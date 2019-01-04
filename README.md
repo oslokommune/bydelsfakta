@@ -1,21 +1,23 @@
-# faktaark
+# Faktaark
 
-## Project setup
+Frontend applikasjon for nye designet til faktaark som visualiserer data om Oslo bydelene
+
+## Installere prosjektet
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Kjører opp lokalt for testing
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Kompilerer og bygger prosjektet til en dist-mappe
 ```
 npm run build
 ```
 
-### Run your tests
+### Kjør tester
 ```
 npm run test
 ```
