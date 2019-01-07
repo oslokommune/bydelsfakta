@@ -19,6 +19,7 @@ export default new Vuex.Store({
   actions: {
     SET_SELECTED_BYDEL: ({ commit }, { selectedBydel }) => {
       commit('SET_SELECTED_BYDEL', { selectedBydel });
+      return Promise.resolve();
     },
   },
 });
