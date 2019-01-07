@@ -1,9 +1,9 @@
 <template>
-  <VContainer>
-    <VLayout text-xs-center wrap>
+  <v-container>
+    <v-layout text-xs-center wrap>
     <h1>Forside</h1>
-    </VLayout>
-  </VContainer>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

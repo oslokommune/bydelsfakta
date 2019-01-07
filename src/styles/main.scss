@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'OsloSans';
+  src: url('./fonts/OsloSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#app {
+  font-family: 'OsloSans', sans-serif;
+}
+
+.theme--light.v-select .v-select__selections {
+  color: #8d8da0;
+}

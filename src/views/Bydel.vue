@@ -1,15 +1,15 @@
 <template>
-    <VContainer fluid>
-      <VLayout row>
-        <VFlex lg8>
+    <v-container fluid>
+      <v-layout row>
+        <v-flex lg8>
           <h1>Undersider</h1>
-        </VFlex>
-        <VFlex lg4>
+        </v-flex>
+        <v-flex lg4>
           <h1>Delbydeler - kart</h1>
-        </VFlex>
-      </VLayout>
-      <RouterView />
-    </VContainer>
+        </v-flex>
+      </v-layout>
+      <router-view />
+    </v-container>
 </template>
 
 <script>

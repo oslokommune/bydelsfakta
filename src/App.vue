@@ -1,50 +1,55 @@
 <template>
-  <VApp>
-      <VNavigationDrawer
-        class="oslo__navigation-drawer"
-        permanent
-        absolute
-        app
-      >
-          <VLayout column>
-            <VFlex v-for="link in links" :key="link.key" :class="checkActiveBydel(link.key)" >
-              <VLayout row style="height: 40px">
-                <VFlex xs1>
-                  <VCheckbox v-model="selected" :value="link.key" color="#6ee9ff" @change="onCheckboxChange"/>
-                </VFlex>
-                <VFlex xs11 style="margin-top: 0.7rem">
-                  <RouterLink :to="{ path: `/bydel/${link.key}` }" class="oslo__navigation-link--label">{{link.value}}</RouterLink>
-                </VFlex>
-              </VLayout>
-            </VFlex>
-            <VSpacer />
-            <VFlex :class="checkActiveSammenlign()">
-              <RouterLink :to="{ path: `/sammenlign/${selected.join('%20')}` }">Sammenlign bydeler</RouterLink>
-            </VFlex>
-          </VLayout>
-      </VNavigationDrawer>
-    <VContent>
-        <VLayout column class="oslo__navigation-topbar">
-          <VContainer>
-           <h4>Bydel {{this.$route.params.bydel}}</h4>
-           <VFlex lg6 md8 sm8 xs10>
-              <VSelect
-                v-model="selectedSubpage"
-                :items="items"
-                label="VELG TEMA"
-                class="v-select__selection--uppercase"
-              ></VSelect>
-            </VFlex>
-          </VContainer>
-        </VLayout>
-      <RouterView/>
-    </VContent>
-  </VApp>
+  <v-app>
+    <v-navigation-drawer
+      class="oslo__navigation-drawer"
+      permanent
+      absolute
+      app
+    >
+      <v-layout column>
+        <v-flex lg12 align-self-center>
+          <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" />
+        </v-flex>
+        <v-flex v-for="link in links" :key="link.key" :class="checkActiveBydel(link.key)" >
+          <v-layout row style="height: 40px">
+            <v-flex xs1>
+              <v-checkbox v-model="selected" :value="link.key" color="#6ee9ff" @change="onCheckboxChange"/>
+            </v-flex>
+            <v-flex xs11 style="margin-top: 0.7rem">
+              <router-link :to="{ path: `/bydel/${link.key}` }" class="oslo__navigation-link--label">{{link.value}}</router-link>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+        <v-spacer />
+        <v-flex :class="checkActiveSammenlign()">
+          <router-link :to="{ path: `/sammenlign/${selected.join('%20')}` }">Sammenlign bydeler</router-link>
+        </v-flex>
+      </v-layout>
+    </v-navigation-drawer>
+    <v-content>
+      <v-layout column class="oslo__navigation-topbar">
+        <v-container>
+         <h4>Bydel {{this.$route.params.bydel}}</h4>
+         <v-flex lg6 md8 sm8 xs10>
+           <v-select
+            v-model="selectedSubpage"
+            :items="items"
+            label="VELG TEMA"
+            class="v-select__selection--uppercase"
+            ></v-select>
+          </v-flex>
+        </v-container>
+      </v-layout>
+      <router-view/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
 import bydeler from './config/bydeler';
 import subpages from './config/subpages';
+
+import osloIcon from './assets/oslo-logo.svg';
 
 export default {
   name: 'App',
@@ -59,6 +64,7 @@ export default {
       selected: [],
       items: subpages,
       selectedSubpage: '',
+      osloIcon: osloIcon,
     };
   },
   async mounted() {
@@ -147,5 +153,16 @@ a {
 
 .v-select__selection--uppercase {
   text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.7px;
+}
+
+.oslo__logo {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 </style>

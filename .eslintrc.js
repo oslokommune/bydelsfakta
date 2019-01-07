@@ -12,6 +12,13 @@ module.exports = {
   extends: ['plugin:vue/strongly-recommended', '@vue/airbnb', '@vue/prettier'],
 
   rules: {
-    'vue/component-name-in-template-casing': 'error',
+    'vue/component-name-in-template-casing': [
+      'error',
+      'kebab-case',
+      {
+        registeredComponentsOnly: true,
+        ignores: [],
+      },
+    ],
   },
 };
