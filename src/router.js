@@ -2,6 +2,17 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Bydel from './views/Bydel.vue';
+import Alder from './views/subviews/Alder.vue';
+import Boligpriser from './views/subviews/Boligpriser.vue';
+import Bygningstyper from './views/subviews/Bygningstyper.vue';
+import Eierform from './views/subviews/Eierform.vue';
+import Flytting from './views/subviews/Flytting.vue';
+import Folkemengde from './views/subviews/Folkemengde.vue';
+import Husholdninger from './views/subviews/Husholdninger.vue';
+import Innvandrerbefolkningen from './views/subviews/Innvandrerbefolkningen.vue';
+import Kommunaleboliger from './views/subviews/Kommunaleboliger.vue';
+import Levekaar from './views/subviews/Levekaar.vue';
+import Trangboddhet from './views/subviews/Trangboddhet.vue';
 
 Vue.use(Router);
 
@@ -16,63 +27,61 @@ export default new Router({
       path: '/bydel/:bydel',
       name: 'Bydel',
       component: Bydel,
-      children: [
-        {
-          path: 'folkemengde',
-          name: 'BydelFolkemengde',
-          component: Home,
-        },
-        {
-          path: 'alder',
-          name: 'BydelAlder',
-          component: Home,
-        },
-        {
-          path: 'innvandrerbefolkningen',
-          name: 'BydelInnvandrerbefolkningen',
-          component: Home,
-        },
-        {
-          path: 'husholdninger',
-          name: 'BydelHusholdninger',
-          component: Home,
-        },
-        {
-          path: 'trangboddhet',
-          name: 'BydelTrandboddhet',
-          component: Home,
-        },
-        {
-          path: 'eierform',
-          name: 'BydelEierform',
-          component: Home,
-        },
-        {
-          path: 'kommunaleboliger',
-          name: 'BydelKommunaleboliger',
-          component: Home,
-        },
-        {
-          path: 'flytting',
-          name: 'BydelFlytting',
-          component: Home,
-        },
-        {
-          path: 'bygningstyper',
-          name: 'BydelBygningstyper',
-          component: Home,
-        },
-        {
-          path: 'boligpriser',
-          name: 'BydelBoligpriser',
-          component: Home,
-        },
-        {
-          path: 'levekaar',
-          name: 'Bydellevekaar',
-          component: Home,
-        },
-      ],
+    },
+    {
+      path: '/bydel/:bydel/folkemengde',
+      name: 'BydelFolkemengde',
+      component: Folkemengde,
+    },
+    {
+      path: '/bydel/:bydel/alder',
+      name: 'BydelAlder',
+      component: Alder,
+    },
+    {
+      path: '/bydel/:bydel/innvandrerbefolkningen',
+      name: 'BydelInnvandrerbefolkningen',
+      component: Innvandrerbefolkningen,
+    },
+    {
+      path: '/bydel/:bydel/husholdninger',
+      name: 'BydelHusholdninger',
+      component: Husholdninger,
+    },
+    {
+      path: '/bydel/:bydel/trangboddhet',
+      name: 'BydelTrandboddhet',
+      component: Trangboddhet,
+    },
+    {
+      path: '/bydel/:bydel/eierform',
+      name: 'BydelEierform',
+      component: Eierform,
+    },
+    {
+      path: '/bydel/:bydel/kommunaleboliger',
+      name: 'BydelKommunaleboliger',
+      component: Kommunaleboliger,
+    },
+    {
+      path: '/bydel/:bydel/flytting',
+      name: 'BydelFlytting',
+      component: Flytting,
+    },
+    {
+      path: '/bydel/:bydel/bygningstyper',
+      name: 'BydelBygningstyper',
+      component: Bygningstyper,
+    },
+    {
+      path: '/bydel/:bydel/boligpriser',
+      name: 'BydelBoligpriser',
+      component: Boligpriser,
+    },
+    {
+      path: '/bydel/:bydel/levekaar',
+      name: 'Bydellevekaar',
+      component: Levekaar,
     },
     {
       path: '/sammenlign/:bydel*',
@@ -80,59 +89,59 @@ export default new Router({
       component: Bydel,
       children: [
         {
-          path: 'folkemengde',
+          path: '/folkemengde',
           name: 'Folkemengde',
-          component: Home,
+          component: Folkemengde,
         },
         {
-          path: 'alder',
+          path: '/alder',
           name: 'Alder',
-          component: Home,
+          component: Alder,
         },
         {
-          path: 'innvandrerbefolkningen',
+          path: '/innvandrerbefolkningen',
           name: 'Innvandrerbefolkningen',
-          component: Home,
+          component: Innvandrerbefolkningen,
         },
         {
-          path: 'husholdninger',
+          path: '/husholdninger',
           name: 'Husholdninger',
-          component: Home,
+          component: Husholdninger,
         },
         {
-          path: 'trangboddhet',
+          path: '/trangboddhet',
           name: 'Trandboddhet',
-          component: Home,
+          component: Trangboddhet,
         },
         {
-          path: 'eierform',
+          path: '/eierform',
           name: 'Eierform',
-          component: Home,
+          component: Eierform,
         },
         {
-          path: 'kommunaleboliger',
+          path: '/kommunaleboliger',
           name: 'Kommunaleboliger',
-          component: Home,
+          component: Kommunaleboliger,
         },
         {
-          path: 'flytting',
+          path: '/flytting',
           name: 'Flytting',
-          component: Home,
+          component: Flytting,
         },
         {
-          path: 'bygningstyper',
+          path: '/bygningstyper',
           name: 'Bygningstyper',
-          component: Home,
+          component: Bygningstyper,
         },
         {
-          path: 'boligpriser',
+          path: '/boligpriser',
           name: 'Boligpriser',
-          component: Home,
+          component: Boligpriser,
         },
         {
-          path: 'levekaar',
+          path: '/levekaar',
           name: 'levekaar',
-          component: Home,
+          component: Levekaar,
         },
       ],
     },

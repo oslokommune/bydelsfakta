@@ -3,10 +3,20 @@
   src: url('./fonts/OsloSans-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "OsloSans";
+  src: url("./fonts/OsloSans-Bold.woff") format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
 }
 
 #app {
   font-family: 'OsloSans', sans-serif;
+  background-color: #f6f6f6;
 }
 
 .theme--light.v-select .v-select__selections {

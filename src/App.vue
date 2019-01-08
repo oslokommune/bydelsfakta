@@ -15,8 +15,8 @@
             <v-flex xs1>
               <v-checkbox v-model="selected" :value="link.key" color="#6ee9ff" @change="onCheckboxChange"/>
             </v-flex>
-            <v-flex xs11 style="margin-top: 0.7rem">
-              <router-link :to="{ path: `/bydel/${link.key}` }" class="oslo__navigation-link--label">{{link.value}}</router-link>
+            <v-flex xs11 style="margin-top: 0.7rem; cursor: pointer;" @click="onClickBydel(link.key)">
+              <span class="oslo__navigation-link--label">{{link.value}}</span>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -28,7 +28,7 @@
     </v-navigation-drawer>
     <v-content>
       <v-layout column class="oslo__navigation-topbar">
-        <v-container>
+        <v-container fluid>
          <h4>Bydel {{this.$route.params.bydel}}</h4>
          <v-flex lg6 md8 sm8 xs10>
            <v-select
@@ -92,6 +92,9 @@ export default {
     checkActiveSammenlign() {
       return this.$route.path.includes('sammenlign') ? 'oslo__navigation-link--active' : 'oslo__navigation-link';
     },
+    onClickBydel(bydel) {
+      this.$router.push({ path: `/bydel/${bydel}` });
+    },
   },
   watch: {
     $route(to) {
@@ -131,13 +134,15 @@ a {
     padding-left: 2rem;
     background-color: #6ee9ff;
 
-    a {
+    span {
       color: #292858;
     }
   }
 }
 
 .oslo__navigation-link--label {
+  letter-spacing: 0.3px;
+  color: rgb(255, 255, 255);
   margin-left: 1rem;
 }
 
