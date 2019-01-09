@@ -1,6 +1,6 @@
 module.exports = {
   lintOnSave: true,
-  baseUrl: undefined,
+  baseUrl: '/bydelsfakta',
   outputDir: 'docs',
   assetsDir: undefined,
   runtimeCompiler: undefined,
