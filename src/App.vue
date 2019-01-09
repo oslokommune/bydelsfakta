@@ -15,8 +15,8 @@
             <v-flex xs1>
               <v-checkbox v-model="selected" :value="link.key" color="#6ee9ff" @change="onCheckboxChange"/>
             </v-flex>
-            <v-flex xs11 style="margin-top: 0.7rem">
-              <router-link :to="{ path: `/bydel/${link.key}` }" class="oslo__navigation-link--label">{{link.value}}</router-link>
+            <v-flex xs11 style="margin-top: 0.7rem; cursor: pointer;" @click="onClickBydel(link.key)">
+              <span class="oslo__navigation-link--label">{{link.value}}</span>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -28,14 +28,17 @@
     </v-navigation-drawer>
     <v-content>
       <v-layout column class="oslo__navigation-topbar">
-        <v-container>
-         <h4>Bydel {{this.$route.params.bydel}}</h4>
-         <v-flex lg6 md8 sm8 xs10>
-           <v-select
-            v-model="selectedSubpage"
-            :items="items"
-            label="VELG TEMA"
-            class="v-select__selection--uppercase"
+        <v-container fluid>
+          <v-layout row >
+            <v-icon class="oslo__topbar">arrow_back</v-icon>
+            <h4 class="text-uppercase oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
+          </v-layout>
+          <v-flex lg6 md8 sm8 xs10>
+            <v-select
+              v-model="selectedSubpage"
+              :items="items"
+              label="VELG TEMA"
+              class="v-select__selection--uppercase"
             ></v-select>
           </v-flex>
         </v-container>
@@ -65,6 +68,7 @@ export default {
       items: subpages,
       selectedSubpage: '',
       osloIcon: osloIcon,
+      bydel: this.getBydel(this.$route.params.bydel),
     };
   },
   async mounted() {
@@ -92,12 +96,30 @@ export default {
     checkActiveSammenlign() {
       return this.$route.path.includes('sammenlign') ? 'oslo__navigation-link--active' : 'oslo__navigation-link';
     },
+    onClickBydel(bydel) {
+      const routes = this.$route.path.split('/');
+      routes.length > 3
+        ? this.$router.push({ path: `/bydel/${bydel}/${routes[3]}` })
+        : this.$router.push({ path: `/bydel/${bydel}` });
+    },
+    getBydel(id) {
+      return this.$route.name === 'Sammenlign'
+        ? 'Sammenligne bydeler'
+        : id !== undefined
+          ? bydeler.find(bydel => bydel.key === id).value
+          : 'Velg bydel';
+    },
   },
   watch: {
     $route(to) {
+      const routes = this.$route.path.split('/');
       if (to.name === 'Bydel') {
         this.selected = [to.params.bydel];
         this.selectedSubpage = null;
+      }
+      if (routes.length > 3) {
+        this.selected = [to.params.bydel];
+        this.selectedSubpage = routes[3];
       }
     },
     selectedSubpage(subpage) {
@@ -121,6 +143,11 @@ a {
   text-decoration: none;
 }
 
+.oslo__logo {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
 .oslo__navigation-drawer {
   background-color: #292858;
 }
@@ -131,19 +158,33 @@ a {
     padding-left: 2rem;
     background-color: #6ee9ff;
 
-    a {
+    span {
       color: #292858;
     }
   }
-}
 
-.oslo__navigation-link--label {
-  margin-left: 1rem;
+  &--label {
+    letter-spacing: 0.3px;
+    color: rgb(255, 255, 255);
+    margin-left: 1rem;
+  }
 }
 
 .oslo__navigation-topbar {
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.32);
+}
+
+.oslo__topbar {
+  font-weight: bold;
+  color: rgb(41, 40, 88);
+  margin-bottom: 2rem;
+
+  &-text {
+    letter-spacing: 0.8px;
+    margin-top: 0.3rem;
+    margin-left: 1rem;
+  }
 }
 
 .v-input--selection-controls {
@@ -155,14 +196,6 @@ a {
   text-transform: uppercase;
   font-size: 24px;
   font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
   letter-spacing: 0.7px;
-}
-
-.oslo__logo {
-  margin-top: 3rem;
-  margin-bottom: 2rem;
 }
 </style>

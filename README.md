@@ -1,6 +1,6 @@
-# Faktaark
+# Bydelsfakta
 
-Frontend applikasjon for nye designet til faktaark som visualiserer data om Oslo bydelene
+Frontend applikasjon for nye designet til Bydelsfakta som visualiserer data om Oslo sine bydeler
 
 ## Installere prosjektet
 ```
