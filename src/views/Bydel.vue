@@ -1,26 +1,22 @@
 <template>
-  <v-layout row>
-    <v-flex lg7>
-      <v-container grid-list-md fluid>
-        <v-layout row wrap>
-          <card-image
-            v-for="item in items"
-            :key="item.value"
-            :id="item.value"
-            :kategori="item.options.kategori"
-            :tema="item.options.tema"
-            :bg-image="item.options.bgImage"
-            :bg-color="item.options.bgColor"
-            :txt-color="item.options.txtColor"
-            :click-bydel="onClickCard"
-          />
-        </v-layout>
-      </v-container>
-    </v-flex>
-    <v-flex lg5>
-      <h1>Delbydeler - kart</h1>
-    </v-flex>
-  </v-layout>
+  <div class="bydel-container">
+    <div class="bydel__cards-container">
+      <card-image
+              v-for="item in items"
+              :key="item.value"
+              :id="item.value"
+              :kategori="item.options.kategori"
+              :tema="item.options.tema"
+              :bg-image="item.options.bgImage"
+              :bg-color="item.options.bgColor"
+              :txt-color="item.options.txtColor"
+              :click-bydel="onClickCard"
+      />
+    </div>
+    <div class="bydel__map-container">
+      <h3>Bydelskart</h3>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -44,4 +40,26 @@ export default {
 </script>
 
 <style scoped>
+.bydel-container {
+  display: flex;
+}
+
+.bydel__cards-container {
+  display: flex;
+  padding: 2rem;
+
+  flex-flow: row wrap;
+  justify-content: start;
+
+  flex-basis: auto;
+}
+
+.bydel__map-container {
+  display: flex;
+  padding: 2rem;
+
+  flex-flow: row wrap;
+  justify-content: start;
+  flex: 0 0 600px;
+}
 </style>
