@@ -107,63 +107,61 @@ export default new Router({
       path: '/sammenlign/:bydel*',
       name: 'Sammenlign',
       component: Bydel,
-      children: [
-        {
-          path: '/folkemengde',
-          name: 'Folkemengde',
-          component: Folkemengde,
-        },
-        {
-          path: '/alder',
-          name: 'Alder',
-          component: Alder,
-        },
-        {
-          path: '/innvandrerbefolkningen',
-          name: 'Innvandrerbefolkningen',
-          component: Innvandrerbefolkningen,
-        },
-        {
-          path: '/husholdninger',
-          name: 'Husholdninger',
-          component: Husholdninger,
-        },
-        {
-          path: '/trangboddhet',
-          name: 'Trandboddhet',
-          component: Trangboddhet,
-        },
-        {
-          path: '/eierform',
-          name: 'Eierform',
-          component: Eierform,
-        },
-        {
-          path: '/kommunaleboliger',
-          name: 'Kommunaleboliger',
-          component: Kommunaleboliger,
-        },
-        {
-          path: '/flytting',
-          name: 'Flytting',
-          component: Flytting,
-        },
-        {
-          path: '/bygningstyper',
-          name: 'Bygningstyper',
-          component: Bygningstyper,
-        },
-        {
-          path: '/boligpriser',
-          name: 'Boligpriser',
-          component: Boligpriser,
-        },
-        {
-          path: '/levekaar',
-          name: 'levekaar',
-          component: Levekaar,
-        },
-      ],
+    },
+    {
+      path: '/sammenlign/:bydel*/folkemengde',
+      name: 'Folkemengde',
+      component: Folkemengde,
+    },
+    {
+      path: '/sammenlign/:bydel*/alder',
+      name: 'Alder',
+      component: Alder,
+    },
+    {
+      path: '/sammenlign/:bydel*/innvandrerbefolkningen',
+      name: 'Innvandrerbefolkningen',
+      component: Innvandrerbefolkningen,
+    },
+    {
+      path: '/sammenlign/:bydel*/husholdninger',
+      name: 'Husholdninger',
+      component: Husholdninger,
+    },
+    {
+      path: '/sammenlign/:bydel*/trangboddhet',
+      name: 'Trandboddhet',
+      component: Trangboddhet,
+    },
+    {
+      path: '/sammenlign/:bydel*/eierform',
+      name: 'Eierform',
+      component: Eierform,
+    },
+    {
+      path: '/sammenlign/:bydel*/kommunaleboliger',
+      name: 'Kommunaleboliger',
+      component: Kommunaleboliger,
+    },
+    {
+      path: '/sammenlign/:bydel*/flytting',
+      name: 'Flytting',
+      component: Flytting,
+    },
+    {
+      path: '/sammenlign/:bydel*/bygningstyper',
+      name: 'Bygningstyper',
+      component: Bygningstyper,
+    },
+    {
+      path: '/sammenlign/:bydel*/boligpriser',
+      name: 'Boligpriser',
+      component: Boligpriser,
+    },
+    {
+      path: '/sammenlign/:bydel*/levekaar',
+      name: 'levekaar',
+      component: Levekaar,
     },
   ],
 });

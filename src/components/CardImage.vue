@@ -1,5 +1,5 @@
 <template>
-  <v-flex lg4>
+  <div class="flex-item">
     <v-card
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"
@@ -20,7 +20,7 @@
         </v-layout>
       </v-container>
     </v-card>
-  </v-flex>
+  </div>
 </template>
 
 <script>
@@ -93,5 +93,10 @@ export default {
   bottom: 0.2rem;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
+}
+
+.flex-item {
+  padding: 5px;
+  margin-top: 10px;
 }
 </style>
