@@ -103,7 +103,11 @@ export default {
         : this.$router.push({ path: `/bydel/${bydel}` });
     },
     getBydel(id) {
-      return this.$route.name === 'Sammenlign' ? 'Sammenligne bydeler' : bydeler.find(bydel => bydel.key === id).value;
+      return this.$route.name === 'Sammenlign'
+        ? 'Sammenligne bydeler'
+        : id !== undefined
+          ? bydeler.find(bydel => bydel.key === id).value
+          : 'Velg bydel';
     },
   },
   watch: {
