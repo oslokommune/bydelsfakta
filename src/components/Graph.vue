@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h3 v-text="heading"></h3>
     <svg ref="svg"></svg>
   </div>
 </template>
 
 <script>
+import * as d3 from 'd3';
 import TemplateA from '../lib/templateA.js';
 import TemplateB from '../lib/templateB.js';
-import * as d3 from 'd3';
+import TemplateC from '../lib/templateC.js';
 
 export default {
   data: () => ({
@@ -19,6 +19,16 @@ export default {
 
   watch: {
     settings: function() {
+      this.draw();
+    },
+  },
+
+  mounted() {
+    this.draw();
+  },
+
+  methods: {
+    draw() {
       if (this.currentTemplate !== this.settings.template) {
         switch (this.settings.template) {
           case 'a':
@@ -26,6 +36,9 @@ export default {
             break;
           case 'b':
             this.svg = new TemplateB(this.$refs['svg']);
+            break;
+          case 'c':
+            this.svg = new TemplateC(this.$refs['svg']);
             break;
           default:
             break;
@@ -40,26 +53,6 @@ export default {
     },
   },
 
-  mounted() {
-    if (this.currentTemplate !== this.settings.template) {
-      switch (this.settings.template) {
-        case 'a':
-          this.svg = new TemplateA(this.$refs['svg']);
-          break;
-        case 'b':
-          this.svg = new TemplateB(this.$refs['svg']);
-          break;
-        default:
-          break;
-      }
-    }
-
-    d3.json(this.settings.url).then(res => {
-      this.heading = res.meta.heading;
-      this.svg.render(res);
-      this.currentTemplate = this.settings.template;
-    });
-  },
   props: ['settings'],
 };
 </script>

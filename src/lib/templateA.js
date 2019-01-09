@@ -1,11 +1,11 @@
-import { Base_Template, util } from '../lib/baseTemplate';
-import * as d3 from 'd3';
+import { Base_Template, util } from './baseTemplate';
+import d3 from '@/assets/d3';
 
 function Template_A(svg) {
   Base_Template.apply(this, arguments);
 
   this.height = 500;
-  this.padding.top = 80;
+  this.padding.top = 100;
   this.padding.left = 190;
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
@@ -14,6 +14,8 @@ function Template_A(svg) {
   const formatPercent = d3.format('.0%');
 
   this.render = function(data) {
+    this.heading.text(data.meta.heading);
+
     let maxValues = data.meta.series.map((row, i) => {
       return d3.max(data.data.map(d => d.values[i]));
     });

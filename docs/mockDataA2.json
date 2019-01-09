@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Andel innvandrere i Bydel Grünerløkka (2018)",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "series": [
+      { "heading": "Innvandrer", "subheading": "Kort botid" },
+      { "heading": "Innvandrer", "subheading": "Lang botid" },
+      { "heading": "Norskfødt", "subheading": "2 innvandrerforeldre" },
+      { "heading": "Norskfødt", "subheading": "1 innvandrerforelder" }
+    ],
+    "xAxis": {
+      "format": "%",
+      "title": false
+    },
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http://ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "files": [
+      {
+        "url": "http://data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http://data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+
+  "data": [
+    {
+      "linkTo": false,
+      "geography": "Bydel Stovner",
+      "values": [0.104, 0.242, 0.065, 0.085]
+    },
+    {
+      "linkTo": false,
+      "geography": "Bydel Frogner",
+      "values": [0.124, 0.172, 0.055, 0.015]
+    },
+    {
+      "linkTo": false,
+      "geography": "Bydel Grünerløkka",
+      "values": [0.164, 0.642, 0.065, 0.035]
+    },
+    {
+      "linkTo": false,
+      "geography": "Bydel Gamle Oslo",
+      "avgRow": true,
+      "values": [0.224, 0.442, 0.125, 0.065]
+    },
+    {
+      "linkTo": "/sammenligne-bydeler/innvandrere",
+      "geography": "Oslo i alt",
+      "totalRow": true,
+      "values": [0.164, 0.242, 0.065, 0.025]
+    }
+  ]
+}

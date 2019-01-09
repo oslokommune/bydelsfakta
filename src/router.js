@@ -34,13 +34,13 @@ export default new Router({
     {
       path: '/graphB',
       name: 'Graph2',
-      props: { settings: { url: '/mockDataA2.json', template: 'a' } },
+      props: { settings: { url: '/mockDataB.json', template: 'b' } },
       component: Graph,
     },
     {
       path: '/graphC',
       name: 'Graph3',
-      props: { settings: { url: '/mockDataB.json', template: 'b' } },
+      props: { settings: { url: '/mockDataC.json', template: 'c' } },
       component: Graph,
     },
     {
