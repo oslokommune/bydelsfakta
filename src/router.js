@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Bydel from './views/Bydel.vue';
 
+import Graph from './components/Graph.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -11,6 +13,24 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
+    },
+    {
+      path: '/graphA',
+      name: 'Graph1',
+      props: { settings: { url: '/mockDataA.json', template: 'a' } },
+      component: Graph,
+    },
+    {
+      path: '/graphB',
+      name: 'Graph2',
+      props: { settings: { url: '/mockDataA2.json', template: 'a' } },
+      component: Graph,
+    },
+    {
+      path: '/graphC',
+      name: 'Graph3',
+      props: { settings: { url: '/mockDataB.json', template: 'b' } },
+      component: Graph,
     },
     {
       path: '/bydel/:bydel',
