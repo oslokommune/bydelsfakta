@@ -1,3 +1,5 @@
+import baseUrl from '../util/config';
+
 const subpages = [
   {
     text: 'Folkemengde',
@@ -5,7 +7,7 @@ const subpages = [
     options: {
       kategori: 'Befolkning',
       tema: 'Folkemengde',
-      bgImage: '/img/folkemengde.png',
+      bgImage: `${baseUrl()}/img/folkemengde.png`,
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
@@ -16,7 +18,7 @@ const subpages = [
     options: {
       kategori: 'Befolkning',
       tema: 'Alder',
-      bgImage: '/img/alder.png',
+      bgImage: `${baseUrl()}/img/alder.png`,
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
@@ -27,7 +29,7 @@ const subpages = [
     options: {
       kategori: 'Befolkning',
       tema: 'Innvandrer-befolkningen',
-      bgImage: '/img/innvandring.png',
+      bgImage: `${baseUrl()}/img/innvandring.png`,
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
@@ -38,7 +40,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Husholdninger',
-      bgImage: '/img/husholdninger.png',
+      bgImage: `${baseUrl()}/img/husholdninger.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -49,7 +51,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Trandboddhet',
-      bgImage: '/img/trangboddhet.png',
+      bgImage: `${baseUrl()}/img/trangboddhet.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -60,7 +62,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Eierform',
-      bgImage: '/img/eierform.png',
+      bgImage: `${baseUrl()}/img/eierform.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -71,7 +73,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Kommunale boliger',
-      bgImage: '/img/kommunale-boliger.png',
+      bgImage: `${baseUrl()}/img/kommunale-boliger.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -82,7 +84,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Flytting',
-      bgImage: '/img/flytting.png',
+      bgImage: `${baseUrl()}/img/flytting.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -93,7 +95,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Bygningstyper',
-      bgImage: '/img/bygningstyper.png',
+      bgImage: `${baseUrl()}/img/bygningstyper.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -104,7 +106,7 @@ const subpages = [
     options: {
       kategori: 'Bomiljø',
       tema: 'Boligpriser',
-      bgImage: '/img/boligpriser.png',
+      bgImage: `${baseUrl()}/img/boligpriser.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
@@ -115,7 +117,7 @@ const subpages = [
     options: {
       kategori: 'Levekår',
       tema: 'Levekår',
-      bgImage: '/img/levekaar.png',
+      bgImage: `${baseUrl()}/img/levekaar.png`,
       bgColor: 'rgb(248, 198, 107)',
       txtColor: 'rgb(244, 206, 138)',
     },

@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs4>
+  <v-flex lg4>
     <v-card
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"

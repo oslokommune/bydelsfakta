@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex lg6>
+    <v-flex lg7>
       <v-container grid-list-md fluid>
         <v-layout row wrap>
           <card-image
@@ -17,7 +17,7 @@
         </v-layout>
       </v-container>
     </v-flex>
-    <v-flex lg6>
+    <v-flex lg5>
       <h1>Delbydeler - kart</h1>
     </v-flex>
   </v-layout>
