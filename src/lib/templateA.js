@@ -1,5 +1,5 @@
-import { Base_Template, util } from '../lib/baseTemplate';
 import * as d3 from 'd3';
+import { Base_Template, util } from './baseTemplate';
 
 function Template_A(svg) {
   Base_Template.apply(this, arguments);

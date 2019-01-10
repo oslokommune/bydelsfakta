@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import TemplateA from '../lib/templateA.js';
-import TemplateB from '../lib/templateB.js';
 import * as d3 from 'd3';
+import TemplateA from '../lib/templateA';
+import TemplateB from '../lib/templateB';
 
 export default {
   data: () => ({
@@ -60,7 +60,12 @@ export default {
       this.currentTemplate = this.settings.template;
     });
   },
-  props: ['settings'],
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 

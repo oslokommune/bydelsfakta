@@ -9,6 +9,8 @@ import 'vuetify/src/stylus/app.styl';
 import './styles/main.scss';
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
+Vue.config.performance = process.env.NODE_ENV !== 'production';
 
 new Vue({
   router,

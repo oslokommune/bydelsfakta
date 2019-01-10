@@ -15,7 +15,7 @@
              {{dataKategori}}
            </span>
           </div>
-          <div class="grow"><span class="oslo__tema">{{dataTema}}</span></div>
+          <span class="oslo__tema">{{dataTema}}</span>
           <span class="oslo__see-more-text">Se mer ----------></span>
         </v-layout>
       </v-container>
@@ -83,7 +83,7 @@ export default {
 }
 
 .oslo__tema {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
 }
