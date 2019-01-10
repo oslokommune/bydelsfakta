@@ -1,19 +1,21 @@
-import * as d3 from 'd3';
 import { Base_Template, util } from './baseTemplate';
+import d3 from '@/assets/d3';
 
 function Template_A(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 10;
+  this.padding.top = 50;
   this.padding.left = 60;
   this.padding.right = 120;
   this.height = 300;
   this.width = 300;
 
-  let formatDate = d3.timeParse('%Y-%m-%d');
+  const strokeWidth = this.strokeWidth;
+  const strokeWidthHighlight = this.strokeWidthHighlight;
+
   let line = d3
     .line()
-    .x(d => this.x(formatDate(d.date)))
+    .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
 
   this.getTickFormat = function() {
@@ -34,7 +36,40 @@ function Template_A(svg) {
     return format;
   };
 
+  this.drawLabels = function() {
+    let labels = this.canvas.selectAll('text.label').data(this.data.data.filter(row => row.avgRow || row.totalRow));
+    let labelsE = labels
+      .enter()
+      .append('text')
+      .attr('class', 'label');
+
+    labels.exit().remove();
+    labels = labels.merge(labelsE);
+
+    labelsE.append('title');
+
+    labels
+      .text(d => util.truncate(d.geography, this.padding.right - 20))
+      .attr('x', this.width + 5)
+      .attr('font-weight', 'bold')
+      .attr('y', d => {
+        return this.y(d.values[d.values.length - 1][this.method]) + 5;
+      });
+
+    labels
+      .selectAll('title')
+      .data(d => [d.geography])
+      .enter()
+      .append('title')
+      .html(d => d);
+  };
+
   this.render = function(data, method = 'value') {
+    this.data = data;
+    this.method = method;
+
+    this.heading.text(data.meta.heading);
+
     this.method = method;
     this.y.max = d3.max(data.data.map(row => d3.max(row.values.map(d => d[method])))) * 1.05;
     this.y.min = d3.min(data.data.map(row => d3.min(row.values.map(d => d[method])))) / 1.05;
@@ -44,8 +79,8 @@ function Template_A(svg) {
     this.x = d3
       .scaleTime()
       .domain([
-        formatDate(data.data[0].values[0].date),
-        formatDate(data.data[0].values[data.data[0].values.length - 1].date),
+        this.parseDate(data.data[0].values[0].date),
+        this.parseDate(data.data[0].values[data.data[0].values.length - 1].date),
       ])
       .range([0, this.width]);
 
@@ -75,31 +110,15 @@ function Template_A(svg) {
       .attr('stroke-width', 3)
       .attr('fill', 'none');
 
-    let labels = this.canvas.selectAll('text.label').data(data.data.filter(row => row.avgRow || row.totalRow));
-    let labelsE = labels
-      .enter()
-      .append('text')
-      .attr('class', 'label');
+    row.on('mouseover', function() {
+      d3.select(this).attr('stroke-width', strokeWidthHighlight);
+    });
 
-    labels.exit().remove();
-    labels = labels.merge(labelsE);
+    row.on('mouseleave', function() {
+      d3.select(this).attr('stroke-width', strokeWidth);
+    });
 
-    labelsE.append('title');
-
-    labels
-      .text(d => util.truncate(d.geography, this.padding.right - 20))
-      .attr('x', this.width + 5)
-      .attr('font-weight', 'bold')
-      .attr('y', d => {
-        return this.y(d.values[d.values.length - 1][this.method]) + 5;
-      });
-
-    labels
-      .selectAll('title')
-      .data(d => [d.geography])
-      .enter()
-      .append('title')
-      .html(d => d);
+    this.drawLabels();
   };
 
   this.init(svg);
