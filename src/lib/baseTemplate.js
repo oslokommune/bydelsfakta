@@ -6,7 +6,7 @@ function Base_Template(svg) {
   this.width = 800;
   this.padding = { top: 30, right: 40, bottom: 40, left: 120 };
   this.height2 = 0;
-  this.xGutter = 0;
+  this.yGutter = 0;
   this.x = d3.scaleLinear();
   this.y = d3.scaleBand();
   this.max = 0;
@@ -22,8 +22,9 @@ function Base_Template(svg) {
   this.init = function() {
     this.svg = d3
       .select(svg)
-      .attr('height', this.height + this.height2 + this.xGutter + this.padding.top + this.padding.bottom)
-      .attr('width', this.width + this.padding.left + this.padding.right);
+      .attr('height', this.height + this.height2 + this.yGutter + this.padding.top + this.padding.bottom)
+      .attr('width', this.width + this.padding.left + this.padding.right)
+      .attr('test', 'test');
 
     this.svg.selectAll('*').remove();
 

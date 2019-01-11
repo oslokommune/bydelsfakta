@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Størrelsen av alderssegmenter i Bydel Grünerløkka (01.01.2018)",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http: //ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "files": [
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+
+  "data": [
+    {
+      "linkTo": false,
+      "geography": "Grünerløkka vest",
+      "values": [
+        { "menn": 832, "kvinner": 832 },
+        { "menn": 902, "kvinner": 902 },
+        { "menn": 878, "kvinner": 878 },
+        { "menn": 923, "kvinner": 1923 },
+        { "menn": 991, "kvinner": 991 },
+        { "menn": 1040, "kvinner": 1040 },
+        { "menn": 895, "kvinner": 895 },
+        { "menn": 954, "kvinner": 954 },
+        { "menn": 1032, "kvinner": 1032 }
+      ]
+    },
+    {
+      "linkTo": false,
+      "geography": "Grünerløkka øst",
+      "values": [
+        { "menn": 832, "kvinner": 832 },
+        { "menn": 902, "kvinner": 902 },
+        { "menn": 878, "kvinner": 878 },
+        { "menn": 923, "kvinner": 923 },
+        { "menn": 1991, "kvinner": 991 },
+        { "menn": 11040, "kvinner": 1040 },
+        { "menn": 1895, "kvinner": 895 },
+        { "menn": 1954, "kvinner": 954 },
+        { "menn": 3032, "kvinner": 1032 }
+      ]
+    },
+    {
+      "linkTo": "/grunerlokka/befolkning",
+      "geography": "Bydel Grünerløkka",
+      "avgRow": true,
+      "values": [
+        { "menn": 432, "kvinner": 732 },
+        { "menn": 502, "kvinner": 402 },
+        { "menn": 878, "kvinner": 878 },
+        { "menn": 923, "kvinner": 923 },
+        { "menn": 991, "kvinner": 991 },
+        { "menn": 1040, "kvinner": 1040 },
+        { "menn": 895, "kvinner": 895 },
+        { "menn": 954, "kvinner": 954 },
+        { "menn": 1032, "kvinner": 1032 }
+      ]
+    },
+    {
+      "linkTo": "/sammenligne-bydeler/befolkning",
+      "geography": "Oslo i alt",
+      "totalRow": true,
+      "values": [
+        { "menn": 32, "kvinner": 132 },
+        { "menn": 202, "kvinner": 202 },
+        { "menn": 378, "kvinner": 478 },
+        { "menn": 423, "kvinner": 423 },
+        { "menn": 591, "kvinner": 591 },
+        { "menn": 840, "kvinner": 840 },
+        { "menn": 995, "kvinner": 995 },
+        { "menn": 1154, "kvinner": 1154 },
+        { "menn": 1432, "kvinner": 1432 }
+      ]
+    }
+  ]
+}

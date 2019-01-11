@@ -44,6 +44,12 @@ export default new Router({
       component: Graph,
     },
     {
+      path: '/graphD',
+      name: 'Graph4',
+      props: { settings: { url: '/mockDataD.json', template: 'd' } },
+      component: Graph,
+    },
+    {
       path: '/bydel/:bydel',
       name: 'Bydel',
       component: Bydel,

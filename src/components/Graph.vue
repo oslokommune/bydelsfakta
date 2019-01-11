@@ -9,6 +9,7 @@ import * as d3 from 'd3';
 import TemplateA from '../lib/templateA.js';
 import TemplateB from '../lib/templateB.js';
 import TemplateC from '../lib/templateC.js';
+import TemplateD from '../lib/templateD.js';
 
 export default {
   data: () => ({
@@ -39,6 +40,9 @@ export default {
             break;
           case 'c':
             this.svg = new TemplateC(this.$refs['svg']);
+            break;
+          case 'd':
+            this.svg = new TemplateD(this.$refs['svg']);
             break;
           default:
             break;
