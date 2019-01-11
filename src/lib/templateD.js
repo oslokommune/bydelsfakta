@@ -305,7 +305,13 @@ function Template_A(svg) {
     lines.attr('d', d => this.line(d.values));
   };
 
-  this.render = function(data, method = 'ratio') {
+  this.render = function(data, method = 'ratio', range) {
+    if (range) {
+      extent = JSON.parse(range);
+      gBrushLarge.call(brushLarge.move, extent.map(this.age));
+      gBrushSmall.call(brushSmall.move, extent.map(this.age));
+    }
+
     if (!data) return;
 
     this.data = data;
