@@ -56,8 +56,12 @@ export default {
       });
     },
   },
-
-  props: ['settings'],
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 

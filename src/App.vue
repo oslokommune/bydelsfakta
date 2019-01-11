@@ -10,19 +10,18 @@
         <v-flex lg12 align-self-center>
           <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" />
         </v-flex>
-        <v-flex v-for="link in links" :key="link.key" :class="checkActiveBydel(link.key)" >
+        <v-flex v-for="link in links" :key="link.key" :label="link.value" :class="checkActiveBydel(link.uri)" >
           <v-layout row style="height: 40px">
             <v-flex xs1>
               <v-checkbox v-model="selected" :value="link.key" color="#6ee9ff" @change="onCheckboxChange"/>
             </v-flex>
-            <v-flex xs11 style="margin-top: 0.7rem; cursor: pointer;" @click="onClickBydel(link.key)">
+            <v-flex xs11 style="margin-top: 0.7rem; cursor: pointer;" @click="onClickBydel(link.uri)">
               <span class="oslo__navigation-link--label">{{link.value}}</span>
             </v-flex>
           </v-layout>
         </v-flex>
-        <v-spacer />
-        <v-flex :class="checkActiveSammenlign()">
-          <router-link :to="{ path: `/sammenlign/${selected.join('%20')}` }">Sammenlign bydeler</router-link>
+        <v-flex :class="checkActiveSammenlign()" style="margin-top: 0.7rem; cursor: pointer;" @click="onClickSammenlign">
+          <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
         </v-flex>
       </v-layout>
     </v-navigation-drawer>
@@ -72,20 +71,35 @@ export default {
     };
   },
   async mounted() {
-    if (this.$route.name === 'Home') {
+    const routes = this.$route.path.split('/');
+    const path = this.$route.path;
+    if (this.$route.params.bydel === undefined) {
       return;
+    } else if (path.includes('sammenlign')) {
+      const selectedBydel = this.$route.params.bydel.split('-');
+      await this.$store.dispatch('SET_SELECTED_BYDEL', { selectedBydel });
+      this.selected = this.selectedBydel;
+    } else if (path.includes('bydel')) {
+      const bydelKey = bydeler.find(item => item.uri === this.$route.params.bydel).key;
+      await this.$store.dispatch('SET_SELECTED_BYDEL', { selectedBydel: bydelKey });
+      this.selected = this.selectedBydel;
     }
-    const selectedBydel = this.$route.params.bydel.split(' ');
-    await this.$store.dispatch('SET_SELECTED_BYDEL', { selectedBydel });
-    this.selected = this.selectedBydel;
+    if (routes.length > 3) {
+      this.selectedSubpage = routes[3];
+    }
   },
   methods: {
     async onCheckboxChange(newValue) {
+      const routes = this.$route.path.split('/');
       await this.$store.dispatch('SET_SELECTED_BYDEL', {
         selectedBydel: [...newValue],
       });
       if (this.selectedBydel.length > 1) {
-        this.$router.push({ path: `/sammenlign/${this.selected.join('%20')}` });
+        if (routes.length > 3) {
+          this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` });
+        } else {
+          this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
+        }
       }
     },
     checkActiveBydel(link) {
@@ -98,27 +112,34 @@ export default {
     },
     onClickBydel(bydel) {
       const routes = this.$route.path.split('/');
+      const bydelUri = bydeler.find(item => item.uri === bydel).uri;
       routes.length > 3
-        ? this.$router.push({ path: `/bydel/${bydel}/${routes[3]}` })
-        : this.$router.push({ path: `/bydel/${bydel}` });
+        ? this.$router.push({ path: `/bydel/${bydelUri}/${routes[3]}` })
+        : this.$router.push({ path: `/bydel/${bydelUri}` });
+    },
+    onClickSammenlign() {
+      const routes = this.$route.path.split('/');
+      routes.length > 3
+        ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
+        : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
     },
     getBydel(id) {
-      return this.$route.name === 'Sammenlign'
+      return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-          ? bydeler.find(bydel => bydel.key === id).value
+          ? bydeler.find(bydel => bydel.uri === id).value
           : 'Velg bydel';
     },
   },
   watch: {
     $route(to) {
       const routes = this.$route.path.split('/');
-      if (to.name === 'Bydel') {
-        this.selected = [to.params.bydel];
+      if (to.path.includes('bydel')) {
+        const bydel = bydeler.find(item => item.uri === routes[2]).key;
+        this.selected = [bydel];
         this.selectedSubpage = null;
       }
       if (routes.length > 3) {
-        this.selected = [to.params.bydel];
         this.selectedSubpage = routes[3];
       }
     },
