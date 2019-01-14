@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Husholdninger fordelt etter eie/leieforhold av boligen i Bydel Grünerløkka",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http: //ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "series": ["Andel/-aksjeeiere", "Selveiere", "Leietakere"],
+    "files": [
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+
+  "data": [
+    {
+      "geography": "Grünerløkka vest",
+      "values": [{ "value": 311, "ratio": 0.9 }, { "value": 554, "ratio": 0.05 }, { "value": 181, "ratio": 0.05 }]
+    },
+    {
+      "geography": "Grünerløkka øst",
+      "values": [{ "value": 311, "ratio": 0.05 }, { "value": 554, "ratio": 0.9 }, { "value": 181, "ratio": 0.05 }]
+    },
+    {
+      "geography": "Bydel Grünerløkka",
+      "avgRow": true,
+      "values": [{ "value": 311, "ratio": 0.05 }, { "value": 554, "ratio": 0.05 }, { "value": 181, "ratio": 0.9 }]
+    },
+    {
+      "geography": "Oslo i alt",
+      "totalRow": true,
+      "values": [
+        { "value": 311, "ratio": 0.3333 },
+        { "value": 554, "ratio": 0.3333 },
+        { "value": 181, "ratio": 0.3333 }
+      ]
+    }
+  ]
+}

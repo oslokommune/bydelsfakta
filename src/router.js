@@ -62,6 +62,12 @@ export default new Router({
       component: Graph,
     },
     {
+      path: '/graphI',
+      name: 'Graph6',
+      props: { settings: { url: '/mockDataI.json', template: 'i' } },
+      component: Graph,
+    },
+    {
       path: '/bydel/:bydel',
       name: 'Bydel',
       component: Bydel,
