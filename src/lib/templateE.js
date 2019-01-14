@@ -7,14 +7,17 @@ function Template(svg) {
   this.padding.top = 70;
   this.padding.left = 300;
   this.padding.right = 25;
-  this.height = 700;
+  this.height = 400;
   this.width = 650;
   this.rowHeight = 40;
   this.y = d3.scaleLinear();
+  this.x = d3.scaleLinear();
   this.selected = null;
-  this.list, this.pyramid;
-  this.gutter = 40;
+  this.list;
+  this.pyramid;
+  this.gutter = 100;
   this.yAxis = [];
+  this.max = 0;
 
   this.drawList = function() {
     let active = this.selected;
@@ -80,22 +83,93 @@ function Template(svg) {
 
     this.canvas.selectAll('*').remove();
 
+    this.pyramid = this.canvas.append('g').attr('class', 'pyramid');
+
+    this.y.range([this.height, 0]).domain([0, 120]);
     this.yAxis = this.canvas
       .selectAll('g.axis.y')
       .data([{ type: 'left' }, { type: 'right' }, { type: 'lines' }])
       .enter()
       .append('g');
 
+    this.xAxis = this.canvas
+      .append('g')
+      .attr('class', 'axis x')
+      .attr('transform', `translate(0, ${this.height})`);
+
     this.yAxis.attr('class', d => `axis y axis-${d.type}`);
+  };
+
+  this.area = d3
+    .area()
+    .curve(d3.curveBasis)
+    .x0(() => this.x(0))
+    .x1(d => {
+      if (d.gender == 'Kvinne') {
+        return this.x(d.value);
+      } else {
+        return this.x(-d.value);
+      }
+    })
+    .y((d, i) => this.y(i));
+
+  this.drawPyramid = function() {
+    let genderData = ['Mann', 'Kvinne'].map(gender => {
+      return this.data.data[this.selected].values.map(d => {
+        return { gender, value: d[gender] };
+      });
+    });
+
+    let gender = this.pyramid.selectAll('path.gender').data(genderData);
+    let genderE = gender
+      .enter()
+      .append('path')
+      .attr('class', 'gender');
+    gender.exit().remove();
+    gender = gender.merge(genderE);
+
+    gender
+      .attr('fill', d => {
+        if (d[0].gender == 'Kvinne') {
+          return util.color.red;
+        } else {
+          return util.color.blue;
+        }
+      })
+      .transition()
+      .attr('d', this.area);
   };
 
   this.render = function(data, selected) {
     if (!data) return;
     this.data = data;
-    this.selected = selected == null ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+    this.selected =
+      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
 
     this.heading.text(data.meta.heading);
 
+    this.max = d3.max(this.data.data[this.selected].values.map(d => d.value));
+    this.x.range([0, this.width]).domain([-this.max, this.max]);
+
+    this.xAxis.transition().call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
+    this.yAxis.each((d, i, j) => {
+      if (d.type == 'left') {
+        d3.select(j[i]).call(d3.axisLeft(this.y));
+      } else if (d.type == 'right') {
+        d3.select(j[i])
+          .call(d3.axisRight(this.y))
+          .attr('transform', `translate(${this.width}, 0)`);
+      } else if (d.type == 'lines') {
+        let axis = d3.select(j[i]);
+
+        axis.call(d3.axisLeft(this.y).tickSize(-this.width));
+        axis.selectAll('text').remove();
+        axis.selectAll('.tick').attr('opacity', 0.15);
+        axis.selectAll('.domain').remove();
+      }
+    });
+
+    this.drawPyramid();
     this.drawList();
 
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);

@@ -345,7 +345,13 @@ function Template(svg) {
     let maxSum =
       d3.max(
         data.data
-          .filter(bydel => !bydel.totalRow && !bydel.avgRow)
+          .filter(bydel => {
+            if (this.method == 'ratio') {
+              return bydel;
+            } else {
+              return !bydel.totalRow && !bydel.avgRow;
+            }
+          })
           .map(bydel =>
             d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
           )
@@ -354,7 +360,13 @@ function Template(svg) {
     let max =
       d3.max(
         data.data
-          .filter(bydel => !bydel.totalRow && !bydel.avgRow)
+          .filter(bydel => {
+            if (this.method == 'ratio') {
+              return bydel;
+            } else {
+              return !bydel.totalRow && !bydel.avgRow;
+            }
+          })
           .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
       ) * 1.05;
 
