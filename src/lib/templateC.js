@@ -1,7 +1,7 @@
 import { Base_Template, util } from './baseTemplate';
 import d3 from '@/assets/d3';
 
-function Template_A(svg) {
+function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.padding.top = 130;
@@ -54,7 +54,7 @@ function Template_A(svg) {
     return format;
   };
 
-  this.drawTabs = function(data) {
+  this.drawTabs = function() {
     this.tabs
       .select('rect.rule')
       .attr('height', 1)
@@ -345,4 +345,4 @@ function Template_A(svg) {
   this.init(svg);
 }
 
-export default Template_A;
+export default Template;

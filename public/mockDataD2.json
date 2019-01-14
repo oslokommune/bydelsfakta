@@ -1,0 +1,6221 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Størrelsen av alderssegmenter i Bydel Grünerløkka (01.01.2018)",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http://ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "files": [
+      {
+        "url": "http://data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http://data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+  "data": [
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Alna",
+      "avgRow": 1.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 349.0,
+          "Kvinne": 334.0,
+          "value": 683.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 339.0,
+          "Kvinne": 328.0,
+          "value": 667.0,
+          "ratio": 0.0135
+        },
+        {
+          "Mann": 342.0,
+          "Kvinne": 309.0,
+          "value": 651.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 351.0,
+          "Kvinne": 363.0,
+          "value": 714.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 335.0,
+          "Kvinne": 318.0,
+          "value": 653.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 342.0,
+          "Kvinne": 285.0,
+          "value": 627.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 322.0,
+          "Kvinne": 337.0,
+          "value": 659.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 313.0,
+          "Kvinne": 311.0,
+          "value": 624.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 348.0,
+          "Kvinne": 294.0,
+          "value": 642.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 311.0,
+          "Kvinne": 286.0,
+          "value": 597.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 311.0,
+          "Kvinne": 310.0,
+          "value": 621.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 281.0,
+          "Kvinne": 257.0,
+          "value": 538.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 297.0,
+          "Kvinne": 295.0,
+          "value": 592.0,
+          "ratio": 0.012
+        },
+        {
+          "Mann": 268.0,
+          "Kvinne": 302.0,
+          "value": 570.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 300.0,
+          "Kvinne": 270.0,
+          "value": 570.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 282.0,
+          "Kvinne": 266.0,
+          "value": 548.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 273.0,
+          "Kvinne": 281.0,
+          "value": 554.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 293.0,
+          "Kvinne": 270.0,
+          "value": 563.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 301.0,
+          "Kvinne": 270.0,
+          "value": 571.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 288.0,
+          "Kvinne": 261.0,
+          "value": 549.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 269.0,
+          "Kvinne": 239.0,
+          "value": 508.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 268.0,
+          "Kvinne": 262.0,
+          "value": 530.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 281.0,
+          "Kvinne": 255.0,
+          "value": 536.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 308.0,
+          "Kvinne": 276.0,
+          "value": 584.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 318.0,
+          "Kvinne": 294.0,
+          "value": 612.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 344.0,
+          "Kvinne": 376.0,
+          "value": 720.0,
+          "ratio": 0.0146
+        },
+        {
+          "Mann": 372.0,
+          "Kvinne": 370.0,
+          "value": 742.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 358.0,
+          "Kvinne": 368.0,
+          "value": 726.0,
+          "ratio": 0.0147
+        },
+        {
+          "Mann": 408.0,
+          "Kvinne": 432.0,
+          "value": 840.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 418.0,
+          "Kvinne": 418.0,
+          "value": 836.0,
+          "ratio": 0.0169
+        },
+        {
+          "Mann": 380.0,
+          "Kvinne": 436.0,
+          "value": 816.0,
+          "ratio": 0.0165
+        },
+        {
+          "Mann": 433.0,
+          "Kvinne": 462.0,
+          "value": 895.0,
+          "ratio": 0.0181
+        },
+        {
+          "Mann": 444.0,
+          "Kvinne": 435.0,
+          "value": 879.0,
+          "ratio": 0.0178
+        },
+        {
+          "Mann": 439.0,
+          "Kvinne": 433.0,
+          "value": 872.0,
+          "ratio": 0.0177
+        },
+        {
+          "Mann": 409.0,
+          "Kvinne": 427.0,
+          "value": 836.0,
+          "ratio": 0.0169
+        },
+        {
+          "Mann": 426.0,
+          "Kvinne": 427.0,
+          "value": 853.0,
+          "ratio": 0.0173
+        },
+        {
+          "Mann": 397.0,
+          "Kvinne": 388.0,
+          "value": 785.0,
+          "ratio": 0.0159
+        },
+        {
+          "Mann": 409.0,
+          "Kvinne": 386.0,
+          "value": 795.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 382.0,
+          "Kvinne": 378.0,
+          "value": 760.0,
+          "ratio": 0.0154
+        },
+        {
+          "Mann": 421.0,
+          "Kvinne": 356.0,
+          "value": 777.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 351.0,
+          "Kvinne": 316.0,
+          "value": 667.0,
+          "ratio": 0.0135
+        },
+        {
+          "Mann": 406.0,
+          "Kvinne": 344.0,
+          "value": 750.0,
+          "ratio": 0.0152
+        },
+        {
+          "Mann": 354.0,
+          "Kvinne": 343.0,
+          "value": 697.0,
+          "ratio": 0.0141
+        },
+        {
+          "Mann": 381.0,
+          "Kvinne": 355.0,
+          "value": 736.0,
+          "ratio": 0.0149
+        },
+        {
+          "Mann": 323.0,
+          "Kvinne": 339.0,
+          "value": 662.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 346.0,
+          "Kvinne": 343.0,
+          "value": 689.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 372.0,
+          "Kvinne": 335.0,
+          "value": 707.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 369.0,
+          "Kvinne": 293.0,
+          "value": 662.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 311.0,
+          "Kvinne": 345.0,
+          "value": 656.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 351.0,
+          "Kvinne": 324.0,
+          "value": 675.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 318.0,
+          "Kvinne": 304.0,
+          "value": 622.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 338.0,
+          "Kvinne": 316.0,
+          "value": 654.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 345.0,
+          "Kvinne": 296.0,
+          "value": 641.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 312.0,
+          "Kvinne": 334.0,
+          "value": 646.0,
+          "ratio": 0.0131
+        },
+        {
+          "Mann": 312.0,
+          "Kvinne": 286.0,
+          "value": 598.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 309.0,
+          "Kvinne": 297.0,
+          "value": 606.0,
+          "ratio": 0.0123
+        },
+        {
+          "Mann": 293.0,
+          "Kvinne": 257.0,
+          "value": 550.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 292.0,
+          "Kvinne": 265.0,
+          "value": 557.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 286.0,
+          "Kvinne": 270.0,
+          "value": 556.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 254.0,
+          "Kvinne": 255.0,
+          "value": 509.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 247.0,
+          "Kvinne": 283.0,
+          "value": 530.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 268.0,
+          "Kvinne": 262.0,
+          "value": 530.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 236.0,
+          "Kvinne": 261.0,
+          "value": 497.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 208.0,
+          "Kvinne": 256.0,
+          "value": 464.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 219.0,
+          "Kvinne": 224.0,
+          "value": 443.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 205.0,
+          "Kvinne": 267.0,
+          "value": 472.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 232.0,
+          "Kvinne": 226.0,
+          "value": 458.0,
+          "ratio": 0.0093
+        },
+        {
+          "Mann": 222.0,
+          "Kvinne": 235.0,
+          "value": 457.0,
+          "ratio": 0.0093
+        },
+        {
+          "Mann": 241.0,
+          "Kvinne": 234.0,
+          "value": 475.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 219.0,
+          "Kvinne": 231.0,
+          "value": 450.0,
+          "ratio": 0.0091
+        },
+        {
+          "Mann": 204.0,
+          "Kvinne": 223.0,
+          "value": 427.0,
+          "ratio": 0.0087
+        },
+        {
+          "Mann": 228.0,
+          "Kvinne": 228.0,
+          "value": 456.0,
+          "ratio": 0.0092
+        },
+        {
+          "Mann": 171.0,
+          "Kvinne": 214.0,
+          "value": 385.0,
+          "ratio": 0.0078
+        },
+        {
+          "Mann": 164.0,
+          "Kvinne": 168.0,
+          "value": 332.0,
+          "ratio": 0.0067
+        },
+        {
+          "Mann": 149.0,
+          "Kvinne": 177.0,
+          "value": 326.0,
+          "ratio": 0.0066
+        },
+        {
+          "Mann": 127.0,
+          "Kvinne": 169.0,
+          "value": 296.0,
+          "ratio": 0.006
+        },
+        {
+          "Mann": 109.0,
+          "Kvinne": 132.0,
+          "value": 241.0,
+          "ratio": 0.0049
+        },
+        {
+          "Mann": 113.0,
+          "Kvinne": 110.0,
+          "value": 223.0,
+          "ratio": 0.0045
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 126.0,
+          "value": 207.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 93.0,
+          "Kvinne": 114.0,
+          "value": 207.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 84.0,
+          "value": 153.0,
+          "ratio": 0.0031
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 99.0,
+          "value": 162.0,
+          "ratio": 0.0033
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 80.0,
+          "value": 130.0,
+          "ratio": 0.0026
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 85.0,
+          "value": 135.0,
+          "ratio": 0.0027
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 76.0,
+          "value": 122.0,
+          "ratio": 0.0025
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 105.0,
+          "value": 147.0,
+          "ratio": 0.003
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 58.0,
+          "value": 104.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 40.0,
+          "Kvinne": 84.0,
+          "value": 124.0,
+          "ratio": 0.0025
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 56.0,
+          "value": 82.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 58.0,
+          "value": 76.0,
+          "ratio": 0.0015
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 42.0,
+          "value": 67.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 38.0,
+          "value": 52.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 40.0,
+          "value": 49.0,
+          "ratio": 0.001
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 18.0,
+          "value": 32.0,
+          "ratio": 0.0006
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 23.0,
+          "value": 23.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 24.0,
+          "value": 30.0,
+          "ratio": 0.0006
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 11.0,
+          "value": 11.0,
+          "ratio": 0.0002
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 10.0,
+          "value": 16.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 8.0,
+          "value": 8.0,
+          "ratio": 0.0002
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 3.0,
+          "value": 6.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Ellingsrud",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 55.0,
+          "Kvinne": 50.0,
+          "value": 105.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 54.0,
+          "value": 101.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 44.0,
+          "value": 99.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 50.0,
+          "value": 109.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 47.0,
+          "value": 101.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 46.0,
+          "value": 114.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 59.0,
+          "value": 122.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 61.0,
+          "value": 109.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 50.0,
+          "value": 102.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 46.0,
+          "value": 105.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 43.0,
+          "value": 88.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 36.0,
+          "value": 95.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 45.0,
+          "value": 98.0,
+          "ratio": 0.0129
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 51.0,
+          "value": 85.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 39.0,
+          "value": 83.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 42.0,
+          "value": 86.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 39.0,
+          "value": 74.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 50.0,
+          "value": 102.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 52.0,
+          "value": 103.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 55.0,
+          "value": 104.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 31.0,
+          "value": 83.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 32.0,
+          "value": 67.0,
+          "ratio": 0.0088
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 37.0,
+          "value": 76.0,
+          "ratio": 0.01
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 41.0,
+          "value": 83.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 30.0,
+          "value": 77.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 45.0,
+          "value": 84.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 46.0,
+          "value": 100.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 52.0,
+          "value": 106.0,
+          "ratio": 0.0139
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 38.0,
+          "value": 80.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 45.0,
+          "value": 91.0,
+          "ratio": 0.012
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 54.0,
+          "value": 106.0,
+          "ratio": 0.0139
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 72.0,
+          "value": 132.0,
+          "ratio": 0.0174
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 57.0,
+          "value": 121.0,
+          "ratio": 0.0159
+        },
+        {
+          "Mann": 75.0,
+          "Kvinne": 69.0,
+          "value": 144.0,
+          "ratio": 0.0189
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 53.0,
+          "value": 109.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 49.0,
+          "value": 98.0,
+          "ratio": 0.0129
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 65.0,
+          "value": 119.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 61.0,
+          "value": 110.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 64.0,
+          "value": 116.0,
+          "ratio": 0.0153
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 52.0,
+          "value": 114.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 41.0,
+          "value": 80.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 58.0,
+          "value": 109.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 57.0,
+          "Kvinne": 60.0,
+          "value": 117.0,
+          "ratio": 0.0154
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 56.0,
+          "value": 110.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 51.0,
+          "value": 107.0,
+          "ratio": 0.0141
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 61.0,
+          "value": 110.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 45.0,
+          "value": 97.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 48.0,
+          "value": 111.0,
+          "ratio": 0.0146
+        },
+        {
+          "Mann": 36.0,
+          "Kvinne": 50.0,
+          "value": 86.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 51.0,
+          "value": 95.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 43.0,
+          "value": 90.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 43.0,
+          "value": 95.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 54.0,
+          "value": 109.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 50.0,
+          "value": 95.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 44.0,
+          "value": 91.0,
+          "ratio": 0.012
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 57.0,
+          "value": 113.0,
+          "ratio": 0.0149
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 38.0,
+          "value": 88.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 32.0,
+          "value": 79.0,
+          "ratio": 0.0104
+        },
+        {
+          "Mann": 43.0,
+          "Kvinne": 46.0,
+          "value": 89.0,
+          "ratio": 0.0117
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 40.0,
+          "value": 73.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 70.0,
+          "value": 95.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 44.0,
+          "value": 93.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 59.0,
+          "value": 98.0,
+          "ratio": 0.0129
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 42.0,
+          "value": 75.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 59.0,
+          "value": 98.0,
+          "ratio": 0.0129
+        },
+        {
+          "Mann": 37.0,
+          "Kvinne": 45.0,
+          "value": 82.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 40.0,
+          "value": 87.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 47.0,
+          "value": 95.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 46.0,
+          "value": 90.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 38.0,
+          "value": 80.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 52.0,
+          "value": 90.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 47.0,
+          "value": 100.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 45.0,
+          "value": 76.0,
+          "ratio": 0.01
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 27.0,
+          "value": 55.0,
+          "ratio": 0.0072
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 33.0,
+          "value": 63.0,
+          "ratio": 0.0083
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 22.0,
+          "value": 47.0,
+          "ratio": 0.0062
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 16.0,
+          "value": 35.0,
+          "ratio": 0.0046
+        },
+        {
+          "Mann": 21.0,
+          "Kvinne": 15.0,
+          "value": 36.0,
+          "ratio": 0.0047
+        },
+        {
+          "Mann": 13.0,
+          "Kvinne": 19.0,
+          "value": 32.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 7.0,
+          "value": 24.0,
+          "ratio": 0.0032
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 6.0,
+          "value": 16.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 16.0,
+          "value": 22.0,
+          "ratio": 0.0029
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 6.0,
+          "value": 10.0,
+          "ratio": 0.0013
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 10.0,
+          "value": 20.0,
+          "ratio": 0.0026
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 12.0,
+          "value": 16.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 13.0,
+          "value": 16.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 11.0,
+          "value": 11.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 9.0,
+          "value": 12.0,
+          "ratio": 0.0016
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 7.0,
+          "value": 10.0,
+          "ratio": 0.0013
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 9.0,
+          "value": 9.0,
+          "ratio": 0.0012
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 9.0,
+          "value": 14.0,
+          "ratio": 0.0018
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 9.0,
+          "value": 9.0,
+          "ratio": 0.0012
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 11.0,
+          "value": 11.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 3.0,
+          "value": 7.0,
+          "ratio": 0.0009
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 5.0,
+          "value": 5.0,
+          "ratio": 0.0007
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 3.0,
+          "value": 6.0,
+          "ratio": 0.0008
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Furuset",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 60.0,
+          "Kvinne": 83.0,
+          "value": 143.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 74.0,
+          "Kvinne": 77.0,
+          "value": 151.0,
+          "ratio": 0.0151
+        },
+        {
+          "Mann": 82.0,
+          "Kvinne": 83.0,
+          "value": 165.0,
+          "ratio": 0.0165
+        },
+        {
+          "Mann": 83.0,
+          "Kvinne": 74.0,
+          "value": 157.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 65.0,
+          "value": 131.0,
+          "ratio": 0.0131
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 57.0,
+          "value": 119.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 58.0,
+          "Kvinne": 70.0,
+          "value": 128.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 62.0,
+          "value": 121.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 78.0,
+          "Kvinne": 78.0,
+          "value": 156.0,
+          "ratio": 0.0156
+        },
+        {
+          "Mann": 58.0,
+          "Kvinne": 66.0,
+          "value": 124.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 72.0,
+          "Kvinne": 65.0,
+          "value": 137.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 50.0,
+          "value": 116.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 74.0,
+          "value": 142.0,
+          "ratio": 0.0142
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 64.0,
+          "value": 145.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 70.0,
+          "value": 136.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 75.0,
+          "Kvinne": 73.0,
+          "value": 148.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 58.0,
+          "value": 125.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 74.0,
+          "value": 151.0,
+          "ratio": 0.0151
+        },
+        {
+          "Mann": 72.0,
+          "Kvinne": 67.0,
+          "value": 139.0,
+          "ratio": 0.0139
+        },
+        {
+          "Mann": 70.0,
+          "Kvinne": 67.0,
+          "value": 137.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 58.0,
+          "Kvinne": 47.0,
+          "value": 105.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 67.0,
+          "value": 136.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 49.0,
+          "value": 103.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 73.0,
+          "Kvinne": 57.0,
+          "value": 130.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 74.0,
+          "value": 138.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 89.0,
+          "value": 170.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 72.0,
+          "value": 141.0,
+          "ratio": 0.0141
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 62.0,
+          "value": 129.0,
+          "ratio": 0.0129
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 79.0,
+          "value": 150.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 82.0,
+          "Kvinne": 77.0,
+          "value": 159.0,
+          "ratio": 0.0159
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 86.0,
+          "value": 148.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 90.0,
+          "Kvinne": 93.0,
+          "value": 183.0,
+          "ratio": 0.0183
+        },
+        {
+          "Mann": 78.0,
+          "Kvinne": 83.0,
+          "value": 161.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 84.0,
+          "Kvinne": 82.0,
+          "value": 166.0,
+          "ratio": 0.0166
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 92.0,
+          "value": 163.0,
+          "ratio": 0.0163
+        },
+        {
+          "Mann": 108.0,
+          "Kvinne": 95.0,
+          "value": 203.0,
+          "ratio": 0.0203
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 77.0,
+          "value": 154.0,
+          "ratio": 0.0154
+        },
+        {
+          "Mann": 95.0,
+          "Kvinne": 75.0,
+          "value": 170.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 66.0,
+          "value": 147.0,
+          "ratio": 0.0147
+        },
+        {
+          "Mann": 83.0,
+          "Kvinne": 64.0,
+          "value": 147.0,
+          "ratio": 0.0147
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 59.0,
+          "value": 125.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 83.0,
+          "Kvinne": 65.0,
+          "value": 148.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 77.0,
+          "value": 146.0,
+          "ratio": 0.0146
+        },
+        {
+          "Mann": 75.0,
+          "Kvinne": 78.0,
+          "value": 153.0,
+          "ratio": 0.0153
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 59.0,
+          "value": 114.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 71.0,
+          "value": 148.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 66.0,
+          "value": 143.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 49.0,
+          "value": 130.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 77.0,
+          "value": 140.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 63.0,
+          "value": 140.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 69.0,
+          "value": 132.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 58.0,
+          "value": 121.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 62.0,
+          "value": 124.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 62.0,
+          "value": 113.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 57.0,
+          "value": 121.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 55.0,
+          "value": 110.0,
+          "ratio": 0.011
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 44.0,
+          "value": 97.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 49.0,
+          "value": 113.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 48.0,
+          "value": 107.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 58.0,
+          "value": 100.0,
+          "ratio": 0.01
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 48.0,
+          "value": 97.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 49.0,
+          "value": 111.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 53.0,
+          "value": 108.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 52.0,
+          "value": 86.0,
+          "ratio": 0.0086
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 47.0,
+          "value": 99.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 53.0,
+          "value": 97.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 48.0,
+          "value": 98.0,
+          "ratio": 0.0098
+        },
+        {
+          "Mann": 43.0,
+          "Kvinne": 32.0,
+          "value": 75.0,
+          "ratio": 0.0075
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 28.0,
+          "value": 76.0,
+          "ratio": 0.0076
+        },
+        {
+          "Mann": 37.0,
+          "Kvinne": 43.0,
+          "value": 80.0,
+          "ratio": 0.008
+        },
+        {
+          "Mann": 36.0,
+          "Kvinne": 40.0,
+          "value": 76.0,
+          "ratio": 0.0076
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 32.0,
+          "value": 67.0,
+          "ratio": 0.0067
+        },
+        {
+          "Mann": 27.0,
+          "Kvinne": 31.0,
+          "value": 58.0,
+          "ratio": 0.0058
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 25.0,
+          "value": 48.0,
+          "ratio": 0.0048
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 21.0,
+          "value": 41.0,
+          "ratio": 0.0041
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 27.0,
+          "value": 42.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 12.0,
+          "value": 26.0,
+          "ratio": 0.0026
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 17.0,
+          "value": 35.0,
+          "ratio": 0.0035
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 22.0,
+          "value": 34.0,
+          "ratio": 0.0034
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 33.0,
+          "value": 52.0,
+          "ratio": 0.0052
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 19.0,
+          "value": 31.0,
+          "ratio": 0.0031
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 20.0,
+          "value": 29.0,
+          "ratio": 0.0029
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 16.0,
+          "value": 26.0,
+          "ratio": 0.0026
+        },
+        {
+          "Mann": 13.0,
+          "Kvinne": 13.0,
+          "value": 26.0,
+          "ratio": 0.0026
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 15.0,
+          "value": 24.0,
+          "ratio": 0.0024
+        },
+        {
+          "Mann": 11.0,
+          "Kvinne": 13.0,
+          "value": 24.0,
+          "ratio": 0.0024
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 10.0,
+          "value": 22.0,
+          "ratio": 0.0022
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 17.0,
+          "value": 22.0,
+          "ratio": 0.0022
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 14.0,
+          "value": 19.0,
+          "ratio": 0.0019
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 14.0,
+          "value": 17.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 10.0,
+          "value": 13.0,
+          "ratio": 0.0013
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 7.0,
+          "value": 14.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 6.0,
+          "value": 10.0,
+          "ratio": 0.001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 5.0,
+          "value": 5.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 8.0,
+          "value": 8.0,
+          "ratio": 0.0008
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 8.0,
+          "value": 11.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.0006
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 5.0,
+          "value": 5.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Hellerudtoppen",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 26.0,
+          "Kvinne": 21.0,
+          "value": 47.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 21.0,
+          "Kvinne": 26.0,
+          "value": 47.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 19.0,
+          "value": 44.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 35.0,
+          "value": 67.0,
+          "ratio": 0.0189
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 29.0,
+          "value": 49.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 16.0,
+          "value": 44.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 31.0,
+          "value": 70.0,
+          "ratio": 0.0198
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 26.0,
+          "value": 51.0,
+          "ratio": 0.0144
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 16.0,
+          "value": 41.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 20.0,
+          "value": 40.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 28.0,
+          "value": 56.0,
+          "ratio": 0.0158
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 15.0,
+          "value": 53.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 20.0,
+          "value": 38.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 21.0,
+          "Kvinne": 20.0,
+          "value": 41.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 21.0,
+          "value": 51.0,
+          "ratio": 0.0144
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 13.0,
+          "value": 31.0,
+          "ratio": 0.0088
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 23.0,
+          "value": 43.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 17.0,
+          "value": 42.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 24.0,
+          "Kvinne": 18.0,
+          "value": 42.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 13.0,
+          "value": 30.0,
+          "ratio": 0.0085
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 18.0,
+          "value": 33.0,
+          "ratio": 0.0093
+        },
+        {
+          "Mann": 22.0,
+          "Kvinne": 13.0,
+          "value": 35.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 14.0,
+          "value": 34.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 13.0,
+          "value": 33.0,
+          "ratio": 0.0093
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 13.0,
+          "value": 28.0,
+          "ratio": 0.0079
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 19.0,
+          "value": 35.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 17.0,
+          "value": 34.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 11.0,
+          "value": 23.0,
+          "ratio": 0.0065
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 19.0,
+          "value": 38.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 13.0,
+          "Kvinne": 23.0,
+          "value": 36.0,
+          "ratio": 0.0102
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 15.0,
+          "value": 34.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 19.0,
+          "value": 42.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 29.0,
+          "value": 43.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 26.0,
+          "value": 43.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 22.0,
+          "value": 48.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 35.0,
+          "value": 55.0,
+          "ratio": 0.0155
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 31.0,
+          "value": 61.0,
+          "ratio": 0.0172
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 19.0,
+          "value": 47.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 24.0,
+          "value": 44.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 29.0,
+          "value": 60.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 28.0,
+          "value": 61.0,
+          "ratio": 0.0172
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 26.0,
+          "value": 51.0,
+          "ratio": 0.0144
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 24.0,
+          "value": 43.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 36.0,
+          "Kvinne": 27.0,
+          "value": 63.0,
+          "ratio": 0.0178
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 33.0,
+          "value": 53.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 28.0,
+          "value": 60.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 28.0,
+          "value": 59.0,
+          "ratio": 0.0167
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 25.0,
+          "value": 58.0,
+          "ratio": 0.0164
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 37.0,
+          "value": 63.0,
+          "ratio": 0.0178
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 31.0,
+          "value": 61.0,
+          "ratio": 0.0172
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 23.0,
+          "value": 48.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 21.0,
+          "Kvinne": 28.0,
+          "value": 49.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 24.0,
+          "Kvinne": 21.0,
+          "value": 45.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 21.0,
+          "Kvinne": 44.0,
+          "value": 65.0,
+          "ratio": 0.0184
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 26.0,
+          "value": 49.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 21.0,
+          "value": 49.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 30.0,
+          "value": 60.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 18.0,
+          "value": 41.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 26.0,
+          "value": 60.0,
+          "ratio": 0.017
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 21.0,
+          "value": 38.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 27.0,
+          "Kvinne": 21.0,
+          "value": 48.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 17.0,
+          "value": 35.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 13.0,
+          "value": 27.0,
+          "ratio": 0.0076
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 26.0,
+          "value": 44.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 14.0,
+          "value": 26.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 14.0,
+          "value": 26.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 13.0,
+          "Kvinne": 13.0,
+          "value": 26.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 11.0,
+          "Kvinne": 12.0,
+          "value": 23.0,
+          "ratio": 0.0065
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 17.0,
+          "value": 33.0,
+          "ratio": 0.0093
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 13.0,
+          "value": 29.0,
+          "ratio": 0.0082
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 22.0,
+          "value": 34.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 19.0,
+          "value": 42.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 14.0,
+          "value": 32.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 13.0,
+          "value": 32.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 16.0,
+          "value": 26.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 11.0,
+          "value": 26.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 11.0,
+          "Kvinne": 10.0,
+          "value": 21.0,
+          "ratio": 0.0059
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 6.0,
+          "value": 13.0,
+          "ratio": 0.0037
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 7.0,
+          "value": 12.0,
+          "ratio": 0.0034
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 10.0,
+          "value": 17.0,
+          "ratio": 0.0048
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 8.0,
+          "value": 15.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 11.0,
+          "value": 21.0,
+          "ratio": 0.0059
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 8.0,
+          "value": 15.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 9.0,
+          "value": 15.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 8.0,
+          "value": 13.0,
+          "ratio": 0.0037
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 9.0,
+          "value": 12.0,
+          "ratio": 0.0034
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 4.0,
+          "value": 10.0,
+          "ratio": 0.0028
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 9.0,
+          "value": 15.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 6.0,
+          "value": 13.0,
+          "ratio": 0.0037
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 3.0,
+          "value": 6.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 0.0,
+          "value": 5.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 5.0,
+          "value": 5.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0008
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Lindeberg",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 54.0,
+          "Kvinne": 57.0,
+          "value": 111.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 52.0,
+          "value": 115.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 58.0,
+          "Kvinne": 61.0,
+          "value": 119.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 61.0,
+          "Kvinne": 67.0,
+          "value": 128.0,
+          "ratio": 0.016
+        },
+        {
+          "Mann": 57.0,
+          "Kvinne": 49.0,
+          "value": 106.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 54.0,
+          "value": 114.0,
+          "ratio": 0.0142
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 51.0,
+          "value": 95.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 55.0,
+          "value": 126.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 73.0,
+          "Kvinne": 53.0,
+          "value": 126.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 62.0,
+          "value": 115.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 61.0,
+          "value": 128.0,
+          "ratio": 0.016
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 45.0,
+          "value": 91.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 51.0,
+          "value": 105.0,
+          "ratio": 0.0131
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 60.0,
+          "value": 116.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 52.0,
+          "value": 99.0,
+          "ratio": 0.0123
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 58.0,
+          "value": 110.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 67.0,
+          "value": 119.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 36.0,
+          "value": 83.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 65.0,
+          "Kvinne": 44.0,
+          "value": 109.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 57.0,
+          "value": 101.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 40.0,
+          "Kvinne": 52.0,
+          "value": 92.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 43.0,
+          "value": 87.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 42.0,
+          "value": 98.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 47.0,
+          "value": 92.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 49.0,
+          "value": 104.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 65.0,
+          "Kvinne": 63.0,
+          "value": 128.0,
+          "ratio": 0.016
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 55.0,
+          "value": 110.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 52.0,
+          "value": 105.0,
+          "ratio": 0.0131
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 63.0,
+          "value": 132.0,
+          "ratio": 0.0165
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 73.0,
+          "value": 129.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 75.0,
+          "value": 131.0,
+          "ratio": 0.0163
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 76.0,
+          "value": 143.0,
+          "ratio": 0.0178
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 66.0,
+          "value": 137.0,
+          "ratio": 0.0171
+        },
+        {
+          "Mann": 75.0,
+          "Kvinne": 72.0,
+          "value": 147.0,
+          "ratio": 0.0183
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 67.0,
+          "value": 129.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 77.0,
+          "value": 140.0,
+          "ratio": 0.0174
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 55.0,
+          "value": 122.0,
+          "ratio": 0.0152
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 60.0,
+          "value": 126.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 66.0,
+          "value": 129.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 58.0,
+          "value": 120.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 65.0,
+          "value": 120.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 61.0,
+          "Kvinne": 49.0,
+          "value": 110.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 51.0,
+          "value": 115.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 52.0,
+          "value": 111.0,
+          "ratio": 0.0138
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 59.0,
+          "value": 122.0,
+          "ratio": 0.0152
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 47.0,
+          "value": 95.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 53.0,
+          "value": 116.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 57.0,
+          "value": 108.0,
+          "ratio": 0.0135
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 53.0,
+          "value": 95.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 47.0,
+          "value": 98.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 34.0,
+          "value": 81.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 45.0,
+          "value": 91.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 41.0,
+          "value": 93.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 53.0,
+          "value": 95.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 51.0,
+          "value": 93.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 56.0,
+          "value": 94.0,
+          "ratio": 0.0117
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 42.0,
+          "value": 76.0,
+          "ratio": 0.0095
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 51.0,
+          "value": 100.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 39.0,
+          "value": 83.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 40.0,
+          "value": 78.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 55.0,
+          "value": 103.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 35.0,
+          "value": 82.0,
+          "ratio": 0.0102
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 42.0,
+          "value": 81.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 45.0,
+          "value": 84.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 37.0,
+          "value": 63.0,
+          "ratio": 0.0079
+        },
+        {
+          "Mann": 37.0,
+          "Kvinne": 51.0,
+          "value": 88.0,
+          "ratio": 0.011
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 38.0,
+          "value": 70.0,
+          "ratio": 0.0087
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 44.0,
+          "value": 77.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 46.0,
+          "value": 93.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 45.0,
+          "value": 79.0,
+          "ratio": 0.0098
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 30.0,
+          "value": 56.0,
+          "ratio": 0.007
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 32.0,
+          "value": 77.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 34.0,
+          "value": 62.0,
+          "ratio": 0.0077
+        },
+        {
+          "Mann": 22.0,
+          "Kvinne": 22.0,
+          "value": 44.0,
+          "ratio": 0.0055
+        },
+        {
+          "Mann": 36.0,
+          "Kvinne": 25.0,
+          "value": 61.0,
+          "ratio": 0.0076
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 24.0,
+          "value": 52.0,
+          "ratio": 0.0065
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 16.0,
+          "value": 32.0,
+          "ratio": 0.004
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 14.0,
+          "value": 31.0,
+          "ratio": 0.0039
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 14.0,
+          "value": 24.0,
+          "ratio": 0.003
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 13.0,
+          "value": 27.0,
+          "ratio": 0.0034
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 10.0,
+          "value": 20.0,
+          "ratio": 0.0025
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 11.0,
+          "value": 15.0,
+          "ratio": 0.0019
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 6.0,
+          "value": 11.0,
+          "ratio": 0.0014
+        },
+        {
+          "Mann": 8.0,
+          "Kvinne": 9.0,
+          "value": 17.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 7.0,
+          "value": 13.0,
+          "ratio": 0.0016
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 14.0,
+          "value": 18.0,
+          "ratio": 0.0022
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 12.0,
+          "value": 17.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 5.0,
+          "value": 5.0,
+          "ratio": 0.0006
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 3.0,
+          "value": 10.0,
+          "ratio": 0.0012
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 3.0,
+          "value": 6.0,
+          "ratio": 0.0007
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Teisen",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 46.0,
+          "Kvinne": 43.0,
+          "value": 89.0,
+          "ratio": 0.0155
+        },
+        {
+          "Mann": 41.0,
+          "Kvinne": 26.0,
+          "value": 67.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 37.0,
+          "Kvinne": 25.0,
+          "value": 62.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 37.0,
+          "value": 69.0,
+          "ratio": 0.012
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 29.0,
+          "value": 63.0,
+          "ratio": 0.011
+        },
+        {
+          "Mann": 27.0,
+          "Kvinne": 32.0,
+          "value": 59.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 38.0,
+          "value": 71.0,
+          "ratio": 0.0123
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 30.0,
+          "value": 56.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 28.0,
+          "value": 54.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 28.0,
+          "value": 63.0,
+          "ratio": 0.011
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 32.0,
+          "value": 57.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 24.0,
+          "value": 42.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 24.0,
+          "Kvinne": 29.0,
+          "value": 53.0,
+          "ratio": 0.0092
+        },
+        {
+          "Mann": 13.0,
+          "Kvinne": 29.0,
+          "value": 42.0,
+          "ratio": 0.0073
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 20.0,
+          "value": 50.0,
+          "ratio": 0.0087
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 22.0,
+          "value": 53.0,
+          "ratio": 0.0092
+        },
+        {
+          "Mann": 27.0,
+          "Kvinne": 20.0,
+          "value": 47.0,
+          "ratio": 0.0082
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 19.0,
+          "value": 45.0,
+          "ratio": 0.0078
+        },
+        {
+          "Mann": 22.0,
+          "Kvinne": 26.0,
+          "value": 48.0,
+          "ratio": 0.0083
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 12.0,
+          "value": 35.0,
+          "ratio": 0.0061
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 27.0,
+          "value": 55.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 29.0,
+          "Kvinne": 33.0,
+          "value": 62.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 29.0,
+          "Kvinne": 27.0,
+          "value": 56.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 36.0,
+          "value": 87.0,
+          "ratio": 0.0151
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 48.0,
+          "value": 95.0,
+          "ratio": 0.0165
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 66.0,
+          "value": 125.0,
+          "ratio": 0.0217
+        },
+        {
+          "Mann": 62.0,
+          "Kvinne": 72.0,
+          "value": 134.0,
+          "ratio": 0.0233
+        },
+        {
+          "Mann": 65.0,
+          "Kvinne": 60.0,
+          "value": 125.0,
+          "ratio": 0.0217
+        },
+        {
+          "Mann": 70.0,
+          "Kvinne": 73.0,
+          "value": 143.0,
+          "ratio": 0.0249
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 65.0,
+          "value": 134.0,
+          "ratio": 0.0233
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 82.0,
+          "value": 149.0,
+          "ratio": 0.0259
+        },
+        {
+          "Mann": 78.0,
+          "Kvinne": 77.0,
+          "value": 155.0,
+          "ratio": 0.0269
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 69.0,
+          "value": 140.0,
+          "ratio": 0.0243
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 55.0,
+          "value": 115.0,
+          "ratio": 0.02
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 65.0,
+          "value": 134.0,
+          "ratio": 0.0233
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 61.0,
+          "value": 138.0,
+          "ratio": 0.024
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 55.0,
+          "value": 107.0,
+          "ratio": 0.0186
+        },
+        {
+          "Mann": 69.0,
+          "Kvinne": 52.0,
+          "value": 121.0,
+          "ratio": 0.021
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 49.0,
+          "value": 95.0,
+          "ratio": 0.0165
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 53.0,
+          "value": 113.0,
+          "ratio": 0.0196
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 43.0,
+          "value": 87.0,
+          "ratio": 0.0151
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 49.0,
+          "value": 109.0,
+          "ratio": 0.0189
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 34.0,
+          "value": 76.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 38.0,
+          "value": 85.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 53.0,
+          "value": 101.0,
+          "ratio": 0.0176
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 40.0,
+          "value": 82.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 50.0,
+          "value": 96.0,
+          "ratio": 0.0167
+        },
+        {
+          "Mann": 41.0,
+          "Kvinne": 32.0,
+          "value": 73.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 32.0,
+          "value": 70.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 41.0,
+          "value": 85.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 45.0,
+          "value": 89.0,
+          "ratio": 0.0155
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 35.0,
+          "value": 80.0,
+          "ratio": 0.0139
+        },
+        {
+          "Mann": 40.0,
+          "Kvinne": 33.0,
+          "value": 73.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 43.0,
+          "value": 92.0,
+          "ratio": 0.016
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 22.0,
+          "value": 60.0,
+          "ratio": 0.0104
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 26.0,
+          "value": 64.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 19.0,
+          "value": 54.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 23.0,
+          "value": 43.0,
+          "ratio": 0.0075
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 29.0,
+          "value": 62.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 15.0,
+          "value": 45.0,
+          "ratio": 0.0078
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 27.0,
+          "value": 52.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 22.0,
+          "Kvinne": 28.0,
+          "value": 50.0,
+          "ratio": 0.0087
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 12.0,
+          "value": 31.0,
+          "ratio": 0.0054
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 29.0,
+          "value": 62.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 17.0,
+          "value": 48.0,
+          "ratio": 0.0083
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 27.0,
+          "value": 55.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 18.0,
+          "value": 33.0,
+          "ratio": 0.0057
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 20.0,
+          "value": 37.0,
+          "ratio": 0.0064
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 14.0,
+          "value": 37.0,
+          "ratio": 0.0064
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 14.0,
+          "value": 28.0,
+          "ratio": 0.0049
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 13.0,
+          "value": 30.0,
+          "ratio": 0.0052
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 18.0,
+          "value": 38.0,
+          "ratio": 0.0066
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 21.0,
+          "value": 38.0,
+          "ratio": 0.0066
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 15.0,
+          "value": 35.0,
+          "ratio": 0.0061
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 14.0,
+          "value": 26.0,
+          "ratio": 0.0045
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 16.0,
+          "value": 22.0,
+          "ratio": 0.0038
+        },
+        {
+          "Mann": 8.0,
+          "Kvinne": 14.0,
+          "value": 22.0,
+          "ratio": 0.0038
+        },
+        {
+          "Mann": 11.0,
+          "Kvinne": 11.0,
+          "value": 22.0,
+          "ratio": 0.0038
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 8.0,
+          "value": 13.0,
+          "ratio": 0.0023
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 9.0,
+          "value": 14.0,
+          "ratio": 0.0024
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 5.0,
+          "value": 12.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 6.0,
+          "value": 10.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 10.0,
+          "value": 13.0,
+          "ratio": 0.0023
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 10.0,
+          "value": 10.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 5.0,
+          "value": 10.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 7.0,
+          "value": 7.0,
+          "ratio": 0.0012
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 7.0,
+          "value": 11.0,
+          "ratio": 0.0019
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.001
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 4.0,
+          "value": 7.0,
+          "ratio": 0.0012
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.001
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 5.0,
+          "value": 10.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0007
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0007
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Trosterud",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 67.0,
+          "Kvinne": 45.0,
+          "value": 112.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 66.0,
+          "value": 121.0,
+          "ratio": 0.0136
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 47.0,
+          "value": 100.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 51.0,
+          "Kvinne": 60.0,
+          "value": 111.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 78.0,
+          "Kvinne": 65.0,
+          "value": 143.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 51.0,
+          "value": 117.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 53.0,
+          "Kvinne": 62.0,
+          "value": 115.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 46.0,
+          "value": 102.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 49.0,
+          "value": 113.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 46.0,
+          "value": 100.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 47.0,
+          "value": 101.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 57.0,
+          "value": 101.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 51.0,
+          "value": 106.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 56.0,
+          "value": 103.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 51.0,
+          "value": 106.0,
+          "ratio": 0.0119
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 46.0,
+          "value": 93.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 54.0,
+          "Kvinne": 51.0,
+          "value": 105.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 57.0,
+          "value": 107.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 49.0,
+          "value": 98.0,
+          "ratio": 0.011
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 39.0,
+          "value": 95.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 45.0,
+          "value": 97.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 47.0,
+          "value": 96.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 59.0,
+          "Kvinne": 55.0,
+          "value": 114.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 52.0,
+          "Kvinne": 58.0,
+          "value": 110.0,
+          "ratio": 0.0124
+        },
+        {
+          "Mann": 61.0,
+          "Kvinne": 57.0,
+          "value": 118.0,
+          "ratio": 0.0133
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 49.0,
+          "value": 99.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 63.0,
+          "value": 140.0,
+          "ratio": 0.0158
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 71.0,
+          "value": 139.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 80.0,
+          "Kvinne": 106.0,
+          "value": 186.0,
+          "ratio": 0.0209
+        },
+        {
+          "Mann": 86.0,
+          "Kvinne": 80.0,
+          "value": 166.0,
+          "ratio": 0.0187
+        },
+        {
+          "Mann": 67.0,
+          "Kvinne": 73.0,
+          "value": 140.0,
+          "ratio": 0.0158
+        },
+        {
+          "Mann": 76.0,
+          "Kvinne": 73.0,
+          "value": 149.0,
+          "ratio": 0.0168
+        },
+        {
+          "Mann": 90.0,
+          "Kvinne": 79.0,
+          "value": 169.0,
+          "ratio": 0.019
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 88.0,
+          "value": 169.0,
+          "ratio": 0.019
+        },
+        {
+          "Mann": 84.0,
+          "Kvinne": 80.0,
+          "value": 164.0,
+          "ratio": 0.0185
+        },
+        {
+          "Mann": 64.0,
+          "Kvinne": 70.0,
+          "value": 134.0,
+          "ratio": 0.0151
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 56.0,
+          "value": 127.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 74.0,
+          "value": 134.0,
+          "ratio": 0.0151
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 64.0,
+          "value": 141.0,
+          "ratio": 0.0159
+        },
+        {
+          "Mann": 75.0,
+          "Kvinne": 64.0,
+          "value": 139.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 79.0,
+          "Kvinne": 59.0,
+          "value": 138.0,
+          "ratio": 0.0155
+        },
+        {
+          "Mann": 81.0,
+          "Kvinne": 56.0,
+          "value": 137.0,
+          "ratio": 0.0154
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 61.0,
+          "value": 129.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 72.0,
+          "value": 143.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 56.0,
+          "value": 112.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 67.0,
+          "value": 130.0,
+          "ratio": 0.0146
+        },
+        {
+          "Mann": 63.0,
+          "Kvinne": 59.0,
+          "value": 122.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 56.0,
+          "value": 124.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 60.0,
+          "Kvinne": 69.0,
+          "value": 129.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 74.0,
+          "Kvinne": 52.0,
+          "value": 126.0,
+          "ratio": 0.0142
+        },
+        {
+          "Mann": 49.0,
+          "Kvinne": 53.0,
+          "value": 102.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 68.0,
+          "value": 136.0,
+          "ratio": 0.0153
+        },
+        {
+          "Mann": 68.0,
+          "Kvinne": 57.0,
+          "value": 125.0,
+          "ratio": 0.0141
+        },
+        {
+          "Mann": 71.0,
+          "Kvinne": 48.0,
+          "value": 119.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 44.0,
+          "value": 92.0,
+          "ratio": 0.0104
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 47.0,
+          "value": 102.0,
+          "ratio": 0.0115
+        },
+        {
+          "Mann": 61.0,
+          "Kvinne": 53.0,
+          "value": 114.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 58.0,
+          "Kvinne": 55.0,
+          "value": 113.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 50.0,
+          "value": 96.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 57.0,
+          "Kvinne": 55.0,
+          "value": 112.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 31.0,
+          "value": 78.0,
+          "ratio": 0.0088
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 50.0,
+          "value": 89.0,
+          "ratio": 0.01
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 47.0,
+          "value": 89.0,
+          "ratio": 0.01
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 33.0,
+          "value": 61.0,
+          "ratio": 0.0069
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 26.0,
+          "value": 60.0,
+          "ratio": 0.0068
+        },
+        {
+          "Mann": 27.0,
+          "Kvinne": 49.0,
+          "value": 76.0,
+          "ratio": 0.0086
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 38.0,
+          "value": 84.0,
+          "ratio": 0.0095
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 49.0,
+          "value": 95.0,
+          "ratio": 0.0107
+        },
+        {
+          "Mann": 43.0,
+          "Kvinne": 43.0,
+          "value": 86.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 54.0,
+          "value": 99.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 41.0,
+          "Kvinne": 38.0,
+          "value": 79.0,
+          "ratio": 0.0089
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 47.0,
+          "value": 80.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 38.0,
+          "value": 69.0,
+          "ratio": 0.0078
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 28.0,
+          "value": 62.0,
+          "ratio": 0.007
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 37.0,
+          "value": 57.0,
+          "ratio": 0.0064
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 28.0,
+          "value": 48.0,
+          "ratio": 0.0054
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 29.0,
+          "value": 48.0,
+          "ratio": 0.0054
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 26.0,
+          "value": 45.0,
+          "ratio": 0.0051
+        },
+        {
+          "Mann": 17.0,
+          "Kvinne": 19.0,
+          "value": 36.0,
+          "ratio": 0.0041
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 18.0,
+          "value": 34.0,
+          "ratio": 0.0038
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 10.0,
+          "value": 17.0,
+          "ratio": 0.0019
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 14.0,
+          "value": 26.0,
+          "ratio": 0.0029
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 11.0,
+          "value": 23.0,
+          "ratio": 0.0026
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 14.0,
+          "value": 18.0,
+          "ratio": 0.002
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 12.0,
+          "value": 19.0,
+          "ratio": 0.0021
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 21.0,
+          "value": 30.0,
+          "ratio": 0.0034
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 10.0,
+          "value": 17.0,
+          "ratio": 0.0019
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 12.0,
+          "value": 24.0,
+          "ratio": 0.0027
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 6.0,
+          "value": 10.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 9.0,
+          "value": 9.0,
+          "ratio": 0.001
+        },
+        {
+          "Mann": 5.0,
+          "Kvinne": 5.0,
+          "value": 10.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Alna",
+      "geography": "Tveita",
+      "avgRow": 0.0,
+      "totalRow": 0.0,
+      "values": [
+        {
+          "Mann": 41.0,
+          "Kvinne": 35.0,
+          "value": 76.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 27.0,
+          "value": 65.0,
+          "ratio": 0.0117
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 30.0,
+          "value": 62.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 40.0,
+          "value": 73.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 34.0,
+          "value": 60.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 29.0,
+          "value": 60.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 26.0,
+          "value": 58.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 31.0,
+          "value": 59.0,
+          "ratio": 0.0106
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 20.0,
+          "value": 50.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 18.0,
+          "value": 50.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 34.0,
+          "value": 54.0,
+          "ratio": 0.0097
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 30.0,
+          "value": 40.0,
+          "ratio": 0.0072
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 25.0,
+          "value": 50.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 22.0,
+          "value": 38.0,
+          "ratio": 0.0069
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 17.0,
+          "value": 45.0,
+          "ratio": 0.0081
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 12.0,
+          "value": 27.0,
+          "ratio": 0.0049
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 23.0,
+          "value": 41.0,
+          "ratio": 0.0074
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 17.0,
+          "value": 33.0,
+          "ratio": 0.006
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 14.0,
+          "value": 32.0,
+          "ratio": 0.0058
+        },
+        {
+          "Mann": 29.0,
+          "Kvinne": 18.0,
+          "value": 47.0,
+          "ratio": 0.0085
+        },
+        {
+          "Mann": 24.0,
+          "Kvinne": 19.0,
+          "value": 43.0,
+          "ratio": 0.0078
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 27.0,
+          "value": 47.0,
+          "ratio": 0.0085
+        },
+        {
+          "Mann": 24.0,
+          "Kvinne": 31.0,
+          "value": 55.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 24.0,
+          "value": 49.0,
+          "ratio": 0.0088
+        },
+        {
+          "Mann": 29.0,
+          "Kvinne": 23.0,
+          "value": 52.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 45.0,
+          "value": 79.0,
+          "ratio": 0.0143
+        },
+        {
+          "Mann": 38.0,
+          "Kvinne": 45.0,
+          "value": 83.0,
+          "ratio": 0.015
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 60.0,
+          "value": 99.0,
+          "ratio": 0.0179
+        },
+        {
+          "Mann": 57.0,
+          "Kvinne": 54.0,
+          "value": 111.0,
+          "ratio": 0.02
+        },
+        {
+          "Mann": 66.0,
+          "Kvinne": 55.0,
+          "value": 121.0,
+          "ratio": 0.0218
+        },
+        {
+          "Mann": 57.0,
+          "Kvinne": 51.0,
+          "value": 108.0,
+          "ratio": 0.0195
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 52.0,
+          "value": 91.0,
+          "ratio": 0.0164
+        },
+        {
+          "Mann": 56.0,
+          "Kvinne": 52.0,
+          "value": 108.0,
+          "ratio": 0.0195
+        },
+        {
+          "Mann": 47.0,
+          "Kvinne": 41.0,
+          "value": 88.0,
+          "ratio": 0.0159
+        },
+        {
+          "Mann": 41.0,
+          "Kvinne": 48.0,
+          "value": 89.0,
+          "ratio": 0.0161
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 40.0,
+          "value": 85.0,
+          "ratio": 0.0153
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 49.0,
+          "value": 95.0,
+          "ratio": 0.0171
+        },
+        {
+          "Mann": 42.0,
+          "Kvinne": 45.0,
+          "value": 87.0,
+          "ratio": 0.0157
+        },
+        {
+          "Mann": 43.0,
+          "Kvinne": 45.0,
+          "value": 88.0,
+          "ratio": 0.0159
+        },
+        {
+          "Mann": 48.0,
+          "Kvinne": 36.0,
+          "value": 84.0,
+          "ratio": 0.0152
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 21.0,
+          "value": 56.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 45.0,
+          "Kvinne": 41.0,
+          "value": 86.0,
+          "ratio": 0.0155
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 36.0,
+          "value": 71.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 32.0,
+          "value": 71.0,
+          "ratio": 0.0128
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 28.0,
+          "value": 53.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 29.0,
+          "value": 64.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 40.0,
+          "Kvinne": 34.0,
+          "value": 74.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 32.0,
+          "Kvinne": 26.0,
+          "value": 58.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 46.0,
+          "Kvinne": 27.0,
+          "value": 73.0,
+          "ratio": 0.0132
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 39.0,
+          "value": 70.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 43.0,
+          "Kvinne": 37.0,
+          "value": 80.0,
+          "ratio": 0.0144
+        },
+        {
+          "Mann": 43.0,
+          "Kvinne": 39.0,
+          "value": 82.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 44.0,
+          "Kvinne": 28.0,
+          "value": 72.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 33.0,
+          "Kvinne": 34.0,
+          "value": 67.0,
+          "ratio": 0.0121
+        },
+        {
+          "Mann": 50.0,
+          "Kvinne": 42.0,
+          "value": 92.0,
+          "ratio": 0.0166
+        },
+        {
+          "Mann": 39.0,
+          "Kvinne": 35.0,
+          "value": 74.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 30.0,
+          "Kvinne": 31.0,
+          "value": 61.0,
+          "ratio": 0.011
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 37.0,
+          "value": 68.0,
+          "ratio": 0.0123
+        },
+        {
+          "Mann": 27.0,
+          "Kvinne": 32.0,
+          "value": 59.0,
+          "ratio": 0.0106
+        },
+        {
+          "Mann": 37.0,
+          "Kvinne": 26.0,
+          "value": 63.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 26.0,
+          "Kvinne": 31.0,
+          "value": 57.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 39.0,
+          "value": 70.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 28.0,
+          "Kvinne": 35.0,
+          "value": 63.0,
+          "ratio": 0.0114
+        },
+        {
+          "Mann": 23.0,
+          "Kvinne": 29.0,
+          "value": 52.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 25.0,
+          "Kvinne": 24.0,
+          "value": 49.0,
+          "ratio": 0.0088
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 28.0,
+          "value": 48.0,
+          "ratio": 0.0087
+        },
+        {
+          "Mann": 29.0,
+          "Kvinne": 31.0,
+          "value": 60.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 24.0,
+          "Kvinne": 31.0,
+          "value": 55.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 40.0,
+          "value": 60.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 31.0,
+          "Kvinne": 24.0,
+          "value": 55.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 34.0,
+          "Kvinne": 28.0,
+          "value": 62.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 33.0,
+          "value": 52.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 31.0,
+          "value": 50.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 38.0,
+          "value": 56.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 21.0,
+          "Kvinne": 31.0,
+          "value": 52.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 41.0,
+          "value": 59.0,
+          "ratio": 0.0106
+        },
+        {
+          "Mann": 22.0,
+          "Kvinne": 35.0,
+          "value": 57.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 20.0,
+          "Kvinne": 21.0,
+          "value": 41.0,
+          "ratio": 0.0074
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 37.0,
+          "value": 56.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 15.0,
+          "Kvinne": 24.0,
+          "value": 39.0,
+          "ratio": 0.007
+        },
+        {
+          "Mann": 16.0,
+          "Kvinne": 26.0,
+          "value": 42.0,
+          "ratio": 0.0076
+        },
+        {
+          "Mann": 18.0,
+          "Kvinne": 21.0,
+          "value": 39.0,
+          "ratio": 0.007
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 23.0,
+          "value": 32.0,
+          "ratio": 0.0058
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 20.0,
+          "value": 29.0,
+          "ratio": 0.0052
+        },
+        {
+          "Mann": 10.0,
+          "Kvinne": 17.0,
+          "value": 27.0,
+          "ratio": 0.0049
+        },
+        {
+          "Mann": 12.0,
+          "Kvinne": 28.0,
+          "value": 40.0,
+          "ratio": 0.0072
+        },
+        {
+          "Mann": 14.0,
+          "Kvinne": 16.0,
+          "value": 30.0,
+          "ratio": 0.0054
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 19.0,
+          "value": 28.0,
+          "ratio": 0.0051
+        },
+        {
+          "Mann": 7.0,
+          "Kvinne": 17.0,
+          "value": 24.0,
+          "ratio": 0.0043
+        },
+        {
+          "Mann": 9.0,
+          "Kvinne": 14.0,
+          "value": 23.0,
+          "ratio": 0.0042
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 9.0,
+          "value": 9.0,
+          "ratio": 0.0016
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 13.0,
+          "value": 17.0,
+          "ratio": 0.0031
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 6.0,
+          "value": 6.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 4.0,
+          "Kvinne": 3.0,
+          "value": 7.0,
+          "ratio": 0.0013
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 4.0,
+          "value": 4.0,
+          "ratio": 0.0007
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 5.0,
+          "value": 5.0,
+          "ratio": 0.0009
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0005
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    },
+    {
+      "aargang": 2018,
+      "bydel2": "Oslo",
+      "geography": "Oslo i alt",
+      "avgRow": 0.0,
+      "totalRow": 1.0,
+      "values": [
+        {
+          "Mann": 4857.0,
+          "Kvinne": 4547.0,
+          "value": 9404.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 4699.0,
+          "Kvinne": 4353.0,
+          "value": 9052.0,
+          "ratio": 0.0135
+        },
+        {
+          "Mann": 4487.0,
+          "Kvinne": 4010.0,
+          "value": 8497.0,
+          "ratio": 0.0127
+        },
+        {
+          "Mann": 4321.0,
+          "Kvinne": 4064.0,
+          "value": 8385.0,
+          "ratio": 0.0125
+        },
+        {
+          "Mann": 4021.0,
+          "Kvinne": 3773.0,
+          "value": 7794.0,
+          "ratio": 0.0116
+        },
+        {
+          "Mann": 4029.0,
+          "Kvinne": 3785.0,
+          "value": 7814.0,
+          "ratio": 0.0117
+        },
+        {
+          "Mann": 3848.0,
+          "Kvinne": 3710.0,
+          "value": 7558.0,
+          "ratio": 0.0113
+        },
+        {
+          "Mann": 3785.0,
+          "Kvinne": 3736.0,
+          "value": 7521.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 3824.0,
+          "Kvinne": 3696.0,
+          "value": 7520.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 3730.0,
+          "Kvinne": 3507.0,
+          "value": 7237.0,
+          "ratio": 0.0108
+        },
+        {
+          "Mann": 3654.0,
+          "Kvinne": 3413.0,
+          "value": 7067.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 3375.0,
+          "Kvinne": 3415.0,
+          "value": 6790.0,
+          "ratio": 0.0101
+        },
+        {
+          "Mann": 3293.0,
+          "Kvinne": 3253.0,
+          "value": 6546.0,
+          "ratio": 0.0098
+        },
+        {
+          "Mann": 3249.0,
+          "Kvinne": 3178.0,
+          "value": 6427.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 3260.0,
+          "Kvinne": 3010.0,
+          "value": 6270.0,
+          "ratio": 0.0094
+        },
+        {
+          "Mann": 3014.0,
+          "Kvinne": 2930.0,
+          "value": 5944.0,
+          "ratio": 0.0089
+        },
+        {
+          "Mann": 2948.0,
+          "Kvinne": 2903.0,
+          "value": 5851.0,
+          "ratio": 0.0087
+        },
+        {
+          "Mann": 3071.0,
+          "Kvinne": 3070.0,
+          "value": 6141.0,
+          "ratio": 0.0092
+        },
+        {
+          "Mann": 3155.0,
+          "Kvinne": 2898.0,
+          "value": 6053.0,
+          "ratio": 0.009
+        },
+        {
+          "Mann": 3290.0,
+          "Kvinne": 3284.0,
+          "value": 6574.0,
+          "ratio": 0.0098
+        },
+        {
+          "Mann": 3487.0,
+          "Kvinne": 3970.0,
+          "value": 7457.0,
+          "ratio": 0.0111
+        },
+        {
+          "Mann": 3972.0,
+          "Kvinne": 4468.0,
+          "value": 8440.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 4395.0,
+          "Kvinne": 4798.0,
+          "value": 9193.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 4514.0,
+          "Kvinne": 5218.0,
+          "value": 9732.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 5078.0,
+          "Kvinne": 5839.0,
+          "value": 10917.0,
+          "ratio": 0.0163
+        },
+        {
+          "Mann": 5880.0,
+          "Kvinne": 6727.0,
+          "value": 12607.0,
+          "ratio": 0.0188
+        },
+        {
+          "Mann": 6521.0,
+          "Kvinne": 7364.0,
+          "value": 13885.0,
+          "ratio": 0.0207
+        },
+        {
+          "Mann": 7136.0,
+          "Kvinne": 8064.0,
+          "value": 15200.0,
+          "ratio": 0.0227
+        },
+        {
+          "Mann": 7621.0,
+          "Kvinne": 8159.0,
+          "value": 15780.0,
+          "ratio": 0.0235
+        },
+        {
+          "Mann": 7566.0,
+          "Kvinne": 8016.0,
+          "value": 15582.0,
+          "ratio": 0.0232
+        },
+        {
+          "Mann": 7386.0,
+          "Kvinne": 7577.0,
+          "value": 14963.0,
+          "ratio": 0.0223
+        },
+        {
+          "Mann": 7286.0,
+          "Kvinne": 7217.0,
+          "value": 14503.0,
+          "ratio": 0.0216
+        },
+        {
+          "Mann": 7163.0,
+          "Kvinne": 6728.0,
+          "value": 13891.0,
+          "ratio": 0.0207
+        },
+        {
+          "Mann": 6779.0,
+          "Kvinne": 6488.0,
+          "value": 13267.0,
+          "ratio": 0.0198
+        },
+        {
+          "Mann": 6654.0,
+          "Kvinne": 5952.0,
+          "value": 12606.0,
+          "ratio": 0.0188
+        },
+        {
+          "Mann": 6470.0,
+          "Kvinne": 5840.0,
+          "value": 12310.0,
+          "ratio": 0.0184
+        },
+        {
+          "Mann": 6055.0,
+          "Kvinne": 5604.0,
+          "value": 11659.0,
+          "ratio": 0.0174
+        },
+        {
+          "Mann": 6056.0,
+          "Kvinne": 5590.0,
+          "value": 11646.0,
+          "ratio": 0.0174
+        },
+        {
+          "Mann": 5656.0,
+          "Kvinne": 5263.0,
+          "value": 10919.0,
+          "ratio": 0.0163
+        },
+        {
+          "Mann": 5557.0,
+          "Kvinne": 4900.0,
+          "value": 10457.0,
+          "ratio": 0.0156
+        },
+        {
+          "Mann": 5299.0,
+          "Kvinne": 4689.0,
+          "value": 9988.0,
+          "ratio": 0.0149
+        },
+        {
+          "Mann": 5293.0,
+          "Kvinne": 4651.0,
+          "value": 9944.0,
+          "ratio": 0.0148
+        },
+        {
+          "Mann": 5177.0,
+          "Kvinne": 4639.0,
+          "value": 9816.0,
+          "ratio": 0.0146
+        },
+        {
+          "Mann": 5093.0,
+          "Kvinne": 4646.0,
+          "value": 9739.0,
+          "ratio": 0.0145
+        },
+        {
+          "Mann": 4927.0,
+          "Kvinne": 4460.0,
+          "value": 9387.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 4902.0,
+          "Kvinne": 4458.0,
+          "value": 9360.0,
+          "ratio": 0.014
+        },
+        {
+          "Mann": 4774.0,
+          "Kvinne": 4377.0,
+          "value": 9151.0,
+          "ratio": 0.0137
+        },
+        {
+          "Mann": 4748.0,
+          "Kvinne": 4234.0,
+          "value": 8982.0,
+          "ratio": 0.0134
+        },
+        {
+          "Mann": 4461.0,
+          "Kvinne": 4285.0,
+          "value": 8746.0,
+          "ratio": 0.013
+        },
+        {
+          "Mann": 4439.0,
+          "Kvinne": 3988.0,
+          "value": 8427.0,
+          "ratio": 0.0126
+        },
+        {
+          "Mann": 4196.0,
+          "Kvinne": 3971.0,
+          "value": 8167.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 4262.0,
+          "Kvinne": 3889.0,
+          "value": 8151.0,
+          "ratio": 0.0122
+        },
+        {
+          "Mann": 4111.0,
+          "Kvinne": 3917.0,
+          "value": 8028.0,
+          "ratio": 0.012
+        },
+        {
+          "Mann": 4068.0,
+          "Kvinne": 3849.0,
+          "value": 7917.0,
+          "ratio": 0.0118
+        },
+        {
+          "Mann": 3853.0,
+          "Kvinne": 3666.0,
+          "value": 7519.0,
+          "ratio": 0.0112
+        },
+        {
+          "Mann": 3727.0,
+          "Kvinne": 3554.0,
+          "value": 7281.0,
+          "ratio": 0.0109
+        },
+        {
+          "Mann": 3522.0,
+          "Kvinne": 3409.0,
+          "value": 6931.0,
+          "ratio": 0.0103
+        },
+        {
+          "Mann": 3609.0,
+          "Kvinne": 3414.0,
+          "value": 7023.0,
+          "ratio": 0.0105
+        },
+        {
+          "Mann": 3373.0,
+          "Kvinne": 3303.0,
+          "value": 6676.0,
+          "ratio": 0.01
+        },
+        {
+          "Mann": 3224.0,
+          "Kvinne": 3398.0,
+          "value": 6622.0,
+          "ratio": 0.0099
+        },
+        {
+          "Mann": 3176.0,
+          "Kvinne": 3230.0,
+          "value": 6406.0,
+          "ratio": 0.0096
+        },
+        {
+          "Mann": 3059.0,
+          "Kvinne": 3141.0,
+          "value": 6200.0,
+          "ratio": 0.0092
+        },
+        {
+          "Mann": 2949.0,
+          "Kvinne": 2980.0,
+          "value": 5929.0,
+          "ratio": 0.0088
+        },
+        {
+          "Mann": 2820.0,
+          "Kvinne": 2942.0,
+          "value": 5762.0,
+          "ratio": 0.0086
+        },
+        {
+          "Mann": 2666.0,
+          "Kvinne": 2846.0,
+          "value": 5512.0,
+          "ratio": 0.0082
+        },
+        {
+          "Mann": 2578.0,
+          "Kvinne": 2806.0,
+          "value": 5384.0,
+          "ratio": 0.008
+        },
+        {
+          "Mann": 2530.0,
+          "Kvinne": 2655.0,
+          "value": 5185.0,
+          "ratio": 0.0077
+        },
+        {
+          "Mann": 2390.0,
+          "Kvinne": 2657.0,
+          "value": 5047.0,
+          "ratio": 0.0075
+        },
+        {
+          "Mann": 2453.0,
+          "Kvinne": 2556.0,
+          "value": 5009.0,
+          "ratio": 0.0075
+        },
+        {
+          "Mann": 2461.0,
+          "Kvinne": 2559.0,
+          "value": 5020.0,
+          "ratio": 0.0075
+        },
+        {
+          "Mann": 2458.0,
+          "Kvinne": 2605.0,
+          "value": 5063.0,
+          "ratio": 0.0076
+        },
+        {
+          "Mann": 2622.0,
+          "Kvinne": 2755.0,
+          "value": 5377.0,
+          "ratio": 0.008
+        },
+        {
+          "Mann": 2152.0,
+          "Kvinne": 2475.0,
+          "value": 4627.0,
+          "ratio": 0.0069
+        },
+        {
+          "Mann": 2156.0,
+          "Kvinne": 2301.0,
+          "value": 4457.0,
+          "ratio": 0.0066
+        },
+        {
+          "Mann": 1807.0,
+          "Kvinne": 1996.0,
+          "value": 3803.0,
+          "ratio": 0.0057
+        },
+        {
+          "Mann": 1462.0,
+          "Kvinne": 1740.0,
+          "value": 3202.0,
+          "ratio": 0.0048
+        },
+        {
+          "Mann": 1191.0,
+          "Kvinne": 1408.0,
+          "value": 2599.0,
+          "ratio": 0.0039
+        },
+        {
+          "Mann": 1265.0,
+          "Kvinne": 1504.0,
+          "value": 2769.0,
+          "ratio": 0.0041
+        },
+        {
+          "Mann": 1109.0,
+          "Kvinne": 1528.0,
+          "value": 2637.0,
+          "ratio": 0.0039
+        },
+        {
+          "Mann": 1005.0,
+          "Kvinne": 1318.0,
+          "value": 2323.0,
+          "ratio": 0.0035
+        },
+        {
+          "Mann": 877.0,
+          "Kvinne": 1290.0,
+          "value": 2167.0,
+          "ratio": 0.0032
+        },
+        {
+          "Mann": 782.0,
+          "Kvinne": 1138.0,
+          "value": 1920.0,
+          "ratio": 0.0029
+        },
+        {
+          "Mann": 684.0,
+          "Kvinne": 1144.0,
+          "value": 1828.0,
+          "ratio": 0.0027
+        },
+        {
+          "Mann": 631.0,
+          "Kvinne": 1002.0,
+          "value": 1633.0,
+          "ratio": 0.0024
+        },
+        {
+          "Mann": 614.0,
+          "Kvinne": 980.0,
+          "value": 1594.0,
+          "ratio": 0.0024
+        },
+        {
+          "Mann": 581.0,
+          "Kvinne": 1016.0,
+          "value": 1597.0,
+          "ratio": 0.0024
+        },
+        {
+          "Mann": 559.0,
+          "Kvinne": 973.0,
+          "value": 1532.0,
+          "ratio": 0.0023
+        },
+        {
+          "Mann": 455.0,
+          "Kvinne": 1008.0,
+          "value": 1463.0,
+          "ratio": 0.0022
+        },
+        {
+          "Mann": 370.0,
+          "Kvinne": 792.0,
+          "value": 1162.0,
+          "ratio": 0.0017
+        },
+        {
+          "Mann": 350.0,
+          "Kvinne": 728.0,
+          "value": 1078.0,
+          "ratio": 0.0016
+        },
+        {
+          "Mann": 273.0,
+          "Kvinne": 617.0,
+          "value": 890.0,
+          "ratio": 0.0013
+        },
+        {
+          "Mann": 234.0,
+          "Kvinne": 594.0,
+          "value": 828.0,
+          "ratio": 0.0012
+        },
+        {
+          "Mann": 204.0,
+          "Kvinne": 503.0,
+          "value": 707.0,
+          "ratio": 0.0011
+        },
+        {
+          "Mann": 134.0,
+          "Kvinne": 466.0,
+          "value": 600.0,
+          "ratio": 0.0009
+        },
+        {
+          "Mann": 124.0,
+          "Kvinne": 338.0,
+          "value": 462.0,
+          "ratio": 0.0007
+        },
+        {
+          "Mann": 77.0,
+          "Kvinne": 304.0,
+          "value": 381.0,
+          "ratio": 0.0006
+        },
+        {
+          "Mann": 55.0,
+          "Kvinne": 223.0,
+          "value": 278.0,
+          "ratio": 0.0004
+        },
+        {
+          "Mann": 35.0,
+          "Kvinne": 179.0,
+          "value": 214.0,
+          "ratio": 0.0003
+        },
+        {
+          "Mann": 13.0,
+          "Kvinne": 87.0,
+          "value": 100.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 55.0,
+          "value": 58.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 19.0,
+          "Kvinne": 68.0,
+          "value": 87.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 34.0,
+          "value": 40.0,
+          "ratio": 0.0001
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 15.0,
+          "value": 18.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 6.0,
+          "Kvinne": 12.0,
+          "value": 18.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 12.0,
+          "value": 12.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 6.0,
+          "value": 9.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 6.0,
+          "value": 9.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 3.0,
+          "Kvinne": 0.0,
+          "value": 3.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 3.0,
+          "value": 3.0,
+          "ratio": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        },
+        {
+          "Mann": 0.0,
+          "Kvinne": 0.0
+        }
+      ]
+    }
+  ]
+}

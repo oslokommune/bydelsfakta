@@ -20,11 +20,12 @@
 
 <script>
 import * as d3 from 'd3';
-import ageRanges from '../config/ageRanges.js';
-import TemplateA from '../lib/templateA.js';
-import TemplateB from '../lib/templateB.js';
-import TemplateC from '../lib/templateC.js';
-import TemplateD from '../lib/templateD.js';
+import ageRanges from '../config/ageRanges';
+import TemplateA from '../lib/templateA';
+import TemplateB from '../lib/templateB';
+import TemplateC from '../lib/templateC';
+import TemplateD from '../lib/templateD';
+import TemplateE from '../lib/templateE';
 
 export default {
   data: () => ({
@@ -66,6 +67,10 @@ export default {
             this.showDropdown = true;
             this.svg = new TemplateD(this.$refs['svg']);
             break;
+          case 'e':
+            this.showDropdown = false;
+            this.svg = new TemplateE(this.$refs['svg']);
+            break;
           default:
             break;
         }
@@ -74,7 +79,7 @@ export default {
       d3.json(this.settings.url).then(res => {
         this.res = res;
         this.heading = res.meta.heading;
-        this.svg.render(this.res);
+        this.svg.render(this.res, this.settings.method);
         this.currentTemplate = this.settings.template;
       });
     },

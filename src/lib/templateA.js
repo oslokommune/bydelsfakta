@@ -1,7 +1,7 @@
 import { Base_Template, util } from './baseTemplate';
 import d3 from '@/assets/d3';
 
-function Template_A(svg) {
+function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.height = 500;
@@ -182,11 +182,11 @@ function Template_A(svg) {
 
     bars
       .transition()
-      .attr('width', (d, i) => this.x[0](d))
+      .attr('width', d => this.x[0](d))
       .attr('x', (d, i) => this.x[i](0));
   };
 
   this.init(svg);
 }
 
-export default Template_A;
+export default Template;

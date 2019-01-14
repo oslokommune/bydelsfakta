@@ -46,7 +46,19 @@ export default new Router({
     {
       path: '/graphD',
       name: 'Graph4',
-      props: { settings: { url: '/mockDataD.json', template: 'd' } },
+      props: { settings: { url: '/mockDataD2.json', method: 'ratio', template: 'd' } },
+      component: Graph,
+    },
+    {
+      path: '/graphD2',
+      name: 'Graph5b',
+      props: { settings: { url: '/mockDataD2.json', method: 'value', template: 'd' } },
+      component: Graph,
+    },
+    {
+      path: '/graphE',
+      name: 'Graph5',
+      props: { settings: { url: '/mockDataD2.json', template: 'e' } },
       component: Graph,
     },
     {
