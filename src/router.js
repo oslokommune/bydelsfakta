@@ -16,6 +16,8 @@ import Trangboddhet from './views/subviews/Trangboddhet.vue';
 
 import Graph from './components/Graph.vue';
 
+import { page } from './config/pages';
+
 Vue.use(Router);
 
 export default new Router({
@@ -80,6 +82,7 @@ export default new Router({
     {
       path: '/bydel/:bydel/alder',
       name: 'BydelAlder',
+      props: { settings: page.alder },
       component: Alder,
     },
     {

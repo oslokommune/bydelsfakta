@@ -1,10 +1,21 @@
 <template>
-    <h1>Alder</h1>
+  <div>
+    <graph-card :settings="settings.aldersgrupper" />
+  </div>
 </template>
 
 <script>
+import GraphCard from '../../components/GraphCard.vue';
+
 export default {
   name: 'Alder',
+  components: { GraphCard },
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 
