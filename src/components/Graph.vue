@@ -26,6 +26,7 @@ import TemplateB from '../lib/templateB';
 import TemplateC from '../lib/templateC';
 import TemplateD from '../lib/templateD';
 import TemplateE from '../lib/templateE';
+import TemplateF from '../lib/templateF';
 import TemplateG from '../lib/templateG';
 import TemplateI from '../lib/templateI';
 
@@ -72,6 +73,10 @@ export default {
           case 'e':
             this.showDropdown = false;
             this.svg = new TemplateE(this.$refs['svg']);
+            break;
+          case 'f':
+            this.showDropdown = false;
+            this.svg = new TemplateF(this.$refs['svg']);
             break;
           case 'g':
             this.showDropdown = false;

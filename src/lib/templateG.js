@@ -112,6 +112,7 @@ function Template(svg) {
 
     rows
       .select('text.population__value')
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .text(d => d.values[0])
       .attr('x', this.x(0) + this.x.bandwidth() / 2 - 8);
 
@@ -130,6 +131,7 @@ function Template(svg) {
 
     rows
       .select('text.density__value')
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .attr('x', this.x(1) + this.x.bandwidth() / 2 - 8)
       .text(d => d.values[1]);
     rows
@@ -146,6 +148,7 @@ function Template(svg) {
 
     rows
       .select('text.progress-year__value')
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .attr('x', this.x(2) + this.x.bandwidth() / 2 - 30)
       .text(d => d.values[2]);
     rows
@@ -190,6 +193,7 @@ function Template(svg) {
     rows
       .select('text.progress-period__value')
       .attr('x', this.x(3) + this.x.bandwidth() / 2 - 30)
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .text(d => d.values[3][d.values[3].length - 1] - d.values[3][0]);
 
     rows
