@@ -80,6 +80,12 @@ export default new Router({
       component: Graph,
     },
     {
+      path: '/graphJ',
+      name: 'Graph9',
+      props: { settings: { url: '/mockDataJ.json', template: 'j' } },
+      component: Graph,
+    },
+    {
       path: '/bydel/:bydel',
       name: 'Bydel',
       component: Bydel,
