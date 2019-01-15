@@ -66,6 +66,7 @@ const util = {
     light_grey: '#F0F1F1',
     red: '#FF8174',
     blue: '#6EE9FF',
+    positive: '#06AFCD',
   },
 
   formatTicksY_leftAlign: function(el, padding) {
