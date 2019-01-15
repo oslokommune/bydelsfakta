@@ -16,8 +16,6 @@ function Template(svg) {
   this.padding.right = 105;
   this.width = 400;
   this.height = Math.sqrt(this.width * this.width - (this.width / 2) * (this.width / 2));
-
-  this.rowHeight = 40;
   this.y = d3.scaleLinear();
   this.x = d3.scaleLinear();
   this.selected = null;

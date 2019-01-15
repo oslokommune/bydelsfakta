@@ -9,7 +9,6 @@ function Template(svg) {
   this.padding.right = 25;
   this.height = 400;
   this.width = 650;
-  this.rowHeight = 40;
   this.y = d3.scaleLinear();
   this.x = d3.scaleLinear();
   this.selected = null;

@@ -4,18 +4,13 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 30;
-  this.padding.left = 0;
-  this.padding.right = 20;
-  this.padding.bottom = 1;
-  this.height = 0;
-  this.height2 = 100;
+  this.padding = { top: 30, right: 20, bottom: 1, left: 0 };
+  this.height = 0; // calculated on render. Height of the lower part
+  this.height2 = 100; // height of the upper chart
   this.width = 1050;
-  this.paddingUpperLeft = 160;
-  this.paddingLowerLeft = 300;
-  this.yGutter = 120;
-  this.rowHeight = 43;
-  this.barHeight = 24;
+  this.paddingUpperLeft = 160; // padding left of the upper chart
+  this.paddingLowerLeft = 300; // padding left of the lower chart
+  this.yGutter = 120; // space between upper and lower charts
   this.y = d3.scaleLinear();
   this.handle;
 
@@ -82,37 +77,7 @@ function Template(svg) {
       brushed(this);
     });
 
-  this.drawDropdown = function() {
-    let choices = [{ label: '', value: [0, 5] }, { label: '', value: [1, 5] }, { label: '', value: [1, 10] }];
-
-    let container = this.upper.append('g').attr('class', 'dropdown');
-    let list = container.append('g').attr('class', 'list');
-    let active = container.append('g').attr('class', 'active');
-
-    active.append('rect');
-    active.append('text');
-
-    let elements = list
-      .selectAll('g.element')
-      .data(choices)
-      .enter()
-      .append('g')
-      .attr('class', 'element');
-
-    elements.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-    elements
-      .append('rect')
-      .attr('width', this.paddingUpperLeft - 50)
-      .attr('height', this.rowHeight)
-      .attr('stroke', util.color.purple)
-      .attr('fill', 'white');
-    elements
-      .append('text')
-      .text((d, i) => `element ${i}`)
-      .attr('x', 15)
-      .attr('y', 25);
-  };
-
+  // Draws the handle icons. Triggered from this.created()
   this.drawHandles = function() {
     this.handle = gBrushSmall
       .selectAll('path.handle')
@@ -163,6 +128,8 @@ function Template(svg) {
       .attr('fill-opacity', '0.75');
   };
 
+  // Runs once after initialization. Creates elements that are
+  // unique to this template
   this.created = function() {
     this.upper = this.canvas.append('g').attr('class', 'upper');
     this.middle = this.canvas
@@ -218,13 +185,13 @@ function Template(svg) {
       .attr('class', 'axis x')
       .attr('transform', `translate(${this.paddingLowerLeft}, 0)`);
 
-    // this.drawDropdown();
     this.drawHandles();
 
     gBrushLarge.transition().call(brushLarge.move, [0, 50].map(this.age));
     gBrushSmall.transition().call(brushSmall.move, [0, 50].map(this.age));
   };
 
+  // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
     let rows = this.lower.selectAll('g.row').data(this.data.data.sort((a, b) => a.avgRow - b.avgRow));
     let rowsE = rows
@@ -298,7 +265,9 @@ function Template(svg) {
       });
   };
 
+  // Draws/updates lines in the line chart. Triggered each render
   this.drawLines = function() {
+    // Select lines
     let lines = this.upper.selectAll('path.line').data(
       this.data.data.filter(d => {
         if (this.method == 'ratio') return d;
@@ -309,15 +278,20 @@ function Template(svg) {
       .enter()
       .append('path')
       .attr('class', 'line')
-      .attr('transform', `translate(${this.paddingUpperLeft}, 0)`);
+      .attr('fill', 'none')
+      .attr('transform', `translate(${this.paddingUpperLeft}, 0)`)
+      .attr('opacity', 0);
 
-    linesE.attr('fill', 'none');
-
-    lines.exit().remove();
+    lines
+      .exit()
+      .transition()
+      .attr('opacity', 0)
+      .remove();
     lines = lines.merge(linesE);
 
     lines
       .transition()
+      .attr('opacity', 1)
       .attr('d', d => this.line(d.values))
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
       .attr('stroke', d => (d.avgRow || d.totalRow ? util.color.purple : util.color.blue))
@@ -325,24 +299,26 @@ function Template(svg) {
   };
 
   this.render = function(data, method = 'ratio', range) {
+    if (!data) return;
+
+    // Move the brushes if a range was selected
     if (range) {
       extent = JSON.parse(range);
       gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
       gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
     }
 
-    this.svg.attr(
-      'height',
-      this.padding.top + this.height2 + this.yGutter + this.rowHeight * data.data.length + this.padding.bottom
-    );
-
-    if (!data) return;
+    // Resize the svg based on size of dataset
+    this.height = this.rowHeight * data.data.length;
+    this.svg.attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom);
+    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     this.data = data;
     this.method = method;
     this.heading.text(data.meta.heading);
 
-    let maxSum =
+    // Find the larges accumulated number within the selected range
+    let maxAccumulated =
       d3.max(
         data.data
           .filter(bydel => {
@@ -357,6 +333,7 @@ function Template(svg) {
           )
       ) * 1.05;
 
+    // Find the largest single age to scale y axis behind brush within the selected range
     let max =
       d3.max(
         data.data
@@ -370,15 +347,9 @@ function Template(svg) {
           .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
       ) * 1.05;
 
+    // Set axis and scales based on these max values
     this.y.domain([0, max]).range([this.height2, 0]);
-    this.x.domain([0, maxSum]).range([0, this.width - this.paddingLowerLeft]);
-    this.xAxis;
-
-    this.drawRows();
-    this.drawLines();
-
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-
+    this.x.domain([0, maxAccumulated]).range([0, this.width - this.paddingLowerLeft]);
     this.upperYAxis.transition().call(
       d3
         .axisLeft(this.y)
@@ -401,6 +372,10 @@ function Template(svg) {
         }
       })
     );
+
+    // Trigger re-draws of rows (bars) and lines
+    this.drawRows();
+    this.drawLines();
   };
 
   this.init(svg);

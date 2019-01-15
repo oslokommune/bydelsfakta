@@ -7,8 +7,6 @@ function Template(svg) {
   this.padding = { top: 90, left: 240, right: 20, bottom: 68 };
   this.height = 0; // set during render
   this.width = 600;
-  this.rowHeight = 43;
-  this.barHeight = 20;
   this.x = d3.scaleLinear();
   this.bars;
   this.legendBox;

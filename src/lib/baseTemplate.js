@@ -11,7 +11,8 @@ function Base_Template(svg) {
   this.y = d3.scaleBand();
   this.max = 0;
   this.min = 0;
-  this.barHeight = 40;
+  this.rowHeight = 43;
+  this.barHeight = 24;
   this.tabWidth = 120;
   this.tabGap = 10;
   this.strokeWidth = 4;
