@@ -1,6 +1,12 @@
 import { Base_Template, util } from './baseTemplate';
 import d3 from '@/assets/d3';
 
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function() {
+    this.parentNode.appendChild(this);
+  });
+};
+
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
@@ -21,9 +27,14 @@ function Template(svg) {
   this.yAxis = [];
   this.max = 0;
   this.dotContainer;
+  this.lineContainer;
+
+  const fillOpacity = 0.3;
+  const strokeOpacity = 0.8;
 
   this.drawList = function() {
     let active = this.selected;
+    let dots = this.dotContainer.selectAll('g');
 
     let row = this.list.selectAll('g.row').data(this.data.data);
     let rowE = row
@@ -49,15 +60,33 @@ function Template(svg) {
       .select('rect.fill')
       .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
       .on('click', (d, i) => {
-        this.render(this.data, i);
+        if (this.selected === i) {
+          this.render(this.data, null);
+        } else {
+          this.render(this.data, i);
+        }
       })
       .on('mouseenter', function(d, i) {
         if (i == active) return;
-        d3.select(this).attr('fill-opacity', 0.15);
+        d3.select(this).attr('fill-opacity', 0.25);
+        dots
+          .filter((d, index) => i == index)
+          .select('circle')
+          .attr('r', 8)
+          .attr('fill', util.color.blue)
+          .attr('fill-opacity', 1)
+          .attr('stroke-opacity', 1);
       })
       .on('mouseleave', function(d, i) {
         if (i == active) return;
         d3.select(this).attr('fill-opacity', 0);
+        dots
+          .filter((d, index) => i == index)
+          .select('circle')
+          .attr('r', 6)
+          .attr('fill', util.color.blue)
+          .attr('fill-opacity', fillOpacity)
+          .attr('stroke-opacity', strokeOpacity);
       });
 
     row
@@ -167,7 +196,6 @@ function Template(svg) {
   // Draw the triangle, grid lines, labels etc on screen
   this.drawGrid = function() {
     this.matrix = this.canvas.append('g').attr('class', 'matrix');
-    this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
 
     // Labels left
     this.matrix
@@ -228,7 +256,7 @@ function Template(svg) {
       .append('path')
       .datum(triangleData)
       .attr('d', line)
-      .attr('fill', '#eee');
+      .attr('fill', util.color.light_grey);
 
     // Grid lines
     this.matrix
@@ -286,40 +314,83 @@ function Template(svg) {
       .attr('y', y(tickData[22][1].y) + 42);
   };
 
+  this.drawLines = function() {
+    if (this.selected === null) {
+      this.lineContainer
+        .selectAll('path.lines')
+        .transition()
+        .attr('opacity', 0);
+      return;
+    }
+
+    let el = this.dotContainer.selectAll('g').filter((d, i) => i == this.selected);
+    let circ = el.select('circle');
+    let m = +el.attr('data-x');
+    let n = +el.attr('data-y');
+
+    let xx = d3
+      .scaleLinear()
+      .range([-1, 1])
+      .domain([1, 0]);
+
+    let lineData = [
+      [{ x: x.invert(m), y: y.invert(n) }, { x: xx(circ.attr('data-0')), y: 0 }],
+      [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-1') - 1, y: circ.attr('data-1') }],
+      [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-2'), y: 1 - circ.attr('data-2') }],
+    ];
+
+    let lines = this.lineContainer.selectAll('path.lines').data(lineData);
+    lines.exit().remove();
+    let linesE = lines
+      .enter()
+      .append('path')
+      .attr('class', 'lines');
+    lines = lines.merge(linesE);
+    lines
+      .attr('fill', 'none')
+      .attr('stroke', 'black')
+      .attr('stroke-width', 2)
+      .style('pointer-events', 'none')
+      .transition()
+      .attr('opacity', 1)
+      .attr('d', line);
+  };
+
   // Draw and position nodes inside the matrix
   this.drawMatrix = function() {
+    // Create dots (groups)
     let dot = this.dotContainer.selectAll('g').data(this.data.data);
     dot.exit().remove();
     let dotE = dot.enter().append('g');
     dotE.append('circle');
-    dotE.append('rect');
-    dotE.append('text');
+    // dotE.append('rect');
+    // dotE.append('text');
     dot = dot.merge(dotE);
 
-    dot.attr('transform', d => {
-      let pos_y = y(d.values[1].ratio);
-      let pos_x = x(d.values[2].ratio - d.values[0].ratio);
+    // Update position of the dot (group)
+    dot
+      .attr('transform', d => {
+        let pos_y = y(d.values[1].ratio);
+        let pos_x = x(d.values[2].ratio - d.values[0].ratio);
+        return `translate(${pos_x}, ${pos_y})`;
+      })
+      .attr('data-x', d => x(d.values[2].ratio - d.values[0].ratio))
+      .attr('data-y', d => y(d.values[1].ratio));
 
-      return `translate(${pos_x}, ${pos_y})`;
-      // return `translate(
-      //   ${x((d.values[2].antall[0] - d.values[0].antall[0]) / 100)},
-      //   ${y(d.values[1].antall[0] / 100)})`;
-    });
-    // .attr('data-x', d => x((d.data[2].antall[0] - d.data[0].antall[0]) / 100))
-    // .attr('data-y', d => y(d.data[1].antall[0] / 100));
-
+    // Update style of dot (circle)
     dot
       .select('circle')
       .attr('stroke-width', 2)
-      .attr('fill', '#6EE9FF')
-      // .attr('data-0', d => +d.data[0].antall[0] / 100)
-      // .attr('data-1', d => +d.data[1].antall[0] / 100)
-      // .attr('data-2', d => +d.data[2].antall[0] / 100)
+
+      .attr('data-0', d => +d.values[0].ratio)
+      .attr('data-1', d => +d.values[1].ratio)
+      .attr('data-2', d => +d.values[2].ratio)
       .transition()
+      .attr('fill', (d, i) => (i === this.selected ? util.color.purple : util.color.blue))
       .attr('r', (d, i) => (i === this.selected ? 9 : 6))
-      .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : 0.3))
-      .attr('stroke-opacity', (d, i) => (i === this.selected ? 1 : 0.6))
-      .attr('stroke', '#292858');
+      .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : fillOpacity))
+      .attr('stroke-opacity', (d, i) => (i === this.selected ? 1 : strokeOpacity))
+      .attr('stroke', (d, i) => (i === this.selected ? util.color.light_grey : util.color.purple));
   };
 
   this.updateAxisLabels = function() {
@@ -345,19 +416,25 @@ function Template(svg) {
     this.canvas.selectAll('*').remove();
 
     this.drawGrid();
+    this.lineContainer = this.canvas.append('g').attr('class', 'lineContainer');
+    this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
   };
 
-  this.render = function(data, selected) {
+  this.render = function(data, selected = null) {
     if (!data) return;
     this.data = data;
-    this.selected =
-      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+
+    this.selected = selected;
+
+    // this.selected =
+    //   selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
 
     this.heading.text(data.meta.heading);
 
     this.drawMatrix();
     this.drawList();
     this.updateAxisLabels();
+    this.drawLines();
 
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
   };
