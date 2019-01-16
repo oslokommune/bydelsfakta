@@ -75,6 +75,13 @@ export default new Router({
       props: { settings: { url: '/mockDataG.json', template: 'g' } },
       component: Graph,
     },
+    ,
+    {
+      path: '/graphH',
+      name: 'Graph10',
+      props: { settings: { url: '/mockDataH.json', template: 'h' } },
+      component: Graph,
+    },
     {
       path: '/graphI',
       name: 'Graph6',

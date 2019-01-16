@@ -18,6 +18,7 @@ function Base_Template(svg) {
   this.strokeWidth = 4;
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
+  this.formatYear = d3.timeFormat('%Y');
 
   // Common operations to be run once a template is initialized
   this.init = function() {

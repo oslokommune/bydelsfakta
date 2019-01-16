@@ -15,8 +15,7 @@ function Template(svg) {
   this.list;
   this.pyramid;
   this.gutter = 100;
-  this.yAxis = [];
-  this.max = 0;
+  this.yAxis = []; // three yAxis (left, right and gridlines)
 
   this.drawList = function() {
     let active = this.selected;
@@ -139,17 +138,10 @@ function Template(svg) {
       .attr('d', this.area);
   };
 
-  this.render = function(data, selected) {
-    if (!data) return;
-    this.data = data;
-    this.selected =
-      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+  this.resetAxis = function() {
+    let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
 
-    this.heading.text(data.meta.heading);
-
-    this.max = d3.max(this.data.data[this.selected].values.map(d => d.value));
-    this.x.range([0, this.width]).domain([-this.max, this.max]);
-
+    this.x.range([0, this.width]).domain([-max, max]);
     this.xAxis.transition().call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
     this.yAxis.each((d, i, j) => {
       if (d.type == 'left') {
@@ -167,7 +159,17 @@ function Template(svg) {
         axis.selectAll('.domain').remove();
       }
     });
+  };
 
+  this.render = function(data, selected) {
+    if (!data) return;
+    this.data = data;
+    this.selected =
+      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+
+    this.heading.text(data.meta.heading);
+
+    this.resetAxis();
     this.drawPyramid();
     this.drawList();
 
