@@ -8,23 +8,20 @@ function Template(svg) {
   this.height1 = 400;
   this.gapX = 50;
   this.gapY = 70;
-  this.height2 = 100;
+  this.height2 = 80;
   this.height = this.height1 + this.gapY + this.height2;
-
-  this.width = 600;
   this.width1 = 750; // width of upper and lower graphs
   this.sidebarWidth = 250;
-  this.barWidth;
-
-  this.sidebar;
-  this.upper;
-  this.lower;
-  this.triggersContainer;
-
+  this.width = this.width1 + this.gapX + this.sidebarWidth;
   this.x = d3.scaleTime();
   this.y = d3.scaleLinear();
   this.y2 = d3.scaleLinear();
 
+  this.barWidth;
+  this.sidebar;
+  this.upper;
+  this.lower;
+  this.triggersContainer;
   this.selected;
 
   this.line = d3
@@ -269,7 +266,7 @@ function Template(svg) {
 
     this.lower
       .select('text.sectionHeading')
-      .attr('y', 6)
+      .attr('y', -5)
       .attr('x', 20);
   };
 
@@ -308,10 +305,25 @@ function Template(svg) {
       .attr('width', this.barWidth + 1)
       .attr('height', this.height1 + this.gapY + this.height2)
       .attr('x', d => this.x(this.parseDate(d.date)) - this.barWidth / 2)
-      .attr('fill-opacity', 0)
+      .style('cursor', 'pointer')
       .on('mouseover', d => {
         this.render(this.data, d.date);
-      });
+      })
+      .on('click', d => {
+        this.render(this.data, d.date);
+      })
+      .on('mouseover', function() {
+        d3.select(this).attr('fill-opacity', 0.03);
+      })
+      .on('mouseleave', function() {
+        d3.select(this)
+          .transition()
+          .duration(40)
+          .attr('fill-opacity', 0);
+      })
+      .transition()
+      .duration(1000)
+      .attr('fill-opacity', 0);
   };
 
   this.resetScales = function() {
@@ -321,7 +333,9 @@ function Template(svg) {
     let maxPop =
       d3.max(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.high)) * 1.15;
 
-    this.y2.range([this.height2, 0]).domain(d3.extent(this.data.data.actual.map(d => d.change)));
+    this.y2
+      .range([this.height2, 0])
+      .domain(d3.extent(this.data.data.actual.map(d => d.change).map((d, i) => (i == 1 ? d * 1.3 : d))));
     this.x.range([0, this.width1]).domain(dates);
     this.y.range([this.height1, 0]).domain([minPop, maxPop]);
     this.xAxis.call(d3.axisBottom(this.x));
@@ -350,7 +364,7 @@ function Template(svg) {
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.svg
       .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.width1 + this.padding.left + this.padding.right + this.gapX + this.sidebarWidth);
+      .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.resetScales();
 

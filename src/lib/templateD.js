@@ -10,7 +10,7 @@ function Template(svg) {
   this.width = 1050;
   this.paddingUpperLeft = 160; // padding left of the upper chart
   this.paddingLowerLeft = 300; // padding left of the lower chart
-  this.yGutter = 120; // space between upper and lower charts
+  this.yGutter = 130; // space between upper and lower charts
   this.y = d3.scaleLinear();
   this.handle;
 
@@ -141,6 +141,15 @@ function Template(svg) {
       .attr('class', 'lower')
       .attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
 
+    this.lower
+      .append('text')
+      .attr('class', 'xAxis-title')
+      .attr('font-size', 12)
+      .attr('font-weight', 700)
+      .attr('text-anchor', 'middle')
+      .attr('fill', util.color.purple)
+      .attr('transform', `translate(${this.paddingLowerLeft + (this.width - this.paddingLowerLeft) / 2}, ${-28})`);
+
     gBrushLarge = this.upper
       .append('g')
       .attr('class', 'brush')
@@ -263,6 +272,18 @@ function Template(svg) {
       .attr('fill', d => {
         return d.totalRow || d.avgRow ? util.color.purple : util.color.blue;
       });
+
+    this.lower.select('text.xAxis-title').text(() => {
+      if (this.method === 'ratio' && extent[1] - extent[0] >= 1) {
+        return `Andel av befolkningen mellom ${extent[0]} og ${extent[1]} år`;
+      } else if (this.method === 'ratio' && extent[1] - extent[0] === 0) {
+        return `Andel av befolkningen som er ${extent[0]} år`;
+      } else if (this.method !== 'ratio' && extent[1] - extent[0] >= 1) {
+        return `Størrelse av befolkningen mellom ${extent[0]} og ${extent[1]} år`;
+      } else if (this.method !== 'ratio' && extent[1] - extent[0] === 0) {
+        return `Størrelse av befolkningen på ${extent[0]} år`;
+      }
+    });
   };
 
   // Draws/updates lines in the line chart. Triggered each render
