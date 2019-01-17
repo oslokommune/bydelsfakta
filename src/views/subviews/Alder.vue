@@ -1,9 +1,9 @@
 <template>
-  <div class="alder-container">
-    <div class="alder__cards-container">
+  <div class="main-container">
+    <div class="main-container__cards">
       <graph-card :settings="settings.aldersgrupper" />
     </div>
-    <div class="alder__map-container">
+    <div class="main-container__map">
       <h3>Kart</h3>
     </div>
   </div>
@@ -25,26 +25,4 @@ export default {
 </script>
 
 <style scoped>
-.alder-container {
-  display: flex;
-}
-
-.alder__cards-container {
-  display: flex;
-  padding: 2rem;
-
-  flex-flow: row wrap;
-  justify-content: start;
-
-  flex-basis: auto;
-}
-
-.alder__map-container {
-  display: flex;
-  padding: 2rem;
-
-  flex-flow: row wrap;
-  justify-content: start;
-  flex: 0 0 600px;
-}
 </style>

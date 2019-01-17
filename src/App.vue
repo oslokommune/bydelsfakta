@@ -6,30 +6,60 @@
       app
     >
       <v-layout column>
-        <v-flex lg12 align-self-center>
-          <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" />
+        <v-flex
+          lg12
+          align-self-center
+        >
+          <img
+            :src="osloIcon"
+            alt="oslo-logo"
+            class="oslo__logo"
+          />
         </v-flex>
-        <v-flex v-for="link in links" :key="link.key" :label="link.value" :class="checkActiveBydel(link.uri)" >
+        <v-flex
+          v-for="link in links"
+          :key="link.key"
+          :label="link.value"
+          :class="checkActiveBydel(link.uri)"
+        >
           <v-layout row style="height: 40px">
             <v-flex xs1>
-              <v-checkbox v-model="selected" :value="link.key" color="#6ee9ff" @change="onCheckboxChange"/>
+              <v-checkbox
+                v-model="selected"
+                :value="link.key"
+                color="#6ee9ff"
+                @change="onCheckboxChange"
+              />
             </v-flex>
-            <v-flex xs11 style="margin-top: 0.7rem; cursor: pointer;" @click="onClickBydel(link.uri)">
+            <v-flex
+              xs11
+              style="margin-top: 0.7rem; cursor: pointer;"
+              @click="onClickBydel(link.uri)"
+            >
               <span class="oslo__navigation-link--label">{{link.value}}</span>
             </v-flex>
           </v-layout>
         </v-flex>
-        <v-flex :class="checkActiveSammenlign()" style="margin-top: 0.7rem; cursor: pointer;" @click="onClickSammenlign">
+        <v-flex
+          :class="checkActiveSammenlign()"
+          style="margin-top: 0.7rem; cursor: pointer;"
+          @click="onClickSammenlign"
+        >
           <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
         </v-flex>
       </v-layout>
     </v-navigation-drawer>
     <v-content>
-      <v-layout column class="oslo__navigation-topbar">
+      <v-layout
+        column
+        class="oslo__navigation-topbar"
+      >
         <v-container fluid>
           <v-layout row >
             <v-icon class="oslo__topbar">arrow_back</v-icon>
-            <h4 class="text-uppercase oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
+            <h4 class="text-uppercase oslo__topbar oslo__topbar-text">
+              {{ getBydel(this.$route.params.bydel) }}
+            </h4>
           </v-layout>
           <v-flex lg6 md8 sm8 xs10>
             <v-select
