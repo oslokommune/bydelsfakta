@@ -12,24 +12,96 @@ function Template(svg) {
 
   const formatPercent = d3.format('.0%');
 
-  this.render = function(data) {
-    this.heading.text(data.meta.heading);
+  this.initRowElements = function(rowsE) {
+    // Row fill
+    rowsE
+      .append('rect')
+      .attr('class', 'rowFill')
+      .attr('fill', util.color.purple)
+      .attr('height', this.rowHeight)
+      .attr('x', -this.padding.left)
+      .attr('width', this.width + this.padding.left);
 
-    let maxValues = data.meta.series.map((row, i) => {
-      return d3.max(data.data.map(d => d.values[i]));
+    // Row divider
+    rowsE
+      .append('rect')
+      .attr('class', 'divider')
+      .attr('fill', util.color.purple)
+      .attr('x', -this.padding.left)
+      .attr('width', this.width + this.padding.left)
+      .attr('height', 1)
+      .attr('y', this.rowHeight);
+
+    // Row Geography
+    rowsE
+      .append('text')
+      .attr('class', 'geography')
+      .attr('fill', util.color.purple)
+      .attr('y', this.rowHeight / 2 + 6)
+      .attr('x', -this.padding.left + 10);
+  };
+
+  this.drawRows = function() {
+    let rows = this.canvas.selectAll('g.row').data(this.data.data);
+    let rowsE = rows
+      .enter()
+      .append('g')
+      .attr('class', 'row');
+    rows.exit().remove();
+    rows = rows.merge(rowsE);
+
+    this.initRowElements(rowsE);
+
+    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+    rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0));
+    rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+    rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+    rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
+
+    rows.attr('data-total', d => d.totalRow);
+    rows.attr('data-avg', d => d.avgRow);
+
+    let bars = rows.selectAll('rect.bar').data(d => {
+      return d.values;
     });
+    let barsE = bars
+      .enter()
+      .append('rect')
+      .attr('width', 0)
+      .attr('class', 'bar');
 
-    this.height = data.data.length * this.rowHeight;
-    this.svg.attr('height', this.height + this.padding.top + this.padding.bottom);
+    bars.exit().remove();
+    bars = bars.merge(barsE);
+
+    bars
+      .attr('height', (d, i, j) => {
+        return j[0].parentNode.getAttribute('data-total') ? 1 : this.barHeight;
+      })
+      .attr('y', (d, i, j) => {
+        return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
+      })
+      .attr('fill', (d, i, j) => {
+        return j[0].parentNode.getAttribute('data-avg') ? util.color.yellow : util.color.purple;
+      });
+
+    bars
+      .transition()
+      .attr('width', d => this.x[0](d))
+      .attr('x', (d, i) => this.x[i](0));
+  };
+
+  this.setScales = function() {
+    let maxValues = this.data.meta.series.map((row, i) => {
+      return d3.max(this.data.data.map(d => d.values[i]));
+    });
 
     this.x2 = d3
       .scaleLinear()
-      .range([0, this.width - (this.gutter * data.meta.series.length - 1)])
+      .range([0, this.width - (this.gutter * this.data.meta.series.length - 1)])
       .domain([0, d3.sum(maxValues)]);
 
-    this.x = data.meta.series.map((series, index) => {
+    this.x = this.data.meta.series.map((series, index) => {
       const SCALE = d3.scaleLinear();
-
       let startPos = 0;
       for (let j = 0; j < index; j++) {
         startPos += this.x2(maxValues[j]);
@@ -41,6 +113,10 @@ function Template(svg) {
       return SCALE;
     });
 
+    this.x2.domain(this.data.meta.series.map((d, i) => i)).range([0, this.width]);
+  };
+
+  this.drawAxis = function() {
     let xAxis = this.canvas.selectAll('g.axis.x').data(this.x);
     let xAxisE = xAxis
       .enter()
@@ -49,7 +125,6 @@ function Template(svg) {
       .attr('transform', `translate(${0}, ${this.height + 10})`);
     xAxis.exit().remove();
     xAxis = xAxis.merge(xAxisE);
-
     xAxis.each((d, i, j) => {
       d3.select(j[i])
         .attr('transform', `translate(${0}, ${this.height + 10})`)
@@ -60,40 +135,27 @@ function Template(svg) {
             .ticks(2)
             .tickFormat(formatPercent)
         );
-
       util.formatTicksX(d3.select(j[i]));
     });
+  };
 
-    this.x2.domain(data.meta.series.map((d, i) => i)).range([0, this.width]);
-
-    this.y
-      .domain(data.data.map(d => d.geography))
-      .range([0, this.height])
-      .padding(0.35);
-    this.yAxis.call(d3.axisLeft(this.y));
-
-    util.formatTicksY_leftAlign(this.yAxis, this.padding.left);
-
-    let columns = this.canvas.selectAll('g.column').data(data.meta.series);
+  this.drawColumns = function() {
+    let columns = this.canvas.selectAll('g.column').data(this.data.meta.series);
     let columnsE = columns
       .enter()
       .append('g')
       .attr('class', 'column');
     columns.exit().remove();
     columns = columns.merge(columnsE);
-
     columns.transition().attr('transform', (d, i) => {
       return `translate(${this.x[i](0)},0)`;
     });
-
     columnsE.append('rect').attr('fill', util.color.light_grey);
-
     columnsE
       .append('rect')
       .attr('class', 'arrow')
       .attr('width', 1)
       .attr('height', 11);
-
     columnsE
       .append('text')
       .attr('class', 'colHeading')
@@ -102,7 +164,6 @@ function Template(svg) {
       .append('text')
       .attr('class', 'colSubheading')
       .attr('transform', 'translate(0, -20)');
-
     columns
       .select('text.colHeading')
       .text(d => d.heading)
@@ -119,8 +180,8 @@ function Template(svg) {
       .attr('height', this.height + 10)
       .transition()
       .attr('width', (d, i) => {
-        if (data.data.filter(d => d.totalRow).length) {
-          return this.x[0](data.data.filter(d => d.totalRow)[0].values[i]);
+        if (this.data.data.filter(d => d.totalRow).length) {
+          return this.x[0](this.data.data.filter(d => d.totalRow)[0].values[i]);
         } else {
           return 0;
         }
@@ -129,60 +190,32 @@ function Template(svg) {
     columns
       .select('rect.arrow')
       .attr('y', () => {
-        return this.y(data.data.filter(d => d.totalRow)[0].geography) + this.y.bandwidth() / 2;
+        let indexOfTotalRow = this.data.data.findIndex(d => d.totalRow);
+        return indexOfTotalRow * this.rowHeight;
       })
+      .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
       .transition()
       .attr('x', (d, i) => {
-        return this.x[0](data.data.filter(d => d.totalRow)[0].values[i]);
+        return this.x[0](this.data.data.filter(d => d.totalRow)[0].values[i]);
       });
+  };
 
-    let rows = this.canvas.selectAll('g.row').data(data.data);
+  this.render = function(data) {
+    if (!data && !data.data) return;
+    this.data = data;
+    this.heading.text(this.data.meta.heading);
+    this.height = this.rowHeight * this.data.data.length + 1;
+    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
-    let rowsE = rows
-      .enter()
-      .append('g')
-      .attr('class', 'row');
-    rows.exit().remove();
-    rows = rows.merge(rowsE);
+    this.height = this.data.data.length * this.rowHeight;
+    this.svg
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
 
-    rows
-      .attr('transform', d => {
-        if (d.avgRow || d.totalRow) {
-          return `translate(0, ${this.y(d.geography) + 5})`;
-        } else {
-          return `translate(0, ${this.y(d.geography) - 5})`;
-        }
-      })
-      .attr('data-avg', d => d.avgRow)
-      .attr('data-total', d => d.totalRow);
-
-    let bars = rows.selectAll('rect.bar').data(d => {
-      return d.values;
-    });
-    let barsE = bars
-      .enter()
-      .append('rect')
-      .attr('width', 0)
-      .attr('class', 'bar');
-
-    bars.exit().remove();
-    bars = bars.merge(barsE);
-
-    bars
-      .attr('height', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-total') ? 1 : this.y.bandwidth();
-      })
-      .attr('y', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-total') ? this.y.bandwidth() / 2 : 0;
-      })
-      .attr('fill', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-avg') ? util.color.yellow : util.color.purple;
-      });
-
-    bars
-      .transition()
-      .attr('width', d => this.x[0](d))
-      .attr('x', (d, i) => this.x[i](0));
+    this.setScales();
+    this.drawAxis();
+    this.drawColumns();
+    this.drawRows();
   };
 
   this.init(svg);
