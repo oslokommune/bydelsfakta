@@ -5,7 +5,6 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import 'vuetify/src/stylus/app.styl';
 import './styles/main.scss';
 
 Vue.config.productionTip = false;

@@ -3,7 +3,6 @@
     <v-navigation-drawer
       class="oslo__navigation-drawer"
       permanent
-      absolute
       app
     >
       <v-layout column>
