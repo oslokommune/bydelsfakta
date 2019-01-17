@@ -53,6 +53,10 @@ function Base_Template(svg) {
     this.created();
   };
 
+  this.parentWidth = function() {
+    return svg.parentNode.getBoundingClientRect().width;
+  };
+
   // Placeholder for operations to be run once a child template is initialized
   this.created = function() {};
 

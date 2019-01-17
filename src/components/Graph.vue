@@ -118,7 +118,6 @@ export default {
   position: absolute;
   top: 164px;
   left: 0;
-
   padding: 1em;
   border: 1px solid black;
 }

@@ -4,10 +4,10 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 30, right: 20, bottom: 1, left: 0 };
+  this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
   this.height = 0; // calculated on render. Height of the lower part
   this.height2 = 100; // height of the upper chart
-  this.width = 1050;
+  this.width = 600;
   this.paddingUpperLeft = 160; // padding left of the upper chart
   this.paddingLowerLeft = 300; // padding left of the lower chart
   this.yGutter = 130; // space between upper and lower charts
@@ -220,6 +220,7 @@ function Template(svg) {
       .append('text')
       .attr('class', 'geography')
       .attr('fill', util.color.purple)
+      .attr('x', 10)
       .attr('y', this.rowHeight / 2 + 7);
     rowsE
       .append('text')
@@ -241,6 +242,7 @@ function Template(svg) {
       .attr('height', 1)
       .attr('y', this.rowHeight);
 
+    rows.select('rect.rowFill').attr('width', this.width);
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
     rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
@@ -331,7 +333,9 @@ function Template(svg) {
 
     // Resize the svg based on size of dataset
     this.height = this.rowHeight * data.data.length;
-    this.svg.attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom);
+    this.svg
+      .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     this.data = data;
@@ -400,6 +404,23 @@ function Template(svg) {
   };
 
   this.init(svg);
+
+  this.resize = function() {
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+
+    this.age.range([0, this.width - this.paddingUpperLeft]);
+
+    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    gBrushLarge.call(brushLarge);
+    gBrushSmall.call(brushSmall);
+
+    this.render(this.data, this.method);
+  };
+
+  window.addEventListener('resize', () => {
+    this.resize();
+  });
 }
 
 export default Template;

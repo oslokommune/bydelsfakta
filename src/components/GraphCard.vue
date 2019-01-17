@@ -1,10 +1,20 @@
 <template>
   <div class="flex-item">
-    <div class="card-container" v-for="(item, index) in settings" :key="index" :style="item.size === 'large' ? '1100px' : '550px'">
+    <div
+      class="card-container"
+      v-for="(item, index) in settings"
+      :key="index"
+      :style="item.size === 'large' ? '1100px' : '550px'"
+    >
       <div class="graph__cards-container">
         <div class="tabs">
           <div>
-            <a v-for="(tab, tabIndex) in item.tabs" :key="tabIndex" @click="activeTab(tabIndex)" :class=" active === tabIndex ? 'active' : ''">{{tab.label}}</a>
+            <a
+              v-for="(tab, tabIndex) in item.tabs"
+              :key="tabIndex"
+              @click="activeTab(tabIndex)"
+              :class=" active === tabIndex ? 'active' : ''"
+            >{{tab.label}}</a>
           </div>
           <div class="tabs--right">
             <span>Test</span>
@@ -12,7 +22,7 @@
           </div>
         </div>
         <div class="graph" v-if="item.tabs[active] !== undefined">
-          <graph :settings="item.tabs[active]" />
+          <graph :settings="item.tabs[active]"/>
         </div>
       </div>
     </div>
@@ -76,60 +86,43 @@ export default {
   background-color: rgb(246, 246, 246);
   width: 100%;
   border-radius: 4px;
-}
 
-.tabs a {
-  float: left;
-  cursor: pointer;
-  padding: 14px 24px;
-  transition: background-color 0.2s;
-  background-color: rgb(246, 246, 246);
-  font-weight: bold;
-  color: rgb(41, 40, 88);
-  border-radius: 2px;
-}
-
-/* Change background color of tabs on hover */
-.tabs a:hover {
-  background-color: #aaa;
-  position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: white;
-  }
-}
-
-/* Styling for active tab */
-.tabs a.active {
-  background-color: #fff;
-  cursor: default;
-  position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    width: 99%;
-    background-color: white;
+  div:first-of-type a:first-child {
+    border-top-left-radius: 3px;
   }
 
-  &:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 102%;
-    width: 1px;
-    background-color: rgba(170, 170, 170, 0.6);
+  a {
+    float: left;
+    cursor: pointer;
+    padding: 14px 24px;
+    transition: background-color 0.2s;
+    background-color: rgb(246, 246, 246);
+    font-weight: bold;
+    color: rgb(41, 40, 88);
+
+    &.active {
+      background-color: #fff;
+      cursor: default;
+      position: relative;
+      box-shadow: 0 0 0 1px #e0e0e0;
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0px;
+        height: 2px;
+        background-color: white;
+      }
+    }
+
+    /* Change background color of tabs on hover */
+    &:hover:not(.active) {
+      background-color: #efefef;
+      position: relative;
+      box-shadow: 0 0 0 1px #e0e0e0;
+    }
   }
 }
 </style>
