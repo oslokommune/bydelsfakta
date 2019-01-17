@@ -10,8 +10,6 @@ function Template(svg) {
   this.width2 = 310;
   this.gapX = 80;
   this.width = this.width1 + this.width2 + this.gapX;
-  this.rowHeight = 43;
-  this.barHeight = 20;
   this.x = d3.scaleLinear();
   this.x2 = d3.scaleLinear();
 

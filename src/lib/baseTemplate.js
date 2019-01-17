@@ -11,12 +11,14 @@ function Base_Template(svg) {
   this.y = d3.scaleBand();
   this.max = 0;
   this.min = 0;
-  this.barHeight = 40;
+  this.rowHeight = 43;
+  this.barHeight = 24;
   this.tabWidth = 120;
   this.tabGap = 10;
   this.strokeWidth = 4;
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
+  this.formatYear = d3.timeFormat('%Y');
 
   // Common operations to be run once a template is initialized
   this.init = function() {

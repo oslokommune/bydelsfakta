@@ -28,6 +28,7 @@ import TemplateD from '../lib/templateD';
 import TemplateE from '../lib/templateE';
 import TemplateF from '../lib/templateF';
 import TemplateG from '../lib/templateG';
+import TemplateH from '../lib/templateH';
 import TemplateI from '../lib/templateI';
 import TemplateJ from '../lib/templateJ';
 
@@ -54,41 +55,38 @@ export default {
   methods: {
     draw() {
       if (this.currentTemplate !== this.settings.template) {
+        // Show dropdown only for template d
+        this.showDropdown = this.settings.template === 'd';
+
         switch (this.settings.template) {
           case 'a':
-            this.showDropdown = false;
             this.svg = new TemplateA(this.$refs['svg']);
             break;
           case 'b':
-            this.showDropdown = false;
             this.svg = new TemplateB(this.$refs['svg']);
             break;
           case 'c':
-            this.showDropdown = false;
             this.svg = new TemplateC(this.$refs['svg']);
             break;
           case 'd':
-            this.showDropdown = true;
             this.svg = new TemplateD(this.$refs['svg']);
             break;
           case 'e':
-            this.showDropdown = false;
             this.svg = new TemplateE(this.$refs['svg']);
             break;
           case 'f':
-            this.showDropdown = false;
             this.svg = new TemplateF(this.$refs['svg']);
             break;
           case 'g':
-            this.showDropdown = false;
             this.svg = new TemplateG(this.$refs['svg']);
             break;
+          case 'h':
+            this.svg = new TemplateH(this.$refs['svg']);
+            break;
           case 'i':
-            this.showDropdown = false;
             this.svg = new TemplateI(this.$refs['svg']);
             break;
           case 'j':
-            this.showDropdown = false;
             this.svg = new TemplateJ(this.$refs['svg']);
             break;
           default:
@@ -98,7 +96,6 @@ export default {
 
       d3.json(this.settings.url).then(res => {
         this.res = res;
-        this.heading = res.meta.heading;
         this.svg.render(this.res, this.settings.method);
         this.currentTemplate = this.settings.template;
       });

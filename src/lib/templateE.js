@@ -5,19 +5,18 @@ function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.padding.top = 70;
+  this.padding.bottom = 50;
   this.padding.left = 300;
   this.padding.right = 25;
   this.height = 400;
   this.width = 650;
-  this.rowHeight = 40;
   this.y = d3.scaleLinear();
   this.x = d3.scaleLinear();
   this.selected = null;
   this.list;
   this.pyramid;
   this.gutter = 100;
-  this.yAxis = [];
-  this.max = 0;
+  this.yAxis = []; // three yAxis (left, right and gridlines)
 
   this.drawList = function() {
     let active = this.selected;
@@ -98,6 +97,28 @@ function Template(svg) {
       .attr('transform', `translate(0, ${this.height})`);
 
     this.yAxis.attr('class', d => `axis y axis-${d.type}`);
+
+    this.canvas
+      .append('g')
+      .attr('class', 'yAxis-title')
+      .attr('transform', `translate(-30, ${this.height / 2})`)
+      .append('text')
+      .attr('font-size', 12)
+      .attr('font-weight', 700)
+      .attr('fill', util.color.purple)
+      .text('Alder')
+      .attr('text-anchor', 'middle')
+      .attr('transform', `rotate(-90)`);
+
+    this.canvas
+      .append('text')
+      .attr('class', 'xAxis-title')
+      .attr('font-size', 12)
+      .attr('font-weight', 700)
+      .attr('fill', util.color.purple)
+      .attr('text-anchor', 'middle')
+      .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`)
+      .text('Folkemengde');
   };
 
   this.area = d3
@@ -140,17 +161,10 @@ function Template(svg) {
       .attr('d', this.area);
   };
 
-  this.render = function(data, selected) {
-    if (!data) return;
-    this.data = data;
-    this.selected =
-      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+  this.resetAxis = function() {
+    let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
 
-    this.heading.text(data.meta.heading);
-
-    this.max = d3.max(this.data.data[this.selected].values.map(d => d.value));
-    this.x.range([0, this.width]).domain([-this.max, this.max]);
-
+    this.x.range([0, this.width]).domain([-max, max]);
     this.xAxis.transition().call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
     this.yAxis.each((d, i, j) => {
       if (d.type == 'left') {
@@ -168,7 +182,17 @@ function Template(svg) {
         axis.selectAll('.domain').remove();
       }
     });
+  };
 
+  this.render = function(data, selected) {
+    if (!data) return;
+    this.data = data;
+    this.selected =
+      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+
+    this.heading.text(data.meta.heading);
+
+    this.resetAxis();
     this.drawPyramid();
     this.drawList();
 

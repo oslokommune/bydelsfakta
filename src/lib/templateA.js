@@ -4,7 +4,6 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.height = 500;
   this.padding.top = 100;
   this.padding.left = 190;
   this.gutter = 30;
@@ -20,7 +19,7 @@ function Template(svg) {
       return d3.max(data.data.map(d => d.values[i]));
     });
 
-    this.height = data.data.length * this.barHeight;
+    this.height = data.data.length * this.rowHeight;
     this.svg.attr('height', this.height + this.padding.top + this.padding.bottom);
 
     this.x2 = d3

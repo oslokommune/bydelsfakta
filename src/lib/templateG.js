@@ -8,8 +8,6 @@ function Template(svg) {
   this.paddingLeft = 160;
   this.height = 0; // set during render
   this.width = 850;
-  this.rowHeight = 43;
-  this.barHeight = 20;
   this.y = d3.scaleLinear();
   this.x = d3.scaleBand();
 
