@@ -6,10 +6,15 @@ function Template(svg) {
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 1 };
   this.height = 0; // set during render
-  this.width1 = 310;
-  this.width2 = 310;
+  // this.width1 = 310;
+  // this.width2 = 310;
   this.gapX = 80;
-  this.width = this.width1 + this.width2 + this.gapX;
+  // this.width = this.width1 + this.width2 + this.gapX;
+
+  this.width = this.parentWidth() - this.padding.left - this.padding.right;
+  this.width1 = (this.width - this.gapX) / 2;
+  this.width2 = (this.width - this.gapX) / 2;
+
   this.x = d3.scaleLinear();
   this.x2 = d3.scaleLinear();
 

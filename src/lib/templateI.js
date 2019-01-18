@@ -420,6 +420,7 @@ function Template(svg) {
 
   this.render = function(data, selected = null) {
     if (!data) return;
+    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
 
     this.selected = selected;
