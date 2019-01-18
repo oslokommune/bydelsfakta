@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card :settings="settings.eierform" />
+      <graph-card v-for="(card, index) in settings.eierform" :key="`eierform-${index}`"  :settings="card" />
     </div>
     <div class="main-container__map">
       <h3>Kart</h3>

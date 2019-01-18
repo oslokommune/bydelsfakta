@@ -160,7 +160,7 @@ const page = {
             label: 'Historisk',
             id: 'innvandring_under16-totalt_historisk',
             template: 'b',
-            url: `${baseUrl()}/mockDataA.json`,
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },

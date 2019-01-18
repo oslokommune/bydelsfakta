@@ -1,9 +1,9 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card :settings="settings.fremskriving" />
-      <graph-card :settings="settings.utvikling" />
-      <graph-card :settings="settings.nokkeltall" />
+      <graph-card v-for="(card, index) in settings.fremskriving" :key="`folkemengde-fremskriving-${index}`" :settings="card" />
+      <graph-card v-for="(card, index) in settings.utvikling" :key="`folkemengde-utvikling-${index}`"  :settings="card" />
+      <graph-card v-for="(card, index) in settings.nokkeltall" :key="`folkemengde-nokkeltall-${index}`"  :settings="card" />
     </div>
     <div class="main-container__map">
       <h3>Kart</h3>

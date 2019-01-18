@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card :settings="settings.totalt" />
-      <graph-card :settings="settings.spesifikk" />
+      <graph-card v-for="(card, index) in settings.totalt" :key="`husholdninger-totalt-${index}`"  :settings="card" />
+      <graph-card v-for="(card, index) in settings.spesifikk" :key="`husholdninger-spesifikk-${index}`"  :settings="card" />
     </div>
     <div class="main-container__map">
       <h3>Kart</h3>

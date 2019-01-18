@@ -2,18 +2,16 @@
   <div class="main-container__item">
     <div
       class="card-container"
-      v-for="(item, index) in settings"
-      :key="index"
-      :style="item.size === 'large' ?  'width: 100%' : 'width: 50%'"
+      :style="settings.size === 'large' ?  'width: 100%' : 'width: 50%'"
     >
       <div class="graph__cards-container">
         <div class="tabs">
           <div>
             <a
-              v-for="(tab, tabIndex) in item.tabs"
-              :key="tabIndex"
-              @click="activeTab(tabIndex)"
-              :class=" active === tabIndex ? 'active' : ''"
+              v-for="(tab, index) in settings.tabs"
+              :key="index"
+              @click="activeTab(index)"
+              :class=" active === index ? 'active' : ''"
             >
               {{tab.label}}
             </a>
@@ -32,9 +30,9 @@
         </div>
         <div
           class="graph"
-          v-if="item.tabs[active] !== undefined"
+          v-if="settings.tabs[active] !== undefined"
         >
-          <graph :settings="item.tabs[active]" />
+          <graph :settings="settings.tabs[active]" />
         </div>
       </div>
     </div>
@@ -55,7 +53,7 @@ export default {
   },
   props: {
     settings: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },

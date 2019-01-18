@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card :settings="settings.blokk" />
+      <graph-card v-for="(card, index) in settings.blokk" :key="`kommunale-boliger-${index}`"  :settings="card" />
     </div>
     <div class="main-container__map">
       <h3>Kart</h3>
