@@ -70,7 +70,7 @@ function Template(svg) {
       .attr('class', 'geography')
       .attr('fill', util.color.purple)
       .attr('y', this.rowHeight / 2 + 6)
-      .attr('x', -this.padding.left);
+      .attr('x', -this.padding.left + 10);
   };
 
   this.drawRows = function() {
@@ -161,6 +161,9 @@ function Template(svg) {
 
   this.render = function(data, method = 'ratio') {
     if (data === undefined) return;
+    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
+    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
+    this.data = data;
 
     data.data = data.data.map(bydel => {
       // swap places between first and second value and make them negative
@@ -170,7 +173,6 @@ function Template(svg) {
 
     [data.meta.series[0], data.meta.series[1]] = [data.meta.series[1], data.meta.series[0]];
 
-    this.data = data;
     this.method = method;
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);

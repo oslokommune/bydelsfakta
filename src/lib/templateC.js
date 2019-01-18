@@ -6,7 +6,7 @@ function Template(svg) {
 
   this.padding.top = 130;
   this.padding.left = 60;
-  this.padding.right = 420;
+  this.padding.right = 220;
   this.height = 500;
   this.width = 640;
 

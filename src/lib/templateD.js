@@ -324,7 +324,6 @@ function Template(svg) {
   this.render = function(data, method = 'ratio', range) {
     if (!data) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-
     this.data = data;
 
     // Move the brushes if a range was selected

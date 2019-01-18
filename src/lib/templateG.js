@@ -5,7 +5,7 @@ function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.padding = { top: 90, left: 0, right: 20, bottom: 1 };
-  this.paddingLeft = 160;
+  this.paddingLeft = 180;
   this.height = 0; // set during render
   this.width = 850;
   this.y = d3.scaleLinear();
@@ -36,7 +36,8 @@ function Template(svg) {
       .append('text')
       .attr('class', 'geography')
       .attr('fill', util.color.purple)
-      .attr('y', this.rowHeight / 2 + 6);
+      .attr('y', this.rowHeight / 2 + 6)
+      .attr('x', 10);
 
     // Population
     rowsE
@@ -269,6 +270,8 @@ function Template(svg) {
 
   this.render = function(data, method = 'ratio', range) {
     if (data === undefined) return;
+    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
+    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
     this.method = method;
     this.heading.text(this.data.meta.heading);

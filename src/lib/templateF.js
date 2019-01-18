@@ -60,7 +60,7 @@ function Template(svg) {
       .attr('class', 'geography')
       .attr('fill', util.color.purple)
       .attr('y', this.rowHeight / 2 + 6)
-      .attr('x', -this.padding.left);
+      .attr('x', -this.padding.left + 10);
 
     // Box
     rowsE
@@ -117,7 +117,7 @@ function Template(svg) {
   };
 
   this.drawRows = function() {
-    let rows = this.canvas.selectAll('g.row').data(this.data.data.sort((a, b) => a.avgRow - b.avgRow));
+    let rows = this.canvas.selectAll('g.row').data(this.data.data);
     let rowsE = rows
       .enter()
       .append('g')
@@ -155,6 +155,9 @@ function Template(svg) {
 
   this.render = function(data, method = 'ratio') {
     if (data === undefined) return;
+    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
+    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
+    this.data = data;
 
     // Find quartiles, mean and median for each geography
     data.data = data.data.map(bydel => {
@@ -172,8 +175,8 @@ function Template(svg) {
       return bydel;
     });
 
-    data.data = data.data.sort((a, b) => a.mean - b.mean);
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
+    // data.data = data.data.sort((a, b) => a.mean - b.mean);
+    // data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
 
     this.data = data;
     this.method = method;
