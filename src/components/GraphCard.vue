@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container__item">
+  <div class="main-container__item main-container__item--graph">
     <div
       class="card-container"
       :style="settings.size === 'large' ?  'width: 100%' : 'width: 50%'"
@@ -66,6 +66,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.main-container__item--graph {
+  width: 100%;
+}
+
 .card-container {
   border-radius: 4px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.34);
