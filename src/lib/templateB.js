@@ -8,7 +8,7 @@ function Template(svg) {
   this.padding.left = 60;
   this.padding.right = 220;
   this.height = 300;
-  this.width = 900;
+  this.width = 700;
 
   const strokeWidth = this.strokeWidth;
   const strokeWidthHighlight = this.strokeWidthHighlight;
