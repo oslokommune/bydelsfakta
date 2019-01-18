@@ -1,10 +1,26 @@
 <template>
-  <h1>Flytting</h1>
+  <div class="main-container">
+    <div class="main-container__cards">
+      <graph-card :settings="settings.hyppighet" />
+    </div>
+    <div class="main-container__map">
+      <h3>Kart</h3>
+    </div>
+  </div>
 </template>
 
 <script>
+import GraphCard from '../../components/GraphCard.vue';
+
 export default {
   name: 'Flytting',
+  components: { GraphCard },
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 

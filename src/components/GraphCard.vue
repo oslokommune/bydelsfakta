@@ -4,7 +4,7 @@
       class="card-container"
       v-for="(item, index) in settings"
       :key="index"
-      :style="item.size === 'large' ?  'width: 1100px' : 'width: 550px'"
+      :style="item.size === 'large' ?  'width: 100%' : 'width: 50%'"
     >
       <div class="graph__cards-container">
         <div class="tabs">
