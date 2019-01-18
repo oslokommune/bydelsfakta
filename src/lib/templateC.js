@@ -6,9 +6,9 @@ function Template(svg) {
 
   this.padding.top = 130;
   this.padding.left = 60;
-  this.padding.right = 220;
-  this.height = 300;
-  this.width = 440;
+  this.padding.right = 420;
+  this.height = 500;
+  this.width = 640;
 
   let line = d3
     .line()
@@ -23,6 +23,28 @@ function Template(svg) {
       .attr('transform', 'translate(0, 20)');
     this.tabs.append('rect').attr('class', 'rule');
 
+    this.createInfoBoxElements();
+  };
+
+  this.getTickFormat = function() {
+    let format;
+    let range = this.y.max - this.y.min;
+
+    if (this.method === 'value') {
+      return d3.format('');
+    }
+    if (range < 0.001) {
+      format = d3.format('.2%');
+    } else if (range < 0.005) {
+      format = d3.format('.1%');
+    } else {
+      format = d3.format('.0%');
+    }
+
+    return format;
+  };
+
+  this.createInfoBoxElements = function() {
     // Create infobox placeholder
     this.infobox = this.svg.append('g').attr('class', 'infobox');
     this.infoboxBody = this.infobox.append('g').attr('class', 'infobox__body');
@@ -36,87 +58,6 @@ function Template(svg) {
     this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
   };
 
-  this.getTickFormat = function() {
-    let format;
-    let range = this.y.max - this.y.min;
-
-    if (this.method === 'value') {
-      return d3.format('');
-    }
-    if (range < 0.01) {
-      format = d3.format('.2%');
-    } else if (range < 0.04) {
-      format = d3.format('.1%');
-    } else {
-      format = d3.format('.0%');
-    }
-
-    return format;
-  };
-
-  this.drawTabs = function() {
-    this.tabs
-      .select('rect.rule')
-      .attr('height', 1)
-      .attr('width', this.width + this.padding.left + this.padding.right)
-      .attr('fill', util.color.purple)
-      .attr('opacity', 0.2)
-      .attr('y', 40);
-
-    let tab = this.tabs.selectAll('g.tab').data(this.data.meta.series);
-    let tabE = tab
-      .enter()
-      .append('g')
-      .attr('class', 'tab');
-
-    tabE
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('height', 4)
-      .attr('width', this.tabWidth)
-      .attr('y', 37)
-      .attr('fill', util.color.blue);
-
-    tabE
-      .append('text')
-      .attr('class', 'heading')
-      .attr('font-size', 16)
-      .attr('y', 5);
-    tabE
-      .append('text')
-      .attr('class', 'subHeading')
-      .attr('font-size', 12)
-      .attr('y', 20);
-
-    tabE
-      .append('rect')
-      .attr('class', 'tabOverlay')
-      .attr('width', this.tabWidth)
-      .attr('height', 60)
-      .attr('opacity', 0)
-      .attr('y', -20);
-
-    tab.exit().remove();
-    tab = tab.merge(tabE);
-
-    tab.attr('transform', (d, i) => `translate(${i * (this.tabWidth + this.tabGap)}, 0)`);
-
-    tab
-      .select('text.heading')
-      .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
-      .text(d => d.heading);
-    tab
-      .select('text.subHeading')
-      .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
-      .text(d => d.subheading);
-
-    tab.select('rect.tabOverlay').on('click', (d, i) => {
-      this.render(this.data, this.method, i);
-    });
-
-    tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
-  };
-
   this.drawInfobox = function() {
     if (this.highlight === -1) {
       this.infobox.attr('opacity', 0);
@@ -126,8 +67,8 @@ function Template(svg) {
     let year = d3.timeFormat('%Y');
     let data = this.data.data[this.highlight].values.filter((d, i) => i === this.series)[0];
     let geography = this.data.data[this.highlight].geography;
-    let high = data.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
-    let low = data.reduce((prev, curr) => (prev.value < curr.value ? prev : curr));
+    let high = this.data.data.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
+    let low = this.data.data.reduce((prev, curr) => (prev.value < curr.value ? prev : curr));
 
     this.infobox
       .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
@@ -224,6 +165,69 @@ function Template(svg) {
       .text(Math.round(low.ratio * 10000) / 100 + '%');
   };
 
+  this.drawTabs = function() {
+    this.tabs
+      .select('rect.rule')
+      .attr('height', 1)
+      .attr('width', this.width + this.padding.left + this.padding.right)
+      .attr('fill', util.color.purple)
+      .attr('opacity', 0.2)
+      .attr('y', 40);
+
+    let tab = this.tabs.selectAll('g.tab').data(this.data.meta.series);
+    let tabE = tab
+      .enter()
+      .append('g')
+      .attr('class', 'tab');
+
+    tabE
+      .append('rect')
+      .attr('class', 'bar')
+      .attr('height', 4)
+      .attr('width', this.tabWidth)
+      .attr('y', 37)
+      .attr('fill', util.color.blue);
+
+    tabE
+      .append('text')
+      .attr('class', 'heading')
+      .attr('font-size', 16)
+      .attr('y', 5);
+    tabE
+      .append('text')
+      .attr('class', 'subHeading')
+      .attr('font-size', 12)
+      .attr('y', 20);
+
+    tabE
+      .append('rect')
+      .attr('class', 'tabOverlay')
+      .attr('width', this.tabWidth)
+      .attr('height', 60)
+      .attr('opacity', 0)
+      .attr('y', -20);
+
+    tab.exit().remove();
+    tab = tab.merge(tabE);
+
+    tab.attr('transform', (d, i) => `translate(${i * (this.tabWidth + this.tabGap)}, 0)`);
+
+    tab
+      .select('text.heading')
+      .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
+      .text(d => d.heading);
+    tab
+      .select('text.subHeading')
+      .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
+      .text(d => d.subheading);
+
+    tab.select('rect.tabOverlay').on('click', (d, i) => {
+      this.render(this.data, this.method, i);
+    });
+
+    tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
+  };
+
   this.drawLabels = function() {
     let labelsData = (() => {
       if (this.highlight >= 0) {
@@ -303,25 +307,15 @@ function Template(svg) {
     });
   };
 
-  this.render = function(data, method = 'ratio', series = 0, highlight = -1) {
-    this.highlight = highlight;
-    this.data = data;
-    this.series = series;
-    this.heading.attr('y', 90).text(data.meta.heading[this.series]);
-
-    this.svg.attr('height', this.height + this.padding.top + this.padding.bottom);
-
-    this.method = method;
-    this.y.max = d3.max(data.data.map(row => d3.max(row.values[series].map(d => d[this.method])))) * 1.05;
-    this.y.min = d3.min(data.data.map(row => d3.min(row.values[series].map(d => d[this.method])))) / 1.05;
-
-    let formatYTicks = this.getTickFormat();
+  this.setScales = function() {
+    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values[this.series].map(d => d[this.method])))) * 1.05;
+    this.y.min = d3.min(this.data.data.map(row => d3.min(row.values[this.series].map(d => d[this.method])))) / 1.05;
 
     this.x = d3
       .scaleTime()
       .domain([
-        this.parseDate(data.data[0].values[0][0].date),
-        this.parseDate(data.data[0].values[this.series][data.data[0].values[this.series].length - 1].date),
+        this.parseDate(this.data.data[0].values[0][0].date),
+        this.parseDate(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
       ])
       .range([0, this.width]);
 
@@ -329,13 +323,31 @@ function Template(svg) {
       .scaleLinear()
       .domain([this.y.min, this.y.max])
       .range([this.height, 0]);
+  };
+
+  this.drawAxis = function() {
+    let formatYTicks = this.getTickFormat();
 
     this.yAxis.transition().call(d3.axisLeft(this.y).tickFormat(formatYTicks));
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
       .call(d3.axisBottom(this.x));
+  };
 
+  this.render = function(data, method = 'ratio', series = 0, highlight = -1) {
+    this.highlight = highlight;
+    this.data = data;
+    this.series = series;
+    this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
+    this.method = method;
+
+    this.svg
+      .attr('height', this.height + this.padding.top + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.setScales();
+    this.drawAxis();
     this.drawLines();
     this.drawTabs();
     this.drawLabels();

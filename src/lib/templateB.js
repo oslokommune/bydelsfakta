@@ -6,14 +6,14 @@ function Template(svg) {
 
   this.padding.top = 50;
   this.padding.left = 60;
-  this.padding.right = 120;
+  this.padding.right = 220;
   this.height = 300;
-  this.width = 300;
+  this.width = 900;
 
   const strokeWidth = this.strokeWidth;
   const strokeWidthHighlight = this.strokeWidthHighlight;
 
-  let line = d3
+  this.line = d3
     .line()
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
@@ -49,8 +49,8 @@ function Template(svg) {
     labelsE.append('title');
 
     labels
-      .text(d => util.truncate(d.geography, this.padding.right - 20))
-      .attr('x', this.width + 5)
+      .text(d => util.truncate(d.geography, this.padding.right - 30))
+      .attr('x', this.width + 10)
       .attr('font-weight', 'bold')
       .attr('y', d => {
         return this.y(d.values[d.values.length - 1][this.method]) + 5;
@@ -64,35 +64,120 @@ function Template(svg) {
       .html(d => d);
   };
 
-  this.render = function(data, method = 'value') {
-    this.data = data;
-    this.method = method;
+  this.createInfoBoxElements = function() {
+    // Create infobox placeholder
+    this.infobox = this.svg.append('g').attr('class', 'infobox');
+    this.infoboxBody = this.infobox.append('g').attr('class', 'infobox__body');
+    this.infoboxBody.append('rect').attr('class', 'background');
+    this.infoboxHead = this.infobox.append('g').attr('class', 'infobox__head');
+    this.infoboxHead.append('rect').attr('class', 'background');
+    this.infoboxTitle = this.infoboxHead.append('text');
+    this.infoboxContent = this.infoboxBody.append('g').attr('class', 'infobox__content');
+    this.infoboxHeading = this.infoboxContent.append('text').attr('class', 'infobox__heading');
+    this.infoboxContent.append('rect').attr('class', 'infobox__rule');
+    this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
+  };
 
-    this.heading.text(data.meta.heading);
+  this.drawInfobox = function() {
+    if (this.highlight === -1) {
+      this.infobox.attr('opacity', 0);
+      return;
+    }
 
-    this.method = method;
-    this.y.max = d3.max(data.data.map(row => d3.max(row.values.map(d => d[method])))) * 1.05;
-    this.y.min = d3.min(data.data.map(row => d3.min(row.values.map(d => d[method])))) / 1.05;
+    let year = d3.timeFormat('%Y');
+    let data = this.data.data[this.highlight].values;
+    let geography = this.data.data[this.highlight].geography;
+    let high = data.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
+    let low = data.reduce((prev, curr) => (prev.value < curr.value ? prev : curr));
 
-    let formatYTicks = this.getTickFormat();
+    this.infobox
+      .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
+      .transition()
+      .attr('opacity', 1);
 
-    this.x = d3
-      .scaleTime()
-      .domain([
-        this.parseDate(data.data[0].values[0].date),
-        this.parseDate(data.data[0].values[data.data[0].values.length - 1].date),
-      ])
-      .range([0, this.width]);
+    this.infoboxHead
+      .select('rect.background')
+      .attr('height', 30)
+      .attr('width', this.padding.right - 22)
+      .attr('x', 11)
+      .attr('fill', util.color.purple);
+    this.infoboxTitle
+      .attr('y', 20)
+      .attr('x', 21)
+      .attr('font-size', 14)
+      .attr('font-weight', 700)
+      .text(util.truncate(geography, this.padding.right - 55, 14, 700))
+      .attr('fill', util.color.blue);
 
-    this.y = d3
-      .scaleLinear()
-      .domain([this.y.min, this.y.max])
-      .range([this.height, 0]);
+    this.infoboxBody
+      .select('rect.background')
+      .attr('height', this.height - 40)
+      .attr('y', 20)
+      .attr('x', 4)
+      .attr('width', this.padding.right - 8)
+      .attr('fill', util.color.light_yellow)
+      .attr('stroke', util.color.purple);
 
-    this.yAxis.call(d3.axisLeft(this.y).tickFormat(formatYTicks));
-    this.xAxis.call(d3.axisBottom(this.x)).attr('transform', `translate(0, ${this.height})`);
+    this.infoboxContent.attr('transform', 'translate(20, 60)');
+    this.infoboxHeading
+      .attr('font-size', 12)
+      .attr('font-weight', 700)
+      .attr('text-transform', 'uppercase')
+      .attr('fill', util.color.purple)
+      .text(util.truncate(this.data.meta.heading, this.padding.right - 90, 12, 700).toUpperCase());
 
-    let row = this.canvas.selectAll('path.row').data(data.data);
+    this.infoboxTable.selectAll('*').remove();
+
+    this.infoboxTable
+      .append('text')
+      .attr('y', 50)
+      .text('Utvikling');
+    this.infoboxTable
+      .append('text')
+      .attr('y', 75)
+      .text('Utvikling (p.p.)');
+    this.infoboxTable
+      .append('text')
+      .attr('y', 100)
+      .text(`Høyest (${year(this.parseDate(high.date))})`);
+    this.infoboxTable
+      .append('text')
+      .attr('y', 125)
+      .text(`Lavest (${year(this.parseDate(low.date))})`);
+
+    this.infoboxTable
+      .append('text')
+      .attr('font-weight', 700)
+      .attr('y', 50)
+      .attr('x', this.padding.right - 40)
+      .attr('text-anchor', 'end')
+      .text(Math.round(((data[data.length - 1].value - data[0].value) / data[0].value) * 100) + '%');
+
+    this.infoboxTable
+      .append('text')
+      .attr('font-weight', 700)
+      .attr('y', 75)
+      .attr('x', this.padding.right - 40)
+      .attr('text-anchor', 'end')
+      .text(Math.round((data[data.length - 1].ratio - data[0].ratio) * 10000) / 100);
+    this.infoboxTable
+      .append('text')
+      .attr('font-weight', 700)
+      .attr('y', 100)
+      .attr('x', this.padding.right - 40)
+      .attr('text-anchor', 'end')
+      .text(Math.round(high.ratio * 10000) / 100 + '%');
+    this.infoboxTable
+      .append('text')
+      .attr('font-weight', 700)
+      .attr('y', 125)
+      .attr('x', this.padding.right - 40)
+      .attr('text-anchor', 'end')
+      .text(Math.round(low.ratio * 10000) / 100 + '%');
+  };
+
+  this.drawLines = function() {
+    let row = this.canvas.selectAll('path.row').data(this.data.data);
     let rowE = row
       .enter()
       .append('path')
@@ -101,7 +186,7 @@ function Template(svg) {
     row = row.merge(rowE);
 
     row
-      .attr('d', d => line(d.values))
+      .attr('d', d => this.line(d.values))
       .attr('stroke', d => {
         if (d.totalRow) return util.color.blue;
         if (d.avgRow) return util.color.red;
@@ -118,7 +203,55 @@ function Template(svg) {
       d3.select(this).attr('stroke-width', strokeWidth);
     });
 
+    row.on('click', (d, i) => {
+      if (i === this.highlight) {
+        this.render(this.data, this.method, -1);
+      } else {
+        this.render(this.data, this.method, i);
+      }
+    });
+  };
+
+  this.setScales = function() {
+    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
+    this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) / 1.2;
+
+    this.x = d3
+      .scaleTime()
+      .domain([
+        d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0].date), -1),
+        this.parseDate(this.data.data[0].values[this.data.data[0].values.length - 1].date),
+      ])
+      .range([0, this.width]);
+
+    this.y = d3
+      .scaleLinear()
+      .domain([this.y.min, this.y.max])
+      .range([this.height, 0]);
+  };
+
+  this.drawAxis = function() {
+    let formatYTicks = this.getTickFormat();
+    this.yAxis.call(d3.axisLeft(this.y).tickFormat(formatYTicks));
+    this.xAxis.call(d3.axisBottom(this.x)).attr('transform', `translate(0, ${this.height})`);
+  };
+
+  this.created = function() {
+    this.createInfoBoxElements();
+  };
+
+  this.render = function(data, method = 'value', highlight = -1) {
+    if (!data || !data.data) return;
+    this.data = data;
+    this.method = method;
+    this.heading.text(this.data.meta.heading);
+    this.highlight = highlight;
+
+    this.setScales();
+    this.drawLines();
+    this.drawAxis();
     this.drawLabels();
+    this.drawInfobox();
   };
 
   this.init(svg);
