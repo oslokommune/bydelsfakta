@@ -1,6 +1,8 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
+      <graph-card :settings="settings.median" />
+      <graph-card :settings="settings.populasjonspyramide" />
       <graph-card :settings="settings.aldersgrupper" />
     </div>
     <div class="main-container__map">
