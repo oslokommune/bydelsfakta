@@ -50,7 +50,7 @@ const subpages = [
     value: 'trangboddhet',
     options: {
       kategori: 'Bomiljø',
-      tema: 'Trandboddhet',
+      tema: 'Trangboddhet',
       bgImage: `${baseUrl()}/img/trangboddhet.png`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',

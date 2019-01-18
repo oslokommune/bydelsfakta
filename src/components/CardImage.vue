@@ -7,16 +7,18 @@
     >
       <v-container>
         <v-layout column>
-          <div>
-           <span
-             class="text-uppercase oslo__category"
-             :style="{ backgroundColor: dataTxtColor }"
-           >
-             {{dataKategori}}
-           </span>
+          <div style="position: relative; display: flex; flex-direction: column; height: 120px">
+            <div>
+              <span
+                class="text-uppercase oslo__category"
+                :style="{ backgroundColor: dataTxtColor }"
+              >
+                {{dataKategori}}
+              </span>
+            </div>
+            <span class="oslo__tema">{{dataTema}}</span>
+            <span class="oslo__see-more-text">Se mer ----------></span>
           </div>
-          <span class="oslo__tema">{{dataTema}}</span>
-          <span class="oslo__see-more-text">Se mer ----------></span>
         </v-layout>
       </v-container>
     </div>
