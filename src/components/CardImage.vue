@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-item">
+  <div class="main-container__item">
     <v-card
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"
@@ -11,7 +11,10 @@
       <v-container>
         <v-layout column>
           <div>
-           <span class="text-uppercase oslo__category" :style="{ backgroundColor: dataTxtColor }">
+           <span
+             class="text-uppercase oslo__category"
+             :style="{ backgroundColor: dataTxtColor }"
+           >
              {{dataKategori}}
            </span>
           </div>
@@ -93,10 +96,5 @@ export default {
   bottom: 0.2rem;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
-}
-
-.flex-item {
-  padding: 5px;
-  margin-top: 10px;
 }
 </style>

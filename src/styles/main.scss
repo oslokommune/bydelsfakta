@@ -30,3 +30,31 @@
 .theme--light.v-select .v-select__selections {
   color: #8d8da0;
 }
+
+.main-container {
+  display: flex;
+}
+
+.main-container__item {
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.main-container__cards {
+  display: flex;
+  padding: 2rem;
+
+  flex-flow: row wrap;
+  justify-content: start;
+
+  flex-basis: auto;
+}
+
+.main-container__map {
+  display: flex;
+  padding: 2rem;
+
+  flex-flow: row wrap;
+  justify-content: start;
+  flex: 0 0 600px;
+}

@@ -1,6 +1,6 @@
 <template>
-  <div class="bydel-container">
-    <div class="bydel__cards-container">
+  <div class="main-container">
+    <div class="main-container__cards">
       <card-image
               v-for="item in items"
               :key="item.value"
@@ -13,7 +13,7 @@
               :click-bydel="onClickCard"
       />
     </div>
-    <div class="bydel__map-container">
+    <div class="main-container__map">
       <h3>Bydelskart</h3>
     </div>
   </div>
@@ -40,26 +40,4 @@ export default {
 </script>
 
 <style scoped>
-.bydel-container {
-  display: flex;
-}
-
-.bydel__cards-container {
-  display: flex;
-  padding: 2rem;
-
-  flex-flow: row wrap;
-  justify-content: start;
-
-  flex-basis: auto;
-}
-
-.bydel__map-container {
-  display: flex;
-  padding: 2rem;
-
-  flex-flow: row wrap;
-  justify-content: start;
-  flex: 0 0 600px;
-}
 </style>

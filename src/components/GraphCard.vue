@@ -1,10 +1,10 @@
 <template>
-  <div class="flex-item">
+  <div class="main-container__item">
     <div
       class="card-container"
       v-for="(item, index) in settings"
       :key="index"
-      :style="item.size === 'large' ? '1100px' : '550px'"
+      :style="item.size === 'large' ?  'width: 1100px' : 'width: 550px'"
     >
       <div class="graph__cards-container">
         <div class="tabs">
@@ -14,15 +14,20 @@
               :key="tabIndex"
               @click="activeTab(tabIndex)"
               :class=" active === tabIndex ? 'active' : ''"
-            >{{tab.label}}</a>
+            >
+              {{tab.label}}
+            </a>
           </div>
           <div class="tabs--right">
             <span>Test</span>
             <v-btn flat>Test</v-btn>
           </div>
         </div>
-        <div class="graph" v-if="item.tabs[active] !== undefined">
-          <graph :settings="item.tabs[active]"/>
+        <div
+          class="graph"
+          v-if="item.tabs[active] !== undefined"
+        >
+          <graph :settings="item.tabs[active]" />
         </div>
       </div>
     </div>
@@ -66,11 +71,8 @@ export default {
 
   flex-flow: row wrap;
   justify-content: start;
-}
 
-.flex-item {
-  padding: 5px;
-  margin-top: 10px;
+  flex-basis: auto;
 }
 
 .graph {
