@@ -7,7 +7,7 @@ function Template(svg) {
   this.padding.top = 70;
   this.padding.bottom = 50;
   this.padding.left = 300;
-  this.padding.right = 25;
+  this.padding.right = 55;
   this.height = 400;
   this.width = 650;
   this.y = d3.scaleLinear();
@@ -101,7 +101,7 @@ function Template(svg) {
     this.canvas
       .append('g')
       .attr('class', 'yAxis-title')
-      .attr('transform', `translate(-30, ${this.height / 2})`)
+      .attr('transform', `translate(-50, ${this.height / 2})`)
       .append('text')
       .attr('font-size', 12)
       .attr('font-weight', 700)
@@ -123,7 +123,7 @@ function Template(svg) {
 
   this.area = d3
     .area()
-    .curve(d3.curveBasis)
+    .curve(d3.curveStep)
     .x0(() => this.x(0))
     .x1(d => {
       if (d.gender == 'Kvinne') {
@@ -141,38 +141,54 @@ function Template(svg) {
       });
     });
 
-    let gender = this.pyramid.selectAll('path.gender').data(genderData);
-    let genderE = gender
+    let genderGroup = this.pyramid.selectAll('g.gender').data(genderData);
+    let genderGroupE = genderGroup
       .enter()
-      .append('path')
+      .append('g')
       .attr('class', 'gender');
-    gender.exit().remove();
-    gender = gender.merge(genderE);
+    genderGroup.exit().remove();
+    genderGroup = genderGroup.merge(genderGroupE);
 
-    gender
+    let genderLabel = genderGroupE.append('text').datum(d => d);
+    let genderPath = genderGroupE.append('path').datum(d => d);
+
+    genderLabel
+      .text(d => d[0].gender)
+      .attr('text-anchor', (d, i) => (i === 0 ? 'end' : 'start'))
+      .attr('font-size', 16)
+      .attr('font-weight', 700)
+      .attr('fill', util.color.purple)
+      .attr('transform', `translate(${this.width / 2}, 23)`)
+      .attr('x', (d, i) => (i === 0 ? -20 : 20));
+
+    genderGroup
+      .select('path')
       .attr('fill', d => {
         if (d[0].gender == 'Kvinne') {
           return util.color.red;
         } else {
-          return util.color.blue;
+          return util.color.positive;
         }
       })
       .transition()
       .attr('d', this.area);
   };
 
-  this.resetAxis = function() {
+  this.drawAxis = function() {
     let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
 
     this.x.range([0, this.width]).domain([-max, max]);
     this.xAxis.transition().call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
     this.yAxis.each((d, i, j) => {
       if (d.type == 'left') {
-        d3.select(j[i]).call(d3.axisLeft(this.y));
+        d3.select(j[i])
+          .call(d3.axisLeft(this.y).tickFormat(d => d + ' år'))
+          .selectAll('text');
       } else if (d.type == 'right') {
         d3.select(j[i])
-          .call(d3.axisRight(this.y))
-          .attr('transform', `translate(${this.width}, 0)`);
+          .call(d3.axisRight(this.y).tickFormat(d => d + ' år'))
+          .attr('transform', `translate(${this.width}, 0)`)
+          .selectAll('text');
       } else if (d.type == 'lines') {
         let axis = d3.select(j[i]);
 
@@ -192,7 +208,7 @@ function Template(svg) {
 
     this.heading.text(data.meta.heading);
 
-    this.resetAxis();
+    this.drawAxis();
     this.drawPyramid();
     this.drawList();
 
