@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-375cd434"],{"23cd":function(e,n,c){},"42be":function(e,n,c){"use strict";c.r(n);var t=function(){var e=this,n=e.$createElement,c=e._self._c||n;return c("h1",[e._v("Folkemengde")])},o=[],a={name:"Folkemengde"},u=a,i=(c("a12b"),c("2877")),l=Object(i["a"])(u,t,o,!1,null,"86c6c5ae",null);l.options.__file="Folkemengde.vue";n["default"]=l.exports},a12b:function(e,n,c){"use strict";var t=c("23cd"),o=c.n(t);o.a}}]);
-//# sourceMappingURL=chunk-375cd434.f7acccd5.js.map

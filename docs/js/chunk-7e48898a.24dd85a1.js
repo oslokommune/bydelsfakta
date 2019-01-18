@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-7e48898a"],{"25d7":function(e,n,i){},"2b38":function(e,n,i){"use strict";var r=i("25d7"),t=i.n(r);t.a},8644:function(e,n,i){"use strict";i.r(n);var r=function(){var e=this,n=e.$createElement,i=e._self._c||n;return i("h1",[e._v("Boligpriser")])},t=[],o={name:"Boligpriser"},s=o,c=(i("2b38"),i("2877")),u=Object(c["a"])(s,r,t,!1,null,"5575fd3c",null);u.options.__file="Boligpriser.vue";n["default"]=u.exports}}]);
-//# sourceMappingURL=chunk-7e48898a.24dd85a1.js.map

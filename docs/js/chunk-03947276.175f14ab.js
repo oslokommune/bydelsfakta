@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-03947276"],{3494:function(e,n,o){"use strict";var t=o("eb86"),u=o.n(t);u.a},4218:function(e,n,o){"use strict";o.r(n);var t=function(){var e=this,n=e.$createElement,o=e._self._c||n;return o("h1",[e._v("Kommunale boliger")])},u=[],i={name:"Kommunaleboliger"},l=i,a=(o("3494"),o("2877")),r=Object(a["a"])(l,t,u,!1,null,"31b68f37",null);r.options.__file="Kommunaleboliger.vue";n["default"]=r.exports},eb86:function(e,n,o){}}]);
-//# sourceMappingURL=chunk-03947276.175f14ab.js.map

@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-1a23321c"],{"532f":function(e,n,t){"use strict";var a=t("d84e"),o=t.n(a);o.a},a814:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("h1",[e._v("Trangboddhet")])},o=[],c={name:"Trangboddhet"},r=c,u=(t("532f"),t("2877")),d=Object(u["a"])(r,a,o,!1,null,"4ea0e004",null);d.options.__file="Trangboddhet.vue";n["default"]=d.exports},d84e:function(e,n,t){}}]);
-//# sourceMappingURL=chunk-1a23321c.b94f8142.js.map
