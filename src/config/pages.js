@@ -57,7 +57,7 @@ export const page = {
             label: 'Status',
             id: 'alder_medianalder_status',
             template: 'f',
-            url: '/mockDataD2.json',
+            url: `${baseUrl()}/mockDataD2.json`,
           },
         ],
       },

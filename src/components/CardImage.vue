@@ -1,28 +1,27 @@
 <template>
   <div class="main-container__item">
-    <v-card
+    <div
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"
-      id="bilde"
-      height="160px"
-      width="280px"
       @click="clickBydel(id)"
     >
       <v-container>
         <v-layout column>
-          <div>
-           <span
-             class="text-uppercase oslo__category"
-             :style="{ backgroundColor: dataTxtColor }"
-           >
-             {{dataKategori}}
-           </span>
+          <div style="position: relative; display: flex; flex-direction: column; height: 120px">
+            <div>
+              <span
+                class="text-uppercase oslo__category"
+                :style="{ backgroundColor: dataTxtColor }"
+              >
+                {{dataKategori}}
+              </span>
+            </div>
+            <span class="oslo__tema">{{dataTema}}</span>
+            <span class="oslo__see-more-text">Se mer ----------></span>
           </div>
-          <span class="oslo__tema">{{dataTema}}</span>
-          <span class="oslo__see-more-text">Se mer ----------></span>
         </v-layout>
       </v-container>
-    </v-card>
+    </div>
   </div>
 </template>
 
@@ -77,6 +76,8 @@ export default {
   background-blend-mode: multiply;
   color: white;
   cursor: pointer;
+  height: 160px;
+  width: 280px;
 }
 
 .oslo__category {
