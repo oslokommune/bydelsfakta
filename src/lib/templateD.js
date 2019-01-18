@@ -7,7 +7,7 @@ function Template(svg) {
   this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
   this.height = 0; // calculated on render. Height of the lower part
   this.height2 = 100; // height of the upper chart
-  this.width = 600;
+  this.width = 1000;
   this.paddingUpperLeft = 160; // padding left of the upper chart
   this.paddingLowerLeft = 300; // padding left of the lower chart
   this.yGutter = 130; // space between upper and lower charts
@@ -202,7 +202,7 @@ function Template(svg) {
 
   // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
-    let rows = this.lower.selectAll('g.row').data(this.data.data.sort((a, b) => a.avgRow - b.avgRow));
+    let rows = this.lower.selectAll('g.row').data(this.data.data);
     let rowsE = rows
       .enter()
       .append('g')
@@ -323,6 +323,9 @@ function Template(svg) {
 
   this.render = function(data, method = 'ratio', range) {
     if (!data) return;
+    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
+
+    this.data = data;
 
     // Move the brushes if a range was selected
     if (range) {
@@ -338,7 +341,6 @@ function Template(svg) {
       .attr('width', this.padding.left + this.width + this.padding.right);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
-    this.data = data;
     this.method = method;
     this.heading.text(data.meta.heading);
 
@@ -418,9 +420,9 @@ function Template(svg) {
     this.render(this.data, this.method);
   };
 
-  window.addEventListener('resize', () => {
-    this.resize();
-  });
+  // window.addEventListener('resize', () => {
+  //   this.resize();
+  // });
 }
 
 export default Template;
