@@ -18,9 +18,16 @@
               {{tab.label}}
             </a>
           </div>
-          <div class="tabs--right">
-            <span>Test</span>
-            <v-btn flat>Test</v-btn>
+          <div class="tabs--right" style="display: flex;">
+            <div style="position: relative">
+              <button class="button__menu" @click="showDropdown = !showDropdown">
+                <v-icon v-if="showDropdown" class="button__icon">close</v-icon>
+                <v-icon v-if="!showDropdown" class="button__icon">menu</v-icon>
+              </button>
+              <div style="width: 200px; background-color: rgb(178, 210, 216); z-index: 100; position: absolute; right: 0" v-if="showDropdown">
+                <span>Coming soon</span>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -43,6 +50,7 @@ export default {
   data() {
     return {
       active: 0,
+      showDropdown: false,
     };
   },
   props: {
@@ -126,5 +134,18 @@ export default {
       box-shadow: 0 0 0 1px #e0e0e0;
     }
   }
+}
+
+.button__menu {
+  width: 4rem;
+  height: 3.5rem;
+  border-top-right-radius: 3px;
+  background-color: rgb(178, 210, 216);
+}
+
+.button__icon {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(41, 40, 88);
 }
 </style>
