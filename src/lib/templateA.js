@@ -6,6 +6,9 @@ function Template(svg) {
 
   this.padding.top = 100;
   this.padding.left = 190;
+
+  this.padding = { top: 100, left: 190, right: 20, bottom: 30 };
+
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
   this.x = [];
@@ -207,8 +210,10 @@ function Template(svg) {
     this.height = this.rowHeight * this.data.data.length + 1;
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.height = this.data.data.length * this.rowHeight;
     this.svg
+      .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.padding.left + this.width + this.padding.right);
 

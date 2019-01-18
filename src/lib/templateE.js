@@ -207,6 +207,11 @@ function Template(svg) {
     this.selected =
       selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
 
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
     this.heading.text(data.meta.heading);
 
     this.drawAxis();

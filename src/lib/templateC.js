@@ -342,7 +342,9 @@ function Template(svg) {
     this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
     this.method = method;
 
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg
+      .transition()
       .attr('height', this.height + this.padding.top + this.padding.bottom)
       .attr('width', this.padding.left + this.width + this.padding.right);
 

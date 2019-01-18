@@ -74,7 +74,7 @@ function Template(svg) {
   };
 
   this.drawRows = function() {
-    let rows = this.canvas.selectAll('g.row').data(this.data.data.sort((a, b) => a.avgRow - b.avgRow));
+    let rows = this.canvas.selectAll('g.row').data(this.data.data);
     let rowsE = rows
       .enter()
       .append('g')
@@ -161,9 +161,6 @@ function Template(svg) {
 
   this.render = function(data, method = 'ratio') {
     if (data === undefined) return;
-    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
 
     data.data = data.data.map(bydel => {
       // swap places between first and second value and make them negative
@@ -173,6 +170,7 @@ function Template(svg) {
 
     [data.meta.series[0], data.meta.series[1]] = [data.meta.series[1], data.meta.series[0]];
 
+    this.data = data;
     this.method = method;
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);

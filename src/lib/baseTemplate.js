@@ -22,11 +22,9 @@ function Base_Template(svg) {
 
   // Common operations to be run once a template is initialized
   this.init = function() {
-    this.svg = d3
-      .select(svg)
-      .attr('height', this.height + this.height2 + this.yGutter + this.padding.top + this.padding.bottom)
-      .attr('width', this.width + this.padding.left + this.padding.right)
-      .attr('test', 'test');
+    this.svg = d3.select(svg);
+    // .attr('height', this.height + this.height2 + this.yGutter + this.padding.top + this.padding.bottom)
+    // .attr('width', this.width + this.padding.left + this.padding.right)
 
     this.svg.selectAll('*').remove();
 

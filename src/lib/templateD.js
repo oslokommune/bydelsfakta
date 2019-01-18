@@ -258,6 +258,9 @@ function Template(svg) {
       }
     });
 
+    rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);
+    rows.select('rect.divider').attr('width', this.padding.left + this.width + this.padding.right);
+
     rows
       .select('rect.bar')
       .transition()
@@ -325,6 +328,8 @@ function Template(svg) {
     if (!data) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
+
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
 
     // Move the brushes if a range was selected
     if (range) {
