@@ -1,3 +1,5 @@
+import baseUrl from '../util/config';
+
 export const page = {
   folkemengde: {},
   alder: {
@@ -11,7 +13,7 @@ export const page = {
             label: 'Antall',
             id: 'alder_segment_antall',
             template: 'd',
-            url: '/mockDataD2.json',
+            url: `${baseUrl()}/mockDataD2.json`,
             method: 'value',
           },
           {
@@ -19,15 +21,7 @@ export const page = {
             label: 'Andel',
             id: 'alder_segment_andel',
             template: 'd',
-            url: '/mockDataD2.json',
-            method: 'ratio',
-          },
-          {
-            active: false,
-            label: 'Andel',
-            id: 'alder_segment_andel',
-            template: 'd',
-            url: '/mockDataD2.json',
+            url: `${baseUrl()}/mockDataD2.json`,
             method: 'ratio',
           },
         ],
@@ -42,14 +36,14 @@ export const page = {
             label: 'Status',
             id: 'alder_distribusjon_status',
             template: 'e',
-            url: '/mockDataD2.json',
+            url: `${baseUrl()}/mockDataD2.json`,
           },
           {
             active: false,
             label: 'Historisk',
             id: 'alder_distribusjon_historisk',
             template: 'b',
-            url: '/mockDataB.json',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },

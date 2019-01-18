@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Nøkkeltall for befolkningen i Bydel Grünerløkka",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http://ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "series": [
+      { "heading": "Folkemengde", "subheading": "(totalt)" },
+      { "heading": "Befolkningstetthet", "subheading": "(personer pr km2)" },
+      { "heading": "Utvikling siste år", "subheading": false },
+      { "heading": "Utvikling siste 10 år", "subheading": false }
+    ],
+    "files": [
+      {
+        "url": "http://data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http://data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+
+  "data": [
+    {
+      "linkTo": false,
+      "geography": "Grünerløkka vest",
+      "values": [1421, 4733.4, 242, [2942, 1961, 2021, 1995, 2012, 2044, 2076, 2102, 2132, 2121]]
+    },
+    {
+      "linkTo": false,
+      "geography": "Grünerløkka øst",
+      "values": [1111, 4033.4, 442, [1342, 1961, 2021, 1995, 2012, 2044, 2076, 2102, 2132, 2221]]
+    },
+    {
+      "linkTo": "/grunerlokka/innvandrere",
+      "geography": "Bydel Grünerløkka",
+      "avgRow": true,
+      "values": [2321, 3933.4, -42, [2321, 1961, 2021, 1995, 2012, 2044, 2076, 2102, 2132, 2309]]
+    },
+    {
+      "linkTo": "/sammenligne-bydeler/innvandrere",
+      "geography": "Oslo i alt",
+      "totalRow": true,
+      "values": [321, 3233.4, 142, [1942, 1961, 2021, 1995, 2012, 2044, 2076, 2102, 2132, 2121]]
+    }
+  ]
+}

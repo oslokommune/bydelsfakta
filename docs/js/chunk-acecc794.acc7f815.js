@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-acecc794"],{"1b20":function(n,e,c){},"81e3":function(n,e,c){"use strict";var r=c("1b20"),t=c.n(r);t.a},e121:function(n,e,c){"use strict";c.r(e);var r=function(){var n=this,e=n.$createElement,c=n._self._c||e;return c("h1",[n._v("Innvandrerbefolkningen")])},t=[],a={name:"Innvandrerbefolkningen"},i=a,o=(c("81e3"),c("2877")),u=Object(o["a"])(i,r,t,!1,null,"ec7cbcd2",null);u.options.__file="Innvandrerbefolkningen.vue";e["default"]=u.exports}}]);
+//# sourceMappingURL=chunk-acecc794.acc7f815.js.map

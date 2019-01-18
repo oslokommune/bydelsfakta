@@ -14,6 +14,7 @@
             :src="osloIcon"
             alt="oslo-logo"
             class="oslo__logo"
+            @click="onClickHome"
           />
         </v-flex>
         <v-flex
@@ -29,6 +30,7 @@
                 :value="link.key"
                 color="#6ee9ff"
                 @change="onCheckboxChange"
+                dark
               />
             </v-flex>
             <v-flex
@@ -131,14 +133,17 @@ export default {
         }
       }
     },
+
     checkActiveBydel(link) {
       return this.$route.params.bydel === link && this.$route.path.includes('bydel')
         ? 'oslo__navigation-link--active'
         : 'oslo__navigation-link';
     },
+
     checkActiveSammenlign() {
       return this.$route.path.includes('sammenlign') ? 'oslo__navigation-link--active' : 'oslo__navigation-link';
     },
+
     onClickBydel(bydel) {
       const routes = this.$route.path.split('/');
       const bydelUri = bydeler.find(item => item.uri === bydel).uri;
@@ -146,18 +151,25 @@ export default {
         ? this.$router.push({ path: `/bydel/${bydelUri}/${routes[3]}` })
         : this.$router.push({ path: `/bydel/${bydelUri}` });
     },
+
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
         : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
     },
+
     getBydel(id) {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
           ? bydeler.find(bydel => bydel.uri === id).value
           : 'Velg bydel';
+    },
+
+    onClickHome() {
+      this.selected = [];
+      this.$router.push({ name: 'Home' });
     },
   },
   watch: {
@@ -172,6 +184,7 @@ export default {
         this.selectedSubpage = routes[3];
       }
     },
+
     selectedSubpage(subpage) {
       if (this.$route.path.includes('sammenlign') && subpage !== null) {
         this.$router.push({
@@ -196,6 +209,7 @@ a {
 .oslo__logo {
   margin-top: 3rem;
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 
 .oslo__navigation-drawer {
@@ -247,5 +261,9 @@ a {
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 0.7px;
+}
+
+input[type='checkbox'] {
+  border-bottom-color: white !important;
 }
 </style>
