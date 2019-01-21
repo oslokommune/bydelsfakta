@@ -26,6 +26,8 @@ function Base_Template(svg) {
     // .attr('height', this.height + this.height2 + this.yGutter + this.padding.top + this.padding.bottom)
     // .attr('width', this.width + this.padding.left + this.padding.right)
 
+    this.svg.style('font-family', 'OsloSans');
+
     this.svg.selectAll('*').remove();
 
     this.heading = this.svg

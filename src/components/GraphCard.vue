@@ -13,24 +13,28 @@
         <div class="tabs--right" style="display: flex;">
           <div style="position: relative">
             <button class="button__menu" @click="showDropdown = !showDropdown">
-              <v-icon v-if="showDropdown" class="button__icon">close</v-icon>
-              <v-icon v-if="!showDropdown" class="button__icon">menu</v-icon>
+              <v-icon v-if="showDropdown" class="button__menu-icon">close</v-icon>
+              <v-icon v-if="!showDropdown" class="button__menu-icon">menu</v-icon>
             </button>
             <div
-              style="width: 200px; background-color: rgb(178, 210, 216); z-index: 100; position: absolute; right: 0"
+              style="width: 200px; background-color: rgb(178, 210, 216); z-index: 1; position: absolute; right: 0"
               v-if="showDropdown"
             >
-              <span>Coming soon</span>
+              <div @click="savePng(settings.tabs[active].id)" role="button" class="button__item">
+                <v-icon color="rgb(41, 40, 88)" class="button__item--icon">photo_size_select_actual</v-icon>
+                <span>Save as PNG</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <graph v-if="settings.tabs[active] !== undefined" :settings="settings.tabs[active]"/>
+      <graph v-if="settings.tabs[active] !== undefined" :settings="settings.tabs[active]" ref="graph"/>
     </div>
   </div>
 </template>
 
 <script>
+import { saveSvgAsPng } from 'save-svg-as-png';
 import Graph from './Graph.vue';
 
 export default {
@@ -51,6 +55,17 @@ export default {
   methods: {
     activeTab(index) {
       this.active = index;
+    },
+    savePng(id) {
+      const file = this.$refs.graph.$refs.svg;
+      const filename = `${this.$route.params.bydel}_${id}`;
+      saveSvgAsPng(file, filename, {
+        backgroundColor: 'white',
+        width: file.width.baseVal.value + 40,
+        height: file.height.baseVal.value + 40,
+        top: -20,
+        left: -20,
+      });
     },
   },
 };
@@ -80,7 +95,7 @@ export default {
 .tabs {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(246, 246, 246);
+  background-color: $color-grey-50;
   width: 100%;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -95,7 +110,7 @@ export default {
     cursor: pointer;
     padding: 14px 24px;
     transition: background-color 0.2s;
-    background-color: rgb(246, 246, 246);
+    background-color: $color-grey-50;
     font-weight: bold;
     color: rgb(41, 40, 88);
 
@@ -125,16 +140,47 @@ export default {
   }
 }
 
-.button__menu {
-  width: 4rem;
-  height: 3.5rem;
-  border-top-right-radius: 3px;
-  background-color: rgb(178, 210, 216);
-}
+.button {
+  &__menu {
+    width: 4rem;
+    height: 3.5rem;
+    border-top-right-radius: 3px;
+    background-color: $color-light-blue-2;
+  }
 
-.button__icon {
-  font-size: 24px;
-  font-weight: bold;
-  color: rgb(41, 40, 88);
+  &__menu-icon {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(41, 40, 88);
+  }
+
+  &__items {
+    width: 200px;
+    background-color: $color-light-blue-2;
+    z-index: 1;
+    position: absolute;
+    right: 0;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    color: $color-purple;
+    padding: 0.5rem;
+    box-shadow: 0 2px 2px 0 $color-grey-200;
+
+    &:hover {
+      background-color: lighten($color-light-blue-2, 5%);
+    }
+
+    &--icon {
+      font-size: 16px;
+    }
+
+    span {
+      margin-left: 0.5rem;
+    }
+  }
 }
 </style>

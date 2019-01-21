@@ -228,7 +228,7 @@ a {
 
   background-color: $color-purple;
   transition: background-color 0.3s ease-in-out;
-  margin-left: 2rem;
+  padding-left: 2rem;
   color: rgba(white, 0.9);
 
   &--active {
@@ -239,6 +239,10 @@ a {
       color: $color-purple;
       font-weight: 500;
     }
+  }
+
+  &:hover {
+    background-color: lighten($color-purple, 10%);
   }
 
   &--label {
