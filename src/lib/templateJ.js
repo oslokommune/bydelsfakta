@@ -142,7 +142,16 @@ function Template(svg) {
       .attr('height', 16)
       .attr('width', 16)
       .attr('rx', 3)
-      .attr('fill', (d, i) => this.colors(i));
+      // Cheap trick to ensure correct colors on the legend
+      .attr('fill', (d, i) => {
+        if (i === 0) {
+          return this.colors(1);
+        } else if (i === 1) {
+          return this.colors(0);
+        } else {
+          return this.colors(i);
+        }
+      });
     groupE.append('text').attr('y', 8);
 
     group
@@ -163,7 +172,7 @@ function Template(svg) {
     data.data = data.data.map(bydel => {
       bydel.values = bydel.values.map((value, i) => {
         if (value < 0) return value;
-        return i <= 2 ? value * -1 : value;
+        return i < 2 ? value * -1 : value;
       });
       return bydel;
     });
