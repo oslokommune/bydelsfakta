@@ -28,7 +28,7 @@ const subpages = [
     value: 'innvandrerbefolkningen',
     options: {
       kategori: 'Befolkning',
-      tema: 'Innvandrer-befolkningen',
+      tema: 'Innvandrer&shy;befolkningen',
       bgImage: `${baseUrl()}/img/innvandring.png`,
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',

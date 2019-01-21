@@ -2,15 +2,15 @@
   <div class="main-container">
     <div class="main-container__cards">
       <card-image
-              v-for="item in items"
-              :key="item.value"
-              :id="item.value"
-              :kategori="item.options.kategori"
-              :tema="item.options.tema"
-              :bg-image="item.options.bgImage"
-              :bg-color="item.options.bgColor"
-              :txt-color="item.options.txtColor"
-              :click-bydel="onClickCard"
+        v-for="item in items"
+        :key="item.value"
+        :id="item.value"
+        :kategori="item.options.kategori"
+        :tema="item.options.tema"
+        :bg-image="item.options.bgImage"
+        :bg-color="item.options.bgColor"
+        :txt-color="item.options.txtColor"
+        :click-bydel="onClickCard"
       />
     </div>
     <div class="main-container__map">
@@ -38,6 +38,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

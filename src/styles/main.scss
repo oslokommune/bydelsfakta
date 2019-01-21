@@ -1,61 +1,18 @@
-@font-face {
-  font-family: 'OsloSans';
-  src: url('./fonts/OsloSans-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: 'OsloSans';
-  src: url('./fonts/OsloSans-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: 'OsloSans';
-  src: url('./fonts/OsloSans-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-}
+@import 'colors';
+@import 'fonts';
+@import 'layout';
 
 #app {
   font-family: 'OsloSans', sans-serif;
-  background-color: #f6f6f6;
+  background-color: $color-grey-50;
 }
 
 .theme--light.v-select .v-select__selections {
   color: #8d8da0;
 }
 
-.main-container {
-  display: flex;
-}
-
-.main-container__item {
-  padding: 5px;
-  margin-top: 10px;
-}
-
-.main-container__cards {
-  display: flex;
-  padding: 2rem;
-
-  flex-flow: row wrap;
-  justify-content: start;
-
-  flex-basis: auto;
+h2.section-heading {
+  color: $color-purple;
   width: 100%;
-}
-
-.main-container__map {
-  display: flex;
-  padding: 2rem;
-
-  flex-flow: row wrap;
-  justify-content: start;
-  flex: 0 0 600px;
+  padding: 1.5em 0.5em 0.5em;
 }

@@ -113,6 +113,7 @@ export default {
 <style scoped>
 .graph__container {
   position: relative;
+  padding: 1em;
 }
 .graph__dropdown {
   position: absolute;

@@ -1,21 +1,9 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      class="oslo__navigation-drawer"
-      permanent
-      app
-    >
+    <v-navigation-drawer class="oslo__navigation-drawer" permanent app>
       <v-layout column>
-        <v-flex
-          lg12
-          align-self-center
-        >
-          <img
-            :src="osloIcon"
-            alt="oslo-logo"
-            class="oslo__logo"
-            @click="onClickHome"
-          />
+        <v-flex lg12 align-self-center>
+          <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
         </v-flex>
         <v-flex
           v-for="link in links"
@@ -52,16 +40,13 @@
       </v-layout>
     </v-navigation-drawer>
     <v-content>
-      <v-layout
-        column
-        class="oslo__navigation-topbar"
-      >
+      <v-layout column class="oslo__navigation-topbar">
         <v-container fluid>
-          <v-layout row >
+          <v-layout row>
             <v-icon class="oslo__topbar">arrow_back</v-icon>
-            <h4 class="text-uppercase oslo__topbar oslo__topbar-text">
-              {{ getBydel(this.$route.params.bydel) }}
-            </h4>
+            <h4
+              class="text-uppercase oslo__topbar oslo__topbar-text"
+            >{{ getBydel(this.$route.params.bydel) }}</h4>
           </v-layout>
           <v-flex lg6 md8 sm8 xs10>
             <v-select
@@ -163,8 +148,8 @@ export default {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-          ? bydeler.find(bydel => bydel.uri === id).value
-          : 'Velg bydel';
+        ? bydeler.find(bydel => bydel.uri === id).value
+        : 'Velg bydel';
     },
 
     onClickHome() {
@@ -201,6 +186,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import './styles/colors';
+
 a {
   color: white;
   text-decoration: none;
@@ -213,35 +200,41 @@ a {
 }
 
 .oslo__navigation-drawer {
-  background-color: #292858;
+  background-color: $color-purple;
 }
 
 .oslo__navigation-link {
+  $p: &;
+
+  background-color: $color-purple;
+  transition: background-color 0.3s ease-in-out;
   margin-left: 2rem;
+  color: rgba(white, 0.9);
+
   &--active {
     padding-left: 2rem;
-    background-color: #6ee9ff;
+    background-color: $color-blue;
 
-    span {
-      color: #292858;
+    #{$p}--label {
+      color: $color-purple;
+      font-weight: 500;
     }
   }
 
   &--label {
     letter-spacing: 0.3px;
-    color: rgb(255, 255, 255);
     margin-left: 1rem;
   }
 }
 
 .oslo__navigation-topbar {
   background-color: white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.32);
+  border-bottom: 1px solid $color-grey-300;
 }
 
 .oslo__topbar {
   font-weight: bold;
-  color: rgb(41, 40, 88);
+  color: $color-purple;
   margin-bottom: 2rem;
 
   &-text {

@@ -1,0 +1,28 @@
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-container__item {
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.main-container__cards {
+  display: flex;
+  padding: 2rem;
+  flex-flow: row wrap;
+  justify-content: start;
+  min-width: 800px;
+  flex: 1 1 900px;
+}
+
+.main-container__map {
+  display: flex;
+  padding: 2rem;
+  flex-flow: row wrap;
+  justify-content: start;
+  min-width: 300px;
+  max-width: 500px;
+  flex: 0 1 400px;
+}
