@@ -6,6 +6,10 @@ html {
   background-color: $color-grey-50;
 }
 
+body {
+  min-height: 100vh;
+}
+
 #app {
   font-family: 'OsloSans', sans-serif;
 }
