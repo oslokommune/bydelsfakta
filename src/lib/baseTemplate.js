@@ -21,43 +21,46 @@ function Base_Template(svg) {
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
 
+  // Resize is called from the parent vue component
+  // every time the container size changes.
   this.resize = debounce(function() {
     this.render(this.data, this.method);
-  }, 500);
+  }, 100);
 
   // Common operations to be run once a template is initialized
   this.init = function() {
-    this.svg = d3.select(svg);
-    // .attr('height', this.height + this.height2 + this.yGutter + this.padding.top + this.padding.bottom)
-    // .attr('width', this.width + this.padding.left + this.padding.right)
+    this.svg = d3.select(svg).style('font-family', 'OsloSans');
 
-    this.svg.style('font-family', 'OsloSans');
-
+    // Clear the contents of the svg
     this.svg.selectAll('*').remove();
 
+    // Append heading element
     this.heading = this.svg
       .append('text')
       .attr('class', 'heading')
       .attr('font-size', 14)
       .attr('font-weight', 'bold')
-      .attr('y', 14)
-      .text('loading ...');
+      .attr('y', 14);
 
-    this.heading.append('title').html('tooltip text goes here');
-
+    // Append canvas element
     this.canvas = this.svg
       .append('g')
       .attr('class', 'canvas')
       .attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
+    // Append common axis elements
     this.xAxis = this.canvas.append('g').attr('class', 'axis x');
     this.yAxis = this.canvas.append('g').attr('class', 'axis y');
     this.x2Axis = this.canvas.append('g').attr('class', 'axis x2');
     this.y2Axis = this.canvas.append('g').attr('class', 'axis y2');
 
+    // The various templates have different needs for elements to be
+    // appended to the svg after initialization. This method is run
+    // once for each initialization.
     this.created();
   };
 
+  // The parent container width is needed for each render of a template.
   this.parentWidth = function() {
     return svg.parentNode.getBoundingClientRect().width;
   };
@@ -65,6 +68,7 @@ function Base_Template(svg) {
   // Placeholder for operations to be run once a child template is initialized
   this.created = function() {};
 
+  // Placeholder for the render method
   this.render = function() {};
 }
 
