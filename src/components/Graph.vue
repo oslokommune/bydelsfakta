@@ -15,6 +15,7 @@
       >{{element.label}}</option>
     </select>
     <svg class="graph__svg" ref="svg"></svg>
+    <resize-observer @notify="svg.resize(res, settings.method)"/>
   </div>
 </template>
 

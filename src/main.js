@@ -5,6 +5,10 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import VueResize from 'vue-resize';
+import 'vue-resize/dist/vue-resize.css';
+Vue.use(VueResize);
+
 import 'vuetify/src/stylus/app.styl';
 import './styles/main.scss';
 
