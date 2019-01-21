@@ -28,7 +28,11 @@
           </div>
         </div>
       </div>
-      <graph v-if="settings.tabs[active] !== undefined" :settings="settings.tabs[active]" ref="graph"/>
+      <graph
+        v-if="settings.tabs[active] !== undefined"
+        :settings="settings.tabs[active]"
+        ref="graph"
+      />
     </div>
   </div>
 </template>
@@ -58,9 +62,10 @@ export default {
     },
     savePng(id) {
       const file = this.$refs.graph.$refs.svg;
-      const filename = `${this.$route.params.bydel}_${id}`;
+      const filename = `${this.$route.params.bydel}_${id}.png`;
       saveSvgAsPng(file, filename, {
         backgroundColor: 'white',
+        encoderOptions: 1,
         width: file.width.baseVal.value + 40,
         height: file.height.baseVal.value + 40,
         top: -20,
