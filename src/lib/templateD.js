@@ -146,9 +146,8 @@ function Template(svg) {
       .attr('class', 'xAxis-title')
       .attr('font-size', 12)
       .attr('font-weight', 700)
-      .attr('text-anchor', 'middle')
       .attr('fill', util.color.purple)
-      .attr('transform', `translate(${this.paddingLowerLeft + (this.width - this.paddingLowerLeft) / 2}, ${-28})`);
+      .attr('transform', `translate(${this.paddingLowerLeft}, ${-28})`);
 
     gBrushLarge = this.upper
       .append('g')
@@ -198,6 +197,15 @@ function Template(svg) {
 
     gBrushLarge.transition().call(brushLarge.move, [0, 50].map(this.age));
     gBrushSmall.transition().call(brushSmall.move, [0, 50].map(this.age));
+  };
+
+  this.setBrushes = function() {
+    this.age.range([0, this.width - this.paddingUpperLeft]);
+    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+
+    gBrushLarge.call(brushLarge);
+    gBrushSmall.call(brushSmall);
   };
 
   // Draws/updates rows content. Triggered each render
@@ -328,8 +336,16 @@ function Template(svg) {
     if (!data) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
+    this.method = method;
+    this.heading.text(data.meta.heading);
 
+    // Resize the svg based on size of dataset
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    this.height = this.rowHeight * data.data.length;
+    this.svg
+      .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     // Move the brushes if a range was selected
     if (range) {
@@ -338,15 +354,13 @@ function Template(svg) {
       gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
     }
 
-    // Resize the svg based on size of dataset
-    this.height = this.rowHeight * data.data.length;
-    this.svg
-      .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
+    this.setBrushes();
 
-    this.method = method;
-    this.heading.text(data.meta.heading);
+    // this.age.range([0, this.width - this.paddingUpperLeft]);
+    // brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+    // brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    // gBrushLarge.call(brushLarge);
+    // gBrushSmall.call(brushSmall);
 
     // Find the larges accumulated number within the selected range
     let maxAccumulated =
@@ -405,28 +419,25 @@ function Template(svg) {
     );
 
     // Trigger re-draws of rows (bars) and lines
+    this.setBrushes();
     this.drawRows();
     this.drawLines();
   };
 
   this.init(svg);
 
-  this.resize = function() {
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+  // this.resize = function() {
+  //   this.width = this.parentWidth() - this.padding.left - this.padding.right;
 
-    this.age.range([0, this.width - this.paddingUpperLeft]);
+  //   this.age.range([0, this.width - this.paddingUpperLeft]);
 
-    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
-    gBrushLarge.call(brushLarge);
-    gBrushSmall.call(brushSmall);
+  //   brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+  //   brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+  //   gBrushLarge.call(brushLarge);
+  //   gBrushSmall.call(brushSmall);
 
-    this.render(this.data, this.method);
-  };
-
-  // window.addEventListener('resize', () => {
-  //   this.resize();
-  // });
+  //   this.render(this.data, this.method);
+  // };
 }
 
 export default Template;

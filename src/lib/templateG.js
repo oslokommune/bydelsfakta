@@ -228,8 +228,14 @@ function Template(svg) {
 
     // Update row geography, style and position
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
-    rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
-    rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+    rows
+      .select('rect.rowFill')
+      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0))
+      .attr('width', this.width);
+    rows
+      .select('rect.divider')
+      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+      .attr('width', this.width);
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => util.truncate(d.geography, this.paddingLeft));
 
@@ -277,7 +283,11 @@ function Template(svg) {
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.height = this.rowHeight * this.data.data.length;
-    this.svg.attr('height', this.padding.top + this.height + this.padding.bottom);
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
 

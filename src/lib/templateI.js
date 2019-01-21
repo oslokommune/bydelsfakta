@@ -12,7 +12,7 @@ function Template(svg) {
 
   this.padding.top = 70;
   this.padding.bottom = 70;
-  this.padding.left = 400;
+  this.padding.left = 200;
   this.padding.right = 105;
   this.width = 400;
   this.height = Math.sqrt(this.width * this.width - (this.width / 2) * (this.width / 2));
@@ -21,7 +21,7 @@ function Template(svg) {
   this.selected = null;
   this.list;
   this.matrix;
-  this.gutter = 200;
+  this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
   this.yAxis = [];
   this.max = 0;
   this.dotContainer;
@@ -45,7 +45,7 @@ function Template(svg) {
     rowE
       .append('rect')
       .attr('class', 'fill')
-      .attr('width', this.padding.left - this.gutter)
+      .attr('width', this.padding.left)
       .attr('height', this.rowHeight)
       .attr('fill', util.color.blue)
       .style('cursor', 'pointer')
@@ -361,8 +361,6 @@ function Template(svg) {
     dot.exit().remove();
     let dotE = dot.enter().append('g');
     dotE.append('circle');
-    // dotE.append('rect');
-    // dotE.append('text');
     dot = dot.merge(dotE);
 
     // Update position of the dot (group)
@@ -413,6 +411,8 @@ function Template(svg) {
 
     this.canvas.selectAll('*').remove();
 
+    this.canvas.attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
+
     this.drawGrid();
     this.lineContainer = this.canvas.append('g').attr('class', 'lineContainer');
     this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
@@ -422,11 +422,15 @@ function Template(svg) {
     if (!data) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
-
     this.selected = selected;
 
-    // this.selected =
-    //   selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+    this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
+    this.canvas.transition().attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
+
+    this.svg
+      .transition()
+      .attr('height', 500)
+      .attr('width', this.parentWidth());
 
     this.heading.text(data.meta.heading);
 
@@ -434,8 +438,6 @@ function Template(svg) {
     this.drawList();
     this.updateAxisLabels();
     this.drawLines();
-
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
   };
 
   this.init(svg);

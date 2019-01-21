@@ -149,15 +149,24 @@ function Template(svg) {
     genderGroup.exit().remove();
     genderGroup = genderGroup.merge(genderGroupE);
 
-    let genderLabel = genderGroupE.append('text').datum(d => d);
-    let genderPath = genderGroupE.append('path').datum(d => d);
+    // Create labels
+    genderGroupE
+      .append('text')
+      .datum(d => d)
+      .attr('transform', `translate(${this.width / 2}, 23)`)
+      .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
-    genderLabel
+    // Create area
+    genderGroupE.append('path').datum(d => d);
+
+    genderGroup
+      .select('text')
       .text(d => d[0].gender)
       .attr('text-anchor', (d, i) => (i === 0 ? 'end' : 'start'))
       .attr('font-size', 16)
       .attr('font-weight', 700)
       .attr('fill', util.color.purple)
+      .transition()
       .attr('transform', `translate(${this.width / 2}, 23)`)
       .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
@@ -198,6 +207,12 @@ function Template(svg) {
         axis.selectAll('.domain').remove();
       }
     });
+
+    // Reposition axis title
+    this.canvas
+      .select('text.xAxis-title')
+      .transition()
+      .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`);
   };
 
   this.render = function(data, selected) {
@@ -207,6 +222,7 @@ function Template(svg) {
     this.selected =
       selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
 
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)

@@ -247,11 +247,7 @@ function Template(svg) {
     this.heading.text(this.data.meta.heading);
     this.highlight = highlight;
 
-    // this.width =
-    // console.log(this.svg.parentNode.getBoudingClientRect());
-
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
-
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)

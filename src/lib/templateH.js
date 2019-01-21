@@ -10,8 +10,8 @@ function Template(svg) {
   this.gapY = 70;
   this.height2 = 80;
   this.height = this.height1 + this.gapY + this.height2;
-  this.width1 = 750; // width of upper and lower graphs
   this.sidebarWidth = 250;
+  this.width1 = 750; // width of upper and lower graphs
   this.width = this.width1 + this.gapX + this.sidebarWidth;
   this.x = d3.scaleTime();
   this.y = d3.scaleLinear();
@@ -362,7 +362,12 @@ function Template(svg) {
     this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
+
+    this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
+    this.width = this.width1 + this.gapX + this.sidebarWidth;
+
     this.svg
+      .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
