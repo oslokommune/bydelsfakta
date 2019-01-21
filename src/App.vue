@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <v-app>
     <v-navigation-drawer class="oslo__navigation-drawer" permanent app>
       <div style="align-self: center">
         <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
@@ -37,7 +37,7 @@
         <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
       </div>
     </v-navigation-drawer>
-    <div class="oslo__content">
+    <v-content>
       <div class="oslo__navigation-topbar">
         <div @click="backButton" role="button" style="display: flex; flex-direction: row;">
           <v-icon class="oslo__topbar">arrow_back</v-icon>
@@ -53,8 +53,8 @@
         ></v-select>
       </div>
       <router-view/>
-    </div>
-  </div>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -209,11 +209,11 @@ a {
 
 .oslo__content {
   display: flex;
-  flex: 1 1 auto;
-  max-width: 100%;
   position: relative;
   padding-left: 300px;
   flex-wrap: wrap;
+  height: 100vh;
+  max-height: 100%;
 }
 
 .oslo__logo {
