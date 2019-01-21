@@ -2,9 +2,12 @@
 @import 'fonts';
 @import 'layout';
 
+html {
+  background-color: $color-grey-50;
+}
+
 #app {
   font-family: 'OsloSans', sans-serif;
-  background-color: $color-grey-50;
 }
 
 .theme--light.v-select .v-select__selections {
