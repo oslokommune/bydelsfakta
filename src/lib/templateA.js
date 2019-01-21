@@ -4,11 +4,7 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 100;
-  this.padding.left = 190;
-
   this.padding = { top: 100, left: 190, right: 20, bottom: 30 };
-
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
   this.x = [];
@@ -36,12 +32,13 @@ function Template(svg) {
       .attr('y', this.rowHeight);
 
     // Row Geography
-    rowsE
+    let textElement = rowsE
       .append('text')
       .attr('class', 'geography')
       .attr('fill', util.color.purple)
-      .attr('y', this.rowHeight / 2 + 6)
-      .attr('x', -this.padding.left + 10);
+      .attr('y', this.rowHeight / 2 + 6);
+
+    textElement.append('a').html('test');
   };
 
   this.drawRows = function() {
@@ -59,7 +56,21 @@ function Template(svg) {
     rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0));
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-    rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
+
+    rows
+      .select('text.geography')
+      .text(d => util.truncate(d.geography, this.padding.left))
+      .attr('x', () => {
+        return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
+      })
+      .attr('text-anchor', () => {
+        return this.data.meta.series.length > 1 ? 'start' : 'end';
+      });
+
+    rows
+      .select('text.geography')
+      .append('title')
+      .html(d => d.geography);
 
     rows.attr('data-total', d => d.totalRow);
     rows.attr('data-avg', d => d.avgRow);
@@ -163,20 +174,30 @@ function Template(svg) {
       .append('text')
       .attr('class', 'colHeading')
       .attr('transform', 'translate(0, -40)');
+
     columnsE
       .append('text')
       .attr('class', 'colSubheading')
       .attr('transform', 'translate(0, -20)');
+
     columns
       .select('text.colHeading')
+      .style('display', () => {
+        return this.data.meta.series.length > 1 ? 'inherit' : 'none';
+      })
       .text(d => d.heading)
       .append('title')
       .html(d => d.heading);
+
     columns
       .select('text.colSubheading')
       .text((d, i) => util.truncate(d.subheading, this.x[i].range()))
+      .style('display', () => {
+        return this.data.meta.series.length > 1 ? 'inherit' : 'none';
+      })
       .append('title')
       .html(d => d.subheading);
+
     columns
       .select('rect')
       .attr('y', -10)
@@ -207,6 +228,9 @@ function Template(svg) {
     if (!data && !data.data) return;
     this.data = data;
     this.heading.text(this.data.meta.heading);
+
+    this.padding.top = this.data.meta.series.length > 1 ? 100 : 40;
+
     this.height = this.rowHeight * this.data.data.length + 1;
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 

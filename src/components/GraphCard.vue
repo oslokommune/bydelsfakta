@@ -89,6 +89,7 @@ export default {
   border: 1px solid $color-grey-100;
   width: 100%;
   border-radius: 3px;
+  box-shadow: 0 1.5px 3px rgba($color-grey-600, 0.95);
 }
 
 /* Style the tabs */

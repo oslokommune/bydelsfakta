@@ -132,7 +132,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_befolkning_status',
             template: 'a',
-            url: `${baseUrl()}/mockDataA.json`,
+            url: `${baseUrl()}/mockDataA2.json`,
           },
           {
             active: false,
@@ -153,7 +153,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_under16-totalt_status',
             template: 'a',
-            url: `${baseUrl()}/mockDataA.json`,
+            url: `${baseUrl()}/mockDataAinnvandrer1.json`,
           },
           {
             active: false,
@@ -172,7 +172,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_under16-en-innvandrerforelder_status',
             template: 'a',
-            url: `${baseUrl()}/mockDataA.json`,
+            url: `${baseUrl()}/mockDataAinnvandrer2.json`,
           },
           {
             active: false,
@@ -191,7 +191,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_under16-to-innvandrerforeldre_status',
             template: 'a',
-            url: `${baseUrl()}/mockDataA.json`,
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
             active: false,

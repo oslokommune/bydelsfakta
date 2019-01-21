@@ -1,4 +1,5 @@
 import d3 from '@/assets/d3';
+import debounce from '../util/debounce';
 
 function Base_Template(svg) {
   this.data = {};
@@ -19,6 +20,10 @@ function Base_Template(svg) {
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
+
+  this.resize = debounce(function() {
+    this.render(this.data, this.method);
+  }, 500);
 
   // Common operations to be run once a template is initialized
   this.init = function() {
