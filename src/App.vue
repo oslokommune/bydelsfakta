@@ -58,10 +58,12 @@
       >
         <v-container fluid>
           <v-layout row >
-            <v-icon class="oslo__topbar">arrow_back</v-icon>
-            <h4 class="text-uppercase oslo__topbar oslo__topbar-text">
-              {{ getBydel(this.$route.params.bydel) }}
-            </h4>
+            <div @click="backButton" role="button" style="display: flex; flex-direction: row;">
+              <v-icon class="oslo__topbar">arrow_back</v-icon>
+              <h4 class="text-uppercase oslo__topbar oslo__topbar-text">
+                {{ getBydel(this.$route.params.bydel) }}
+              </h4>
+            </div>
           </v-layout>
           <v-flex lg6 md8 sm8 xs10>
             <v-select
@@ -125,7 +127,12 @@ export default {
       await this.$store.dispatch('SET_SELECTED_BYDEL', {
         selectedBydel: [...newValue],
       });
-      if (this.selectedBydel.length > 1) {
+      if (this.selectedBydel.length === 0) {
+        this.$router.push({ name: 'Home' });
+      } else if (this.selectedBydel.length === 1) {
+        const bydel = bydeler.find(item => item.key === this.selectedBydel[0]).uri;
+        this.$router.push({ path: `/bydel/${bydel}` });
+      } else if (this.selectedBydel.length > 1) {
         if (routes.length > 3) {
           this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` });
         } else {
@@ -170,6 +177,19 @@ export default {
     onClickHome() {
       this.selected = [];
       this.$router.push({ name: 'Home' });
+    },
+
+    backButton() {
+      const route = this.$route;
+      if (this.selectedSubpage === null) {
+        this.selected = [];
+        this.$router.push({ path: '/' });
+      } else if (route.path.includes('bydel')) {
+        this.$router.push({ path: `/bydel/${route.params.bydel}` });
+      } else if (route.path.includes('sammenlign')) {
+        this.$router.push({ path: `/sammenlign/${route.params.bydel}` });
+      }
+      this.selectedSubpage = null;
     },
   },
   watch: {

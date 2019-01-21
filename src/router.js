@@ -4,19 +4,19 @@ import Graph from './components/Graph.vue';
 import page from './config/pages';
 import baseUrl from './util/config';
 
-const Alder = () => import('./views/subviews/Alder.vue');
-const Boligpriser = () => import('./views/subviews/Boligpriser.vue');
-const Bydel = () => import('./views/Bydel.vue');
-const Bygningstyper = () => import('./views/subviews/Bygningstyper.vue');
-const Eierform = () => import('./views/subviews/Eierform.vue');
-const Flytting = () => import('./views/subviews/Flytting.vue');
-const Folkemengde = () => import('./views/subviews/Folkemengde.vue');
-const Home = () => import('./views/Home.vue');
-const Husholdninger = () => import('./views/subviews/Husholdninger.vue');
-const Innvandrerbefolkningen = () => import('./views/subviews/Innvandrerbefolkningen.vue');
-const Kommunaleboliger = () => import('./views/subviews/Kommunaleboliger.vue');
-const Levekaar = () => import('./views/subviews/Levekaar.vue');
-const Trangboddhet = () => import('./views/subviews/Trangboddhet.vue');
+import Home from './views/Home.vue';
+import Bydel from './views/Bydel.vue';
+import Alder from './views/subviews/Alder.vue';
+import Boligpriser from './views/subviews/Boligpriser.vue';
+import Bygningstyper from './views/subviews/Bygningstyper.vue';
+import Eierform from './views/subviews/Eierform.vue';
+import Flytting from './views/subviews/Flytting.vue';
+import Folkemengde from './views/subviews/Folkemengde.vue';
+import Husholdninger from './views/subviews/Husholdninger.vue';
+import Innvandrerbefolkningen from './views/subviews/Innvandrerbefolkningen.vue';
+import Kommunaleboliger from './views/subviews/Kommunaleboliger.vue';
+import Levekaar from './views/subviews/Levekaar.vue';
+import Trangboddhet from './views/subviews/Trangboddhet.vue';
 
 Vue.use(Router);
 
