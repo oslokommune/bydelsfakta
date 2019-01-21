@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="card-container"
-    :class="{ large: settings.size === 'large' }"
-    v-click-outside="closeMenu"
-  >
+  <div class="card-container" :class="{ large: settings.size === 'large' }">
     <div class="card">
       <div class="tabs">
         <div>
@@ -14,7 +10,12 @@
             :class=" active === index ? 'active' : ''"
           >{{tab.label}}</a>
         </div>
-        <div class="tabs--right" style="display: flex;" @keydown.escape="closeMenu()">
+        <div
+          class="tabs--right"
+          style="display: flex;"
+          @keydown.escape="closeMenu()"
+          v-click-outside="closeMenu"
+        >
           <div style="position: relative">
             <button class="button__menu" @click="showDropdown = !showDropdown">
               <v-icon v-if="showDropdown" class="button__menu-icon">close</v-icon>
