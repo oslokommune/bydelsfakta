@@ -163,10 +163,12 @@ function Template(svg) {
         'transform',
         `translate(${this.x(2) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr('d', d =>
-        d.values[2] > 0
-          ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
-          : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
+      .attr(
+        'd',
+        d =>
+          d.values[2] > 0
+            ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
+            : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
       );
   };
 
@@ -202,10 +204,12 @@ function Template(svg) {
         'transform',
         `translate(${this.x(3) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr('d', d =>
-        d.values[3][d.values[3].length - 1] - d.values[3][0] > 0
-          ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
-          : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
+      .attr(
+        'd',
+        d =>
+          d.values[3][d.values[3].length - 1] - d.values[3][0] > 0
+            ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
+            : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
       );
 
     rows

@@ -1,16 +1,17 @@
 import '@babel/polyfill';
 import Vue from 'vue';
 import './plugins/vuetify';
+import VueResize from 'vue-resize';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import VueResize from 'vue-resize';
 import 'vue-resize/dist/vue-resize.css';
-Vue.use(VueResize);
 
 import 'vuetify/src/stylus/app.styl';
 import './styles/main.scss';
+
+Vue.use(VueResize);
 
 Vue.config.productionTip = false;
 Vue.config.devtools = true;

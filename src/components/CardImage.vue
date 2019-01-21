@@ -5,14 +5,14 @@
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"
       @click="clickBydel(id)"
     >
-      <v-layout column class="oslo__card-image__content">
-        <span
-          class="text-uppercase oslo__category"
-          :style="{ backgroundColor: dataTxtColor }"
-        >{{dataKategori}}</span>
-        <span class="oslo__tema" v-html="dataTema"></span>
-        <span class="oslo__see-more-text">Se mer ----------></span>
-      </v-layout>
+      <span
+        class="text-uppercase oslo__category"
+        :style="{ backgroundColor: dataTxtColor }"
+      >
+        {{dataKategori}}
+      </span>
+      <span class="oslo__tema" v-html="dataTema"></span>
+      <span class="oslo__see-more-text">Se mer ----------></span>
     </div>
   </div>
 </template>

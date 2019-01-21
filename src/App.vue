@@ -1,68 +1,60 @@
 <template>
-  <v-app>
+  <div id="app">
     <v-navigation-drawer class="oslo__navigation-drawer" permanent app>
-      <v-layout column>
-        <v-flex lg12 align-self-center>
-          <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
-        </v-flex>
-        <v-flex
-          v-for="link in links"
-          :key="link.key"
-          :label="link.value"
-          :class="checkActiveBydel(link.uri)"
-        >
-          <v-layout row style="height: 40px">
-            <v-flex xs1>
-              <v-checkbox
-                v-model="selected"
-                :value="link.key"
-                color="#6ee9ff"
-                @change="onCheckboxChange"
-                dark
-              />
-            </v-flex>
-            <v-flex
-              xs11
-              style="margin-top: 0.7rem; cursor: pointer;"
-              @click="onClickBydel(link.uri)"
-            >
-              <span class="oslo__navigation-link--label">{{link.value}}</span>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex
-          :class="checkActiveSammenlign()"
-          style="margin-top: 0.7rem; cursor: pointer;"
-          @click="onClickSammenlign"
-        >
-          <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
-        </v-flex>
-      </v-layout>
+      <div style="align-self: center">
+        <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+      </div>
+      <div
+        v-for="link in links"
+        :key="link.key"
+        :label="link.value"
+        :class="checkActiveBydel(link.uri)"
+      >
+        <div class="oslo__navigation-drawer__checkbox">
+          <div>
+            <v-checkbox
+              v-model="selected"
+              :value="link.key"
+              color="#6ee9ff"
+              @change="onCheckboxChange"
+              dark
+            />
+          </div>
+          <div
+            style="padding-top: 0.7rem; cursor: pointer; width: 100%"
+            @click="onClickBydel(link.uri)"
+          >
+            <span class="oslo__navigation-link--label">{{link.value}}</span>
+          </div>
+        </div>
+      </div>
+      <div
+        :class="checkActiveSammenlign()"
+        style="margin-top: 0.7rem; cursor: pointer;"
+        @click="onClickSammenlign"
+        role="button"
+      >
+        <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
+      </div>
     </v-navigation-drawer>
-    <v-content>
-      <v-layout column class="oslo__navigation-topbar">
-        <v-container fluid>
-          <v-layout row>
-            <div @click="backButton" role="button" style="display: flex; flex-direction: row;">
-              <v-icon class="oslo__topbar">arrow_back</v-icon>
-              <h4
-                class="text-uppercase oslo__topbar oslo__topbar-text"
-              >{{ getBydel(this.$route.params.bydel) }}</h4>
-            </div>
-          </v-layout>
-          <v-flex lg6 md8 sm8 xs10>
-            <v-select
-              v-model="selectedSubpage"
-              :items="items"
-              label="VELG TEMA"
-              class="v-select__selection--uppercase"
-            ></v-select>
-          </v-flex>
-        </v-container>
-      </v-layout>
+    <div class="oslo__content">
+      <div class="oslo__navigation-topbar">
+        <div @click="backButton" role="button" style="display: flex; flex-direction: row;">
+          <v-icon class="oslo__topbar">arrow_back</v-icon>
+          <h4
+            class="text-uppercase oslo__topbar oslo__topbar-text"
+          >{{ getBydel(this.$route.params.bydel) }}</h4>
+        </div>
+        <v-select
+          v-model="selectedSubpage"
+          :items="items"
+          label="VELG TEMA"
+          class="v-select__selection--uppercase"
+        ></v-select>
+      </div>
       <router-view/>
-    </v-content>
-  </v-app>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -78,6 +70,7 @@ export default {
       return this.$store.state.selectedBydel;
     },
   },
+
   data() {
     return {
       links: bydeler,
@@ -88,6 +81,7 @@ export default {
       bydel: this.getBydel(this.$route.params.bydel),
     };
   },
+
   async mounted() {
     const routes = this.$route.path.split('/');
     const path = this.$route.path;
@@ -155,8 +149,8 @@ export default {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-        ? bydeler.find(bydel => bydel.uri === id).value
-        : 'Velg bydel';
+          ? bydeler.find(bydel => bydel.uri === id).value
+          : 'Velg bydel';
     },
 
     onClickHome() {
@@ -213,6 +207,15 @@ a {
   text-decoration: none;
 }
 
+.oslo__content {
+  display: flex;
+  flex: 1 1 auto;
+  max-width: 100%;
+  position: relative;
+  padding-left: 300px;
+  flex-wrap: wrap;
+}
+
 .oslo__logo {
   margin-top: 3rem;
   margin-bottom: 2rem;
@@ -220,7 +223,15 @@ a {
 }
 
 .oslo__navigation-drawer {
+  display: flex;
+  flex-direction: column;
   background-color: $color-purple;
+
+  &__checkbox {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+  }
 }
 
 .oslo__navigation-link {
@@ -254,6 +265,10 @@ a {
 .oslo__navigation-topbar {
   background-color: white;
   border-bottom: 1px solid $color-grey-300;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  width: 100%;
 }
 
 .oslo__topbar {
