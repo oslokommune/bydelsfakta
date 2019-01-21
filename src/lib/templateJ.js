@@ -94,7 +94,7 @@ function Template(svg) {
 
     let seriesData = d3
       .stack()
-      .keys([0, 1, 2, 3])
+      .keys([1, 0, 2, 3])
       .offset(d3.stackOffsetDiverging)(this.data.data.map(bydel => bydel.values));
 
     let min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;
@@ -119,8 +119,6 @@ function Template(svg) {
     bar = bar.merge(barE);
 
     bar
-      .attr('x', this.x(0))
-      .attr('width', 0)
       .attr('y', (d, i) => i * this.rowHeight + (this.rowHeight - this.barHeight) / 2)
       .attr('height', this.barHeight)
       .transition()
@@ -159,35 +157,39 @@ function Template(svg) {
     );
   };
 
-  this.render = function(data, method = 'ratio') {
+  this.render = function(data) {
     if (data === undefined) return;
 
     data.data = data.data.map(bydel => {
-      // swap places between first and second value and make them negative
-      [bydel.values[0], bydel.values[1]] = [bydel.values[1] * -1, bydel.values[0] * -1];
+      bydel.values = bydel.values.map((value, i) => {
+        if (value < 0) return value;
+        return i <= 2 ? value * -1 : value;
+      });
       return bydel;
     });
 
-    [data.meta.series[0], data.meta.series[1]] = [data.meta.series[1], data.meta.series[0]];
-
     this.data = data;
-    this.method = method;
+
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.height = this.rowHeight * this.data.data.length;
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg
+      .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawRows();
+
     this.drawLegend();
 
     this.canvas
       .select('line.zero')
-      .attr('x1', this.x(0))
-      .attr('x2', this.x(0))
       .attr('y1', 0)
-      .attr('y2', this.height);
+      .attr('y2', this.height)
+      .transition()
+      .attr('x1', this.x(0))
+      .attr('x2', this.x(0));
 
     this.canvas.select('text.label-min').attr('x', this.x(0) - 15);
     this.canvas.select('text.label-max').attr('x', this.x(0) + 15);
