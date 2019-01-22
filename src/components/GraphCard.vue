@@ -3,12 +3,14 @@
     <div class="card">
       <div class="tabs">
         <div>
-          <a
+          <button
             v-for="(tab, index) in settings.tabs"
             :key="index"
             @click="activeTab(index)"
-            :class=" active === index ? 'active' : ''"
-          >{{tab.label}}</a>
+            :class="{ active: active === index }"
+            class="tabs__button"
+            aria-label="tab-button"
+          >{{tab.label}}</button>
         </div>
         <div
           class="tabs--right"
@@ -17,7 +19,11 @@
           v-click-outside="closeMenu"
         >
           <div style="position: relative">
-            <button class="button__menu" @click="showDropdown = !showDropdown">
+            <button
+              class="button__menu"
+              @click="showDropdown = !showDropdown"
+              aria-label="context-menu-button"
+            >
               <v-icon v-if="showDropdown" class="button__menu-icon">close</v-icon>
               <v-icon v-if="!showDropdown" class="button__menu-icon">menu</v-icon>
             </button>
@@ -25,10 +31,16 @@
               style="width: 200px; background-color: rgb(178, 210, 216); z-index: 1; position: absolute; right: 0"
               v-if="showDropdown"
             >
-              <div @click="savePng(settings.tabs[active].id)" role="button" class="button__item">
+              <a
+                @click="savePng(settings.tabs[active].id)"
+                role="button"
+                class="button__item"
+                tabIndex="0"
+                aria-label="lagre graf som png"
+              >
                 <v-icon color="rgb(41, 40, 88)" class="button__item--icon">photo_size_select_actual</v-icon>
-                <span>Save as PNG</span>
-              </div>
+                <span>Last ned som PNG</span>
+              </a>
             </div>
           </div>
         </div>
@@ -100,7 +112,6 @@ export default {
 }
 
 .card {
-  overflow-x: hidden;
   background: white;
   border: 1px solid $color-grey-100;
   width: 100%;
@@ -122,7 +133,7 @@ export default {
     border-top-left-radius: 3px;
   }
 
-  a {
+  &__button {
     float: left;
     cursor: pointer;
     padding: 14px 24px;
@@ -140,9 +151,9 @@ export default {
       &:after {
         content: '';
         position: absolute;
-        bottom: -2px;
+        bottom: -1px;
         left: 0;
-        right: 0px;
+        right: 0;
         height: 2px;
         background-color: white;
       }
