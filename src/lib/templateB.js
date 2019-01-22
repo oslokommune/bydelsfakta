@@ -15,14 +15,14 @@ function Template(svg) {
   this.padding.top = 50;
   this.padding.left = 60;
   this.padding.right = 220;
-  this.height = 300;
-  this.width = 700;
 
   const strokeWidth = this.strokeWidth;
   const strokeWidthHighlight = this.strokeWidthHighlight;
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
+
+    this.height = d3.max([300, this.width * 0.5]);
 
     this.svg
       .transition()
