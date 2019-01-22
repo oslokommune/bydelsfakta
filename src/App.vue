@@ -20,7 +20,11 @@
           @change="onChangeCheckbox"
         />
         <label :for="link.key"></label>
-        <span class="oslo__navigation-link--label">{{link.value}}</span>
+        <span
+          class="oslo__navigation-link--label"
+        >
+          {{link.value}}
+        </span>
       </div>
       <div
         :class="checkActiveSammenlign()"
