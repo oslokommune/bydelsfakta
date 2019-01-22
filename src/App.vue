@@ -9,7 +9,6 @@
         :key="link.key"
         :label="link.value"
         :class="checkActiveBydel(link.uri)"
-        class="oslo__navigation-drawer__checkbox"
         style="cursor: pointer; width: 100%"
         @click="onClickBydel(link.uri)"
       >
@@ -17,8 +16,10 @@
           type="checkbox"
           v-model="selected"
           :value="link.key"
+          :id="link.key"
           @change="onChangeCheckbox"
         />
+        <label :for="link.key"></label>
         <span class="oslo__navigation-link--label">{{link.value}}</span>
       </div>
       <div
@@ -195,47 +196,45 @@ a {
 
 .oslo__content {
   display: flex;
-  position: relative;
-  padding-left: 300px;
   flex-wrap: wrap;
   height: 100vh;
   max-height: 100%;
+  padding-left: 300px;
+  position: relative;
 }
 
 .oslo__logo {
+  cursor: pointer;
   margin-top: 3rem;
   margin-bottom: 2rem;
-  cursor: pointer;
 }
 
 .oslo__navigation-drawer {
+  background-color: $color-purple;
   display: flex;
   flex-direction: column;
-  background-color: $color-purple;
-
-  &__checkbox {
-    height: 40px;
-  }
 }
 
 .oslo__navigation-link {
   $p: &;
 
   background-color: $color-purple;
-  transition: background-color 0.3s ease-in-out;
-  padding-left: 2rem;
-  padding-top: 10px;
   color: rgba(white, 0.9);
+  transition: background-color 0.3s ease-in-out;
 
   &--active {
-    padding-left: 2rem;
-    padding-top: 10px;
     background-color: $color-blue;
-    transition: background-color 0.3s ease-in-out;
 
     #{$p}--label {
       color: $color-purple;
       font-weight: 500;
+    }
+
+    input[type='checkbox']:checked + label {
+      background-color: $color-blue;
+      &::before {
+        background-color: $color-blue;
+      }
     }
   }
 
@@ -259,14 +258,14 @@ a {
 }
 
 .oslo__topbar {
-  font-weight: bold;
   color: $color-purple;
+  font-weight: bold;
   margin-bottom: 2rem;
 
   &-text {
     letter-spacing: 0.8px;
-    margin-top: 0.3rem;
     margin-left: 1rem;
+    margin-top: 0.3rem;
   }
 }
 
@@ -276,9 +275,68 @@ a {
 }
 
 .v-select__selection--uppercase {
-  text-transform: uppercase;
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+input[type='checkbox'] {
+  display: none;
+
+  & + label {
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    opacity: 0.5;
+    position: relative;
+    vertical-align: middle;
+    width: 40px;
+
+    // unchecked border
+    &::before {
+      -moz-border-radius: 1px;
+      -webkit-border-radius: 1px;
+      border: 1px solid white;
+      border-radius: 1px;
+      content: '';
+      height: 18px;
+      left: 10px;
+      opacity: 0.2;
+      position: absolute;
+      top: 10px;
+      width: 18px;
+    }
+  }
+
+  &:checked + label {
+    opacity: 100;
+    position: relative;
+
+    // checked inside border
+    &::after {
+      background-color: $color-blue;
+      border-radius: 1px;
+      content: '';
+      height: 10px;
+      left: 14px;
+      position: absolute;
+      top: 14px;
+      width: 10px;
+    }
+
+    // checked border
+    &::before {
+      background-color: $color-purple;
+      border: 1px solid $color-blue;
+      border-radius: 1px;
+      content: '';
+      height: 18px;
+      left: 10px;
+      position: absolute;
+      top: 10px;
+      width: 18px;
+    }
+  }
 }
 </style>
