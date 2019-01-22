@@ -1,4 +1,5 @@
-import { Base_Template, util } from './baseTemplate';
+import { Base_Template } from './baseTemplate';
+import { util } from './template-utils';
 import d3 from '@/assets/d3';
 
 const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
