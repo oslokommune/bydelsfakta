@@ -1,3 +1,9 @@
+/**
+ * Template for tabular chart with bar charts for population,
+ * population density and population change last year plus
+ * sparklines for population change last 10 years.
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';

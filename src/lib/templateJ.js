@@ -1,3 +1,8 @@
+/**
+ * Template for stacked bar charts with positive and negative values
+ * aligned at 0.
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';

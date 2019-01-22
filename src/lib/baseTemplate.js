@@ -1,9 +1,26 @@
+/**
+ * Each graph template inherits properties and methods from this Base Template.
+ * Once a template object is created the init() is called which clears the
+ * provided SVG node and creates new DOM elements (mainly empty 'g's) inside of it.
+ * At the end of init() the created() method is called. The template in question
+ * may have needs of its own to create DOM elements inside the SVG at creation for
+ * its own convenience.
+ *
+ * Each template defines its own render() method which is called each time
+ * new data is passed down from Vue, on resize (see below) or the template
+ * itself requests a new render (typically on user interaction)
+ *
+ * Each template shares a lot of code to be run on each render() and thus the
+ * commonRender() method exists in this Base Template.
+ *
+ * Vue listens for changes in size for the SVG's container. The resize()
+ * method uses debounce to prevent the render() method to be 'smashed'.
+ *
+ */
+
 import d3 from '@/assets/d3';
 import debounce from '../util/debounce';
 
-/**
- * @param  {Node} svg - svg element to be initialized
- */
 function Base_Template(svg) {
   this.data = {};
   this.height = 0;

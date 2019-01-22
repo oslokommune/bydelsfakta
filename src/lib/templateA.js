@@ -1,3 +1,7 @@
+/**
+ * Template for bar chart which supports both single or multiple series.
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';

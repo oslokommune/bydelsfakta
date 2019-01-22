@@ -1,3 +1,13 @@
+/**
+ * Template for multi series multi-line chart.
+ *
+ * A details box appears when rendered with highlight parameter
+ * defined in the options object.
+ *
+ * Change tabs by rendering with the series parameter defined
+ * in the options object.
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';

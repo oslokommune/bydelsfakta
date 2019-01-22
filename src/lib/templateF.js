@@ -1,3 +1,8 @@
+/**
+ * Template for dot plot for mean age and box plot for median age
+ * (the dots are rendered as lines)
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';

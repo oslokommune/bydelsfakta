@@ -1,3 +1,12 @@
+/**
+ * Template for composite chart with line chart for population
+ * histogram for population change per year and a sidebar
+ * displaying various metrics for the selected year.
+ *
+ * Render the chart using the highlight parameter in the options
+ * object to change the focused year.
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';

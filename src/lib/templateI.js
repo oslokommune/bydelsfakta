@@ -1,3 +1,11 @@
+/**
+ * Template for ternary plot (triangular 2d-diagram with three axis/dimensions
+ * which sum is 1)
+ *
+ * Highlight a specific series by adding the selected parameter in the
+ * options object.
+ */
+
 import { Base_Template } from './baseTemplate';
 import { util } from './template-utils';
 import d3 from '@/assets/d3';
