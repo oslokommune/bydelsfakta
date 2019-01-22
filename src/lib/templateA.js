@@ -13,23 +13,82 @@ function Template(svg) {
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
   this.x = [];
+  this.filteredData;
 
   const formatPercent = d3.format('.0%');
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    this.padding.top = this.data.meta.series.length > 1 ? 100 : 40;
+    this.filteredData = JSON.parse(JSON.stringify(this.data));
+
+    if (this.selected > -1) {
+      this.filteredData.meta.series = [this.data.meta.series[this.selected]];
+      this.filteredData.data = this.filteredData.data.map(bydel => {
+        bydel.values = [bydel.values[this.selected]];
+        return bydel;
+      });
+    }
+
+    this.padding.top = this.data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
 
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
+    this.canvas
+      .select('g.close')
+      .style('display', () => {
+        return this.selected > -1 ? 'block' : 'none';
+      })
+      .attr('transform', `translate(${this.width - 30}, -60)`);
+
     this.setScales();
     this.drawAxis();
     this.drawColumns();
     this.drawRows();
+  };
+
+  this.created = function() {
+    this.canvas.append('g').attr('class', 'columns');
+    this.canvas.append('g').attr('class', 'rows');
+
+    let close = this.canvas
+      .append('g')
+      .attr('class', 'close')
+      .style('display', 'none')
+      .on('click', () => {
+        this.render(this.data);
+      });
+
+    close
+      .append('rect')
+      .attr('width', 30)
+      .attr('height', 30)
+      .attr('fill', util.color.red)
+      .style('cursor', 'pointer')
+      .attr('opacity', 0.7)
+      .on('mouseenter', function() {
+        d3.select(this)
+          .transition()
+          .attr('opacity', 1);
+      })
+      .on('mouseleave', function() {
+        d3.select(this)
+          .transition()
+          .attr('opacity', 0.7);
+      });
+
+    close
+      .append('text')
+      .attr('fill', util.color.purple)
+      .style('pointer-events', 'none')
+      .text('x')
+      .attr('font-weight', 700)
+      .attr('font-size', 20)
+      .attr('text-anchor', 'middle')
+      .attr('transform', 'translate(15, 20)');
   };
 
   this.initRowElements = function(rowsE) {
@@ -63,7 +122,10 @@ function Template(svg) {
   };
 
   this.drawRows = function() {
-    let rows = this.canvas.selectAll('g.row').data(this.data.data);
+    let rows = this.canvas
+      .select('g.rows')
+      .selectAll('g.row')
+      .data(this.filteredData.data);
     let rowsE = rows
       .enter()
       .append('g')
@@ -117,6 +179,9 @@ function Template(svg) {
       })
       .attr('fill', (d, i, j) => {
         return j[0].parentNode.getAttribute('data-avg') ? util.color.yellow : util.color.purple;
+      })
+      .attr('opacity', (d, i) => {
+        return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
       });
 
     bars
@@ -126,16 +191,16 @@ function Template(svg) {
   };
 
   this.setScales = function() {
-    let maxValues = this.data.meta.series.map((row, i) => {
-      return d3.max(this.data.data.map(d => d.values[i]));
+    let maxValues = this.filteredData.meta.series.map((row, i) => {
+      return d3.max(this.filteredData.data.map(d => d.values[i]));
     });
 
     this.x2 = d3
       .scaleLinear()
-      .range([0, this.width - (this.gutter * this.data.meta.series.length - 1)])
+      .range([0, this.width - (this.gutter * this.filteredData.meta.series.length - 1)])
       .domain([0, d3.sum(maxValues)]);
 
-    this.x = this.data.meta.series.map((series, index) => {
+    this.x = this.filteredData.meta.series.map((series, index) => {
       const SCALE = d3.scaleLinear();
       let startPos = 0;
       for (let j = 0; j < index; j++) {
@@ -148,7 +213,7 @@ function Template(svg) {
       return SCALE;
     });
 
-    this.x2.domain(this.data.meta.series.map((d, i) => i)).range([0, this.width]);
+    this.x2.domain(this.filteredData.meta.series.map((d, i) => i)).range([0, this.width]);
   };
 
   this.drawAxis = function() {
@@ -163,6 +228,9 @@ function Template(svg) {
     xAxis.each((d, i, j) => {
       d3.select(j[i])
         .attr('transform', `translate(${0}, ${this.height + 10})`)
+        .attr('opacity', () => {
+          return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
+        })
         .transition()
         .call(
           d3
@@ -174,7 +242,10 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
-    let columns = this.canvas.selectAll('g.column').data(this.data.meta.series);
+    let columns = this.canvas
+      .select('g.columns')
+      .selectAll('g.column')
+      .data(this.filteredData.meta.series);
     let columnsE = columns
       .enter()
       .append('g')
@@ -200,10 +271,36 @@ function Template(svg) {
       .attr('class', 'colSubheading')
       .attr('transform', 'translate(0, -20)');
 
+    columnsE.append('rect').attr('class', 'clickTrigger');
+
+    columns
+      .select('rect.clickTrigger')
+      .style('cursor', () => {
+        if (this.data.meta.series.length > 1) return 'pointer';
+      })
+      .attr('width', (d, i) => {
+        return this.x[i].range()[1] - this.x[i].range()[0] + this.gutter;
+      })
+      .attr('height', this.height + 80)
+      .attr('transform', `translate(0, -60)`)
+      .attr('fill', 'black')
+      .attr('opacity', 0)
+      .on('mouseover', (d, i) => {
+        this.render(this.data, { highlight: i, selected: this.selected });
+      })
+      .on('mouseleave', (d, i) => {
+        this.render(this.data, { highlight: -1, selected: this.selected });
+      })
+      .on('click', (d, i) => {
+        if (this.data.meta.series.length === 1) return;
+        let target = this.selected > -1 ? -1 : i;
+        this.render(this.data, { selected: target });
+      });
+
     columns
       .select('text.colHeading')
-      .style('display', () => {
-        return this.data.meta.series.length > 1 ? 'inherit' : 'none';
+      .style('display', (d, i) => {
+        return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
       })
       .text(d => d.heading)
       .append('title')
@@ -212,11 +309,19 @@ function Template(svg) {
     columns
       .select('text.colSubheading')
       .text((d, i) => util.truncate(d.subheading, this.x[i].range()))
-      .style('display', () => {
-        return this.data.meta.series.length > 1 ? 'inherit' : 'none';
+      .style('display', (d, i) => {
+        return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
       })
       .append('title')
       .html(d => d.subheading);
+
+    columns.select('text.colHeading').attr('opacity', (d, i) => {
+      return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
+    });
+
+    columns.select('text.colSubheading').attr('opacity', (d, i) => {
+      return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
+    });
 
     columns
       .select('rect')
@@ -224,8 +329,8 @@ function Template(svg) {
       .attr('height', this.height + 10)
       .transition()
       .attr('width', (d, i) => {
-        if (this.data.data.filter(d => d.totalRow).length) {
-          return this.x[0](this.data.data.filter(d => d.totalRow)[0].values[i]);
+        if (this.filteredData.data.filter(d => d.totalRow).length) {
+          return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i]);
         } else {
           return 0;
         }
@@ -234,13 +339,13 @@ function Template(svg) {
     columns
       .select('rect.arrow')
       .attr('y', () => {
-        let indexOfTotalRow = this.data.data.findIndex(d => d.totalRow);
+        let indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
         return indexOfTotalRow * this.rowHeight;
       })
       .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
       .transition()
       .attr('x', (d, i) => {
-        return this.x[0](this.data.data.filter(d => d.totalRow)[0].values[i]);
+        return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i]);
       });
   };
 

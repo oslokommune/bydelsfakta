@@ -23,8 +23,6 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    let t0 = performance.now();
-
     // Find quartiles, mean and median for each geography
     data.data = data.data.map(bydel => {
       if (bydel.low) return bydel;
@@ -79,9 +77,6 @@ function Template(svg) {
       .attr('x', this.width1 / 2);
 
     this.drawRows();
-
-    let t1 = performance.now();
-    console.log(`rendering template F took ${t1 - t0} milliseconds`);
   };
 
   this.created = function() {
