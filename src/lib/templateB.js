@@ -241,14 +241,8 @@ function Template(svg) {
   };
 
   this.render = function(data, options = {}) {
-    if (!data || !data.data) return;
+    if (!this.commonRender(data, options)) return;
 
-    this.data = data;
-    this.method = options.method || 'value';
-    this.highlight = options.highlight || -1;
-    this.heading.text(this.data.meta.heading);
-
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)

@@ -167,9 +167,9 @@ function Template(svg) {
   };
 
   this.render = function(data) {
-    if (data === undefined) return;
+    if (!this.commonRender(data)) return;
 
-    data.data = data.data.map(bydel => {
+    this.data.data = data.data.map(bydel => {
       bydel.values = bydel.values.map((value, i) => {
         if (value < 0) return value;
         return i < 2 ? value * -1 : value;
@@ -177,19 +177,12 @@ function Template(svg) {
       return bydel;
     });
 
-    this.data = data;
-
-    this.heading.text(this.data.meta.heading);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.height = this.rowHeight * this.data.data.length;
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawRows();
-
     this.drawLegend();
 
     this.canvas

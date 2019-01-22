@@ -356,14 +356,13 @@ function Template(svg) {
   };
 
   this.render = function(data, options = {}) {
-    if (data === undefined) return;
-    this.data = data;
+    if (!this.commonRender(data, options)) return;
+
     this.highlight = options.highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
     this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
-    this.heading.text(this.data.meta.heading);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
     this.width = this.width1 + this.gapX + this.sidebarWidth;
+    this.height = this.height1 + this.gapY + this.height2;
 
     this.svg
       .transition()

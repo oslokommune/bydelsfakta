@@ -178,12 +178,13 @@ function Template(svg) {
 
   // this.render = function(data, method = 'ratio') {
   this.render = function(data, options = {}) {
-    if (data === undefined || data.data === undefined) return;
-    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
+    if (!this.commonRender(data, options)) return;
+
+    let t0 = performance.now();
 
     // Find quartiles, mean and median for each geography
     data.data = data.data.map(bydel => {
+      if (bydel.low) return bydel;
       let ages = [];
       bydel.values.forEach((val, age) => {
         for (let i = 0; i < val.value; i++) {
@@ -198,20 +199,12 @@ function Template(svg) {
       return bydel;
     });
 
-    this.data = data;
-    this.method = options.method || 'ratio';
-    this.heading.text(this.data.meta.heading);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.height = this.rowHeight * this.data.data.length;
-
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.width1 = (this.width - this.gapX) / 2;
-    this.width2 = (this.width - this.gapX) / 2;
-
     this.svg
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
+    this.width1 = (this.width - this.gapX) / 2;
+    this.width2 = (this.width - this.gapX) / 2;
     this.x2.range([0, this.width2]).domain([0, 70]);
     this.x2Axis
       .transition()
@@ -243,6 +236,9 @@ function Template(svg) {
       .attr('x', this.width1 / 2);
 
     this.drawRows();
+
+    let t1 = performance.now();
+    console.log(`rendering template F took ${t1 - t0} milliseconds`);
   };
 
   this.init(svg);

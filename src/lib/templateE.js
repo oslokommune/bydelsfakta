@@ -8,8 +8,6 @@ function Template(svg) {
   this.padding.bottom = 50;
   this.padding.left = 300;
   this.padding.right = 55;
-  this.height = 400;
-  this.width = 650;
   this.y = d3.scaleLinear();
   this.x = d3.scaleLinear();
   this.selected = null;
@@ -17,6 +15,7 @@ function Template(svg) {
   this.pyramid;
   this.gutter = 100;
   this.yAxis = []; // three yAxis (left, right and gridlines)
+  this.selected;
 
   this.drawList = function() {
     let active = this.selected;
@@ -84,7 +83,6 @@ function Template(svg) {
 
     this.pyramid = this.canvas.append('g').attr('class', 'pyramid');
 
-    this.y.range([this.height, 0]).domain([0, 120]);
     this.yAxis = this.canvas
       .selectAll('g.axis.y')
       .data([{ type: 'left' }, { type: 'right' }, { type: 'lines' }])
@@ -185,9 +183,12 @@ function Template(svg) {
 
   this.drawAxis = function() {
     let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
-
+    this.y.range([this.height, 0]).domain([0, 120]);
     this.x.range([0, this.width]).domain([-max, max]);
-    this.xAxis.transition().call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
+    this.xAxis
+      .attr('transform', `translate(0, ${this.height})`)
+      .transition()
+      .call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
     this.yAxis.each((d, i, j) => {
       if (d.type == 'left') {
         d3.select(j[i])
@@ -213,30 +214,31 @@ function Template(svg) {
       .select('text.xAxis-title')
       .transition()
       .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`);
+
+    // Reposition axis title
+    this.canvas
+      .select('g.yAxis-title')
+      .transition()
+      .attr('transform', `translate(-50, ${this.height / 2})`);
   };
 
   this.render = function(data, options) {
-    if (data === undefined || data.data === undefined) return;
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
+    if (!this.commonRender(data, options)) return;
+
     this.selected =
       options.selected == null || options.selected == undefined
         ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
         : options.selected;
 
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    this.height = 400;
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    this.heading.text(data.meta.heading);
-
     this.drawAxis();
     this.drawPyramid();
     this.drawList();
-
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
   };
 
   this.init(svg);

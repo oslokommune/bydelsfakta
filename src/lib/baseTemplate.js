@@ -3,8 +3,8 @@ import debounce from '../util/debounce';
 
 function Base_Template(svg) {
   this.data = {};
-  this.height = 800;
-  this.width = 800;
+  this.height = 0;
+  this.width = 0;
   this.padding = { top: 30, right: 40, bottom: 40, left: 120 };
   this.height2 = 0;
   this.yGutter = 0;
@@ -67,6 +67,27 @@ function Base_Template(svg) {
 
   // Placeholder for operations to be run once a child template is initialized
   this.created = function() {};
+
+  // All templates share these common operations when rendered
+  this.commonRender = function(data, options = {}) {
+    if (data === undefined || data.data === undefined) return;
+
+    data.data = Array.isArray(data.data) ? data.data.sort((a, b) => a.totalRow - b.totalRow) : data.data;
+    this.data = data;
+
+    this.heading.text(this.data.meta.heading);
+    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
+
+    this.method = options.method || 'value';
+    this.highlight = options.highlight || -1;
+    this.series = options.series || 0;
+    this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
+
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    this.height = this.data.data.length * this.rowHeight;
+
+    return true;
+  };
 
   // Placeholder for the render method
   this.render = function() {};

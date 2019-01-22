@@ -7,8 +7,6 @@ function Template(svg) {
   this.padding.top = 130;
   this.padding.left = 60;
   this.padding.right = 220;
-  this.height = 500;
-  this.width = 640;
 
   let line = d3
     .line()
@@ -336,13 +334,10 @@ function Template(svg) {
   };
 
   this.render = function(data, options = {}) {
-    if (!data) return;
-    this.data = data;
-    this.series = options.series || 0;
-    this.method = options.method || 'ratio';
-    this.highlight = options.highlight || -1;
+    if (!this.commonRender(data, options)) return;
+
     this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    this.height = 400;
     this.svg
       .transition()
       .attr('height', this.height + this.padding.top + this.padding.bottom)

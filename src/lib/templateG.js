@@ -6,8 +6,8 @@ function Template(svg) {
 
   this.padding = { top: 90, left: 0, right: 20, bottom: 1 };
   this.paddingLeft = 180;
-  this.height = 0; // set during render
-  this.width = 850;
+  this.height = 0;
+  this.width = 0;
   this.y = d3.scaleLinear();
   this.x = d3.scaleBand();
 
@@ -275,15 +275,8 @@ function Template(svg) {
   };
 
   this.render = function(data, options = {}) {
-    if (data === undefined || data.data === undefined) return;
-    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
-    this.method = options.method || 'ratio';
-    this.heading.text(this.data.meta.heading);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.height = this.rowHeight * this.data.data.length;
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    if (!this.commonRender(data, options)) return;
+
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)

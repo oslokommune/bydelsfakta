@@ -225,17 +225,10 @@ function Template(svg) {
   };
 
   this.render = function(data, options = {}) {
-    if (!data && !data.data) return;
-    this.data = data;
-    this.heading.text(this.data.meta.heading);
+    if (!this.commonRender(data, options)) return;
 
     this.padding.top = this.data.meta.series.length > 1 ? 100 : 40;
 
-    this.height = this.rowHeight * this.data.data.length + 1;
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.height = this.data.data.length * this.rowHeight;
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom)

@@ -377,7 +377,6 @@ function Template(svg) {
     dot
       .select('circle')
       .attr('stroke-width', 2)
-
       .attr('data-0', d => +d.values[0].ratio)
       .attr('data-1', d => +d.values[1].ratio)
       .attr('data-2', d => +d.values[2].ratio)
@@ -419,20 +418,18 @@ function Template(svg) {
   };
 
   this.render = function(data, options = {}) {
-    if (!data) return;
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
+    if (!this.commonRender(data, options)) return;
 
-    this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
-    this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
-    this.canvas.transition().attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
+    this.gutter = (this.parentWidth() - this.padding.left - 400) / 2;
+
+    this.matrix.transition().attr('transform', `translate(${this.gutter}, 0)`);
+    this.dotContainer.transition().attr('transform', `translate(${this.gutter}, 0)`);
+    this.lineContainer.transition().attr('transform', `translate(${this.gutter}, 0)`);
 
     this.svg
       .transition()
       .attr('height', 500)
       .attr('width', this.parentWidth());
-
-    this.heading.text(data.meta.heading);
 
     this.drawMatrix();
     this.drawList();

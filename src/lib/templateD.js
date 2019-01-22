@@ -334,20 +334,11 @@ function Template(svg) {
 
   // this.render = function(data, method = 'ratio', range) {
   this.render = function(data, options) {
-    if (!data) return;
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
+    if (!this.commonRender(data, options)) return;
 
-    this.method = options.method || 'ratio';
-    this.heading.text(data.meta.heading);
-
-    // Resize the svg based on size of dataset
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.height = this.rowHeight * data.data.length;
     this.svg
       .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
       .attr('width', this.padding.left + this.width + this.padding.right);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     // Move the brushes if a range was selected
     if (options.range) {
