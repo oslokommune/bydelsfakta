@@ -45,7 +45,7 @@ function Base_Template(svg) {
   // every time the container size changes.
   this.resize = debounce(function() {
     this.render(this.data, { method: this.method, series: this.series, highlight: this.highlight });
-  }, 100);
+  }, 250);
 
   // Common operations to be run once a template is initialized
   this.init = function() {
@@ -99,7 +99,7 @@ function Base_Template(svg) {
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     this.method = options.method || 'value';
-    this.highlight = options.highlight || -1;
+    this.highlight = options.highlight === undefined || options.highlight == null ? -1 : options.highlight;
     this.series = options.series || 0;
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
 
