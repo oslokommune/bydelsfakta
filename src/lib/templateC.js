@@ -45,7 +45,7 @@ function Template(svg) {
   this.created = function() {
     // Create tabs placeholder
     this.tabs = this.svg
-      .append('g')
+      .insert('g')
       .attr('class', 'tabs')
       .attr('transform', 'translate(0, 20)');
     this.tabs.append('rect').attr('class', 'rule');
@@ -248,9 +248,14 @@ function Template(svg) {
       .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
       .text(d => d.subheading);
 
-    tab.select('rect.tabOverlay').on('click', (d, i) => {
-      this.render(this.data, { method: this.method, series: i });
-    });
+    tab
+      .select('rect.tabOverlay')
+      .on('click keyup.enter', (d, i) => {
+        if (d3.event && d3.event.key !== 'Enter') return;
+        d3.event.preventDefault();
+        this.render(this.data, { method: this.method, series: i });
+      })
+      .attr('tabindex', 0);
 
     tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
   };
@@ -301,6 +306,7 @@ function Template(svg) {
       .enter()
       .append('path')
       .attr('class', 'row');
+
     row.exit().remove();
     row = row.merge(rowE);
 
@@ -325,13 +331,16 @@ function Template(svg) {
       d3.select(this).attr('stroke-width', strokeWidth);
     });
 
-    row.on('click', (d, i) => {
-      if (i === this.highlight) {
-        this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
-      } else {
-        this.render(this.data, { method: this.method, series: this.series, highlight: i });
-      }
-    });
+    row
+      .on('click keyup.enter', (d, i) => {
+        if (d3.event && d3.event.key !== 'Enter') return;
+        if (i === this.highlight) {
+          this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
+        } else {
+          this.render(this.data, { method: this.method, series: this.series, highlight: i });
+        }
+      })
+      .attr('tabindex', 0);
   };
 
   this.setScales = function() {
