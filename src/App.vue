@@ -12,12 +12,11 @@
       >
         <div class="oslo__navigation-drawer__checkbox">
           <div>
-            <v-checkbox
+            <input
+              type="checkbox"
               v-model="selected"
               :value="link.key"
-              color="#6ee9ff"
-              @change="onCheckboxChange"
-              dark
+              @change="onChangeCheckbox"
             />
           </div>
           <div
@@ -82,41 +81,34 @@ export default {
     };
   },
 
-  async mounted() {
+  mounted() {
     const routes = this.$route.path.split('/');
     const path = this.$route.path;
     if (this.$route.params.bydel === undefined) {
       return;
     } else if (path.includes('sammenlign')) {
-      const selectedBydel = this.$route.params.bydel.split('-');
-      await this.$store.dispatch('SET_SELECTED_BYDEL', { selectedBydel });
-      this.selected = this.selectedBydel;
+      this.selected = this.$route.params.bydel.split('-');
     } else if (path.includes('bydel')) {
       const bydelKey = bydeler.find(item => item.uri === this.$route.params.bydel).key;
-      await this.$store.dispatch('SET_SELECTED_BYDEL', { selectedBydel: bydelKey });
-      this.selected = this.selectedBydel;
+      this.selected = [bydelKey];
     }
     if (routes.length > 3) {
       this.selectedSubpage = routes[3];
     }
   },
   methods: {
-    async onCheckboxChange(newValue) {
+    onChangeCheckbox() {
       const routes = this.$route.path.split('/');
-      await this.$store.dispatch('SET_SELECTED_BYDEL', {
-        selectedBydel: [...newValue],
-      });
-      if (this.selectedBydel.length === 0) {
+
+      if (this.selected.length === 0) {
         this.$router.push({ name: 'Home' });
-      } else if (this.selectedBydel.length === 1) {
-        const bydel = bydeler.find(item => item.key === this.selectedBydel[0]).uri;
+      } else if (this.selected.length === 1) {
+        const bydel = bydeler.find(item => item.key === this.selected[0]).uri;
         this.$router.push({ path: `/bydel/${bydel}` });
-      } else if (this.selectedBydel.length > 1) {
-        if (routes.length > 3) {
-          this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` });
-        } else {
-          this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
-        }
+      } else if (this.selected.length > 1) {
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
       }
     },
 
