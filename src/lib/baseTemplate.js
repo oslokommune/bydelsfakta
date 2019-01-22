@@ -113,4 +113,4 @@ function Base_Template(svg) {
   this.render = function() {};
 }
 
-export { Base_Template };
+export default Base_Template;

@@ -4,8 +4,8 @@
  * sparklines for population change last 10 years.
  */
 
-import { Base_Template } from './baseTemplate';
-import { util } from './template-utils';
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -17,6 +17,11 @@ function Template(svg) {
   this.width = 0;
   this.y = d3.scaleLinear();
   this.x = d3.scaleBand();
+
+  const arrowPaths = {
+    up: 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z',
+    down: 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z',
+  };
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -184,11 +189,7 @@ function Template(svg) {
         'transform',
         `translate(${this.x(2) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr('d', d =>
-        d.values[2] > 0
-          ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
-          : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
-      );
+      .attr('d', d => (d.values[2] > 0 ? arrowPaths.up : arrowPaths.down));
   };
 
   this.renderProgressPeriod = function(rows) {
@@ -223,11 +224,7 @@ function Template(svg) {
         'transform',
         `translate(${this.x(3) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr('d', d =>
-        d.values[3][d.values[3].length - 1] - d.values[3][0] > 0
-          ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
-          : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
-      );
+      .attr('d', d => (d.values[3][d.values[3].length - 1] - d.values[3][0] > 0 ? arrowPaths.up : arrowPaths.down));
 
     rows
       .select('path.progress-year__line')

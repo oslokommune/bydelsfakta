@@ -8,8 +8,8 @@
  * in the options object.
  */
 
-import { Base_Template } from './baseTemplate';
-import { util } from './template-utils';
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {

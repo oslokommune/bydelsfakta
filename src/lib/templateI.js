@@ -6,8 +6,8 @@
  * options object.
  */
 
-import { Base_Template } from './baseTemplate';
-import { util } from './template-utils';
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
@@ -207,8 +207,8 @@ function Template(svg) {
       .attr('text-anchor', 'end')
       .style('font-size', 13)
       .style('font-weight', 'bold')
-      .attr('x', (d, i) => x(d[1].x) - 6)
-      .attr('y', (d, i) => y(d[1].y) + 4);
+      .attr('x', d => x(d[1].x) - 6)
+      .attr('y', d => y(d[1].y) + 4);
 
     // Labels right
     this.matrix
@@ -217,8 +217,8 @@ function Template(svg) {
       .enter()
       .append('text')
       .attr('class', 'label-2')
-      .attr('x', (d, i) => x(d[1].x) + 4)
-      .attr('y', (d, i) => y(d[1].y) + 4)
+      .attr('x', d => x(d[1].x) + 4)
+      .attr('y', d => y(d[1].y) + 4)
       .attr('transform', d => `rotate(300, ${x(d[1].x)}, ${y(d[1].y)})`)
       .text((d, i) => (i + 1) * 10)
       .attr('text-anchor', 'start')
@@ -232,8 +232,8 @@ function Template(svg) {
       .enter()
       .append('text')
       .attr('class', 'label-3')
-      .attr('x', (d, i) => x(d[1].x) + 4)
-      .attr('y', (d, i) => y(d[1].y) + 4)
+      .attr('x', d => x(d[1].x) + 4)
+      .attr('y', d => y(d[1].y) + 4)
       .attr('transform', d => `rotate(60, ${x(d[1].x)}, ${y(d[1].y)})`)
       .text((d, i) => (i + 1) * 10)
       .attr('text-anchor', 'start')

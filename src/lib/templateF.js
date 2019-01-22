@@ -3,8 +3,8 @@
  * (the dots are rendered as lines)
  */
 
-import { Base_Template } from './baseTemplate';
-import { util } from './template-utils';
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -145,7 +145,7 @@ function Template(svg) {
       .attr('rx', 2)
       .attr('shape-rendering', 'geometricPrecision')
       .attr('height', this.barHeight)
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.low))
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
       .attr('y', (this.rowHeight - this.barHeight) / 2);
 
     // Median Age
@@ -167,7 +167,7 @@ function Template(svg) {
       .attr('shape-rendering', 'geometricPrecision')
       .attr('transform', `translate(-1.5, 0)`)
       .attr('y', 0)
-      .attr('x', (d, i) => this.gapX + this.width1);
+      .attr('x', this.gapX + this.width1);
 
     // Mean Age
     rowsE
@@ -211,29 +211,29 @@ function Template(svg) {
 
     rows
       .select('text.median-value')
-      .text((d, i) => d.median)
+      .text(d => d.median)
       .transition()
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.median) + 6);
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
 
     rows
       .select('text.mean-value')
-      .text((d, i) => d.mean)
+      .text(d => d.mean)
       .transition()
-      .attr('x', (d, i) => this.x(d.mean) + 6);
+      .attr('x', d => this.x(d.mean) + 6);
 
     rows
       .select('rect.mean-stroke')
       .transition()
-      .attr('x', (d, i) => this.x(d.mean));
+      .attr('x', d => this.x(d.mean));
     rows
       .select('rect.median-stroke')
       .transition()
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.median));
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.median));
     rows
       .select('rect.box')
       .transition()
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.low))
-      .attr('width', (d, i) => this.x2(d.high) - this.x2(d.low));
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
+      .attr('width', d => this.x2(d.high) - this.x2(d.low));
 
     rows
       .select('rect.rowFill')

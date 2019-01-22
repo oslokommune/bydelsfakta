@@ -24,7 +24,7 @@ const util = {
       .text(str)
       .attr('font-size', size)
       .attr('font-weight', weight)
-      .each(function(d) {
+      .each(function() {
         computedWidth = this.getComputedTextLength();
       });
     svg.remove();
@@ -40,4 +40,4 @@ const util = {
   },
 };
 
-export { util };
+export default util;
