@@ -59,9 +59,9 @@ function Template(svg) {
       .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
       .on('click', (d, i) => {
         if (this.selected === i) {
-          this.render(this.data, null);
+          this.render(this.data, { selected: null });
         } else {
-          this.render(this.data, i);
+          this.render(this.data, { selected: i });
         }
       })
       .on('mouseenter', function(d, i) {
@@ -313,7 +313,7 @@ function Template(svg) {
   };
 
   this.drawLines = function() {
-    if (this.selected === null) {
+    if (this.selected === null || this.selected === -1 || this.selected === undefined) {
       this.lineContainer
         .selectAll('path.lines')
         .transition()
@@ -418,12 +418,12 @@ function Template(svg) {
     this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
   };
 
-  this.render = function(data, selected = null) {
+  this.render = function(data, options = {}) {
     if (!data) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
-    this.selected = selected;
 
+    this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
     this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
     this.canvas.transition().attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
 

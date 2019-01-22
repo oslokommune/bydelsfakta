@@ -176,11 +176,11 @@ function Template(svg) {
       .attr('width', this.width + this.padding.left + this.padding.right);
   };
 
-  this.render = function(data, method = 'ratio') {
-    if (data === undefined) return;
+  // this.render = function(data, method = 'ratio') {
+  this.render = function(data, options = {}) {
+    if (data === undefined || data.data === undefined) return;
     data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
 
     // Find quartiles, mean and median for each geography
     data.data = data.data.map(bydel => {
@@ -199,7 +199,7 @@ function Template(svg) {
     });
 
     this.data = data;
-    this.method = method;
+    this.method = options.method || 'ratio';
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.height = this.rowHeight * this.data.data.length;

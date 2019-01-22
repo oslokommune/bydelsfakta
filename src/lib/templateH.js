@@ -307,10 +307,10 @@ function Template(svg) {
       .attr('x', d => this.x(this.parseDate(d.date)) - this.barWidth / 2)
       .style('cursor', 'pointer')
       .on('mouseover', d => {
-        this.render(this.data, d.date);
+        this.render(this.data, { highlight: d.date });
       })
       .on('click', d => {
-        this.render(this.data, d.date);
+        this.render(this.data, { highlight: d.date });
       })
       .on('mouseover', function() {
         d3.select(this).attr('fill-opacity', 0.03);
@@ -355,14 +355,13 @@ function Template(svg) {
     this.triggersContainer = this.svg.append('g').attr('class', 'triggers');
   };
 
-  this.render = function(data, highlight) {
+  this.render = function(data, options = {}) {
     if (data === undefined) return;
     this.data = data;
-    this.highlight = highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
+    this.highlight = options.highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
     this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-
     this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
     this.width = this.width1 + this.gapX + this.sidebarWidth;
 

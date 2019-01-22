@@ -224,7 +224,7 @@ function Template(svg) {
       });
   };
 
-  this.render = function(data) {
+  this.render = function(data, options = {}) {
     if (!data && !data.data) return;
     this.data = data;
     this.heading.text(this.data.meta.heading);

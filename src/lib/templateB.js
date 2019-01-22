@@ -205,9 +205,9 @@ function Template(svg) {
 
     row.on('click', (d, i) => {
       if (i === this.highlight) {
-        this.render(this.data, this.method, -1);
+        this.render(this.data, { method: this.method, highlight: -1 });
       } else {
-        this.render(this.data, this.method, i);
+        this.render(this.data, { method: this.method, highlight: i });
       }
     });
   };
@@ -240,12 +240,13 @@ function Template(svg) {
     this.createInfoBoxElements();
   };
 
-  this.render = function(data, method = 'value', highlight = -1) {
+  this.render = function(data, options = {}) {
     if (!data || !data.data) return;
+
     this.data = data;
-    this.method = method;
+    this.method = options.method || 'value';
+    this.highlight = options.highlight || -1;
     this.heading.text(this.data.meta.heading);
-    this.highlight = highlight;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg

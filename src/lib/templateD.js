@@ -53,7 +53,7 @@ function Template(svg) {
     self.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
 
     if (self.data && self.data.meta) {
-      self.render(self.data, self.method);
+      self.render(self.data, { method: self.method });
     }
   };
 
@@ -332,11 +332,13 @@ function Template(svg) {
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5));
   };
 
-  this.render = function(data, method = 'ratio', range) {
+  // this.render = function(data, method = 'ratio', range) {
+  this.render = function(data, options) {
     if (!data) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
-    this.method = method;
+
+    this.method = options.method || 'ratio';
     this.heading.text(data.meta.heading);
 
     // Resize the svg based on size of dataset
@@ -348,8 +350,8 @@ function Template(svg) {
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     // Move the brushes if a range was selected
-    if (range) {
-      extent = JSON.parse(range);
+    if (options.range) {
+      extent = JSON.parse(options.range);
       gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
       gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
     }

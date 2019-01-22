@@ -222,7 +222,7 @@ function Template(svg) {
       .text(d => d.subheading);
 
     tab.select('rect.tabOverlay').on('click', (d, i) => {
-      this.render(this.data, this.method, i);
+      this.render(this.data, { method: this.method, series: i });
     });
 
     tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
@@ -300,9 +300,9 @@ function Template(svg) {
 
     row.on('click', (d, i) => {
       if (i === this.highlight) {
-        this.render(this.data, this.method, this.series, -1);
+        this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
       } else {
-        this.render(this.data, this.method, this.series, i);
+        this.render(this.data, { method: this.method, series: this.series, highlight: i });
       }
     });
   };
@@ -335,13 +335,13 @@ function Template(svg) {
       .call(d3.axisBottom(this.x));
   };
 
-  this.render = function(data, method = 'ratio', series = 0, highlight = -1) {
-    this.highlight = highlight;
+  this.render = function(data, options = {}) {
+    if (!data) return;
     this.data = data;
-    this.series = series;
+    this.series = options.series || 0;
+    this.method = options.method || 'ratio';
+    this.highlight = options.highlight || -1;
     this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
-    this.method = method;
-
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg
       .transition()

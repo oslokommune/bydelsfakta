@@ -45,7 +45,7 @@ function Template(svg) {
       .select('rect.fill')
       .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
       .on('click', (d, i) => {
-        this.render(this.data, i);
+        this.render(this.data, { selected: i });
       })
       .on('mouseenter', function(d, i) {
         if (i == active) return;
@@ -215,12 +215,14 @@ function Template(svg) {
       .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`);
   };
 
-  this.render = function(data, selected) {
-    if (!data) return;
+  this.render = function(data, options) {
+    if (data === undefined || data.data === undefined) return;
     data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
     this.data = data;
     this.selected =
-      selected == null || selected == -1 ? this.data.data.findIndex(el => el.avgRow || el.totalRow) : selected;
+      options.selected == null || options.selected == undefined
+        ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
+        : options.selected;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.svg

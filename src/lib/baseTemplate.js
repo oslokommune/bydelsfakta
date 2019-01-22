@@ -24,7 +24,7 @@ function Base_Template(svg) {
   // Resize is called from the parent vue component
   // every time the container size changes.
   this.resize = debounce(function() {
-    this.render(this.data, this.method);
+    this.render(this.data, { method: this.method, series: this.series, highlight: this.highlight });
   }, 100);
 
   // Common operations to be run once a template is initialized
