@@ -9,23 +9,17 @@
         :key="link.key"
         :label="link.value"
         :class="checkActiveBydel(link.uri)"
+        class="oslo__navigation-drawer__checkbox"
+        style="cursor: pointer; width: 100%"
+        @click="onClickBydel(link.uri)"
       >
-        <div class="oslo__navigation-drawer__checkbox">
-          <div>
-            <input
-              type="checkbox"
-              v-model="selected"
-              :value="link.key"
-              @change="onChangeCheckbox"
-            />
-          </div>
-          <div
-            style="padding-top: 0.7rem; cursor: pointer; width: 100%"
-            @click="onClickBydel(link.uri)"
-          >
-            <span class="oslo__navigation-link--label">{{link.value}}</span>
-          </div>
-        </div>
+        <input
+          type="checkbox"
+          v-model="selected"
+          :value="link.key"
+          @change="onChangeCheckbox"
+        />
+        <span class="oslo__navigation-link--label">{{link.value}}</span>
       </div>
       <div
         :class="checkActiveSammenlign()"
@@ -220,8 +214,6 @@ a {
   background-color: $color-purple;
 
   &__checkbox {
-    display: flex;
-    flex-direction: row;
     height: 40px;
   }
 }
@@ -232,11 +224,14 @@ a {
   background-color: $color-purple;
   transition: background-color 0.3s ease-in-out;
   padding-left: 2rem;
+  padding-top: 10px;
   color: rgba(white, 0.9);
 
   &--active {
     padding-left: 2rem;
+    padding-top: 10px;
     background-color: $color-blue;
+    transition: background-color 0.3s ease-in-out;
 
     #{$p}--label {
       color: $color-purple;
@@ -285,9 +280,5 @@ a {
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 0.7px;
-}
-
-input[type='checkbox'] {
-  border-bottom-color: white !important;
 }
 </style>
