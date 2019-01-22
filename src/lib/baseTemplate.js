@@ -1,10 +1,30 @@
+/**
+ * Each graph template inherits properties and methods from this Base Template.
+ * Once a template object is created the init() is called which clears the
+ * provided SVG node and creates new DOM elements (mainly empty 'g's) inside of it.
+ * At the end of init() the created() method is called. The template in question
+ * may have needs of its own to create DOM elements inside the SVG at creation for
+ * its own convenience.
+ *
+ * Each template defines its own render() method which is called each time
+ * new data is passed down from Vue, on resize (see below) or the template
+ * itself requests a new render (typically on user interaction)
+ *
+ * Each template shares a lot of code to be run on each render() and thus the
+ * commonRender() method exists in this Base Template.
+ *
+ * Vue listens for changes in size for the SVG's container. The resize()
+ * method uses debounce to prevent the render() method to be 'smashed'.
+ *
+ */
+
 import d3 from '@/assets/d3';
 import debounce from '../util/debounce';
 
 function Base_Template(svg) {
   this.data = {};
-  this.height = 800;
-  this.width = 800;
+  this.height = 0;
+  this.width = 0;
   this.padding = { top: 30, right: 40, bottom: 40, left: 120 };
   this.height2 = 0;
   this.yGutter = 0;
@@ -24,8 +44,8 @@ function Base_Template(svg) {
   // Resize is called from the parent vue component
   // every time the container size changes.
   this.resize = debounce(function() {
-    this.render(this.data, this.method);
-  }, 100);
+    this.render(this.data, { method: this.method, series: this.series, highlight: this.highlight });
+  }, 250);
 
   // Common operations to be run once a template is initialized
   this.init = function() {
@@ -68,62 +88,29 @@ function Base_Template(svg) {
   // Placeholder for operations to be run once a child template is initialized
   this.created = function() {};
 
+  // All templates share these common operations when rendered
+  this.commonRender = function(data, options = {}) {
+    if (data === undefined || data.data === undefined) return;
+
+    data.data = Array.isArray(data.data) ? data.data.sort((a, b) => a.totalRow - b.totalRow) : data.data;
+    this.data = data;
+
+    this.heading.text(this.data.meta.heading);
+    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
+
+    this.method = options.method || 'value';
+    this.highlight = options.highlight === undefined || options.highlight == null ? -1 : options.highlight;
+    this.series = options.series || 0;
+    this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
+
+    this.width = this.parentWidth() - this.padding.left - this.padding.right;
+    this.height = this.data.data.length * this.rowHeight;
+
+    return true;
+  };
+
   // Placeholder for the render method
   this.render = function() {};
 }
 
-const util = {
-  color: {
-    yellow: '#F8C66B',
-    light_yellow: '#F8F0DC',
-    purple: '#292858',
-    grey: '#cccccc',
-    light_grey: '#F0F1F1',
-    red: '#FF8174',
-    blue: '#6EE9FF',
-    positive: '#06AFCD',
-  },
-
-  formatTicksY_leftAlign: function(el, padding) {
-    el.selectAll('.tick text')
-      .attr('font-size', 16)
-      .attr('x', -padding)
-      .attr('text-anchor', 'start');
-    el.selectAll('.tick line').attr('opacity', 0);
-    el.select('.domain').attr('opacity', 0);
-  },
-
-  formatTicksX: function(el) {
-    el.selectAll('.tick text').attr('font-size', 12);
-    el.select('.domain').attr('opacity', 1);
-  },
-
-  truncate: function(str, width, size = 14, weight = 400) {
-    width = width.length === 2 ? width[1] - width[0] : width;
-    let computedWidth;
-
-    // create placeholder svg
-    let svg = d3.select('body').append('svg');
-
-    svg
-      .append('text')
-      .text(str)
-      .attr('font-size', size)
-      .attr('font-weight', weight)
-      .each(function(d) {
-        computedWidth = this.getComputedTextLength();
-      });
-    svg.remove();
-
-    let overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
-
-    if (overflowingCharacters) {
-      str = str.substring(0, str.length - overflowingCharacters - 1);
-      str += '...';
-    }
-
-    return str;
-  },
-};
-
-export { Base_Template, util };
+export default Base_Template;

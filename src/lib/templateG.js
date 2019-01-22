@@ -1,4 +1,11 @@
-import { Base_Template, util } from './baseTemplate';
+/**
+ * Template for tabular chart with bar charts for population,
+ * population density and population change last year plus
+ * sparklines for population change last 10 years.
+ */
+
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -6,10 +13,29 @@ function Template(svg) {
 
   this.padding = { top: 90, left: 0, right: 20, bottom: 1 };
   this.paddingLeft = 180;
-  this.height = 0; // set during render
-  this.width = 850;
+  this.height = 0;
+  this.width = 0;
   this.y = d3.scaleLinear();
   this.x = d3.scaleBand();
+
+  const arrowPaths = {
+    up: 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z',
+    down: 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z',
+  };
+
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
+
+    this.drawRows();
+    this.drawColumnHeaders();
+  };
 
   this.created = function() {};
 
@@ -163,13 +189,7 @@ function Template(svg) {
         'transform',
         `translate(${this.x(2) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr(
-        'd',
-        d =>
-          d.values[2] > 0
-            ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
-            : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
-      );
+      .attr('d', d => (d.values[2] > 0 ? arrowPaths.up : arrowPaths.down));
   };
 
   this.renderProgressPeriod = function(rows) {
@@ -204,13 +224,7 @@ function Template(svg) {
         'transform',
         `translate(${this.x(3) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr(
-        'd',
-        d =>
-          d.values[3][d.values[3].length - 1] - d.values[3][0] > 0
-            ? 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z'
-            : 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z'
-      );
+      .attr('d', d => (d.values[3][d.values[3].length - 1] - d.values[3][0] > 0 ? arrowPaths.up : arrowPaths.down));
 
     rows
       .select('path.progress-year__line')
@@ -276,27 +290,6 @@ function Template(svg) {
 
     column.select('text.heading').text(d => (d.heading ? d.heading : ''));
     column.select('text.subHeading').text(d => (d.subheading ? d.subheading : ''));
-  };
-
-  this.render = function(data, method = 'ratio', range) {
-    if (data === undefined) return;
-    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
-    this.method = method;
-    this.heading.text(this.data.meta.heading);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.height = this.rowHeight * this.data.data.length;
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
-
-    this.drawRows();
-    this.drawColumnHeaders();
   };
 
   this.init(svg);

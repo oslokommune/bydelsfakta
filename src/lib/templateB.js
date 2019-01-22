@@ -1,4 +1,12 @@
-import { Base_Template, util } from './baseTemplate';
+/**
+ * Template for single series multi-line chart.
+ *
+ * A details box appears when rendered with 'highlight' parameter
+ * defined in the options object
+ */
+
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -7,11 +15,30 @@ function Template(svg) {
   this.padding.top = 50;
   this.padding.left = 60;
   this.padding.right = 220;
-  this.height = 300;
-  this.width = 700;
 
   const strokeWidth = this.strokeWidth;
   const strokeWidthHighlight = this.strokeWidthHighlight;
+
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.height = d3.max([300, this.width * 0.5]);
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.setScales();
+    this.drawLines();
+    this.drawAxis();
+    this.drawLabels();
+    this.drawInfobox();
+  };
+
+  this.created = function() {
+    this.createInfoBoxElements();
+  };
 
   this.line = d3
     .line()
@@ -205,9 +232,9 @@ function Template(svg) {
 
     row.on('click', (d, i) => {
       if (i === this.highlight) {
-        this.render(this.data, this.method, -1);
+        this.render(this.data, { method: this.method, highlight: -1 });
       } else {
-        this.render(this.data, this.method, i);
+        this.render(this.data, { method: this.method, highlight: i });
       }
     });
   };
@@ -234,30 +261,6 @@ function Template(svg) {
     let formatYTicks = this.getTickFormat();
     this.yAxis.call(d3.axisLeft(this.y).tickFormat(formatYTicks));
     this.xAxis.call(d3.axisBottom(this.x)).attr('transform', `translate(0, ${this.height})`);
-  };
-
-  this.created = function() {
-    this.createInfoBoxElements();
-  };
-
-  this.render = function(data, method = 'value', highlight = -1) {
-    if (!data || !data.data) return;
-    this.data = data;
-    this.method = method;
-    this.heading.text(this.data.meta.heading);
-    this.highlight = highlight;
-
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.setScales();
-    this.drawLines();
-    this.drawAxis();
-    this.drawLabels();
-    this.drawInfobox();
   };
 
   this.init(svg);

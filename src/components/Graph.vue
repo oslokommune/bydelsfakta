@@ -5,7 +5,7 @@
       name
       id
       v-if="showDropdown"
-      @input="svg.render(res, 'ratio', $event.target.value)"
+      @input="svg.render(data, { method: settings.method, range: $event.target.value})"
     >
       <option
         v-for="(element, index) in dropDownList"
@@ -15,7 +15,7 @@
       >{{element.label}}</option>
     </select>
     <svg class="graph__svg" ref="svg"></svg>
-    <resize-observer @notify="svg.resize(res, settings.method)"/>
+    <resize-observer @notify="svg.resize(data, {method: settings.method })"/>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ import TemplateJ from '../lib/templateJ';
 export default {
   data: () => ({
     svg: false,
-    res: null,
+    data: null,
     currentTemplate: false,
     heading: 'loading ...',
     showDropdown: false,
@@ -95,9 +95,11 @@ export default {
         }
       }
 
-      d3.json(this.settings.url).then(res => {
-        this.res = res;
-        this.svg.render(this.res, this.settings.method);
+      d3.json(this.settings.url).then(data => {
+        this.data = data;
+        this.svg.render(this.data, {
+          method: this.settings.method,
+        });
         this.currentTemplate = this.settings.template;
       });
     },

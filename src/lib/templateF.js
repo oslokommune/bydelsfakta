@@ -1,11 +1,16 @@
-import { Base_Template, util } from './baseTemplate';
+/**
+ * Template for dot plot for mean age and box plot for median age
+ * (the dots are rendered as lines)
+ */
+
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 1 };
-  this.height = 0; // set during render
   this.gapX = 80;
 
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
@@ -14,6 +19,65 @@ function Template(svg) {
 
   this.x = d3.scaleLinear();
   this.x2 = d3.scaleLinear();
+
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    // Find quartiles, mean and median for each geography
+    data.data = data.data.map(bydel => {
+      if (bydel.low) return bydel;
+      let ages = [];
+      bydel.values.forEach((val, age) => {
+        for (let i = 0; i < val.value; i++) {
+          ages.push(age);
+        }
+      });
+      bydel.low = d3.quantile(ages, 0.25);
+      bydel.median = d3.quantile(ages, 0.5);
+      bydel.high = d3.quantile(ages, 0.75);
+      bydel.mean = Math.round(d3.mean(ages) * 100) / 100;
+
+      return bydel;
+    });
+
+    this.svg
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.width + this.padding.left + this.padding.right);
+
+    this.width1 = (this.width - this.gapX) / 2;
+    this.width2 = (this.width - this.gapX) / 2;
+    this.x2.range([0, this.width2]).domain([0, 70]);
+    this.x2Axis
+      .transition()
+      .call(
+        d3
+          .axisTop(this.x2)
+          .tickFormat(d => `${d} år`)
+          .ticks(this.width2 / 45)
+      )
+      .attr('transform', `translate(${this.width1 + this.gapX})`);
+
+    this.x
+      .range([0, this.width1])
+      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05]);
+    this.xAxis.transition().call(
+      d3
+        .axisTop(this.x)
+        .tickFormat(d => `${d} år`)
+        .ticks(this.width2 / 45)
+    );
+
+    this.canvas
+      .select('text.label-median')
+      .transition()
+      .attr('x', this.width1 + this.gapX + this.width2 / 2);
+    this.canvas
+      .select('text.label-mean')
+      .transition()
+      .attr('x', this.width1 / 2);
+
+    this.drawRows();
+  };
 
   this.created = function() {
     this.canvas
@@ -76,7 +140,7 @@ function Template(svg) {
       .attr('rx', 2)
       .attr('shape-rendering', 'geometricPrecision')
       .attr('height', this.barHeight)
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.low))
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
       .attr('y', (this.rowHeight - this.barHeight) / 2);
 
     // Median Age
@@ -98,7 +162,7 @@ function Template(svg) {
       .attr('shape-rendering', 'geometricPrecision')
       .attr('transform', `translate(-1.5, 0)`)
       .attr('y', 0)
-      .attr('x', (d, i) => this.gapX + this.width1);
+      .attr('x', this.gapX + this.width1);
 
     // Mean Age
     rowsE
@@ -142,29 +206,29 @@ function Template(svg) {
 
     rows
       .select('text.median-value')
-      .text((d, i) => d.median)
+      .text(d => d.median)
       .transition()
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.median) + 6);
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
 
     rows
       .select('text.mean-value')
-      .text((d, i) => d.mean)
+      .text(d => d.mean)
       .transition()
-      .attr('x', (d, i) => this.x(d.mean) + 6);
+      .attr('x', d => this.x(d.mean) + 6);
 
     rows
       .select('rect.mean-stroke')
       .transition()
-      .attr('x', (d, i) => this.x(d.mean));
+      .attr('x', d => this.x(d.mean));
     rows
       .select('rect.median-stroke')
       .transition()
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.median));
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.median));
     rows
       .select('rect.box')
       .transition()
-      .attr('x', (d, i) => this.gapX + this.width1 + this.x2(d.low))
-      .attr('width', (d, i) => this.x2(d.high) - this.x2(d.low));
+      .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
+      .attr('width', d => this.x2(d.high) - this.x2(d.low));
 
     rows
       .select('rect.rowFill')
@@ -174,75 +238,6 @@ function Template(svg) {
       .select('rect.divider')
       .transition()
       .attr('width', this.width + this.padding.left + this.padding.right);
-  };
-
-  this.render = function(data, method = 'ratio') {
-    if (data === undefined) return;
-    data.data = data.data.sort((a, b) => a.avgRow - b.avgRow);
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
-
-    // Find quartiles, mean and median for each geography
-    data.data = data.data.map(bydel => {
-      let ages = [];
-      bydel.values.forEach((val, age) => {
-        for (let i = 0; i < val.value; i++) {
-          ages.push(age);
-        }
-      });
-      bydel.low = d3.quantile(ages, 0.25);
-      bydel.median = d3.quantile(ages, 0.5);
-      bydel.high = d3.quantile(ages, 0.75);
-      bydel.mean = Math.round(d3.mean(ages) * 100) / 100;
-
-      return bydel;
-    });
-
-    this.data = data;
-    this.method = method;
-    this.heading.text(this.data.meta.heading);
-    this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.height = this.rowHeight * this.data.data.length;
-
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.width1 = (this.width - this.gapX) / 2;
-    this.width2 = (this.width - this.gapX) / 2;
-
-    this.svg
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.width + this.padding.left + this.padding.right);
-
-    this.x2.range([0, this.width2]).domain([0, 70]);
-    this.x2Axis
-      .transition()
-      .call(
-        d3
-          .axisTop(this.x2)
-          .tickFormat(d => `${d} år`)
-          .ticks(this.width2 / 45)
-      )
-      .attr('transform', `translate(${this.width1 + this.gapX})`);
-
-    this.x
-      .range([0, this.width1])
-      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05]);
-    this.xAxis.transition().call(
-      d3
-        .axisTop(this.x)
-        .tickFormat(d => `${d} år`)
-        .ticks(this.width2 / 45)
-    );
-
-    this.canvas
-      .select('text.label-median')
-      .transition()
-      .attr('x', this.width1 + this.gapX + this.width2 / 2);
-    this.canvas
-      .select('text.label-mean')
-      .transition()
-      .attr('x', this.width1 / 2);
-
-    this.drawRows();
   };
 
   this.init(svg);

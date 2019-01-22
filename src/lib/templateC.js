@@ -1,4 +1,15 @@
-import { Base_Template, util } from './baseTemplate';
+/**
+ * Template for multi series multi-line chart.
+ *
+ * A details box appears when rendered with highlight parameter
+ * defined in the options object.
+ *
+ * Change tabs by rendering with the series parameter defined
+ * in the options object.
+ */
+
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -7,13 +18,29 @@ function Template(svg) {
   this.padding.top = 130;
   this.padding.left = 60;
   this.padding.right = 220;
-  this.height = 500;
-  this.width = 640;
 
   let line = d3
     .line()
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
+
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
+    this.height = 400;
+    this.svg
+      .transition()
+      .attr('height', this.height + this.padding.top + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.setScales();
+    this.drawAxis();
+    this.drawLines();
+    this.drawTabs();
+    this.drawLabels();
+    this.drawInfobox();
+  };
 
   this.created = function() {
     // Create tabs placeholder
@@ -222,7 +249,7 @@ function Template(svg) {
       .text(d => d.subheading);
 
     tab.select('rect.tabOverlay').on('click', (d, i) => {
-      this.render(this.data, this.method, i);
+      this.render(this.data, { method: this.method, series: i });
     });
 
     tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
@@ -300,9 +327,9 @@ function Template(svg) {
 
     row.on('click', (d, i) => {
       if (i === this.highlight) {
-        this.render(this.data, this.method, this.series, -1);
+        this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
       } else {
-        this.render(this.data, this.method, this.series, i);
+        this.render(this.data, { method: this.method, series: this.series, highlight: i });
       }
     });
   };
@@ -333,27 +360,6 @@ function Template(svg) {
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
       .call(d3.axisBottom(this.x));
-  };
-
-  this.render = function(data, method = 'ratio', series = 0, highlight = -1) {
-    this.highlight = highlight;
-    this.data = data;
-    this.series = series;
-    this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
-    this.method = method;
-
-    this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.svg
-      .transition()
-      .attr('height', this.height + this.padding.top + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.setScales();
-    this.drawAxis();
-    this.drawLines();
-    this.drawTabs();
-    this.drawLabels();
-    this.drawInfobox();
   };
 
   this.init(svg);

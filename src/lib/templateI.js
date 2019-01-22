@@ -1,5 +1,47 @@
-import { Base_Template, util } from './baseTemplate';
+/**
+ * Template for ternary plot (triangular 2d-diagram with three axis/dimensions
+ * which sum is 1)
+ *
+ * Highlight a specific series by adding the selected parameter in the
+ * options object.
+ */
+
+import Base_Template from './baseTemplate';
+import util from './template-utils';
 import d3 from '@/assets/d3';
+
+const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+const gridLinesData = [
+  [{ x: -0.9, y: 0.1 }, { x: -0.8, y: 0 }],
+  [{ x: -0.8, y: 0.2 }, { x: -0.6, y: 0 }],
+  [{ x: -0.7, y: 0.3 }, { x: -0.4, y: 0 }],
+  [{ x: -0.6, y: 0.4 }, { x: -0.2, y: 0 }],
+  [{ x: -0.5, y: 0.5 }, { x: 0.0, y: 0 }],
+  [{ x: -0.4, y: 0.6 }, { x: 0.2, y: 0 }],
+  [{ x: -0.3, y: 0.7 }, { x: 0.4, y: 0 }],
+  [{ x: -0.2, y: 0.8 }, { x: 0.6, y: 0 }],
+  [{ x: -0.1, y: 0.9 }, { x: 0.8, y: 0 }],
+
+  [{ x: 0.1, y: 0.9 }, { x: -0.8, y: 0 }],
+  [{ x: 0.2, y: 0.8 }, { x: -0.6, y: 0 }],
+  [{ x: 0.3, y: 0.7 }, { x: -0.4, y: 0 }],
+  [{ x: 0.4, y: 0.6 }, { x: -0.2, y: 0 }],
+  [{ x: 0.5, y: 0.5 }, { x: 0.0, y: 0 }],
+  [{ x: 0.6, y: 0.4 }, { x: 0.2, y: 0 }],
+  [{ x: 0.7, y: 0.3 }, { x: 0.4, y: 0 }],
+  [{ x: 0.8, y: 0.2 }, { x: 0.6, y: 0 }],
+  [{ x: 0.9, y: 0.1 }, { x: 0.8, y: 0 }],
+
+  [{ x: -0.9, y: 0.1 }, { x: 0.9, y: 0.1 }],
+  [{ x: -0.8, y: 0.2 }, { x: 0.8, y: 0.2 }],
+  [{ x: -0.7, y: 0.3 }, { x: 0.7, y: 0.3 }],
+  [{ x: -0.6, y: 0.4 }, { x: 0.6, y: 0.4 }],
+  [{ x: -0.5, y: 0.5 }, { x: 0.5, y: 0.5 }],
+  [{ x: -0.4, y: 0.6 }, { x: 0.4, y: 0.6 }],
+  [{ x: -0.3, y: 0.7 }, { x: 0.3, y: 0.7 }],
+  [{ x: -0.2, y: 0.8 }, { x: 0.2, y: 0.8 }],
+  [{ x: -0.1, y: 0.9 }, { x: 0.1, y: 0.9 }],
+];
 
 d3.selection.prototype.moveToFront = function() {
   return this.each(function() {
@@ -10,10 +52,7 @@ d3.selection.prototype.moveToFront = function() {
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 70;
-  this.padding.bottom = 70;
-  this.padding.left = 200;
-  this.padding.right = 105;
+  this.padding = { top: 70, bottom: 70, left: 200, right: 105 };
   this.width = 400;
   this.height = Math.sqrt(this.width * this.width - (this.width / 2) * (this.width / 2));
   this.y = d3.scaleLinear();
@@ -29,6 +68,63 @@ function Template(svg) {
 
   const fillOpacity = 0.3;
   const strokeOpacity = 0.8;
+
+  const x = d3
+    .scaleLinear()
+    .range([0, this.width])
+    .domain([-1, 1]);
+  const y = d3
+    .scaleLinear()
+    .range([this.height, 0])
+    .domain([0, 1]);
+
+  const line = d3
+    .line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.gutter = (this.parentWidth() - this.padding.left - 400) / 2;
+
+    this.matrix.transition().attr('transform', `translate(${this.gutter}, 0)`);
+    this.dotContainer.transition().attr('transform', `translate(${this.gutter}, 0)`);
+    this.lineContainer.transition().attr('transform', `translate(${this.gutter}, 0)`);
+
+    this.svg
+      .transition()
+      .attr('height', 500)
+      .attr('width', this.parentWidth());
+
+    this.drawMatrix();
+    this.drawList();
+    this.updateAxisLabels();
+    this.drawLines();
+  };
+
+  this.created = function() {
+    this.list = this.svg
+      .append('g')
+      .attr('class', 'list')
+      .attr('transform', `translate(0, ${this.padding.top})`);
+    this.list
+      .append('text')
+      .text('Velg delbydel')
+      .attr('font-size', 12)
+      .style('text-transform', 'uppercase')
+      .attr('font-weight', 700)
+      .attr('fill', util.color.purple)
+      .attr('transform', 'translate(10, -16)');
+
+    this.canvas.selectAll('*').remove();
+
+    this.canvas.attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
+
+    this.drawGrid();
+    this.lineContainer = this.canvas.append('g').attr('class', 'lineContainer');
+    this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
+  };
 
   this.drawList = function() {
     let active = this.selected;
@@ -59,9 +155,9 @@ function Template(svg) {
       .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
       .on('click', (d, i) => {
         if (this.selected === i) {
-          this.render(this.data, null);
+          this.render(this.data, { selected: null });
         } else {
-          this.render(this.data, i);
+          this.render(this.data, { selected: i });
         }
       })
       .on('mouseenter', function(d, i) {
@@ -97,100 +193,6 @@ function Template(svg) {
       .style('pointer-events', 'none');
   };
 
-  const x = d3
-    .scaleLinear()
-    .range([0, this.width])
-    .domain([-1, 1]);
-  const y = d3
-    .scaleLinear()
-    .range([this.height, 0])
-    .domain([0, 1]);
-
-  const line = d3
-    .line()
-    .x(d => x(d.x))
-    .y(d => y(d.y));
-
-  const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
-
-  const gridLinesData = [
-    [{ x: -0.9, y: 0.1 }, { x: -0.8, y: 0 }],
-    [{ x: -0.8, y: 0.2 }, { x: -0.6, y: 0 }],
-    [{ x: -0.7, y: 0.3 }, { x: -0.4, y: 0 }],
-    [{ x: -0.6, y: 0.4 }, { x: -0.2, y: 0 }],
-    [{ x: -0.5, y: 0.5 }, { x: 0.0, y: 0 }],
-    [{ x: -0.4, y: 0.6 }, { x: 0.2, y: 0 }],
-    [{ x: -0.3, y: 0.7 }, { x: 0.4, y: 0 }],
-    [{ x: -0.2, y: 0.8 }, { x: 0.6, y: 0 }],
-    [{ x: -0.1, y: 0.9 }, { x: 0.8, y: 0 }],
-
-    [{ x: 0.1, y: 0.9 }, { x: -0.8, y: 0 }],
-    [{ x: 0.2, y: 0.8 }, { x: -0.6, y: 0 }],
-    [{ x: 0.3, y: 0.7 }, { x: -0.4, y: 0 }],
-    [{ x: 0.4, y: 0.6 }, { x: -0.2, y: 0 }],
-    [{ x: 0.5, y: 0.5 }, { x: 0.0, y: 0 }],
-    [{ x: 0.6, y: 0.4 }, { x: 0.2, y: 0 }],
-    [{ x: 0.7, y: 0.3 }, { x: 0.4, y: 0 }],
-    [{ x: 0.8, y: 0.2 }, { x: 0.6, y: 0 }],
-    [{ x: 0.9, y: 0.1 }, { x: 0.8, y: 0 }],
-
-    [{ x: -0.9, y: 0.1 }, { x: 0.9, y: 0.1 }],
-    [{ x: -0.8, y: 0.2 }, { x: 0.8, y: 0.2 }],
-    [{ x: -0.7, y: 0.3 }, { x: 0.7, y: 0.3 }],
-    [{ x: -0.6, y: 0.4 }, { x: 0.6, y: 0.4 }],
-    [{ x: -0.5, y: 0.5 }, { x: 0.5, y: 0.5 }],
-    [{ x: -0.4, y: 0.6 }, { x: 0.4, y: 0.6 }],
-    [{ x: -0.3, y: 0.7 }, { x: 0.3, y: 0.7 }],
-    [{ x: -0.2, y: 0.8 }, { x: 0.2, y: 0.8 }],
-    [{ x: -0.1, y: 0.9 }, { x: 0.1, y: 0.9 }],
-  ];
-
-  this.getTick = function(x1, y1, angle, dist) {
-    let s = d3
-      .scaleLinear()
-      .domain([0, 1])
-      .range([0, this.height]);
-    let rad = angle * (Math.PI / 180);
-    let distX = s(dist) * Math.cos(rad);
-    let distY = s(dist) * Math.sin(rad);
-    let x2 = x.invert(distX + x(x1));
-    let y2 = y.invert(distY + y(y1));
-    return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
-  };
-
-  let tickData = [
-    // group 1
-    this.getTick(-0.9, 0.1, 180, 0.02),
-    this.getTick(-0.8, 0.2, 180, 0.02),
-    this.getTick(-0.7, 0.3, 180, 0.02),
-    this.getTick(-0.6, 0.4, 180, 0.02),
-    this.getTick(-0.5, 0.5, 180, 0.02),
-    this.getTick(-0.4, 0.6, 180, 0.02),
-    this.getTick(-0.3, 0.7, 180, 0.02),
-    this.getTick(-0.2, 0.8, 180, 0.02),
-    this.getTick(-0.1, 0.9, 180, 0.02),
-    // group 2
-    this.getTick(0.1, 0.9, 300, 0.02),
-    this.getTick(0.2, 0.8, 300, 0.02),
-    this.getTick(0.3, 0.7, 300, 0.02),
-    this.getTick(0.4, 0.6, 300, 0.02),
-    this.getTick(0.5, 0.5, 300, 0.02),
-    this.getTick(0.6, 0.4, 300, 0.02),
-    this.getTick(0.7, 0.3, 300, 0.02),
-    this.getTick(0.8, 0.2, 300, 0.02),
-    this.getTick(0.9, 0.1, 300, 0.02),
-    // group 3
-    this.getTick(0.8, 0, 60, 0.02),
-    this.getTick(0.6, 0, 60, 0.02),
-    this.getTick(0.4, 0, 60, 0.02),
-    this.getTick(0.2, 0, 60, 0.02),
-    this.getTick(0.0, 0, 60, 0.02),
-    this.getTick(-0.2, 0, 60, 0.02),
-    this.getTick(-0.4, 0, 60, 0.02),
-    this.getTick(-0.6, 0, 60, 0.02),
-    this.getTick(-0.8, 0, 60, 0.02),
-  ];
-
   // Draw the triangle, grid lines, labels etc on screen
   this.drawGrid = function() {
     this.matrix = this.canvas.append('g').attr('class', 'matrix');
@@ -205,8 +207,8 @@ function Template(svg) {
       .attr('text-anchor', 'end')
       .style('font-size', 13)
       .style('font-weight', 'bold')
-      .attr('x', (d, i) => x(d[1].x) - 6)
-      .attr('y', (d, i) => y(d[1].y) + 4);
+      .attr('x', d => x(d[1].x) - 6)
+      .attr('y', d => y(d[1].y) + 4);
 
     // Labels right
     this.matrix
@@ -215,8 +217,8 @@ function Template(svg) {
       .enter()
       .append('text')
       .attr('class', 'label-2')
-      .attr('x', (d, i) => x(d[1].x) + 4)
-      .attr('y', (d, i) => y(d[1].y) + 4)
+      .attr('x', d => x(d[1].x) + 4)
+      .attr('y', d => y(d[1].y) + 4)
       .attr('transform', d => `rotate(300, ${x(d[1].x)}, ${y(d[1].y)})`)
       .text((d, i) => (i + 1) * 10)
       .attr('text-anchor', 'start')
@@ -230,8 +232,8 @@ function Template(svg) {
       .enter()
       .append('text')
       .attr('class', 'label-3')
-      .attr('x', (d, i) => x(d[1].x) + 4)
-      .attr('y', (d, i) => y(d[1].y) + 4)
+      .attr('x', d => x(d[1].x) + 4)
+      .attr('y', d => y(d[1].y) + 4)
       .attr('transform', d => `rotate(60, ${x(d[1].x)}, ${y(d[1].y)})`)
       .text((d, i) => (i + 1) * 10)
       .attr('text-anchor', 'start')
@@ -313,7 +315,7 @@ function Template(svg) {
   };
 
   this.drawLines = function() {
-    if (this.selected === null) {
+    if (this.selected === null || this.selected === -1 || this.selected === undefined) {
       this.lineContainer
         .selectAll('path.lines')
         .transition()
@@ -377,7 +379,6 @@ function Template(svg) {
     dot
       .select('circle')
       .attr('stroke-width', 2)
-
       .attr('data-0', d => +d.values[0].ratio)
       .attr('data-1', d => +d.values[1].ratio)
       .attr('data-2', d => +d.values[2].ratio)
@@ -395,50 +396,51 @@ function Template(svg) {
     this.matrix.select('text.label3').text(`% ${this.data.meta.series[2]}`);
   };
 
-  this.created = function() {
-    this.list = this.svg
-      .append('g')
-      .attr('class', 'list')
-      .attr('transform', `translate(0, ${this.padding.top})`);
-    this.list
-      .append('text')
-      .text('Velg delbydel')
-      .attr('font-size', 12)
-      .style('text-transform', 'uppercase')
-      .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
-      .attr('transform', 'translate(10, -16)');
-
-    this.canvas.selectAll('*').remove();
-
-    this.canvas.attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
-
-    this.drawGrid();
-    this.lineContainer = this.canvas.append('g').attr('class', 'lineContainer');
-    this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
+  this.getTick = function(x1, y1, angle, dist) {
+    let s = d3
+      .scaleLinear()
+      .domain([0, 1])
+      .range([0, this.height]);
+    let rad = angle * (Math.PI / 180);
+    let distX = s(dist) * Math.cos(rad);
+    let distY = s(dist) * Math.sin(rad);
+    let x2 = x.invert(distX + x(x1));
+    let y2 = y.invert(distY + y(y1));
+    return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
   };
 
-  this.render = function(data, selected = null) {
-    if (!data) return;
-    data.data = data.data.sort((a, b) => a.totalRow - b.totalRow);
-    this.data = data;
-    this.selected = selected;
-
-    this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
-    this.canvas.transition().attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
-
-    this.svg
-      .transition()
-      .attr('height', 500)
-      .attr('width', this.parentWidth());
-
-    this.heading.text(data.meta.heading);
-
-    this.drawMatrix();
-    this.drawList();
-    this.updateAxisLabels();
-    this.drawLines();
-  };
+  let tickData = [
+    // group 1
+    this.getTick(-0.9, 0.1, 180, 0.02),
+    this.getTick(-0.8, 0.2, 180, 0.02),
+    this.getTick(-0.7, 0.3, 180, 0.02),
+    this.getTick(-0.6, 0.4, 180, 0.02),
+    this.getTick(-0.5, 0.5, 180, 0.02),
+    this.getTick(-0.4, 0.6, 180, 0.02),
+    this.getTick(-0.3, 0.7, 180, 0.02),
+    this.getTick(-0.2, 0.8, 180, 0.02),
+    this.getTick(-0.1, 0.9, 180, 0.02),
+    // group 2
+    this.getTick(0.1, 0.9, 300, 0.02),
+    this.getTick(0.2, 0.8, 300, 0.02),
+    this.getTick(0.3, 0.7, 300, 0.02),
+    this.getTick(0.4, 0.6, 300, 0.02),
+    this.getTick(0.5, 0.5, 300, 0.02),
+    this.getTick(0.6, 0.4, 300, 0.02),
+    this.getTick(0.7, 0.3, 300, 0.02),
+    this.getTick(0.8, 0.2, 300, 0.02),
+    this.getTick(0.9, 0.1, 300, 0.02),
+    // group 3
+    this.getTick(0.8, 0, 60, 0.02),
+    this.getTick(0.6, 0, 60, 0.02),
+    this.getTick(0.4, 0, 60, 0.02),
+    this.getTick(0.2, 0, 60, 0.02),
+    this.getTick(0.0, 0, 60, 0.02),
+    this.getTick(-0.2, 0, 60, 0.02),
+    this.getTick(-0.4, 0, 60, 0.02),
+    this.getTick(-0.6, 0, 60, 0.02),
+    this.getTick(-0.8, 0, 60, 0.02),
+  ];
 
   this.init(svg);
 }
