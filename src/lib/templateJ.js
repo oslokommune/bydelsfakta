@@ -4,17 +4,45 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 90, left: 240, right: 20, bottom: 68 };
-  this.height = 0; // set during render
-  this.width = 600;
+  this.padding = { top: 90, left: 240, right: 20, bottom: 58 };
   this.x = d3.scaleLinear();
   this.bars;
   this.legendBox;
-
   this.colors = d3
     .scaleOrdinal()
     .domain([0, 1, 2, 3])
     .range(['#C57066', '#834B44', '#838296', '#4F4E6A']);
+
+  this.render = function(data) {
+    if (!this.commonRender(data)) return;
+
+    this.data.data = data.data.map(bydel => {
+      bydel.values = bydel.values.map((value, i) => {
+        if (value < 0) return value;
+        return i < 2 ? value * -1 : value;
+      });
+      return bydel;
+    });
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.width + this.padding.left + this.padding.right);
+
+    this.drawRows();
+    this.drawLegend();
+
+    this.canvas
+      .select('line.zero')
+      .attr('y1', 0)
+      .attr('y2', this.height)
+      .transition()
+      .attr('x1', this.x(0))
+      .attr('x2', this.x(0));
+
+    this.canvas.select('text.label-min').attr('x', this.x(0) - 15);
+    this.canvas.select('text.label-max').attr('x', this.x(0) + 15);
+  };
 
   this.created = function() {
     this.legendBox = this.svg.append('g').attr('class', 'legend');
@@ -87,8 +115,16 @@ function Template(svg) {
 
     // Update row geography, style and position
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
-    rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
-    rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+    rows
+      .select('rect.rowFill')
+      .transition()
+      .attr('width', this.padding.left + this.width + this.padding.right)
+      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
+    rows
+      .select('rect.divider')
+      .transition()
+      .attr('width', this.padding.left + this.width + this.padding.right)
+      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
 
@@ -164,37 +200,6 @@ function Template(svg) {
       'transform',
       (d, i) => `translate(${i * ((this.width + this.padding.left + this.padding.right) / 4)}, 0)`
     );
-  };
-
-  this.render = function(data) {
-    if (!this.commonRender(data)) return;
-
-    this.data.data = data.data.map(bydel => {
-      bydel.values = bydel.values.map((value, i) => {
-        if (value < 0) return value;
-        return i < 2 ? value * -1 : value;
-      });
-      return bydel;
-    });
-
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.width + this.padding.left + this.padding.right);
-
-    this.drawRows();
-    this.drawLegend();
-
-    this.canvas
-      .select('line.zero')
-      .attr('y1', 0)
-      .attr('y2', this.height)
-      .transition()
-      .attr('x1', this.x(0))
-      .attr('x2', this.x(0));
-
-    this.canvas.select('text.label-min').attr('x', this.x(0) - 15);
-    this.canvas.select('text.label-max').attr('x', this.x(0) + 15);
   };
 
   this.init(svg);

@@ -21,6 +21,90 @@ function Template(svg) {
   const formatPercent = NO.format('.1%');
   const formatFloat = NO.format(',.0f');
 
+  this.render = function(data, options) {
+    if (!this.commonRender(data, options)) return;
+
+    this.svg
+      .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    // Move the brushes if a range was selected
+    if (options.range) {
+      extent = JSON.parse(options.range);
+      gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
+      gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
+    }
+
+    this.setBrushes();
+
+    // this.age.range([0, this.width - this.paddingUpperLeft]);
+    // brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+    // brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    // gBrushLarge.call(brushLarge);
+    // gBrushSmall.call(brushSmall);
+
+    // Find the larges accumulated number within the selected range
+    let maxAccumulated =
+      d3.max(
+        data.data
+          .filter(bydel => {
+            if (this.method == 'ratio') {
+              return bydel;
+            } else {
+              return !bydel.totalRow && !bydel.avgRow;
+            }
+          })
+          .map(bydel =>
+            d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
+          )
+      ) * 1.05;
+
+    // Find the largest single age to scale y axis behind brush within the selected range
+    let max =
+      d3.max(
+        data.data
+          .filter(bydel => {
+            if (this.method == 'ratio') {
+              return bydel;
+            } else {
+              return !bydel.totalRow && !bydel.avgRow;
+            }
+          })
+          .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
+      ) * 1.05;
+
+    // Set axis and scales based on these max values
+    this.y.domain([0, max]).range([this.height2, 0]);
+    this.x.domain([0, maxAccumulated]).range([0, this.width - this.paddingLowerLeft]);
+    this.upperYAxis.transition().call(
+      d3
+        .axisLeft(this.y)
+        .ticks(4)
+        .tickFormat(d => {
+          if (this.method == 'ratio') {
+            return formatPercent(d);
+          } else {
+            return formatFloat(d);
+          }
+        })
+    );
+    this.upperXAxis.transition().call(d3.axisBottom(this.age).tickFormat(d => d + ' år'));
+    this.lowerXAxis.transition().call(
+      d3.axisTop(this.x).tickFormat(d => {
+        if (this.method == 'ratio') {
+          return formatPercent(d);
+        } else {
+          return formatFloat(d);
+        }
+      })
+    );
+
+    // Trigger re-draws of rows (bars) and lines
+    this.setBrushes();
+    this.drawRows();
+    this.drawLines();
+  };
+
   this.age = d3
     .scaleLinear()
     .range([0, this.width - this.paddingUpperLeft])
@@ -330,91 +414,6 @@ function Template(svg) {
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
       .attr('stroke', d => (d.avgRow || d.totalRow ? util.color.purple : util.color.blue))
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5));
-  };
-
-  // this.render = function(data, method = 'ratio', range) {
-  this.render = function(data, options) {
-    if (!this.commonRender(data, options)) return;
-
-    this.svg
-      .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    // Move the brushes if a range was selected
-    if (options.range) {
-      extent = JSON.parse(options.range);
-      gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
-      gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
-    }
-
-    this.setBrushes();
-
-    // this.age.range([0, this.width - this.paddingUpperLeft]);
-    // brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    // brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
-    // gBrushLarge.call(brushLarge);
-    // gBrushSmall.call(brushSmall);
-
-    // Find the larges accumulated number within the selected range
-    let maxAccumulated =
-      d3.max(
-        data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel =>
-            d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
-          )
-      ) * 1.05;
-
-    // Find the largest single age to scale y axis behind brush within the selected range
-    let max =
-      d3.max(
-        data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
-      ) * 1.05;
-
-    // Set axis and scales based on these max values
-    this.y.domain([0, max]).range([this.height2, 0]);
-    this.x.domain([0, maxAccumulated]).range([0, this.width - this.paddingLowerLeft]);
-    this.upperYAxis.transition().call(
-      d3
-        .axisLeft(this.y)
-        .ticks(4)
-        .tickFormat(d => {
-          if (this.method == 'ratio') {
-            return formatPercent(d);
-          } else {
-            return formatFloat(d);
-          }
-        })
-    );
-    this.upperXAxis.transition().call(d3.axisBottom(this.age).tickFormat(d => d + ' år'));
-    this.lowerXAxis.transition().call(
-      d3.axisTop(this.x).tickFormat(d => {
-        if (this.method == 'ratio') {
-          return formatPercent(d);
-        } else {
-          return formatFloat(d);
-        }
-      })
-    );
-
-    // Trigger re-draws of rows (bars) and lines
-    this.setBrushes();
-    this.drawRows();
-    this.drawLines();
   };
 
   this.init(svg);

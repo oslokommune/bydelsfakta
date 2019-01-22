@@ -11,6 +11,22 @@ function Template(svg) {
 
   const formatPercent = d3.format('.0%');
 
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.padding.top = this.data.meta.series.length > 1 ? 100 : 40;
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.setScales();
+    this.drawAxis();
+    this.drawColumns();
+    this.drawRows();
+  };
+
   this.initRowElements = function(rowsE) {
     // Row fill
     rowsE
@@ -149,7 +165,6 @@ function Template(svg) {
             .ticks(2)
             .tickFormat(formatPercent)
         );
-      util.formatTicksX(d3.select(j[i]));
     });
   };
 
@@ -222,22 +237,6 @@ function Template(svg) {
       .attr('x', (d, i) => {
         return this.x[0](this.data.data.filter(d => d.totalRow)[0].values[i]);
       });
-  };
-
-  this.render = function(data, options = {}) {
-    if (!this.commonRender(data, options)) return;
-
-    this.padding.top = this.data.meta.series.length > 1 ? 100 : 40;
-
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.setScales();
-    this.drawAxis();
-    this.drawColumns();
-    this.drawRows();
   };
 
   this.init(svg);

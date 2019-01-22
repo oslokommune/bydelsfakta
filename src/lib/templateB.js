@@ -13,6 +13,25 @@ function Template(svg) {
   const strokeWidth = this.strokeWidth;
   const strokeWidthHighlight = this.strokeWidthHighlight;
 
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.setScales();
+    this.drawLines();
+    this.drawAxis();
+    this.drawLabels();
+    this.drawInfobox();
+  };
+
+  this.created = function() {
+    this.createInfoBoxElements();
+  };
+
   this.line = d3
     .line()
     .x(d => this.x(this.parseDate(d.date)))
@@ -234,25 +253,6 @@ function Template(svg) {
     let formatYTicks = this.getTickFormat();
     this.yAxis.call(d3.axisLeft(this.y).tickFormat(formatYTicks));
     this.xAxis.call(d3.axisBottom(this.x)).attr('transform', `translate(0, ${this.height})`);
-  };
-
-  this.created = function() {
-    this.createInfoBoxElements();
-  };
-
-  this.render = function(data, options = {}) {
-    if (!this.commonRender(data, options)) return;
-
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.setScales();
-    this.drawLines();
-    this.drawAxis();
-    this.drawLabels();
-    this.drawInfobox();
   };
 
   this.init(svg);

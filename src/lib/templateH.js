@@ -29,6 +29,39 @@ function Template(svg) {
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d.population));
 
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.highlight = options.highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
+    this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
+    this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
+    this.width = this.width1 + this.gapX + this.sidebarWidth;
+    this.height = this.height1 + this.gapY + this.height2;
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.resetScales();
+
+    this.drawSidebar();
+    this.drawUpper();
+    this.drawLower();
+    this.drawTriggers();
+  };
+
+  this.created = function() {
+    this.canvas.selectAll('*').remove();
+    this.canvas.remove();
+
+    this.createSidebarElements();
+    this.createUpperElements();
+    this.createLowerElements();
+
+    this.triggersContainer = this.svg.append('g').attr('class', 'triggers');
+  };
+
   this.createSidebarElements = function() {
     this.sidebar = this.svg.append('g').attr('class', 'sidebar');
 
@@ -341,40 +374,6 @@ function Template(svg) {
     this.xAxis.call(d3.axisBottom(this.x));
     this.yAxis.call(d3.axisLeft(this.y).ticks(this.height1 / 50));
     this.y2Axis.call(d3.axisLeft(this.y2).ticks(this.height2 / 40));
-  };
-
-  // Create svg elements unique for this template during init
-  this.created = function() {
-    this.canvas.selectAll('*').remove();
-    this.canvas.remove();
-
-    this.createSidebarElements();
-    this.createUpperElements();
-    this.createLowerElements();
-
-    this.triggersContainer = this.svg.append('g').attr('class', 'triggers');
-  };
-
-  this.render = function(data, options = {}) {
-    if (!this.commonRender(data, options)) return;
-
-    this.highlight = options.highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
-    this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
-    this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
-    this.width = this.width1 + this.gapX + this.sidebarWidth;
-    this.height = this.height1 + this.gapY + this.height2;
-
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.resetScales();
-
-    this.drawSidebar();
-    this.drawUpper();
-    this.drawLower();
-    this.drawTriggers();
   };
 
   this.init(svg);

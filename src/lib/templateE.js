@@ -17,52 +17,23 @@ function Template(svg) {
   this.yAxis = []; // three yAxis (left, right and gridlines)
   this.selected;
 
-  this.drawList = function() {
-    let active = this.selected;
+  this.render = function(data, options) {
+    if (!this.commonRender(data, options)) return;
 
-    let row = this.list.selectAll('g.row').data(this.data.data);
-    let rowE = row
-      .enter()
-      .append('g')
-      .attr('class', 'row');
-    row.exit().remove();
-    row = row.merge(rowE);
+    this.selected =
+      options.selected == null || options.selected == undefined
+        ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
+        : options.selected;
 
-    rowE
-      .append('rect')
-      .attr('class', 'fill')
-      .attr('width', this.padding.left - this.gutter)
-      .attr('height', this.rowHeight)
-      .attr('fill', util.color.blue)
-      .style('cursor', 'pointer')
-      .attr('rx', 3);
-    rowE.append('text').attr('class', 'label');
+    this.height = 400;
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
 
-    row.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-
-    row
-      .select('rect.fill')
-      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
-      .on('click', (d, i) => {
-        this.render(this.data, { selected: i });
-      })
-      .on('mouseenter', function(d, i) {
-        if (i == active) return;
-        d3.select(this).attr('fill-opacity', 0.15);
-      })
-      .on('mouseleave', function(d, i) {
-        if (i == active) return;
-        d3.select(this).attr('fill-opacity', 0);
-      });
-
-    row
-      .select('text.label')
-      .text(d => d.geography)
-      .attr('y', this.rowHeight / 2 + 5)
-      .attr('x', 10)
-      .attr('font-weight', d => (d.totalRow || d.avgRow ? 700 : 400))
-      .attr('fill', util.color.purple)
-      .style('pointer-events', 'none');
+    this.drawAxis();
+    this.drawPyramid();
+    this.drawList();
   };
 
   this.created = function() {
@@ -117,6 +88,54 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`)
       .text('Folkemengde');
+  };
+
+  this.drawList = function() {
+    let active = this.selected;
+
+    let row = this.list.selectAll('g.row').data(this.data.data);
+    let rowE = row
+      .enter()
+      .append('g')
+      .attr('class', 'row');
+    row.exit().remove();
+    row = row.merge(rowE);
+
+    rowE
+      .append('rect')
+      .attr('class', 'fill')
+      .attr('width', this.padding.left - this.gutter)
+      .attr('height', this.rowHeight)
+      .attr('fill', util.color.blue)
+      .style('cursor', 'pointer')
+      .attr('rx', 3);
+    rowE.append('text').attr('class', 'label');
+
+    row.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+
+    row
+      .select('rect.fill')
+      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
+      .on('click', (d, i) => {
+        this.render(this.data, { selected: i });
+      })
+      .on('mouseenter', function(d, i) {
+        if (i == active) return;
+        d3.select(this).attr('fill-opacity', 0.15);
+      })
+      .on('mouseleave', function(d, i) {
+        if (i == active) return;
+        d3.select(this).attr('fill-opacity', 0);
+      });
+
+    row
+      .select('text.label')
+      .text(d => d.geography)
+      .attr('y', this.rowHeight / 2 + 5)
+      .attr('x', 10)
+      .attr('font-weight', d => (d.totalRow || d.avgRow ? 700 : 400))
+      .attr('fill', util.color.purple)
+      .style('pointer-events', 'none');
   };
 
   this.area = d3
@@ -220,25 +239,6 @@ function Template(svg) {
       .select('g.yAxis-title')
       .transition()
       .attr('transform', `translate(-50, ${this.height / 2})`);
-  };
-
-  this.render = function(data, options) {
-    if (!this.commonRender(data, options)) return;
-
-    this.selected =
-      options.selected == null || options.selected == undefined
-        ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
-        : options.selected;
-
-    this.height = 400;
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.drawAxis();
-    this.drawPyramid();
-    this.drawList();
   };
 
   this.init(svg);

@@ -11,6 +11,20 @@ function Template(svg) {
   this.y = d3.scaleLinear();
   this.x = d3.scaleBand();
 
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.svg
+      .transition()
+      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
+
+    this.drawRows();
+    this.drawColumnHeaders();
+  };
+
   this.created = function() {};
 
   this.initRowElements = function(rowsE) {
@@ -272,20 +286,6 @@ function Template(svg) {
 
     column.select('text.heading').text(d => (d.heading ? d.heading : ''));
     column.select('text.subHeading').text(d => (d.subheading ? d.subheading : ''));
-  };
-
-  this.render = function(data, options = {}) {
-    if (!this.commonRender(data, options)) return;
-
-    this.svg
-      .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
-
-    this.drawRows();
-    this.drawColumnHeaders();
   };
 
   this.init(svg);

@@ -13,6 +13,24 @@ function Template(svg) {
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
 
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
+    this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
+    this.height = 400;
+    this.svg
+      .transition()
+      .attr('height', this.height + this.padding.top + this.padding.bottom)
+      .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.setScales();
+    this.drawAxis();
+    this.drawLines();
+    this.drawTabs();
+    this.drawLabels();
+    this.drawInfobox();
+  };
+
   this.created = function() {
     // Create tabs placeholder
     this.tabs = this.svg
@@ -331,24 +349,6 @@ function Template(svg) {
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
       .call(d3.axisBottom(this.x));
-  };
-
-  this.render = function(data, options = {}) {
-    if (!this.commonRender(data, options)) return;
-
-    this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
-    this.height = 400;
-    this.svg
-      .transition()
-      .attr('height', this.height + this.padding.top + this.padding.bottom)
-      .attr('width', this.padding.left + this.width + this.padding.right);
-
-    this.setScales();
-    this.drawAxis();
-    this.drawLines();
-    this.drawTabs();
-    this.drawLabels();
-    this.drawInfobox();
   };
 
   this.init(svg);
