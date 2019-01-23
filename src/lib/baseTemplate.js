@@ -20,6 +20,10 @@
 
 import d3 from '@/assets/d3';
 import debounce from '../util/debounce';
+import * as locale from './locale';
+
+d3.timeFormatDefaultLocale(locale.timeFormat);
+d3.formatDefaultLocale(locale.format);
 
 function Base_Template(svg) {
   this.data = {};
