@@ -146,8 +146,8 @@ export default {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-          ? bydeler.find(bydel => bydel.uri === id).value
-          : 'Velg bydel';
+        ? bydeler.find(bydel => bydel.uri === id).value
+        : 'Velg bydel';
     },
 
     onClickHome() {
@@ -280,10 +280,30 @@ export default {
     flex-grow: 1;
     height: 40px;
     align-items: center;
+    position: relative;
+
+    // Add visual border on the left side of text on hover
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      width: 10px;
+      top: 0;
+      left: -10px;
+      bottom: 0;
+      background: $color-purple;
+      pointer-events: none;
+    }
   }
 
   &:not(&--active) &--label:hover {
     background-color: darken($color-purple, 5%);
+
+    // Show the visual border on hover
+    &::before {
+      background-color: darken($color-purple, 5%);
+      display: block;
+    }
   }
 }
 
