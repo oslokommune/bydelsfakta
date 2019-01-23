@@ -14,7 +14,7 @@
         :selected="element.selected"
       >{{element.label}}</option>
     </select>
-    <svg class="graph__svg" ref="svg" focusable="true" tabindex="-1"></svg>
+    <svg class="graph__svg" ref="svg"></svg>
     <resize-observer @notify="svg.resize(data, {method: settings.method })"/>
   </div>
 </template>

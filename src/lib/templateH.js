@@ -352,7 +352,9 @@ function Template(svg) {
       .on('mouseover', d => {
         this.render(this.data, { highlight: d.date });
       })
-      .on('click', d => {
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (d3.event && d3.event.type === 'click') j[i].blur();
         this.render(this.data, { highlight: d.date });
       })
       .on('mouseover', function() {
@@ -366,7 +368,8 @@ function Template(svg) {
       })
       .transition()
       .duration(1000)
-      .attr('fill-opacity', 0);
+      .attr('fill-opacity', 0)
+      .attr('tabindex', 0);
   };
 
   this.resetScales = function() {

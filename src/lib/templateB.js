@@ -214,10 +214,12 @@ function Template(svg) {
 
     row
       .attr('d', d => this.line(d.values))
-      .attr('stroke', d => {
+      .attr('stroke', (d, i) => {
+        if (this.highlight >= 0 && i === this.highlight) return util.color.yellow;
+        if (this.highlight >= 0 && i !== this.highlight) return util.color.grey;
         if (d.totalRow) return util.color.blue;
         if (d.avgRow) return util.color.red;
-        return '#cccccc';
+        return util.color.grey;
       })
       .attr('stroke-width', 3)
       .attr('fill', 'none');
@@ -230,13 +232,17 @@ function Template(svg) {
       d3.select(this).attr('stroke-width', strokeWidth);
     });
 
-    row.on('click', (d, i) => {
-      if (i === this.highlight) {
-        this.render(this.data, { method: this.method, highlight: -1 });
-      } else {
-        this.render(this.data, { method: this.method, highlight: i });
-      }
-    });
+    row
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'click') j[i].blur();
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (i === this.highlight) {
+          this.render(this.data, { method: this.method, highlight: -1 });
+        } else {
+          this.render(this.data, { method: this.method, highlight: i });
+        }
+      })
+      .attr('tabindex', 0);
   };
 
   this.setScales = function() {

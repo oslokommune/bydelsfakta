@@ -107,7 +107,7 @@ function Template(svg) {
     this.list = this.svg
       .append('g')
       .attr('class', 'list')
-      .attr('transform', `translate(0, ${this.padding.top})`);
+      .attr('transform', `translate(3, ${this.padding.top})`);
     this.list
       .append('text')
       .text('Velg delbydel')
@@ -148,18 +148,22 @@ function Template(svg) {
       .attr('rx', 3);
     rowE.append('text').attr('class', 'label');
 
-    row.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-
     row
-      .select('rect.fill')
-      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
-      .on('click', (d, i) => {
+      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`)
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (d3.event && d3.event.type === 'click') j[i].blur();
         if (this.selected === i) {
           this.render(this.data, { selected: null });
         } else {
           this.render(this.data, { selected: i });
         }
       })
+      .attr('tabindex', 0);
+
+    row
+      .select('rect.fill')
+      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
       .on('mouseenter', function(d, i) {
         if (i == active) return;
         d3.select(this).attr('fill-opacity', 0.25);
