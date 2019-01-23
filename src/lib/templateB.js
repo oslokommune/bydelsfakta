@@ -230,13 +230,17 @@ function Template(svg) {
       d3.select(this).attr('stroke-width', strokeWidth);
     });
 
-    row.on('click', (d, i) => {
-      if (i === this.highlight) {
-        this.render(this.data, { method: this.method, highlight: -1 });
-      } else {
-        this.render(this.data, { method: this.method, highlight: i });
-      }
-    });
+    row
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'click') j[i].blur();
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (i === this.highlight) {
+          this.render(this.data, { method: this.method, highlight: -1 });
+        } else {
+          this.render(this.data, { method: this.method, highlight: i });
+        }
+      })
+      .attr('tabindex', 0);
   };
 
   this.setScales = function() {

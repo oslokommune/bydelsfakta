@@ -331,14 +331,14 @@ function Template(svg) {
     });
 
     row
-      .on('click keyup.enter', (d, i, j) => {
+      .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (d3.event && d3.event.type === 'click') j[i].blur();
         if (i === this.highlight) {
           this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
         } else {
           this.render(this.data, { method: this.method, series: this.series, highlight: i });
         }
-        j[i].blur();
       })
       .attr('tabindex', 0);
   };
