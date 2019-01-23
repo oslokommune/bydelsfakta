@@ -9,7 +9,7 @@
         :key="link.key"
         :label="link.value"
         class="oslo__navigation-link"
-        :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri) }"
+        :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
         style="cursor: pointer; width: 100%"
         @click="onClickBydel(link.uri)"
       >
@@ -104,10 +104,7 @@ export default {
 
       if (this.selected.length === 0) {
         this.$router.push({ name: 'Home' });
-      } else if (this.selected.length === 1) {
-        const bydel = bydeler.find(item => item.key === this.selected[0]).uri;
-        this.$router.push({ path: `/bydel/${bydel}` });
-      } else if (this.selected.length > 1) {
+      } else {
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
@@ -120,6 +117,10 @@ export default {
 
     checkActiveSammenlign() {
       return this.$route.path.includes('sammenlign');
+    },
+
+    checkMultipleBydeler(key) {
+      return this.$route.path.includes('sammenlign') && this.selected.includes(key);
     },
 
     onClickBydel(bydel) {
@@ -253,6 +254,10 @@ a {
   &--label {
     letter-spacing: 0.3px;
   }
+}
+
+.oslo__navigation-link--compare {
+  background-color: lighten($color-purple, 5%);
 }
 
 .oslo__navigation-topbar {
