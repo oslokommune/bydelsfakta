@@ -8,7 +8,8 @@
         v-for="link in links"
         :key="link.key"
         :label="link.value"
-        :class="checkActiveBydel(link.uri)"
+        class="oslo__navigation-link"
+        :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri) }"
         style="cursor: pointer; width: 100%"
         @click="onClickBydel(link.uri)"
       >
@@ -18,6 +19,7 @@
           :value="link.key"
           :id="link.key"
           @change="onChangeCheckbox"
+          :disabled="disableChecbox(link.key)"
         />
         <label :for="link.key"></label>
         <span
@@ -27,7 +29,8 @@
         </span>
       </div>
       <div
-        :class="checkActiveSammenlign()"
+        class="oslo__navigation-link"
+        :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
         style="margin-top: 0.7rem; cursor: pointer;"
         @click="onClickSammenlign"
         role="button"
@@ -112,13 +115,11 @@ export default {
     },
 
     checkActiveBydel(link) {
-      return this.$route.params.bydel === link && this.$route.path.includes('bydel')
-        ? 'oslo__navigation-link--active'
-        : 'oslo__navigation-link';
+      return this.$route.params.bydel === link && this.$route.path.includes('bydel');
     },
 
     checkActiveSammenlign() {
-      return this.$route.path.includes('sammenlign') ? 'oslo__navigation-link--active' : 'oslo__navigation-link';
+      return this.$route.path.includes('sammenlign');
     },
 
     onClickBydel(bydel) {
@@ -160,6 +161,10 @@ export default {
         this.$router.push({ path: `/sammenlign/${route.params.bydel}` });
       }
       this.selectedSubpage = null;
+    },
+
+    disableChecbox(key) {
+      return this.selected.length === 1 && this.selected[0] === key;
     },
   },
   watch: {
@@ -224,7 +229,6 @@ a {
 
   background-color: $color-purple;
   color: rgba(white, 0.9);
-  transition: background-color 0.3s ease-in-out;
 
   &--active {
     background-color: $color-blue;
@@ -240,10 +244,6 @@ a {
         background-color: $color-blue;
       }
     }
-  }
-
-  &:hover {
-    background-color: lighten($color-purple, 10%);
   }
 
   &--label {
