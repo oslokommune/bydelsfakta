@@ -35,7 +35,7 @@ function Template(svg) {
 
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.canvas
@@ -50,6 +50,7 @@ function Template(svg) {
     this.drawAxis();
     this.drawColumns();
     this.drawRows();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {

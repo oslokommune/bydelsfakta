@@ -32,7 +32,7 @@ function Template(svg) {
     this.height = 400;
     this.svg
       .transition()
-      .attr('height', this.height + this.padding.top + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.setScales();
@@ -41,6 +41,7 @@ function Template(svg) {
     this.drawTabs();
     this.drawLabels();
     this.drawInfobox();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {

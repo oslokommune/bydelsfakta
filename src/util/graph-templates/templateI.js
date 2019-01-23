@@ -95,13 +95,14 @@ function Template(svg) {
 
     this.svg
       .transition()
-      .attr('height', 500)
+      .attr('height', 500 + this.sourceHeight)
       .attr('width', this.parentWidth());
 
     this.drawMatrix();
     this.drawList();
     this.updateAxisLabels();
     this.drawLines();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {

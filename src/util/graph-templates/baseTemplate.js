@@ -23,6 +23,7 @@
 
 import d3 from '@/assets/d3';
 import debounce from '../debounce';
+import color from './colors';
 import * as locale from './locale';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
@@ -49,6 +50,7 @@ function Base_Template(svg) {
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
+  this.sourceHeight = 25;
 
   // Resize is called from the parent vue component
   // every time the container size changes.
@@ -87,6 +89,47 @@ function Base_Template(svg) {
     // appended to the svg after initialization. This method is run
     // once for each initialization.
     this.created();
+    this.addSourceElement();
+  };
+
+  this.addSourceElement = function() {
+    let group = this.svg
+      .append('g')
+      .attr('class', 'sourceGroup')
+      .attr('fill', color.purple)
+      .attr('opacity', 0);
+
+    group
+      .append('text')
+      .attr('class', 'source-label')
+      .attr('font-size', 10)
+      .text('Kilde: ');
+
+    group
+      .append('text')
+      .attr('class', 'source')
+      .attr('font-size', 10)
+      .attr('transform', () => {
+        let labelWidth = group
+          .select('.source-label')
+          .node()
+          .getBBox().width;
+        return `translate(${labelWidth + 4}, 0)`;
+      });
+  };
+
+  this.drawSource = function(str) {
+    this.svg.select('text.source').text(str);
+    let parent = this.svg.node().parentNode.getBoundingClientRect();
+    let source = this.svg
+      .select('g.sourceGroup')
+      .node()
+      .getBBox();
+    let offsetX = parent.width - source.width;
+    this.svg
+      .select('g.sourceGroup')
+      .attr('opacity', 1)
+      .attr('transform', `translate(${offsetX}, ${parent.height - 9})`);
   };
 
   // The parent container width is needed for each render of a template.

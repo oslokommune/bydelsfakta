@@ -33,7 +33,10 @@ function Template(svg) {
     this.age.range([0, this.width - this.paddingUpperLeft]);
 
     this.svg
-      .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
+      .attr(
+        'height',
+        this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom + this.sourceHeight
+      )
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     // Move the brushes if a range was selected
@@ -127,6 +130,7 @@ function Template(svg) {
     this.setBrushes();
     this.drawRows();
     this.drawLines();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.age = d3.scaleLinear().domain(extent);

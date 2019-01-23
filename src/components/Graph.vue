@@ -116,7 +116,7 @@ export default {
 <style scoped>
 .graph__container {
   position: relative;
-  margin: 1em;
+  margin: 1em 1em 0 1em;
   overflow: hidden;
 }
 

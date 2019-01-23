@@ -33,11 +33,12 @@ function Template(svg) {
 
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawRows();
     this.drawLegend();
+    this.drawSource('Statistisk sentralbyrå (test)');
 
     this.canvas
       .select('line.zero')

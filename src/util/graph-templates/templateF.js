@@ -42,7 +42,7 @@ function Template(svg) {
     });
 
     this.svg
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.width1 = (this.width - this.gapX) / 2;
@@ -78,6 +78,7 @@ function Template(svg) {
       .attr('x', this.width1 / 2);
 
     this.drawRows();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {

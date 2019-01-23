@@ -29,13 +29,14 @@ function Template(svg) {
 
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
 
     this.drawRows();
     this.drawColumnHeaders();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {};
