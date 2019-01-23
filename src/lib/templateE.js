@@ -216,7 +216,12 @@ function Template(svg) {
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
-      .call(d3.axisBottom(this.x).tickFormat(d => Math.abs(d)));
+      .call(
+        d3
+          .axisBottom(this.x)
+          .ticks(this.width / 65)
+          .tickFormat(d => Math.abs(d))
+      );
     this.yAxis.each((d, i, j) => {
       if (d.type == 'left') {
         d3.select(j[i])

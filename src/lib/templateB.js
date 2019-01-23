@@ -45,24 +45,6 @@ function Template(svg) {
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
 
-  this.getTickFormat = function() {
-    let format;
-    let range = this.y.max - this.y.min;
-
-    if (this.method === 'value') {
-      return d3.format('');
-    }
-
-    if (range < 0.01) {
-      format = d3.format('.2%');
-    } else if (range < 0.04) {
-      format = d3.format('.1%');
-    } else {
-      format = d3.format('.0%');
-    }
-    return format;
-  };
-
   this.drawLabels = function() {
     let labels = this.canvas.selectAll('text.label').data(this.data.data.filter(row => row.avgRow || row.totalRow));
     let labelsE = labels
@@ -264,9 +246,8 @@ function Template(svg) {
   };
 
   this.drawAxis = function() {
-    let formatYTicks = this.getTickFormat();
-    this.yAxis.call(d3.axisLeft(this.y).tickFormat(formatYTicks));
-    this.xAxis.call(d3.axisBottom(this.x)).attr('transform', `translate(0, ${this.height})`);
+    this.yAxis.call(d3.axisLeft(this.y).ticks(this.height / 30));
+    this.xAxis.call(d3.axisBottom(this.x).ticks(this.width / 90)).attr('transform', `translate(0, ${this.height})`);
   };
 
   this.init(svg);

@@ -384,9 +384,9 @@ function Template(svg) {
       .domain(d3.extent(this.data.data.actual.map(d => d.change).map((d, i) => (i == 1 ? d * 1.3 : d))));
     this.x.range([0, this.width1]).domain(dates);
     this.y.range([this.height1, 0]).domain([minPop, maxPop]);
-    this.xAxis.call(d3.axisBottom(this.x));
-    this.yAxis.call(d3.axisLeft(this.y).ticks(this.height1 / 50));
-    this.y2Axis.call(d3.axisLeft(this.y2).ticks(this.height2 / 40));
+    this.xAxis.call(d3.axisBottom(this.x).ticks(this.width1 / 60));
+    this.yAxis.call(d3.axisLeft(this.y).ticks(this.height1 / 40));
+    this.y2Axis.call(d3.axisLeft(this.y2).ticks(this.height2 / 20));
   };
 
   this.init(svg);

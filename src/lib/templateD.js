@@ -22,12 +22,14 @@ function Template(svg) {
   let extent = [0, 119];
   let gBrushSmall, gBrushLarge;
 
-  let NO = d3.formatDefaultLocale({ decimal: ',', thousands: ' ', grouping: [3], currency: ['', 'NOK'] });
+  let NO = d3.formatDefaultLocale({ decimal: ',', thousands: '', grouping: [3], currency: ['', 'NOK'] });
   const formatPercent = NO.format('.1%');
   const formatFloat = NO.format(',.0f');
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
+
+    this.age.range([0, this.width - this.paddingUpperLeft]);
 
     this.svg
       .attr('height', this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom)
@@ -39,6 +41,14 @@ function Template(svg) {
       gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
       gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
     }
+
+    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]).on('brush end', () => {
+      this.brushed(this);
+    });
+
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]).on('brush end', () => {
+      this.brushed(this);
+    });
 
     this.setBrushes();
 
@@ -93,15 +103,23 @@ function Template(svg) {
           }
         })
     );
-    this.upperXAxis.transition().call(d3.axisBottom(this.age).tickFormat(d => d + ' år'));
+    this.upperXAxis.transition().call(
+      d3
+        .axisBottom(this.age)
+        .ticks((this.width - this.paddingUpperLeft) / 100)
+        .tickFormat(d => d + ' år')
+    );
     this.lowerXAxis.transition().call(
-      d3.axisTop(this.x).tickFormat(d => {
-        if (this.method == 'ratio') {
-          return formatPercent(d);
-        } else {
-          return formatFloat(d);
-        }
-      })
+      d3
+        .axisTop(this.x)
+        .tickFormat(d => {
+          if (this.method == 'ratio') {
+            return formatPercent(d);
+          } else {
+            return formatFloat(d);
+          }
+        })
+        .ticks((this.width - this.paddingLowerLeft) / 70)
     );
 
     // Trigger re-draws of rows (bars) and lines
@@ -110,12 +128,9 @@ function Template(svg) {
     this.drawLines();
   };
 
-  this.age = d3
-    .scaleLinear()
-    .range([0, this.width - this.paddingUpperLeft])
-    .domain(extent);
+  this.age = d3.scaleLinear().domain(extent);
 
-  let brushed = function(self) {
+  this.brushed = function(self) {
     var s = d3.event.selection || self.age.range();
     extent = s.map(val => Math.round(self.age.invert(val)));
 
@@ -152,19 +167,8 @@ function Template(svg) {
     .x((d, i) => this.age(i))
     .y(d => this.y(d[this.method]));
 
-  const brushLarge = d3
-    .brushX()
-    .extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]])
-    .on('brush end', () => {
-      brushed(this);
-    });
-
-  const brushSmall = d3
-    .brushX()
-    .extent([[0, 0], [this.width - this.paddingUpperLeft, 19]])
-    .on('brush end', () => {
-      brushed(this);
-    });
+  const brushLarge = d3.brushX();
+  const brushSmall = d3.brushX();
 
   // Draws the handle icons. Triggered from this.created()
   this.drawHandles = function() {

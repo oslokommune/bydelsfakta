@@ -53,7 +53,7 @@ function Template(svg) {
         d3
           .axisTop(this.x2)
           .tickFormat(d => `${d} år`)
-          .ticks(this.width2 / 45)
+          .ticks(this.width2 / 60)
       )
       .attr('transform', `translate(${this.width1 + this.gapX})`);
 
@@ -64,7 +64,7 @@ function Template(svg) {
       d3
         .axisTop(this.x)
         .tickFormat(d => `${d} år`)
-        .ticks(this.width2 / 45)
+        .ticks(this.width2 / 60)
     );
 
     this.canvas
