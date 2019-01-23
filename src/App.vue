@@ -132,6 +132,10 @@ export default {
 
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
+      if (this.selected.length < 2) {
+        this.selected = [];
+        this.$router.push({ name: 'Sammenlign' });
+      }
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
         : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
@@ -248,7 +252,6 @@ a {
 
   &--label {
     letter-spacing: 0.3px;
-    margin-left: 1rem;
   }
 }
 
@@ -295,7 +298,8 @@ input[type='checkbox'] {
     opacity: 0.5;
     position: relative;
     vertical-align: middle;
-    width: 40px;
+    width: 50px;
+    padding-left: 1rem;
 
     // unchecked border
     &::before {
@@ -305,7 +309,7 @@ input[type='checkbox'] {
       border-radius: 1px;
       content: '';
       height: 18px;
-      left: 10px;
+      left: 20px;
       opacity: 0.2;
       position: absolute;
       top: 10px;
@@ -314,8 +318,8 @@ input[type='checkbox'] {
   }
 
   &:checked + label {
-    opacity: 100;
     position: relative;
+    opacity: 1;
 
     // checked inside border
     &::after {
@@ -323,7 +327,7 @@ input[type='checkbox'] {
       border-radius: 1px;
       content: '';
       height: 10px;
-      left: 14px;
+      left: 24px;
       position: absolute;
       top: 14px;
       width: 10px;
@@ -331,12 +335,12 @@ input[type='checkbox'] {
 
     // checked border
     &::before {
-      background-color: $color-purple;
       border: 1px solid $color-blue;
       border-radius: 1px;
       content: '';
       height: 18px;
-      left: 10px;
+      left: 20px;
+      opacity: 1;
       position: absolute;
       top: 10px;
       width: 18px;
