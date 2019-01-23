@@ -21,12 +21,18 @@
         <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
       </div>
       <div
-        class="oslo__navigation-link"
+        class="oslo__navigation-link oslo__navigation-link--compare"
         :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
         @click="onClickSammenlign"
         role="button"
       >
-        <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
+        <span class="oslo__navigation-link--label oslo__navigation-link--label-compare">Sammenlign bydeler</span>
+      </div>
+      <div style="display: flex; justify-content: flex-end; flex-direction: column; padding-right: 1rem">
+        <div style="align-self: flex-end">
+          <button class="oslo__navigation-button">Velg alle</button>
+          <button class="oslo__navigation-button" :disabled="selected.length === 0" @click="selected = []">Fjern alle</button>
+        </div>
       </div>
     </div>
     <div id="content">
@@ -142,8 +148,8 @@ export default {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-        ? bydeler.find(bydel => bydel.uri === id).value
-        : 'Velg bydel';
+          ? bydeler.find(bydel => bydel.uri === id).value
+          : 'Velg bydel';
     },
 
     onClickHome() {
@@ -270,8 +276,7 @@ export default {
   }
 
   &--compare {
-    background-color: lighten($color-purple, 5%);
-    transition: background-color 0.3s ease-in-out;
+    margin-top: 2rem;
   }
 
   &--label {
@@ -281,6 +286,10 @@ export default {
     height: 40px;
     align-items: center;
     position: relative;
+
+    &-compare {
+      padding-left: 3.6rem;
+    }
 
     // Add visual border on the left side of text on hover
     &::before {
@@ -412,6 +421,21 @@ input[type='checkbox'] {
       opacity: 1;
       transition: all 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
+  }
+}
+
+
+.oslo__navigation-button {
+  border: 1px solid rgb(248, 198, 107);
+  color: rgb(248, 198, 107);
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0.5rem;
+
+  &:disabled {
+    opacity: 0.2;
   }
 }
 </style>
