@@ -291,9 +291,28 @@ function Template(svg) {
       .on('mouseleave', (d, i) => {
         this.render(this.data, { highlight: -1, selected: this.selected });
       })
-      .on('click', (d, i) => {
+      .on('click', (d, i, j) => {
         if (this.data.meta.series.length === 1) return;
         let target = this.selected > -1 ? -1 : i;
+
+        // Move affected column to index 0 in DOM
+        let columnToBeMoved = j[i].parentElement;
+        columnToBeMoved.parentElement.prepend(columnToBeMoved);
+
+        // Move affected rects to index 0 in DOM
+        let barsToBeMoved = this.canvas
+          .select('g.rows')
+          .selectAll('g.row')
+          .selectAll('rect.bar')
+          .filter((dd, ii, jj) => {
+            return ii === i;
+          });
+
+        barsToBeMoved.each(function() {
+          let barElement = d3.select(this).node();
+          barElement.parentElement.prepend(barElement);
+        });
+
         this.render(this.data, { selected: target });
       });
 
