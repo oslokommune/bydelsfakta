@@ -19,7 +19,7 @@
  */
 
 import d3 from '@/assets/d3';
-import debounce from '../util/debounce';
+import debounce from '../debounce';
 import * as locale from './locale';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);

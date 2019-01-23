@@ -22,16 +22,16 @@
 <script>
 import * as d3 from 'd3';
 import ageRanges from '../config/ageRanges';
-import TemplateA from '../lib/templateA';
-import TemplateB from '../lib/templateB';
-import TemplateC from '../lib/templateC';
-import TemplateD from '../lib/templateD';
-import TemplateE from '../lib/templateE';
-import TemplateF from '../lib/templateF';
-import TemplateG from '../lib/templateG';
-import TemplateH from '../lib/templateH';
-import TemplateI from '../lib/templateI';
-import TemplateJ from '../lib/templateJ';
+import TemplateA from '../util/graph-templates/templateA';
+import TemplateB from '../util/graph-templates/templateB';
+import TemplateC from '../util/graph-templates/templateC';
+import TemplateD from '../util/graph-templates/templateD';
+import TemplateE from '../util/graph-templates/templateE';
+import TemplateF from '../util/graph-templates/templateF';
+import TemplateG from '../util/graph-templates/templateG';
+import TemplateH from '../util/graph-templates/templateH';
+import TemplateI from '../util/graph-templates/templateI';
+import TemplateJ from '../util/graph-templates/templateJ';
 
 export default {
   data: () => ({
