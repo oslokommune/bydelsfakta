@@ -234,9 +234,11 @@ a {
 
   background-color: $color-purple;
   color: rgba(white, 0.9);
+  transition: all 0.3s ease-in-out;
 
   &--active {
     background-color: $color-blue;
+    transition: all 0.3s ease-in-out;
 
     #{$p}--label {
       color: $color-purple;
@@ -244,20 +246,18 @@ a {
     }
 
     input[type='checkbox']:checked + label {
-      background-color: $color-blue;
-      &::before {
-        background-color: $color-blue;
-      }
+      opacity: 0;
     }
+  }
+
+  &--compare {
+    background-color: lighten($color-purple, 5%);
+    transition: background-color 0.3s ease-in-out;
   }
 
   &--label {
     letter-spacing: 0.3px;
   }
-}
-
-.oslo__navigation-link--compare {
-  background-color: lighten($color-purple, 5%);
 }
 
 .oslo__navigation-topbar {
@@ -306,6 +306,20 @@ input[type='checkbox'] {
     width: 50px;
     padding-left: 1rem;
 
+    // checked inside border
+    &::after {
+      background-color: $color-blue;
+      border-radius: 1px;
+      content: '';
+      height: 10px;
+      left: 24px;
+      position: absolute;
+      top: 14px;
+      width: 10px;
+      transform: scale(0);
+      transition: all 0.3s ease-in-out;
+    }
+
     // unchecked border
     &::before {
       -moz-border-radius: 1px;
@@ -319,6 +333,7 @@ input[type='checkbox'] {
       position: absolute;
       top: 10px;
       width: 18px;
+      transition: all 0.3s ease-in-out;
     }
   }
 
@@ -328,27 +343,15 @@ input[type='checkbox'] {
 
     // checked inside border
     &::after {
-      background-color: $color-blue;
-      border-radius: 1px;
-      content: '';
-      height: 10px;
-      left: 24px;
-      position: absolute;
-      top: 14px;
-      width: 10px;
+      transform: scale(1);
+      transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
 
     // checked border
     &::before {
       border: 1px solid $color-blue;
-      border-radius: 1px;
-      content: '';
-      height: 18px;
-      left: 20px;
       opacity: 1;
-      position: absolute;
-      top: 10px;
-      width: 18px;
+      transition: all 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
   }
 }
