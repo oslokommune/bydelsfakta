@@ -132,19 +132,22 @@ export default {
       const routes = this.$route.path.split('/');
       if (this.selected.length < 2) {
         this.selected = [];
-        this.$router.push({ name: 'Sammenlign' });
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/alle` });
+      } else {
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
       }
-      routes.length > 3
-        ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
-        : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
     },
 
     getBydel(id) {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-        ? bydeler.find(bydel => bydel.uri === id).value
-        : 'Velg bydel';
+          ? bydeler.find(bydel => bydel.uri === id).value
+          : 'Velg bydel';
     },
 
     onClickHome() {
