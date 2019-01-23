@@ -143,7 +143,12 @@ function Template(svg) {
     let max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
 
     this.x.domain([min, max]).range([0, this.width]);
-    this.xAxis.call(d3.axisTop(this.x).tickFormat(d => Math.abs(d) * 100 + '%'));
+    this.xAxis.call(
+      d3
+        .axisTop(this.x)
+        .ticks(this.width / 60)
+        .tickFormat(d => Math.abs(d) * 100 + '%')
+    );
 
     let series = this.bars.selectAll('g.series').data(seriesData);
     let seriesE = series

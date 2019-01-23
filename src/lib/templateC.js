@@ -53,24 +53,6 @@ function Template(svg) {
     this.createInfoBoxElements();
   };
 
-  this.getTickFormat = function() {
-    let format;
-    let range = this.y.max - this.y.min;
-
-    if (this.method === 'value') {
-      return d3.format('');
-    }
-    if (range < 0.001) {
-      format = d3.format('.2%');
-    } else if (range < 0.005) {
-      format = d3.format('.1%');
-    } else {
-      format = d3.format('.0%');
-    }
-
-    return format;
-  };
-
   this.createInfoBoxElements = function() {
     // Create infobox placeholder
     this.infobox = this.svg.append('g').attr('class', 'infobox');
@@ -362,13 +344,11 @@ function Template(svg) {
   };
 
   this.drawAxis = function() {
-    let formatYTicks = this.getTickFormat();
-
-    this.yAxis.transition().call(d3.axisLeft(this.y).tickFormat(formatYTicks));
+    this.yAxis.transition().call(d3.axisLeft(this.y).ticks(this.height / 30));
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
-      .call(d3.axisBottom(this.x));
+      .call(d3.axisBottom(this.x).ticks(this.width / 110));
   };
 
   this.init(svg);

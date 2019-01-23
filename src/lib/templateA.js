@@ -237,7 +237,7 @@ function Template(svg) {
         .call(
           d3
             .axisBottom(this.x[i])
-            .ticks(2)
+            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
             .tickFormat(formatPercent)
         );
     });
