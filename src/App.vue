@@ -19,14 +19,9 @@
           :id="link.key"
           @change="onChangeCheckbox"
           :disabled="disableChecbox(link.key)"
-        />
-        <label :for="link.key"></label>
-        <span
-          class="oslo__navigation-link--label"
-          @click="onClickBydel(link.uri)"
         >
-          {{link.value}}
-        </span>
+        <label :for="link.key"></label>
+        <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
       </div>
       <div
         class="oslo__navigation-link"
@@ -148,8 +143,8 @@ export default {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
         : id !== undefined
-          ? bydeler.find(bydel => bydel.uri === id).value
-          : 'Velg bydel';
+        ? bydeler.find(bydel => bydel.uri === id).value
+        : 'Velg bydel';
     },
 
     onClickHome() {
@@ -244,9 +239,12 @@ export default {
 .oslo__navigation-link {
   $p: &;
 
+  position: relative;
   background-color: $color-purple;
   color: rgba(white, 0.9);
   transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
 
   &--active {
     background-color: $color-blue;
@@ -257,8 +255,14 @@ export default {
       font-weight: 500;
     }
 
+    label:hover {
+      background: none !important;
+    }
+
     input[type='checkbox']:checked + label {
-      opacity: 0;
+      &::after {
+        transform: scale(0);
+      }
     }
   }
 
@@ -269,6 +273,14 @@ export default {
 
   &--label {
     letter-spacing: 0.3px;
+    display: flex;
+    flex-grow: 1;
+    height: 40px;
+    align-items: center;
+  }
+
+  &:not(&--active) &--label:hover {
+    background-color: darken($color-purple, 5%);
   }
 }
 
@@ -312,11 +324,18 @@ input[type='checkbox'] {
     cursor: pointer;
     display: inline-block;
     height: 40px;
-    opacity: 0.5;
     position: relative;
     vertical-align: middle;
     width: 50px;
     padding-left: 1rem;
+
+    &:hover {
+      background: darken($color-purple, 10%);
+      &::before {
+        opacity: 0.8;
+        background: rgba(white, 0.15);
+      }
+    }
 
     // checked inside border
     &::after {
@@ -341,7 +360,7 @@ input[type='checkbox'] {
       content: '';
       height: 18px;
       left: 20px;
-      opacity: 0.2;
+      opacity: 0.35;
       position: absolute;
       top: 10px;
       width: 18px;
