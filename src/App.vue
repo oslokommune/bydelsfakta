@@ -1,16 +1,13 @@
 <template>
   <v-app>
     <div id="navbar">
-      <div style="align-self: center">
         <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
-      </div>
       <div
         v-for="link in links"
         :key="link.key"
         :label="link.value"
         class="oslo__navigation-link"
         :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
-        style="cursor: pointer; width: 100%"
       >
         <input
           type="checkbox"
@@ -26,7 +23,6 @@
       <div
         class="oslo__navigation-link"
         :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
-        style="margin-top: 0.7rem; cursor: pointer;"
         @click="onClickSammenlign"
         role="button"
       >
@@ -35,7 +31,7 @@
     </div>
     <div id="content">
       <div class="oslo__navigation-topbar">
-        <div @click="backButton" role="button" style="display: flex; flex-direction: row;">
+        <div @click="backButton" role="button" class="oslo__navigation-topbar-button">
           <v-icon class="oslo__topbar">arrow_back</v-icon>
           <h4
             class="text-uppercase oslo__topbar oslo__topbar-text"
@@ -231,6 +227,7 @@ export default {
   cursor: pointer;
   margin-top: 3rem;
   margin-bottom: 2rem;
+  align-self: center;
 }
 
 .oslo__navigation-drawer {
@@ -248,6 +245,9 @@ export default {
   transition: all 0.3s ease-in-out;
   display: flex;
   align-items: center;
+
+  cursor: pointer;
+  width: 100%;
 
   &--active {
     background-color: $color-blue;
@@ -314,6 +314,11 @@ export default {
   flex-direction: column;
   padding: 2rem;
   width: 100%;
+
+  &-button {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .oslo__topbar {

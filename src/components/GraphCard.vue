@@ -13,35 +13,32 @@
           >{{tab.label}}</button>
         </div>
         <div
-          class="tabs--right"
-          style="display: flex;"
           @keydown.escape="closeMenu()"
           v-click-outside="closeMenu"
+          class="context-menu"
         >
-          <div style="position: relative">
-            <button
-              class="button__menu"
-              @click="showDropdown = !showDropdown"
-              aria-label="context-menu-button"
+          <button
+            class="context-menu__button"
+            @click="showDropdown = !showDropdown"
+            aria-label="context-menu-button"
+          >
+            <v-icon v-if="showDropdown" class="context-menu__button-icon">close</v-icon>
+            <v-icon v-if="!showDropdown" class="context-menu__button-icon">menu</v-icon>
+          </button>
+          <div
+            v-if="showDropdown"
+            class="context-menu__dropdown"
+          >
+            <a
+              @click="savePng(settings.tabs[active].id)"
+              role="button"
+              class="context-menu__dropdown-item"
+              tabIndex="0"
+              aria-label="lagre graf som png"
             >
-              <v-icon v-if="showDropdown" class="button__menu-icon">close</v-icon>
-              <v-icon v-if="!showDropdown" class="button__menu-icon">menu</v-icon>
-            </button>
-            <div
-              style="width: 200px; background-color: rgb(178, 210, 216); z-index: 1; position: absolute; right: 0"
-              v-if="showDropdown"
-            >
-              <a
-                @click="savePng(settings.tabs[active].id)"
-                role="button"
-                class="button__item"
-                tabIndex="0"
-                aria-label="lagre graf som png"
-              >
-                <v-icon color="rgb(41, 40, 88)" class="button__item--icon">photo_size_select_actual</v-icon>
-                <span>Last ned som PNG</span>
-              </a>
-            </div>
+              <v-icon class="context-menu__dropdown-item-icon">photo_size_select_actual</v-icon>
+              <span>Last ned som PNG</span>
+            </a>
           </div>
         </div>
       </div>
@@ -114,100 +111,103 @@ export default {
 .card {
   background: white;
   border: 1px solid $color-grey-100;
-  width: 100%;
   border-radius: 3px;
   box-shadow: 0 1.5px 3px rgba($color-grey-600, 0.95);
+  width: 100%;
 }
 
 /* Style the tabs */
 .tabs {
-  display: flex;
-  justify-content: space-between;
   background-color: $color-grey-50;
-  width: 100%;
+  border-bottom: 1px solid $color-grey-100;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  border-bottom: 1px solid $color-grey-100;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
   div:first-of-type a:first-child {
     border-top-left-radius: 3px;
   }
 
   &__button {
-    float: left;
-    cursor: pointer;
-    padding: 14px 24px;
-    transition: background-color 0.2s;
     background-color: $color-grey-50;
-    font-weight: bold;
     color: rgb(41, 40, 88);
+    cursor: pointer;
+    float: left;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    padding: 14px 24px;
 
     &.active {
       background-color: #fff;
+      box-shadow: 0 0 0 1px #e0e0e0;
       cursor: default;
       position: relative;
-      box-shadow: 0 0 0 1px #e0e0e0;
 
       &:after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        right: 0;
-        height: 2px;
         background-color: white;
+        bottom: -1px;
+        content: '';
+        height: 2px;
+        left: 0;
+        position: absolute;
+        right: 0;
       }
     }
 
     /* Change background color of tabs on hover */
     &:hover:not(.active) {
       background-color: #efefef;
-      position: relative;
       box-shadow: 0 0 0 1px #e0e0e0;
+      position: relative;
     }
   }
 }
 
-.button {
-  &__menu {
-    width: 4rem;
-    height: 3.5rem;
-    border-top-right-radius: 3px;
+.context-menu {
+  position: relative;
+
+  &__button {
     background-color: $color-light-blue-2;
+    border-top-right-radius: 3px;
+    height: 3.5rem;
+    width: 4rem;
   }
 
-  &__menu-icon {
+  &__button-icon {
+    color: rgb(41, 40, 88);
     font-size: 24px;
     font-weight: bold;
-    color: rgb(41, 40, 88);
   }
 
-  &__items {
-    width: 200px;
-    background-color: $color-light-blue-2;
-    z-index: 1;
+  &__dropdown {
+    background-color: rgb(178, 210, 216);
     position: absolute;
     right: 0;
-  }
+    width: 200px;
+    z-index: 1;
 
-  &__item {
-    display: flex;
-    flex-direction: row;
-    font-weight: bold;
-    color: $color-purple;
-    padding: 0.5rem;
-    box-shadow: 0 2px 2px 0 $color-grey-200;
+    &-item {
+      box-shadow: 0 2px 2px 0 $color-grey-200;
+      color: $color-purple;
+      display: flex;
+      flex-direction: row;
+      font-weight: bold;
+      padding: 0.5rem;
 
-    &:hover {
-      background-color: lighten($color-light-blue-2, 5%);
-    }
+      &:hover {
+        background-color: lighten($color-light-blue-2, 5%);
+      }
 
-    &--icon {
-      font-size: 16px;
-    }
+      &-icon {
+        color: rgb(41, 40, 88);
+        font-size: 16px;
+      }
 
-    span {
-      margin-left: 0.5rem;
+      span {
+        margin-left: 0.5rem;
+      }
     }
   }
 }
