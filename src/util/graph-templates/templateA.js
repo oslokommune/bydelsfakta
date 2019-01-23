@@ -21,8 +21,9 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    // Make a filtered copy of the provided data object containing
+    // to house only the selected series (if one has been selected)
     this.filteredData = JSON.parse(JSON.stringify(this.data));
-
     if (this.selected > -1) {
       this.filteredData.meta.series = [this.data.meta.series[this.selected]];
       this.filteredData.data = this.filteredData.data.map(bydel => {
@@ -31,6 +32,7 @@ function Template(svg) {
       });
     }
 
+    // Multiseries need larger padding top to make room for tabs
     this.padding.top = this.data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
 
     this.svg
@@ -38,6 +40,7 @@ function Template(svg) {
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
+    // Move the close button
     this.canvas
       .select('g.close')
       .style('display', () => {
@@ -57,6 +60,7 @@ function Template(svg) {
     this.canvas.append('g').attr('class', 'columns');
     this.canvas.append('g').attr('class', 'rows');
 
+    // Create and initialise the close button
     let close = this.canvas
       .append('g')
       .attr('class', 'close')
@@ -66,6 +70,7 @@ function Template(svg) {
         this.render(this.data);
       });
 
+    // Close button background
     close
       .append('rect')
       .attr('width', 30)
@@ -84,6 +89,7 @@ function Template(svg) {
           .attr('opacity', 0.7);
       });
 
+    // Close button icon
     close
       .append('text')
       .attr('fill', color.purple)
@@ -95,6 +101,11 @@ function Template(svg) {
       .attr('transform', 'translate(15, 20)');
   };
 
+  /**
+   * @param  {nodelist} rowsE - The newly created rows
+   *
+   * Creates all the DOM elements inside of each row
+   */
   this.initRowElements = function(rowsE) {
     // Row fill
     rowsE
@@ -116,36 +127,51 @@ function Template(svg) {
       .attr('y', this.rowHeight);
 
     // Row Geography
-    let textElement = rowsE
+    let hyperlink = rowsE.append('a').attr('class', 'hyperlink');
+
+    // Text element inside of hyperlink
+    hyperlink
       .append('text')
       .attr('class', 'geography')
       .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6);
-
-    textElement.append('a').html('test');
   };
 
+  /**
+   * Updates elements on each row
+   */
   this.drawRows = function() {
+    // Select all existing rows (DOM elements) that matches the data
     let rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
       .data(this.filteredData.data);
+
+    // Create DOM element for missing rows
     let rowsE = rows
       .enter()
       .append('g')
       .attr('class', 'row');
+
+    // Remove excess DOM elements
     rows.exit().remove();
+
+    // Combine selections of existing rows and newly created rows
     rows = rows.merge(rowsE);
 
+    // Create DOM elements inside the newly created rows
     this.initRowElements(rowsE);
 
-    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+    // Dynamic styling, sizing and positioning based on data and container size
+
     rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0));
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
+    rows.select('a.hyperlink').attr('xlink:href', 'http://localhost:8080/bydelsfakta#/bydel/sthanshaugen/folkemengde');
     rows
-      .select('text.geography')
+      .select('a.hyperlink')
+      .select('text')
       .text(d => util.truncate(d.geography, this.padding.left))
       .attr('x', () => {
         return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
@@ -154,22 +180,23 @@ function Template(svg) {
         return this.data.meta.series.length > 1 ? 'start' : 'end';
       });
 
+    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+
     rows
       .select('text.geography')
       .append('title')
       .html(d => d.geography);
 
+    // Add attributes to total and avg rows
     rows.attr('data-total', d => d.totalRow);
     rows.attr('data-avg', d => d.avgRow);
 
-    let bars = rows.selectAll('rect.bar').data(d => {
-      return d.values;
-    });
+    let bars = rows.selectAll('rect.bar').data(d => d.values);
     let barsE = bars
       .enter()
       .append('rect')
-      .attr('width', 0)
-      .attr('class', 'bar');
+      .attr('class', 'bar')
+      .attr('width', 0);
 
     bars.exit().remove();
     bars = bars.merge(barsE);
