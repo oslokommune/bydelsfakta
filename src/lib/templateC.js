@@ -250,9 +250,8 @@ function Template(svg) {
 
     tab
       .select('rect.tabOverlay')
-      .on('click keyup.enter', (d, i) => {
-        if (d3.event && d3.event.key !== 'Enter') return;
-        d3.event.preventDefault();
+      .on('click keyup', (d, i) => {
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         this.render(this.data, { method: this.method, series: i });
       })
       .attr('tabindex', 0);
@@ -332,13 +331,14 @@ function Template(svg) {
     });
 
     row
-      .on('click keyup.enter', (d, i) => {
-        if (d3.event && d3.event.key !== 'Enter') return;
+      .on('click keyup.enter', (d, i, j) => {
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (i === this.highlight) {
           this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
         } else {
           this.render(this.data, { method: this.method, series: this.series, highlight: i });
         }
+        j[i].blur();
       })
       .attr('tabindex', 0);
   };

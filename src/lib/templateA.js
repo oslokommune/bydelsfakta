@@ -42,7 +42,8 @@ function Template(svg) {
       .style('display', () => {
         return this.selected > -1 ? 'block' : 'none';
       })
-      .attr('transform', `translate(${this.width - 30}, -60)`);
+      .attr('transform', `translate(${this.width - 30}, -60)`)
+      .attr('tabindex', this.selected === -1 ? false : 0);
 
     this.setScales();
     this.drawAxis();
@@ -58,7 +59,8 @@ function Template(svg) {
       .append('g')
       .attr('class', 'close')
       .style('display', 'none')
-      .on('click', () => {
+      .on('click keyup', () => {
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         this.render(this.data);
       });
 
@@ -291,15 +293,16 @@ function Template(svg) {
       .on('mouseleave', (d, i) => {
         this.render(this.data, { highlight: -1, selected: this.selected });
       })
-      .on('click', (d, i, j) => {
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (this.data.meta.series.length === 1) return;
         let target = this.selected > -1 ? -1 : i;
 
-        // Move affected column to index 0 in DOM
+        // Move affected column to index 0 in DOM to ensure smooth transitions
         let columnToBeMoved = j[i].parentElement;
         columnToBeMoved.parentElement.prepend(columnToBeMoved);
 
-        // Move affected rects to index 0 in DOM
+        // Move affected rects to index 0 in DOM to ensure smooth transitions
         let barsToBeMoved = this.canvas
           .select('g.rows')
           .selectAll('g.row')
@@ -314,7 +317,8 @@ function Template(svg) {
         });
 
         this.render(this.data, { selected: target });
-      });
+      })
+      .attr('tabindex', this.filteredData.meta.series.length > 1 ? 0 : false);
 
     columns
       .select('text.colHeading')
