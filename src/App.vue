@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer class="oslo__navigation-drawer" permanent app>
+    <div id="navbar">
       <div style="align-self: center">
         <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
       </div>
@@ -11,7 +11,6 @@
         class="oslo__navigation-link"
         :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
         style="cursor: pointer; width: 100%"
-        @click="onClickBydel(link.uri)"
       >
         <input
           type="checkbox"
@@ -24,6 +23,7 @@
         <label :for="link.key"></label>
         <span
           class="oslo__navigation-link--label"
+          @click="onClickBydel(link.uri)"
         >
           {{link.value}}
         </span>
@@ -37,8 +37,8 @@
       >
         <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
       </div>
-    </v-navigation-drawer>
-    <v-content>
+    </div>
+    <div id="content">
       <div class="oslo__navigation-topbar">
         <div @click="backButton" role="button" style="display: flex; flex-direction: row;">
           <v-icon class="oslo__topbar">arrow_back</v-icon>
@@ -54,7 +54,7 @@
         ></v-select>
       </div>
       <router-view/>
-    </v-content>
+    </div>
   </v-app>
 </template>
 
@@ -103,8 +103,10 @@ export default {
       const routes = this.$route.path.split('/');
 
       if (this.selected.length === 0) {
-        this.$router.push({ name: 'Home' });
-      } else {
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/alle` });
+      } else if (this.selected.length > 0) {
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
@@ -169,7 +171,7 @@ export default {
     },
 
     disableChecbox(key) {
-      return this.selected.length === 1 && this.selected[0] === key;
+      return this.$route.path.includes('bydel') && this.selected.length === 1 && this.selected[0] === key;
     },
   },
   watch: {
@@ -203,9 +205,19 @@ export default {
 <style scoped lang="scss">
 @import './styles/colors';
 
-a {
-  color: white;
-  text-decoration: none;
+#navbar {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 300px;
+  background-color: $color-purple;
+  position: fixed;
+  z-index: 100;
+}
+
+#content {
+  margin-left: 300px;
 }
 
 .oslo__content {

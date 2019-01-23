@@ -117,7 +117,9 @@ export default {
 .graph__container {
   position: relative;
   margin: 1em;
+  overflow: hidden;
 }
+
 .graph__dropdown {
   position: absolute;
   top: 164px;
