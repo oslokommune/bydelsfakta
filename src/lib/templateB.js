@@ -214,10 +214,12 @@ function Template(svg) {
 
     row
       .attr('d', d => this.line(d.values))
-      .attr('stroke', d => {
+      .attr('stroke', (d, i) => {
+        if (this.highlight >= 0 && i === this.highlight) return util.color.yellow;
+        if (this.highlight >= 0 && i !== this.highlight) return util.color.grey;
         if (d.totalRow) return util.color.blue;
         if (d.avgRow) return util.color.red;
-        return '#cccccc';
+        return util.color.grey;
       })
       .attr('stroke-width', 3)
       .attr('fill', 'none');
