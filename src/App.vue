@@ -8,7 +8,8 @@
         v-for="link in links"
         :key="link.key"
         :label="link.value"
-        :class="checkActiveBydel(link.uri)"
+        class="oslo__navigation-link"
+        :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
         style="cursor: pointer; width: 100%"
         @click="onClickBydel(link.uri)"
       >
@@ -18,6 +19,7 @@
           :value="link.key"
           :id="link.key"
           @change="onChangeCheckbox"
+          :disabled="disableChecbox(link.key)"
         />
         <label :for="link.key"></label>
         <span
@@ -27,7 +29,8 @@
         </span>
       </div>
       <div
-        :class="checkActiveSammenlign()"
+        class="oslo__navigation-link"
+        :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
         style="margin-top: 0.7rem; cursor: pointer;"
         @click="onClickSammenlign"
         role="button"
@@ -101,10 +104,7 @@ export default {
 
       if (this.selected.length === 0) {
         this.$router.push({ name: 'Home' });
-      } else if (this.selected.length === 1) {
-        const bydel = bydeler.find(item => item.key === this.selected[0]).uri;
-        this.$router.push({ path: `/bydel/${bydel}` });
-      } else if (this.selected.length > 1) {
+      } else {
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
@@ -112,13 +112,15 @@ export default {
     },
 
     checkActiveBydel(link) {
-      return this.$route.params.bydel === link && this.$route.path.includes('bydel')
-        ? 'oslo__navigation-link--active'
-        : 'oslo__navigation-link';
+      return this.$route.params.bydel === link && this.$route.path.includes('bydel');
     },
 
     checkActiveSammenlign() {
-      return this.$route.path.includes('sammenlign') ? 'oslo__navigation-link--active' : 'oslo__navigation-link';
+      return this.$route.path.includes('sammenlign');
+    },
+
+    checkMultipleBydeler(key) {
+      return this.$route.path.includes('sammenlign') && this.selected.includes(key);
     },
 
     onClickBydel(bydel) {
@@ -131,6 +133,10 @@ export default {
 
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
+      if (this.selected.length < 2) {
+        this.selected = [];
+        this.$router.push({ name: 'Sammenlign' });
+      }
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
         : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
@@ -160,6 +166,10 @@ export default {
         this.$router.push({ path: `/sammenlign/${route.params.bydel}` });
       }
       this.selectedSubpage = null;
+    },
+
+    disableChecbox(key) {
+      return this.selected.length === 1 && this.selected[0] === key;
     },
   },
   watch: {
@@ -224,10 +234,11 @@ a {
 
   background-color: $color-purple;
   color: rgba(white, 0.9);
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &--active {
     background-color: $color-blue;
+    transition: all 0.3s ease-in-out;
 
     #{$p}--label {
       color: $color-purple;
@@ -235,20 +246,17 @@ a {
     }
 
     input[type='checkbox']:checked + label {
-      background-color: $color-blue;
-      &::before {
-        background-color: $color-blue;
-      }
+      opacity: 0;
     }
   }
 
-  &:hover {
-    background-color: lighten($color-purple, 10%);
+  &--compare {
+    background-color: lighten($color-purple, 5%);
+    transition: background-color 0.3s ease-in-out;
   }
 
   &--label {
     letter-spacing: 0.3px;
-    margin-left: 1rem;
   }
 }
 
@@ -295,7 +303,22 @@ input[type='checkbox'] {
     opacity: 0.5;
     position: relative;
     vertical-align: middle;
-    width: 40px;
+    width: 50px;
+    padding-left: 1rem;
+
+    // checked inside border
+    &::after {
+      background-color: $color-blue;
+      border-radius: 1px;
+      content: '';
+      height: 10px;
+      left: 24px;
+      position: absolute;
+      top: 14px;
+      width: 10px;
+      transform: scale(0);
+      transition: all 0.3s ease-in-out;
+    }
 
     // unchecked border
     &::before {
@@ -305,41 +328,30 @@ input[type='checkbox'] {
       border-radius: 1px;
       content: '';
       height: 18px;
-      left: 10px;
+      left: 20px;
       opacity: 0.2;
       position: absolute;
       top: 10px;
       width: 18px;
+      transition: all 0.3s ease-in-out;
     }
   }
 
   &:checked + label {
-    opacity: 100;
     position: relative;
+    opacity: 1;
 
     // checked inside border
     &::after {
-      background-color: $color-blue;
-      border-radius: 1px;
-      content: '';
-      height: 10px;
-      left: 14px;
-      position: absolute;
-      top: 14px;
-      width: 10px;
+      transform: scale(1);
+      transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
 
     // checked border
     &::before {
-      background-color: $color-purple;
       border: 1px solid $color-blue;
-      border-radius: 1px;
-      content: '';
-      height: 18px;
-      left: 10px;
-      position: absolute;
-      top: 10px;
-      width: 18px;
+      opacity: 1;
+      transition: all 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
   }
 }
