@@ -4,6 +4,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -182,7 +183,7 @@ function Template(svg) {
 
     this.handle
       .append('path')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .style('pointer-events', 'none')
       .attr('d', d => {
         return d.type === 'e'
@@ -239,7 +240,7 @@ function Template(svg) {
       .attr('class', 'xAxis-title')
       .attr('font-size', 12)
       .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('transform', `translate(${this.paddingLowerLeft}, ${-28})`);
 
     gBrushLarge = this.upper
@@ -250,8 +251,8 @@ function Template(svg) {
 
     gBrushLarge
       .select('.selection')
-      .attr('fill', util.color.yellow)
-      .attr('stroke', util.color.yellow)
+      .attr('fill', color.yellow)
+      .attr('stroke', color.yellow)
       .attr('stroke-width', 2)
       .attr('stroke-opacity', 1)
       .attr('fill-opacity', 0.15);
@@ -264,11 +265,11 @@ function Template(svg) {
 
     gBrushSmall
       .select('.selection')
-      .attr('fill', util.color.yellow)
+      .attr('fill', color.yellow)
       .attr('fill-opacity', 1);
     gBrushSmall
       .select('.overlay')
-      .attr('stroke', util.color.purple)
+      .attr('stroke', color.purple)
       .attr('rx', 6);
 
     this.upperXAxis = this.upper
@@ -314,20 +315,20 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'rowFill')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('width', this.width);
     rowsE
       .append('text')
       .attr('class', 'geography')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('x', 10)
       .attr('y', this.rowHeight / 2 + 7);
     rowsE
       .append('text')
       .attr('class', 'value')
       .attr('y', this.rowHeight / 2 + 7)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('x', this.paddingLowerLeft - 40)
       .attr('text-anchor', 'end');
     rowsE
@@ -338,7 +339,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'divider')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('width', this.width)
       .attr('height', 1)
       .attr('y', this.rowHeight);
@@ -376,7 +377,7 @@ function Template(svg) {
       .attr('x', this.paddingLowerLeft)
       .attr('y', (this.rowHeight - this.barHeight) / 2 + 1)
       .attr('fill', d => {
-        return d.totalRow || d.avgRow ? util.color.purple : util.color.blue;
+        return d.totalRow || d.avgRow ? color.purple : color.blue;
       });
 
     this.lower.select('text.xAxis-title').text(() => {
@@ -421,7 +422,7 @@ function Template(svg) {
       .attr('opacity', 1)
       .attr('d', d => this.line(d.values))
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
-      .attr('stroke', d => (d.avgRow || d.totalRow ? util.color.purple : util.color.blue))
+      .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5));
   };
 

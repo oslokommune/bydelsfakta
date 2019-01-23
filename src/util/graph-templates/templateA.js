@@ -4,6 +4,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -68,7 +69,7 @@ function Template(svg) {
       .append('rect')
       .attr('width', 30)
       .attr('height', 30)
-      .attr('fill', util.color.red)
+      .attr('fill', color.red)
       .style('cursor', 'pointer')
       .attr('opacity', 0.7)
       .on('mouseenter', function() {
@@ -84,7 +85,7 @@ function Template(svg) {
 
     close
       .append('text')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .style('pointer-events', 'none')
       .text('x')
       .attr('font-weight', 700)
@@ -98,7 +99,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'rowFill')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left);
@@ -107,7 +108,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'divider')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left)
       .attr('height', 1)
@@ -117,7 +118,7 @@ function Template(svg) {
     let textElement = rowsE
       .append('text')
       .attr('class', 'geography')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6);
 
     textElement.append('a').html('test');
@@ -180,7 +181,7 @@ function Template(svg) {
         return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
       })
       .attr('fill', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-avg') ? util.color.yellow : util.color.purple;
+        return j[0].parentNode.getAttribute('data-avg') ? color.yellow : color.purple;
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
@@ -257,7 +258,7 @@ function Template(svg) {
     columns.transition().attr('transform', (d, i) => {
       return `translate(${this.x[i](0)},0)`;
     });
-    columnsE.append('rect').attr('fill', util.color.light_grey);
+    columnsE.append('rect').attr('fill', color.light_grey);
     columnsE
       .append('rect')
       .attr('class', 'arrow')

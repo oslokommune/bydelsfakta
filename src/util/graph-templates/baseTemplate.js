@@ -4,7 +4,7 @@
  * provided SVG node and creates new DOM elements (mainly empty 'g's) inside of it.
  * At the end of init() the created() method is called. The template in question
  * may have needs of its own to create DOM elements inside the SVG at creation for
- * its own convenience.
+ * its own convenience, which would be inserted into this method if needed.
  *
  * Each template defines its own render() method which is called each time
  * new data is passed down from Vue, on resize (see below) or the template
@@ -16,6 +16,9 @@
  * Vue listens for changes in size for the SVG's container. The resize()
  * method uses debounce to prevent the render() method to be 'smashed'.
  *
+ * Number and time formats are defined in the locale.js file imported here
+ * and is used by d3 globally.
+ *
  */
 
 import d3 from '@/assets/d3';
@@ -26,6 +29,8 @@ d3.timeFormatDefaultLocale(locale.timeFormat);
 d3.formatDefaultLocale(locale.format);
 
 function Base_Template(svg) {
+  // Declaring local variables here to prevent templates to be
+  // unnecessary cluttered with commonly used variables.
   this.data = {};
   this.height = 0;
   this.width = 0;

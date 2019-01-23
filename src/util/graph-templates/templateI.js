@@ -8,6 +8,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
@@ -114,7 +115,7 @@ function Template(svg) {
       .attr('font-size', 12)
       .style('text-transform', 'uppercase')
       .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('transform', 'translate(10, -16)');
 
     this.canvas.selectAll('*').remove();
@@ -143,7 +144,7 @@ function Template(svg) {
       .attr('class', 'fill')
       .attr('width', this.padding.left)
       .attr('height', this.rowHeight)
-      .attr('fill', util.color.blue)
+      .attr('fill', color.blue)
       .style('cursor', 'pointer')
       .attr('rx', 3);
     rowE.append('text').attr('class', 'label');
@@ -171,7 +172,7 @@ function Template(svg) {
           .filter((d, index) => i == index)
           .select('circle')
           .attr('r', 8)
-          .attr('fill', util.color.blue)
+          .attr('fill', color.blue)
           .attr('fill-opacity', 1)
           .attr('stroke-opacity', 1);
       })
@@ -182,7 +183,7 @@ function Template(svg) {
           .filter((d, index) => i == index)
           .select('circle')
           .attr('r', 6)
-          .attr('fill', util.color.blue)
+          .attr('fill', color.blue)
           .attr('fill-opacity', fillOpacity)
           .attr('stroke-opacity', strokeOpacity);
       });
@@ -193,7 +194,7 @@ function Template(svg) {
       .attr('y', this.rowHeight / 2 + 5)
       .attr('x', 10)
       .attr('font-weight', d => (d.totalRow || d.avgRow ? 700 : 400))
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .style('pointer-events', 'none');
   };
 
@@ -260,7 +261,7 @@ function Template(svg) {
       .append('path')
       .datum(triangleData)
       .attr('d', line)
-      .attr('fill', util.color.light_grey);
+      .attr('fill', color.light_grey);
 
     // Grid lines
     this.matrix
@@ -387,11 +388,11 @@ function Template(svg) {
       .attr('data-1', d => +d.values[1].ratio)
       .attr('data-2', d => +d.values[2].ratio)
       .transition()
-      .attr('fill', (d, i) => (i === this.selected ? util.color.purple : util.color.blue))
+      .attr('fill', (d, i) => (i === this.selected ? color.purple : color.blue))
       .attr('r', (d, i) => (i === this.selected ? 9 : 6))
       .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : fillOpacity))
       .attr('stroke-opacity', (d, i) => (i === this.selected ? 1 : strokeOpacity))
-      .attr('stroke', (d, i) => (i === this.selected ? util.color.light_grey : util.color.purple));
+      .attr('stroke', (d, i) => (i === this.selected ? color.light_grey : color.purple));
   };
 
   this.updateAxisLabels = function() {

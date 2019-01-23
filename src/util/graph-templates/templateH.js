@@ -9,6 +9,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -82,7 +83,7 @@ function Template(svg) {
       .attr('width', 88)
       .attr('rx', 4)
       .attr('height', 40)
-      .attr('fill', util.color.purple);
+      .attr('fill', color.purple);
     section_year
       .append('text')
       .attr('class', 'section-year__text')
@@ -121,14 +122,14 @@ function Template(svg) {
       .selectAll('rect.divider')
       .attr('height', 2)
       .attr('width', this.sidebarWidth)
-      .attr('fill', util.color.purple);
+      .attr('fill', color.purple);
 
     this.sidebar
       .selectAll('text.value')
       .attr('font-size', 16)
       .attr('y', 26)
       .attr('font-weight', '700')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('text-anchor', 'end')
       .attr('x', this.sidebarWidth)
       .text('70');
@@ -138,7 +139,7 @@ function Template(svg) {
       .attr('font-size', 16)
       .attr('font-weight', '400')
       .attr('y', 26)
-      .attr('fill', util.color.purple);
+      .attr('fill', color.purple);
   };
 
   this.createUpperElements = function() {
@@ -149,25 +150,25 @@ function Template(svg) {
     this.upper
       .append('path')
       .attr('class', 'projection')
-      .attr('fill', util.color.blue);
+      .attr('fill', color.blue);
 
     this.upper
       .append('path')
       .attr('class', 'expected')
       .attr('fill', 'none')
-      .attr('stroke', util.color.purple);
+      .attr('stroke', color.purple);
 
     this.upper
       .append('path')
       .attr('class', 'valueLine')
       .attr('fill', 'none')
-      .attr('stroke', util.color.purple)
+      .attr('stroke', color.purple)
       .attr('stroke-width', 3);
 
     this.upper
       .append('line')
       .attr('class', 'currentDate')
-      .attr('stroke', util.color.purple)
+      .attr('stroke', color.purple)
       .attr('opacity', 0.7)
       .attr('stroke-width', 1)
       .style('stroke-dasharray', '3,3');
@@ -184,20 +185,20 @@ function Template(svg) {
       .attr('class', 'highlightLine')
       .attr('stroke-width', 5)
       .attr('stroke-opacity', 0.1)
-      .attr('stroke', util.color.yellow);
+      .attr('stroke', color.yellow);
 
     this.upper
       .append('line')
       .attr('class', 'highlightLine')
       .attr('stroke-width', 2)
-      .attr('stroke', util.color.yellow);
+      .attr('stroke', color.yellow);
 
     let highlightContainer = this.upper.append('g').attr('class', 'highlightContainer');
 
     highlightContainer
       .append('rect')
       .attr('class', 'highlightDateBox')
-      .attr('fill', util.color.yellow)
+      .attr('fill', color.yellow)
       .attr('height', 26)
       .attr('width', 48)
       .attr('transform', 'translate(-24, 0)');
@@ -205,7 +206,7 @@ function Template(svg) {
     highlightContainer
       .append('text')
       .attr('class', 'highlightText')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('font-size', 12)
       .attr('font-weight', 700)
       .attr('y', 18)
@@ -219,13 +220,13 @@ function Template(svg) {
       .append('line')
       .attr('class', 'zeroline')
       .attr('stroke-width', 1)
-      .attr('stroke', util.color.purple);
+      .attr('stroke', color.purple);
     this.y2Axis = this.lower.append('g').attr('class', 'axis y');
 
     this.lower
       .append('text')
       .attr('class', 'sectionHeading')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('font-weight', 500)
       .text('Befolkningsendring per år');
   };
@@ -303,8 +304,8 @@ function Template(svg) {
       .attr('height', d => Math.abs(this.y2(0) - this.y2(d.change)))
       .attr('y', d => (d.change > 0 ? this.y2(d.change) : this.y2(0)))
       .attr('fill', d => {
-        if (d.date === this.highlight) return util.color.purple;
-        return d.change > 0 ? util.color.blue : util.color.red;
+        if (d.date === this.highlight) return color.purple;
+        return d.change > 0 ? color.blue : color.red;
       });
 
     this.lower

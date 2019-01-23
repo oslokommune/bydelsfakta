@@ -7,6 +7,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -109,14 +110,14 @@ function Template(svg) {
       .attr('height', 30)
       .attr('width', this.padding.right - 22)
       .attr('x', 11)
-      .attr('fill', util.color.purple);
+      .attr('fill', color.purple);
     this.infoboxTitle
       .attr('y', 20)
       .attr('x', 21)
       .attr('font-size', 14)
       .attr('font-weight', 700)
       .text(util.truncate(geography, this.padding.right - 55, 14, 700))
-      .attr('fill', util.color.blue);
+      .attr('fill', color.blue);
 
     this.infoboxBody
       .select('rect.background')
@@ -124,15 +125,15 @@ function Template(svg) {
       .attr('y', 20)
       .attr('x', 4)
       .attr('width', this.padding.right - 8)
-      .attr('fill', util.color.light_yellow)
-      .attr('stroke', util.color.purple);
+      .attr('fill', color.light_yellow)
+      .attr('stroke', color.purple);
 
     this.infoboxContent.attr('transform', 'translate(20, 60)');
     this.infoboxHeading
       .attr('font-size', 12)
       .attr('font-weight', 700)
       .attr('text-transform', 'uppercase')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .text(util.truncate(this.data.meta.heading, this.padding.right - 90, 12, 700).toUpperCase());
 
     this.infoboxTable.selectAll('*').remove();
@@ -197,11 +198,11 @@ function Template(svg) {
     row
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i) => {
-        if (this.highlight >= 0 && i === this.highlight) return util.color.yellow;
-        if (this.highlight >= 0 && i !== this.highlight) return util.color.grey;
-        if (d.totalRow) return util.color.blue;
-        if (d.avgRow) return util.color.red;
-        return util.color.grey;
+        if (this.highlight >= 0 && i === this.highlight) return color.yellow;
+        if (this.highlight >= 0 && i !== this.highlight) return color.grey;
+        if (d.totalRow) return color.blue;
+        if (d.avgRow) return color.red;
+        return color.grey;
       })
       .attr('stroke-width', 3)
       .attr('fill', 'none');
