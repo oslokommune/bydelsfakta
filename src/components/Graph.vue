@@ -100,6 +100,7 @@ export default {
         let r0 = performance.now();
         this.svg.render(this.data, {
           method: this.settings.method,
+          range: '[0, 50]',
         });
         let r1 = performance.now();
         let renderTime = r1 - r0;
@@ -111,7 +112,7 @@ export default {
             'for',
             this.settings.id,
             'took',
-            Math.round(loadTime),
+            Math.round(renderTime),
             'ms'
           );
         }
