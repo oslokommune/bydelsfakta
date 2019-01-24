@@ -30,14 +30,14 @@
       <div class="oslo__navigation-drawer__button-container">
         <div class="button-container">
           <button class="oslo__navigation-button" @click="selectAll">Velg alle</button>
-          <button class="oslo__navigation-button" :disabled="selected.length === 0" @click="selected = []">Fjern alle</button>
+          <button class="oslo__navigation-button" :disabled="selected.length === 0" @click="unselectAll">Fjern alle</button>
         </div>
       </div>
     </div>
     <div id="content">
       <div class="oslo__navigation-topbar">
         <div @click="backButton" role="button" class="oslo__navigation-topbar-button">
-          <v-icon class="oslo__topbar">arrow_back</v-icon>
+          <i class="material-icons oslo__topbar">arrow_back</i>
           <h4
             class="text-uppercase oslo__topbar oslo__topbar-text"
           >{{ getBydel(this.$route.params.bydel) }}</h4>
@@ -62,11 +62,6 @@ import osloIcon from './assets/oslo-logo.svg';
 
 export default {
   name: 'App',
-  computed: {
-    selectedBydel() {
-      return this.$store.state.selectedBydel;
-    },
-  },
 
   data() {
     return {
@@ -75,7 +70,9 @@ export default {
       items: subpages,
       selectedSubpage: '',
       osloIcon: osloIcon,
-      bydel: this.getBydel(this.$route.params.bydel),
+      bydel: [],
+      showAllCheckbox: false,
+      bydeler: bydeler,
     };
   },
 
@@ -85,7 +82,8 @@ export default {
     if (this.$route.params.bydel === undefined) {
       return;
     } else if (path.includes('sammenlign')) {
-      this.selected = this.$route.params.bydel.split('-');
+      const bydeler = this.$route.params.bydel.split('-');
+      this.selected = bydeler[0] === 'alle' ? [] : bydeler;
     } else if (path.includes('bydel')) {
       const bydelKey = bydeler.find(item => item.uri === this.$route.params.bydel).key;
       this.selected = [bydelKey];
@@ -99,6 +97,12 @@ export default {
       const routes = this.$route.path.split('/');
 
       if (this.selected.length === 0) {
+        this.showAllCheckbox = false;
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/alle` });
+      } else if (this.selected.length === bydeler.length) {
+        this.showAllCheckbox = true;
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/alle` });
@@ -133,6 +137,10 @@ export default {
       const routes = this.$route.path.split('/');
       if (this.selected.length < 2) {
         this.selected = [];
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/alle` });
+      } else if (this.selected.length === bydeler.length) {
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/alle` });
@@ -174,7 +182,21 @@ export default {
     },
 
     selectAll() {
+      const routes = this.$route.path.split('/');
+      this.selected = [];
+      this.showAllCheckbox = true;
       bydeler.forEach(bydel => this.selected.push(bydel.key));
+      routes.length > 3
+        ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
+        : this.$router.push({ path: `/sammenlign/alle` });
+    },
+
+    unselectAll() {
+      const routes = this.$route.path.split('/');
+      this.selected = [];
+      routes.length > 3
+        ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
+        : this.$router.push({ path: `/sammenlign/alle` });
     },
   },
   watch: {
@@ -184,6 +206,9 @@ export default {
         const bydel = bydeler.find(item => item.uri === routes[2]).key;
         this.selected = [bydel];
         this.selectedSubpage = null;
+      } else if (to.path.includes('sammenlign') && !this.showAllCheckbox) {
+        const paramBydel = routes[2].split('-');
+        this.selected = paramBydel;
       }
       if (routes.length > 3) {
         this.selectedSubpage = routes[3];
