@@ -23,15 +23,44 @@ function Template(svg) {
   let extent = [0, 119];
   let gBrushSmall, gBrushLarge;
 
-  let NO = d3.formatDefaultLocale({ decimal: ',', thousands: '', grouping: [3], currency: ['', 'NOK'] });
+  this.age = d3.scaleLinear().domain(extent);
+
+  let NO = d3.formatDefaultLocale({
+    decimal: ',',
+    thousands: '',
+    grouping: [3],
+    currency: ['', 'NOK'],
+  });
   const formatPercent = NO.format('.1%');
   const formatFloat = NO.format(',.0f');
+
+  this.sortData = function(data) {
+    data = data.sort((a, b) => {
+      let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+      let totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+      return totB - totA;
+    });
+
+    data = data.sort((a, b) => a.avgRow - b.avgRow);
+    data = data.sort((a, b) => a.totalRow - b.totalRow);
+    return data;
+  };
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
 
+    this.data.data = this.sortData(this.data.data);
+
+    if (!data.data) return;
+
+    // Set sizes for brush objects
+    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+
+    // Set size for age (scale for brushes)
     this.age.range([0, this.width - this.paddingUpperLeft]);
 
+    // Resize SVG DOM element
     this.svg
       .attr(
         'height',
@@ -39,60 +68,20 @@ function Template(svg) {
       )
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    // Move the brushes if a range was selected
+    // Move the brushes if a range was selected and save the new extent
     if (options.range) {
       extent = JSON.parse(options.range);
       gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
       gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
     }
 
-    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]).on('brush end', () => {
-      this.brushed(this);
-    });
-
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]).on('brush end', () => {
-      this.brushed(this);
-    });
-
-    this.setBrushes();
-
-    // this.age.range([0, this.width - this.paddingUpperLeft]);
-    // brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    // brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
-    // gBrushLarge.call(brushLarge);
-    // gBrushSmall.call(brushSmall);
-
     // Find the larges accumulated number within the selected range
-    let maxAccumulated =
-      d3.max(
-        data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel =>
-            d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
-          )
-      ) * 1.05;
+    let maxAccumulated = this.getMaxAccumulated();
 
     // Find the largest single age to scale y axis behind brush within the selected range
-    let max =
-      d3.max(
-        data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
-      ) * 1.05;
+    let max = this.getMax();
 
-    // Set axis and scales based on these max values
+    // Set axis and scales based on these max values (for the bars()
     this.y.domain([0, max]).range([this.height2, 0]);
     this.x.domain([0, maxAccumulated]).range([0, this.width - this.paddingLowerLeft]);
     this.upperYAxis.transition().call(
@@ -126,20 +115,50 @@ function Template(svg) {
         .ticks((this.width - this.paddingLowerLeft) / 70)
     );
 
+    // Call brush method on resize, because it handles stuff
+    // like moving the brush overlays and brush handles.
+    if (options.event === 'resize') {
+      this.brushed(this);
+    }
+
     // Trigger re-draws of rows (bars) and lines
-    this.setBrushes();
+    // this.setBrushes();
     this.drawRows();
     this.drawLines();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
-  this.age = d3.scaleLinear().domain(extent);
-
+  /**
+   * @param  {this} self -
+   *
+   * Needs access to the object's 'this' to read from this.render etc
+   * and to manipulate DOM elements stored in the template's properties.
+   */
   this.brushed = function(self) {
-    var s = d3.event.selection || self.age.range();
-    extent = s.map(val => Math.round(self.age.invert(val)));
+    let s; // Holds the pixel values for where brushes should be rendered
 
-    if (d3.event.selection === null) {
+    // Find the pixel values for where brushes should be rendered.
+    // If no d3.event, then it must be a 'resize' event, and
+    // therefore the brush values (ages) should remain the same
+    // but on different pixel values.
+    // If there's brush event, we get the selection here
+    // and saves the extent (years) to the global variable.
+    if (!d3.event) {
+      s = extent.map(self.age);
+    } else {
+      s = d3.event.selection || self.age.range();
+      extent = s.map(val => Math.round(self.age.invert(val)));
+    }
+
+    // Brushes need to be called from their parent group ('g')
+    gBrushLarge.call(brushLarge);
+    gBrushSmall.call(brushSmall);
+
+    // If event.selection equals 'null', the user has clicked the brush
+    // area, and then we set the selection to this.age's range (all ages).
+    // This to counteract D3's default behavior of hiding the brush
+    // selection.
+    if (d3.event && d3.event.selection === null) {
       gBrushSmall.transition().call(brushSmall.move, self.age.range());
       gBrushLarge.transition().call(brushLarge.move, self.age.range());
     }
@@ -161,9 +180,8 @@ function Template(svg) {
     // Move visible handles
     self.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
 
-    if (self.data && self.data.meta) {
-      self.render(self.data, { method: self.method });
-    }
+    // Trigger a new render to update the bars, values and scales
+    self.render(self.data, { method: self.method });
   };
 
   this.line = d3
@@ -172,8 +190,12 @@ function Template(svg) {
     .x((d, i) => this.age(i))
     .y(d => this.y(d[this.method]));
 
-  const brushLarge = d3.brushX();
-  const brushSmall = d3.brushX();
+  const brushLarge = d3.brushX().on('brush end', () => {
+    this.brushed(this);
+  });
+  const brushSmall = d3.brushX().on('brush end', () => {
+    this.brushed(this);
+  });
 
   // Draws the handle icons. Triggered from this.created()
   this.drawHandles = function() {
@@ -295,15 +317,6 @@ function Template(svg) {
 
     gBrushLarge.transition().call(brushLarge.move, [0, 50].map(this.age));
     gBrushSmall.transition().call(brushSmall.move, [0, 50].map(this.age));
-  };
-
-  this.setBrushes = function() {
-    this.age.range([0, this.width - this.paddingUpperLeft]);
-    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
-
-    gBrushLarge.call(brushLarge);
-    gBrushSmall.call(brushSmall);
   };
 
   // Draws/updates rows content. Triggered each render
@@ -430,20 +443,43 @@ function Template(svg) {
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5));
   };
 
+  // Finds the larges accumulated number within the selected range
+  this.getMaxAccumulated = function() {
+    return (
+      d3.max(
+        this.data.data
+          .filter(bydel => {
+            if (this.method == 'ratio') {
+              return bydel;
+            } else {
+              return !bydel.totalRow && !bydel.avgRow;
+            }
+          })
+          .map(bydel =>
+            d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
+          )
+      ) * 1.05
+    );
+  };
+
+  // Finds the largest single age to scale y axis behind brush within the selected range
+  this.getMax = function() {
+    return (
+      d3.max(
+        this.data.data
+          .filter(bydel => {
+            if (this.method == 'ratio') {
+              return bydel;
+            } else {
+              return !bydel.totalRow && !bydel.avgRow;
+            }
+          })
+          .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
+      ) * 1.05
+    );
+  };
+
   this.init(svg);
-
-  // this.resize = function() {
-  //   this.width = this.parentWidth() - this.padding.left - this.padding.right;
-
-  //   this.age.range([0, this.width - this.paddingUpperLeft]);
-
-  //   brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-  //   brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
-  //   gBrushLarge.call(brushLarge);
-  //   gBrushSmall.call(brushSmall);
-
-  //   this.render(this.data, this.method);
-  // };
 }
 
 export default Template;

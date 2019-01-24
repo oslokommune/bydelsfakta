@@ -100,10 +100,11 @@ export default {
         let r0 = performance.now();
         this.svg.render(this.data, {
           method: this.settings.method,
+          range: '[0, 50]',
         });
         let r1 = performance.now();
         let renderTime = r1 - r0;
-        if (renderTime > 50) {
+        if (renderTime > 100) {
           console.warn(
             'SLOW RENDER:',
             'Initial rendering of template',
@@ -111,7 +112,7 @@ export default {
             'for',
             this.settings.id,
             'took',
-            Math.round(loadTime),
+            Math.round(renderTime),
             'ms'
           );
         }

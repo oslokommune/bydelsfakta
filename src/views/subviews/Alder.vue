@@ -2,6 +2,11 @@
   <div class="main-container">
     <div class="main-container__cards">
       <graph-card
+        v-for="(card, index) in settings.aldersgrupper"
+        :key="`alder-grupper-${index}`"
+        :settings="card"
+      />
+      <graph-card
         v-for="(card, index) in settings.median"
         :key="`alder-median-${index}`"
         :settings="card"
@@ -9,11 +14,6 @@
       <graph-card
         v-for="(card, index) in settings.populasjonspyramide"
         :key="`alder-pyramide-${index}`"
-        :settings="card"
-      />
-      <graph-card
-        v-for="(card, index) in settings.aldersgrupper"
-        :key="`alder-grupper-${index}`"
         :settings="card"
       />
     </div>

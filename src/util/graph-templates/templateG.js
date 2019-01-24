@@ -135,7 +135,7 @@ function Template(svg) {
     let x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
-      .domain([0, d3.max(this.data.data.map(d => d.values[0]))]);
+      .domain([0, d3.max(this.data.data.filter(d => (d.avgRow || d.totalRow ? false : d)).map(d => d.values[0]))]);
 
     rows
       .select('text.population__value')
@@ -171,7 +171,10 @@ function Template(svg) {
     let x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
-      .domain([0, d3.max(this.data.data.map(d => Math.abs(d.values[2])))]);
+      .domain([
+        0,
+        d3.max(this.data.data.filter(d => (d.avgRow || d.totalRow ? false : d)).map(d => Math.abs(d.values[2]))),
+      ]);
 
     rows
       .select('text.progress-year__value')
@@ -194,14 +197,19 @@ function Template(svg) {
       .attr('d', d => (d.values[2] > 0 ? arrowPaths.up : arrowPaths.down));
   };
 
-  this.renderProgressPeriod = function(rows) {
-    let min = d3.min(this.data.data.map(bydel => d3.min(bydel.values[3])));
-    let max = d3.max(this.data.data.map(bydel => d3.max(bydel.values[3])));
+  /**
+   * Period chart is called on each row in order to set a relative
+   * scale on the y axis.
+   */
+  this.renderProgressPeriod = function(data, index, arr) {
+    let min = d3.min(data.values[3]) / 1.05;
+    let max = d3.max(data.values[3]) * 1.05;
+    let row = d3.select(arr[index]);
 
     let x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
-      .domain([0, this.data.data[0].values[3].length]);
+      .domain([0, data.values[3].length]);
 
     let y = d3
       .scaleLinear()
@@ -213,22 +221,22 @@ function Template(svg) {
       .x((d, i) => x(i))
       .y(d => y(d));
 
-    rows
+    row
       .select('text.progress-period__value')
       .attr('x', this.x(3) + this.x.bandwidth() / 2 - 30)
       .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .text(d => d.values[3][d.values[3].length - 1] - d.values[3][0]);
 
-    rows
+    row
       .select('g.progress-period__arrow path')
-      .attr('fill', d => (d.values[2] > 0 ? color.positive : color.red))
+      .attr('fill', d => (d.values[3][d.values[3].length - 1] - d.values[3][0] > 0 ? color.positive : color.red))
       .attr(
         'transform',
         `translate(${this.x(3) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
       .attr('d', d => (d.values[3][d.values[3].length - 1] - d.values[3][0] > 0 ? arrowPaths.up : arrowPaths.down));
 
-    rows
+    row
       .select('path.progress-year__line')
       .attr('d', d => line(d.values[3]))
       .attr('transform', `translate(${this.x(3) + this.x.bandwidth() / 2}, 0)`);
@@ -262,7 +270,8 @@ function Template(svg) {
     this.renderPopulation(rows);
     this.renderDensity(rows);
     this.renderProgressYear(rows);
-    this.renderProgressPeriod(rows);
+
+    rows.each((row, index, array) => this.renderProgressPeriod(row, index, array));
   };
 
   this.drawColumnHeaders = function() {

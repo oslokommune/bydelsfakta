@@ -6,6 +6,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
+import url from '../config';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -168,7 +169,7 @@ function Template(svg) {
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
-    rows.select('a.hyperlink').attr('xlink:href', 'http://localhost:8080/bydelsfakta#/bydel/sthanshaugen/folkemengde');
+    rows.select('a.hyperlink').attr('xlink:href', `/bydelsfakta#/bydel/sthanshaugen/folkemengde`);
     rows
       .select('a.hyperlink')
       .select('text')
