@@ -1,11 +1,10 @@
 <template>
   <v-app>
     <div id="navbar">
-        <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+      <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
       <div
         v-for="link in links"
         :key="link.key"
-        :label="link.value"
         class="oslo__navigation-link"
         :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
       >
@@ -13,11 +12,11 @@
           type="checkbox"
           v-model="selected"
           :value="link.key"
-          :id="link.key"
+          :id="`checkbox-${link.key}`"
           @change="onChangeCheckbox"
           :disabled="disableChecbox(link.key)"
         >
-        <label :for="link.key"></label>
+        <label :for="`checkbox-${link.key}`"></label>
         <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
       </div>
       <div

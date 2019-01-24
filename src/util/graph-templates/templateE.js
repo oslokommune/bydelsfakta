@@ -4,6 +4,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -33,12 +34,13 @@ function Template(svg) {
     this.height = 400;
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.drawAxis();
     this.drawPyramid();
     this.drawList();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {
@@ -52,7 +54,7 @@ function Template(svg) {
       .attr('font-size', 12)
       .style('text-transform', 'uppercase')
       .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('transform', 'translate(10, -16)');
 
     this.canvas.selectAll('*').remove();
@@ -79,7 +81,7 @@ function Template(svg) {
       .append('text')
       .attr('font-size', 12)
       .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .text('Alder')
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`);
@@ -89,7 +91,7 @@ function Template(svg) {
       .attr('class', 'xAxis-title')
       .attr('font-size', 12)
       .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('text-anchor', 'middle')
       .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`)
       .text('Folkemengde');
@@ -111,7 +113,7 @@ function Template(svg) {
       .attr('class', 'fill')
       .attr('width', this.padding.left - this.gutter)
       .attr('height', this.rowHeight)
-      .attr('fill', util.color.blue)
+      .attr('fill', color.blue)
       .style('cursor', 'pointer')
       .attr('rx', 3);
     rowE.append('text').attr('class', 'label');
@@ -143,7 +145,7 @@ function Template(svg) {
       .attr('y', this.rowHeight / 2 + 5)
       .attr('x', 10)
       .attr('font-weight', d => (d.totalRow || d.avgRow ? 700 : 400))
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .style('pointer-events', 'none');
   };
 
@@ -191,7 +193,7 @@ function Template(svg) {
       .attr('text-anchor', (d, i) => (i === 0 ? 'end' : 'start'))
       .attr('font-size', 16)
       .attr('font-weight', 700)
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .transition()
       .attr('transform', `translate(${this.width / 2}, 23)`)
       .attr('x', (d, i) => (i === 0 ? -20 : 20));
@@ -200,9 +202,9 @@ function Template(svg) {
       .select('path')
       .attr('fill', d => {
         if (d[0].gender == 'Kvinne') {
-          return util.color.red;
+          return color.red;
         } else {
-          return util.color.positive;
+          return color.positive;
         }
       })
       .transition()

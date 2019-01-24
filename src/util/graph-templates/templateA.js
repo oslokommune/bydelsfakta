@@ -4,6 +4,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -20,8 +21,9 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    // Make a filtered copy of the provided data object containing
+    // to house only the selected series (if one has been selected)
     this.filteredData = JSON.parse(JSON.stringify(this.data));
-
     if (this.selected > -1) {
       this.filteredData.meta.series = [this.data.meta.series[this.selected]];
       this.filteredData.data = this.filteredData.data.map(bydel => {
@@ -30,13 +32,15 @@ function Template(svg) {
       });
     }
 
+    // Multiseries need larger padding top to make room for tabs
     this.padding.top = this.data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
 
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
+    // Move the close button
     this.canvas
       .select('g.close')
       .style('display', () => {
@@ -49,12 +53,14 @@ function Template(svg) {
     this.drawAxis();
     this.drawColumns();
     this.drawRows();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {
     this.canvas.append('g').attr('class', 'columns');
     this.canvas.append('g').attr('class', 'rows');
 
+    // Create and initialise the close button
     let close = this.canvas
       .append('g')
       .attr('class', 'close')
@@ -64,11 +70,12 @@ function Template(svg) {
         this.render(this.data);
       });
 
+    // Close button background
     close
       .append('rect')
       .attr('width', 30)
       .attr('height', 30)
-      .attr('fill', util.color.red)
+      .attr('fill', color.red)
       .style('cursor', 'pointer')
       .attr('opacity', 0.7)
       .on('mouseenter', function() {
@@ -82,9 +89,10 @@ function Template(svg) {
           .attr('opacity', 0.7);
       });
 
+    // Close button icon
     close
       .append('text')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .style('pointer-events', 'none')
       .text('x')
       .attr('font-weight', 700)
@@ -93,12 +101,17 @@ function Template(svg) {
       .attr('transform', 'translate(15, 20)');
   };
 
+  /**
+   * @param  {nodelist} rowsE - The newly created rows
+   *
+   * Creates all the DOM elements inside of each row
+   */
   this.initRowElements = function(rowsE) {
     // Row fill
     rowsE
       .append('rect')
       .attr('class', 'rowFill')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left);
@@ -107,43 +120,58 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'divider')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left)
       .attr('height', 1)
       .attr('y', this.rowHeight);
 
     // Row Geography
-    let textElement = rowsE
+    let hyperlink = rowsE.append('a').attr('class', 'hyperlink');
+
+    // Text element inside of hyperlink
+    hyperlink
       .append('text')
       .attr('class', 'geography')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6);
-
-    textElement.append('a').html('test');
   };
 
+  /**
+   * Updates elements on each row
+   */
   this.drawRows = function() {
+    // Select all existing rows (DOM elements) that matches the data
     let rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
       .data(this.filteredData.data);
+
+    // Create DOM element for missing rows
     let rowsE = rows
       .enter()
       .append('g')
       .attr('class', 'row');
+
+    // Remove excess DOM elements
     rows.exit().remove();
+
+    // Combine selections of existing rows and newly created rows
     rows = rows.merge(rowsE);
 
+    // Create DOM elements inside the newly created rows
     this.initRowElements(rowsE);
 
-    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+    // Dynamic styling, sizing and positioning based on data and container size
+
     rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0));
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
+    rows.select('a.hyperlink').attr('xlink:href', 'http://localhost:8080/bydelsfakta#/bydel/sthanshaugen/folkemengde');
     rows
-      .select('text.geography')
+      .select('a.hyperlink')
+      .select('text')
       .text(d => util.truncate(d.geography, this.padding.left))
       .attr('x', () => {
         return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
@@ -152,22 +180,23 @@ function Template(svg) {
         return this.data.meta.series.length > 1 ? 'start' : 'end';
       });
 
+    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+
     rows
       .select('text.geography')
       .append('title')
       .html(d => d.geography);
 
+    // Add attributes to total and avg rows
     rows.attr('data-total', d => d.totalRow);
     rows.attr('data-avg', d => d.avgRow);
 
-    let bars = rows.selectAll('rect.bar').data(d => {
-      return d.values;
-    });
+    let bars = rows.selectAll('rect.bar').data(d => d.values);
     let barsE = bars
       .enter()
       .append('rect')
-      .attr('width', 0)
-      .attr('class', 'bar');
+      .attr('class', 'bar')
+      .attr('width', 0);
 
     bars.exit().remove();
     bars = bars.merge(barsE);
@@ -180,7 +209,7 @@ function Template(svg) {
         return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
       })
       .attr('fill', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-avg') ? util.color.yellow : util.color.purple;
+        return j[0].parentNode.getAttribute('data-avg') ? color.yellow : color.purple;
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
@@ -257,7 +286,7 @@ function Template(svg) {
     columns.transition().attr('transform', (d, i) => {
       return `translate(${this.x[i](0)},0)`;
     });
-    columnsE.append('rect').attr('fill', util.color.light_grey);
+    columnsE.append('rect').attr('fill', color.light_grey);
     columnsE
       .append('rect')
       .attr('class', 'arrow')

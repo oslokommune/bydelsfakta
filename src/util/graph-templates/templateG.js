@@ -6,6 +6,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -28,13 +29,14 @@ function Template(svg) {
 
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
 
     this.drawRows();
     this.drawColumnHeaders();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {};
@@ -44,7 +46,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'rowFill')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('width', this.width);
 
@@ -52,7 +54,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'divider')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('width', this.width)
       .attr('height', 1)
       .attr('y', this.rowHeight);
@@ -61,7 +63,7 @@ function Template(svg) {
     rowsE
       .append('text')
       .attr('class', 'geography')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6)
       .attr('x', 10);
 
@@ -74,7 +76,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'population__bar')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.barHeight)
       .attr('y', (this.rowHeight - this.barHeight) / 2);
 
@@ -87,7 +89,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'density__bar')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.barHeight)
       .attr('y', (this.rowHeight - this.barHeight) / 2);
 
@@ -125,7 +127,7 @@ function Template(svg) {
       .append('path')
       .attr('class', 'progress-year__line')
       .attr('fill', 'none')
-      .attr('stroke', util.color.purple)
+      .attr('stroke', color.purple)
       .attr('stroke-width', 2);
   };
 
@@ -179,12 +181,12 @@ function Template(svg) {
     rows
       .filter(d => !d.avgRow && !d.totalRow)
       .select('rect.progress-year__bar')
-      .attr('fill', d => (d.values[2] > 0 ? util.color.positive : util.color.red))
+      .attr('fill', d => (d.values[2] > 0 ? color.positive : color.red))
       .attr('x', this.x(2) + this.x.bandwidth() / 2)
       .attr('width', d => x(Math.abs(d.values[2])));
     rows
       .select('g.progress-year__arrow path')
-      .attr('fill', d => (d.values[2] > 0 ? util.color.positive : util.color.red))
+      .attr('fill', d => (d.values[2] > 0 ? color.positive : color.red))
       .attr(
         'transform',
         `translate(${this.x(2) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
@@ -219,7 +221,7 @@ function Template(svg) {
 
     rows
       .select('g.progress-period__arrow path')
-      .attr('fill', d => (d.values[2] > 0 ? util.color.positive : util.color.red))
+      .attr('fill', d => (d.values[2] > 0 ? color.positive : color.red))
       .attr(
         'transform',
         `translate(${this.x(3) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`

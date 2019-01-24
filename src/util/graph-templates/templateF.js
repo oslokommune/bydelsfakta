@@ -5,6 +5,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -41,7 +42,7 @@ function Template(svg) {
     });
 
     this.svg
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.width1 = (this.width - this.gapX) / 2;
@@ -77,6 +78,7 @@ function Template(svg) {
       .attr('x', this.width1 / 2);
 
     this.drawRows();
+    this.drawSource('Statistisk sentralbyrå (test)');
   };
 
   this.created = function() {
@@ -106,7 +108,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'rowFill')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left + this.padding.right);
@@ -115,7 +117,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'divider')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left + this.padding.right)
       .attr('height', 1)
@@ -125,7 +127,7 @@ function Template(svg) {
     rowsE
       .append('text')
       .attr('class', 'geography')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6)
       .attr('x', -this.padding.left + 10);
 
@@ -133,8 +135,8 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'box')
-      .attr('fill', util.color.purple)
-      .attr('stroke', util.color.purple)
+      .attr('fill', color.purple)
+      .attr('stroke', color.purple)
       .attr('stroke-width', 1)
       .attr('fill-opacity', 0.2)
       .attr('rx', 2)
@@ -156,7 +158,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'median-stroke')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('width', 3)
       .attr('shape-rendering', 'geometricPrecision')
@@ -177,7 +179,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'mean-stroke')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('width', 3)
       .attr('shape-rendering', 'geometricPrecision')

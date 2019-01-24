@@ -4,7 +4,7 @@
  * provided SVG node and creates new DOM elements (mainly empty 'g's) inside of it.
  * At the end of init() the created() method is called. The template in question
  * may have needs of its own to create DOM elements inside the SVG at creation for
- * its own convenience.
+ * its own convenience, which would be inserted into this method if needed.
  *
  * Each template defines its own render() method which is called each time
  * new data is passed down from Vue, on resize (see below) or the template
@@ -16,16 +16,22 @@
  * Vue listens for changes in size for the SVG's container. The resize()
  * method uses debounce to prevent the render() method to be 'smashed'.
  *
+ * Number and time formats are defined in the locale.js file imported here
+ * and is used by d3 globally.
+ *
  */
 
 import d3 from '@/assets/d3';
 import debounce from '../debounce';
+import color from './colors';
 import * as locale from './locale';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
 d3.formatDefaultLocale(locale.format);
 
 function Base_Template(svg) {
+  // Declaring local variables here to prevent templates to be
+  // unnecessary cluttered with commonly used variables.
   this.data = {};
   this.height = 0;
   this.width = 0;
@@ -44,6 +50,7 @@ function Base_Template(svg) {
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
+  this.sourceHeight = 25;
 
   // Resize is called from the parent vue component
   // every time the container size changes.
@@ -82,6 +89,47 @@ function Base_Template(svg) {
     // appended to the svg after initialization. This method is run
     // once for each initialization.
     this.created();
+    this.addSourceElement();
+  };
+
+  this.addSourceElement = function() {
+    let group = this.svg
+      .append('g')
+      .attr('class', 'sourceGroup')
+      .attr('fill', color.purple)
+      .attr('opacity', 0);
+
+    group
+      .append('text')
+      .attr('class', 'source-label')
+      .attr('font-size', 10)
+      .text('Kilde: ');
+
+    group
+      .append('text')
+      .attr('class', 'source')
+      .attr('font-size', 10)
+      .attr('transform', () => {
+        let labelWidth = group
+          .select('.source-label')
+          .node()
+          .getBBox().width;
+        return `translate(${labelWidth + 4}, 0)`;
+      });
+  };
+
+  this.drawSource = function(str) {
+    this.svg.select('text.source').text(str);
+    let parent = this.svg.node().parentNode.getBoundingClientRect();
+    let source = this.svg
+      .select('g.sourceGroup')
+      .node()
+      .getBBox();
+    let offsetX = parent.width - source.width;
+    this.svg
+      .select('g.sourceGroup')
+      .attr('opacity', 1)
+      .attr('transform', `translate(${offsetX}, ${parent.height - 9})`);
   };
 
   // The parent container width is needed for each render of a template.

@@ -1,3 +1,7 @@
+/**
+ * Norwegian date and number formatting.
+ */
+
 const timeFormat = {
   dateTime: '%A %e %B %Y %H:%M:%S',
   date: '%d.%m.%Y',

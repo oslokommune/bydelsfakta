@@ -5,6 +5,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
+import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -32,11 +33,12 @@ function Template(svg) {
 
     this.svg
       .transition()
-      .attr('height', this.padding.top + this.height + this.padding.bottom)
+      .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawRows();
     this.drawLegend();
+    this.drawSource('Statistisk sentralbyrå (test)');
 
     this.canvas
       .select('line.zero')
@@ -83,7 +85,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'rowFill')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('height', this.rowHeight)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left);
@@ -92,7 +94,7 @@ function Template(svg) {
     rowsE
       .append('rect')
       .attr('class', 'divider')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('x', -this.padding.left)
       .attr('width', this.width + this.padding.left)
       .attr('height', 1)
@@ -102,7 +104,7 @@ function Template(svg) {
     rowsE
       .append('text')
       .attr('class', 'geography')
-      .attr('fill', util.color.purple)
+      .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6)
       .attr('x', -this.padding.left + 10);
   };
