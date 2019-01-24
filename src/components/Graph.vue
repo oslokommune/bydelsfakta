@@ -2,8 +2,6 @@
   <div class="graph__container">
     <select
       class="graph__dropdown"
-      name
-      id
       v-if="showDropdown"
       @input="svg.render(data, { method: settings.method, range: $event.target.value})"
     >
@@ -55,6 +53,8 @@ export default {
 
   methods: {
     draw() {
+      let t0 = performance.now();
+
       if (this.currentTemplate !== this.settings.template) {
         // Show dropdown only for template d
         this.showDropdown = this.settings.template === 'd';
@@ -97,11 +97,32 @@ export default {
 
       d3.json(this.settings.url).then(data => {
         this.data = data;
+        let r0 = performance.now();
         this.svg.render(this.data, {
           method: this.settings.method,
         });
+        let r1 = performance.now();
+        let renderTime = r1 - r0;
+        if (renderTime > 50) {
+          console.warn(
+            'SLOW RENDER:',
+            'Initial rendering of template',
+            this.settings.template,
+            'for',
+            this.settings.id,
+            'took',
+            Math.round(loadTime),
+            'ms'
+          );
+        }
         this.currentTemplate = this.settings.template;
       });
+
+      let t1 = performance.now();
+      let loadTime = t1 - t0;
+      if (loadTime > 300) {
+        console.warn('SLOW LOAD:', 'Fetching data', this.settings.id, 'took', Math.round(loadTime), 'ms');
+      }
     },
   },
   props: {
