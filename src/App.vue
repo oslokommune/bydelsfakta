@@ -20,12 +20,12 @@
         <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
       </div>
       <div
-        class="oslo__navigation-link oslo__navigation-link--compare"
+        class="oslo__navigation-link oslo__navigation-link--label-compare"
         :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
         @click="onClickSammenlign"
         role="button"
       >
-        <span class="oslo__navigation-link--label oslo__navigation-link--label-compare">Sammenlign bydeler</span>
+        <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
       </div>
       <div style="display: flex; justify-content: flex-end; flex-direction: column; padding-right: 1rem">
         <div style="align-self: flex-end">
@@ -275,7 +275,8 @@ export default {
   }
 
   &--compare {
-    margin-top: 2rem;
+    background-color: lighten($color-purple, 5%);
+    transition: background-color 0.3s ease-in-out;
   }
 
   &--label {
@@ -287,6 +288,7 @@ export default {
     position: relative;
 
     &-compare {
+      margin-top: 2rem;
       padding-left: 3.6rem;
     }
 
