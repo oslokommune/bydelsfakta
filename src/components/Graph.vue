@@ -104,7 +104,7 @@ export default {
         });
         let r1 = performance.now();
         let renderTime = r1 - r0;
-        if (renderTime > 50) {
+        if (renderTime > 100) {
           console.warn(
             'SLOW RENDER:',
             'Initial rendering of template',
