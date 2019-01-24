@@ -27,9 +27,9 @@
       >
         <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
       </div>
-      <div style="display: flex; justify-content: flex-end; flex-direction: column; padding-right: 1rem">
-        <div style="align-self: flex-end">
-          <button class="oslo__navigation-button">Velg alle</button>
+      <div class="oslo__navigation-drawer__button-container">
+        <div class="button-container">
+          <button class="oslo__navigation-button" @click="selectAll">Velg alle</button>
           <button class="oslo__navigation-button" :disabled="selected.length === 0" @click="selected = []">Fjern alle</button>
         </div>
       </div>
@@ -172,6 +172,10 @@ export default {
     disableChecbox(key) {
       return this.$route.path.includes('bydel') && this.selected.length === 1 && this.selected[0] === key;
     },
+
+    selectAll() {
+      bydeler.forEach(bydel => this.selected.push(bydel.key));
+    },
   },
   watch: {
     $route(to) {
@@ -288,6 +292,7 @@ export default {
     position: relative;
 
     &-compare {
+      margin-bottom: 2rem;
       margin-top: 2rem;
       padding-left: 3.6rem;
     }
@@ -425,18 +430,34 @@ input[type='checkbox'] {
   }
 }
 
+.oslo__navigation-drawer__button-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-right: 1rem;
+}
 
-.oslo__navigation-button {
-  border: 1px solid rgb(248, 198, 107);
-  color: rgb(248, 198, 107);
-  padding: 0.3rem 1rem 0.3rem 1rem;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  margin: 0.5rem;
+.button-container {
+  align-self: flex-end;
 
-  &:disabled {
-    opacity: 0.2;
+  .oslo__navigation-button {
+    border: 1px solid rgb(248, 198, 107);
+    color: rgb(248, 198, 107);
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0.5rem;
+    transition: all 0.3s ease-in-out;
+
+    &:disabled {
+      opacity: 0.2;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    &:hover:not([disabled]) {
+      box-shadow: 0 0 0 1px #e0e0e0;
+    }
   }
 }
 </style>
