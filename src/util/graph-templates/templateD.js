@@ -34,8 +34,24 @@ function Template(svg) {
   const formatPercent = NO.format('.1%');
   const formatFloat = NO.format(',.0f');
 
+  this.sortData = function(data) {
+    data = data.sort((a, b) => {
+      let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+      let totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+      return totB - totA;
+    });
+
+    data = data.sort((a, b) => a.avgRow - b.avgRow);
+    data = data.sort((a, b) => a.totalRow - b.totalRow);
+    return data;
+  };
+
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
+
+    this.data.data = this.sortData(this.data.data);
+
+    if (!data.data) return;
 
     // Set sizes for brush objects
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
