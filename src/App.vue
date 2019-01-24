@@ -71,6 +71,8 @@ export default {
       selectedSubpage: '',
       osloIcon: osloIcon,
       bydel: [],
+      showAllCheckbox: false,
+      bydeler: bydeler,
     };
   },
 
@@ -95,10 +97,12 @@ export default {
       const routes = this.$route.path.split('/');
 
       if (this.selected.length === 0) {
+        this.showAllCheckbox = false;
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/alle` });
       } else if (this.selected.length === bydeler.length) {
+        this.showAllCheckbox = true;
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
           : this.$router.push({ path: `/sammenlign/alle` });
@@ -180,6 +184,7 @@ export default {
     selectAll() {
       const routes = this.$route.path.split('/');
       this.selected = [];
+      this.showAllCheckbox = true;
       bydeler.forEach(bydel => this.selected.push(bydel.key));
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
@@ -197,16 +202,13 @@ export default {
   watch: {
     $route(to) {
       const routes = this.$route.path.split('/');
-      const paramBydel = routes[2].split('-');
       if (to.path.includes('bydel')) {
         const bydel = bydeler.find(item => item.uri === routes[2]).key;
         this.selected = [bydel];
         this.selectedSubpage = null;
-      } else if (to.path.includes('sammenlign')) {
-        this.selected = [];
-        paramBydel[0] === 'alle'
-          ? bydeler.forEach(bydel => this.selected.push(bydel.key))
-          : (this.selected = paramBydel);
+      } else if (to.path.includes('sammenlign') && !this.showAllCheckbox) {
+        const paramBydel = routes[2].split('-');
+        this.selected = paramBydel;
       }
       if (routes.length > 3) {
         this.selectedSubpage = routes[3];
