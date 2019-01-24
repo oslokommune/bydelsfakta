@@ -1,10 +1,10 @@
 <template>
-  <div class="oslo__navigation-topbar">
+  <header class="oslo__navigation-topbar">
     <div @click="backButton" role="button" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
-      <h4 class="text-uppercase oslo__topbar oslo__topbar-text">
-        {{ getBydel(this.$route.params.bydel) }}
-      </h4>
+      <h4
+        class="text-uppercase oslo__topbar oslo__topbar-text"
+      >{{ getBydel(this.$route.params.bydel) }}</h4>
     </div>
     <v-select
       v-model="selectedSubpage"
@@ -12,14 +12,14 @@
       label="VELG TEMA"
       class="v-select__selection--uppercase"
     ></v-select>
-  </div>
+  </header>
 </template>
 <script>
 import subpages from '../config/subpages';
 import bydeler from '../config/bydeler';
 
 export default {
-  name: 'navigation-topbar',
+  name: 'NavigationTopbar',
   data() {
     return {
       items: subpages,

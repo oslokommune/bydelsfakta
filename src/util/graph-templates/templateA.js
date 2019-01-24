@@ -6,7 +6,6 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
-import url from '../config';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -320,7 +319,7 @@ function Template(svg) {
       .on('mouseover', (d, i) => {
         this.render(this.data, { highlight: i, selected: this.selected });
       })
-      .on('mouseleave', (d, i) => {
+      .on('mouseleave', () => {
         this.render(this.data, { highlight: -1, selected: this.selected });
       })
       .on('click keyup', (d, i, j) => {
@@ -337,7 +336,7 @@ function Template(svg) {
           .select('g.rows')
           .selectAll('g.row')
           .selectAll('rect.bar')
-          .filter((dd, ii, jj) => {
+          .filter((dd, ii) => {
             return ii === i;
           });
 
@@ -352,7 +351,7 @@ function Template(svg) {
 
     columns
       .select('text.colHeading')
-      .style('display', (d, i) => {
+      .style('display', () => {
         return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
       })
       .text(d => d.heading)
@@ -362,7 +361,7 @@ function Template(svg) {
     columns
       .select('text.colSubheading')
       .text((d, i) => util.truncate(d.subheading, this.x[i].range()))
-      .style('display', (d, i) => {
+      .style('display', () => {
         return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
       })
       .append('title')

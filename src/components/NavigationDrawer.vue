@@ -1,39 +1,44 @@
 <template>
-  <div id="navbar">
+  <aside id="navbar">
     <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
-    <div
-      v-for="link in links"
-      :key="link.key"
-      class="oslo__navigation-link"
-      :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
-    >
-      <input
-        type="checkbox"
-        v-model="selected"
-        :value="link.key"
-        :id="`checkbox-${link.key}`"
-        @change="onChangeCheckbox"
-        :disabled="disableChecbox(link.key)"
+    <nav role="navigation">
+      <div
+        v-for="link in links"
+        :key="link.key"
+        class="oslo__navigation-link"
+        :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
       >
-      <label :for="`checkbox-${link.key}`"></label>
-      <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
-    </div>
-    <div
-      class="oslo__navigation-link oslo__navigation-link--label-compare"
-      :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
-      @click="onClickSammenlign"
-      role="button"
-    >
-      <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
-    </div>
-    <div class="oslo__navigation-drawer__button-container">
-      <div class="button-container">
-        <button class="oslo__navigation-button" @click="selectAll">Velg alle</button>
-        <button class="oslo__navigation-button" :disabled="selected.length === 0" @click="unselectAll">Fjern alle
-        </button>
+        <input
+          type="checkbox"
+          v-model="selected"
+          :value="link.key"
+          :id="`checkbox-${link.key}`"
+          @change="onChangeCheckbox"
+          :disabled="disableChecbox(link.key)"
+        >
+        <label :for="`checkbox-${link.key}`"></label>
+        <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
       </div>
-    </div>
-  </div>
+      <div
+        class="oslo__navigation-link oslo__navigation-link--label-compare"
+        :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
+        @click="onClickSammenlign"
+        role="button"
+      >
+        <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
+      </div>
+      <div class="oslo__navigation-drawer__button-container">
+        <div class="button-container">
+          <button class="oslo__navigation-button" @click="selectAll">Velg alle</button>
+          <button
+            class="oslo__navigation-button"
+            :disabled="selected.length === 0"
+            @click="unselectAll"
+          >Fjern alle</button>
+        </div>
+      </div>
+    </nav>
+  </aside>
 </template>
 
 <script>
@@ -41,7 +46,7 @@ import bydeler from '../config/bydeler';
 import osloIcon from '../assets/oslo-logo.svg';
 
 export default {
-  name: 'navigation-drawer',
+  name: 'NavigationDrawer',
   data() {
     return {
       links: bydeler,

@@ -7,7 +7,7 @@
  */
 
 import Base_Template from './baseTemplate';
-import util from './template-utils';
+// import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
 

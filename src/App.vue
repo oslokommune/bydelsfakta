@@ -1,9 +1,11 @@
 <template>
   <v-app>
-    <navigation-drawer />
+    <navigation-drawer/>
     <div id="content">
-      <navigation-topbar />
-      <router-view/>
+      <navigation-topbar/>
+      <main>
+        <router-view/>
+      </main>
     </div>
   </v-app>
 </template>
