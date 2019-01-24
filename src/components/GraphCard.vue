@@ -22,8 +22,8 @@
             @click="showDropdown = !showDropdown"
             aria-label="context-menu-button"
           >
-            <v-icon v-if="showDropdown" class="context-menu__button-icon">close</v-icon>
-            <v-icon v-if="!showDropdown" class="context-menu__button-icon">menu</v-icon>
+            <i v-if="showDropdown" class="material-icons context-menu__button-icon">close</i>
+            <i v-if="!showDropdown" class="material-icons context-menu__button-icon">menu</i>
           </button>
           <div
             v-if="showDropdown"
@@ -36,7 +36,7 @@
               tabIndex="0"
               aria-label="lagre graf som png"
             >
-              <v-icon class="context-menu__dropdown-item-icon">photo_size_select_actual</v-icon>
+              <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Last ned som PNG</span>
             </a>
           </div>
