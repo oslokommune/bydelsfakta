@@ -51,6 +51,7 @@ function Base_Template(svg) {
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
   this.sourceHeight = 25;
+  this.duration = 100;
 
   // Resize is called from the parent vue component
   // every time the container size changes.

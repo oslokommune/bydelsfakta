@@ -37,6 +37,7 @@ function Template(svg) {
 
     this.svg
       .transition()
+      .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -81,11 +82,13 @@ function Template(svg) {
       .on('mouseenter', function() {
         d3.select(this)
           .transition()
+          .duration(this.duration)
           .attr('opacity', 1);
       })
       .on('mouseleave', function() {
         d3.select(this)
           .transition()
+          .duration(this.duration)
           .attr('opacity', 0.7);
       });
 
@@ -217,6 +220,7 @@ function Template(svg) {
 
     bars
       .transition()
+      .duration(this.duration)
       .attr('width', d => this.x[0](d))
       .attr('x', (d, i) => this.x[i](0));
   };
@@ -263,6 +267,7 @@ function Template(svg) {
           return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
         })
         .transition()
+        .duration(this.duration)
         .call(
           d3
             .axisBottom(this.x[i])
@@ -283,9 +288,12 @@ function Template(svg) {
       .attr('class', 'column');
     columns.exit().remove();
     columns = columns.merge(columnsE);
-    columns.transition().attr('transform', (d, i) => {
-      return `translate(${this.x[i](0)},0)`;
-    });
+    columns
+      .transition()
+      .duration(this.duration)
+      .attr('transform', (d, i) => {
+        return `translate(${this.x[i](0)},0)`;
+      });
     columnsE.append('rect').attr('fill', color.light_grey);
     columnsE
       .append('rect')
@@ -380,6 +388,7 @@ function Template(svg) {
       .attr('y', -10)
       .attr('height', this.height + 10)
       .transition()
+      .duration(this.duration)
       .attr('width', (d, i) => {
         if (this.filteredData.data.filter(d => d.totalRow).length) {
           return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i]);
@@ -396,6 +405,7 @@ function Template(svg) {
       })
       .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
       .transition()
+      .duration(this.duration)
       .attr('x', (d, i) => {
         return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i]);
       });

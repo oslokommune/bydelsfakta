@@ -71,8 +71,14 @@ function Template(svg) {
     // Move the brushes if a range was selected and save the new extent
     if (options.range) {
       extent = JSON.parse(options.range);
-      gBrushLarge.transition().call(brushLarge.move, extent.map(this.age));
-      gBrushSmall.transition().call(brushSmall.move, extent.map(this.age));
+      gBrushLarge
+        .transition()
+        .duration(this.duration)
+        .call(brushLarge.move, extent.map(this.age));
+      gBrushSmall
+        .transition()
+        .duration(this.duration)
+        .call(brushSmall.move, extent.map(this.age));
     }
 
     // Find the larges accumulated number within the selected range
@@ -84,36 +90,45 @@ function Template(svg) {
     // Set axis and scales based on these max values (for the bars()
     this.y.domain([0, max]).range([this.height2, 0]);
     this.x.domain([0, maxAccumulated]).range([0, this.width - this.paddingLowerLeft]);
-    this.upperYAxis.transition().call(
-      d3
-        .axisLeft(this.y)
-        .ticks(4)
-        .tickFormat(d => {
-          if (this.method == 'ratio') {
-            return formatPercent(d);
-          } else {
-            return formatFloat(d);
-          }
-        })
-    );
-    this.upperXAxis.transition().call(
-      d3
-        .axisBottom(this.age)
-        .ticks((this.width - this.paddingUpperLeft) / 100)
-        .tickFormat(d => d + ' år')
-    );
-    this.lowerXAxis.transition().call(
-      d3
-        .axisTop(this.x)
-        .tickFormat(d => {
-          if (this.method == 'ratio') {
-            return formatPercent(d);
-          } else {
-            return formatFloat(d);
-          }
-        })
-        .ticks((this.width - this.paddingLowerLeft) / 70)
-    );
+    this.upperYAxis
+      .transition()
+      .duration(this.duration)
+      .call(
+        d3
+          .axisLeft(this.y)
+          .ticks(4)
+          .tickFormat(d => {
+            if (this.method == 'ratio') {
+              return formatPercent(d);
+            } else {
+              return formatFloat(d);
+            }
+          })
+      );
+    this.upperXAxis
+      .transition()
+      .duration(this.duration)
+      .call(
+        d3
+          .axisBottom(this.age)
+          .ticks((this.width - this.paddingUpperLeft) / 100)
+          .tickFormat(d => d + ' år')
+      );
+    this.lowerXAxis
+      .transition()
+      .duration(this.duration)
+      .call(
+        d3
+          .axisTop(this.x)
+          .tickFormat(d => {
+            if (this.method == 'ratio') {
+              return formatPercent(d);
+            } else {
+              return formatFloat(d);
+            }
+          })
+          .ticks((this.width - this.paddingLowerLeft) / 70)
+      );
 
     // Call brush method on resize, because it handles stuff
     // like moving the brush overlays and brush handles.
@@ -159,8 +174,14 @@ function Template(svg) {
     // This to counteract D3's default behavior of hiding the brush
     // selection.
     if (d3.event && d3.event.selection === null) {
-      gBrushSmall.transition().call(brushSmall.move, self.age.range());
-      gBrushLarge.transition().call(brushLarge.move, self.age.range());
+      gBrushSmall
+        .transition()
+        .duration(this.duration)
+        .call(brushSmall.move, self.age.range());
+      gBrushLarge
+        .transition()
+        .duration(this.duration)
+        .call(brushLarge.move, self.age.range());
     }
 
     // Resize and move both selections to new location
@@ -315,8 +336,14 @@ function Template(svg) {
 
     this.drawHandles();
 
-    gBrushLarge.transition().call(brushLarge.move, [0, 50].map(this.age));
-    gBrushSmall.transition().call(brushSmall.move, [0, 50].map(this.age));
+    gBrushLarge
+      .transition()
+      .duration(this.duration)
+      .call(brushLarge.move, [0, 50].map(this.age));
+    gBrushSmall
+      .transition()
+      .duration(this.duration)
+      .call(brushSmall.move, [0, 50].map(this.age));
   };
 
   // Draws/updates rows content. Triggered each render
@@ -383,6 +410,7 @@ function Template(svg) {
     rows
       .select('rect.bar')
       .transition()
+      .duration(this.duration)
       .attr('width', bydel => {
         if (this.method == 'value' && (bydel.avgRow || bydel.totalRow)) {
           return 0;
@@ -430,12 +458,14 @@ function Template(svg) {
     lines
       .exit()
       .transition()
+      .duration(this.duration)
       .attr('opacity', 0)
       .remove();
     lines = lines.merge(linesE);
 
     lines
       .transition()
+      .duration(this.duration)
       .attr('opacity', 1)
       .attr('d', d => this.line(d.values))
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))

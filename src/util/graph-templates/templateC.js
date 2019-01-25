@@ -32,6 +32,7 @@ function Template(svg) {
     this.height = 400;
     this.svg
       .transition()
+      .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -84,6 +85,7 @@ function Template(svg) {
     this.infobox
       .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
       .transition()
+      .duration(this.duration)
       .attr('opacity', 1);
 
     this.infoboxHead
@@ -268,6 +270,7 @@ function Template(svg) {
       .attr('x', this.width + 5)
       .attr('font-weight', 'bold')
       .transition()
+      .duration(this.duration)
       .attr('y', d => {
         return this.y(d.values[this.series][d.values[this.series].length - 1][this.method]) + 5;
       });
@@ -304,6 +307,7 @@ function Template(svg) {
       .attr('stroke-width', this.strokeWidth)
       .attr('fill', 'none')
       .transition()
+      .duration(this.duration)
       .attr('d', d => line(d.values[this.series]));
 
     row.on('mouseover', function() {
@@ -346,10 +350,14 @@ function Template(svg) {
   };
 
   this.drawAxis = function() {
-    this.yAxis.transition().call(d3.axisLeft(this.y).ticks(this.height / 30));
+    this.yAxis
+      .transition()
+      .duration(this.duration)
+      .call(d3.axisLeft(this.y).ticks(this.height / 30));
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
+      .duration(this.duration)
       .call(d3.axisBottom(this.x).ticks(this.width / 110));
   };
 

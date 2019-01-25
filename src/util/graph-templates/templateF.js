@@ -50,6 +50,7 @@ function Template(svg) {
     this.x2.range([0, this.width2]).domain([0, 70]);
     this.x2Axis
       .transition()
+      .duration(this.duration)
       .call(
         d3
           .axisTop(this.x2)
@@ -61,20 +62,25 @@ function Template(svg) {
     this.x
       .range([0, this.width1])
       .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05]);
-    this.xAxis.transition().call(
-      d3
-        .axisTop(this.x)
-        .tickFormat(d => `${d} år`)
-        .ticks(this.width2 / 60)
-    );
+    this.xAxis
+      .transition()
+      .duration(this.duration)
+      .call(
+        d3
+          .axisTop(this.x)
+          .tickFormat(d => `${d} år`)
+          .ticks(this.width2 / 60)
+      );
 
     this.canvas
       .select('text.label-median')
       .transition()
+      .duration(this.duration)
       .attr('x', this.width1 + this.gapX + this.width2 / 2);
     this.canvas
       .select('text.label-mean')
       .transition()
+      .duration(this.duration)
       .attr('x', this.width1 / 2);
 
     this.drawRows();
@@ -203,42 +209,52 @@ function Template(svg) {
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
     rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
-    rows.transition().attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+    rows
+      .transition()
+      .duration(this.duration)
+      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
 
     rows
       .select('text.median-value')
       .text(d => d.median)
       .transition()
+      .duration(this.duration)
       .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
 
     rows
       .select('text.mean-value')
       .text(d => d.mean)
       .transition()
+      .duration(this.duration)
       .attr('x', d => this.x(d.mean) + 6);
 
     rows
       .select('rect.mean-stroke')
       .transition()
+      .duration(this.duration)
       .attr('x', d => this.x(d.mean));
     rows
       .select('rect.median-stroke')
       .transition()
+      .duration(this.duration)
       .attr('x', d => this.gapX + this.width1 + this.x2(d.median));
     rows
       .select('rect.box')
       .transition()
+      .duration(this.duration)
       .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
       .attr('width', d => this.x2(d.high) - this.x2(d.low));
 
     rows
       .select('rect.rowFill')
       .transition()
+      .duration(this.duration)
       .attr('width', this.width + this.padding.left + this.padding.right);
     rows
       .select('rect.divider')
       .transition()
+      .duration(this.duration)
       .attr('width', this.width + this.padding.left + this.padding.right);
   };
 

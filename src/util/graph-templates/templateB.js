@@ -27,6 +27,7 @@ function Template(svg) {
 
     this.svg
       .transition()
+      .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -104,6 +105,7 @@ function Template(svg) {
     this.infobox
       .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
       .transition()
+      .duration(this.duration)
       .attr('opacity', 1);
 
     this.infoboxHead

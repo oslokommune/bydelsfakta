@@ -89,12 +89,22 @@ function Template(svg) {
 
     this.gutter = (this.parentWidth() - this.padding.left - 400) / 2;
 
-    this.matrix.transition().attr('transform', `translate(${this.gutter}, 0)`);
-    this.dotContainer.transition().attr('transform', `translate(${this.gutter}, 0)`);
-    this.lineContainer.transition().attr('transform', `translate(${this.gutter}, 0)`);
+    this.matrix
+      .transition()
+      .duration(this.duration)
+      .attr('transform', `translate(${this.gutter}, 0)`);
+    this.dotContainer
+      .transition()
+      .duration(this.duration)
+      .attr('transform', `translate(${this.gutter}, 0)`);
+    this.lineContainer
+      .transition()
+      .duration(this.duration)
+      .attr('transform', `translate(${this.gutter}, 0)`);
 
     this.svg
       .transition()
+      .duration(this.duration)
       .attr('height', 500 + this.sourceHeight)
       .attr('width', this.parentWidth());
 
@@ -325,6 +335,7 @@ function Template(svg) {
       this.lineContainer
         .selectAll('path.lines')
         .transition()
+        .duration(this.duration)
         .attr('opacity', 0);
       return;
     }
@@ -358,6 +369,7 @@ function Template(svg) {
       .attr('stroke-width', 2)
       .style('pointer-events', 'none')
       .transition()
+      .duration(this.duration)
       .attr('opacity', 1)
       .attr('d', line);
   };
@@ -389,6 +401,7 @@ function Template(svg) {
       .attr('data-1', d => +d.values[1].ratio)
       .attr('data-2', d => +d.values[2].ratio)
       .transition()
+      .duration(this.duration)
       .attr('fill', (d, i) => (i === this.selected ? color.purple : color.blue))
       .attr('r', (d, i) => (i === this.selected ? 9 : 6))
       .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : fillOpacity))

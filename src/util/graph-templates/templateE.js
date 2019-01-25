@@ -34,6 +34,7 @@ function Template(svg) {
     this.height = 400;
     this.svg
       .transition()
+      .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -195,6 +196,7 @@ function Template(svg) {
       .attr('font-weight', 700)
       .attr('fill', color.purple)
       .transition()
+      .duration(this.duration)
       .attr('transform', `translate(${this.width / 2}, 23)`)
       .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
@@ -208,6 +210,7 @@ function Template(svg) {
         }
       })
       .transition()
+      .duration(this.duration)
       .attr('d', this.area);
   };
 
@@ -218,6 +221,7 @@ function Template(svg) {
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
+      .duration(this.duration)
       .call(
         d3
           .axisBottom(this.x)
@@ -248,12 +252,14 @@ function Template(svg) {
     this.canvas
       .select('text.xAxis-title')
       .transition()
+      .duration(this.duration)
       .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`);
 
     // Reposition axis title
     this.canvas
       .select('g.yAxis-title')
       .transition()
+      .duration(this.duration)
       .attr('transform', `translate(-50, ${this.height / 2})`);
   };
 

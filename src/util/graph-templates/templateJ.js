@@ -33,6 +33,7 @@ function Template(svg) {
 
     this.svg
       .transition()
+      .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
@@ -45,6 +46,7 @@ function Template(svg) {
       .attr('y1', 0)
       .attr('y2', this.height)
       .transition()
+      .duration(this.duration)
       .attr('x1', this.x(0))
       .attr('x2', this.x(0));
 
@@ -126,11 +128,13 @@ function Template(svg) {
     rows
       .select('rect.rowFill')
       .transition()
+      .duration(this.duration)
       .attr('width', this.padding.left + this.width + this.padding.right)
       .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
     rows
       .select('rect.divider')
       .transition()
+      .duration(this.duration)
       .attr('width', this.padding.left + this.width + this.padding.right)
       .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
@@ -171,6 +175,7 @@ function Template(svg) {
       .attr('y', (d, i) => i * this.rowHeight + (this.rowHeight - this.barHeight) / 2)
       .attr('height', this.barHeight)
       .transition()
+      .duration(this.duration)
       .attr('x', d => this.x(d[0]))
       .attr('width', d => this.x(d[1]) - this.x(d[0]));
   };
