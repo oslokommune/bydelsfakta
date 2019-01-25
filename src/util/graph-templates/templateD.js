@@ -290,6 +290,9 @@ function Template(svg) {
       .attr('fill', color.purple)
       .attr('transform', `translate(${this.paddingLowerLeft}, ${-28})`);
 
+    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+
     gBrushLarge = this.upper
       .append('g')
       .attr('class', 'brush')
@@ -457,15 +460,11 @@ function Template(svg) {
 
     lines
       .exit()
-      .transition()
-      .duration(this.duration)
       .attr('opacity', 0)
       .remove();
     lines = lines.merge(linesE);
 
     lines
-      .transition()
-      .duration(this.duration)
       .attr('opacity', 1)
       .attr('d', d => this.line(d.values))
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
