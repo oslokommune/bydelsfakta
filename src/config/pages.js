@@ -40,6 +40,7 @@ const page = {
             label: 'Historisk (prosent)',
             id: 'folkemengde_utvikling_historisk-prosent',
             template: 'b',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataB.json`,
           },
         ],

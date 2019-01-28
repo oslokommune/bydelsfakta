@@ -157,7 +157,7 @@ function Base_Template(svg) {
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.height = this.data.data.length * this.rowHeight;
+    this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     return true;
   };

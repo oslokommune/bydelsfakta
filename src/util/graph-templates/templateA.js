@@ -206,7 +206,7 @@ function Template(svg) {
 
     bars
       .attr('height', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-total') ? 1 : this.barHeight;
+        return j[0].parentNode.getAttribute('data-total') ? 2 : this.barHeight;
       })
       .attr('y', (d, i, j) => {
         return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;

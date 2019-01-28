@@ -49,7 +49,8 @@ function Template(svg) {
     .y(d => this.y(d[this.method]));
 
   this.drawLabels = function() {
-    let labels = this.canvas.selectAll('text.label').data(this.data.data.filter(row => row.avgRow || row.totalRow));
+    // let labels = this.canvas.selectAll('text.label').data(this.data.data.filter(row => row.avgRow || row.totalRow));
+    let labels = this.canvas.selectAll('text.label').data(this.data.data);
     let labelsE = labels
       .enter()
       .append('text')
@@ -63,10 +64,10 @@ function Template(svg) {
     labels
       .text(d => util.truncate(d.geography, this.padding.right - 30))
       .attr('x', this.width + 10)
-      .attr('font-weight', 'bold')
       .attr('y', d => {
         return this.y(d.values[d.values.length - 1][this.method]) + 5;
-      });
+      })
+      .attr('opacity', 0.4);
 
     labels
       .selectAll('title')
@@ -210,12 +211,25 @@ function Template(svg) {
       .attr('stroke-width', 3)
       .attr('fill', 'none');
 
-    row.on('mouseover', function() {
-      d3.select(this).attr('stroke-width', strokeWidthHighlight);
+    row.on('mouseover', (d, i, j) => {
+      d3.selectAll(j).attr('opacity', 0.35);
+      d3.select(j[i])
+        .attr('stroke-width', strokeWidthHighlight)
+        .attr('opacity', 1);
+      this.canvas.selectAll('text.label').attr('opacity', 0);
+      let label = this.canvas.selectAll('text.label').filter(l => l.geography === d.geography);
+      label.attr('opacity', 1).attr('font-weight', 'bold');
+      label.node().parentElement.append(label.node());
     });
 
-    row.on('mouseleave', function() {
-      d3.select(this).attr('stroke-width', strokeWidth);
+    row.on('mouseleave', (d, i, j) => {
+      d3.select(j[i]).attr('stroke-width', strokeWidth);
+
+      d3.selectAll(j).attr('opacity', 1);
+      this.canvas
+        .selectAll('text.label')
+        .attr('opacity', 0.5)
+        .attr('font-weight', '400');
     });
 
     row

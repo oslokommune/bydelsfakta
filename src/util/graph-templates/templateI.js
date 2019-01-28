@@ -67,7 +67,7 @@ function Template(svg) {
   this.dotContainer;
   this.lineContainer;
 
-  const fillOpacity = 0.3;
+  const fillOpacity = 0.6;
   const strokeOpacity = 0.8;
 
   const x = d3
@@ -183,7 +183,6 @@ function Template(svg) {
           .filter((d, index) => i == index)
           .select('circle')
           .attr('r', 8)
-          .attr('fill', color.blue)
           .attr('fill-opacity', 1)
           .attr('stroke-opacity', 1);
       })
@@ -194,7 +193,6 @@ function Template(svg) {
           .filter((d, index) => i == index)
           .select('circle')
           .attr('r', 6)
-          .attr('fill', color.blue)
           .attr('fill-opacity', fillOpacity)
           .attr('stroke-opacity', strokeOpacity);
       });
@@ -402,11 +400,27 @@ function Template(svg) {
       .attr('data-2', d => +d.values[2].ratio)
       .transition()
       .duration(this.duration)
-      .attr('fill', (d, i) => (i === this.selected ? color.purple : color.blue))
+      .attr('fill', (d, i) => {
+        if (d.avgRow) {
+          return color.red;
+        } else if (d.totalRow) {
+          return color.yellow;
+        } else {
+          return i === this.selected ? color.purple : color.blue;
+        }
+      })
       .attr('r', (d, i) => (i === this.selected ? 9 : 6))
       .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : fillOpacity))
       .attr('stroke-opacity', (d, i) => (i === this.selected ? 1 : strokeOpacity))
       .attr('stroke', (d, i) => (i === this.selected ? color.light_grey : color.purple));
+
+    dot
+      .on('mouseover', (d, i) => {
+        this.render(this.data, { selected: i });
+      })
+      .on('mouseleave', () => {
+        this.render(this.data, { selected: this.selected });
+      });
   };
 
   this.updateAxisLabels = function() {
