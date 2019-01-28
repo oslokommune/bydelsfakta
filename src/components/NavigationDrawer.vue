@@ -21,13 +21,16 @@
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
-        :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
+        :class="{ 'navigation-link--active': $route.path.includes('sammenlign') }"
         @click="onClickSammenlign"
         role="button"
       >
         <span class="navigation-link__label">Sammenlign bydeler</span>
       </div>
-      <div class="navigation-drawer__buttons">
+      <div
+        class="navigation-drawer__buttons"
+        v-if="$route.path.includes('sammenlign')"
+      >
         <div class="navigation-drawer__button-container">
           <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
           <button
@@ -39,6 +42,7 @@
         <div class="navigation-drawer__select-container">
           <select
             class="navigation-drawer__select"
+            v-model="selectedPredefinedOption"
           >
             <option
               v-for="(element, index) in options"
@@ -69,6 +73,7 @@ export default {
       showDropdown: false,
       selected: [],
       options: predefinedOptions,
+      selectedPredefinedOption: [],
     };
   },
 
@@ -157,6 +162,7 @@ export default {
       const routes = this.$route.path.split('/');
       this.selected = [];
       this.showAllCheckbox = true;
+      this.selectedPredefinedOption = [];
       bydeler.forEach(bydel => this.selected.push(bydel.key));
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
@@ -166,6 +172,7 @@ export default {
     unselectAll() {
       const routes = this.$route.path.split('/');
       this.selected = [];
+      this.selectedPredefinedOption = [];
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
         : this.$router.push({ path: `/sammenlign/alle` });
@@ -181,6 +188,15 @@ export default {
       } else if (to.path.includes('sammenlign') && !this.showAllCheckbox) {
         const paramBydel = routes[2].split('-');
         this.selected = paramBydel;
+      }
+    },
+    selectedPredefinedOption() {
+      const routes = this.$route.path.split('/');
+      if (this.selectedPredefinedOption.length !== 0) {
+        this.selected = this.selectedPredefinedOption;
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
       }
     },
   },
