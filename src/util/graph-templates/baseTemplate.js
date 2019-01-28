@@ -91,6 +91,52 @@ function Base_Template(svg) {
     // once for each initialization.
     this.created();
     this.addSourceElement();
+    this.addTooltipElement();
+  };
+
+  this.addTooltipElement = function() {
+    let group = this.svg
+      .append('g')
+      .attr('class', 'tooltip')
+      .attr('opacity', 0)
+      .style('pointer-events', 'none');
+
+    group
+      .append('rect')
+      .attr('transform', 'translate(0, -29)')
+      .attr('fill', color.yellow)
+      .attr('stroke', 'white')
+      .attr('rx', 11)
+      .attr('height', 21);
+    group
+      .append('text')
+      .attr('transform', 'translate(0, -14)')
+      .attr('font-size', 12)
+      .attr('font-weight', 'bold')
+      .attr('text-anchor', 'middle')
+      .attr('fill', color.purple);
+  };
+
+  this.showTooltip = function(str, event) {
+    let group = this.svg.select('g.tooltip');
+    let rect = group.select('rect');
+    let text = group.select('text');
+
+    group.attr('transform', `translate(${event.layerX}, ${event.layerY})`);
+    text.text(str);
+    rect.attr('width', text.node().getBBox().width + 20).attr('x', -(text.node().getBBox().width / 2 + 10));
+
+    group.attr('opacity', 1);
+  };
+
+  this.hideTooltip = function(str) {
+    let group = this.svg.select('g.tooltip');
+    let rect = group.select('rect');
+    let text = group.select('text');
+
+    text.text('');
+
+    group.attr('opacity', 0);
   };
 
   this.addSourceElement = function() {

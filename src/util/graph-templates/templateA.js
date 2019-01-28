@@ -216,6 +216,12 @@ function Template(svg) {
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
+      })
+      .on('mousemove', (d, i, j) => {
+        this.showTooltip(Math.round(d * 100) + '%', d3.event);
+      })
+      .on('mouseleave', () => {
+        this.hideTooltip();
       });
 
     bars
