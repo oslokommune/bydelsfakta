@@ -5,8 +5,8 @@
       <div
         v-for="link in links"
         :key="link.key"
-        class="oslo__navigation-link"
-        :class="{ 'oslo__navigation-link--active': checkActiveBydel(link.uri), 'oslo__navigation-link--compare': checkMultipleBydeler(link.key) }"
+        class="navigation-link"
+        :class="{ 'navigation-link--active': checkActiveBydel(link.uri), 'navigation-link--compare': checkMultipleBydeler(link.key) }"
       >
         <input
           type="checkbox"
@@ -17,24 +17,41 @@
           :disabled="disableChecbox(link.key)"
         >
         <label :for="`checkbox-${link.key}`"></label>
-        <span class="oslo__navigation-link--label" @click="onClickBydel(link.uri)">{{link.value}}</span>
+        <span class="navigation-link__label" @click="onClickBydel(link.uri)">{{link.value}}</span>
       </div>
       <div
-        class="oslo__navigation-link oslo__navigation-link--label-compare"
-        :class="{ 'oslo__navigation-link--active': $route.path.includes('sammenlign') }"
+        class="navigation-link navigation-link__label-compare"
+        :class="{ 'navigation-link--active': $route.path.includes('sammenlign') }"
         @click="onClickSammenlign"
         role="button"
       >
-        <span class="oslo__navigation-link--label">Sammenlign bydeler</span>
+        <span class="navigation-link__label">Sammenlign bydeler</span>
       </div>
-      <div class="oslo__navigation-drawer__button-container">
-        <div class="button-container">
-          <button class="oslo__navigation-button" @click="selectAll">Velg alle</button>
+      <div
+        class="navigation-drawer__buttons"
+        v-if="$route.path.includes('sammenlign')"
+      >
+        <div class="navigation-drawer__button-container">
+          <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
           <button
-            class="oslo__navigation-button"
+            class="navigation-drawer__button"
             :disabled="selected.length === 0"
             @click="unselectAll"
           >Fjern alle</button>
+        </div>
+        <div class="navigation-drawer__select-container">
+          <select
+            class="navigation-drawer__select"
+            v-model="selectedPredefinedOption"
+          >
+            <option
+              v-for="(element, index) in options"
+              :key="index"
+              :value="element.option"
+              :selected="element.selected"
+              :disabled="element.disabled"
+            >{{element.label}}</option>
+          </select>
         </div>
       </div>
     </nav>
@@ -43,6 +60,7 @@
 
 <script>
 import bydeler from '../config/bydeler';
+import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg';
 
 export default {
@@ -52,7 +70,10 @@ export default {
       links: bydeler,
       osloIcon: osloIcon,
       showAllCheckbox: false,
+      showDropdown: false,
       selected: [],
+      options: predefinedOptions,
+      selectedPredefinedOption: [],
     };
   },
 
@@ -141,6 +162,7 @@ export default {
       const routes = this.$route.path.split('/');
       this.selected = [];
       this.showAllCheckbox = true;
+      this.selectedPredefinedOption = [];
       bydeler.forEach(bydel => this.selected.push(bydel.key));
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
@@ -150,6 +172,7 @@ export default {
     unselectAll() {
       const routes = this.$route.path.split('/');
       this.selected = [];
+      this.selectedPredefinedOption = [];
       routes.length > 3
         ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
         : this.$router.push({ path: `/sammenlign/alle` });
@@ -165,6 +188,15 @@ export default {
       } else if (to.path.includes('sammenlign') && !this.showAllCheckbox) {
         const paramBydel = routes[2].split('-');
         this.selected = paramBydel;
+      }
+    },
+    selectedPredefinedOption() {
+      const routes = this.$route.path.split('/');
+      if (this.selectedPredefinedOption.length !== 0) {
+        this.selected = this.selectedPredefinedOption;
+        routes.length > 3
+          ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
       }
     },
   },
@@ -192,7 +224,7 @@ export default {
   align-self: center;
 }
 
-.oslo__navigation-link {
+.navigation-link {
   $p: &;
 
   position: relative;
@@ -209,7 +241,7 @@ export default {
     background-color: $color-blue;
     transition: all 0.3s ease-in-out;
 
-    #{$p}--label {
+    #{$p}__label {
       color: $color-purple;
       font-weight: 500;
     }
@@ -230,7 +262,7 @@ export default {
     transition: background-color 0.3s ease-in-out;
   }
 
-  &--label {
+  &__label {
     letter-spacing: 0.3px;
     display: flex;
     flex-grow: 1;
@@ -258,7 +290,7 @@ export default {
     }
   }
 
-  &:not(&--active) &--label:hover {
+  &:not(&--active) &__label:hover {
     background-color: darken($color-purple, 5%);
 
     // Show the visual border on hover
@@ -340,34 +372,65 @@ input[type='checkbox'] {
   }
 }
 
-.oslo__navigation-drawer__button-container {
+.navigation-drawer__buttons {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
   padding-right: 1rem;
+
+  .navigation-drawer__button-container {
+    align-self: flex-end;
+
+    .navigation-drawer__button {
+      border: 1px solid rgb(248, 198, 107);
+      color: rgb(248, 198, 107);
+      font-weight: bold;
+      padding: 0.3rem 1rem 0.3rem 1rem;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      margin: 0.5rem;
+      transition: all 0.3s ease-in-out;
+
+      &:disabled {
+        opacity: 0.2;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      &:hover:not([disabled]) {
+        box-shadow: 0 0 0 1px #e0e0e0;
+      }
+    }
+  }
 }
 
-.button-container {
-  align-self: flex-end;
 
-  .oslo__navigation-button {
+
+.navigation-drawer__select-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+  .navigation-drawer__select {
     border: 1px solid rgb(248, 198, 107);
-    color: rgb(248, 198, 107);
-    padding: 0.3rem 1rem 0.3rem 1rem;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    width: 205px;
     margin: 0.5rem;
-    transition: all 0.3s ease-in-out;
+    color: rgb(248, 198, 107);
+    font-weight: bold;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    position: relative;
+  }
 
-    &:disabled {
-      opacity: 0.2;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    &:hover:not([disabled]) {
-      box-shadow: 0 0 0 1px #e0e0e0;
-    }
+  &:before {
+    content: '';
+    border-left: 2px solid rgb(248, 198, 107);
+    border-bottom: 2px solid rgb(248, 198, 107);
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    transform: rotate(-45deg);
   }
 }
 </style>
