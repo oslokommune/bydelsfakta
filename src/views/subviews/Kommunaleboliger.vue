@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
+      <h2 class="section-heading">Blokkleilighet</h2>
       <graph-card v-for="(card, index) in settings.blokk" :key="`kommunale-boliger-${index}`"  :settings="card" />
     </div>
     <div class="main-container__map">

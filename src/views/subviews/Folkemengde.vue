@@ -1,11 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card
-        v-for="(card, index) in settings.nokkeltall"
-        :key="`folkemengde-nokkeltall-${index}`"
-        :settings="card"
-      />
+      <h2 class="section-heading">Befolkningsutvikling og fremskriving</h2>
       <graph-card
         v-for="(card, index) in settings.fremskriving"
         :key="`folkemengde-fremskriving-${index}`"
@@ -14,6 +10,12 @@
       <graph-card
         v-for="(card, index) in settings.utvikling"
         :key="`folkemengde-utvikling-${index}`"
+        :settings="card"
+      />
+      <h2 class="section-heading">Nøkkeltall for delbydelene</h2>
+      <graph-card
+        v-for="(card, index) in settings.nokkeltall"
+        :key="`folkemengde-nokkeltall-${index}`"
         :settings="card"
       />
     </div>

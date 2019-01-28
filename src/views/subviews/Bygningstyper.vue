@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
+      <h2 class="section-heading">Eierform</h2>
       <graph-card v-for="(card, index) in settings.totalt" :key="`bygningstyper-totalt-${index}`"  :settings="card" />
       <graph-card v-for="(card, index) in settings.spesifikk" :key="`bygningstyper-spesifikk-${index}`"  :settings="card" />
     </div>

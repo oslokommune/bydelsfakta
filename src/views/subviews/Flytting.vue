@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
+      <h2 class="section-heading">Flyttehyppighet</h2>
       <graph-card v-for="(card, index) in settings.hyppighet" :key="`flytting-${index}`"  :settings="card" />
     </div>
     <div class="main-container__map">
