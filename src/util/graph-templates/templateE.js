@@ -1,27 +1,25 @@
 /**
  * Template for population pyramid chart for age distributions.
+ * The shape of the pyramid can be altered using various d3.curve functions
+ * on the area() method.
+ * The height of this chart is fixed to ensure a consistent shape of the
+ * pyramid.
+ *
+ * The chart must be rendered with a selected geography.
+ *
  */
 
 import Base_Template from './baseTemplate';
-// import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 70;
-  this.padding.bottom = 50;
-  this.padding.left = 300;
-  this.padding.right = 55;
+  this.padding = { top: 70, right: 55, bottom: 50, left: 300 };
   this.y = d3.scaleLinear();
-  this.x = d3.scaleLinear();
-  this.selected = null;
-  this.list;
-  this.pyramid;
   this.gutter = 100;
   this.yAxis = []; // three yAxis (left, right and gridlines)
-  this.selected;
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
@@ -44,11 +42,19 @@ function Template(svg) {
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
+  // Runs once after init() and is called from base template.
+  // Creates neccessary DOM elements required for this template.
   this.created = function() {
+    // Clears the contents of the canvas element
+    this.canvas.selectAll('*').remove();
+
+    // Holds the list of available geographies
     this.list = this.svg
       .append('g')
       .attr('class', 'list')
       .attr('transform', `translate(3, ${this.padding.top})`);
+
+    // Create heading (label) for the list
     this.list
       .append('text')
       .text('Velg delbydel')
@@ -58,23 +64,28 @@ function Template(svg) {
       .attr('fill', color.purple)
       .attr('transform', 'translate(10, -16)');
 
-    this.canvas.selectAll('*').remove();
-
+    // Holds the pyradmid elements
     this.pyramid = this.canvas.append('g').attr('class', 'pyramid');
 
+    // Append three yAxis groups
+    // - One on the left side
+    // - One on the right side
+    // - One in the center to hold the grid lines
     this.yAxis = this.canvas
       .selectAll('g.axis.y')
       .data([{ type: 'left' }, { type: 'right' }, { type: 'lines' }])
       .enter()
-      .append('g');
+      .append('g')
+      .attr('class', d => `axis y axis-${d.type}`);
 
+    // Holds the xAxis
     this.xAxis = this.canvas
       .append('g')
       .attr('class', 'axis x')
       .attr('transform', `translate(0, ${this.height})`);
 
-    this.yAxis.attr('class', d => `axis y axis-${d.type}`);
-
+    // Group to hold the label for the y axis
+    // and inside that group there's a rotated text label
     this.canvas
       .append('g')
       .attr('class', 'yAxis-title')
@@ -87,6 +98,7 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`);
 
+    // Label for the x axis
     this.canvas
       .append('text')
       .attr('class', 'xAxis-title')
