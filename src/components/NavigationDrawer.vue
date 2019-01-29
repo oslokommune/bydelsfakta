@@ -27,10 +27,7 @@
       >
         <span class="navigation-link__label">Sammenlign bydeler</span>
       </div>
-      <div
-        class="navigation-drawer__buttons"
-        v-if="$route.path.includes('sammenlign')"
-      >
+      <div class="navigation-drawer__buttons" v-if="$route.path.includes('sammenlign')">
         <div class="navigation-drawer__button-container">
           <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
           <button
@@ -40,10 +37,7 @@
           >Fjern alle</button>
         </div>
         <div class="navigation-drawer__select-container">
-          <select
-            class="navigation-drawer__select"
-            v-model="selectedPredefinedOption"
-          >
+          <select class="navigation-drawer__select" v-model="selectedPredefinedOption">
             <option
               v-for="(element, index) in options"
               :key="index"
@@ -110,6 +104,9 @@ export default {
     onChangeCheckbox() {
       const routes = this.$route.path.split('/');
 
+      // Reset selector
+      this.selectedPredefinedOption = [];
+
       if (this.selected.length === 0) {
         this.showAllCheckbox = false;
         routes.length > 3
@@ -128,6 +125,9 @@ export default {
     },
 
     onClickBydel(bydel) {
+      // Reset selector
+      this.selectedPredefinedOption = [];
+
       const routes = this.$route.path.split('/');
       const bydelUri = this.links.find(item => item.uri === bydel).uri;
       routes.length > 3
@@ -403,8 +403,6 @@ input[type='checkbox'] {
     }
   }
 }
-
-
 
 .navigation-drawer__select-container {
   display: flex;
