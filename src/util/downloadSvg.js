@@ -13,6 +13,16 @@ function cleanSvgData(str) {
     .attr('tabindex', null)
     .style('cursor', null);
 
+  // Remove hyperlinks by grabbing their children
+  // and appending them to their grandparent before
+  // removing the <a>-elements.
+  let hyperlink_children = svg.selectAll('a > *');
+  hyperlink_children.each(function() {
+    let parent = d3.select(this).node().parentElement.parentElement;
+    parent.append(d3.select(this).node());
+  });
+  svg.selectAll('a').remove();
+
   return svg.node().outerHTML;
 }
 
