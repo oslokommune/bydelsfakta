@@ -13,9 +13,7 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 50;
-  this.padding.left = 60;
-  this.padding.right = 220;
+  this.padding = { top: 50, right: 220, bottom: 1, left: 60 };
 
   const strokeWidth = this.strokeWidth;
   const strokeWidthHighlight = this.strokeWidthHighlight;
@@ -43,24 +41,28 @@ function Template(svg) {
     this.createInfoBoxElements();
   };
 
+  // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
 
+  // Updates labels on the right hand side
   this.drawLabels = function() {
-    // let labels = this.canvas.selectAll('text.label').data(this.data.data.filter(row => row.avgRow || row.totalRow));
+    // Standard select/enter/update/exit pattern for text labels
     let labels = this.canvas.selectAll('text.label').data(this.data.data);
     let labelsE = labels
       .enter()
       .append('text')
       .attr('class', 'label');
-
     labels.exit().remove();
     labels = labels.merge(labelsE);
 
+    // Append <title> element inside text to support tooltip in case of truncation
     labelsE.append('title');
 
+    // Update the text string and position.
+    // Default opacity is low to allow labels overlapping
     labels
       .text(d => util.truncate(d.geography, this.padding.right - 30))
       .attr('x', this.width + 10)
@@ -69,6 +71,7 @@ function Template(svg) {
       })
       .attr('opacity', 0.4);
 
+    // Update content in the <title> element
     labels
       .selectAll('title')
       .data(d => [d.geography])
@@ -77,8 +80,9 @@ function Template(svg) {
       .html(d => d);
   };
 
+  // Runs once in the created() method and creates DOM elements for the
+  // infobox which appears when a series is selected
   this.createInfoBoxElements = function() {
-    // Create infobox placeholder
     this.infobox = this.svg.append('g').attr('class', 'infobox');
     this.infoboxBody = this.infobox.append('g').attr('class', 'infobox__body');
     this.infoboxBody.append('rect').attr('class', 'background');
@@ -91,6 +95,7 @@ function Template(svg) {
     this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
   };
 
+  //
   this.drawInfobox = function() {
     if (this.highlight === -1) {
       this.infobox.attr('opacity', 0);
@@ -190,7 +195,10 @@ function Template(svg) {
       .text(Math.round(low.ratio * 10000) / 100 + '%');
   };
 
+  // Updates the shape and style of the lines in the line chart
   this.drawLines = function() {
+    // Standard select/enter/update/exit pattern for each line.
+    // Each line is a path element
     let row = this.canvas.selectAll('path.row').data(this.data.data);
     let rowE = row
       .enter()
@@ -199,6 +207,9 @@ function Template(svg) {
     row.exit().remove();
     row = row.merge(rowE);
 
+    // Update the shape of the line using the line generator
+    // and its style based on the data: total and avg rows get
+    // separate styling
     row
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i) => {
@@ -211,6 +222,7 @@ function Template(svg) {
       .attr('stroke-width', 3)
       .attr('fill', 'none');
 
+    // Add interactivity to each line
     row.on('mouseover', (d, i, j) => {
       d3.selectAll(j).attr('opacity', 0.35);
       d3.select(j[i])
@@ -232,6 +244,8 @@ function Template(svg) {
         .attr('font-weight', '400');
     });
 
+    // Support click and keyboard navigation (using tabindex and keyup)
+    // to trigger a render() with a highlight argument
     row
       .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'click') j[i].blur();
@@ -245,10 +259,13 @@ function Template(svg) {
       .attr('tabindex', 0);
   };
 
+  // Resets the scales based on the provided data on each render
   this.setScales = function() {
+    // Find the min and max values and add some padding
     this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) / 1.2;
 
+    // Set the xScale (time dimension) range and domain
     this.x = d3
       .scaleTime()
       .domain([
@@ -257,12 +274,14 @@ function Template(svg) {
       ])
       .range([0, this.width]);
 
+    // Set the y scale based on max and min values
     this.y = d3
       .scaleLinear()
       .domain([this.y.min, this.y.max])
       .range([this.height, 0]);
   };
 
+  // Renders axis based on the updated scales
   this.drawAxis = function() {
     this.yAxis.call(d3.axisLeft(this.y).ticks(this.height / 30));
     this.xAxis.call(d3.axisBottom(this.x).ticks(this.width / 90)).attr('transform', `translate(0, ${this.height})`);
