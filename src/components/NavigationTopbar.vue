@@ -12,11 +12,62 @@
       label="VELG TEMA"
       class="v-select__selection--uppercase"
     ></v-select>
+    <div>
+      <select
+        v-model="selectedSubpage"
+      >
+        <option
+          v-for="(element, index) in items"
+          :key="index"
+          :value="element.value"
+          :selected="element.selected"
+          :disabled="element.disabled"
+        >{{element.text}}</option>
+      </select>
+    </div>
+    <div class="navigation-topbar">
+      <div
+        id="select"
+        class="navigation-topbar__select"
+        @click="showDropdown = !showDropdown"
+      >
+        <span>{{selectedSubpage}}</span>
+      </div>
+      <div
+        id="dropdown"
+        class="navigation-topbar__dropdown"
+        v-if="showDropdown"
+      >
+        <div
+          v-for="(kategori, index) in dropdown"
+          :key="index"
+          class="navigation-topbar__dropdown-column"
+        >
+          <div
+            class="navigation-topbar__dropdown-column--heading"
+            :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
+          >
+            <span>{{kategori.kategori}}</span>
+          </div>
+          <div class="navigation-topbar__dropdown-items">
+            <a
+              v-for="(link, index) in kategori.links"
+              :key="index"
+              class="navigation-topbar__dropdown-item"
+              :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
+            >
+              {{link.text}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 </template>
 <script>
 import subpages from '../config/subpages';
 import bydeler from '../config/bydeler';
+import dropdownSubpages from '../config/dropdownSubpages';
 
 export default {
   name: 'NavigationTopbar',
@@ -24,7 +75,9 @@ export default {
     return {
       items: subpages,
       selectedSubpage: '',
+      dropdown: dropdownSubpages,
       bydeler: bydeler,
+      showDropdown: false,
     };
   },
 
@@ -55,6 +108,10 @@ export default {
         this.$router.push({ path: `/sammenlign/${route.params.bydel}` });
       }
       this.selectedSubpage = null;
+    },
+
+    checkActiveSubpage(subpage) {
+      return this.$route.path.includes(subpage);
     },
   },
 
@@ -122,5 +179,53 @@ export default {
 .v-input--selection-controls {
   margin-top: 0.6rem;
   padding-top: 0;
+}
+
+.navigation-topbar {
+
+  &__select {
+    position: relative;
+  }
+
+  &__dropdown {
+    position: absolute;
+    max-width: 660px;
+    height: 350px;
+    border: 1px solid black;
+    display: flex;
+    flex-flow: row wrap;
+    z-index: 1;
+    background-color: white;
+
+    &-column {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+
+      &--heading {
+        margin-bottom: 1rem;
+        border-top: 3px solid rgb(182, 63, 50);
+        width: 190px;
+        font-weight: bold;
+      }
+    }
+
+    &-items {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-item {
+      background-color: rgb(245, 245, 245);
+      height: 34px;
+      padding: 0.5rem;
+      margin-bottom: 0.1rem;
+      color: rgb(41, 40, 88);
+
+      &--active {
+        background-color: rgb(110, 233, 255);
+      }
+    }
+  }
 }
 </style>
