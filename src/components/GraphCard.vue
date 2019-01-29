@@ -59,6 +59,7 @@
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
 import Graph from './Graph.vue';
+import downloadSvg from '../util/downloadSvg';
 
 export default {
   name: 'GraphCard',
@@ -89,15 +90,7 @@ export default {
     saveSvg(id) {
       const filename = `${this.$route.params.bydel}_${id}.svg`;
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
-      const preface = '<?xml version="1.0" standalone="no"?>\r\n';
-      const svgBlob = new Blob([preface, svgData], { type: 'image/svg+xml;charset=utf-8' });
-      const svgUrl = URL.createObjectURL(svgBlob);
-      const downloadLink = document.createElement('a');
-      downloadLink.href = svgUrl;
-      downloadLink.download = filename;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
+      downloadSvg(svgData, filename);
     },
 
     savePng(id) {
