@@ -63,6 +63,8 @@ function Base_Template(svg) {
   this.init = function() {
     this.svg = d3.select(svg).style('font-family', 'OsloSans');
 
+    this.svg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink').attr('xmlns', 'http://www.w3.org/2000/svg');
+
     // Clear the contents of the svg
     this.svg.selectAll('*').remove();
 

@@ -73,6 +73,7 @@ function Template(svg) {
       .attr('text-anchor', 'start')
       .text('Ikke trangbodde husstander');
 
+    this.canvas.append('g').attr('class', 'rows');
     this.bars = this.canvas.append('g').attr('class', 'bars');
 
     this.canvas
@@ -112,7 +113,10 @@ function Template(svg) {
   };
 
   this.drawRows = function() {
-    let rows = this.canvas.selectAll('g.row').data(this.data.data);
+    let rows = this.canvas
+      .select('g.rows')
+      .selectAll('g.row')
+      .data(this.data.data);
     let rowsE = rows
       .enter()
       .append('g')
@@ -178,6 +182,19 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x', d => this.x(d[0]))
       .attr('width', d => this.x(d[1]) - this.x(d[0]));
+
+    bar
+      .on('mouseenter', function() {
+        bar.attr('opacity', 0.3);
+        d3.select(this).attr('opacity', 1);
+      })
+      .on('mousemove', (d, i, j) => {
+        this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
+      })
+      .on('mouseleave', (d, i, j) => {
+        bar.attr('opacity', 1);
+        this.hideTooltip();
+      });
   };
 
   this.drawLegend = function() {
