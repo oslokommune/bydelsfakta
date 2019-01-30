@@ -69,7 +69,7 @@ function Template(svg) {
       .attr('y', d => {
         return this.y(d.values[d.values.length - 1][this.method]) + 5;
       })
-      .attr('opacity', 0.4);
+      .attr('opacity', 0.2);
 
     // Update content in the <title> element
     labels

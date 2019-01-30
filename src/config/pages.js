@@ -260,7 +260,7 @@ const page = {
             label: 'Historisk',
             id: 'boligpriser_historisk',
             template: 'b',
-            url: `${baseUrl()}/mockDataB.json`,
+            url: `${baseUrl()}/Grünerløkka-boligpriser-historisk.json`,
           },
         ],
       },
