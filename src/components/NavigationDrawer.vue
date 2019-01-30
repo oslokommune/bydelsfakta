@@ -135,12 +135,14 @@ export default {
     onClickBydel(bydel) {
       // Reset selector
       this.selectedPredefinedOption = [];
-
       const routes = this.$route.path.split('/');
       const bydelUri = this.links.find(item => item.uri === bydel).uri;
-      routes.length > 3
-        ? this.$router.push({ path: `/bydel/${bydelUri}/${routes[3]}` })
-        : this.$router.push({ path: `/bydel/${bydelUri}` });
+
+      bydel === this.$route.params.bydel
+        ? this.$router.push({ path: `/bydel/${bydel}` })
+        : routes.length > 3
+          ? this.$router.push({ path: `/bydel/${bydelUri}/${routes[3]}` })
+          : this.$router.push({ path: `/bydel/${bydelUri}` });
     },
 
     onClickHome() {
@@ -150,7 +152,10 @@ export default {
 
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
-      if (this.selected.length < 2) {
+      const selectedBydeler = this.selected.join('-');
+      if (selectedBydeler === routes[2] || routes[2] === 'alle') {
+        this.$router.push({ path: `/sammenlign/${routes[2]}` });
+      } else if (this.selected.length < 2) {
         this.selected = [];
         routes.length > 3
           ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
@@ -161,8 +166,8 @@ export default {
           : this.$router.push({ path: `/sammenlign/alle` });
       } else {
         routes.length > 3
-          ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
-          : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
+          ? this.$router.push({ path: `/sammenlign/${selectedBydeler}/${routes[3]}` })
+          : this.$router.push({ path: `/sammenlign/${selectedBydeler}` });
       }
     },
 

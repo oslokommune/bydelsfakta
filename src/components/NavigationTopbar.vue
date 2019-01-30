@@ -36,8 +36,8 @@
             </div>
             <div class="navigation-topbar__dropdown-items">
               <a
-                v-for="(link, index) in kategori.links"
-                :key="index"
+                v-for="(link, subpageIndex) in kategori.links"
+                :key="subpageIndex"
                 class="navigation-topbar__dropdown-item"
                 :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
                 @click="onClickSubpage(link.value)"
