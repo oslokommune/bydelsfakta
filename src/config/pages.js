@@ -133,6 +133,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_befolkning_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataA2.json`,
           },
           {
@@ -154,6 +155,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_under16-totalt_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer1.json`,
           },
           {
@@ -173,6 +175,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_under16-en-innvandrerforelder_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer2.json`,
           },
           {
@@ -192,6 +195,7 @@ const page = {
             label: 'Status',
             id: 'innvandring_under16-to-innvandrerforeldre_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -216,6 +220,7 @@ const page = {
             label: 'Status',
             id: 'eierform_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -246,8 +251,9 @@ const page = {
             active: false,
             label: 'Status',
             id: 'boligpriser_status',
+            method: 'value',
             template: 'a',
-            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+            url: `${baseUrl()}/Grünerløkka-status.json`,
           },
           {
             active: false,
@@ -292,6 +298,7 @@ const page = {
             active: false,
             label: 'Status',
             id: 'trangboddhet_under0.5_status',
+            method: 'ratio',
             template: 'a',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
@@ -312,6 +319,7 @@ const page = {
             label: 'Status',
             id: 'trangboddhet_0.5-0.9_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -331,6 +339,7 @@ const page = {
             label: 'Status',
             id: 'trangboddhet_1.0-1.9_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -350,6 +359,7 @@ const page = {
             label: 'Status',
             id: 'trangboddhet_over2_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -374,6 +384,7 @@ const page = {
             label: 'Status',
             id: 'blokkleilighet_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -398,6 +409,7 @@ const page = {
             label: 'Status',
             id: 'flyttehyppighet_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -422,6 +434,7 @@ const page = {
             label: 'Status',
             id: 'eierform_totalt_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -450,6 +463,7 @@ const page = {
             label: 'Andel',
             id: 'eierform_blokk_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -457,6 +471,7 @@ const page = {
             label: 'Antall',
             id: 'eierform_blokk_antall',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
@@ -469,6 +484,7 @@ const page = {
             label: 'Andel',
             id: 'eierform_rekkehus_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -476,6 +492,7 @@ const page = {
             label: 'Antall',
             id: 'eierform_rekkehus_antall',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
@@ -488,6 +505,7 @@ const page = {
             label: 'Andel',
             id: 'eierform_enebolig_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -495,6 +513,7 @@ const page = {
             label: 'Antall',
             id: 'eierform_enebolig_antall',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
@@ -512,6 +531,7 @@ const page = {
             label: 'Status',
             id: 'husholdning_totalt_status',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataA.json`,
           },
           {
@@ -540,6 +560,7 @@ const page = {
             label: 'Andel',
             id: 'husholdning_1-barn_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -547,6 +568,7 @@ const page = {
             label: 'Antall',
             id: 'husholdning_1-barn_antall',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
@@ -559,6 +581,7 @@ const page = {
             label: 'Andel',
             id: 'husholdning_2-barn_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -566,6 +589,7 @@ const page = {
             label: 'Antall',
             id: 'husholdning_2-barn_antall',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
@@ -578,6 +602,7 @@ const page = {
             label: 'Andel',
             id: 'husholdning_3-barn_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -585,6 +610,7 @@ const page = {
             label: 'Antall',
             id: 'husholdning_3-barn_antall',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
@@ -602,6 +628,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_funksjonsevne_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -621,6 +648,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_lav-utdanning_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -640,6 +668,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_fattige_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -659,6 +688,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_ikke-sysselsatte_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -678,6 +708,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_vgs_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -697,6 +728,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_dodsrate_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -716,6 +748,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_trangbodde_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
@@ -735,6 +768,7 @@ const page = {
             label: 'Andel',
             id: 'levekar_innvandrere_andel',
             template: 'a',
+            method: 'ratio',
             url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
