@@ -12,6 +12,8 @@
         class="navigation-topbar__select"
         @click="showDropdown = !showDropdown"
         tabindex="0"
+        @keydown.escape="closeMenu"
+        v-click-outside="closeMenu"
       >
         <label class="label" :class="{ 'label--active': selectedSubpage !== null }">VELG TEMA</label>
         <span>{{selectedSubpage}}</span>
@@ -76,6 +78,12 @@ export default {
   },
 
   methods: {
+    closeMenu() {
+      if (this.showDropdown) {
+        this.showDropdown = false;
+      }
+    },
+
     getBydel(id) {
       return this.$route.path.includes('sammenlign')
         ? 'Sammenligne bydeler'
@@ -167,10 +175,10 @@ export default {
   transition: all 0.3s ease-in-out;
 
   &--active {
-    left: 0;
-    right: auto;
-    position: absolute;
     font-size: 16px;
+    left: 0;
+    position: absolute;
+    right: auto;
     transform: translateY(-18px) translateX(-12px) scale(0.75);
     transition: all 0.3s ease-in-out;
   }
@@ -178,23 +186,23 @@ export default {
 
 .navigation-topbar {
   &__select {
-    position: relative;
+    color: rgb(141, 141, 160);
+    display: flex;
     font-size: 24px;
     font-weight: bold;
-    letter-spacing: 0.7px;
-    text-transform: uppercase;
-    display: flex;
     justify-content: space-between;
-    color: rgb(141, 141, 160);
+    letter-spacing: 0.7px;
+    position: relative;
+    text-transform: uppercase;
 
     &:before {
+      border: 0.5px solid black;
       bottom: -1px;
       content: '';
       left: 0;
       position: absolute;
       transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
       width: 100%;
-      border: 0.5px solid black;
     }
 
     &:focus {
@@ -206,23 +214,24 @@ export default {
     }
 
     &:after {
+      border: 1px solid $color-purple;
       bottom: -1px;
       content: '';
       position: absolute;
+      transform: scaleX(0);
       transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
       width: 100%;
-      border: 1px solid $color-purple;
-      transform: scaleX(0);
     }
   }
 
   &__dropdown {
-    position: absolute;
-    border: 1px solid black;
+    background-color: white;
+    border: 1px solid $color-grey-100;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.75);
     display: flex;
     flex-flow: row wrap;
+    position: absolute;
     z-index: 1;
-    background-color: white;
 
     &-column {
       display: flex;
@@ -230,10 +239,9 @@ export default {
       padding: 1rem;
 
       &--heading {
-        margin-bottom: 1rem;
-        border-top: 3px solid rgb(182, 63, 50);
-        width: 190px;
         font-weight: bold;
+        margin-bottom: 1rem;
+        width: 190px;
       }
     }
 
@@ -243,15 +251,15 @@ export default {
     }
 
     &-item {
-      background-color: rgb(245, 245, 245);
-      height: 34px;
-      padding: 0.5rem;
-      margin-bottom: 0.1rem;
-      color: rgb(41, 40, 88);
+      background-color: $color-grey-50;
       border-radius: 4px;
+      color: $color-purple;
+      height: 34px;
+      margin-bottom: 0.1rem;
+      padding: 0.5rem;
 
       &--active {
-        background-color: rgb(110, 233, 255);
+        background-color: $color-blue;
       }
     }
   }
