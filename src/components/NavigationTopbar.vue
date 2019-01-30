@@ -6,32 +6,16 @@
         class="text-uppercase oslo__topbar oslo__topbar-text"
       >{{ getBydel(this.$route.params.bydel) }}</h4>
     </div>
-    <v-select
-      v-model="selectedSubpage"
-      :items="items"
-      label="VELG TEMA"
-      class="v-select__selection--uppercase"
-    ></v-select>
-    <div>
-      <select
-        v-model="selectedSubpage"
-      >
-        <option
-          v-for="(element, index) in items"
-          :key="index"
-          :value="element.value"
-          :selected="element.selected"
-          :disabled="element.disabled"
-        >{{element.text}}</option>
-      </select>
-    </div>
     <div class="navigation-topbar">
       <div
         id="select"
         class="navigation-topbar__select"
         @click="showDropdown = !showDropdown"
+        tabindex="0"
       >
+        <label class="label" :class="{ 'label--active': selectedSubpage !== null }">VELG TEMA</label>
         <span>{{selectedSubpage}}</span>
+        <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down'}}</i>
       </div>
       <div
         id="dropdown"
@@ -55,6 +39,7 @@
               :key="index"
               class="navigation-topbar__dropdown-item"
               :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
+              @click="onClickSubpage(link.value)"
             >
               {{link.text}}
             </a>
@@ -112,6 +97,11 @@ export default {
 
     checkActiveSubpage(subpage) {
       return this.$route.path.includes(subpage);
+    },
+
+    onClickSubpage(subpage) {
+      this.selectedSubpage = subpage;
+      this.showDropdown = false;
     },
   },
 
@@ -181,16 +171,62 @@ export default {
   padding-top: 0;
 }
 
-.navigation-topbar {
+.label {
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
 
+  &--active {
+    left: 0;
+    right: auto;
+    position: absolute;
+    font-size: 16px;
+    transform: translateY(-18px) translateX(-12px) scale(0.75);
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.navigation-topbar {
   &__select {
     position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(141, 141, 160);
+
+    &:before {
+      bottom: -1px;
+      content: '';
+      left: 0;
+      position: absolute;
+      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+      width: 100%;
+      border: 0.5px solid black;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus:after {
+      transform: scaleX(1);
+    }
+
+    &:after {
+      bottom: -1px;
+      content: '';
+      position: absolute;
+      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+      width: 100%;
+      border: 1px solid $color-purple;
+      transform: scaleX(0);
+    }
   }
 
   &__dropdown {
     position: absolute;
-    max-width: 660px;
-    height: 350px;
     border: 1px solid black;
     display: flex;
     flex-flow: row wrap;
@@ -221,6 +257,7 @@ export default {
       padding: 0.5rem;
       margin-bottom: 0.1rem;
       color: rgb(41, 40, 88);
+      border-radius: 4px;
 
       &--active {
         background-color: rgb(110, 233, 255);

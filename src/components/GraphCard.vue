@@ -22,8 +22,7 @@
             @click="showDropdown = !showDropdown"
             aria-label="context-menu-button"
           >
-            <i v-if="showDropdown" class="material-icons context-menu__button-icon">close</i>
-            <i v-if="!showDropdown" class="material-icons context-menu__button-icon">menu</i>
+            <i class="material-icons context-menu__button-icon">{{showDropdown ? 'close' : 'menu'}}</i>
           </button>
           <div
             v-if="showDropdown"
