@@ -27,33 +27,35 @@
       >
         <span class="navigation-link__label">Sammenlign bydeler</span>
       </div>
-      <div
-        class="navigation-drawer__buttons"
-        v-if="$route.path.includes('sammenlign')"
-      >
-        <div class="navigation-drawer__button-container">
-          <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
-          <button
-            class="navigation-drawer__button"
-            :disabled="selected.length === 0"
-            @click="unselectAll"
-          >Fjern alle</button>
+      <transition name="fade">
+        <div
+          class="navigation-drawer__buttons"
+          v-if="$route.path.includes('sammenlign')"
+        >
+          <div class="navigation-drawer__button-container">
+            <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
+            <button
+              class="navigation-drawer__button"
+              :disabled="selected.length === 0"
+              @click="unselectAll"
+            >Fjern alle</button>
+          </div>
+          <div class="navigation-drawer__select-container">
+            <select
+              class="navigation-drawer__select"
+              v-model="selectedPredefinedOption"
+            >
+              <option
+                v-for="(element, index) in options"
+                :key="index"
+                :value="element.option"
+                :selected="element.selected"
+                :disabled="element.disabled"
+              >{{element.label}}</option>
+            </select>
+          </div>
         </div>
-        <div class="navigation-drawer__select-container">
-          <select
-            class="navigation-drawer__select"
-            v-model="selectedPredefinedOption"
-          >
-            <option
-              v-for="(element, index) in options"
-              :key="index"
-              :value="element.option"
-              :selected="element.selected"
-              :disabled="element.disabled"
-            >{{element.label}}</option>
-          </select>
-        </div>
-      </div>
+      </transition>
     </nav>
   </aside>
 </template>
@@ -403,8 +405,6 @@ input[type='checkbox'] {
     }
   }
 }
-
-
 
 .navigation-drawer__select-container {
   display: flex;

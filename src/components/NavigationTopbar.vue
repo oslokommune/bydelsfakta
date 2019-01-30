@@ -17,35 +17,37 @@
         <span>{{selectedSubpage}}</span>
         <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down'}}</i>
       </div>
-      <div
-        id="dropdown"
-        class="navigation-topbar__dropdown"
-        v-if="showDropdown"
-      >
+      <transition name="fade">
         <div
-          v-for="(kategori, index) in dropdown"
-          :key="index"
-          class="navigation-topbar__dropdown-column"
+          id="dropdown"
+          class="navigation-topbar__dropdown"
+          v-if="showDropdown"
         >
           <div
-            class="navigation-topbar__dropdown-column--heading"
-            :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
+            v-for="(kategori, index) in dropdown"
+            :key="index"
+            class="navigation-topbar__dropdown-column"
           >
-            <span>{{kategori.kategori}}</span>
-          </div>
-          <div class="navigation-topbar__dropdown-items">
-            <a
-              v-for="(link, index) in kategori.links"
-              :key="index"
-              class="navigation-topbar__dropdown-item"
-              :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
-              @click="onClickSubpage(link.value)"
+            <div
+              class="navigation-topbar__dropdown-column--heading"
+              :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
             >
-              {{link.text}}
-            </a>
+              <span>{{kategori.kategori}}</span>
+            </div>
+            <div class="navigation-topbar__dropdown-items">
+              <a
+                v-for="(link, index) in kategori.links"
+                :key="index"
+                class="navigation-topbar__dropdown-item"
+                :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
+                @click="onClickSubpage(link.value)"
+              >
+                {{link.text}}
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </header>
 </template>
@@ -59,7 +61,7 @@ export default {
   data() {
     return {
       items: subpages,
-      selectedSubpage: '',
+      selectedSubpage: null,
       dropdown: dropdownSubpages,
       bydeler: bydeler,
       showDropdown: false,
