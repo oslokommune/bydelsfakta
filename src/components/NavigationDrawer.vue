@@ -17,7 +17,7 @@
           :disabled="disableChecbox(link.key)"
         >
         <label :for="`checkbox-${link.key}`"></label>
-        <span class="navigation-link__label" @click="onClickBydel(link.uri)">{{link.value}}</span>
+        <a class="navigation-link__label" @click="onClickBydel(link.uri)">{{link.value}}</a>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
@@ -25,7 +25,7 @@
         @click="onClickSammenlign"
         role="button"
       >
-        <span class="navigation-link__label">Sammenlign bydeler</span>
+        <a class="navigation-link__label">Sammenlign bydeler</a>
       </div>
       <transition name="fade">
         <div
