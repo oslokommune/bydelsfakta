@@ -8,7 +8,7 @@
       "url": "http: //ssb.no/data/1234124/",
       "label": "Statistisk sentralbyrå"
     },
-    "series": ["Andel/-aksjeeiere", "Selveiere", "Leietakere"],
+    "series": ["Leietakere", "Andel/-aksjeeiere", "Selveiere"],
     "files": [
       {
         "url": "http: //data.oslo.kommune.no/data/1234123/data.xls",
@@ -23,26 +23,116 @@
 
   "data": [
     {
-      "geography": "Grünerløkka vest",
-      "values": [{ "value": 311, "ratio": 0.9 }, { "value": 554, "ratio": 0.05 }, { "value": 181, "ratio": 0.05 }]
+      "geography": "Holmlia Syd",
+      "values": [
+        {
+          "value": 30,
+          "ratio": 0.16
+        },
+        {
+          "value": 554,
+          "ratio": 0.69
+        },
+        {
+          "value": 181,
+          "ratio": 0.16
+        }
+      ]
     },
     {
-      "geography": "Grünerløkka øst",
-      "values": [{ "value": 311, "ratio": 0.05 }, { "value": 554, "ratio": 0.9 }, { "value": 181, "ratio": 0.05 }]
+      "geography": "Holmlia Nord",
+      "values": [
+        {
+          "value": 30,
+          "ratio": 0.07
+        },
+        {
+          "value": 554,
+          "ratio": 0.89
+        },
+        {
+          "value": 181,
+          "ratio": 0.04
+        }
+      ]
     },
     {
-      "geography": "Bydel Grünerløkka",
+      "geography": "Prinsdal",
+      "values": [
+        {
+          "value": 30,
+          "ratio": 0.25
+        },
+        {
+          "value": 554,
+          "ratio": 0.15
+        },
+        {
+          "value": 181,
+          "ratio": 0.59
+        }
+      ]
+    },
+    {
+      "geography": "Bjørnerud",
+      "values": [
+        {
+          "value": 311,
+          "ratio": 0.22
+        },
+        {
+          "value": 554,
+          "ratio": 0.28
+        },
+        {
+          "value": 181,
+          "ratio": 0.5
+        }
+      ]
+    },
+    {
+      "geography": "Mortensrud",
+      "values": [
+        {
+          "value": 30,
+          "ratio": 0.15
+        },
+        {
+          "value": 554,
+          "ratio": 0.19
+        },
+        {
+          "value": 181,
+          "ratio": 0.66
+        }
+      ]
+    },
+    {
+      "geography": "Bjørndal",
+      "values": [
+        {
+          "value": 30,
+          "ratio": 0.23
+        },
+        {
+          "value": 554,
+          "ratio": 0.17
+        },
+        {
+          "value": 181,
+          "ratio": 0.6
+        }
+      ]
+    },
+    {
+      "geography": "Bydel Søndre Nordstrand",
       "avgRow": true,
-      "values": [{ "value": 311, "ratio": 0.05 }, { "value": 554, "ratio": 0.05 }, { "value": 181, "ratio": 0.9 }]
+      "values": [{ "value": 311, "ratio": 0.18 }, { "value": 554, "ratio": 0.4 }, { "value": 181, "ratio": 0.41 }]
     },
     {
       "geography": "Oslo i alt",
       "totalRow": true,
-      "values": [
-        { "value": 311, "ratio": 0.3333 },
-        { "value": 554, "ratio": 0.3333 },
-        { "value": 181, "ratio": 0.3333 }
-      ]
+      "values": [{ "value": 311, "ratio": 0.3 }, { "value": 554, "ratio": 0.33 }, { "value": 181, "ratio": 0.37 }]
     }
   ]
 }

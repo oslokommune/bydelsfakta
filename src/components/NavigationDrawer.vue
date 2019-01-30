@@ -112,6 +112,9 @@ export default {
     onChangeCheckbox() {
       const routes = this.$route.path.split('/');
 
+      // Reset selector
+      this.selectedPredefinedOption = [];
+
       if (this.selected.length === 0) {
         this.showAllCheckbox = false;
         routes.length > 3
@@ -130,6 +133,9 @@ export default {
     },
 
     onClickBydel(bydel) {
+      // Reset selector
+      this.selectedPredefinedOption = [];
+
       const routes = this.$route.path.split('/');
       const bydelUri = this.links.find(item => item.uri === bydel).uri;
       routes.length > 3

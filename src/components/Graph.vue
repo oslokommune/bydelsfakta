@@ -52,9 +52,7 @@ export default {
   },
 
   methods: {
-    draw() {
-      let t0 = performance.now();
-
+    async draw() {
       if (this.currentTemplate !== this.settings.template) {
         // Show dropdown only for template d
         this.showDropdown = this.settings.template === 'd';
@@ -95,35 +93,35 @@ export default {
         }
       }
 
-      d3.json(this.settings.url).then(data => {
-        this.data = data;
-        let r0 = performance.now();
-        this.svg.render(this.data, {
-          method: this.settings.method,
-          range: '[0, 50]',
-        });
-        let r1 = performance.now();
-        let renderTime = r1 - r0;
-        if (renderTime > 100) {
-          console.warn(
-            'SLOW RENDER:',
-            'Initial rendering of template',
-            this.settings.template,
-            'for',
-            this.settings.id,
-            'took',
-            Math.round(renderTime),
-            'ms'
-          );
-        }
-        this.currentTemplate = this.settings.template;
-      });
-
+      let t0 = performance.now();
+      let data = await d3.json(this.settings.url);
       let t1 = performance.now();
       let loadTime = t1 - t0;
       if (loadTime > 300) {
         console.warn('SLOW LOAD:', 'Fetching data', this.settings.id, 'took', Math.round(loadTime), 'ms');
       }
+
+      this.data = data;
+      let r0 = performance.now();
+      this.svg.render(this.data, {
+        method: this.settings.method,
+        range: '[0, 50]',
+      });
+      let r1 = performance.now();
+      let renderTime = r1 - r0;
+      if (renderTime > 100) {
+        console.warn(
+          'SLOW RENDER:',
+          'Initial rendering of template',
+          this.settings.template,
+          'for',
+          this.settings.id,
+          'took',
+          Math.round(renderTime),
+          'ms'
+        );
+      }
+      this.currentTemplate = this.settings.template;
     },
   },
   props: {

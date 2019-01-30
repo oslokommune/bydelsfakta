@@ -12,11 +12,7 @@
             aria-label="tab-button"
           >{{tab.label}}</button>
         </div>
-        <div
-          @keydown.escape="closeMenu()"
-          v-click-outside="closeMenu"
-          class="context-menu"
-        >
+        <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
           <button
             class="context-menu__button"
             @click="showDropdown = !showDropdown"
@@ -24,19 +20,28 @@
           >
             <i class="material-icons context-menu__button-icon">{{showDropdown ? 'close' : 'menu'}}</i>
           </button>
-          <div
-            v-if="showDropdown"
-            class="context-menu__dropdown"
-          >
+          <div v-if="showDropdown" class="context-menu__dropdown">
             <a
               @click="savePng(settings.tabs[active].id)"
+              @keyup.enter="saveSvg(settings.tabs[active].id)"
               role="button"
               class="context-menu__dropdown-item"
-              tabIndex="0"
+              tabindex="0"
               aria-label="lagre graf som png"
             >
               <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Last ned som PNG</span>
+            </a>
+            <a
+              class="context-menu__dropdown-item"
+              aria-label="lagre graf som svg"
+              role="button"
+              tabindex="0"
+              @click="saveSvg(settings.tabs[active].id)"
+              @keyup.enter="saveSvg(settings.tabs[active].id)"
+            >
+              <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
+              <span>Lagre som SVG</span>
             </a>
           </div>
         </div>
@@ -53,6 +58,7 @@
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
 import Graph from './Graph.vue';
+import downloadSvg from '../util/downloadSvg';
 
 export default {
   name: 'GraphCard',
@@ -79,6 +85,13 @@ export default {
     activeTab(index) {
       this.active = index;
     },
+
+    saveSvg(id) {
+      const filename = `${this.$route.params.bydel}_${id}.svg`;
+      const svgData = this.$refs.graph.$refs.svg.outerHTML;
+      downloadSvg(svgData, filename);
+    },
+
     savePng(id) {
       const file = this.$refs.graph.$refs.svg;
       const filename = `${this.$route.params.bydel}_${id}.png`;

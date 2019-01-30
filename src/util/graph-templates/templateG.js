@@ -12,13 +12,10 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 90, left: 0, right: 20, bottom: 1 };
-  this.paddingLeft = 180;
-  this.height = 0;
-  this.width = 0;
-  this.y = d3.scaleLinear();
+  this.padding = { top: 90, left: 180, right: 20, bottom: 1 };
   this.x = d3.scaleBand();
 
+  // Data for svg paths for
   const arrowPaths = {
     up: 'M1 2V1 0h12v12l-1 1h-1v-1h-1V5l-8 8H1l-1-1v-1l8-8H1V2z',
     down: 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z',
@@ -33,7 +30,7 @@ function Template(svg) {
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    this.x.domain(this.data.meta.series.map((d, i) => i)).range([this.paddingLeft, this.width]);
+    this.x.domain(this.data.meta.series.map((d, i) => i)).range([0, this.width]);
 
     this.drawRows();
     this.drawColumnHeaders();
@@ -48,15 +45,13 @@ function Template(svg) {
       .append('rect')
       .attr('class', 'rowFill')
       .attr('fill', color.purple)
-      .attr('height', this.rowHeight)
-      .attr('width', this.width);
+      .attr('height', this.rowHeight);
 
     // Row divider
     rowsE
       .append('rect')
       .attr('class', 'divider')
       .attr('fill', color.purple)
-      .attr('width', this.width)
       .attr('height', 1)
       .attr('y', this.rowHeight);
 
@@ -256,17 +251,22 @@ function Template(svg) {
     this.initRowElements(rowsE);
 
     // Update row geography, style and position
-    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+    rows
+      .select('text.geography')
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400))
+      .attr('transform', `translate(${-this.padding.left}, ${0})`);
     rows
       .select('rect.rowFill')
       .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0))
-      .attr('width', this.width);
+      .attr('width', this.padding.left + this.width + this.padding.right)
+      .attr('transform', `translate(${-this.padding.left}, ${0})`);
     rows
       .select('rect.divider')
       .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
-      .attr('width', this.width);
+      .attr('width', this.padding.left + this.width + this.padding.right)
+      .attr('transform', `translate(${-this.padding.left}, ${0})`);
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-    rows.select('text.geography').text(d => util.truncate(d.geography, this.paddingLeft));
+    rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
 
     this.renderPopulation(rows);
     this.renderDensity(rows);

@@ -1,7 +1,7 @@
 {
   "meta": {
     "scope": "bydel",
-    "heading": "Andel innvandrere i Bydel Grünerløkka (2018)",
+    "heading": "Andel innvandrere i Oslo (2018)",
     "help": "Dette er en beskrivelse for hvordan dataene leses",
     "series": [
       { "heading": "Innvandrer", "subheading": "Kort botid" },
@@ -33,30 +33,24 @@
   "data": [
     {
       "linkTo": false,
-      "geography": "Bydel Stovner",
-      "values": [0.104, 0.242, 0.065, 0.085]
+      "geography": "Bydel Nordstrand",
+      "values": [{ "ratio": 0.05 }, { "ratio": 0.09 }, { "ratio": 0.03 }, { "ratio": 0.09 }]
     },
     {
       "linkTo": false,
-      "geography": "Bydel Frogner",
-      "values": [0.124, 0.172, 0.055, 0.015]
+      "geography": "Bydel Søndre Nordstrand",
+      "values": [{ "ratio": 0.08 }, { "ratio": 0.27 }, { "ratio": 0.19 }, { "ratio": 0.09 }]
     },
     {
       "linkTo": false,
-      "geography": "Bydel Grünerløkka",
-      "values": [0.164, 0.642, 0.065, 0.035]
-    },
-    {
-      "linkTo": false,
-      "geography": "Bydel Gamle Oslo",
-      "avgRow": true,
-      "values": [0.224, 0.442, 0.125, 0.065]
+      "geography": "Bydel Østensjø",
+      "values": [{ "ratio": 0.05 }, { "ratio": 0.13 }, { "ratio": 0.07 }, { "ratio": 0.08 }]
     },
     {
       "linkTo": "/sammenligne-bydeler/innvandrere",
       "geography": "Oslo i alt",
       "totalRow": true,
-      "values": [0.164, 0.242, 0.065, 0.025]
+      "values": [{ "ratio": 0.09 }, { "ratio": 0.16 }, { "ratio": 0.08 }, { "ratio": 0.08 }]
     }
   ]
 }

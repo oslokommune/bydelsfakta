@@ -428,6 +428,16 @@ function Template(svg) {
         return d.totalRow || d.avgRow ? color.purple : color.blue;
       });
 
+    rows
+      .select('rect.bar')
+      .on('mousemove', d => {
+        let sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
+        this.showTooltip(sum, d3.event);
+      })
+      .on('mouseleave', () => {
+        this.hideTooltip();
+      });
+
     this.lower.select('text.xAxis-title').text(() => {
       if (this.method === 'ratio' && extent[1] - extent[0] >= 1) {
         return `Andel av befolkningen mellom ${extent[0]} og ${extent[1]} år`;

@@ -56,12 +56,19 @@ function Base_Template(svg) {
   // Resize is called from the parent vue component
   // every time the container size changes.
   this.resize = debounce(function() {
-    this.render(this.data, { method: this.method, series: this.series, highlight: this.highlight, event: 'resize' });
+    this.render(this.data, {
+      method: this.method,
+      series: this.series,
+      highlight: this.highlight,
+      event: 'resize',
+    });
   }, 250);
 
   // Common operations to be run once a template is initialized
   this.init = function() {
     this.svg = d3.select(svg).style('font-family', 'OsloSans');
+
+    this.svg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink').attr('xmlns', 'http://www.w3.org/2000/svg');
 
     // Clear the contents of the svg
     this.svg.selectAll('*').remove();
@@ -91,6 +98,52 @@ function Base_Template(svg) {
     // once for each initialization.
     this.created();
     this.addSourceElement();
+    this.addTooltipElement();
+  };
+
+  this.addTooltipElement = function() {
+    let group = this.svg
+      .append('g')
+      .attr('class', 'tooltip')
+      .attr('opacity', 0)
+      .style('pointer-events', 'none');
+
+    group
+      .append('rect')
+      .attr('transform', 'translate(0, -29)')
+      .attr('fill', color.yellow)
+      .attr('stroke', 'white')
+      .attr('rx', 11)
+      .attr('height', 21);
+    group
+      .append('text')
+      .attr('transform', 'translate(0, -14)')
+      .attr('font-size', 12)
+      .attr('font-weight', 'bold')
+      .attr('text-anchor', 'middle')
+      .attr('fill', color.purple);
+  };
+
+  this.showTooltip = function(str, event) {
+    let group = this.svg.select('g.tooltip');
+    let rect = group.select('rect');
+    let text = group.select('text');
+
+    group.attr('transform', `translate(${event.layerX}, ${event.layerY})`);
+    text.text(str);
+    rect.attr('width', text.node().getBBox().width + 20).attr('x', -(text.node().getBBox().width / 2 + 10));
+
+    group.attr('opacity', 1);
+  };
+
+  this.hideTooltip = function(str) {
+    let group = this.svg.select('g.tooltip');
+    let rect = group.select('rect');
+    let text = group.select('text');
+
+    text.text('');
+
+    group.attr('opacity', 0);
   };
 
   this.addSourceElement = function() {
@@ -157,7 +210,7 @@ function Base_Template(svg) {
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.height = this.data.data.length * this.rowHeight;
+    this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     return true;
   };

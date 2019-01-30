@@ -32,12 +32,18 @@ function Template(svg) {
       });
     }
 
+    // Sort by highest value in first series
+    this.filteredData.data = this.filteredData.data
+      .sort((a, b) => b.values[0][this.method] - a.values[0][this.method])
+      .sort((a, b) => (b.avgRow ? -1 : 0))
+      .sort((a, b) => (b.totalRow ? -1 : 0));
+
     // Multiseries need larger padding top to make room for tabs
     this.padding.top = this.data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
 
     this.svg
-      .transition()
-      .duration(this.duration)
+      // .transition()
+      // .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -68,7 +74,7 @@ function Template(svg) {
       .style('display', 'none')
       .on('click keyup', () => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        this.render(this.data);
+        this.render(this.data, { method: this.method });
       });
 
     // Close button background
@@ -206,7 +212,7 @@ function Template(svg) {
 
     bars
       .attr('height', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-total') ? 1 : this.barHeight;
+        return j[0].parentNode.getAttribute('data-total') ? 2 : this.barHeight;
       })
       .attr('y', (d, i, j) => {
         return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
@@ -216,18 +222,28 @@ function Template(svg) {
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
+      })
+      .on('mousemove', (d, i, j) => {
+        if (this.method === 'ratio') {
+          this.showTooltip(formatPercent(d.ratio), d3.event);
+        } else {
+          this.showTooltip(Math.round(d[this.method]), d3.event);
+        }
+      })
+      .on('mouseleave', () => {
+        this.hideTooltip();
       });
 
     bars
       .transition()
       .duration(this.duration)
-      .attr('width', d => this.x[0](d))
+      .attr('width', d => this.x[0](d[this.method]))
       .attr('x', (d, i) => this.x[i](0));
   };
 
   this.setScales = function() {
     let maxValues = this.filteredData.meta.series.map((row, i) => {
-      return d3.max(this.filteredData.data.map(d => d.values[i]));
+      return d3.max(this.filteredData.data.map(d => d.values[i][this.method]));
     });
 
     this.x2 = d3
@@ -257,12 +273,12 @@ function Template(svg) {
       .enter()
       .append('g')
       .attr('class', 'axis x')
-      .attr('transform', `translate(${0}, ${this.height + 10})`);
+      .attr('transform', `translate(0, ${this.height + 10})`);
     xAxis.exit().remove();
     xAxis = xAxis.merge(xAxisE);
     xAxis.each((d, i, j) => {
       d3.select(j[i])
-        .attr('transform', `translate(${0}, ${this.height + 10})`)
+        .attr('transform', `translate(0, ${this.height + 10})`)
         .attr('opacity', () => {
           return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
         })
@@ -272,7 +288,13 @@ function Template(svg) {
           d3
             .axisBottom(this.x[i])
             .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
-            .tickFormat(formatPercent)
+            .tickFormat(d => {
+              if (this.method === 'ratio') {
+                return formatPercent(d);
+              } else {
+                return d;
+              }
+            })
         );
     });
   };
@@ -325,10 +347,10 @@ function Template(svg) {
       .attr('fill', 'black')
       .attr('opacity', 0)
       .on('mouseover', (d, i) => {
-        this.render(this.data, { highlight: i, selected: this.selected });
+        this.render(this.data, { highlight: i, selected: this.selected, method: this.method });
       })
       .on('mouseleave', () => {
-        this.render(this.data, { highlight: -1, selected: this.selected });
+        this.render(this.data, { highlight: -1, selected: this.selected, method: this.method });
       })
       .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
@@ -353,7 +375,7 @@ function Template(svg) {
           barElement.parentElement.prepend(barElement);
         });
 
-        this.render(this.data, { selected: target });
+        this.render(this.data, { selected: target, method: this.method });
       })
       .attr('tabindex', this.filteredData.meta.series.length > 1 ? 0 : false);
 
@@ -391,7 +413,7 @@ function Template(svg) {
       .duration(this.duration)
       .attr('width', (d, i) => {
         if (this.filteredData.data.filter(d => d.totalRow).length) {
-          return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i]);
+          return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method]);
         } else {
           return 0;
         }
@@ -407,7 +429,7 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('x', (d, i) => {
-        return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i]);
+        return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method]);
       });
   };
 
