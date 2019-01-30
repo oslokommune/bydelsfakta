@@ -1,6 +1,5 @@
 import '@babel/polyfill';
 import Vue from 'vue';
-import './plugins/vuetify';
 import VueResize from 'vue-resize';
 import App from './App.vue';
 import router from './router';
@@ -10,7 +9,6 @@ import clickOutside from './directives/clickOutside';
 
 import 'vue-resize/dist/vue-resize.css';
 
-import 'vuetify/src/stylus/app.styl';
 import './styles/main.scss';
 
 Vue.use(VueResize);

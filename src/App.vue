@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div id="app">
     <navigation-drawer/>
     <div id="content">
       <navigation-topbar/>
@@ -7,7 +7,7 @@
         <router-view/>
       </main>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -21,8 +21,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import './styles/colors';
-
 #content {
   margin-left: 300px;
 }

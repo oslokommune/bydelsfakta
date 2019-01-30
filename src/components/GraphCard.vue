@@ -146,7 +146,7 @@ export default {
 
       &:after {
         background-color: white;
-        bottom: -1px;
+        bottom: -2px;
         content: '';
         height: 2px;
         left: 0;

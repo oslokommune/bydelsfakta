@@ -3,7 +3,7 @@
     <div @click="backButton" role="button" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
       <h4
-        class="text-uppercase oslo__topbar oslo__topbar-text"
+        class="oslo__topbar oslo__topbar-text"
       >{{ getBydel(this.$route.params.bydel) }}</h4>
     </div>
     <div class="navigation-topbar">
@@ -158,19 +158,8 @@ export default {
     letter-spacing: 0.8px;
     margin-left: 1rem;
     margin-top: 0.3rem;
+    text-transform: uppercase;
   }
-}
-
-.v-select__selection--uppercase {
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-}
-
-.v-input--selection-controls {
-  margin-top: 0.6rem;
-  padding-top: 0;
 }
 
 .label {

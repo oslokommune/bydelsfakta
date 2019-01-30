@@ -6,7 +6,7 @@
       @click="clickBydel(id)"
     >
       <span
-        class="text-uppercase oslo__category"
+        class="oslo__category"
         :style="{ backgroundColor: dataTxtColor }"
       >
         {{dataKategori}}
@@ -84,6 +84,7 @@ export default {
   font-weight: bold;
   margin-bottom: 0.5em;
   align-items: flex-start;
+  text-transform: uppercase;
 }
 
 .oslo__tema {
@@ -95,8 +96,6 @@ export default {
 
 .oslo__see-more-text {
   margin-top: auto;
-  // position: absolute;
-  // bottom: 0.2rem;
   font-size: 1.15rem;
   font-weight: 500;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);

@@ -6,9 +6,14 @@
 
 html {
   background-color: $color-grey-50;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 body {
+  margin: 0;
   min-height: 100vh;
 }
 
@@ -24,4 +29,30 @@ h2.section-heading {
   color: $color-purple;
   width: 100%;
   padding: 1.5em 0.5em 0.5em;
+}
+
+button,
+input,
+select {
+  border-style: none;
+  font: inherit;
+  background-color: transparent;
+}
+
+select {
+  -webkit-appearance: none;
+}
+
+* {
+  margin: 0;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+[role="button"] {
+  cursor: pointer;
 }
