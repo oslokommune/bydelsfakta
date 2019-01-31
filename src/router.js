@@ -99,6 +99,11 @@ export default new Router({
       component: Bydel,
     },
     {
+      path: 'bydel/:bydel/:tema',
+      name: 'Tema',
+      component: Bydel,
+    },
+    {
       path: '/bydel/:bydel/folkemengde',
       name: 'BydelFolkemengde',
       props: { settings: page.folkemengde },
