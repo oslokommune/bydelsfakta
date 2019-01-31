@@ -1,9 +1,9 @@
 <template>
   <div class="main-container__item">
-    <div
+    <router-link
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"
-      @click="clickBydel(id)"
+      :to="link"
     >
       <span
         class="oslo__category"
@@ -13,7 +13,7 @@
       </span>
       <span class="oslo__tema" v-html="dataTema"></span>
       <span class="oslo__see-more-text">Se mer ----------></span>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -41,11 +41,7 @@ export default {
       type: String,
       required: true,
     },
-    clickBydel: {
-      type: Function,
-      required: true,
-    },
-    id: {
+    link: {
       type: String,
       required: true,
     },
@@ -68,6 +64,7 @@ export default {
 
 .oslo__card-image {
   background-blend-mode: multiply;
+  border-radius: 4px;
   color: white;
   cursor: pointer;
   height: 160px;
@@ -75,6 +72,13 @@ export default {
   padding: 1em;
   display: flex;
   flex-direction: column;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 .oslo__category {
