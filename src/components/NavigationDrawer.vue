@@ -80,6 +80,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.$route);
     const routes = this.$route.path.split('/');
     const path = this.$route.path;
     if (this.$route.params.bydel === undefined) {
