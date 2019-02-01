@@ -9,17 +9,19 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
+import positionLabels from '../positionLabels';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.padding = { top: 50, right: 220, bottom: 1, left: 60 };
 
-  const strokeWidth = this.strokeWidth;
-  const strokeWidthHighlight = this.strokeWidthHighlight;
-
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
+
+    this.data.data = this.data.data.sort((a, b) => {
+      return b.values[b.values.length - 1].value - a.values[a.values.length - 1].value;
+    });
 
     this.height = d3.max([300, this.width * 0.5]);
 
@@ -28,6 +30,17 @@ function Template(svg) {
       .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.canvas
+      .select('rect.bg')
+      .attr('height', this.height)
+      .attr('width', this.width)
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'click') j[i].blur();
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        this.render(this.data, { method: this.method, highlight: -1 });
+      })
+      .attr('tabindex', 0);
 
     this.setScales();
     this.drawLines();
@@ -38,6 +51,10 @@ function Template(svg) {
   };
 
   this.created = function() {
+    this.canvas
+      .insert('rect')
+      .attr('class', 'bg')
+      .attr('fill', 'white');
     this.createInfoBoxElements();
   };
 
@@ -47,37 +64,151 @@ function Template(svg) {
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
 
+  this.handleMouseover = function(index) {
+    this.canvas
+      .selectAll('g.label')
+      .transition()
+      .attr('opacity', 0.5);
+
+    d3.selectAll('g.label')
+      .select('text')
+      .attr('font-weight', 400);
+
+    d3.selectAll('g.label')
+      .filter((d, i) => i === index)
+      .transition()
+      .attr('opacity', 1)
+      .select('text')
+      .attr('font-weight', 700);
+
+    this.canvas
+      .selectAll('path.row')
+      .transition()
+      .attr('stroke-opacity', 0.05)
+      .attr('stroke-width', 2)
+      .filter((d, i) => i == index)
+      .attr('stroke-opacity', 1)
+      .attr('stroke-width', 4);
+  };
+
+  this.handleMouseleave = function() {
+    this.canvas
+      .selectAll('g.label')
+      .transition()
+      .attr('opacity', d => {
+        if (d.avgRow || d.totalRow) return 1;
+        return 0.45;
+      });
+
+    this.canvas
+      .selectAll('g.label')
+      .select('text')
+      .attr('font-weight', d => {
+        if (d.avgRow || d.totalRow) return 700;
+        return 400;
+      });
+
+    this.canvas
+      .selectAll('path.row')
+      .transition()
+      .attr('stroke-width', d => {
+        if (d.avgRow) return 5;
+        return 2;
+      })
+      .attr('stroke-opacity', (d, i) => {
+        if (d.totalRow || d.avgRow) return 1;
+        return 0.1;
+      });
+  };
+
   // Updates labels on the right hand side
   this.drawLabels = function() {
+    let labelPositions = positionLabels(
+      this.data.data.map(row => {
+        return this.y(row.values[row.values.length - 1].value);
+      }),
+      this.height
+    );
+
     // Standard select/enter/update/exit pattern for text labels
-    let labels = this.canvas.selectAll('text.label').data(this.data.data);
+    let labels = this.canvas.selectAll('g.label').data(this.data.data);
     let labelsE = labels
       .enter()
-      .append('text')
+      .append('g')
       .attr('class', 'label');
     labels.exit().remove();
     labels = labels.merge(labelsE);
 
+    labelsE.style('cursor', 'pointer');
+
     // Append <title> element inside text to support tooltip in case of truncation
     labelsE.append('title');
+    labelsE.append('text');
+    labelsE
+      .append('line')
+      .attr('stroke-width', 9)
+      .attr('x1', this.width + 22)
+      .attr('x2', this.width + 31);
+
+    // Click label to render with highlight (infobox)
+    labels
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'click') j[i].blur();
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (i === this.highlight) {
+          this.render(this.data, { method: this.method, highlight: -1 });
+        } else {
+          this.render(this.data, { method: this.method, highlight: i });
+        }
+      })
+      .attr('tabindex', 0);
+
+    // Hover label to highlight itself and its corresponding line
+    labels.on('mouseover', (d, i) => {
+      if (this.highlight === -1) {
+        this.handleMouseover(i);
+      }
+    });
+
+    //
+    labels.on('mouseleave', (d, i, j) => {
+      if (this.highlight === -1) {
+        this.handleMouseleave();
+      }
+    });
+
+    labels
+      .select('line')
+      .attr('stroke', (d, i, j) => {
+        if (d.totalRow) return 'black';
+        if (d.avgRow) return color.purple;
+        return d3.interpolateRainbow(i / j.length);
+      })
+      .style('stroke-dasharray', (d, i) => {
+        if (d.totalRow) return '2,1';
+      });
 
     // Update the text string and position.
     // Default opacity is low to allow labels overlapping
     labels
-      .text(d => util.truncate(d.geography, this.padding.right - 30))
-      .attr('x', this.width + 10)
-      .attr('y', d => {
-        return this.y(d.values[d.values.length - 1][this.method]) + 5;
-      })
-      .attr('opacity', 0.2);
+      .select('text')
+      .text(d => util.truncate(d.geography, this.padding.right - 40))
+      .attr('x', this.width + 35)
+      .attr('y', 5)
+      .attr('font-weight', d => {
+        if (d.avgRow || d.totalRow) return 700;
+        return 400;
+      });
+
+    labels
+      .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
+      .attr('opacity', d => {
+        if (d.avgRow || d.totalRow) return 1;
+        return 0.45;
+      });
 
     // Update content in the <title> element
-    labels
-      .selectAll('title')
-      .data(d => [d.geography])
-      .enter()
-      .append('title')
-      .html(d => d);
+    labels.select('title').html(d => d.geography);
   };
 
   // Runs once in the created() method and creates DOM elements for the
@@ -98,7 +229,7 @@ function Template(svg) {
   //
   this.drawInfobox = function() {
     if (this.highlight === -1) {
-      this.infobox.attr('opacity', 0);
+      this.infobox.attr('opacity', 0).style('display', 'none');
       return;
     }
 
@@ -112,7 +243,8 @@ function Template(svg) {
       .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
       .transition()
       .duration(this.duration)
-      .attr('opacity', 1);
+      .attr('opacity', 1)
+      .style('display', 'block');
 
     this.infoboxHead
       .select('rect.background')
@@ -207,56 +339,54 @@ function Template(svg) {
     row.exit().remove();
     row = row.merge(rowE);
 
+    rowE.style('cursor', 'pointer').attr('fill', 'none');
+
     // Update the shape of the line using the line generator
     // and its style based on the data: total and avg rows get
     // separate styling
     row
       .attr('d', d => this.line(d.values))
-      .attr('stroke', (d, i) => {
-        if (this.highlight >= 0 && i === this.highlight) return color.yellow;
-        if (this.highlight >= 0 && i !== this.highlight) return color.grey;
-        if (d.totalRow) return color.blue;
-        if (d.avgRow) return color.red;
-        return color.grey;
+      .attr('stroke', (d, i, j) => {
+        if (d.totalRow) return 'black';
+        if (d.avgRow) return color.purple;
+        return d3.interpolateRainbow(i / j.length);
       })
-      .attr('stroke-width', 3)
-      .attr('fill', 'none');
+      .attr('stroke-width', (d, i) => {
+        if (this.highlight === i) return 5;
+        if (d.avgRow) return 5;
+        return 2;
+      })
+      .attr('stroke-opacity', (d, i) => {
+        if (this.highlight >= 0 && this.highlight !== i) return 0.1;
+        if (this.highlight >= 0 && this.highlight === i) return 1;
+        if (d.totalRow || d.avgRow) return 1;
+        return 0.1;
+      })
+      .style('stroke-dasharray', (d, i) => {
+        if (d.totalRow) return '4,3';
+      });
 
-    // Add interactivity to each line
-    row.on('mouseover', (d, i, j) => {
-      d3.selectAll(j).attr('opacity', 0.35);
-      d3.select(j[i])
-        .attr('stroke-width', strokeWidthHighlight)
-        .attr('opacity', 1);
-      this.canvas.selectAll('text.label').attr('opacity', 0);
-      let label = this.canvas.selectAll('text.label').filter(l => l.geography === d.geography);
-      label.attr('opacity', 1).attr('font-weight', 'bold');
-      label.node().parentElement.append(label.node());
-    });
-
-    row.on('mouseleave', (d, i, j) => {
-      d3.select(j[i]).attr('stroke-width', strokeWidth);
-
-      d3.selectAll(j).attr('opacity', 1);
-      this.canvas
-        .selectAll('text.label')
-        .attr('opacity', 0.5)
-        .attr('font-weight', '400');
-    });
+    row
+      .on('mouseover', (d, i) => {
+        if (this.highlight === -1) {
+          this.handleMouseover(i);
+        }
+      })
+      .on('mouseleave', () => {
+        if (this.highlight === -1) {
+          this.handleMouseleave();
+        }
+      });
 
     // Support click and keyboard navigation (using tabindex and keyup)
     // to trigger a render() with a highlight argument
-    row
-      .on('click keyup', (d, i, j) => {
-        if (d3.event && d3.event.type === 'click') j[i].blur();
-        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        if (i === this.highlight) {
-          this.render(this.data, { method: this.method, highlight: -1 });
-        } else {
-          this.render(this.data, { method: this.method, highlight: i });
-        }
-      })
-      .attr('tabindex', 0);
+    row.on('click', (d, i, j) => {
+      if (i === this.highlight) {
+        this.render(this.data, { method: this.method, highlight: -1 });
+      } else {
+        this.render(this.data, { method: this.method, highlight: i });
+      }
+    });
   };
 
   // Resets the scales based on the provided data on each render

@@ -46,7 +46,7 @@ function Base_Template(svg) {
   this.barHeight = 24;
   this.tabWidth = 120;
   this.tabGap = 10;
-  this.strokeWidth = 4;
+  this.strokeWidth = 1.5;
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');

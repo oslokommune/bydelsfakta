@@ -12,6 +12,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
+import positionLabels from '../positionLabels';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -28,6 +29,13 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    this.data.data = this.data.data.sort((a, b) => {
+      return (
+        b.values[this.series][b.values[this.series].length - 1].value -
+        a.values[this.series][a.values[this.series].length - 1].value
+      );
+    });
+
     this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
     this.height = 400;
     this.svg
@@ -35,6 +43,17 @@ function Template(svg) {
       .duration(this.duration)
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
+
+    this.canvas
+      .select('rect.bg')
+      .attr('height', this.height)
+      .attr('width', this.width)
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'click') j[i].blur();
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
+      })
+      .attr('tabindex', 0);
 
     this.setScales();
     this.drawAxis();
@@ -52,7 +71,10 @@ function Template(svg) {
       .attr('class', 'tabs')
       .attr('transform', 'translate(0, 20)');
     this.tabs.append('rect').attr('class', 'rule');
-
+    this.canvas
+      .insert('rect')
+      .attr('class', 'bg')
+      .attr('fill', 'white');
     this.createInfoBoxElements();
   };
 
@@ -72,7 +94,7 @@ function Template(svg) {
 
   this.drawInfobox = function() {
     if (this.highlight === -1) {
-      this.infobox.attr('opacity', 0);
+      this.infobox.attr('opacity', 0).style('display', 'none');
       return;
     }
 
@@ -84,6 +106,7 @@ function Template(svg) {
 
     this.infobox
       .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
+      .style('display', 'block')
       .transition()
       .duration(this.duration)
       .attr('opacity', 1);
@@ -178,6 +201,63 @@ function Template(svg) {
       .text(Math.round(low.ratio * 10000) / 100 + '%');
   };
 
+  this.handleMouseover = function(index) {
+    this.canvas
+      .selectAll('g.label')
+      .transition()
+      .attr('opacity', 0.5);
+
+    d3.selectAll('g.label')
+      .select('text')
+      .attr('font-weight', 400);
+
+    d3.selectAll('g.label')
+      .filter((d, i) => i === index)
+      .transition()
+      .attr('opacity', 1)
+      .select('text')
+      .attr('font-weight', 700);
+
+    this.canvas
+      .selectAll('path.row')
+      .transition()
+      .attr('stroke-opacity', 0.05)
+      .attr('stroke-width', 2)
+      .filter((d, i) => i == index)
+      .attr('stroke-opacity', 1)
+      .attr('stroke-width', 4);
+  };
+
+  this.handleMouseleave = function() {
+    this.canvas
+      .selectAll('g.label')
+      .transition()
+      .attr('opacity', d => {
+        if (d.avgRow || d.totalRow) return 1;
+        return 0.45;
+      });
+
+    this.canvas
+      .selectAll('g.label')
+      .select('text')
+      .attr('font-weight', d => {
+        if (d.avgRow || d.totalRow) return 700;
+        return 400;
+      });
+
+    this.canvas
+      .selectAll('path.row')
+      .transition()
+      .attr('stroke-width', d => {
+        if (d.avgRow) return 5;
+        return 2;
+      })
+      .attr('stroke-opacity', (d, i) => {
+        if (d.totalRow || d.avgRow) return 1;
+        return 0.1;
+      });
+  };
+
   this.drawTabs = function() {
     this.tabs
       .select('rect.rule')
@@ -246,47 +326,124 @@ function Template(svg) {
   };
 
   this.drawLabels = function() {
-    let labelsData = (() => {
-      if (this.highlight >= 0) {
-        return this.data.data.filter((row, i) => i === this.highlight);
-      } else {
-        return this.data.data.filter(row => row.avgRow || row.totalRow);
-      }
-    })();
+    let labelPositions = positionLabels(
+      this.data.data.map(row => {
+        return this.y(row.values[this.series][row.values[this.series].length - 1].value);
+      }),
+      this.height
+    );
 
-    let labels = this.canvas.selectAll('text.label').data(labelsData);
+    let labels = this.canvas.selectAll('g.label').data(this.data.data);
+
     let labelsE = labels
       .enter()
-      .append('text')
+      .append('g')
       .attr('class', 'label');
+
+    labelsE.style('cursor', 'pointer');
+    labelsE.append('title');
+    labelsE.append('text');
+    labelsE
+      .append('line')
+      .attr('stroke-width', 9)
+      .attr('x1', this.width + 22)
+      .attr('x2', this.width + 31);
 
     labels.exit().remove();
     labels = labels.merge(labelsE);
 
-    labelsE.append('title');
+    // Click label to render with highlight (infobox)
+    labels
+      .on('click keyup', (d, i, j) => {
+        if (d3.event && d3.event.type === 'click') j[i].blur();
+        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+        if (i === this.highlight) {
+          this.render(this.data, {
+            method: this.method,
+            series: this.series,
+            highlight: -1,
+          });
+        } else {
+          this.render(this.data, {
+            method: this.method,
+            series: this.series,
+            highlight: i,
+          });
+        }
+      })
+      .attr('tabindex', 0);
 
     labels
-      .text(d => util.truncate(d.geography, this.padding.right - 30))
-      .attr('x', this.width + 5)
-      .attr('font-weight', 'bold')
+      .select('line')
       .transition()
       .duration(this.duration)
-      .attr('y', d => {
-        return this.y(d.values[this.series][d.values[this.series].length - 1][this.method]) + 5;
+      .attr('stroke', (d, i, j) => {
+        if (d.totalRow) return 'black';
+        if (d.avgRow) return color.purple;
+        return d3.interpolateRainbow(i / j.length);
+      })
+      .style('stroke-dasharray', (d, i) => {
+        if (d.totalRow) return '2,1';
+      });
+
+    // Update the text string and position.
+    // Default opacity is low to allow labels overlapping
+    labels
+      .select('text')
+      .transition()
+      .duration(this.duration)
+      .text(d => util.truncate(d.geography, this.padding.right - 40))
+      .attr('x', this.width + 35)
+      .attr('y', 5)
+      .attr('font-weight', d => {
+        if (d.avgRow || d.totalRow) return 700;
+        return 400;
       });
 
     labels
-      .selectAll('title')
-      .data(d => [d.geography])
-      .enter()
-      .append('title')
-      .html(d => d);
+      .transition()
+      .duration(this.duration)
+      .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
+      .attr('opacity', d => {
+        if (d.avgRow || d.totalRow) return 1;
+        return 0.45;
+      });
+
+    labels.on('mouseover', (d, i) => {
+      if (this.highlight === -1) {
+        this.handleMouseover(i);
+      }
+    });
+
+    //
+    labels.on('mouseleave', (d, i, j) => {
+      if (this.highlight === -1) {
+        this.handleMouseleave();
+      }
+    });
+
+    // Update content in the <title> element
+    labels.select('title').html(d => d.geography);
+
+    // labels
+    //   .text(d => util.truncate(d.geography, this.padding.right - 30))
+    //   .attr('x', this.width + 5)
+    //   .attr('font-weight', 'bold')
+    //   .transition()
+    //   .duration(this.duration)
+    //   .attr('y', d => {
+    //     return this.y(d.values[this.series][d.values[this.series].length - 1][this.method]) + 5;
+    //   });
+
+    // labels
+    //   .selectAll('title')
+    //   .data(d => [d.geography])
+    //   .enter()
+    //   .append('title')
+    //   .html(d => d);
   };
 
   this.drawLines = function() {
-    const strokeWidth = this.strokeWidth;
-    const strokeWidthHighlight = this.strokeWidthHighlight;
-
     let row = this.canvas.selectAll('path.row').data(this.data.data);
     let rowE = row
       .enter()
@@ -296,39 +453,61 @@ function Template(svg) {
     row.exit().remove();
     row = row.merge(rowE);
 
+    rowE.style('cursor', 'pointer').attr('fill', 'none');
+
     row
-      .attr('stroke', (d, i) => {
-        if (this.highlight >= 0 && i === this.highlight) return color.yellow;
-        if (this.highlight >= 0 && i !== this.highlight) return color.grey;
-        if (d.totalRow) return color.blue;
-        if (d.avgRow) return color.red;
-        return color.grey;
+      .attr('stroke', (d, i, j) => {
+        if (d.totalRow) return 'black';
+        if (d.avgRow) return color.purple;
+        return d3.interpolateRainbow(i / j.length);
       })
-      .attr('stroke-width', this.strokeWidth)
+      .attr('stroke-width', (d, i) => {
+        if (this.highlight === i) return 5;
+        if (d.avgRow) return 5;
+        return 2;
+      })
       .attr('fill', 'none')
       .transition()
       .duration(this.duration)
-      .attr('d', d => line(d.values[this.series]));
-
-    row.on('mouseover', function() {
-      d3.select(this).attr('stroke-width', strokeWidthHighlight);
-    });
-
-    row.on('mouseleave', function() {
-      d3.select(this).attr('stroke-width', strokeWidth);
-    });
+      .attr('d', d => line(d.values[this.series]))
+      .attr('stroke-opacity', (d, i) => {
+        if (this.highlight >= 0 && this.highlight !== i) return 0.1;
+        if (this.highlight >= 0 && this.highlight === i) return 1;
+        if (d.totalRow || d.avgRow) return 1;
+        return 0.1;
+      })
+      .style('stroke-dasharray', (d, i) => {
+        if (d.totalRow) return '4,3';
+      });
 
     row
-      .on('click keyup', (d, i, j) => {
-        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        if (d3.event && d3.event.type === 'click') j[i].blur();
-        if (i === this.highlight) {
-          this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
-        } else {
-          this.render(this.data, { method: this.method, series: this.series, highlight: i });
+      .on('mouseover', (d, i) => {
+        if (this.highlight === -1) {
+          this.handleMouseover(i);
         }
       })
-      .attr('tabindex', 0);
+      .on('mouseleave', () => {
+        if (this.highlight === -1) {
+          this.handleMouseleave();
+        }
+      });
+
+    // Support click and to trigger a render() with a highlight argument
+    row.on('click', (d, i, j) => {
+      if (i === this.highlight) {
+        this.render(this.data, {
+          method: this.method,
+          series: this.series,
+          highlight: -1,
+        });
+      } else {
+        this.render(this.data, {
+          method: this.method,
+          series: this.series,
+          highlight: i,
+        });
+      }
+    });
   };
 
   this.setScales = function() {
