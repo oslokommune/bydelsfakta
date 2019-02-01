@@ -199,6 +199,11 @@ function Template(svg) {
     // Add attributes to total and avg rows
     rows.attr('data-total', d => d.totalRow);
     rows.attr('data-avg', d => d.avgRow);
+    rows.attr('fill', (d, i, j) => {
+      if (d.avgRow) return color.yellow;
+      if (d.totalRow) return color.purple;
+      return color.purple;
+    });
 
     let bars = rows.selectAll('rect.bar').data(d => d.values);
     let barsE = bars
@@ -216,9 +221,6 @@ function Template(svg) {
       })
       .attr('y', (d, i, j) => {
         return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
-      })
-      .attr('fill', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-avg') ? color.yellow : color.purple;
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;

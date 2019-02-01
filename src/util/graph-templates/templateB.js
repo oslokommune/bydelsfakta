@@ -125,30 +125,29 @@ function Template(svg) {
   this.drawLabels = function() {
     let labelPositions = positionLabels(
       this.data.data.map(row => {
-        return this.y(row.values[row.values.length - 1].value);
+        row.y = this.y(row.values[row.values.length - 1].value);
+        return row;
       }),
       this.height
     );
 
-    // Standard select/enter/update/exit pattern for text labels
-    let labels = this.canvas.selectAll('g.label').data(this.data.data);
-    let labelsE = labels
-      .enter()
-      .append('g')
+    let labels = this.canvas
+      .selectAll('g.label')
+      .data(labelPositions, d => d.geography)
+      .join(enter => {
+        let g = enter
+          .append('g')
+          .attr('class', 'label')
+          .style('cursor', 'pointer');
+        g.append('text').attr('x', this.width + 35);
+
+        g.append('line')
+          .attr('stroke-width', 9)
+          .attr('x1', this.width + 22)
+          .attr('x2', this.width + 31);
+        g.append('title');
+      })
       .attr('class', 'label');
-    labels.exit().remove();
-    labels = labels.merge(labelsE);
-
-    labelsE.style('cursor', 'pointer');
-
-    // Append <title> element inside text to support tooltip in case of truncation
-    labelsE.append('title');
-    labelsE.append('text');
-    labelsE
-      .append('line')
-      .attr('stroke-width', 9)
-      .attr('x1', this.width + 22)
-      .attr('x2', this.width + 31);
 
     // Click label to render with highlight (infobox)
     labels
@@ -179,9 +178,11 @@ function Template(svg) {
 
     labels
       .select('line')
+      .transition()
+      .duration(this.duration)
       .attr('stroke', (d, i, j) => {
         if (d.totalRow) return 'black';
-        if (d.avgRow) return color.purple;
+        if (d.avgRow) return color.yellow;
         return d3.interpolateRainbow(i / j.length);
       })
       .style('stroke-dasharray', (d, i) => {
@@ -192,6 +193,8 @@ function Template(svg) {
     // Default opacity is low to allow labels overlapping
     labels
       .select('text')
+      .transition()
+      .duration(this.duration)
       .text(d => util.truncate(d.geography, this.padding.right - 40))
       .attr('x', this.width + 35)
       .attr('y', 5)
@@ -201,6 +204,8 @@ function Template(svg) {
       });
 
     labels
+      .transition()
+      .duration(this.duration)
       .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
       .attr('opacity', d => {
         if (d.avgRow || d.totalRow) return 1;
@@ -241,10 +246,10 @@ function Template(svg) {
 
     this.infobox
       .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
+      .style('display', 'block')
       .transition()
       .duration(this.duration)
-      .attr('opacity', 1)
-      .style('display', 'block');
+      .attr('opacity', 1);
 
     this.infoboxHead
       .select('rect.background')
@@ -348,7 +353,7 @@ function Template(svg) {
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i, j) => {
         if (d.totalRow) return 'black';
-        if (d.avgRow) return color.purple;
+        if (d.avgRow) return color.yellow;
         return d3.interpolateRainbow(i / j.length);
       })
       .attr('stroke-width', (d, i) => {
@@ -378,8 +383,7 @@ function Template(svg) {
         }
       });
 
-    // Support click and keyboard navigation (using tabindex and keyup)
-    // to trigger a render() with a highlight argument
+    // Support click and to trigger a render() with a highlight argument
     row.on('click', (d, i, j) => {
       if (i === this.highlight) {
         this.render(this.data, { method: this.method, highlight: -1 });

@@ -17,10 +17,9 @@ import positionLabels from '../positionLabels';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding.top = 130;
-  this.padding.left = 60;
-  this.padding.right = 220;
+  this.padding = { top: 130, left: 60, right: 220, bottom: 10 };
 
+  // Line generator
   let line = d3
     .line()
     .x(d => this.x(this.parseDate(d.date)))
@@ -64,20 +63,28 @@ function Template(svg) {
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
+  // Creates elements for this template. Runs from base template along with init()
   this.created = function() {
     // Create tabs placeholder
     this.tabs = this.svg
       .insert('g')
       .attr('class', 'tabs')
-      .attr('transform', 'translate(0, 20)');
+      .attr('transform', 'translate(3, 23)');
+
+    // stroke below tabs
     this.tabs.append('rect').attr('class', 'rule');
+
+    // Background element allowing users to click to reset
     this.canvas
       .insert('rect')
       .attr('class', 'bg')
       .attr('fill', 'white');
+
+    // Call method for creating info box elements
     this.createInfoBoxElements();
   };
 
+  // Creates info box elements called from created()
   this.createInfoBoxElements = function() {
     // Create infobox placeholder
     this.infobox = this.svg.append('g').attr('class', 'infobox');
@@ -92,6 +99,7 @@ function Template(svg) {
     this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
   };
 
+  // Updtes the data in infobox
   this.drawInfobox = function() {
     if (this.highlight === -1) {
       this.infobox.attr('opacity', 0).style('display', 'none');
@@ -201,6 +209,7 @@ function Template(svg) {
       .text(Math.round(low.ratio * 10000) / 100 + '%');
   };
 
+  // Highlights labels and lines on hover
   this.handleMouseover = function(index) {
     this.canvas
       .selectAll('g.label')
@@ -228,6 +237,7 @@ function Template(svg) {
       .attr('stroke-width', 4);
   };
 
+  // Resets the hover state
   this.handleMouseleave = function() {
     this.canvas
       .selectAll('g.label')
@@ -258,6 +268,7 @@ function Template(svg) {
       });
   };
 
+  // Updates the tabs. Highlights the active series
   this.drawTabs = function() {
     this.tabs
       .select('rect.rule')
@@ -325,32 +336,35 @@ function Template(svg) {
     tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
   };
 
+  // Updates the labels
   this.drawLabels = function() {
+    // Get y-position for each label calculated using
+    // simple collision detection algorithm. Passing in
+    // the original y-position and the available height in pixels
     let labelPositions = positionLabels(
       this.data.data.map(row => {
-        return this.y(row.values[this.series][row.values[this.series].length - 1].value);
+        row.y = this.y(row.values[this.series][row.values[this.series].length - 1].value);
+        return row;
       }),
       this.height
     );
 
-    let labels = this.canvas.selectAll('g.label').data(this.data.data);
-
-    let labelsE = labels
-      .enter()
-      .append('g')
+    let labels = this.canvas
+      .selectAll('g.label')
+      .data(labelPositions, d => d.geography)
+      .join(enter => {
+        let g = enter
+          .append('g')
+          .attr('class', 'label')
+          .style('cursor', 'pointer');
+        g.append('text').attr('x', this.width + 35);
+        g.append('line')
+          .attr('stroke-width', 9)
+          .attr('x1', this.width + 22)
+          .attr('x2', this.width + 31);
+        g.append('title');
+      })
       .attr('class', 'label');
-
-    labelsE.style('cursor', 'pointer');
-    labelsE.append('title');
-    labelsE.append('text');
-    labelsE
-      .append('line')
-      .attr('stroke-width', 9)
-      .attr('x1', this.width + 22)
-      .attr('x2', this.width + 31);
-
-    labels.exit().remove();
-    labels = labels.merge(labelsE);
 
     // Click label to render with highlight (infobox)
     labels
@@ -373,6 +387,7 @@ function Template(svg) {
       })
       .attr('tabindex', 0);
 
+    // Style the color swatch for each label
     labels
       .select('line')
       .transition()
@@ -386,8 +401,7 @@ function Template(svg) {
         if (d.totalRow) return '2,1';
       });
 
-    // Update the text string and position.
-    // Default opacity is low to allow labels overlapping
+    // Style the text label element
     labels
       .select('text')
       .transition()
@@ -400,6 +414,7 @@ function Template(svg) {
         return 400;
       });
 
+    // Style each label group (text and color swatch)
     labels
       .transition()
       .duration(this.duration)
@@ -409,13 +424,14 @@ function Template(svg) {
         return 0.45;
       });
 
+    // Call the handleMouseover method on mouseover
     labels.on('mouseover', (d, i) => {
       if (this.highlight === -1) {
         this.handleMouseover(i);
       }
     });
 
-    //
+    // Call the handleMouseleave on mouseleave
     labels.on('mouseleave', (d, i, j) => {
       if (this.highlight === -1) {
         this.handleMouseleave();
@@ -424,36 +440,14 @@ function Template(svg) {
 
     // Update content in the <title> element
     labels.select('title').html(d => d.geography);
-
-    // labels
-    //   .text(d => util.truncate(d.geography, this.padding.right - 30))
-    //   .attr('x', this.width + 5)
-    //   .attr('font-weight', 'bold')
-    //   .transition()
-    //   .duration(this.duration)
-    //   .attr('y', d => {
-    //     return this.y(d.values[this.series][d.values[this.series].length - 1][this.method]) + 5;
-    //   });
-
-    // labels
-    //   .selectAll('title')
-    //   .data(d => [d.geography])
-    //   .enter()
-    //   .append('title')
-    //   .html(d => d);
   };
 
   this.drawLines = function() {
-    let row = this.canvas.selectAll('path.row').data(this.data.data);
-    let rowE = row
-      .enter()
-      .append('path')
+    let row = this.canvas
+      .selectAll('path.row')
+      .data(this.data.data, d => d.geography)
+      .join('path')
       .attr('class', 'row');
-
-    row.exit().remove();
-    row = row.merge(rowE);
-
-    rowE.style('cursor', 'pointer').attr('fill', 'none');
 
     row
       .attr('stroke', (d, i, j) => {

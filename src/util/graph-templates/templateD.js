@@ -351,51 +351,55 @@ function Template(svg) {
 
   // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
-    let rows = this.lower.selectAll('g.row').data(this.data.data);
-    let rowsE = rows
-      .enter()
-      .append('g')
-      .attr('class', 'row');
-    rows.exit().remove();
-    rows = rows.merge(rowsE);
+    // let rows = this.lower.selectAll('g.row').data(this.data.data);
+    // let rowsE = rows
+    //   .enter()
+    //   .append('g')
+    //   .attr('class', 'row');
+    // rows.exit().remove();
+    // rows = rows.merge(rowsE);
 
-    rowsE
-      .append('rect')
-      .attr('class', 'rowFill')
-      .attr('fill', color.purple)
-      .attr('height', this.rowHeight)
-      .attr('width', this.width);
-    rowsE
-      .append('text')
-      .attr('class', 'geography')
-      .attr('fill', color.purple)
-      .attr('x', 10)
-      .attr('y', this.rowHeight / 2 + 7);
-    rowsE
-      .append('text')
-      .attr('class', 'value')
-      .attr('y', this.rowHeight / 2 + 7)
-      .attr('fill', color.purple)
-      .attr('x', this.paddingLowerLeft - 40)
-      .attr('text-anchor', 'end');
-    rowsE
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('height', this.barHeight);
-
-    rowsE
-      .append('rect')
-      .attr('class', 'divider')
-      .attr('fill', color.purple)
-      .attr('width', this.width)
-      .attr('height', 1)
-      .attr('y', this.rowHeight);
+    let rows = this.lower
+      .selectAll('g.row')
+      .data(this.data.data, d => d.geography)
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'row');
+        g.append('rect')
+          .attr('class', 'rowFill')
+          .attr('fill', color.purple)
+          .attr('height', this.rowHeight)
+          .attr('width', this.width);
+        g.append('text')
+          .attr('class', 'geography')
+          .attr('fill', color.purple)
+          .attr('x', 10)
+          .attr('y', this.rowHeight / 2 + 7);
+        g.append('text')
+          .attr('class', 'value')
+          .attr('y', this.rowHeight / 2 + 7)
+          .attr('fill', color.purple)
+          .attr('x', this.paddingLowerLeft - 40)
+          .attr('text-anchor', 'end');
+        g.append('rect')
+          .attr('class', 'bar')
+          .attr('height', this.barHeight);
+        g.append('rect')
+          .attr('class', 'divider')
+          .attr('fill', color.purple)
+          .attr('width', this.width)
+          .attr('height', 1)
+          .attr('y', this.rowHeight);
+      });
 
     rows.select('rect.rowFill').attr('width', this.width);
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
     rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
     rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
-    rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+    rows
+      .transition()
+      .duration(this.duration * 2)
+      .delay(this.duration)
+      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => d.geography);
     rows.select('text.value').text(bydel => {
       let sum = d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
