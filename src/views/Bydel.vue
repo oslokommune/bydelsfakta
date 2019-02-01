@@ -37,10 +37,5 @@ export default {
       items: subpages,
     };
   },
-
-  mounted() {
-    console.log(this.$route);
-    console.log(this.bydel);
-  },
 };
 </script>
