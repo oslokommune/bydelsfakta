@@ -26,10 +26,21 @@ import subpages from '../config/subpages';
 export default {
   name: 'Bydel',
   components: { CardImage },
+  props: {
+    bydel: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       items: subpages,
     };
+  },
+
+  mounted() {
+    console.log(this.$route);
+    console.log(this.bydel);
   },
 };
 </script>
