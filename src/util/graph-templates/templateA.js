@@ -175,8 +175,14 @@ function Template(svg) {
 
     // Dynamic styling, sizing and positioning based on data and container size
 
-    rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0));
-    rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+    rows
+      .select('rect.rowFill')
+      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0))
+      .attr('width', this.padding.left + this.width + this.padding.right);
+    rows
+      .select('rect.divider')
+      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+      .attr('width', this.padding.left + this.width + this.padding.right);
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
     rows.select('a.hyperlink').attr('xlink:href', `/bydelsfakta#/bydel/sthanshaugen/folkemengde`);
@@ -201,7 +207,7 @@ function Template(svg) {
     // Add attributes to total and avg rows
     rows.attr('data-total', d => d.totalRow);
     rows.attr('data-avg', d => d.avgRow);
-    rows.attr('fill', (d, i, j) => {
+    rows.attr('fill', d => {
       if (d.avgRow) return color.yellow;
       if (d.totalRow) return color.purple;
       return color.purple;
@@ -227,7 +233,7 @@ function Template(svg) {
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
       })
-      .on('mousemove', (d, i, j) => {
+      .on('mousemove', d => {
         if (this.method === 'ratio') {
           this.showTooltip(formatPercent(d.ratio), d3.event);
         } else {

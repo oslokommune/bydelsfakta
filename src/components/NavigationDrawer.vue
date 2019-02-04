@@ -31,10 +31,7 @@
         <a class="navigation-link__label">Sammenlign bydeler</a>
       </div>
       <transition name="fade">
-        <div
-          class="navigation-drawer__buttons"
-          v-if="compareBydeler"
-        >
+        <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
             <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
             <button
@@ -44,10 +41,7 @@
             >Fjern alle</button>
           </div>
           <div class="navigation-drawer__select-container">
-            <select
-              class="navigation-drawer__select"
-              v-model="selectedPredefinedOption"
-            >
+            <select class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
                 :key="index"
@@ -167,8 +161,8 @@ export default {
       return bydel === this.$route.params.bydel
         ? { name: 'Bydel', params: { bydel: bydel } }
         : this.$route.params.tema === undefined
-          ? { name: 'Bydel', params: { bydel: bydel } }
-          : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+        ? { name: 'Bydel', params: { bydel: bydel } }
+        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
     },
 
     onClickHome() {
@@ -271,11 +265,11 @@ export default {
   background-color: $color-purple;
   display: flex;
   flex-direction: column;
-
-  height: 100%;
+  height: 100vh;
   position: fixed;
-  width: 300px;
-  z-index: 100;
+  width: 21.5em;
+  overflow-y: auto;
+  padding-bottom: 2em;
 }
 
 .oslo__logo {

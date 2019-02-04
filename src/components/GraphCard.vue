@@ -120,10 +120,18 @@ export default {
 
 .card-container {
   padding: 0.5em;
-  width: 50%;
+  flex: 50% 1 10;
+  min-width: 300px;
+  overflow: hidden;
+
+  @media screen and (min-width: 950px) {
+    min-width: 400px;
+    max-width: 50%;
+  }
 
   &.large {
-    width: 100%;
+    max-width: 100%;
+    flex-basis: 100%;
   }
 }
 

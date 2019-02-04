@@ -14,7 +14,7 @@ import positionLabels from '../positionLabels';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 50, right: 220, bottom: 1, left: 60 };
+  this.padding = { top: 50, right: 190, bottom: 1, left: 60 };
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -115,7 +115,7 @@ function Template(svg) {
         if (d.avgRow) return 5;
         return 2;
       })
-      .attr('stroke-opacity', (d, i) => {
+      .attr('stroke-opacity', d => {
         if (d.totalRow || d.avgRow) return 1;
         return 0.1;
       });
@@ -170,7 +170,7 @@ function Template(svg) {
     });
 
     //
-    labels.on('mouseleave', (d, i, j) => {
+    labels.on('mouseleave', () => {
       if (this.highlight === -1) {
         this.handleMouseleave();
       }
@@ -180,12 +180,14 @@ function Template(svg) {
       .select('line')
       .transition()
       .duration(this.duration)
+      .attr('x1', this.width + 22)
+      .attr('x2', this.width + 31)
       .attr('stroke', (d, i, j) => {
         if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
         return d3.interpolateRainbow(i / j.length);
       })
-      .style('stroke-dasharray', (d, i) => {
+      .style('stroke-dasharray', d => {
         if (d.totalRow) return '2,1';
       });
 
@@ -367,7 +369,7 @@ function Template(svg) {
         if (d.totalRow || d.avgRow) return 1;
         return 0.1;
       })
-      .style('stroke-dasharray', (d, i) => {
+      .style('stroke-dasharray', d => {
         if (d.totalRow) return '4,3';
       });
 
@@ -384,7 +386,7 @@ function Template(svg) {
       });
 
     // Support click and to trigger a render() with a highlight argument
-    row.on('click', (d, i, j) => {
+    row.on('click', (d, i) => {
       if (i === this.highlight) {
         this.render(this.data, { method: this.method, highlight: -1 });
       } else {

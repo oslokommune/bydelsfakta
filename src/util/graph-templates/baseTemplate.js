@@ -136,14 +136,10 @@ function Base_Template(svg) {
     group.attr('opacity', 1);
   };
 
-  this.hideTooltip = function(str) {
-    let group = this.svg.select('g.tooltip');
-    let rect = group.select('rect');
-    let text = group.select('text');
-
-    text.text('');
-
-    group.attr('opacity', 0);
+  this.hideTooltip = function() {
+    let group = this.svg.select('g.tooltip').attr('opacity', 0);
+    group.select('rect');
+    group.select('text').text('');
   };
 
   this.addSourceElement = function() {

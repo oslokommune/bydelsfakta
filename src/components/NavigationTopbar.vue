@@ -2,9 +2,7 @@
   <header class="oslo__navigation-topbar">
     <div @click="backButton" role="button" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
-      <h4
-        class="oslo__topbar oslo__topbar-text"
-      >{{ getBydel(this.$route.params.bydel) }}</h4>
+      <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
     </div>
     <div class="navigation-topbar">
       <div
@@ -15,16 +13,12 @@
         @keydown.escape="closeMenu"
         v-click-outside="closeMenu"
       >
-        <label class="label" :class="{ 'label--active': selectedSubpage !== null }">VELG TEMA</label>
+        <label class="label" :class="{ 'label--active': selectedSubpage !== null }">Velg tema</label>
         <span>{{selectedSubpage}}</span>
         <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down'}}</i>
       </div>
       <transition name="fade">
-        <div
-          id="dropdown"
-          class="navigation-topbar__dropdown"
-          v-if="showDropdown"
-        >
+        <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
           <div
             v-for="(kategori, index) in dropdown"
             :key="index"
@@ -37,15 +31,14 @@
               <span>{{kategori.kategori}}</span>
             </div>
             <div class="navigation-topbar__dropdown-items">
-              <a
+              <router-link
                 v-for="(link, subpageIndex) in kategori.links"
-                :key="subpageIndex"
                 class="navigation-topbar__dropdown-item"
                 :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
-                @click="onClickSubpage(link.value)"
-              >
-                {{link.text}}
-              </a>
+                :key="subpageIndex"
+                :to="{ name: 'Tema', params: { tema: link.value } }"
+                v-text="link.text"
+              ></router-link>
             </div>
           </div>
         </div>
