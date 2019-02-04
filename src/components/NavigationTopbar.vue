@@ -100,7 +100,7 @@ export default {
       const route = this.$route;
       if (this.selectedSubpage === null) {
         this.selected = [];
-        this.$router.push({ path: '/' });
+        this.$router.push({ name: 'Home' });
       } else if (route.path.includes('bydel')) {
         this.$router.push({ path: `/bydel/${route.params.bydel}` });
       }

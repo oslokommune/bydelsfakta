@@ -206,9 +206,12 @@ export default {
   },
 
   watch: {
-    $route() {
-      const routes = this.$route.path.split('/');
-      if (!this.sammenlign) {
+    $route(to) {
+      const routes = to.path.split('/');
+      if (to.name === 'Home') {
+        this.sammenlign = false;
+        this.selected = [];
+      } else if (!this.sammenlign) {
         const bydel = bydeler.find(item => item.uri === routes[2]).key;
         this.selected = [bydel];
       } else if (this.sammenlign && !this.showAllCheckbox) {

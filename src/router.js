@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Graph from './components/Graph.vue';
-import page from './config/pages';
-import baseUrl from './util/config';
 
 import Home from './views/Home.vue';
 import Bydel from './views/Bydel.vue';
