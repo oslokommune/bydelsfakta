@@ -25,7 +25,7 @@
             aria-haspopup="true"
             :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
           >
-            <i class="material-icons context-menu__button-icon">{{showDropdown ? 'close' : 'menu'}}</i>
+            <i class="material-icons">{{showDropdown ? 'close' : 'menu'}}</i>
           </button>
           <div v-if="showDropdown" class="context-menu__dropdown">
             <button
@@ -201,12 +201,6 @@ export default {
     border-top-right-radius: 3px;
     height: 3.5rem;
     width: 4rem;
-  }
-
-  &__button-icon {
-    color: rgb(41, 40, 88);
-    font-size: 24px;
-    font-weight: bold;
   }
 
   &__dropdown {

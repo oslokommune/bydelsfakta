@@ -25,10 +25,8 @@
       <div
         class="navigation-link navigation-link__label-compare"
         :class="{ 'navigation-link--active': compareBydeler }"
-        @click="onClickSammenlign"
-        role="button"
       >
-        <a class="navigation-link__label">Sammenlign bydeler</a>
+        <router-link :to="onClickSammenlign()" class="navigation-link__label">Sammenlign bydeler</router-link>
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
@@ -157,7 +155,6 @@ export default {
     },
 
     onClickBydel(bydel) {
-      // Reset selector
       return bydel === this.$route.params.bydel
         ? { name: 'Bydel', params: { bydel: bydel } }
         : this.$route.params.tema === undefined
@@ -173,30 +170,14 @@ export default {
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
       const selectedBydeler = this.selected.join('-');
-      if (selectedBydeler === routes[2] || routes[2] === 'alle') {
-        this.$router.push({ name: 'Bydel', params: { bydel: routes[2] } });
-      } else if (this.selected.length < 2) {
-        this.selected = [];
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: 'alle', tema: this.$route.params.tema },
-            });
-      } else if (this.selected.length === bydeler.length) {
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: 'alle', tema: this.$route.params.tema },
-            });
+      const bydel = bydeler.find(item => item.uri === routes[2]);
+
+      if (bydel !== undefined && selectedBydeler === bydel.key) {
+        return this.$route.params.tema === undefined
+          ? { name: 'Bydel', params: { bydel: 'alle' } }
+          : { name: 'Tema', params: { bydel: 'alle', tema: this.$route.params.tema } };
       } else {
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: selectedBydeler } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: selectedBydeler, tema: this.$route.params.tema },
-            });
+        return { name: 'Bydel', params: { bydel: this.$route.params.bydel } };
       }
     },
 
@@ -232,6 +213,9 @@ export default {
       const bydel = bydeler.find(item => item.uri === routes[2]);
 
       if (to.name === 'Home') {
+        this.selected = [];
+      } else if (to.params.bydel === 'alle') {
+        this.compareBydeler = true;
         this.selected = [];
       } else if (params.length > 1) {
         const paramBydel = routes[2].split('-');
