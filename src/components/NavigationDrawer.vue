@@ -30,7 +30,7 @@
       <transition name="fade">
         <div
           class="navigation-drawer__buttons"
-          v-if="$route.path.includes('sammenlign')"
+          v-if="sammenlign"
         >
           <div class="navigation-drawer__button-container">
             <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>

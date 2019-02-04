@@ -71,7 +71,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     const routes = this.$route.path.split('/');
     if (this.$route.name !== 'Home') {
       const paramBydeler = this.$route.params.bydel.split('-');
