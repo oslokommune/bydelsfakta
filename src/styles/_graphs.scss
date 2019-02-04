@@ -7,3 +7,43 @@ svg.graph__svg {
     text-rendering: geometricPrecision;
   }
 }
+
+.graph__container {
+  position: relative;
+  margin: 1em 1em 0 1em;
+  overflow: hidden;
+}
+
+// Position and styles for the age selector dropdown menu
+.graph__dropdown {
+  position: absolute;
+  top: 9.75em;
+  left: 0;
+  padding: 1em;
+
+  &__label {
+    display: block;
+  }
+
+  &__select {
+    border: 1px solid black;
+    position: relative;
+    height: 3em;
+    padding-left: 0.5em;
+    width: 7em;
+    border-radius: 1px;
+    margin-top: 0.5em;
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      height: 15px;
+      width: 15px;
+      background: black;
+      top: 15px;
+      left: 15px;
+    }
+  }
+}

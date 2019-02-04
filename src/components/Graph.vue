@@ -1,17 +1,5 @@
 <template>
   <div class="graph__container">
-    <select
-      class="graph__dropdown"
-      v-if="showDropdown"
-      @input="svg.render(data, { method: settings.method, range: $event.target.value})"
-    >
-      <option
-        v-for="(element, index) in dropDownList"
-        :key="index"
-        :value="element.range"
-        :selected="element.selected"
-      >{{element.label}}</option>
-    </select>
     <svg class="graph__svg" ref="svg"></svg>
     <resize-observer @notify="svg.resize(data, {method: settings.method })"/>
   </div>
@@ -19,7 +7,6 @@
 
 <script>
 import * as d3 from 'd3';
-import ageRanges from '../config/ageRanges';
 import TemplateA from '../util/graph-templates/templateA';
 import TemplateB from '../util/graph-templates/templateB';
 import TemplateC from '../util/graph-templates/templateC';
@@ -36,9 +23,6 @@ export default {
     svg: false,
     data: null,
     currentTemplate: false,
-    heading: 'loading ...',
-    showDropdown: false,
-    dropDownList: ageRanges,
   }),
 
   watch: {
@@ -54,9 +38,6 @@ export default {
   methods: {
     async draw() {
       if (this.currentTemplate !== this.settings.template) {
-        // Show dropdown only for template d
-        this.showDropdown = this.settings.template === 'd';
-
         switch (this.settings.template) {
           case 'a':
             this.svg = new TemplateA(this.$refs['svg']);
@@ -93,34 +74,11 @@ export default {
         }
       }
 
-      let t0 = performance.now();
-      let data = await d3.json(this.settings.url);
-      let t1 = performance.now();
-      let loadTime = t1 - t0;
-      if (loadTime > 300) {
-        console.warn('SLOW LOAD:', 'Fetching data', this.settings.id, 'took', Math.round(loadTime), 'ms');
-      }
-
-      this.data = data;
-      let r0 = performance.now();
+      this.data = await d3.json(this.settings.url);
       this.svg.render(this.data, {
         method: this.settings.method,
         range: '[0, 50]',
       });
-      let r1 = performance.now();
-      let renderTime = r1 - r0;
-      if (renderTime > 100) {
-        console.warn(
-          'SLOW RENDER:',
-          'Initial rendering of template',
-          this.settings.template,
-          'for',
-          this.settings.id,
-          'took',
-          Math.round(renderTime),
-          'ms'
-        );
-      }
       this.currentTemplate = this.settings.template;
     },
   },
@@ -133,18 +91,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.graph__container {
-  position: relative;
-  margin: 1em 1em 0 1em;
-  overflow: hidden;
-}
-
-.graph__dropdown {
-  position: absolute;
-  top: 164px;
-  left: 0;
-  padding: 1em;
-  border: 1px solid black;
-}
-</style>

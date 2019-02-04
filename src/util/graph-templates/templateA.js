@@ -19,6 +19,11 @@ function Template(svg) {
   const formatPercent = d3.format('.0%');
 
   this.render = function(data, options = {}) {
+    this.selected = options.selected !== undefined ? options.selected : -1;
+
+    // Multiseries need larger padding top to make room for tabs
+    this.padding.top = data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
+
     if (!this.commonRender(data, options)) return;
 
     // Make a filtered copy of the provided data object containing
@@ -37,9 +42,6 @@ function Template(svg) {
       .sort((a, b) => b.values[0][this.method] - a.values[0][this.method])
       .sort((a, b) => (b.avgRow ? -1 : 0))
       .sort((a, b) => (b.totalRow ? -1 : 0));
-
-    // Multiseries need larger padding top to make room for tabs
-    this.padding.top = this.data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
 
     this.svg
       // .transition()

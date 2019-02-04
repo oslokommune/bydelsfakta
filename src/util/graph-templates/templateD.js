@@ -6,6 +6,7 @@ import Base_Template from './baseTemplate';
 // import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
+import ageRanges from '../../config/ageRanges';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -269,9 +270,40 @@ function Template(svg) {
       .attr('fill-opacity', '0.75');
   };
 
+  // Creates the styled age selector as normal HTML
+  // as sibling element to the SVG.
+  this.createAgeSelector = function() {
+    let parent = d3.select(this.svg.node().parentNode);
+    let div = parent.insert('div').attr('class', 'graph__dropdown');
+    let label = div
+      .insert('label')
+      .attr('for', 'age_selector')
+      .attr('class', 'graph__dropdown__label')
+      .html('Velg segment');
+    let select = div
+      .append('select')
+      .attr('id', 'age_selector')
+      .attr('class', 'graph__dropdown__select');
+
+    let option = select
+      .selectAll('option')
+      .data(ageRanges)
+      .join('option')
+      .attr('value', d => d.range)
+      .text(d => d.label);
+
+    // Add eventlistener to the selector, and capture the value
+    // and pass it on when re-rendering the chart
+    select.on('input', (d, i, j) => {
+      this.render(this.data, { method: this.method, range: j[i].value });
+    });
+  };
+
   // Runs once after initialization. Creates elements that are
   // unique to this template
   this.created = function() {
+    this.createAgeSelector();
+
     this.upper = this.canvas.append('g').attr('class', 'upper');
     this.middle = this.canvas
       .append('g')

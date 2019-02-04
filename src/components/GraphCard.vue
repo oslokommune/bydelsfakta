@@ -1,22 +1,29 @@
 <template>
   <div class="card-container" :class="{ large: settings.size === 'large' }">
     <div class="card">
-      <div class="tabs">
-        <div>
-          <button
-            v-for="(tab, index) in settings.tabs"
-            :key="index"
-            @click="activeTab(index)"
-            :class="{ active: active === index }"
-            class="tabs__button"
-            aria-label="tab-button"
-          >{{tab.label}}</button>
-        </div>
-        <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
+      <div class="tabs" role="tablist">
+        <button
+          role="tab"
+          :aria-selected="{ true: active === index }"
+          :aria-label="tab.label"
+          v-for="(tab, index) in settings.tabs"
+          :key="index"
+          @click="activeTab(index)"
+          :class="{ active: active === index }"
+          class="tabs__button"
+          v-text="tab.label"
+        ></button>
+        <div
+          @keydown.escape="closeMenu()"
+          v-click-outside="closeMenu"
+          class="context-menu"
+          role="menu"
+        >
           <button
             class="context-menu__button"
             @click="showDropdown = !showDropdown"
-            aria-label="context-menu-button"
+            aria-haspopup="true"
+            :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
           >
             <i class="material-icons context-menu__button-icon">{{showDropdown ? 'close' : 'menu'}}</i>
           </button>
@@ -135,7 +142,7 @@ export default {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   width: 100%;
 
   div:first-of-type a:first-child {
@@ -179,6 +186,7 @@ export default {
 
 .context-menu {
   position: relative;
+  margin-left: auto;
 
   &__button {
     background-color: $color-light-blue-2;
