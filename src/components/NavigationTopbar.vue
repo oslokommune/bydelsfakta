@@ -36,9 +36,11 @@
                 class="navigation-topbar__dropdown-item"
                 :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
                 :key="subpageIndex"
-                :to="{ name: 'Tema', params: { tema: link.value } }"
                 v-text="link.text"
-              ></router-link>
+                :to="onClickSubpage(link.value)"
+              >
+                {{link.text}}
+              </router-link>
             </div>
           </div>
         </div>
@@ -95,7 +97,7 @@ export default {
         this.selected = [];
         this.$router.push({ name: 'Home' });
       } else if (route.path.includes('bydel')) {
-        this.$router.push({ path: `/bydel/${route.params.bydel}` });
+        this.$router.push({ name: 'Bydel', params: { bydel: route.params.bydel } });
       }
       this.selectedSubpage = null;
     },
@@ -105,8 +107,7 @@ export default {
     },
 
     onClickSubpage(subpage) {
-      this.selectedSubpage = subpage;
-      this.showDropdown = false;
+      return { name: 'Tema', params: { bydel: this.$route.params.bydel, tema: subpage } };
     },
   },
 
@@ -118,16 +119,8 @@ export default {
         if (paramBydeler.length > 1 || paramBydeler[0] === 'alle') this.sammenlign = true;
         if (routes.length > 3) this.selectedSubpage = routes[3];
       }
-    },
-
-    selectedSubpage(subpage) {
-      const paramBydeler = this.$route.params.bydel.split('-');
-      if (paramBydeler > 1) this.sammenlign = true;
-
-      if (this.$route.path.includes('bydel') && subpage !== null) {
-        this.$router.push({
-          path: `/bydel/${this.$route.params.bydel}/${subpage}`,
-        });
+      if (to.name === 'Bydel') {
+        this.selectedSubpage = null;
       }
     },
   },
