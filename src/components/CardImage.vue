@@ -12,7 +12,7 @@
         {{dataKategori}}
       </span>
       <span class="oslo__tema" v-html="dataTema"></span>
-      <span class="oslo__see-more-text">Se mer ----------></span>
+      <span class="oslo__see-more-text">Se mer</span>
     </router-link>
   </div>
 </template>
@@ -79,6 +79,38 @@ export default {
     transform: scale(1.03);
     transition: all 0.3s ease-in-out;
   }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 100px;
+    bottom: 25px;
+    width: 130px;
+    border: 0.5px solid white;
+    box-shadow: 0 1.5px 3px rgba($color-grey-600, 0.95);
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 230px;
+    bottom: 22.5px;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 5.5px solid white;
+    transition: left 0.3s ease-in-out;
+  }
+
+  &:hover:before {
+    width: 150px;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover:after {
+    left: 250px;
+    transition: left 0.3s ease-in-out;
+  }
 }
 
 .oslo__category {
@@ -103,5 +135,6 @@ export default {
   font-size: 1.15rem;
   font-weight: 500;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
+  position: relative;
 }
 </style>
