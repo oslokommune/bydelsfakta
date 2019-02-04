@@ -268,34 +268,34 @@ export default {
 @import '../styles/colors';
 
 #navbar {
+  background-color: $color-purple;
   display: flex;
   flex-direction: column;
 
   height: 100%;
-  width: 300px;
-  background-color: $color-purple;
   position: fixed;
+  width: 300px;
   z-index: 100;
 }
 
 .oslo__logo {
+  align-self: center;
   cursor: pointer;
   margin-top: 3rem;
   margin-bottom: 2rem;
-  align-self: center;
 }
 
 .navigation-link {
   $p: &;
 
-  position: relative;
+  align-items: center;
   background-color: $color-purple;
   color: rgba(white, 0.9);
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-
   cursor: pointer;
+  display: flex;
+  position: relative;
+
+  transition: all 0.3s ease-in-out;
   width: 100%;
 
   &--active {
@@ -370,17 +370,17 @@ input[type='checkbox'] {
     cursor: pointer;
     display: inline-block;
     height: 40px;
+    padding-left: 1rem;
     position: relative;
     vertical-align: middle;
     width: 50px;
-    padding-left: 1rem;
 
     &:hover {
       background: darken($color-purple, 10%);
 
       &::before {
-        opacity: 0.8;
         background: rgba(white, 0.15);
+        opacity: 0.8;
       }
     }
 
@@ -393,9 +393,9 @@ input[type='checkbox'] {
       left: 24px;
       position: absolute;
       top: 14px;
-      width: 10px;
       transform: scale(0);
       transition: all 0.3s ease-in-out;
+      width: 10px;
     }
 
     // unchecked border
@@ -410,8 +410,8 @@ input[type='checkbox'] {
       opacity: 0.35;
       position: absolute;
       top: 10px;
-      width: 18px;
       transition: all 0.3s ease-in-out;
+      width: 18px;
     }
   }
 
@@ -436,22 +436,22 @@ input[type='checkbox'] {
 
 .navigation-drawer__buttons {
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
+  justify-content: flex-end;
   padding-right: 1rem;
 
   .navigation-drawer__button-container {
     align-self: flex-end;
 
     .navigation-drawer__button {
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
       border: 1px solid rgb(248, 198, 107);
+      border-radius: 5px;
       color: rgb(248, 198, 107);
       font-weight: bold;
-      padding: 0.3rem 1rem 0.3rem 1rem;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
       margin: 0.5rem;
+      padding: 0.3rem 1rem 0.3rem 1rem;
       transition: all 0.3s ease-in-out;
 
       &:disabled {
@@ -473,24 +473,24 @@ input[type='checkbox'] {
 
   .navigation-drawer__select {
     border: 1px solid rgb(248, 198, 107);
-    width: 205px;
-    margin: 0.5rem;
     color: rgb(248, 198, 107);
     font-weight: bold;
+    margin: 0.5rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
     position: relative;
+    width: 205px;
   }
 
   &:before {
-    content: '';
-    border-left: 2px solid rgb(248, 198, 107);
     border-bottom: 2px solid rgb(248, 198, 107);
-    width: 0.5rem;
+    border-left: 2px solid rgb(248, 198, 107);
+    content: '';
     height: 0.5rem;
     position: absolute;
-    top: 1.5rem;
     right: 1.5rem;
+    top: 1.5rem;
     transform: rotate(-45deg);
+    width: 0.5rem;
   }
 }
 </style>
