@@ -28,7 +28,7 @@
             <i class="material-icons context-menu__button-icon">{{showDropdown ? 'close' : 'menu'}}</i>
           </button>
           <div v-if="showDropdown" class="context-menu__dropdown">
-            <a
+            <button
               @click="savePng(settings.tabs[active].id)"
               @keyup.enter="saveSvg(settings.tabs[active].id)"
               role="button"
@@ -38,8 +38,8 @@
             >
               <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Last ned som PNG</span>
-            </a>
-            <a
+            </button>
+            <button
               class="context-menu__dropdown-item"
               aria-label="lagre graf som svg"
               role="button"
@@ -49,7 +49,7 @@
             >
               <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Lagre som SVG</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -215,6 +215,7 @@ export default {
       flex-direction: row;
       font-weight: bold;
       padding: 0.5rem;
+      width: 100%;
 
       &:hover {
         background-color: lighten($color-light-blue-2, 5%);

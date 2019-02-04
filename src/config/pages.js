@@ -122,8 +122,8 @@ const page = {
       },
     ],
   },
-  innvandring: {
-    name: 'innvandring',
+  innvandrerbefolkningen: {
+    name: 'innvandrerbefolkningen',
     befolkning: [
       {
         size: 'large',
@@ -373,8 +373,8 @@ const page = {
       },
     ],
   },
-  kommunale_boliger: {
-    name: 'kommunale_boliger',
+  kommunaleboliger: {
+    name: 'kommunaleboliger',
     blokk: [
       {
         size: 'large',

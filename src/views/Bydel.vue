@@ -10,7 +10,7 @@
         :bg-image="item.options.bgImage"
         :bg-color="item.options.bgColor"
         :txt-color="item.options.txtColor"
-        :click-bydel="onClickCard"
+        :link="`${$route.path}/${item.value}`"
       />
     </div>
     <div class="main-container__map">
@@ -26,15 +26,16 @@ import subpages from '../config/subpages';
 export default {
   name: 'Bydel',
   components: { CardImage },
+  props: {
+    bydel: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       items: subpages,
     };
-  },
-  methods: {
-    onClickCard(id) {
-      this.$router.push({ path: `${this.$route.path}/${id}` });
-    },
   },
 };
 </script>

@@ -67,13 +67,16 @@ export default {
       dropdown: dropdownSubpages,
       bydeler: bydeler,
       showDropdown: false,
+      sammenlign: false,
     };
   },
 
-  mounted() {
+  created() {
     const routes = this.$route.path.split('/');
-    if (routes.length > 3) {
-      this.selectedSubpage = routes[3];
+    if (this.$route.name !== 'Home') {
+      const paramBydeler = this.$route.params.bydel.split('-');
+      if (paramBydeler.length > 1 || paramBydeler[0] === 'alle') this.sammenlign = true;
+      if (routes.length > 3) this.selectedSubpage = routes[3];
     }
   },
 
@@ -85,22 +88,21 @@ export default {
     },
 
     getBydel(id) {
-      return this.$route.path.includes('sammenlign')
-        ? 'Sammenligne bydeler'
-        : id !== undefined
-          ? this.bydeler.find(bydel => bydel.uri === id).value
-          : 'Velg bydel';
+      if (this.sammenlign || id === 'alle') {
+        return 'Sammenligne bydeler';
+      } else {
+        this.sammenlign = false;
+        return id !== undefined ? this.bydeler.find(bydel => bydel.uri === id).value : 'Velg bydel';
+      }
     },
 
     backButton() {
       const route = this.$route;
       if (this.selectedSubpage === null) {
         this.selected = [];
-        this.$router.push({ path: '/' });
+        this.$router.push({ name: 'Home' });
       } else if (route.path.includes('bydel')) {
         this.$router.push({ path: `/bydel/${route.params.bydel}` });
-      } else if (route.path.includes('sammenlign')) {
-        this.$router.push({ path: `/sammenlign/${route.params.bydel}` });
       }
       this.selectedSubpage = null;
     },
@@ -117,21 +119,19 @@ export default {
 
   watch: {
     $route(to) {
-      const routes = this.$route.path.split('/');
-      if (to.path.includes('bydel')) {
-        this.selectedSubpage = null;
-      }
-      if (routes.length > 3) {
-        this.selectedSubpage = routes[3];
+      const routes = to.path.split('/');
+      if (to.name !== 'Home') {
+        const paramBydeler = to.params.bydel.split('-');
+        if (paramBydeler.length > 1 || paramBydeler[0] === 'alle') this.sammenlign = true;
+        if (routes.length > 3) this.selectedSubpage = routes[3];
       }
     },
 
     selectedSubpage(subpage) {
-      if (this.$route.path.includes('sammenlign') && subpage !== null) {
-        this.$router.push({
-          path: `/sammenlign/${this.$route.params.bydel}/${subpage}`,
-        });
-      } else if (this.$route.path.includes('bydel') && subpage !== null) {
+      const paramBydeler = this.$route.params.bydel.split('-');
+      if (paramBydeler > 1) this.sammenlign = true;
+
+      if (this.$route.path.includes('bydel') && subpage !== null) {
         this.$router.push({
           path: `/bydel/${this.$route.params.bydel}/${subpage}`,
         });
