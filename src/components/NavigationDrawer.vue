@@ -6,7 +6,10 @@
         v-for="link in links"
         :key="link.key"
         class="navigation-link"
-        :class="{ 'navigation-link--active': checkActiveBydel(link.uri), 'navigation-link--compare': checkMultipleBydeler(link.key) }"
+        :class="{
+          'navigation-link--active': checkActiveBydel(link.uri),
+          'navigation-link--compare': checkMultipleBydeler(link.key)
+        }"
       >
         <input
           type="checkbox"
@@ -17,11 +20,11 @@
           :disabled="disableChecbox(link.key)"
         >
         <label :for="`checkbox-${link.key}`"></label>
-        <a class="navigation-link__label" @click="onClickBydel(link.uri)">{{link.value}}</a>
+        <router-link class="navigation-link__label" :to="onClickBydel(link.uri)">{{link.value}}</router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
-        :class="{ 'navigation-link--active': sammenlign }"
+        :class="{ 'navigation-link--active': compareBydeler }"
         @click="onClickSammenlign"
         role="button"
       >
@@ -30,7 +33,7 @@
       <transition name="fade">
         <div
           class="navigation-drawer__buttons"
-          v-if="sammenlign"
+          v-if="compareBydeler"
         >
           <div class="navigation-drawer__button-container">
             <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
@@ -71,90 +74,101 @@ export default {
     return {
       links: bydeler,
       osloIcon: osloIcon,
-      showAllCheckbox: false,
+      checkedAllCheckbox: false,
       showDropdown: false,
       selected: [],
       options: predefinedOptions,
       selectedPredefinedOption: [],
-      sammenlign: false,
+      compareBydeler: false,
     };
   },
 
-  mounted() {
+  created() {
     const route = this.$route;
+    let key = false;
     if (route.params.bydel === undefined) {
       return;
     }
 
     const bydelParams = route.params.bydel.split('-');
 
-    if (bydelParams.length > 1) {
-      this.sammenlign = true;
+    if (bydelParams.length === 1) {
+      const bydelKey = bydeler.find(item => item.uri === bydelParams[0]);
+      this.selected = bydelKey === undefined ? bydelParams : [bydelKey.key];
+      if (bydelKey === undefined) key = true;
+    } else if (bydelParams.length > 0) {
+      this.compareBydeler = true;
       this.selected = bydelParams[0] === 'alle' ? [] : bydelParams;
-    } else {
-      this.sammenlign = false;
-      const bydelKey = bydeler.find(item => item.uri === bydelParams[0]).key;
-      this.selected = [bydelKey];
     }
 
-    const routes = this.$route.path.split('/');
+    const routes = route.path.split('/');
 
     if (routes.length > 3) {
       this.selectedSubpage = routes[3];
+    }
+
+    if (bydelParams[0] === 'alle') {
+      this.selected = [];
+      this.compareBydeler = true;
+    } else if (key) {
+      const bydel = bydeler.find(item => item.key === bydelParams[0]).uri;
+      routes.length > 3
+        ? this.$router.push({ name: 'Tema', params: { bydel: bydel, tema: routes[3] } })
+        : this.$router.push({ name: 'Bydel', params: { bydel: bydel } });
     }
   },
 
   methods: {
     checkActiveBydel(link) {
-      return this.$route.params.bydel === link && this.sammenlign === false;
+      return this.$route.params.bydel === link && !this.sammenlign;
     },
 
     checkMultipleBydeler(key) {
-      return this.sammenlign === true && this.selected.includes(key);
+      return this.compareBydeler && this.selected.includes(key);
     },
 
     disableChecbox(key) {
-      return this.sammenlign === false && this.selected.length === 1 && this.selected[0] === key;
+      return !this.compareBydeler && this.selected.length === 1 && this.selected[0] === key;
     },
 
     onChangeCheckbox() {
-      const routes = this.$route.path.split('/');
-
       // Reset selector
       this.selectedPredefinedOption = [];
 
       if (this.selected.length === 0) {
-        this.showAllCheckbox = false;
-        this.sammenlign = true;
-        routes.length > 3
-          ? this.$router.push({ path: `/bydel/alle/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/alle` });
+        this.checkedAllCheckbox = false;
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: 'alle', tema: this.$route.params.tema },
+            });
       } else if (this.selected.length === bydeler.length) {
-        this.showAllCheckbox = true;
-        this.sammenlign = true;
-        routes.length > 3
-          ? this.$router.push({ path: `/bydel/alle/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/alle` });
+        this.checkedAllCheckbox = true;
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: 'alle', tema: this.$route.params.tema },
+            });
       } else if (this.selected.length > 0) {
-        this.sammenlign = true;
-        routes.length > 3
-          ? this.$router.push({ path: `/bydel/${this.selected.join('-')}/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/${this.selected.join('-')}` });
+        this.compareBydeler = true;
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: this.selected.join('-') } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: this.selected.join('-'), tema: this.$route.params.tema },
+            });
       }
     },
 
     onClickBydel(bydel) {
       // Reset selector
-      this.selectedPredefinedOption = [];
-      this.sammenlign = false;
-      const routes = this.$route.path.split('/');
-      const bydelUri = this.links.find(item => item.uri === bydel).uri;
-
-      bydel === this.$route.params.bydel
-        ? this.$router.push({ path: `/bydel/${bydel}` })
-        : routes.length > 3
-          ? this.$router.push({ path: `/bydel/${bydelUri}/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/${bydelUri}` });
+      return bydel === this.$route.params.bydel
+        ? { name: 'Bydel', params: { bydel: bydel } }
+        : this.$route.params.tema === undefined
+          ? { name: 'Bydel', params: { bydel: bydel } }
+          : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
     },
 
     onClickHome() {
@@ -163,69 +177,87 @@ export default {
     },
 
     onClickSammenlign() {
-      this.sammenlign = true;
       const routes = this.$route.path.split('/');
       const selectedBydeler = this.selected.join('-');
       if (selectedBydeler === routes[2] || routes[2] === 'alle') {
-        this.$router.push({ path: `/bydel/${routes[2]}` });
+        this.$router.push({ name: 'Bydel', params: { bydel: routes[2] } });
       } else if (this.selected.length < 2) {
         this.selected = [];
-        routes.length > 3
-          ? this.$router.push({ path: `/bydel/alle/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/alle` });
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: 'alle', tema: this.$route.params.tema },
+            });
       } else if (this.selected.length === bydeler.length) {
-        routes.length > 3
-          ? this.$router.push({ path: `/bydel/alle/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/alle` });
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: 'alle', tema: this.$route.params.tema },
+            });
       } else {
-        routes.length > 3
-          ? this.$router.push({ path: `/bydel/${selectedBydeler}/${routes[3]}` })
-          : this.$router.push({ path: `/bydel/${selectedBydeler}` });
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: selectedBydeler } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: selectedBydeler, tema: this.$route.params.tema },
+            });
       }
     },
 
     selectAll() {
-      const routes = this.$route.path.split('/');
       this.selected = [];
-      this.showAllCheckbox = true;
+      this.checkedAllCheckbox = true;
       this.selectedPredefinedOption = [];
       bydeler.forEach(bydel => this.selected.push(bydel.key));
-      routes.length > 3
-        ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
-        : this.$router.push({ path: `/sammenlign/alle` });
+      this.$route.params.tema === undefined
+        ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+        : this.$router.push({
+            name: 'Tema',
+            params: { bydel: 'alle', tema: this.$route.params.tema },
+          });
     },
 
     unselectAll() {
-      const routes = this.$route.path.split('/');
       this.selected = [];
       this.selectedPredefinedOption = [];
-      routes.length > 3
-        ? this.$router.push({ path: `/sammenlign/alle/${routes[3]}` })
-        : this.$router.push({ path: `/sammenlign/alle` });
+      this.$route.params.tema === undefined
+        ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+        : this.$router.push({
+            name: 'Tema',
+            params: { bydel: 'alle', tema: this.$route.params.tema },
+          });
     },
   },
 
   watch: {
     $route(to) {
       const routes = to.path.split('/');
+      const params = to.params.bydel.split('-');
+      const bydel = bydeler.find(item => item.uri === routes[2]);
+
       if (to.name === 'Home') {
-        this.sammenlign = false;
         this.selected = [];
-      } else if (!this.sammenlign) {
-        const bydel = bydeler.find(item => item.uri === routes[2]).key;
-        this.selected = [bydel];
-      } else if (this.sammenlign && !this.showAllCheckbox) {
+      } else if (params.length > 1) {
         const paramBydel = routes[2].split('-');
+        this.compareBydeler = true;
         this.selected = paramBydel;
+      } else if (bydel !== undefined) {
+        this.compareBydeler = false;
+        this.selected = [bydel.key];
       }
     },
+
     selectedPredefinedOption() {
-      const routes = this.$route.path.split('/');
       if (this.selectedPredefinedOption.length !== 0) {
         this.selected = this.selectedPredefinedOption;
-        routes.length > 3
-          ? this.$router.push({ path: `/sammenlign/${this.selected.join('-')}/${routes[3]}` })
-          : this.$router.push({ path: `/sammenlign/${this.selected.join('-')}` });
+        this.$route.params.tema === undefined
+          ? this.$router.push({ name: 'Bydel', params: { bydel: this.selected.join('-') } })
+          : this.$router.push({
+              name: 'Tema',
+              params: { bydel: this.selected.join('-'), tema: this.$route.params.tema },
+            });
       }
     },
   },
@@ -292,11 +324,12 @@ export default {
   }
 
   &__label {
-    letter-spacing: 0.3px;
+    align-items: center;
+    color: white;
     display: flex;
     flex-grow: 1;
     height: 40px;
-    align-items: center;
+    letter-spacing: 0.3px;
     position: relative;
 
     &-compare {
@@ -307,15 +340,15 @@ export default {
 
     // Add visual border on the left side of text on hover
     &::before {
+      background: $color-purple;
+      bottom: 0;
       content: '';
       display: none;
-      position: absolute;
-      width: 10px;
-      top: 0;
       left: -10px;
-      bottom: 0;
-      background: $color-purple;
       pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 10px;
     }
   }
 

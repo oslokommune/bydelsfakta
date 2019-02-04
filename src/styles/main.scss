@@ -53,6 +53,10 @@ select {
   box-sizing: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
 [role="button"] {
   cursor: pointer;
 }

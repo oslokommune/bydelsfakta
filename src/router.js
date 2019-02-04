@@ -5,7 +5,6 @@ import Home from './views/Home.vue';
 import Bydel from './views/Bydel.vue';
 import Tema from './views/Tema.vue';
 
-
 Vue.use(Router);
 
 export default new Router({
