@@ -89,11 +89,9 @@ export default {
 
     backButton() {
       const route = this.$route;
-      if (this.selectedSubpage === null) {
-        return { name: 'Home' };
-      } else if (route.name === 'Bydel') {
-        return { name: 'Bydel', params: { bydel: route.params.bydel } };
-      }
+      return this.selectedSubpage === null
+        ? { name: 'Home' }
+        : { name: 'Bydel', params: { bydel: route.params.bydel } };
     },
 
     checkActiveSubpage(subpage) {
