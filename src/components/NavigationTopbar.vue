@@ -1,9 +1,9 @@
 <template>
   <header class="oslo__navigation-topbar">
-    <div @click="backButton" role="button" class="oslo__navigation-topbar-button">
+    <router-link :to="backButton()" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
       <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
-    </div>
+    </router-link>
     <div class="navigation-topbar">
       <div
         id="select"
@@ -94,12 +94,10 @@ export default {
     backButton() {
       const route = this.$route;
       if (this.selectedSubpage === null) {
-        this.selected = [];
-        this.$router.push({ name: 'Home' });
-      } else if (route.path.includes('bydel')) {
-        this.$router.push({ name: 'Bydel', params: { bydel: route.params.bydel } });
+        return { name: 'Home' };
+      } else if (route.name === 'Bydel') {
+        return { name: 'Bydel', params: { bydel: route.params.bydel } };
       }
-      this.selectedSubpage = null;
     },
 
     checkActiveSubpage(subpage) {
@@ -116,11 +114,17 @@ export default {
       const routes = to.path.split('/');
       if (to.name !== 'Home') {
         const paramBydeler = to.params.bydel.split('-');
+        if (paramBydeler.length === 1) {
+          const bydel = bydeler.find(item => item.uri === paramBydeler[0]);
+          this.sammenlign = bydel === undefined;
+        }
         if (paramBydeler.length > 1 || paramBydeler[0] === 'alle') this.sammenlign = true;
         if (routes.length > 3) this.selectedSubpage = routes[3];
       }
       if (to.name === 'Bydel') {
         this.selectedSubpage = null;
+      } else if (to.name === 'Home') {
+        this.sammenlign = false;
       }
     },
   },

@@ -220,7 +220,7 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      const params = to.params.bydel.split('-');
+      const params = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
       const bydel = bydeler.find(item => item.uri === routes[2]);
 
       if (to.name === 'Home') {
