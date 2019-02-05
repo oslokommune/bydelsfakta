@@ -31,7 +31,6 @@
             <button
               @click="savePng(settings.tabs[active].id)"
               @keyup.enter="saveSvg(settings.tabs[active].id)"
-              role="button"
               class="context-menu__dropdown-item"
               tabindex="0"
               aria-label="lagre graf som png"
@@ -42,7 +41,6 @@
             <button
               class="context-menu__dropdown-item"
               aria-label="lagre graf som svg"
-              role="button"
               tabindex="0"
               @click="saveSvg(settings.tabs[active].id)"
               @keyup.enter="saveSvg(settings.tabs[active].id)"

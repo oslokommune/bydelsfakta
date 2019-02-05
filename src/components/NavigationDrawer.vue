@@ -31,14 +31,24 @@
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
-            <button class="navigation-drawer__button" @click="selectAll">Velg alle</button>
+            <button
+              class="navigation-drawer__button"
+              @click="selectAll"
+              aria-label="select all checkboxes"
+            >
+              Velg alle
+            </button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
-            >Fjern alle</button>
+              aria-label="unselect all checkboxes"
+            >
+              Fjern alle
+            </button>
           </div>
           <div class="navigation-drawer__select-container">
+            <label for="predefined-select" class="hidden-label">Velg byområde</label>
             <select class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
@@ -46,8 +56,9 @@
                 :value="element.option"
                 :selected="element.selected"
                 :disabled="element.disabled"
+                id="predefined-select"
               >{{element.label}}</option>
-            </select>
+              </select>
           </div>
         </div>
       </transition>
@@ -158,8 +169,8 @@ export default {
       return bydel === this.$route.params.bydel
         ? { name: 'Bydel', params: { bydel: bydel } }
         : this.$route.params.tema === undefined
-        ? { name: 'Bydel', params: { bydel: bydel } }
-        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+          ? { name: 'Bydel', params: { bydel: bydel } }
+          : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
     },
 
     onClickHome() {
@@ -254,6 +265,14 @@ export default {
   width: 21.5em;
   overflow-y: auto;
   padding-bottom: 2em;
+}
+
+.hidden-label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
 }
 
 .oslo__logo {
