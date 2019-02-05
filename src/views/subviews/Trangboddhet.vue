@@ -2,11 +2,7 @@
   <div class="main-container">
     <div class="main-container__cards">
       <h2 class="section-heading">Trangboddhet i Bydel BYDELSNAVN</h2>
-      <graph-card
-        v-for="(card, index) in settings.helhet"
-        :key="`trangboddhet-helhet-${index}`"
-        :settings="card"
-      />
+      <graph-card v-for="(card, index) in settings.helhet" :key="`trangboddhet-helhet-${index}`" :settings="card" />
       <h2 class="section-heading">Mellomtittel test</h2>
       <graph-card
         v-for="(card, index) in settings.spesifikk"

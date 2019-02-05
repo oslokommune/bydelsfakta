@@ -1,7 +1,7 @@
 <template>
   <div class="graph__container">
     <svg class="graph__svg" ref="svg"></svg>
-    <resize-observer @notify="svg.resize(data, {method: settings.method })"/>
+    <resize-observer @notify="svg.resize(data, { method: settings.method })" />
   </div>
 </template>
 
@@ -90,4 +90,3 @@ export default {
   },
 };
 </script>
-

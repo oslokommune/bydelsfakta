@@ -1,6 +1,6 @@
 <template>
   <aside id="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
     <nav role="navigation">
       <div
         v-for="link in links"
@@ -8,7 +8,7 @@
         class="navigation-link"
         :class="{
           'navigation-link--active': checkActiveBydel(link.uri),
-          'navigation-link--compare': checkMultipleBydeler(link.key)
+          'navigation-link--compare': checkMultipleBydeler(link.key),
         }"
       >
         <input
@@ -18,9 +18,9 @@
           :id="`checkbox-${link.key}`"
           @change="onChangeCheckbox"
           :disabled="disableChecbox(link.key)"
-        >
+        />
         <label :for="`checkbox-${link.key}`"></label>
-        <router-link class="navigation-link__label" :to="onClickBydel(link.uri)">{{link.value}}</router-link>
+        <router-link class="navigation-link__label" :to="onClickBydel(link.uri)">{{ link.value }}</router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
@@ -31,11 +31,7 @@
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
-            <button
-              class="navigation-drawer__button"
-              @click="selectAll"
-              aria-label="select all checkboxes"
-            >
+            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
               Velg alle
             </button>
             <button
@@ -57,8 +53,9 @@
                 :selected="element.selected"
                 :disabled="element.disabled"
                 id="predefined-select"
-              >{{element.label}}</option>
-              </select>
+                >{{ element.label }}</option
+              >
+            </select>
           </div>
         </div>
       </transition>
@@ -169,8 +166,8 @@ export default {
       return bydel === this.$route.params.bydel
         ? { name: 'Bydel', params: { bydel: bydel } }
         : this.$route.params.tema === undefined
-          ? { name: 'Bydel', params: { bydel: bydel } }
-          : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+        ? { name: 'Bydel', params: { bydel: bydel } }
+        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
     },
 
     onClickHome() {

@@ -13,19 +13,14 @@
           class="tabs__button"
           v-text="tab.label"
         ></button>
-        <div
-          @keydown.escape="closeMenu()"
-          v-click-outside="closeMenu"
-          class="context-menu"
-          role="menu"
-        >
+        <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
           <button
             class="context-menu__button"
             @click="showDropdown = !showDropdown"
             aria-haspopup="true"
             :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
           >
-            <i class="material-icons">{{showDropdown ? 'close' : 'menu'}}</i>
+            <i class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
           </button>
           <div v-if="showDropdown" class="context-menu__dropdown">
             <button
@@ -51,11 +46,7 @@
           </div>
         </div>
       </div>
-      <graph
-        v-if="settings.tabs[active] !== undefined"
-        :settings="settings.tabs[active]"
-        ref="graph"
-      />
+      <graph v-if="settings.tabs[active] !== undefined" :settings="settings.tabs[active]" ref="graph" />
     </div>
   </div>
 </template>

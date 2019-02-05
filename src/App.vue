@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <navigation-drawer/>
+    <navigation-drawer />
     <div id="content">
-      <navigation-topbar/>
+      <navigation-topbar />
       <main>
-        <router-view/>
+        <router-view />
       </main>
     </div>
   </div>

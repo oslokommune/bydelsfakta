@@ -2,7 +2,7 @@
   <div class="main-container">
     <div class="main-container__cards">
       <h2 class="section-heading">Flyttehyppighet</h2>
-      <graph-card v-for="(card, index) in settings.hyppighet" :key="`flytting-${index}`"  :settings="card" />
+      <graph-card v-for="(card, index) in settings.hyppighet" :key="`flytting-${index}`" :settings="card" />
     </div>
     <div class="main-container__map">
       <h3>Kart</h3>
@@ -25,5 +25,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

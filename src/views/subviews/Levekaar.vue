@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card v-for="(card, index) in settings.spesifikk" :key="`levekaar-${index}`"  :settings="card" />
+      <graph-card v-for="(card, index) in settings.spesifikk" :key="`levekaar-${index}`" :settings="card" />
     </div>
     <div class="main-container__map">
       <h3>Kart</h3>
@@ -24,5 +24,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -14,21 +14,17 @@
         v-click-outside="closeMenu"
       >
         <label class="label" :class="{ 'label--active': selectedSubpage !== null }">Velg tema</label>
-        <span>{{selectedSubpage}}</span>
-        <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down'}}</i>
+        <span>{{ selectedSubpage }}</span>
+        <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
       </div>
       <transition name="fade">
         <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
-          <div
-            v-for="(kategori, index) in dropdown"
-            :key="index"
-            class="navigation-topbar__dropdown-column"
-          >
+          <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
             <div
               class="navigation-topbar__dropdown-column--heading"
               :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
             >
-              <span>{{kategori.kategori}}</span>
+              <span>{{ kategori.kategori }}</span>
             </div>
             <div class="navigation-topbar__dropdown-items">
               <router-link
@@ -39,7 +35,7 @@
                 v-text="link.text"
                 :to="onClickSubpage(link.value)"
               >
-                {{link.text}}
+                {{ link.text }}
               </router-link>
             </div>
           </div>

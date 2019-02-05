@@ -2,14 +2,11 @@
   <div class="main-container__item">
     <router-link
       class="oslo__card-image"
-      :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor}"
+      :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor }"
       :to="link"
     >
-      <span
-        class="oslo__category"
-        :style="{ backgroundColor: dataTxtColor }"
-      >
-        {{dataKategori}}
+      <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">
+        {{ dataKategori }}
       </span>
       <span class="oslo__tema" v-html="dataTema"></span>
       <span class="oslo__see-more-text">Se mer</span>
