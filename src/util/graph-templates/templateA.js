@@ -15,6 +15,7 @@ function Template(svg) {
   this.x2 = d3.scaleLinear();
   this.x = [];
   this.filteredData;
+  this.mobileWidth = 400;
 
   const formatPercent = d3.format('.0%');
 
@@ -25,6 +26,12 @@ function Template(svg) {
     this.padding.top = data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
 
     if (!this.commonRender(data, options)) return;
+
+    if (this.parentWidth() < this.mobileWidth) {
+      this.padding.left = 10;
+    } else {
+      this.padding.left = 190;
+    }
 
     // Make a filtered copy of the provided data object containing
     // to house only the selected series (if one has been selected)
@@ -59,9 +66,9 @@ function Template(svg) {
       .attr('tabindex', this.selected === -1 ? false : 0);
 
     this.setScales();
-    this.drawAxis();
     this.drawColumns();
     this.drawRows();
+    this.drawAxis();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
@@ -153,10 +160,7 @@ function Template(svg) {
    */
   this.drawRows = function() {
     // Select all existing rows (DOM elements) that matches the data
-    let rows = this.canvas
-      .select('g.rows')
-      .selectAll('g.row')
-      .data(this.filteredData.data);
+    let rows = this.canvas.selectAll('g.row').data(this.filteredData.data);
 
     // Create DOM element for missing rows
     let rowsE = rows
@@ -181,7 +185,13 @@ function Template(svg) {
       .attr('width', this.padding.left + this.width + this.padding.right);
     rows
       .select('rect.divider')
-      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+      .attr('fill-opacity', d => {
+        if (this.parentWidth() < this.mobileWidth) {
+          return 0;
+        } else {
+          return d.avgRow || d.totalRow ? 0.5 : 0.2;
+        }
+      })
       .attr('width', this.padding.left + this.width + this.padding.right);
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
@@ -189,12 +199,22 @@ function Template(svg) {
     rows
       .select('a.hyperlink')
       .select('text')
-      .text(d => util.truncate(d.geography, this.padding.left))
+      .text(d => d.geography)
       .attr('x', () => {
+        if (this.parentWidth() < this.mobileWidth) return 0;
         return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
       })
+      .attr('y', () => {
+        if (this.parentWidth() < this.mobileWidth) {
+          return 20;
+        } else {
+          return this.rowHeight / 2 + 6;
+        }
+      })
       .attr('text-anchor', () => {
-        return this.data.meta.series.length > 1 ? 'start' : 'end';
+        if (this.parentWidth() < this.mobileWidth) return 'start';
+        if (this.data.meta.series.length > 1) return 'start';
+        return 'end';
       });
 
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
@@ -225,10 +245,17 @@ function Template(svg) {
 
     bars
       .attr('height', (d, i, j) => {
+        if (this.parentWidth() < this.mobileWidth) return 4;
         return j[0].parentNode.getAttribute('data-total') ? 2 : this.barHeight;
       })
       .attr('y', (d, i, j) => {
-        return j[0].parentNode.getAttribute('data-total') ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
+        if (this.parentWidth() < this.mobileWidth) {
+          return (this.rowHeight - this.barHeight) / 2 + 16;
+        } else {
+          return j[0].parentNode.getAttribute('data-total')
+            ? this.rowHeight / 2
+            : (this.rowHeight - this.barHeight) / 2;
+        }
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
@@ -278,15 +305,15 @@ function Template(svg) {
   };
 
   this.drawAxis = function() {
-    let xAxis = this.canvas.selectAll('g.axis.x').data(this.x);
-    let xAxisE = xAxis
+    this.xAxis = this.canvas.selectAll('g.axis.x').data(this.x);
+    let xAxisE = this.xAxis
       .enter()
       .append('g')
       .attr('class', 'axis x')
       .attr('transform', `translate(0, ${this.height + 10})`);
-    xAxis.exit().remove();
-    xAxis = xAxis.merge(xAxisE);
-    xAxis.each((d, i, j) => {
+    this.xAxis.exit().remove();
+    this.xAxis = this.xAxis.merge(xAxisE);
+    this.xAxis.each((d, i, j) => {
       d3.select(j[i])
         .attr('transform', `translate(0, ${this.height + 10})`)
         .attr('opacity', () => {
@@ -310,10 +337,7 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
-    let columns = this.canvas
-      .select('g.columns')
-      .selectAll('g.column')
-      .data(this.filteredData.meta.series);
+    let columns = this.canvas.selectAll('g.column').data(this.filteredData.meta.series);
     let columnsE = columns
       .enter()
       .append('g')
