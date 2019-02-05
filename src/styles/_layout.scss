@@ -12,7 +12,7 @@
   display: flex;
   padding: 2rem;
   flex-flow: row wrap;
-  justify-content: start;
+  justify-content: flex-start;
   min-width: 300px;
   max-width: 1300px;
   flex: 1 1 900px;
@@ -22,7 +22,7 @@
   display: flex;
   padding: 2rem;
   flex-flow: row wrap;
-  justify-content: start;
+  justify-content: flex-start;
   min-width: 300px;
   max-width: 500px;
   flex: 0 1 400px;
