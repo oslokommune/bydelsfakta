@@ -3,7 +3,7 @@
     <router-link
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor }"
-      :to="link"
+      :to="dataLink"
     >
       <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">
         {{ dataKategori }}
@@ -51,6 +51,7 @@ export default {
       dataBgColor: this.bgColor,
       dataTxtColor: this.txtColor,
       dataId: this.id,
+      dataLink: this.link,
     };
   },
 };
