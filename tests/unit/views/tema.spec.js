@@ -35,4 +35,10 @@ describe('Tema', () => {
   test('renders component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
+
+  test('renders different component when props change', () => {
+    expect(wrapper.vm.tema).toBe('alder');
+    wrapper.setProps({ tema: 'levekaar' });
+    expect(wrapper.vm.tema).toBe('levekaar');
+  });
 });
