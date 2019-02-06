@@ -1,4 +1,4 @@
-import { mount, RouterLinkStub, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import vueResize from 'vue-resize';
 import Graph from '../../../src/components/Graph.vue';
 import page from '../../../src/config/pages';
@@ -13,7 +13,6 @@ describe('Graph', () => {
       propsData: {
         settings: page['alder'].aldersgrupper[0].tabs[0],
       },
-      stubs: { RouterLink: RouterLinkStub },
       localVue,
     });
   });
