@@ -15,5 +15,10 @@ module.exports = {
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: ['src/**/*.js', 'src/**/*.vue'],
   coverageDirectory: '<rootDir>/src/coverageReport',
-  coveragePathIgnorePatterns: ['<rootDir>/node_modules', '<rootDir>/src/coverageReport'],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/node_modules',
+    '<rootDir>/src/coverageReport',
+    '<rootDir>/src/main.js',
+    '<rootDir>/src/store.js',
+  ],
 };

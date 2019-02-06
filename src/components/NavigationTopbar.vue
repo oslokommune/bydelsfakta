@@ -105,9 +105,9 @@ export default {
 
   watch: {
     $route(to) {
-      const routes = to.path.split('/');
+      const routes = to.path !== undefined ? to.path.split('/') : '';
       if (to.name !== 'Home') {
-        const paramBydeler = to.params.bydel.split('-');
+        const paramBydeler = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
         if (paramBydeler.length === 1) {
           const bydel = bydeler.find(item => item.uri === paramBydeler[0]);
           this.sammenlign = bydel === undefined;

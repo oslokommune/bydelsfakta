@@ -1,0 +1,749 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders component correctly 1`] = `
+<div
+  id="app"
+>
+  <aside
+    id="navbar"
+  >
+    <img
+      alt="oslo-logo"
+      class="oslo__logo"
+      src="[object Object]"
+    />
+     
+    <nav
+      role="navigation"
+    >
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-1"
+          type="checkbox"
+          value="1"
+        />
+         
+        <label
+          for="checkbox-1"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/gamleoslo"
+        >
+          Bydel Gamle Oslo
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-2"
+          type="checkbox"
+          value="2"
+        />
+         
+        <label
+          for="checkbox-2"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/grunerlokka"
+        >
+          Bydel Grünerløkka
+        </a>
+      </div>
+      <div
+        class="navigation-link navigation-link--active"
+      >
+        <input
+          disabled="disabled"
+          id="checkbox-3"
+          type="checkbox"
+          value="3"
+        />
+         
+        <label
+          for="checkbox-3"
+        />
+         
+        <a
+          class="navigation-link__label router-link-exact-active router-link-active"
+          href="#/bydel/sagene"
+        >
+          Bydel Sagene
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-4"
+          type="checkbox"
+          value="4"
+        />
+         
+        <label
+          for="checkbox-4"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/sthanshaugen"
+        >
+          Bydel St. Hanshaugen
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-5"
+          type="checkbox"
+          value="5"
+        />
+         
+        <label
+          for="checkbox-5"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/frogner"
+        >
+          Bydel Frogner
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-6"
+          type="checkbox"
+          value="6"
+        />
+         
+        <label
+          for="checkbox-6"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/ullern"
+        >
+          Bydel Ullern
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-7"
+          type="checkbox"
+          value="7"
+        />
+         
+        <label
+          for="checkbox-7"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/vestreaker"
+        >
+          Bydel Vestre Aker
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-8"
+          type="checkbox"
+          value="8"
+        />
+         
+        <label
+          for="checkbox-8"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/nordreaker"
+        >
+          Bydel Nordre Aker
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-9"
+          type="checkbox"
+          value="9"
+        />
+         
+        <label
+          for="checkbox-9"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/bjerke"
+        >
+          Bydel Bjerke
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-10"
+          type="checkbox"
+          value="10"
+        />
+         
+        <label
+          for="checkbox-10"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/grorud"
+        >
+          Bydel Grorud
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-11"
+          type="checkbox"
+          value="11"
+        />
+         
+        <label
+          for="checkbox-11"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/stovner"
+        >
+          Bydel Stovner
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-12"
+          type="checkbox"
+          value="12"
+        />
+         
+        <label
+          for="checkbox-12"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/alna"
+        >
+          Bydel Alna
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-13"
+          type="checkbox"
+          value="13"
+        />
+         
+        <label
+          for="checkbox-13"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/ostensjo"
+        >
+          Bydel Østensjø
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-14"
+          type="checkbox"
+          value="14"
+        />
+         
+        <label
+          for="checkbox-14"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/nordstrand"
+        >
+          Bydel Nordstrand
+        </a>
+      </div>
+      <div
+        class="navigation-link"
+      >
+        <input
+          id="checkbox-15"
+          type="checkbox"
+          value="15"
+        />
+         
+        <label
+          for="checkbox-15"
+        />
+         
+        <a
+          class="navigation-link__label"
+          href="#/bydel/sondrenordstrand"
+        >
+          Bydel Søndre Nordstrand
+        </a>
+      </div>
+       
+      <div
+        class="navigation-link navigation-link__label-compare"
+      >
+        <a
+          class="navigation-link__label"
+          href="#/bydel/alle"
+        >
+          Sammenlign bydeler
+        </a>
+      </div>
+       
+      <!---->
+    </nav>
+  </aside>
+   
+  <div
+    id="content"
+  >
+    <header
+      class="oslo__navigation-topbar"
+    >
+      <a
+        class="oslo__navigation-topbar-button router-link-active"
+        href="#/"
+      >
+        <i
+          class="material-icons oslo__topbar"
+        >
+          arrow_back
+        </i>
+         
+        <h4
+          class="oslo__topbar oslo__topbar-text"
+        >
+          Bydel Sagene
+        </h4>
+      </a>
+       
+      <div
+        class="navigation-topbar"
+      >
+        <div
+          class="navigation-topbar__select"
+          id="select"
+          tabindex="0"
+        >
+          <label
+            class="label"
+          >
+            Velg tema
+          </label>
+           
+          <span>
+            
+          </span>
+           
+          <i
+            class="material-icons"
+          >
+            arrow_drop_down
+          </i>
+        </div>
+         
+        <!---->
+      </div>
+    </header>
+     
+    <main>
+      <div
+        class="main-container"
+      >
+        <div
+          class="main-container__cards"
+        >
+          <div
+            class="main-container__item"
+            id="folkemengde"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/folkemengde"
+              style="background-image: url(/img/folkemengde.png); background-color: rgb(255, 129, 116);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(245, 173, 165);"
+              >
+                
+      Befolkning
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Folkemengde
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="alder"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/alder"
+              style="background-image: url(/img/alder.png); background-color: rgb(255, 129, 116);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(245, 173, 165);"
+              >
+                
+      Befolkning
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Alder
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="innvandrerbefolkningen"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/innvandrerbefolkningen"
+              style="background-image: url(/img/innvandring.png); background-color: rgb(255, 129, 116);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(245, 173, 165);"
+              >
+                
+      Befolkning
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Innvandrer­befolkningen
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="husholdninger"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/husholdninger"
+              style="background-image: url(/img/husholdninger.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Husholdninger
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="trangboddhet"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/trangboddhet"
+              style="background-image: url(/img/trangboddhet.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Trangboddhet
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="eierform"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/eierform"
+              style="background-image: url(/img/eierform.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Eierform
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="kommunaleboliger"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/kommunaleboliger"
+              style="background-image: url(/img/kommunale-boliger.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Kommunale boliger
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="flytting"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/flytting"
+              style="background-image: url(/img/flytting.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Flytting
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="bygningstyper"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/bygningstyper"
+              style="background-image: url(/img/bygningstyper.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Bygningstyper
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="boligpriser"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/boligpriser"
+              style="background-image: url(/img/boligpriser.png); background-color: rgb(66, 248, 182);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(199, 247, 201);"
+              >
+                
+      Bomiljø
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Boligpriser
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+          <div
+            class="main-container__item"
+            id="levekaar"
+          >
+            <a
+              class="oslo__card-image"
+              href="#/bydel/sagene/levekaar"
+              style="background-image: url(/img/levekaar.png); background-color: rgb(248, 198, 107);"
+            >
+              <span
+                class="oslo__category"
+                style="background-color: rgb(244, 206, 138);"
+              >
+                
+      Levekår
+    
+              </span>
+               
+              <span
+                class="oslo__tema"
+              >
+                Levekår
+              </span>
+               
+              <span
+                class="oslo__see-more-text"
+              >
+                Se mer
+              </span>
+            </a>
+          </div>
+        </div>
+         
+        <div
+          class="main-container__map"
+        >
+          <h3>
+            Bydelskart
+          </h3>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;
