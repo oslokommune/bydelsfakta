@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bydel renders component correctly 1`] = `
+<div
+  class="main-container"
+>
+  <div
+    class="main-container__cards"
+  >
+    <div
+      class="main-container__item"
+      id="folkemengde"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//folkemengde"
+        style="background-image: url(/img/folkemengde.png); background-color: rgb(255, 129, 116);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          
+      Befolkning
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Folkemengde
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="alder"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//alder"
+        style="background-image: url(/img/alder.png); background-color: rgb(255, 129, 116);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          
+      Befolkning
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Alder
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="innvandrerbefolkningen"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//innvandrerbefolkningen"
+        style="background-image: url(/img/innvandring.png); background-color: rgb(255, 129, 116);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          
+      Befolkning
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Innvandrer­befolkningen
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="husholdninger"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//husholdninger"
+        style="background-image: url(/img/husholdninger.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Husholdninger
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="trangboddhet"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//trangboddhet"
+        style="background-image: url(/img/trangboddhet.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Trangboddhet
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="eierform"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//eierform"
+        style="background-image: url(/img/eierform.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Eierform
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="kommunaleboliger"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//kommunaleboliger"
+        style="background-image: url(/img/kommunale-boliger.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Kommunale boliger
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="flytting"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//flytting"
+        style="background-image: url(/img/flytting.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Flytting
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="bygningstyper"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//bygningstyper"
+        style="background-image: url(/img/bygningstyper.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Bygningstyper
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="boligpriser"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//boligpriser"
+        style="background-image: url(/img/boligpriser.png); background-color: rgb(66, 248, 182);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          
+      Bomiljø
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Boligpriser
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+    <div
+      class="main-container__item"
+      id="levekaar"
+    >
+      <a
+        class="oslo__card-image"
+        href="#//levekaar"
+        style="background-image: url(/img/levekaar.png); background-color: rgb(248, 198, 107);"
+      >
+        <span
+          class="oslo__category"
+          style="background-color: rgb(244, 206, 138);"
+        >
+          
+      Levekår
+    
+        </span>
+         
+        <span
+          class="oslo__tema"
+        >
+          Levekår
+        </span>
+         
+        <span
+          class="oslo__see-more-text"
+        >
+          Se mer
+        </span>
+      </a>
+    </div>
+  </div>
+   
+  <div
+    class="main-container__map"
+  >
+    <h3>
+      Bydelskart
+    </h3>
+  </div>
+</div>
+`;

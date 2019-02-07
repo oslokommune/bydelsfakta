@@ -12,6 +12,7 @@
         tabindex="0"
         @keydown.escape="closeMenu"
         v-click-outside="closeMenu"
+        ref="select"
       >
         <label class="label" :class="{ 'label--active': selectedSubpage !== null }">Velg tema</label>
         <span>{{ selectedSubpage }}</span>
@@ -63,9 +64,9 @@ export default {
   },
 
   created() {
-    const routes = this.$route.path !== undefined ? this.$route.path.split('/') : '';
     if (this.$route.name !== 'Home') {
-      const paramBydeler = this.$route.params.bydel !== undefined ? this.$route.params.bydel.split('-') : [];
+      const routes = this.$route.path.split('/');
+      const paramBydeler = this.$route.params.bydel.split('-');
       if (paramBydeler.length > 1 || paramBydeler[0] === 'alle') this.sammenlign = true;
       if (routes.length > 3) this.selectedSubpage = routes[3];
     }

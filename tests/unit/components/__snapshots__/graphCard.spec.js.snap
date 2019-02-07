@@ -1,5 +1,855 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GraphCard change an active tab 1`] = `
+<div
+  class="card-container large"
+>
+  <div
+    class="card"
+  >
+    <div
+      class="tabs"
+      role="tablist"
+    >
+      <button
+        aria-label="Status"
+        aria-selected="[object Object]"
+        class="tabs__button"
+        role="tab"
+      >
+        Status
+      </button>
+      <button
+        aria-label="Matrise"
+        aria-selected="[object Object]"
+        class="tabs__button active"
+        role="tab"
+      >
+        Matrise
+      </button>
+      <button
+        aria-label="Historisk"
+        aria-selected="[object Object]"
+        class="tabs__button"
+        role="tab"
+      >
+        Historisk
+      </button>
+       
+      <div
+        class="context-menu"
+        role="menu"
+      >
+        <button
+          aria-haspopup="true"
+          aria-label="åpne meny"
+          class="context-menu__button"
+        >
+          <i
+            class="material-icons"
+          >
+            menu
+          </i>
+        </button>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="graph__container"
+    >
+      <svg
+        class="graph__svg"
+        style="font-family: OsloSans;"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <text
+          class="heading"
+          font-size="14"
+          font-weight="bold"
+          y="14"
+        />
+        <g
+          class="canvas"
+          transform="translate(-100, 70)"
+        >
+          <g
+            class="matrix"
+          >
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="7.071796769724475"
+              y="315.7691453623979"
+            >
+              10
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="27.071796769724493"
+              y="281.12812921102034"
+            >
+              20
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="47.071796769724514"
+              y="246.4871130596428"
+            >
+              30
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="67.07179676972449"
+              y="211.84609690826525"
+            >
+              40
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="87.0717967697245"
+              y="177.20508075688772"
+            >
+              50
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="107.07179676972447"
+              y="142.5640646055102"
+            >
+              60
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="127.0717967697245"
+              y="107.92304845413264"
+            >
+              70
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="147.0717967697245"
+              y="73.28203230275506"
+            >
+              80
+            </text>
+            <text
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="end"
+              x="167.0717967697245"
+              y="38.64101615137753"
+            >
+              90
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 223.4641016151378, 28.641016151377528)"
+              x="227.4641016151378"
+              y="32.64101615137753"
+            >
+              10
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 243.46410161513776, 63.282032302755056)"
+              x="247.46410161513776"
+              y="67.28203230275506"
+            >
+              20
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 263.46410161513774, 97.92304845413261)"
+              x="267.46410161513774"
+              y="101.92304845413261"
+            >
+              30
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 283.46410161513774, 132.5640646055102)"
+              x="287.46410161513774"
+              y="136.5640646055102"
+            >
+              40
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 303.46410161513774, 167.2050807568877)"
+              x="307.46410161513774"
+              y="171.2050807568877"
+            >
+              50
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 323.46410161513774, 201.84609690826528)"
+              x="327.46410161513774"
+              y="205.84609690826528"
+            >
+              60
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 343.46410161513774, 236.4871130596428)"
+              x="347.46410161513774"
+              y="240.4871130596428"
+            >
+              70
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 363.46410161513774, 271.12812921102034)"
+              x="367.46410161513774"
+              y="275.12812921102034"
+            >
+              80
+            </text>
+            <text
+              class="label-2"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(300, 383.46410161513774, 305.7691453623979)"
+              x="387.46410161513774"
+              y="309.7691453623979"
+            >
+              90
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 363.46410161513774, 352.4101615137755)"
+              x="367.46410161513774"
+              y="356.4101615137755"
+            >
+              10
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 323.46410161513774, 352.4101615137755)"
+              x="327.46410161513774"
+              y="356.4101615137755"
+            >
+              20
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 283.46410161513774, 352.4101615137755)"
+              x="287.46410161513774"
+              y="356.4101615137755"
+            >
+              30
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 243.46410161513776, 352.4101615137755)"
+              x="247.46410161513776"
+              y="356.4101615137755"
+            >
+              40
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 203.46410161513776, 352.4101615137755)"
+              x="207.46410161513776"
+              y="356.4101615137755"
+            >
+              50
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 163.46410161513776, 352.4101615137755)"
+              x="167.46410161513776"
+              y="356.4101615137755"
+            >
+              60
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 123.46410161513775, 352.4101615137755)"
+              x="127.46410161513775"
+              y="356.4101615137755"
+            >
+              70
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 83.46410161513775, 352.4101615137755)"
+              x="87.46410161513775"
+              y="356.4101615137755"
+            >
+              80
+            </text>
+            <text
+              class="label-3"
+              style="font-size: 13; font-weight: bold;"
+              text-anchor="start"
+              transform="rotate(60, 43.464101615137764, 352.4101615137755)"
+              x="47.464101615137764"
+              y="356.4101615137755"
+            >
+              90
+            </text>
+            <path
+              class="tickLine"
+              d="M19.999999999999996,311.7691453623979L13.071796769724475,311.7691453623979"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M39.99999999999999,277.12812921102034L33.07179676972449,277.12812921102034"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M60.00000000000001,242.4871130596428L53.071796769724514,242.4871130596428"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M80,207.84609690826525L73.07179676972449,207.84609690826525"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M100,173.20508075688772L93.0717967697245,173.20508075688772"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M120,138.5640646055102L113.07179676972447,138.5640646055102"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M140,103.92304845413264L133.0717967697245,103.92304845413264"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M160,69.28203230275506L153.0717967697245,69.28203230275506"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M180,34.64101615137753L173.0717967697245,34.64101615137753"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M220.00000000000003,34.64101615137753L223.4641016151378,28.641016151377528"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M240,69.28203230275506L243.46410161513776,63.282032302755056"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M260,103.92304845413264L263.46410161513774,97.92304845413261"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M280,138.5640646055102L283.46410161513774,132.5640646055102"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M300,173.20508075688772L303.46410161513774,167.2050807568877"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M320,207.84609690826525L323.46410161513774,201.84609690826528"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M340,242.4871130596428L343.46410161513774,236.4871130596428"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M360,277.12812921102034L363.46410161513774,271.12812921102034"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M380,311.7691453623979L383.46410161513774,305.7691453623979"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M360,346.41016151377545L363.46410161513774,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M320,346.41016151377545L323.46410161513774,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M280,346.41016151377545L283.46410161513774,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M240,346.41016151377545L243.46410161513776,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M200,346.41016151377545L203.46410161513776,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M160,346.41016151377545L163.46410161513776,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M120,346.41016151377545L123.46410161513775,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M80,346.41016151377545L83.46410161513775,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              class="tickLine"
+              d="M39.99999999999999,346.41016151377545L43.464101615137764,352.4101615137755"
+              stroke="black"
+              stroke-width="2"
+            />
+            <path
+              d="M0,346.41016151377545L400,346.41016151377545L200,0L0,346.41016151377545"
+              fill="#F0F1F1"
+            />
+            <path
+              class="line"
+              d="M19.999999999999996,311.7691453623979L39.99999999999999,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M39.99999999999999,277.12812921102034L80,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M60.00000000000001,242.4871130596428L120,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M80,207.84609690826525L160,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M100,173.20508075688772L200,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M120,138.5640646055102L240,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M140,103.92304845413264L280,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M160,69.28203230275506L320,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M180,34.64101615137753L360,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M220.00000000000003,34.64101615137753L39.99999999999999,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M240,69.28203230275506L80,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M260,103.92304845413264L120,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M280,138.5640646055102L160,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M300,173.20508075688772L200,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M320,207.84609690826525L240,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M340,242.4871130596428L280,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M360,277.12812921102034L320,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M380,311.7691453623979L360,346.41016151377545"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M19.999999999999996,311.7691453623979L380,311.7691453623979"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M39.99999999999999,277.12812921102034L360,277.12812921102034"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M60.00000000000001,242.4871130596428L340,242.4871130596428"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M80,207.84609690826525L320,207.84609690826525"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M100,173.20508075688772L300,173.20508075688772"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M120,138.5640646055102L280,138.5640646055102"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M140,103.92304845413264L260,103.92304845413264"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M160,69.28203230275506L240,69.28203230275506"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              class="line"
+              d="M180,34.64101615137753L220.00000000000003,34.64101615137753"
+              stroke="white"
+              stroke-width="2"
+            />
+            <path
+              d="M0,346.41016151377545L400,346.41016151377545L200,0L0,346.41016151377545"
+              fill="none"
+              stroke="black"
+              stroke-width="2"
+            />
+            <text
+              class="label2"
+              style="font-size: 15; font-weight: bold;"
+              text-anchor="middle"
+              transform="rotate(300, 93.0717967697245, 173.20508075688772)"
+              x="81.0717967697245"
+              y="133.20508075688772"
+            >
+              % sand
+            </text>
+            <text
+              class="label3"
+              style="font-size: 15; font-weight: bold;"
+              text-anchor="middle"
+              transform="rotate(60, 303.46410161513774, 173.20508075688772)"
+              x="291.46410161513774"
+              y="135.2050807568877"
+            >
+              % dirt
+            </text>
+            <text
+              class="label1"
+              style="font-size: 15; font-weight: bold;"
+              text-anchor="middle"
+              x="203.46410161513776"
+              y="394.4101615137755"
+            >
+              % water
+            </text>
+          </g>
+          <g
+            class="lineContainer"
+          />
+          <g
+            class="dotcontainer"
+          />
+        </g>
+        <g
+          class="list"
+          transform="translate(3, 70)"
+        >
+          <text
+            fill="#292858"
+            font-size="12"
+            font-weight="700"
+            style="text-transform: uppercase;"
+            transform="translate(10, -16)"
+          >
+            Velg delbydel
+          </text>
+        </g>
+        <g
+          class="sourceGroup"
+          fill="#292858"
+          opacity="0"
+        >
+          <text
+            class="source-label"
+            font-size="10"
+          >
+            Kilde: 
+          </text>
+          <text
+            class="source"
+            font-size="10"
+          />
+        </g>
+      </svg>
+       
+      <div
+        class="resize-observer"
+        data-v-b329ee4c=""
+        tabindex="-1"
+      >
+        <object
+          aria-hidden="true"
+          data="about:blank"
+          tabindex="-1"
+          type="text/html"
+        />
+      </div>
+      <div
+        class="graph__dropdown"
+      >
+        <label
+          class="graph__dropdown__label"
+          for="age_selector"
+        >
+          Velg segment
+        </label>
+        <select
+          class="graph__dropdown__select"
+          id="age_selector"
+        >
+          <option
+            value="[0, 119]"
+          >
+            Alle
+          </option>
+          <option
+            value="[0, 1]"
+          >
+            0–1 år
+          </option>
+          <option
+            value="[0, 5]"
+          >
+            0–5 år
+          </option>
+          <option
+            value="[6, 12]"
+          >
+            6–12 år
+          </option>
+          <option
+            value="[6, 15]"
+          >
+            6–15 år
+          </option>
+          <option
+            value="[6, 17]"
+          >
+            6–17 år
+          </option>
+          <option
+            value="[12, 15]"
+          >
+            12–15 år
+          </option>
+          <option
+            value="[16, 18]"
+          >
+            16–18 år
+          </option>
+          <option
+            value="[16, 18]"
+          >
+            19–29 år
+          </option>
+          <option
+            value="[16, 18]"
+          >
+            19–29 år
+          </option>
+          <option
+            value="[30, 49]"
+          >
+            30–49 år
+          </option>
+          <option
+            value="[50, 66]"
+          >
+            50–66 år
+          </option>
+          <option
+            value="[67, 119]"
+          >
+            67+ år
+          </option>
+          <option
+            value="[60, 79]"
+          >
+            60–79 år
+          </option>
+          <option
+            value="[80, 119]"
+          >
+            80+ år
+          </option>
+          <option
+            value="[80, 89]"
+          >
+            80–89 år
+          </option>
+          <option
+            value="[90, 119]"
+          >
+            90+ år
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`GraphCard renders correctly 1`] = `
 <div
   class="card-container large"

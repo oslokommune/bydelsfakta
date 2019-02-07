@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kommunaleboliger renders Kommunaleboliger component correctly 1`] = `
+<div
+  class="main-container"
+>
+  <div
+    class="main-container__cards"
+  >
+    <h2
+      class="section-heading"
+    >
+      Blokkleilighet
+    </h2>
+     
+    <div
+      class="card-container large"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="tabs"
+          role="tablist"
+        >
+          <button
+            aria-label="Status"
+            aria-selected="[object Object]"
+            class="tabs__button active"
+            role="tab"
+          >
+            Status
+          </button>
+          <button
+            aria-label="Historisk"
+            aria-selected="[object Object]"
+            class="tabs__button"
+            role="tab"
+          >
+            Historisk
+          </button>
+           
+          <div
+            class="context-menu"
+            role="menu"
+          >
+            <button
+              aria-haspopup="true"
+              aria-label="åpne meny"
+              class="context-menu__button"
+            >
+              <i
+                class="material-icons"
+              >
+                menu
+              </i>
+            </button>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="graph__container"
+        >
+          <svg
+            class="graph__svg"
+            style="font-family: OsloSans;"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <text
+              class="heading"
+              font-size="14"
+              font-weight="bold"
+              y="14"
+            />
+            <g
+              class="canvas"
+              transform="translate(190, 100)"
+            >
+              <g
+                class="axis x"
+              />
+              <g
+                class="axis y"
+              />
+              <g
+                class="axis x2"
+              />
+              <g
+                class="axis y2"
+              />
+              <g
+                class="columns"
+              />
+              <g
+                class="rows"
+              />
+              <g
+                class="close"
+                style="display: none;"
+              >
+                <rect
+                  fill="#FF8174"
+                  height="30"
+                  opacity="0.7"
+                  style="cursor: pointer;"
+                  width="30"
+                />
+                <text
+                  fill="#292858"
+                  font-size="20"
+                  font-weight="700"
+                  style="pointer-events: none;"
+                  text-anchor="middle"
+                  transform="translate(15, 20)"
+                >
+                  x
+                </text>
+              </g>
+            </g>
+            <g
+              class="sourceGroup"
+              fill="#292858"
+              opacity="0"
+            >
+              <text
+                class="source-label"
+                font-size="10"
+              >
+                Kilde: 
+              </text>
+              <text
+                class="source"
+                font-size="10"
+              />
+            </g>
+          </svg>
+           
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="main-container__map"
+  >
+    <h3>
+      Kart
+    </h3>
+  </div>
+</div>
+`;
