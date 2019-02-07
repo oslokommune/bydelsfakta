@@ -23,7 +23,7 @@ function Template(svg) {
       return b.values[b.values.length - 1].value - a.values[a.values.length - 1].value;
     });
 
-    this.height = d3.max([300, this.width * 0.5]);
+    this.height = d3.max([480, this.width * 0.5]);
 
     this.svg
       .transition()
@@ -47,6 +47,8 @@ function Template(svg) {
     this.drawAxis();
     this.drawLabels();
     this.drawInfobox();
+    this.drawDots();
+    this.drawVoronoi();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
@@ -55,6 +57,11 @@ function Template(svg) {
       .insert('rect')
       .attr('class', 'bg')
       .attr('fill', 'white');
+
+    this.canvas.append('g').attr('class', 'lines');
+    this.canvas.append('g').attr('class', 'dots');
+    this.canvas.append('g').attr('class', 'voronoi');
+    this.canvas.append('g').attr('class', 'labels');
     this.createInfoBoxElements();
   };
 
@@ -64,43 +71,127 @@ function Template(svg) {
     .x(d => this.x(this.parseDate(d.date)))
     .y(d => this.y(d[this.method]));
 
-  this.handleMouseover = function(index) {
+  this.drawVoronoi = function() {
+    let flattenData = this.data.data
+      .map(geo => geo.values.map(val => ({ date: val.date, value: val.value, geography: geo.geography })))
+      .flat();
+
+    let voronoiData = d3
+      .voronoi()
+      .extent([[1, 1], [this.width, this.height]])
+      .x(d => this.x(this.parseDate(d.date)))
+      .y(d => this.y(d.value))
+      .polygons(flattenData);
+
     this.canvas
+      .select('g.voronoi')
+      .selectAll('path')
+      .data(voronoiData)
+      .join('path')
+      .attr('d', d => 'M' + d.join('L') + 'Z')
+      .attr('fill-opacity', 0)
+      .on('mouseover', (d, i, j) => {
+        let geography = j[i].__data__.data.geography;
+        let date = j[i].__data__.data.date;
+
+        if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
+          this.canvas.selectAll('g.dot').attr('opacity', 0);
+          this.canvas
+            .selectAll('g.dotgroup')
+            .filter((dot, index) => {
+              if (dot.geography === geography) {
+                this.handleMouseover(dot.geography);
+                return true;
+              }
+            })
+            .selectAll('g.dot')
+            .filter(dot => dot.date === date)
+            .attr('opacity', 1);
+        }
+      })
+      .on('mouseleave', () => {
+        if (this.highlight === -1) {
+          this.canvas.selectAll('g.dot').attr('opacity', 0);
+          this.handleMouseleave();
+        }
+      });
+  };
+
+  this.drawDots = function() {
+    let dotgroup = this.canvas
+      .select('g.dots')
+      .selectAll('g.dotgroup')
+      .data(this.data.data, d => d.geography)
+      .join('g')
+      .attr('class', 'dotgroup');
+
+    let dot = dotgroup
+      .selectAll('g.dot')
+      .data(d => d.values, d => d.geography)
+      .join('g')
+      .attr('class', 'dot')
+      .attr('opacity', 0);
+
+    dot
+      .append('text')
+      .text(d => d.value)
+      .attr('x', d => this.x(this.parseDate(d.date)))
+      .attr('y', d => this.y(d.value))
+      .attr('font-size', 11)
+      .attr('transform', `translate(0, -7)`)
+      .attr('text-anchor', 'middle')
+      .style('pointer-events', 'none');
+
+    dot
+      .append('circle')
+      .attr('r', 4)
+      .attr('fill', 'none')
+      .attr('stroke', 'steelblue')
+      .attr('cx', d => this.x(this.parseDate(d.date)))
+      .attr('cy', d => this.y(d.value));
+  };
+
+  this.handleMouseover = function(geo) {
+    this.canvas
+      .select('g.labels')
       .selectAll('g.label')
-      .transition()
       .attr('opacity', 0.5);
 
-    d3.selectAll('g.label')
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
       .select('text')
       .attr('font-weight', 400);
 
-    d3.selectAll('g.label')
-      .filter((d, i) => i === index)
-      .transition()
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
+      .filter((d, i) => d.geography === geo)
       .attr('opacity', 1)
       .select('text')
       .attr('font-weight', 700);
 
     this.canvas
+      .select('g.lines')
       .selectAll('path.row')
-      .transition()
       .attr('stroke-opacity', 0.05)
       .attr('stroke-width', 2)
-      .filter((d, i) => i == index)
+      .filter((d, i) => d.geography === geo)
       .attr('stroke-opacity', 1)
       .attr('stroke-width', 4);
   };
 
   this.handleMouseleave = function() {
     this.canvas
+      .select('g.labels')
       .selectAll('g.label')
-      .transition()
       .attr('opacity', d => {
         if (d.avgRow || d.totalRow) return 1;
         return 0.45;
       });
 
     this.canvas
+      .select('g.labels')
       .selectAll('g.label')
       .select('text')
       .attr('font-weight', d => {
@@ -109,8 +200,8 @@ function Template(svg) {
       });
 
     this.canvas
+      .select('g.lines')
       .selectAll('path.row')
-      .transition()
       .attr('stroke-width', d => {
         if (d.avgRow) return 5;
         return 2;
@@ -132,22 +223,34 @@ function Template(svg) {
     );
 
     let labels = this.canvas
+      .select('g.labels')
       .selectAll('g.label')
-      .data(labelPositions, d => d.geography)
-      .join(enter => {
-        let g = enter
-          .append('g')
-          .attr('class', 'label')
-          .style('cursor', 'pointer');
-        g.append('text').attr('x', this.width + 35);
+      .data(labelPositions, d => d.geography);
 
-        g.append('line')
-          .attr('stroke-width', 9)
-          .attr('x1', this.width + 22)
-          .attr('x2', this.width + 31);
-        g.append('title');
-      })
-      .attr('class', 'label');
+    let labelsE = labels
+      .enter()
+      .append('g')
+      .attr('class', 'label')
+      .style('cursor', 'pointer');
+
+    labelsE
+      .append('g')
+      .attr('class', 'label')
+      .style('cursor', 'pointer');
+
+    labelsE.append('text').attr('x', this.width + 35);
+
+    labelsE
+      .append('line')
+      .attr('stroke-width', 9)
+      .attr('x1', this.width + 22)
+      .attr('x2', this.width + 31);
+    labelsE.append('title');
+
+    labels.exit().remove();
+    labels = labels.merge(labelsE);
+
+    labels.attr('class', 'label');
 
     // Click label to render with highlight (infobox)
     labels
@@ -164,8 +267,9 @@ function Template(svg) {
 
     // Hover label to highlight itself and its corresponding line
     labels.on('mouseover', (d, i) => {
+      console.log(i);
       if (this.highlight === -1) {
-        this.handleMouseover(i);
+        this.handleMouseover(d.geography);
       }
     });
 
@@ -338,7 +442,10 @@ function Template(svg) {
   this.drawLines = function() {
     // Standard select/enter/update/exit pattern for each line.
     // Each line is a path element
-    let row = this.canvas.selectAll('path.row').data(this.data.data);
+    let row = this.canvas
+      .select('g.lines')
+      .selectAll('path.row')
+      .data(this.data.data, d => d.geography);
     let rowE = row
       .enter()
       .append('path')
@@ -352,6 +459,7 @@ function Template(svg) {
     // and its style based on the data: total and avg rows get
     // separate styling
     row
+      .transition()
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i, j) => {
         if (d.totalRow) return 'black';
@@ -373,26 +481,27 @@ function Template(svg) {
         if (d.totalRow) return '4,3';
       });
 
-    row
-      .on('mouseover', (d, i) => {
-        if (this.highlight === -1) {
-          this.handleMouseover(i);
-        }
-      })
-      .on('mouseleave', () => {
-        if (this.highlight === -1) {
-          this.handleMouseleave();
-        }
-      });
+    // row
+    //   .on('mouseover', (d, i) => {
+    //     console.log(d);
+    //     if (this.highlight === -1) {
+    //       this.handleMouseover(d.geography);
+    //     }
+    //   })
+    //   .on('mouseleave', () => {
+    //     if (this.highlight === -1) {
+    //       this.handleMouseleave();
+    //     }
+    //   });
 
-    // Support click and to trigger a render() with a highlight argument
-    row.on('click', (d, i) => {
-      if (i === this.highlight) {
-        this.render(this.data, { method: this.method, highlight: -1 });
-      } else {
-        this.render(this.data, { method: this.method, highlight: i });
-      }
-    });
+    // // Support click and to trigger a render() with a highlight argument
+    // row.on('click', (d, i) => {
+    //   if (i === this.highlight) {
+    //     this.render(this.data, { method: this.method, highlight: -1 });
+    //   } else {
+    //     this.render(this.data, { method: this.method, highlight: i });
+    //   }
+    // });
   };
 
   // Resets the scales based on the provided data on each render
@@ -419,8 +528,11 @@ function Template(svg) {
 
   // Renders axis based on the updated scales
   this.drawAxis = function() {
-    this.yAxis.call(d3.axisLeft(this.y).ticks(this.height / 30));
-    this.xAxis.call(d3.axisBottom(this.x).ticks(this.width / 90)).attr('transform', `translate(0, ${this.height})`);
+    this.yAxis.transition().call(d3.axisLeft(this.y).ticks(this.height / 30));
+    this.xAxis
+      .transition()
+      .call(d3.axisBottom(this.x).ticks(this.width / 90))
+      .attr('transform', `translate(0, ${this.height})`);
   };
 
   this.init(svg);
