@@ -127,7 +127,7 @@ function Template(svg) {
   this.initRowElements = function(rowsE) {
     // Row fill
     rowsE
-      .append('rect')
+      .insert('rect')
       .attr('class', 'rowFill')
       .attr('fill', color.purple)
       .attr('height', this.rowHeight)
@@ -136,7 +136,7 @@ function Template(svg) {
 
     // Row divider
     rowsE
-      .append('rect')
+      .insert('rect')
       .attr('class', 'divider')
       .attr('fill', color.purple)
       .attr('x', -this.padding.left)
@@ -153,6 +153,8 @@ function Template(svg) {
       .attr('class', 'geography')
       .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6);
+
+    rowsE.append('g').attr('class', 'bars');
   };
 
   /**
@@ -160,7 +162,10 @@ function Template(svg) {
    */
   this.drawRows = function() {
     // Select all existing rows (DOM elements) that matches the data
-    let rows = this.canvas.selectAll('g.row').data(this.filteredData.data);
+    let rows = this.canvas
+      .select('g.rows')
+      .selectAll('g.row')
+      .data(this.filteredData.data, d => d.geography);
 
     // Create DOM element for missing rows
     let rowsE = rows
@@ -233,7 +238,10 @@ function Template(svg) {
       return color.purple;
     });
 
-    let bars = rows.selectAll('rect.bar').data(d => d.values);
+    let bars = rows
+      .select('g.bars')
+      .selectAll('rect.bar')
+      .data(d => d.values);
     let barsE = bars
       .enter()
       .append('rect')
@@ -259,7 +267,9 @@ function Template(svg) {
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-      })
+      });
+
+    bars
       .on('mousemove', d => {
         if (this.method === 'ratio') {
           this.showTooltip(formatPercent(d.ratio), d3.event);
@@ -337,7 +347,10 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
-    let columns = this.canvas.selectAll('g.column').data(this.filteredData.meta.series);
+    let columns = this.canvas
+      .select('g.columns')
+      .selectAll('g.column')
+      .data(this.filteredData.meta.series);
     let columnsE = columns
       .enter()
       .append('g')
