@@ -66,6 +66,7 @@ function Template(svg) {
   this.max = 0;
   this.dotContainer;
   this.lineContainer;
+  this.arrows;
 
   const fillOpacity = 0.6;
   const strokeOpacity = 0.8;
@@ -134,6 +135,7 @@ function Template(svg) {
     this.canvas.attr('transform', `translate(${this.padding.left + this.gutter}, ${this.padding.top})`);
 
     this.drawGrid();
+
     this.lineContainer = this.canvas.append('g').attr('class', 'lineContainer');
     this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
   };
@@ -207,10 +209,7 @@ function Template(svg) {
       .style('pointer-events', 'none');
   };
 
-  // Draw the triangle, grid lines, labels etc on screen
-  this.drawGrid = function() {
-    this.matrix = this.canvas.append('g').attr('class', 'matrix');
-
+  this.drawLabels = function() {
     // Labels left
     this.matrix
       .selectAll('text.label-1')
@@ -223,6 +222,26 @@ function Template(svg) {
       .style('font-weight', 'bold')
       .attr('x', d => x(d[1].x) - 6)
       .attr('y', d => y(d[1].y) + 4);
+
+    this.arrows.attr('transform', `translate(${x(0)},${y(0.333)})`);
+
+    let arrow = this.arrows
+      .selectAll('g.arrow')
+      .data([1, 3, 5])
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'arrow');
+        g.append('path')
+          .attr('d', () => {
+            return `M0,0 h70 l-10,-4 v8 l10,-4 Z`;
+          })
+          .attr('stroke', 'black')
+          .attr('fill', 'black');
+        return g;
+      });
+
+    arrow.attr(`transform`, d => {
+      return `rotate(${60 * d}) translate(${this.width * 0.3},${this.width * -0.39})`;
+    });
 
     // Labels right
     this.matrix
@@ -253,6 +272,14 @@ function Template(svg) {
       .attr('text-anchor', 'start')
       .style('font-size', 13)
       .style('font-weight', 'bold');
+  };
+
+  // Draw the triangle, grid lines, labels etc on screen
+  this.drawGrid = function() {
+    this.matrix = this.canvas.append('g').attr('class', 'matrix');
+    this.arrows = this.matrix.append('g').attr('class', 'arrows');
+
+    this.drawLabels();
 
     // Tick marks
     this.matrix
@@ -296,7 +323,6 @@ function Template(svg) {
     this.matrix
       .append('text')
       .attr('class', 'label2')
-      .text('% sand')
       .attr('text-anchor', 'middle')
       .style('font-size', 15)
       .style('font-weight', 'bold')
@@ -308,7 +334,6 @@ function Template(svg) {
     this.matrix
       .append('text')
       .attr('class', 'label3')
-      .text('% dirt')
       .attr('text-anchor', 'middle')
       .style('font-size', 15)
       .style('font-weight', 'bold')
@@ -320,7 +345,6 @@ function Template(svg) {
     this.matrix
       .append('text')
       .attr('class', 'label1')
-      .text('% water')
       .attr('text-anchor', 'middle')
       .style('font-size', 15)
       .style('font-weight', 'bold')
@@ -424,9 +448,9 @@ function Template(svg) {
   };
 
   this.updateAxisLabels = function() {
-    this.matrix.select('text.label1').text(`% ${this.data.meta.series[0]}`);
-    this.matrix.select('text.label2').text(`% ${this.data.meta.series[1]}`);
-    this.matrix.select('text.label3').text(`% ${this.data.meta.series[2]}`);
+    this.matrix.select('text.label1').text(`Andel ${this.data.meta.series[0].toLowerCase()} (%)`);
+    this.matrix.select('text.label2').text(`Andel ${this.data.meta.series[1].toLowerCase()} (%)`);
+    this.matrix.select('text.label3').text(`Andel ${this.data.meta.series[2].toLowerCase()} (%)`);
   };
 
   this.getTick = function(x1, y1, angle, dist) {
