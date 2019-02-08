@@ -230,8 +230,6 @@ function Template(svg) {
       .html(d => d.geography);
 
     // Add attributes to total and avg rows
-    rows.attr('data-total', d => d.totalRow);
-    rows.attr('data-avg', d => d.avgRow);
     rows.attr('fill', d => {
       if (d.avgRow) return color.yellow;
       if (d.totalRow) return color.purple;
@@ -254,15 +252,13 @@ function Template(svg) {
     bars
       .attr('height', (d, i, j) => {
         if (this.parentWidth() < this.mobileWidth) return 4;
-        return j[0].parentNode.getAttribute('data-total') ? 2 : this.barHeight;
+        return j[0].parentNode.__data__.totalRow ? 2 : this.barHeight;
       })
       .attr('y', (d, i, j) => {
         if (this.parentWidth() < this.mobileWidth) {
           return (this.rowHeight - this.barHeight) / 2 + 16;
         } else {
-          return j[0].parentNode.getAttribute('data-total')
-            ? this.rowHeight / 2
-            : (this.rowHeight - this.barHeight) / 2;
+          return j[0].parentNode.__data__.totalRow ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
         }
       })
       .attr('opacity', (d, i) => {
