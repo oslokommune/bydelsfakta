@@ -31,6 +31,7 @@
               <router-link
                 v-for="(link, subpageIndex) in kategori.links"
                 class="navigation-topbar__dropdown-item"
+                :id="`dropdown-href-${subpageIndex}`"
                 :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
                 :key="subpageIndex"
                 v-text="link.text"

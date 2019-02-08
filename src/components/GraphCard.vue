@@ -6,6 +6,7 @@
           role="tab"
           :aria-selected="{ true: active === index }"
           :aria-label="tab.label"
+          :id="`tabButton-${index}`"
           v-for="(tab, index) in settings.tabs"
           :key="index"
           @click="activeTab(index)"
@@ -19,6 +20,7 @@
             @click="showDropdown = !showDropdown"
             aria-haspopup="true"
             :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
+            id="context-menu-button"
           >
             <i class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
           </button>
@@ -29,6 +31,7 @@
               class="context-menu__dropdown-item"
               tabindex="0"
               aria-label="lagre graf som png"
+              id="context-menu-button-png"
             >
               <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Last ned som PNG</span>
@@ -39,6 +42,7 @@
               tabindex="0"
               @click="saveSvg(settings.tabs[active].id)"
               @keyup.enter="saveSvg(settings.tabs[active].id)"
+              id="context-menu-button-svg"
             >
               <i class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Lagre som SVG</span>
