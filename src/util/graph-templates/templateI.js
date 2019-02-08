@@ -7,11 +7,14 @@
  */
 
 import Base_Template from './baseTemplate';
-// import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
 
+// Coordinates for the three corners of the triangle.
+// First corner duplicated to complete the path
 const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+
+// Coordinates for the grid lines (starting and ending positions)
 const gridLinesData = [
   [{ x: -0.9, y: 0.1 }, { x: -0.8, y: 0 }],
   [{ x: -0.8, y: 0.2 }, { x: -0.6, y: 0 }],
@@ -44,6 +47,8 @@ const gridLinesData = [
   [{ x: -0.1, y: 0.9 }, { x: 0.1, y: 0.9 }],
 ];
 
+// Helper function to move an element to front
+// by appending it to last position of parent.
 d3.selection.prototype.moveToFront = function() {
   return this.each(function() {
     this.parentNode.appendChild(this);
@@ -71,10 +76,26 @@ function Template(svg) {
   const fillOpacity = 0.6;
   const strokeOpacity = 0.8;
 
+  /**
+   * The x position inside of the matrix
+   * is calculated from -1 on the left
+   * to 1 on the right with 0 being the
+   * center of the triangle's x axis.
+   * Finding the x-value is achieved
+   * by subtracting the value on the
+   * right hand axis with the value on
+   * the bottom axis.
+   */
   const x = d3
     .scaleLinear()
     .range([0, this.width])
     .domain([-1, 1]);
+
+  /**
+   * The y position is easier to visualize
+   * as it ranges from 0 on the bottom to
+   * 1 on the top.
+   */
   const y = d3
     .scaleLinear()
     .range([this.height, 0])
@@ -88,6 +109,8 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    // The gutter is the left hand side padding
+    // inside of the canvas towards the matrix
     this.gutter = (this.parentWidth() - this.padding.left - 400) / 2;
 
     this.matrix
@@ -112,7 +135,7 @@ function Template(svg) {
     this.drawMatrix();
     this.drawList();
     this.updateAxisLabels();
-    this.drawLines();
+    this.drawGuideLines();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
@@ -209,7 +232,9 @@ function Template(svg) {
       .style('pointer-events', 'none');
   };
 
-  this.drawLabels = function() {
+  // Renders the angled tick marks and tick labels
+  // using the tickData generated before
+  this.drawTicks = function() {
     // Labels left
     this.matrix
       .selectAll('text.label-1')
@@ -222,26 +247,6 @@ function Template(svg) {
       .style('font-weight', 'bold')
       .attr('x', d => x(d[1].x) - 6)
       .attr('y', d => y(d[1].y) + 4);
-
-    this.arrows.attr('transform', `translate(${x(0)},${y(0.333)})`);
-
-    let arrow = this.arrows
-      .selectAll('g.arrow')
-      .data([1, 3, 5])
-      .join(enter => {
-        let g = enter.append('g').attr('class', 'arrow');
-        g.append('path')
-          .attr('d', () => {
-            return `M0,0 h70 l-10,-4 v8 l10,-4 Z`;
-          })
-          .attr('stroke', 'black')
-          .attr('fill', 'black');
-        return g;
-      });
-
-    arrow.attr(`transform`, d => {
-      return `rotate(${60 * d}) translate(${this.width * 0.3},${this.width * -0.39})`;
-    });
 
     // Labels right
     this.matrix
@@ -272,14 +277,6 @@ function Template(svg) {
       .attr('text-anchor', 'start')
       .style('font-size', 13)
       .style('font-weight', 'bold');
-  };
-
-  // Draw the triangle, grid lines, labels etc on screen
-  this.drawGrid = function() {
-    this.matrix = this.canvas.append('g').attr('class', 'matrix');
-    this.arrows = this.matrix.append('g').attr('class', 'arrows');
-
-    this.drawLabels();
 
     // Tick marks
     this.matrix
@@ -291,34 +288,11 @@ function Template(svg) {
       .attr('stroke', 'black')
       .attr('stroke-width', 2)
       .attr('d', d => line(d));
+  };
 
-    // Triangle background
-    this.matrix
-      .append('path')
-      .datum(triangleData)
-      .attr('d', line)
-      .attr('fill', color.light_grey);
-
-    // Grid lines
-    this.matrix
-      .selectAll('.line')
-      .data(gridLinesData)
-      .enter()
-      .append('path')
-      .attr('class', 'line')
-      .attr('stroke-width', 2)
-      .attr('stroke', 'white')
-      .attr('d', d => line(d));
-
-    // Triangle frame
-    this.matrix
-      .append('path')
-      .datum(triangleData)
-      .attr('d', line)
-      .attr('stroke-width', 2)
-      .attr('stroke', 'black')
-      .attr('fill', 'none');
-
+  // Draws the labes for each of the three
+  // axis and their angled arrows
+  this.drawAxisLabels = function() {
     // Axis 2 label
     this.matrix
       .append('text')
@@ -350,9 +324,70 @@ function Template(svg) {
       .style('font-weight', 'bold')
       .attr('x', x(tickData[22][1].x))
       .attr('y', y(tickData[22][1].y) + 42);
+
+    // Position the arrows' parent group to the center
+    // of the matrix
+    this.arrows.attr('transform', `translate(${x(0)},${y(0.333)})`);
+
+    // Create the arrow parent and arrow DOM elements
+    let arrow = this.arrows
+      .selectAll('g.arrow')
+      .data([1, 3, 5])
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'arrow');
+        g.append('path')
+          .attr('d', () => {
+            return `M0,0 h70 l-10,-4 v8 l10,-4 Z`;
+          })
+          .attr('stroke', 'black')
+          .attr('fill', 'black');
+        return g;
+      });
+
+    // Rotate and position the arrow parent group
+    arrow.attr(`transform`, d => {
+      return `rotate(${60 * d}) translate(${this.width * 0.3},${this.width * -0.39})`;
+    });
   };
 
-  this.drawLines = function() {
+  // Draw the triangle, grid lines, labels etc on screen
+  this.drawGrid = function() {
+    this.matrix = this.canvas.append('g').attr('class', 'matrix');
+    this.arrows = this.matrix.append('g').attr('class', 'arrows');
+
+    this.drawTicks();
+    this.drawAxisLabels();
+
+    // Triangle background
+    this.matrix
+      .append('path')
+      .datum(triangleData)
+      .attr('d', line)
+      .attr('fill', color.light_grey);
+
+    // Grid lines
+    this.matrix
+      .selectAll('.line')
+      .data(gridLinesData)
+      .enter()
+      .append('path')
+      .attr('class', 'line')
+      .attr('stroke-width', 2)
+      .attr('stroke', 'white')
+      .attr('d', d => line(d));
+
+    // Triangle frame
+    this.matrix
+      .append('path')
+      .datum(triangleData)
+      .attr('d', line)
+      .attr('stroke-width', 2)
+      .attr('stroke', 'black')
+      .attr('fill', 'none');
+  };
+
+  // Draws the helper lines when a node is selected
+  this.drawGuideLines = function() {
     if (this.selected === null || this.selected === -1 || this.selected === undefined) {
       this.lineContainer
         .selectAll('path.lines')
@@ -362,6 +397,8 @@ function Template(svg) {
       return;
     }
 
+    // Find the node element on the selected index
+    // and store its coordinates (m, n)
     let el = this.dotContainer.selectAll('g').filter((d, i) => i == this.selected);
     let circ = el.select('circle');
     let m = +el.attr('data-x');
@@ -372,12 +409,16 @@ function Template(svg) {
       .range([-1, 1])
       .domain([1, 0]);
 
+    // Generate the data to draw the guide lines
+    // based on the coordinates of the selected node
     let lineData = [
       [{ x: x.invert(m), y: y.invert(n) }, { x: xx(circ.attr('data-0')), y: 0 }],
       [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-1') - 1, y: circ.attr('data-1') }],
       [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-2'), y: 1 - circ.attr('data-2') }],
     ];
 
+    // Create, update, remove pattern for
+    // the guide lines using the lineData
     let lines = this.lineContainer.selectAll('path.lines').data(lineData);
     lines.exit().remove();
     let linesE = lines
@@ -453,6 +494,8 @@ function Template(svg) {
     this.matrix.select('text.label3').text(`Andel ${this.data.meta.series[2].toLowerCase()} (%)`);
   };
 
+  // Calculate the starting and ending coordinates
+  // for the angled ticks
   this.getTick = function(x1, y1, angle, dist) {
     let s = d3
       .scaleLinear()

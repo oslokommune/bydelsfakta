@@ -101,6 +101,7 @@ function Base_Template(svg) {
     this.addTooltipElement();
   };
 
+  // Creates DOM elements for generic tooltip
   this.addTooltipElement = function() {
     let group = this.svg
       .append('g')
@@ -124,6 +125,9 @@ function Base_Template(svg) {
       .attr('fill', color.purple);
   };
 
+  // Displays generic tooltip,
+  // using the d3.event as an argument
+  // to position the tooltip
   this.showTooltip = function(str, event) {
     let group = this.svg.select('g.tooltip');
     let rect = group.select('rect');
@@ -136,12 +140,14 @@ function Base_Template(svg) {
     group.attr('opacity', 1);
   };
 
+  // Hides the generic tooltip
   this.hideTooltip = function() {
     let group = this.svg.select('g.tooltip').attr('opacity', 0);
     group.select('rect');
     group.select('text').text('');
   };
 
+  // Creates DOM elements for generic source reference
   this.addSourceElement = function() {
     let group = this.svg
       .append('g')
@@ -168,6 +174,7 @@ function Base_Template(svg) {
       });
   };
 
+  // Updates and repositions the source reference text
   this.drawSource = function(str) {
     this.svg.select('text.source').text(str);
     let parent = this.svg.node().parentNode.getBoundingClientRect();
