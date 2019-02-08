@@ -12,12 +12,15 @@ function Template(svg) {
   Base_Template.apply(this, arguments);
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 1 };
-  this.gapX = 80;
-
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
+
+  // Define withs of both charts.
+  // gapX is the space between them.
+  this.gapX = 80;
   this.width1 = (this.width - this.gapX) / 2;
   this.width2 = (this.width - this.gapX) / 2;
 
+  // Scales for the two charts
   this.x = d3.scaleLinear();
   this.x2 = d3.scaleLinear();
 
@@ -45,44 +48,8 @@ function Template(svg) {
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
-    this.width1 = (this.width - this.gapX) / 2;
-    this.width2 = (this.width - this.gapX) / 2;
-    this.x2.range([0, this.width2]).domain([0, 70]);
-    this.x2Axis
-      .transition()
-      .duration(this.duration)
-      .call(
-        d3
-          .axisTop(this.x2)
-          .tickFormat(d => `${d} år`)
-          .ticks(this.width2 / 60)
-      )
-      .attr('transform', `translate(${this.width1 + this.gapX})`);
-
-    this.x
-      .range([0, this.width1])
-      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05]);
-    this.xAxis
-      .transition()
-      .duration(this.duration)
-      .call(
-        d3
-          .axisTop(this.x)
-          .tickFormat(d => `${d} år`)
-          .ticks(this.width2 / 60)
-      );
-
-    this.canvas
-      .select('text.label-median')
-      .transition()
-      .duration(this.duration)
-      .attr('x', this.width1 + this.gapX + this.width2 / 2);
-    this.canvas
-      .select('text.label-mean')
-      .transition()
-      .duration(this.duration)
-      .attr('x', this.width1 / 2);
-
+    this.drawScales();
+    this.drawAxisLabels();
     this.drawRows();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
@@ -193,6 +160,55 @@ function Template(svg) {
       .attr('y', 0);
   };
 
+  // Updates the text and position for both
+  // axis labels on each render
+  this.drawAxisLabels = function() {
+    this.canvas
+      .select('text.label-median')
+      .transition()
+      .duration(this.duration)
+      .attr('x', this.width1 + this.gapX + this.width2 / 2);
+
+    this.canvas
+      .select('text.label-mean')
+      .transition()
+      .duration(this.duration)
+      .attr('x', this.width1 / 2);
+  };
+
+  // Updates the scales and axis for the two
+  // charts on each render.
+  this.drawScales = function() {
+    this.width1 = (this.width - this.gapX) / 2;
+    this.width2 = (this.width - this.gapX) / 2;
+    this.x2.range([0, this.width2]).domain([0, 70]);
+    this.x2Axis
+      .transition()
+      .duration(this.duration)
+      .call(
+        d3
+          .axisTop(this.x2)
+          .tickFormat(d => `${d} år`)
+          .ticks(this.width2 / 60)
+      )
+      .attr('transform', `translate(${this.width1 + this.gapX})`);
+
+    this.x
+      .range([0, this.width1])
+      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05]);
+    this.xAxis
+      .transition()
+      .duration(this.duration)
+      .call(
+        d3
+          .axisTop(this.x)
+          .tickFormat(d => `${d} år`)
+          .ticks(this.width2 / 60)
+      );
+  };
+
+  // Update the contents for each row on each
+  // render
   this.drawRows = function() {
     let rows = this.canvas.selectAll('g.row').data(this.data.data);
     let rowsE = rows
