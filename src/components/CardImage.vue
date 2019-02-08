@@ -4,6 +4,7 @@
       class="oslo__card-image"
       :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor }"
       :to="dataLink"
+      :id="dataId"
     >
       <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">
         {{ dataKategori }}
@@ -39,6 +40,10 @@ export default {
       required: true,
     },
     link: {
+      type: String,
+      required: true,
+    },
+    id: {
       type: String,
       required: true,
     },

@@ -20,13 +20,14 @@
           :disabled="disableChecbox(link.key)"
         />
         <label :for="`checkbox-${link.key}`"></label>
-        <router-link class="navigation-link__label" :to="onClickBydel(link.uri)">{{ link.value }}</router-link>
+        <router-link :id="`a-${link.key}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{ link.value }}</router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
+        data-test="sammenlign"
         :class="{ 'navigation-link--active': compareBydeler }"
       >
-        <router-link :to="onClickSammenlign()" class="navigation-link__label">Sammenlign bydeler</router-link>
+        <router-link data-test="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">Sammenlign bydeler</router-link>
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
@@ -166,12 +167,13 @@ export default {
       return bydel === this.$route.params.bydel
         ? { name: 'Bydel', params: { bydel: bydel } }
         : this.$route.params.tema === undefined
-        ? { name: 'Bydel', params: { bydel: bydel } }
-        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+          ? { name: 'Bydel', params: { bydel: bydel } }
+          : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
     },
 
     onClickHome() {
       this.selected = [];
+      this.compareBydeler = false;
       this.$router.push({ name: 'Home' });
     },
 
@@ -184,6 +186,8 @@ export default {
         return this.$route.params.tema === undefined
           ? { name: 'Bydel', params: { bydel: 'alle' } }
           : { name: 'Tema', params: { bydel: 'alle', tema: this.$route.params.tema } };
+      } else if (bydel === undefined && !this.compareBydeler) {
+        return { name: 'Bydel', params: { bydel: 'alle' } };
       } else {
         return { name: 'Bydel', params: { bydel: this.$route.params.bydel } };
       }
