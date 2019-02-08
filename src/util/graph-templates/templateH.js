@@ -5,6 +5,13 @@
  *
  * Render the chart using the highlight parameter in the options
  * object to change the focused year.
+ *
+ * This chart has four main parts:
+ *  * Sidebar - displays the contents of the selected year
+ *  * Upper - displays the population line
+ *  * Lower - displays histogram of change per year
+ *  * Triggers - transparent overlays to trigger clicks
+ *
  */
 
 import Base_Template from './baseTemplate';
@@ -63,6 +70,8 @@ function Template(svg) {
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
+  // Empties canvas and creates the neccessary DOM elements
+  // for this chart
   this.created = function() {
     this.canvas.selectAll('*').remove();
     this.canvas.remove();
@@ -74,6 +83,8 @@ function Template(svg) {
     this.triggersContainer = this.svg.append('g').attr('class', 'triggers');
   };
 
+  // Creates the DOM elements for the sidebar
+  // called from this.created()
   this.createSidebarElements = function() {
     this.sidebar = this.svg.append('g').attr('class', 'sidebar');
 
@@ -143,6 +154,8 @@ function Template(svg) {
       .attr('fill', color.purple);
   };
 
+  // Creates the DOM elements for the upper graph
+  // called from this.created()
   this.createUpperElements = function() {
     this.upper = this.svg.append('g').attr('class', 'upper');
     this.xAxis = this.upper.append('g').attr('class', 'axis x');
@@ -214,6 +227,8 @@ function Template(svg) {
       .attr('text-anchor', 'middle');
   };
 
+  // Creates the DOM elements for the lower histogram
+  // called from this.created()
   this.createLowerElements = function() {
     this.lower = this.svg.append('g').attr('class', 'lower');
     this.lower.append('g').attr('class', 'bars');
@@ -232,6 +247,7 @@ function Template(svg) {
       .text('Befolkningsendring per år');
   };
 
+  // Updates the sidebar contents on each render
   this.drawSidebar = function() {
     this.sidebar.attr('transform', `translate(${this.padding.left + this.width1 + this.gapX}, ${this.padding.top})`);
 
@@ -240,6 +256,7 @@ function Template(svg) {
     this.sidebar.select('g.section-change text.value').text(this.selected.change);
   };
 
+  // Updates the upper line graph on each render.
   this.drawUpper = function() {
     this.upper.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.xAxis.attr('transform', `translate(0, ${this.height1})`);
@@ -277,6 +294,7 @@ function Template(svg) {
     this.drawProjection();
   };
 
+  // Updates the lower histogram on each render
   this.drawLower = function() {
     this.barWidth = this.x(this.parseDate('2018-01-01')) - this.x(this.parseDate('2017-01-01')) - 1;
 
@@ -315,6 +333,8 @@ function Template(svg) {
       .attr('x', 20);
   };
 
+  // Draws the projected path on the upper graph
+  // called from this.drawUpper()
   this.drawProjection = function() {
     // Draw projection
     let lastDate = this.data.data.actual[this.data.data.actual.length - 1];
@@ -338,6 +358,7 @@ function Template(svg) {
     this.upper.select('path.expected').attr('d', expectedPathData);
   };
 
+  // Draws the transparent triggers on each render
   this.drawTriggers = function() {
     this.triggersContainer.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
@@ -376,6 +397,8 @@ function Template(svg) {
       .attr('tabindex', 0);
   };
 
+  // Sets and draws all the scales and axis
+  // for the whole template on each render.
   this.resetScales = function() {
     let dates = d3.extent(this.data.data.actual.concat(this.data.data.projection).map(d => this.parseDate(d.date)));
     dates[0] = d3.timeYear.offset(dates[0], -2);
