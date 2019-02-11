@@ -185,6 +185,7 @@ function Template(svg) {
     rows
       .select('rect.divider')
       .attr('fill-opacity', d => {
+        if (this.data.meta.series.length === 1) return 0;
         if (this.parentWidth() < this.mobileWidth) {
           return 0;
         } else {
@@ -252,7 +253,10 @@ function Template(svg) {
       })
       .transition()
       .duration(this.duration)
-      .attr('width', d => this.x[0](d[this.method]))
+      .attr('width', (d, i) => {
+        if (this.method === 'value' && d.value > this.x[i].domain()[1]) return 0;
+        return this.x[0](d[this.method]);
+      })
       .attr('x', (d, i) => this.x[i](0));
 
     bars
@@ -270,7 +274,9 @@ function Template(svg) {
 
   this.setScales = function() {
     let maxValues = this.filteredData.meta.series.map((row, i) => {
-      return d3.max(this.filteredData.data.map(d => d.values[i][this.method]));
+      return d3.max(
+        this.filteredData.data.filter(d => !(this.method === 'value' && d.totalRow)).map(d => d.values[i][this.method])
+      );
     });
 
     this.x2 = d3
@@ -299,8 +305,7 @@ function Template(svg) {
       .selectAll('g.axis.x')
       .data(this.x)
       .join('g')
-      .attr('class', 'axis x')
-      .attr('transform', `translate(0, ${this.height + 10})`);
+      .attr('class', 'axis x');
 
     this.xAxis.each((d, i, j) => {
       d3.select(j[i])
@@ -309,6 +314,7 @@ function Template(svg) {
         })
         .transition()
         .duration(this.duration)
+        .attr('transform', `translate(0, ${this.height + 10})`)
         .call(
           d3
             .axisBottom(this.x[i])
@@ -427,12 +433,15 @@ function Template(svg) {
     columns
       .select('rect')
       .attr('y', -10)
-      .attr('height', this.height + 10)
       .transition()
       .duration(this.duration)
+      .attr('height', this.height + 10)
+      .duration(this.duration)
       .attr('width', (d, i) => {
+        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+        if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
         if (this.filteredData.data.filter(d => d.totalRow).length) {
-          return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method]);
+          return this.x[0](val);
         } else {
           return 0;
         }
@@ -440,15 +449,26 @@ function Template(svg) {
 
     columns
       .select('rect.arrow')
+
+      .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
+      .transition()
+      .duration(this.duration)
       .attr('y', () => {
         let indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
         return indexOfTotalRow * this.rowHeight;
       })
-      .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
-      .transition()
-      .duration(this.duration)
       .attr('x', (d, i) => {
-        return this.x[0](this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method]);
+        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+        if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
+        return this.x[0](val);
+      })
+      .attr('opacity', (d, i) => {
+        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+        if (this.method === 'value' && val > this.x[i].domain()[1]) {
+          return 0;
+        } else {
+          return 1;
+        }
       });
   };
 
