@@ -124,10 +124,11 @@ function Template(svg) {
    *
    * Creates all the DOM elements inside of each row
    */
-  this.initRowElements = function(rowsE) {
+  this.initRowElements = function(el) {
+    let g = el.append('g').attr('class', 'row');
+
     // Row fill
-    rowsE
-      .insert('rect')
+    g.insert('rect')
       .attr('class', 'rowFill')
       .attr('fill', color.purple)
       .attr('height', this.rowHeight)
@@ -135,8 +136,7 @@ function Template(svg) {
       .attr('width', this.width + this.padding.left);
 
     // Row divider
-    rowsE
-      .insert('rect')
+    g.insert('rect')
       .attr('class', 'divider')
       .attr('fill', color.purple)
       .attr('x', -this.padding.left)
@@ -145,7 +145,7 @@ function Template(svg) {
       .attr('y', this.rowHeight);
 
     // Row Geography
-    let hyperlink = rowsE.append('a').attr('class', 'hyperlink');
+    let hyperlink = g.append('a').attr('class', 'hyperlink');
 
     // Text element inside of hyperlink
     hyperlink
@@ -154,7 +154,9 @@ function Template(svg) {
       .attr('fill', color.purple)
       .attr('y', this.rowHeight / 2 + 6);
 
-    rowsE.append('g').attr('class', 'bars');
+    g.append('g').attr('class', 'bars');
+
+    return g;
   };
 
   /**
@@ -165,25 +167,19 @@ function Template(svg) {
     let rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
-      .data(this.filteredData.data, d => d.geography);
-
-    // Create DOM element for missing rows
-    let rowsE = rows
-      .enter()
-      .append('g')
+      .data(this.filteredData.data, d => d.geography)
+      .join(
+        enter => this.initRowElements(enter),
+        update => update,
+        exit =>
+          exit
+            .transition()
+            .attr('opacity', 0.5)
+            .remove()
+      )
       .attr('class', 'row');
 
-    // Remove excess DOM elements
-    rows.exit().remove();
-
-    // Combine selections of existing rows and newly created rows
-    rows = rows.merge(rowsE);
-
-    // Create DOM elements inside the newly created rows
-    this.initRowElements(rowsE);
-
     // Dynamic styling, sizing and positioning based on data and container size
-
     rows
       .select('rect.rowFill')
       .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0))
@@ -237,17 +233,10 @@ function Template(svg) {
     });
 
     let bars = rows
-      .select('g.bars')
       .selectAll('rect.bar')
-      .data(d => d.values);
-    let barsE = bars
-      .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('width', 0);
-
-    bars.exit().remove();
-    bars = bars.merge(barsE);
+      .data(d => d.values)
+      .join('rect')
+      .attr('class', 'bar');
 
     bars
       .attr('height', (d, i, j) => {
@@ -263,7 +252,11 @@ function Template(svg) {
       })
       .attr('opacity', (d, i) => {
         return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-      });
+      })
+      .transition()
+      .duration(this.duration)
+      .attr('width', d => this.x[0](d[this.method]))
+      .attr('x', (d, i) => this.x[i](0));
 
     bars
       .on('mousemove', d => {
@@ -276,12 +269,6 @@ function Template(svg) {
       .on('mouseleave', () => {
         this.hideTooltip();
       });
-
-    bars
-      .transition()
-      .duration(this.duration)
-      .attr('width', d => this.x[0](d[this.method]))
-      .attr('x', (d, i) => this.x[i](0));
   };
 
   this.setScales = function() {
@@ -311,17 +298,15 @@ function Template(svg) {
   };
 
   this.drawAxis = function() {
-    this.xAxis = this.canvas.selectAll('g.axis.x').data(this.x);
-    let xAxisE = this.xAxis
-      .enter()
-      .append('g')
+    this.xAxis = this.canvas
+      .selectAll('g.axis.x')
+      .data(this.x)
+      .join('g')
       .attr('class', 'axis x')
       .attr('transform', `translate(0, ${this.height + 10})`);
-    this.xAxis.exit().remove();
-    this.xAxis = this.xAxis.merge(xAxisE);
+
     this.xAxis.each((d, i, j) => {
       d3.select(j[i])
-        .attr('transform', `translate(0, ${this.height + 10})`)
         .attr('opacity', () => {
           return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
         })
@@ -331,13 +316,7 @@ function Template(svg) {
           d3
             .axisBottom(this.x[i])
             .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
-            .tickFormat(d => {
-              if (this.method === 'ratio') {
-                return formatPercent(d);
-              } else {
-                return d;
-              }
-            })
+            .tickFormat(d => (this.method === 'ratio' ? formatPercent(d) : d))
         );
     });
   };

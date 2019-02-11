@@ -98,7 +98,7 @@ function Template(svg) {
           this.canvas.selectAll('g.dot').attr('opacity', 0);
           this.canvas
             .selectAll('g.dotgroup')
-            .filter((dot, index) => {
+            .filter(dot => {
               if (dot.geography === geography) {
                 this.handleMouseover(dot.geography);
                 return true;
@@ -166,7 +166,7 @@ function Template(svg) {
     this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .filter((d, i) => d.geography === geo)
+      .filter(d => d.geography === geo)
       .attr('opacity', 1)
       .select('text')
       .attr('font-weight', 700);
@@ -176,7 +176,7 @@ function Template(svg) {
       .selectAll('path.row')
       .attr('stroke-opacity', 0.05)
       .attr('stroke-width', 2)
-      .filter((d, i) => d.geography === geo)
+      .filter(d => d.geography === geo)
       .attr('stroke-opacity', 1)
       .attr('stroke-width', 4);
   };
@@ -266,8 +266,7 @@ function Template(svg) {
       .attr('tabindex', 0);
 
     // Hover label to highlight itself and its corresponding line
-    labels.on('mouseover', (d, i) => {
-      console.log(i);
+    labels.on('mouseover', d => {
       if (this.highlight === -1) {
         this.handleMouseover(d.geography);
       }
@@ -337,7 +336,6 @@ function Template(svg) {
     this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
   };
 
-  //
   this.drawInfobox = function() {
     if (this.highlight === -1) {
       this.infobox.attr('opacity', 0).style('display', 'none');
@@ -440,25 +438,14 @@ function Template(svg) {
 
   // Updates the shape and style of the lines in the line chart
   this.drawLines = function() {
-    // Standard select/enter/update/exit pattern for each line.
     // Each line is a path element
-    let row = this.canvas
-      .select('g.lines')
+    this.canvas
       .selectAll('path.row')
-      .data(this.data.data, d => d.geography);
-    let rowE = row
-      .enter()
-      .append('path')
-      .attr('class', 'row');
-    row.exit().remove();
-    row = row.merge(rowE);
-
-    rowE.style('cursor', 'pointer').attr('fill', 'none');
-
-    // Update the shape of the line using the line generator
-    // and its style based on the data: total and avg rows get
-    // separate styling
-    row
+      .data(this.data.data, d => d.geography)
+      .join('path')
+      .attr('class', 'row')
+      .style('cursor', 'pointer')
+      .attr('fill', 'none')
       .transition()
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i, j) => {
@@ -480,28 +467,6 @@ function Template(svg) {
       .style('stroke-dasharray', d => {
         if (d.totalRow) return '4,3';
       });
-
-    // row
-    //   .on('mouseover', (d, i) => {
-    //     console.log(d);
-    //     if (this.highlight === -1) {
-    //       this.handleMouseover(d.geography);
-    //     }
-    //   })
-    //   .on('mouseleave', () => {
-    //     if (this.highlight === -1) {
-    //       this.handleMouseleave();
-    //     }
-    //   });
-
-    // // Support click and to trigger a render() with a highlight argument
-    // row.on('click', (d, i) => {
-    //   if (i === this.highlight) {
-    //     this.render(this.data, { method: this.method, highlight: -1 });
-    //   } else {
-    //     this.render(this.data, { method: this.method, highlight: i });
-    //   }
-    // });
   };
 
   // Resets the scales based on the provided data on each render
