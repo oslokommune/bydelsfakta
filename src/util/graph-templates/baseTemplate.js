@@ -50,6 +50,7 @@ function Base_Template(svg) {
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
+  this.formatPercent = d3.format('.0%');
   this.sourceHeight = 25;
   this.duration = 250;
 
