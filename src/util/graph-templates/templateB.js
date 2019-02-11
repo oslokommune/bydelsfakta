@@ -130,7 +130,8 @@ function Template(svg) {
       .data(d => d.values, d => d.geography)
       .join('g')
       .attr('class', 'dot')
-      .attr('opacity', 0);
+      .attr('opacity', 0)
+      .style('pointer-events', 'none');
 
     dot
       .append('text')
@@ -174,7 +175,7 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-opacity', 0.05)
+      .attr('stroke-opacity', 0.2)
       .attr('stroke-width', 2)
       .filter(d => d.geography === geo)
       .attr('stroke-opacity', 1)
@@ -208,7 +209,7 @@ function Template(svg) {
       })
       .attr('stroke-opacity', d => {
         if (d.totalRow || d.avgRow) return 1;
-        return 0.1;
+        return 0.2;
       });
   };
 
@@ -440,13 +441,26 @@ function Template(svg) {
   this.drawLines = function() {
     // Each line is a path element
     this.canvas
+      .select('g.lines')
       .selectAll('path.row')
       .data(this.data.data, d => d.geography)
-      .join('path')
+      .join(enter => {
+        return enter.append('path').attr('d', d => {
+          let initialData = d.values.map(val => {
+            return {
+              date: val.date,
+              value: 0,
+            };
+          });
+          return this.line(initialData);
+        });
+      })
       .attr('class', 'row')
-      .style('cursor', 'pointer')
+      .style('pointer-events', 'none')
       .attr('fill', 'none')
       .transition()
+      .duration(100)
+      .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i, j) => {
         if (d.totalRow) return 'black';
@@ -462,7 +476,7 @@ function Template(svg) {
         if (this.highlight >= 0 && this.highlight !== i) return 0.1;
         if (this.highlight >= 0 && this.highlight === i) return 1;
         if (d.totalRow || d.avgRow) return 1;
-        return 0.1;
+        return 0.2;
       })
       .style('stroke-dasharray', d => {
         if (d.totalRow) return '4,3';
@@ -473,13 +487,13 @@ function Template(svg) {
   this.setScales = function() {
     // Find the min and max values and add some padding
     this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
-    this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) / 1.2;
+    this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
 
     // Set the xScale (time dimension) range and domain
     this.x = d3
       .scaleTime()
       .domain([
-        d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0].date), -1),
+        d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0].date), -2),
         this.parseDate(this.data.data[0].values[this.data.data[0].values.length - 1].date),
       ])
       .range([0, this.width]);

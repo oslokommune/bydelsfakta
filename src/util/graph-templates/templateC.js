@@ -60,6 +60,8 @@ function Template(svg) {
     this.drawTabs();
     this.drawLabels();
     this.drawInfobox();
+    this.drawDots();
+    this.drawVoronoi();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
@@ -80,8 +82,93 @@ function Template(svg) {
       .attr('class', 'bg')
       .attr('fill', 'white');
 
+    this.canvas.append('g').attr('class', 'lines');
+    this.canvas.append('g').attr('class', 'dots');
+    this.canvas.append('g').attr('class', 'voronoi');
+    this.canvas.append('g').attr('class', 'labels');
+
     // Call method for creating info box elements
     this.createInfoBoxElements();
+  };
+
+  this.drawDots = function() {
+    let dotgroup = this.canvas
+      .select('g.dots')
+      .selectAll('g.dotgroup')
+      .data(this.data.data, d => d.geography)
+      .join('g')
+      .attr('class', 'dotgroup');
+
+    let dot = dotgroup
+      .selectAll('g.dot')
+      .data(d => d.values[this.series], d => d.geography)
+      .join('g')
+      .attr('class', 'dot')
+      .attr('opacity', 0);
+
+    dot
+      .append('text')
+      .text(d => d.value)
+      .attr('x', d => this.x(this.parseDate(d.date)))
+      .attr('y', d => this.y(d.value))
+      .attr('font-size', 11)
+      .attr('transform', `translate(0, -7)`)
+      .attr('text-anchor', 'middle')
+      .style('pointer-events', 'none');
+
+    dot
+      .append('circle')
+      .attr('r', 4)
+      .attr('fill', 'none')
+      .attr('stroke', 'steelblue')
+      .attr('cx', d => this.x(this.parseDate(d.date)))
+      .attr('cy', d => this.y(d.value));
+  };
+
+  this.drawVoronoi = function() {
+    let flattenData = this.data.data
+      .map(geo => geo.values[this.series].map(val => ({ date: val.date, value: val.value, geography: geo.geography })))
+      .flat();
+
+    let voronoiData = d3
+      .voronoi()
+      .extent([[1, 1], [this.width, this.height]])
+      .x(d => this.x(this.parseDate(d.date)))
+      .y(d => this.y(d.value))
+      .polygons(flattenData);
+
+    this.canvas
+      .select('g.voronoi')
+      .selectAll('path')
+      .data(voronoiData)
+      .join('path')
+      .attr('d', d => 'M' + d.join('L') + 'Z')
+      .attr('fill-opacity', 0)
+      .on('mouseover', (d, i, j) => {
+        let geography = j[i].__data__.data.geography;
+        let date = j[i].__data__.data.date;
+
+        if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
+          this.canvas.selectAll('g.dot').attr('opacity', 0);
+          this.canvas
+            .selectAll('g.dotgroup')
+            .filter(dot => {
+              if (dot.geography === geography) {
+                this.handleMouseover(dot.geography);
+                return true;
+              }
+            })
+            .selectAll('g.dot')
+            .filter(dot => dot.date === date)
+            .attr('opacity', 1);
+        }
+      })
+      .on('mouseleave', () => {
+        if (this.highlight === -1) {
+          this.canvas.selectAll('g.dot').attr('opacity', 0);
+          this.handleMouseleave();
+        }
+      });
   };
 
   // Creates info box elements called from created()
@@ -209,65 +296,6 @@ function Template(svg) {
       .text(Math.round(low.ratio * 10000) / 100 + '%');
   };
 
-  // Highlights labels and lines on hover
-  this.handleMouseover = function(index) {
-    this.canvas
-      .selectAll('g.label')
-      .transition()
-      .attr('opacity', 0.5);
-
-    d3.selectAll('g.label')
-      .select('text')
-      .attr('font-weight', 400);
-
-    d3.selectAll('g.label')
-      .filter((d, i) => i === index)
-      .transition()
-      .attr('opacity', 1)
-      .select('text')
-      .attr('font-weight', 700);
-
-    this.canvas
-      .selectAll('path.row')
-      .transition()
-      .attr('stroke-opacity', 0.05)
-      .attr('stroke-width', 2)
-      .filter((d, i) => i == index)
-      .attr('stroke-opacity', 1)
-      .attr('stroke-width', 4);
-  };
-
-  // Resets the hover state
-  this.handleMouseleave = function() {
-    this.canvas
-      .selectAll('g.label')
-      .transition()
-      .attr('opacity', d => {
-        if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
-      });
-
-    this.canvas
-      .selectAll('g.label')
-      .select('text')
-      .attr('font-weight', d => {
-        if (d.avgRow || d.totalRow) return 700;
-        return 400;
-      });
-
-    this.canvas
-      .selectAll('path.row')
-      .transition()
-      .attr('stroke-width', d => {
-        if (d.avgRow) return 5;
-        return 2;
-      })
-      .attr('stroke-opacity', d => {
-        if (d.totalRow || d.avgRow) return 1;
-        return 0.1;
-      });
-  };
-
   // Updates the tabs. Highlights the active series
   this.drawTabs = function() {
     this.tabs
@@ -336,6 +364,67 @@ function Template(svg) {
     tab.select('rect.bar').attr('opacity', (d, i) => (this.series === i ? 1 : 0));
   };
 
+  this.handleMouseover = function(geo) {
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
+      .attr('opacity', 0.5);
+
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
+      .select('text')
+      .attr('font-weight', 400);
+
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
+      .filter(d => d.geography === geo)
+      .attr('opacity', 1)
+      .select('text')
+      .attr('font-weight', 700);
+
+    this.canvas
+      .select('g.lines')
+      .selectAll('path.row')
+      .attr('stroke-opacity', 0.05)
+      .attr('stroke-width', 2)
+      .filter(d => d.geography === geo)
+      .attr('stroke-opacity', 1)
+      .attr('stroke-width', 4);
+  };
+
+  this.handleMouseleave = function() {
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
+      .attr('opacity', d => {
+        if (d.avgRow || d.totalRow) return 1;
+        return 0.45;
+      });
+
+    this.canvas
+      .select('g.labels')
+      .selectAll('g.label')
+      .select('text')
+      .attr('font-weight', d => {
+        if (d.avgRow || d.totalRow) return 700;
+        return 400;
+      });
+
+    this.canvas
+      .select('g.lines')
+      .selectAll('path.row')
+      .attr('stroke-width', d => {
+        if (d.avgRow) return 5;
+        return 2;
+      })
+      .attr('stroke-opacity', d => {
+        if (d.totalRow || d.avgRow) return 1;
+        return 0.1;
+      });
+  };
+
   // Updates the labels
   this.drawLabels = function() {
     // Get y-position for each label calculated using
@@ -350,6 +439,7 @@ function Template(svg) {
     );
 
     let labels = this.canvas
+      .select('g.labels')
       .selectAll('g.label')
       .data(labelPositions, d => d.geography)
       .join(enter => {
@@ -427,9 +517,9 @@ function Template(svg) {
       });
 
     // Call the handleMouseover method on mouseover
-    labels.on('mouseover', (d, i) => {
+    labels.on('mouseover', d => {
       if (this.highlight === -1) {
-        this.handleMouseover(i);
+        this.handleMouseover(d.geography);
       }
     });
 
@@ -446,6 +536,7 @@ function Template(svg) {
 
   this.drawLines = function() {
     let row = this.canvas
+      .select('g.lines')
       .selectAll('path.row')
       .data(this.data.data, d => d.geography)
       .join('path')
@@ -475,35 +566,6 @@ function Template(svg) {
       .style('stroke-dasharray', d => {
         if (d.totalRow) return '4,3';
       });
-
-    row
-      .on('mouseover', (d, i) => {
-        if (this.highlight === -1) {
-          this.handleMouseover(i);
-        }
-      })
-      .on('mouseleave', () => {
-        if (this.highlight === -1) {
-          this.handleMouseleave();
-        }
-      });
-
-    // Support click and to trigger a render() with a highlight argument
-    row.on('click', (d, i) => {
-      if (i === this.highlight) {
-        this.render(this.data, {
-          method: this.method,
-          series: this.series,
-          highlight: -1,
-        });
-      } else {
-        this.render(this.data, {
-          method: this.method,
-          series: this.series,
-          highlight: i,
-        });
-      }
-    });
   };
 
   this.setScales = function() {
@@ -513,8 +575,11 @@ function Template(svg) {
     this.x = d3
       .scaleTime()
       .domain([
-        this.parseDate(this.data.data[0].values[0][0].date),
-        this.parseDate(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
+        d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0][0].date), -2),
+        d3.timeMonth.offset(
+          this.parseDate(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
+          2
+        ),
       ])
       .range([0, this.width]);
 
