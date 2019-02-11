@@ -1,5 +1,5 @@
 <template>
-  <header class="oslo__navigation-topbar">
+  <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
     <router-link :to="backButton()" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
       <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
@@ -9,6 +9,7 @@
         id="select"
         class="navigation-topbar__select"
         @click="showDropdown = !showDropdown"
+        @keydown.enter="showDropdown = !showDropdown"
         tabindex="0"
         @keydown.escape="closeMenu"
         v-click-outside="closeMenu"
@@ -20,7 +21,11 @@
       </div>
       <transition name="fade">
         <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
-          <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
+          <div
+            v-for="(kategori, index) in dropdown"
+            :key="index"
+            class="navigation-topbar__dropdown-column"
+          >
             <div
               class="navigation-topbar__dropdown-column--heading"
               :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
@@ -35,9 +40,7 @@
                 :key="subpageIndex"
                 v-text="link.text"
                 :to="onClickSubpage(link.value)"
-              >
-                {{ link.text }}
-              </router-link>
+              >{{ link.text }}</router-link>
             </div>
           </div>
         </div>
@@ -170,6 +173,9 @@ export default {
 }
 
 .navigation-topbar {
+  width: 100%;
+  max-width: 768px;
+  position: relative;
   &__select {
     color: rgb(141, 141, 160);
     display: flex;
@@ -212,21 +218,27 @@ export default {
   &__dropdown {
     background-color: white;
     border: 1px solid $color-grey-100;
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.65);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
     position: absolute;
     z-index: 1;
+    padding: 0.5rem;
 
     &-column {
-      display: flex;
+      display: flex 0 0;
       flex-direction: column;
-      padding: 1rem;
+      flex: 33.333%;
+      min-width: 200px;
+      padding: 0.5rem;
 
       &--heading {
         font-weight: bold;
         margin-bottom: 1rem;
-        width: 190px;
+        // width: 190px;
       }
     }
 
@@ -242,6 +254,11 @@ export default {
       height: 34px;
       margin-bottom: 0.1rem;
       padding: 0.5rem;
+
+      &:hover:not(&--active) {
+        background-color: $color-grey-100;
+        color: black;
+      }
 
       &--active {
         background-color: $color-blue;
