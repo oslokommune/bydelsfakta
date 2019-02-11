@@ -233,10 +233,10 @@ function Template(svg) {
           .duration(this.duration)
           .attr('opacity', 1);
       })
-      .on('mousemove', (d, i, j) => {
+      .on('mousemove', d => {
         this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
       })
-      .on('mouseleave', (d, i, j) => {
+      .on('mouseleave', () => {
         bar
           .transition()
           .duration(this.duration)

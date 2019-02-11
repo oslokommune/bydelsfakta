@@ -51,7 +51,6 @@ function Template(svg) {
     if (!this.commonRender(data, options)) return;
 
     this.data.data = this.sortData(this.data.data);
-
     if (!data.data) return;
 
     // Set sizes for brush objects
@@ -275,7 +274,8 @@ function Template(svg) {
   this.createAgeSelector = function() {
     let parent = d3.select(this.svg.node().parentNode);
     let div = parent.insert('div').attr('class', 'graph__dropdown');
-    let label = div
+
+    div
       .insert('label')
       .attr('for', 'age_selector')
       .attr('class', 'graph__dropdown__label')
@@ -285,7 +285,7 @@ function Template(svg) {
       .attr('id', 'age_selector')
       .attr('class', 'graph__dropdown__select');
 
-    let option = select
+    select
       .selectAll('option')
       .data(ageRanges)
       .join('option')
