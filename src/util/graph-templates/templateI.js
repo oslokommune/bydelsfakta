@@ -66,6 +66,7 @@ function Template(svg) {
   this.selected = null;
   this.list;
   this.matrix;
+  this.values;
   this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
   this.yAxis = [];
   this.max = 0;
@@ -136,6 +137,7 @@ function Template(svg) {
     this.drawList();
     this.updateAxisLabels();
     this.drawGuideLines();
+    this.drawValues();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
@@ -230,6 +232,31 @@ function Template(svg) {
       .attr('font-weight', d => (d.totalRow || d.avgRow ? 700 : 400))
       .attr('fill', color.purple)
       .style('pointer-events', 'none');
+  };
+
+  this.drawValues = function() {
+    let values = this.values.attr('transform', `translate(${x(0)}, ${y(0.333)})`).selectAll('g');
+
+    values.attr(`transform`, (d, i) => {
+      if (i === 1) {
+        return `translate(${-x(-0.2)}, -${y(0.7)}) rotate(-60)`;
+      } else if (i === 2) {
+        return `translate(${x(-0.2)}, -${y(0.7)}) rotate(60)`;
+      } else if (i === 0) {
+        return `translate(0, ${y(0.45)})`;
+      }
+    });
+
+    values
+      .select('text')
+      .attr('text-anchor', 'middle')
+      .attr('font-size', 18)
+      .attr('font-weight', '900')
+      .attr('fill', color.purple)
+      .text((d, i) => {
+        if (this.selected === -1) return '';
+        return this.formatPercent(this.data.data[this.selected].values[i].ratio);
+      });
   };
 
   // Renders the angled tick marks and tick labels
@@ -354,6 +381,11 @@ function Template(svg) {
   this.drawGrid = function() {
     this.matrix = this.canvas.append('g').attr('class', 'matrix');
     this.arrows = this.matrix.append('g').attr('class', 'arrows');
+    this.values = this.matrix.append('g').attr('class', 'values');
+
+    this.values.append('g').append('text');
+    this.values.append('g').append('text');
+    this.values.append('g').append('text');
 
     this.drawTicks();
     this.drawAxisLabels();
