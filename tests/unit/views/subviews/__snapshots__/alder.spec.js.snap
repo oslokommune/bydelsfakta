@@ -27,6 +27,7 @@ exports[`Alder renders Alder component correctly 1`] = `
             aria-label="Antall"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Antall
@@ -35,6 +36,7 @@ exports[`Alder renders Alder component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Andel
@@ -48,6 +50,7 @@ exports[`Alder renders Alder component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -427,6 +430,7 @@ exports[`Alder renders Alder component correctly 1`] = `
             aria-label="Status"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Status
@@ -440,6 +444,7 @@ exports[`Alder renders Alder component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -556,6 +561,7 @@ exports[`Alder renders Alder component correctly 1`] = `
             aria-label="Status"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Status
@@ -564,6 +570,7 @@ exports[`Alder renders Alder component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -577,6 +584,7 @@ exports[`Alder renders Alder component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"

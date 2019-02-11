@@ -3,10 +3,10 @@
 exports[`CardImage renders correctly 1`] = `
 <div
   class="main-container__item"
-  id="test"
 >
   <a
     class="oslo__card-image"
+    id="test"
     style="background-image: url(test); background-color: black;"
   >
     <span

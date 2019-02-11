@@ -27,6 +27,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Historisk
@@ -35,6 +36,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
             aria-label="Historisk (prosent)"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk (prosent)
@@ -48,6 +50,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -305,6 +308,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Historisk
@@ -313,6 +317,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
             aria-label="Historisk (prosent)"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk (prosent)
@@ -326,6 +331,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -460,6 +466,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
             aria-label="Nøkkeltall"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Nøkkeltall
@@ -473,6 +480,7 @@ exports[`Folkemengde renders Folkemengde component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"

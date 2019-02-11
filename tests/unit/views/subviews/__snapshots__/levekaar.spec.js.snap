@@ -21,6 +21,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -29,6 +30,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -42,6 +44,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -161,6 +164,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -169,6 +173,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -182,6 +187,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -301,6 +307,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -309,6 +316,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -322,6 +330,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -441,6 +450,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -449,6 +459,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -462,6 +473,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -581,6 +593,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -589,6 +602,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -602,6 +616,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -721,6 +736,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -729,6 +745,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -742,6 +759,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -861,6 +879,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -869,6 +888,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -882,6 +902,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -1001,6 +1022,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Andel"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Andel
@@ -1009,6 +1031,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -1022,6 +1045,7 @@ exports[`Levekaar renders Levekaar component correctly 1`] = `
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"

@@ -1,6 +1,6 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
-    <router-link :to="backButton()" class="oslo__navigation-topbar-button">
+    <router-link :to="backButton()" id="backButton" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
       <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
     </router-link>
@@ -36,6 +36,7 @@
               <router-link
                 v-for="(link, subpageIndex) in kategori.links"
                 class="navigation-topbar__dropdown-item"
+                :id="`dropdown-href-${link.value}`"
                 :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
                 :key="subpageIndex"
                 v-text="link.text"
