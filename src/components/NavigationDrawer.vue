@@ -15,18 +15,23 @@
           type="checkbox"
           v-model="selected"
           :value="link.key"
-          :id="`checkbox-${link.key}`"
+          :id="`checkbox-${link.uri}`"
           @change="onChangeCheckbox"
           :disabled="disableChecbox(link.key)"
         />
-        <label :for="`checkbox-${link.key}`"></label>
-        <router-link class="navigation-link__label" :to="onClickBydel(link.uri)">{{ link.value }}</router-link>
+        <label :for="`checkbox-${link.uri}`"></label>
+        <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
+          link.value
+        }}</router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
+        id="sammenlign"
         :class="{ 'navigation-link--active': compareBydeler }"
       >
-        <router-link :to="onClickSammenlign()" class="navigation-link__label">Sammenlign bydeler</router-link>
+        <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label"
+          >Sammenlign bydeler</router-link
+        >
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
@@ -45,7 +50,7 @@
           </div>
           <div class="navigation-drawer__select-container">
             <label for="predefined-select" class="hidden-label">Velg byområde</label>
-            <select class="navigation-drawer__select" v-model="selectedPredefinedOption">
+            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
                 :key="index"
@@ -172,6 +177,7 @@ export default {
 
     onClickHome() {
       this.selected = [];
+      this.compareBydeler = false;
       this.$router.push({ name: 'Home' });
     },
 
@@ -184,6 +190,8 @@ export default {
         return this.$route.params.tema === undefined
           ? { name: 'Bydel', params: { bydel: 'alle' } }
           : { name: 'Tema', params: { bydel: 'alle', tema: this.$route.params.tema } };
+      } else if (bydel === undefined && !this.compareBydeler) {
+        return { name: 'Bydel', params: { bydel: 'alle' } };
       } else {
         return { name: 'Bydel', params: { bydel: this.$route.params.bydel } };
       }

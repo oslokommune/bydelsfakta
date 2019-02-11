@@ -18,18 +18,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
     >
       <input
         disabled="disabled"
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label router-link-exact-active router-link-active"
         href="#/bydel/gamleoslo"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -38,18 +39,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -58,18 +60,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -78,18 +81,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -98,18 +102,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -118,18 +123,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -138,18 +144,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -158,18 +165,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -178,18 +186,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -198,18 +207,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -218,18 +228,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -238,18 +249,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -258,18 +270,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -278,18 +291,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -298,18 +312,19 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -317,10 +332,12 @@ exports[`NavigationDrawer render navigationDrawer with route /bydel/gamleoslo co
      
     <div
       class="navigation-link navigation-link__label-compare"
+      id="sammenlign"
     >
       <a
         class="navigation-link__label"
         href="#/bydel/alle"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -348,18 +365,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/gamleoslo"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -368,18 +386,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -389,18 +408,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
     >
       <input
         disabled="disabled"
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label router-link-exact-active router-link-active"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -409,18 +429,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -429,18 +450,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -449,18 +471,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -469,18 +492,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -489,18 +513,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -509,18 +534,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -529,18 +555,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -549,18 +576,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -569,18 +597,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -589,18 +618,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -609,18 +639,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -629,18 +660,19 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -648,10 +680,12 @@ exports[`NavigationDrawer renders navigationDrawer correctly 1`] = `
      
     <div
       class="navigation-link navigation-link__label-compare"
+      id="sammenlign"
     >
       <a
         class="navigation-link__label"
         href="#/bydel/alle"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -680,18 +714,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
     >
       <input
         disabled="disabled"
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label router-link-exact-active router-link-active"
         href="#/bydel/gamleoslo"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -700,18 +735,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -720,18 +756,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -740,18 +777,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -760,18 +798,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -780,18 +819,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -800,18 +840,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -820,18 +861,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -840,18 +882,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -860,18 +903,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -880,18 +924,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -900,18 +945,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -920,18 +966,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -940,18 +987,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -960,18 +1008,19 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -979,10 +1028,12 @@ exports[`created lifecycle hook bydel is 1 instead of sagene 1`] = `
      
     <div
       class="navigation-link navigation-link__label-compare"
+      id="sammenlign"
     >
       <a
         class="navigation-link__label"
         href="#/bydel/alle"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -1010,18 +1061,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/gamleoslo/alder"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -1030,18 +1082,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka/alder"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -1051,18 +1104,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
     >
       <input
         disabled="disabled"
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label router-link-active"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -1071,18 +1125,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen/alder"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -1091,18 +1146,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner/alder"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -1111,18 +1167,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern/alder"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -1131,18 +1188,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker/alder"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -1151,18 +1209,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker/alder"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -1171,18 +1230,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke/alder"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -1191,18 +1251,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud/alder"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -1211,18 +1272,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner/alder"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -1231,18 +1293,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna/alder"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -1251,18 +1314,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo/alder"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -1271,18 +1335,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand/alder"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -1291,18 +1356,19 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand/alder"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -1310,10 +1376,12 @@ exports[`created lifecycle hook bydel is sagene and tema is alder 1`] = `
      
     <div
       class="navigation-link navigation-link__label-compare"
+      id="sammenlign"
     >
       <a
         class="navigation-link__label"
         href="#/bydel/alle/alder"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -1341,18 +1409,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/gamleoslo"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -1361,18 +1430,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -1381,18 +1451,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -1401,18 +1472,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -1421,18 +1493,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -1441,18 +1514,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -1461,18 +1535,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -1481,18 +1556,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -1501,18 +1577,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -1521,18 +1598,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -1541,18 +1619,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -1561,18 +1640,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -1581,18 +1661,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -1601,18 +1682,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -1621,18 +1703,19 @@ exports[`created lifecycle hook params is alle 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -1640,10 +1723,12 @@ exports[`created lifecycle hook params is alle 1`] = `
      
     <div
       class="navigation-link navigation-link__label-compare navigation-link--active"
+      id="sammenlign"
     >
       <a
         class="navigation-link__label router-link-exact-active router-link-active"
         href="#/bydel/alle"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -1688,6 +1773,7 @@ exports[`created lifecycle hook params is alle 1`] = `
          
         <select
           class="navigation-drawer__select"
+          id="navigation-drawer-select"
         >
           <option
             disabled="disabled"
@@ -1780,18 +1866,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/gamleoslo"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -1800,18 +1887,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -1820,18 +1908,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -1840,18 +1929,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -1860,18 +1950,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -1880,18 +1971,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -1900,18 +1992,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -1920,18 +2013,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -1940,18 +2034,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -1960,18 +2055,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -1980,18 +2076,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -2000,18 +2097,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -2020,18 +2118,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -2040,18 +2139,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -2060,18 +2160,19 @@ exports[`created lifecycle hook params is undefined 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -2079,10 +2180,12 @@ exports[`created lifecycle hook params is undefined 1`] = `
      
     <div
       class="navigation-link navigation-link__label-compare"
+      id="sammenlign"
     >
       <a
-        class="navigation-link__label router-link-active"
-        href="#/"
+        class="navigation-link__label"
+        href="#/bydel/alle"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -2110,18 +2213,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link navigation-link--compare"
     >
       <input
-        id="checkbox-1"
+        id="checkbox-gamleoslo"
         type="checkbox"
         value="1"
       />
        
       <label
-        for="checkbox-1"
+        for="checkbox-gamleoslo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/gamleoslo"
+        id="a-gamleoslo"
       >
         Bydel Gamle Oslo
       </a>
@@ -2130,18 +2234,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link navigation-link--compare"
     >
       <input
-        id="checkbox-2"
+        id="checkbox-grunerlokka"
         type="checkbox"
         value="2"
       />
        
       <label
-        for="checkbox-2"
+        for="checkbox-grunerlokka"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grunerlokka"
+        id="a-grunerlokka"
       >
         Bydel Grünerløkka
       </a>
@@ -2150,18 +2255,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link navigation-link--compare"
     >
       <input
-        id="checkbox-3"
+        id="checkbox-sagene"
         type="checkbox"
         value="3"
       />
        
       <label
-        for="checkbox-3"
+        for="checkbox-sagene"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sagene"
+        id="a-sagene"
       >
         Bydel Sagene
       </a>
@@ -2170,18 +2276,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link navigation-link--compare"
     >
       <input
-        id="checkbox-4"
+        id="checkbox-sthanshaugen"
         type="checkbox"
         value="4"
       />
        
       <label
-        for="checkbox-4"
+        for="checkbox-sthanshaugen"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sthanshaugen"
+        id="a-sthanshaugen"
       >
         Bydel St. Hanshaugen
       </a>
@@ -2190,18 +2297,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-5"
+        id="checkbox-frogner"
         type="checkbox"
         value="5"
       />
        
       <label
-        for="checkbox-5"
+        for="checkbox-frogner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/frogner"
+        id="a-frogner"
       >
         Bydel Frogner
       </a>
@@ -2210,18 +2318,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-6"
+        id="checkbox-ullern"
         type="checkbox"
         value="6"
       />
        
       <label
-        for="checkbox-6"
+        for="checkbox-ullern"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ullern"
+        id="a-ullern"
       >
         Bydel Ullern
       </a>
@@ -2230,18 +2339,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-7"
+        id="checkbox-vestreaker"
         type="checkbox"
         value="7"
       />
        
       <label
-        for="checkbox-7"
+        for="checkbox-vestreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/vestreaker"
+        id="a-vestreaker"
       >
         Bydel Vestre Aker
       </a>
@@ -2250,18 +2360,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-8"
+        id="checkbox-nordreaker"
         type="checkbox"
         value="8"
       />
        
       <label
-        for="checkbox-8"
+        for="checkbox-nordreaker"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordreaker"
+        id="a-nordreaker"
       >
         Bydel Nordre Aker
       </a>
@@ -2270,18 +2381,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-9"
+        id="checkbox-bjerke"
         type="checkbox"
         value="9"
       />
        
       <label
-        for="checkbox-9"
+        for="checkbox-bjerke"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/bjerke"
+        id="a-bjerke"
       >
         Bydel Bjerke
       </a>
@@ -2290,18 +2402,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-10"
+        id="checkbox-grorud"
         type="checkbox"
         value="10"
       />
        
       <label
-        for="checkbox-10"
+        for="checkbox-grorud"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/grorud"
+        id="a-grorud"
       >
         Bydel Grorud
       </a>
@@ -2310,18 +2423,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-11"
+        id="checkbox-stovner"
         type="checkbox"
         value="11"
       />
        
       <label
-        for="checkbox-11"
+        for="checkbox-stovner"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/stovner"
+        id="a-stovner"
       >
         Bydel Stovner
       </a>
@@ -2330,18 +2444,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-12"
+        id="checkbox-alna"
         type="checkbox"
         value="12"
       />
        
       <label
-        for="checkbox-12"
+        for="checkbox-alna"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/alna"
+        id="a-alna"
       >
         Bydel Alna
       </a>
@@ -2350,18 +2465,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-13"
+        id="checkbox-ostensjo"
         type="checkbox"
         value="13"
       />
        
       <label
-        for="checkbox-13"
+        for="checkbox-ostensjo"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/ostensjo"
+        id="a-ostensjo"
       >
         Bydel Østensjø
       </a>
@@ -2370,18 +2486,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-14"
+        id="checkbox-nordstrand"
         type="checkbox"
         value="14"
       />
        
       <label
-        for="checkbox-14"
+        for="checkbox-nordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/nordstrand"
+        id="a-nordstrand"
       >
         Bydel Nordstrand
       </a>
@@ -2390,18 +2507,19 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
       class="navigation-link"
     >
       <input
-        id="checkbox-15"
+        id="checkbox-sondrenordstrand"
         type="checkbox"
         value="15"
       />
        
       <label
-        for="checkbox-15"
+        for="checkbox-sondrenordstrand"
       />
        
       <a
         class="navigation-link__label"
         href="#/bydel/sondrenordstrand"
+        id="a-sondrenordstrand"
       >
         Bydel Søndre Nordstrand
       </a>
@@ -2409,10 +2527,12 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
      
     <div
       class="navigation-link navigation-link__label-compare navigation-link--active"
+      id="sammenlign"
     >
       <a
         class="navigation-link__label router-link-exact-active router-link-active"
         href="#/bydel/1-2-3-4"
+        id="sammenlign-href"
       >
         Sammenlign bydeler
       </a>
@@ -2456,6 +2576,7 @@ exports[`created lifecycle hook params.length is bigger than 0 1`] = `
          
         <select
           class="navigation-drawer__select"
+          id="navigation-drawer-select"
         >
           <option
             disabled="disabled"

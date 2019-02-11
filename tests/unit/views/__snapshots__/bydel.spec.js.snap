@@ -9,11 +9,11 @@ exports[`Bydel renders component correctly 1`] = `
   >
     <div
       class="main-container__item"
-      id="folkemengde"
     >
       <a
         class="oslo__card-image"
         href="#//folkemengde"
+        id="folkemengde"
         style="background-image: url(/img/folkemengde.png); background-color: rgb(255, 129, 116);"
       >
         <span
@@ -40,11 +40,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="alder"
     >
       <a
         class="oslo__card-image"
         href="#//alder"
+        id="alder"
         style="background-image: url(/img/alder.png); background-color: rgb(255, 129, 116);"
       >
         <span
@@ -71,11 +71,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="innvandrerbefolkningen"
     >
       <a
         class="oslo__card-image"
         href="#//innvandrerbefolkningen"
+        id="innvandrerbefolkningen"
         style="background-image: url(/img/innvandring.png); background-color: rgb(255, 129, 116);"
       >
         <span
@@ -102,11 +102,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="husholdninger"
     >
       <a
         class="oslo__card-image"
         href="#//husholdninger"
+        id="husholdninger"
         style="background-image: url(/img/husholdninger.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -133,11 +133,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="trangboddhet"
     >
       <a
         class="oslo__card-image"
         href="#//trangboddhet"
+        id="trangboddhet"
         style="background-image: url(/img/trangboddhet.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -164,11 +164,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="eierform"
     >
       <a
         class="oslo__card-image"
         href="#//eierform"
+        id="eierform"
         style="background-image: url(/img/eierform.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -195,11 +195,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="kommunaleboliger"
     >
       <a
         class="oslo__card-image"
         href="#//kommunaleboliger"
+        id="kommunaleboliger"
         style="background-image: url(/img/kommunale-boliger.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -226,11 +226,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="flytting"
     >
       <a
         class="oslo__card-image"
         href="#//flytting"
+        id="flytting"
         style="background-image: url(/img/flytting.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -257,11 +257,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="bygningstyper"
     >
       <a
         class="oslo__card-image"
         href="#//bygningstyper"
+        id="bygningstyper"
         style="background-image: url(/img/bygningstyper.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -288,11 +288,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="boligpriser"
     >
       <a
         class="oslo__card-image"
         href="#//boligpriser"
+        id="boligpriser"
         style="background-image: url(/img/boligpriser.png); background-color: rgb(66, 248, 182);"
       >
         <span
@@ -319,11 +319,11 @@ exports[`Bydel renders component correctly 1`] = `
     </div>
     <div
       class="main-container__item"
-      id="levekaar"
     >
       <a
         class="oslo__card-image"
         href="#//levekaar"
+        id="levekaar"
         style="background-image: url(/img/levekaar.png); background-color: rgb(248, 198, 107);"
       >
         <span
