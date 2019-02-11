@@ -20,18 +20,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-1"
+          id="checkbox-gamleoslo"
           type="checkbox"
           value="1"
         />
          
         <label
-          for="checkbox-1"
+          for="checkbox-gamleoslo"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/gamleoslo"
+          id="a-gamleoslo"
         >
           Bydel Gamle Oslo
         </a>
@@ -40,18 +41,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-2"
+          id="checkbox-grunerlokka"
           type="checkbox"
           value="2"
         />
          
         <label
-          for="checkbox-2"
+          for="checkbox-grunerlokka"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/grunerlokka"
+          id="a-grunerlokka"
         >
           Bydel Grünerløkka
         </a>
@@ -60,18 +62,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-3"
+          id="checkbox-sagene"
           type="checkbox"
           value="3"
         />
          
         <label
-          for="checkbox-3"
+          for="checkbox-sagene"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sagene"
+          id="a-sagene"
         >
           Bydel Sagene
         </a>
@@ -80,18 +83,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-4"
+          id="checkbox-sthanshaugen"
           type="checkbox"
           value="4"
         />
          
         <label
-          for="checkbox-4"
+          for="checkbox-sthanshaugen"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sthanshaugen"
+          id="a-sthanshaugen"
         >
           Bydel St. Hanshaugen
         </a>
@@ -100,18 +104,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-5"
+          id="checkbox-frogner"
           type="checkbox"
           value="5"
         />
          
         <label
-          for="checkbox-5"
+          for="checkbox-frogner"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/frogner"
+          id="a-frogner"
         >
           Bydel Frogner
         </a>
@@ -120,18 +125,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-6"
+          id="checkbox-ullern"
           type="checkbox"
           value="6"
         />
          
         <label
-          for="checkbox-6"
+          for="checkbox-ullern"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/ullern"
+          id="a-ullern"
         >
           Bydel Ullern
         </a>
@@ -140,18 +146,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-7"
+          id="checkbox-vestreaker"
           type="checkbox"
           value="7"
         />
          
         <label
-          for="checkbox-7"
+          for="checkbox-vestreaker"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/vestreaker"
+          id="a-vestreaker"
         >
           Bydel Vestre Aker
         </a>
@@ -160,18 +167,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-8"
+          id="checkbox-nordreaker"
           type="checkbox"
           value="8"
         />
          
         <label
-          for="checkbox-8"
+          for="checkbox-nordreaker"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/nordreaker"
+          id="a-nordreaker"
         >
           Bydel Nordre Aker
         </a>
@@ -180,18 +188,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-9"
+          id="checkbox-bjerke"
           type="checkbox"
           value="9"
         />
          
         <label
-          for="checkbox-9"
+          for="checkbox-bjerke"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/bjerke"
+          id="a-bjerke"
         >
           Bydel Bjerke
         </a>
@@ -200,18 +209,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-10"
+          id="checkbox-grorud"
           type="checkbox"
           value="10"
         />
          
         <label
-          for="checkbox-10"
+          for="checkbox-grorud"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/grorud"
+          id="a-grorud"
         >
           Bydel Grorud
         </a>
@@ -220,18 +230,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-11"
+          id="checkbox-stovner"
           type="checkbox"
           value="11"
         />
          
         <label
-          for="checkbox-11"
+          for="checkbox-stovner"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/stovner"
+          id="a-stovner"
         >
           Bydel Stovner
         </a>
@@ -240,18 +251,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-12"
+          id="checkbox-alna"
           type="checkbox"
           value="12"
         />
          
         <label
-          for="checkbox-12"
+          for="checkbox-alna"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/alna"
+          id="a-alna"
         >
           Bydel Alna
         </a>
@@ -260,18 +272,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-13"
+          id="checkbox-ostensjo"
           type="checkbox"
           value="13"
         />
          
         <label
-          for="checkbox-13"
+          for="checkbox-ostensjo"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/ostensjo"
+          id="a-ostensjo"
         >
           Bydel Østensjø
         </a>
@@ -280,18 +293,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-14"
+          id="checkbox-nordstrand"
           type="checkbox"
           value="14"
         />
          
         <label
-          for="checkbox-14"
+          for="checkbox-nordstrand"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/nordstrand"
+          id="a-nordstrand"
         >
           Bydel Nordstrand
         </a>
@@ -300,18 +314,19 @@ exports[`App router sends you to bydel alle 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-15"
+          id="checkbox-sondrenordstrand"
           type="checkbox"
           value="15"
         />
          
         <label
-          for="checkbox-15"
+          for="checkbox-sondrenordstrand"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sondrenordstrand"
+          id="a-sondrenordstrand"
         >
           Bydel Søndre Nordstrand
         </a>
@@ -319,10 +334,12 @@ exports[`App router sends you to bydel alle 1`] = `
        
       <div
         class="navigation-link navigation-link__label-compare navigation-link--active"
+        id="sammenlign"
       >
         <a
           class="navigation-link__label router-link-exact-active router-link-active"
           href="#/bydel/alle"
+          id="sammenlign-href"
         >
           Sammenlign bydeler
         </a>
@@ -367,6 +384,7 @@ exports[`App router sends you to bydel alle 1`] = `
            
           <select
             class="navigation-drawer__select"
+            id="navigation-drawer-select"
           >
             <option
               disabled="disabled"
@@ -450,6 +468,7 @@ exports[`App router sends you to bydel alle 1`] = `
       <a
         class="oslo__navigation-topbar-button router-link-active"
         href="#/"
+        id="backButton"
       >
         <i
           class="material-icons oslo__topbar"
@@ -502,11 +521,11 @@ exports[`App router sends you to bydel alle 1`] = `
         >
           <div
             class="main-container__item"
-            id="folkemengde"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/folkemengde"
+              id="folkemengde"
               style="background-image: url(/img/folkemengde.png); background-color: rgb(255, 129, 116);"
             >
               <span
@@ -533,11 +552,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="alder"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/alder"
+              id="alder"
               style="background-image: url(/img/alder.png); background-color: rgb(255, 129, 116);"
             >
               <span
@@ -564,11 +583,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="innvandrerbefolkningen"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/innvandrerbefolkningen"
+              id="innvandrerbefolkningen"
               style="background-image: url(/img/innvandring.png); background-color: rgb(255, 129, 116);"
             >
               <span
@@ -595,11 +614,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="husholdninger"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/husholdninger"
+              id="husholdninger"
               style="background-image: url(/img/husholdninger.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -626,11 +645,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="trangboddhet"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/trangboddhet"
+              id="trangboddhet"
               style="background-image: url(/img/trangboddhet.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -657,11 +676,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="eierform"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/eierform"
+              id="eierform"
               style="background-image: url(/img/eierform.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -688,11 +707,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="kommunaleboliger"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/kommunaleboliger"
+              id="kommunaleboliger"
               style="background-image: url(/img/kommunale-boliger.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -719,11 +738,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="flytting"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/flytting"
+              id="flytting"
               style="background-image: url(/img/flytting.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -750,11 +769,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="bygningstyper"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/bygningstyper"
+              id="bygningstyper"
               style="background-image: url(/img/bygningstyper.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -781,11 +800,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="boligpriser"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/boligpriser"
+              id="boligpriser"
               style="background-image: url(/img/boligpriser.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -812,11 +831,11 @@ exports[`App router sends you to bydel alle 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="levekaar"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/levekaar"
+              id="levekaar"
               style="background-image: url(/img/levekaar.png); background-color: rgb(248, 198, 107);"
             >
               <span
@@ -876,18 +895,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-1"
+          id="checkbox-gamleoslo"
           type="checkbox"
           value="1"
         />
          
         <label
-          for="checkbox-1"
+          for="checkbox-gamleoslo"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/gamleoslo"
+          id="a-gamleoslo"
         >
           Bydel Gamle Oslo
         </a>
@@ -896,18 +916,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-2"
+          id="checkbox-grunerlokka"
           type="checkbox"
           value="2"
         />
          
         <label
-          for="checkbox-2"
+          for="checkbox-grunerlokka"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/grunerlokka"
+          id="a-grunerlokka"
         >
           Bydel Grünerløkka
         </a>
@@ -917,18 +938,19 @@ exports[`App router sends you to bydel sagene 1`] = `
       >
         <input
           disabled="disabled"
-          id="checkbox-3"
+          id="checkbox-sagene"
           type="checkbox"
           value="3"
         />
          
         <label
-          for="checkbox-3"
+          for="checkbox-sagene"
         />
          
         <a
           class="navigation-link__label router-link-exact-active router-link-active"
           href="#/bydel/sagene"
+          id="a-sagene"
         >
           Bydel Sagene
         </a>
@@ -937,18 +959,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-4"
+          id="checkbox-sthanshaugen"
           type="checkbox"
           value="4"
         />
          
         <label
-          for="checkbox-4"
+          for="checkbox-sthanshaugen"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sthanshaugen"
+          id="a-sthanshaugen"
         >
           Bydel St. Hanshaugen
         </a>
@@ -957,18 +980,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-5"
+          id="checkbox-frogner"
           type="checkbox"
           value="5"
         />
          
         <label
-          for="checkbox-5"
+          for="checkbox-frogner"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/frogner"
+          id="a-frogner"
         >
           Bydel Frogner
         </a>
@@ -977,18 +1001,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-6"
+          id="checkbox-ullern"
           type="checkbox"
           value="6"
         />
          
         <label
-          for="checkbox-6"
+          for="checkbox-ullern"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/ullern"
+          id="a-ullern"
         >
           Bydel Ullern
         </a>
@@ -997,18 +1022,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-7"
+          id="checkbox-vestreaker"
           type="checkbox"
           value="7"
         />
          
         <label
-          for="checkbox-7"
+          for="checkbox-vestreaker"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/vestreaker"
+          id="a-vestreaker"
         >
           Bydel Vestre Aker
         </a>
@@ -1017,18 +1043,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-8"
+          id="checkbox-nordreaker"
           type="checkbox"
           value="8"
         />
          
         <label
-          for="checkbox-8"
+          for="checkbox-nordreaker"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/nordreaker"
+          id="a-nordreaker"
         >
           Bydel Nordre Aker
         </a>
@@ -1037,18 +1064,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-9"
+          id="checkbox-bjerke"
           type="checkbox"
           value="9"
         />
          
         <label
-          for="checkbox-9"
+          for="checkbox-bjerke"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/bjerke"
+          id="a-bjerke"
         >
           Bydel Bjerke
         </a>
@@ -1057,18 +1085,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-10"
+          id="checkbox-grorud"
           type="checkbox"
           value="10"
         />
          
         <label
-          for="checkbox-10"
+          for="checkbox-grorud"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/grorud"
+          id="a-grorud"
         >
           Bydel Grorud
         </a>
@@ -1077,18 +1106,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-11"
+          id="checkbox-stovner"
           type="checkbox"
           value="11"
         />
          
         <label
-          for="checkbox-11"
+          for="checkbox-stovner"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/stovner"
+          id="a-stovner"
         >
           Bydel Stovner
         </a>
@@ -1097,18 +1127,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-12"
+          id="checkbox-alna"
           type="checkbox"
           value="12"
         />
          
         <label
-          for="checkbox-12"
+          for="checkbox-alna"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/alna"
+          id="a-alna"
         >
           Bydel Alna
         </a>
@@ -1117,18 +1148,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-13"
+          id="checkbox-ostensjo"
           type="checkbox"
           value="13"
         />
          
         <label
-          for="checkbox-13"
+          for="checkbox-ostensjo"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/ostensjo"
+          id="a-ostensjo"
         >
           Bydel Østensjø
         </a>
@@ -1137,18 +1169,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-14"
+          id="checkbox-nordstrand"
           type="checkbox"
           value="14"
         />
          
         <label
-          for="checkbox-14"
+          for="checkbox-nordstrand"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/nordstrand"
+          id="a-nordstrand"
         >
           Bydel Nordstrand
         </a>
@@ -1157,18 +1190,19 @@ exports[`App router sends you to bydel sagene 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-15"
+          id="checkbox-sondrenordstrand"
           type="checkbox"
           value="15"
         />
          
         <label
-          for="checkbox-15"
+          for="checkbox-sondrenordstrand"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sondrenordstrand"
+          id="a-sondrenordstrand"
         >
           Bydel Søndre Nordstrand
         </a>
@@ -1176,10 +1210,12 @@ exports[`App router sends you to bydel sagene 1`] = `
        
       <div
         class="navigation-link navigation-link__label-compare"
+        id="sammenlign"
       >
         <a
           class="navigation-link__label"
           href="#/bydel/alle"
+          id="sammenlign-href"
         >
           Sammenlign bydeler
         </a>
@@ -1198,6 +1234,7 @@ exports[`App router sends you to bydel sagene 1`] = `
       <a
         class="oslo__navigation-topbar-button router-link-active"
         href="#/"
+        id="backButton"
       >
         <i
           class="material-icons oslo__topbar"
@@ -1250,11 +1287,11 @@ exports[`App router sends you to bydel sagene 1`] = `
         >
           <div
             class="main-container__item"
-            id="folkemengde"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/folkemengde"
+              id="folkemengde"
               style="background-image: url(/img/folkemengde.png); background-color: rgb(255, 129, 116);"
             >
               <span
@@ -1281,11 +1318,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="alder"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/alder"
+              id="alder"
               style="background-image: url(/img/alder.png); background-color: rgb(255, 129, 116);"
             >
               <span
@@ -1312,11 +1349,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="innvandrerbefolkningen"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/innvandrerbefolkningen"
+              id="innvandrerbefolkningen"
               style="background-image: url(/img/innvandring.png); background-color: rgb(255, 129, 116);"
             >
               <span
@@ -1343,11 +1380,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="husholdninger"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/husholdninger"
+              id="husholdninger"
               style="background-image: url(/img/husholdninger.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1374,11 +1411,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="trangboddhet"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/trangboddhet"
+              id="trangboddhet"
               style="background-image: url(/img/trangboddhet.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1405,11 +1442,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="eierform"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/eierform"
+              id="eierform"
               style="background-image: url(/img/eierform.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1436,11 +1473,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="kommunaleboliger"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/kommunaleboliger"
+              id="kommunaleboliger"
               style="background-image: url(/img/kommunale-boliger.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1467,11 +1504,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="flytting"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/flytting"
+              id="flytting"
               style="background-image: url(/img/flytting.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1498,11 +1535,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="bygningstyper"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/bygningstyper"
+              id="bygningstyper"
               style="background-image: url(/img/bygningstyper.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1529,11 +1566,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="boligpriser"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/boligpriser"
+              id="boligpriser"
               style="background-image: url(/img/boligpriser.png); background-color: rgb(66, 248, 182);"
             >
               <span
@@ -1560,11 +1597,11 @@ exports[`App router sends you to bydel sagene 1`] = `
           </div>
           <div
             class="main-container__item"
-            id="levekaar"
           >
             <a
               class="oslo__card-image"
               href="#/bydel/alle/levekaar"
+              id="levekaar"
               style="background-image: url(/img/levekaar.png); background-color: rgb(248, 198, 107);"
             >
               <span
@@ -1624,18 +1661,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-1"
+          id="checkbox-gamleoslo"
           type="checkbox"
           value="1"
         />
          
         <label
-          for="checkbox-1"
+          for="checkbox-gamleoslo"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/gamleoslo"
+          id="a-gamleoslo"
         >
           Bydel Gamle Oslo
         </a>
@@ -1644,18 +1682,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-2"
+          id="checkbox-grunerlokka"
           type="checkbox"
           value="2"
         />
          
         <label
-          for="checkbox-2"
+          for="checkbox-grunerlokka"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/grunerlokka"
+          id="a-grunerlokka"
         >
           Bydel Grünerløkka
         </a>
@@ -1664,18 +1703,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-3"
+          id="checkbox-sagene"
           type="checkbox"
           value="3"
         />
          
         <label
-          for="checkbox-3"
+          for="checkbox-sagene"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sagene"
+          id="a-sagene"
         >
           Bydel Sagene
         </a>
@@ -1684,18 +1724,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-4"
+          id="checkbox-sthanshaugen"
           type="checkbox"
           value="4"
         />
          
         <label
-          for="checkbox-4"
+          for="checkbox-sthanshaugen"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sthanshaugen"
+          id="a-sthanshaugen"
         >
           Bydel St. Hanshaugen
         </a>
@@ -1704,18 +1745,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-5"
+          id="checkbox-frogner"
           type="checkbox"
           value="5"
         />
          
         <label
-          for="checkbox-5"
+          for="checkbox-frogner"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/frogner"
+          id="a-frogner"
         >
           Bydel Frogner
         </a>
@@ -1724,18 +1766,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-6"
+          id="checkbox-ullern"
           type="checkbox"
           value="6"
         />
          
         <label
-          for="checkbox-6"
+          for="checkbox-ullern"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/ullern"
+          id="a-ullern"
         >
           Bydel Ullern
         </a>
@@ -1744,18 +1787,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-7"
+          id="checkbox-vestreaker"
           type="checkbox"
           value="7"
         />
          
         <label
-          for="checkbox-7"
+          for="checkbox-vestreaker"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/vestreaker"
+          id="a-vestreaker"
         >
           Bydel Vestre Aker
         </a>
@@ -1764,18 +1808,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-8"
+          id="checkbox-nordreaker"
           type="checkbox"
           value="8"
         />
          
         <label
-          for="checkbox-8"
+          for="checkbox-nordreaker"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/nordreaker"
+          id="a-nordreaker"
         >
           Bydel Nordre Aker
         </a>
@@ -1784,18 +1829,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-9"
+          id="checkbox-bjerke"
           type="checkbox"
           value="9"
         />
          
         <label
-          for="checkbox-9"
+          for="checkbox-bjerke"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/bjerke"
+          id="a-bjerke"
         >
           Bydel Bjerke
         </a>
@@ -1804,18 +1850,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-10"
+          id="checkbox-grorud"
           type="checkbox"
           value="10"
         />
          
         <label
-          for="checkbox-10"
+          for="checkbox-grorud"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/grorud"
+          id="a-grorud"
         >
           Bydel Grorud
         </a>
@@ -1824,18 +1871,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-11"
+          id="checkbox-stovner"
           type="checkbox"
           value="11"
         />
          
         <label
-          for="checkbox-11"
+          for="checkbox-stovner"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/stovner"
+          id="a-stovner"
         >
           Bydel Stovner
         </a>
@@ -1844,18 +1892,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-12"
+          id="checkbox-alna"
           type="checkbox"
           value="12"
         />
          
         <label
-          for="checkbox-12"
+          for="checkbox-alna"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/alna"
+          id="a-alna"
         >
           Bydel Alna
         </a>
@@ -1864,18 +1913,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-13"
+          id="checkbox-ostensjo"
           type="checkbox"
           value="13"
         />
          
         <label
-          for="checkbox-13"
+          for="checkbox-ostensjo"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/ostensjo"
+          id="a-ostensjo"
         >
           Bydel Østensjø
         </a>
@@ -1884,18 +1934,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-14"
+          id="checkbox-nordstrand"
           type="checkbox"
           value="14"
         />
          
         <label
-          for="checkbox-14"
+          for="checkbox-nordstrand"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/nordstrand"
+          id="a-nordstrand"
         >
           Bydel Nordstrand
         </a>
@@ -1904,18 +1955,19 @@ exports[`App router sends you to homepage 1`] = `
         class="navigation-link"
       >
         <input
-          id="checkbox-15"
+          id="checkbox-sondrenordstrand"
           type="checkbox"
           value="15"
         />
          
         <label
-          for="checkbox-15"
+          for="checkbox-sondrenordstrand"
         />
          
         <a
           class="navigation-link__label"
           href="#/bydel/sondrenordstrand"
+          id="a-sondrenordstrand"
         >
           Bydel Søndre Nordstrand
         </a>
@@ -1923,10 +1975,12 @@ exports[`App router sends you to homepage 1`] = `
        
       <div
         class="navigation-link navigation-link__label-compare"
+        id="sammenlign"
       >
         <a
-          class="navigation-link__label router-link-exact-active router-link-active"
-          href="#/"
+          class="navigation-link__label"
+          href="#/bydel/alle"
+          id="sammenlign-href"
         >
           Sammenlign bydeler
         </a>
@@ -1945,6 +1999,7 @@ exports[`App router sends you to homepage 1`] = `
       <a
         class="oslo__navigation-topbar-button router-link-exact-active router-link-active"
         href="#/"
+        id="backButton"
       >
         <i
           class="material-icons oslo__topbar"

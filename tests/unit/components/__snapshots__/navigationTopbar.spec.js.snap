@@ -7,6 +7,7 @@ exports[`NavigationTopbar render multiple bydeler correctly 1`] = `
   <a
     class="oslo__navigation-topbar-button router-link-active"
     href="#/bydel/1-2-3-4"
+    id="backButton"
   >
     <i
       class="material-icons oslo__topbar"
@@ -58,6 +59,7 @@ exports[`NavigationTopbar renders correctly 1`] = `
   <a
     class="oslo__navigation-topbar-button router-link-active"
     href="#/"
+    id="backButton"
   >
     <i
       class="material-icons oslo__topbar"

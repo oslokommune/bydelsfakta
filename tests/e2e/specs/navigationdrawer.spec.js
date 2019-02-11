@@ -41,7 +41,9 @@ describe('navigationDrawer', () => {
 
   it('sammenlign is true and all checkboxes are checked, url should be /bydel/alle', () => {
     cy.get('[type="checkbox"]').each(checkbox => {
-      cy.wrap(checkbox).check({ force: true }).should('be.checked');
+      cy.wrap(checkbox)
+        .check({ force: true })
+        .should('be.checked');
     });
     cy.url().should('include', '/bydel/alle');
   });

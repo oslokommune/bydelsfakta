@@ -77,4 +77,4 @@ describe('navigationTopbar', () => {
     cy.url().should('include', '/');
     cy.get('h4').contains('Velg bydel');
   });
-})
+});

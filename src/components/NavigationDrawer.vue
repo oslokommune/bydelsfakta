@@ -20,14 +20,18 @@
           :disabled="disableChecbox(link.key)"
         />
         <label :for="`checkbox-${link.uri}`"></label>
-        <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{ link.value }}</router-link>
+        <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
+          link.value
+        }}</router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
         id="sammenlign"
         :class="{ 'navigation-link--active': compareBydeler }"
       >
-        <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">Sammenlign bydeler</router-link>
+        <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label"
+          >Sammenlign bydeler</router-link
+        >
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
@@ -167,8 +171,8 @@ export default {
       return bydel === this.$route.params.bydel
         ? { name: 'Bydel', params: { bydel: bydel } }
         : this.$route.params.tema === undefined
-          ? { name: 'Bydel', params: { bydel: bydel } }
-          : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+        ? { name: 'Bydel', params: { bydel: bydel } }
+        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
     },
 
     onClickHome() {

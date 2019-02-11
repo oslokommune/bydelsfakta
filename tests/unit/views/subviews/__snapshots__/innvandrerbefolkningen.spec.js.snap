@@ -27,6 +27,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Status"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Status
@@ -35,6 +36,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -48,6 +50,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -174,6 +177,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Status"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Status
@@ -182,6 +186,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -195,6 +200,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -314,6 +320,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Status"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Status
@@ -322,6 +329,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -335,6 +343,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
@@ -454,6 +463,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Status"
             aria-selected="[object Object]"
             class="tabs__button active"
+            id="tabButton-0"
             role="tab"
           >
             Status
@@ -462,6 +472,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
             aria-label="Historisk"
             aria-selected="[object Object]"
             class="tabs__button"
+            id="tabButton-1"
             role="tab"
           >
             Historisk
@@ -475,6 +486,7 @@ exports[`Innvandrerbefolkningen renders Innvandrerbefolkningen component correct
               aria-haspopup="true"
               aria-label="åpne meny"
               class="context-menu__button"
+              id="context-menu-button"
             >
               <i
                 class="material-icons"
