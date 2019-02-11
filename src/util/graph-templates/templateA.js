@@ -51,8 +51,7 @@ function Template(svg) {
       .sort((a, b) => (b.totalRow ? -1 : 0));
 
     this.svg
-      // .transition()
-      // .duration(this.duration)
+      .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -169,13 +168,12 @@ function Template(svg) {
       .selectAll('g.row')
       .data(this.filteredData.data, d => d.geography)
       .join(
-        enter => this.initRowElements(enter),
-        update => update,
-        exit =>
-          exit
-            .transition()
-            .attr('opacity', 0.5)
-            .remove()
+        enter => {
+          let el = this.initRowElements(enter);
+          el.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+          return el;
+        },
+        update => update.transition().attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`)
       )
       .attr('class', 'row');
 
@@ -194,7 +192,6 @@ function Template(svg) {
         }
       })
       .attr('width', this.padding.left + this.width + this.padding.right);
-    rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
     rows.select('a.hyperlink').attr('xlink:href', `/bydelsfakta#/bydel/sthanshaugen/folkemengde`);
     rows
