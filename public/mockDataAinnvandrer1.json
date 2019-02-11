@@ -34,24 +34,24 @@
     {
       "linkTo": false,
       "geography": "Grünerløkka vest",
-      "values": [{ "ratio": 0.104 }]
+      "values": [{ "ratio": 0.104, "value": 4000 }]
     },
     {
       "linkTo": false,
       "geography": "Grünerløkka øst",
-      "values": [{ "ratio": 0.174 }]
+      "values": [{ "ratio": 0.174, "value": 4800 }]
     },
     {
       "linkTo": "/grunerlokka/innvandrere",
       "geography": "Bydel Grünerløkka",
       "avgRow": true,
-      "values": [{ "ratio": 0.184 }]
+      "values": [{ "ratio": 0.184, "value": 4400 }]
     },
     {
       "linkTo": "/sammenligne-bydeler/innvandrere",
       "geography": "Oslo i alt",
       "totalRow": true,
-      "values": [{ "ratio": 0.134 }]
+      "values": [{ "ratio": 0.134, "value": 450450 }]
     }
   ]
 }
