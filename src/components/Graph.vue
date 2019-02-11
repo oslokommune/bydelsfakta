@@ -1,7 +1,7 @@
 <template>
   <div class="graph__container">
     <svg class="graph__svg" ref="svg"></svg>
-    <resize-observer @notify="svg.resize(data, { method: settings.method })" />
+    <resize-observer @notify="svg.resize(data, { method: settings.method })"></resize-observer>
   </div>
 </template>
 
@@ -77,7 +77,7 @@ export default {
       this.data = await d3.json(this.settings.url);
       this.svg.render(this.data, {
         method: this.settings.method,
-        range: '[0, 50]',
+        initialRender: true,
       });
       this.currentTemplate = this.settings.template;
     },
