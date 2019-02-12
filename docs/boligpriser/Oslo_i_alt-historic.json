@@ -14,7 +14,7 @@
   },
   "data": [
     {
-      "geography": "Alna",
+      "geography": "Bydel Alna",
       "values": [
         { "date": "2004-01-01", "value": 18880.0 },
         { "date": "2005-01-01", "value": 20610.0 },
@@ -33,7 +33,7 @@
       ]
     },
     {
-      "geography": "Bjerke",
+      "geography": "Bydel Bjerke",
       "values": [
         { "date": "2004-01-01", "value": 21903.0 },
         { "date": "2005-01-01", "value": 23437.0 },
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "geography": "Frogner",
+      "geography": "Bydel Frogner",
       "values": [
         { "date": "2004-01-01", "value": 31300.0 },
         { "date": "2005-01-01", "value": 37049.0 },
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "geography": "Gamle Oslo",
+      "geography": "Bydel Gamle Oslo",
       "values": [
         { "date": "2004-01-01", "value": 26296.0 },
         { "date": "2005-01-01", "value": 29302.0 },
@@ -90,7 +90,7 @@
       ]
     },
     {
-      "geography": "Grorud",
+      "geography": "Bydel Grorud",
       "values": [
         { "date": "2004-01-01", "value": 18297.0 },
         { "date": "2005-01-01", "value": 20265.0 },
@@ -109,7 +109,7 @@
       ]
     },
     {
-      "geography": "Grünerløkka",
+      "geography": "Bydel Grünerløkka",
       "values": [
         { "date": "2004-01-01", "value": 27430.0 },
         { "date": "2005-01-01", "value": 30819.0 },
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "geography": "Nordre Aker",
+      "geography": "Bydel Nordre Aker",
       "values": [
         { "date": "2004-01-01", "value": 28934.0 },
         { "date": "2005-01-01", "value": 32247.0 },
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "geography": "Nordstrand",
+      "geography": "Bydel Nordstrand",
       "values": [
         { "date": "2004-01-01", "value": 22697.0 },
         { "date": "2005-01-01", "value": 25099.0 },
@@ -183,10 +183,10 @@
         { "date": "2016-01-01", "value": 66312.0 },
         { "date": "2017-01-01", "value": 70774.0 }
       ],
-      "avgRow": true
+      "totalRow": true
     },
     {
-      "geography": "Sagene",
+      "geography": "Bydel Sagene",
       "values": [
         { "date": "2004-01-01", "value": 28350.0 },
         { "date": "2005-01-01", "value": 31186.0 },
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "geography": "Sentrum",
+      "geography": "Bydel Sentrum",
       "values": [
         { "date": "2004-01-01", "value": 33385.0 },
         { "date": "2005-01-01", "value": 38922.0 },
@@ -224,7 +224,7 @@
       ]
     },
     {
-      "geography": "St.Hanshaugen",
+      "geography": "Bydel St.Hanshaugen",
       "values": [
         { "date": "2004-01-01", "value": 29800.0 },
         { "date": "2005-01-01", "value": 34423.0 },
@@ -243,7 +243,7 @@
       ]
     },
     {
-      "geography": "Stovner",
+      "geography": "Bydel Stovner",
       "values": [
         { "date": "2004-01-01", "value": 17733.0 },
         { "date": "2005-01-01", "value": 19051.0 },
@@ -262,7 +262,7 @@
       ]
     },
     {
-      "geography": "Søndre Nordstrand",
+      "geography": "Bydel Søndre Nordstrand",
       "values": [
         { "date": "2004-01-01", "value": 16251.0 },
         { "date": "2005-01-01", "value": 17736.0 },
@@ -281,7 +281,7 @@
       ]
     },
     {
-      "geography": "Ullern",
+      "geography": "Bydel Ullern",
       "values": [
         { "date": "2004-01-01", "value": 29453.0 },
         { "date": "2005-01-01", "value": 32924.0 },
@@ -300,7 +300,7 @@
       ]
     },
     {
-      "geography": "Vestre Aker",
+      "geography": "Bydel Vestre Aker",
       "values": [
         { "date": "2004-01-01", "value": 26651.0 },
         { "date": "2005-01-01", "value": 30070.0 },
@@ -319,7 +319,7 @@
       ]
     },
     {
-      "geography": "Østensjø",
+      "geography": "Bydel Østensjø",
       "values": [
         { "date": "2004-01-01", "value": 21827.0 },
         { "date": "2005-01-01", "value": 23210.0 },
