@@ -1,6 +1,6 @@
 <template>
   <aside id="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
+    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
     <nav role="navigation">
       <div
         v-for="link in links"
@@ -18,39 +18,51 @@
           :id="`checkbox-${link.uri}`"
           @change="onChangeCheckbox"
           :disabled="disableChecbox(link.key)"
-        />
-        <label :for="`checkbox-${link.uri}`"></label>
-        <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
+        >
+        <label :for="`checkbox-${link.uri}`" :class="{'compare' : compareBydeler}"></label>
+        <router-link
+          :id="`a-${link.uri}`"
+          class="navigation-link__label"
+          :to="onClickBydel(link.uri)"
+        >
+          {{
           link.value
-        }}</router-link>
+          }}
+        </router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
         id="sammenlign"
         :class="{ 'navigation-link--active': compareBydeler }"
       >
-        <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label"
-          >Sammenlign bydeler</router-link
-        >
+        <router-link
+          id="sammenlign-href"
+          :to="onClickSammenlign()"
+          class="navigation-link__label"
+        >Sammenlign bydeler</router-link>
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
-            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
-              Velg alle
-            </button>
+            <button
+              class="navigation-drawer__button"
+              @click="selectAll"
+              aria-label="select all checkboxes"
+            >Velg alle</button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
               aria-label="unselect all checkboxes"
-            >
-              Fjern alle
-            </button>
+            >Fjern alle</button>
           </div>
           <div class="navigation-drawer__select-container">
             <label for="predefined-select" class="hidden-label">Velg byområde</label>
-            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
+            <select
+              id="navigation-drawer-select"
+              class="navigation-drawer__select"
+              v-model="selectedPredefinedOption"
+            >
               <option
                 v-for="(element, index) in options"
                 :key="index"
@@ -58,8 +70,7 @@
                 :selected="element.selected"
                 :disabled="element.disabled"
                 id="predefined-select"
-                >{{ element.label }}</option
-              >
+              >{{ element.label }}</option>
             </select>
           </div>
         </div>
@@ -296,7 +307,6 @@ export default {
   cursor: pointer;
   display: flex;
   position: relative;
-
   transition: all 0.3s ease-in-out;
   width: 100%;
 
@@ -409,11 +419,15 @@ input[type='checkbox'] {
       content: '';
       height: 18px;
       left: 20px;
-      opacity: 0.35;
+      opacity: 0;
       position: absolute;
       top: 10px;
       transition: all 0.3s ease-in-out;
       width: 18px;
+    }
+
+    &.compare::before {
+      opacity: 0.35;
     }
   }
 
@@ -431,7 +445,7 @@ input[type='checkbox'] {
     &::before {
       border: 1px solid $color-blue;
       opacity: 1;
-      transition: all 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
+      transition: all 0.3s ease-in-out;
     }
   }
 }
