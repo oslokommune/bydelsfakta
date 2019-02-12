@@ -11,6 +11,18 @@ import color from './colors';
 import d3 from '@/assets/d3';
 import positionLabels from '../positionLabels';
 
+function intersects(a, b) {
+  var det, gamma, lambda;
+  det = (a.x2 - a.x1) * (b.y2 - b.y1) - (b.x2 - b.x1) * (a.y2 - a.y1);
+  if (det === 0) {
+    return false;
+  } else {
+    lambda = ((b.y2 - b.y1) * (b.x2 - a.x1) + (b.x1 - b.x2) * (b.y2 - a.y1)) / det;
+    gamma = ((a.y1 - a.y2) * (b.x2 - a.x1) + (a.x2 - a.x1) * (b.y2 - a.y1)) / det;
+    return 0 < lambda && lambda < 1 && (0 < gamma && gamma < 1);
+  }
+}
+
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
@@ -49,6 +61,7 @@ function Template(svg) {
     this.drawInfobox();
     this.drawDots();
     this.drawVoronoi();
+    this.drawDirectLabels();
     this.drawSource('Statistisk sentralbyrå (test)');
   };
 
@@ -117,6 +130,118 @@ function Template(svg) {
       });
   };
 
+  /**
+   * Direct labels are drawn near lines where there's room
+   * for them. This is acheived by finding the largest
+   * voronoi cell for each line and sorting them, storing only
+   * the 4 largest to limit to maximum 4 direct labels.
+   * The labels are offset by shifting them towards the center
+   * point its voronoi cell (centroid) by the distance
+   * stored in the local 'distance' constant.
+   * To calculate if there's room for the label to be drawn
+   * we check for collisions with (each part of) each line,
+   * and remove the ones who collide.
+   */
+  this.drawDirectLabels = function() {
+    // Find the voronoi cells
+    let cells = this.canvas.select('g.voronoi').selectAll('path');
+
+    // Find each cell's area and centroid and sort by area
+    let areas = [];
+    cells.each((d, i, j) => {
+      areas.push({
+        area: d3.polygonArea(d),
+        centroid: d3.polygonCentroid(d),
+        data: d.data,
+      });
+    });
+    areas.sort((a, b) => b.area - a.area);
+
+    // Nest cells by their geography and save only
+    // the labels for the largest 4 cells
+    areas = d3
+      .nest()
+      .key(d => d.data.geography)
+      .entries(areas)
+      .filter((d, i) => i < 4);
+
+    // Create the text labels for each of these geographies
+    // and for each of them check to see if they collide
+    // with any lines and offset them in the right direction
+    // towards the voronoi's centroid point.
+    this.canvas
+      .selectAll('text.direct')
+      .data(areas, d => d)
+      .join(enter => {
+        return enter.append('text').attr('opacity', 0);
+      })
+      .attr('class', 'direct')
+      .attr('font-size', 11)
+      .attr('text-anchor', 'middle')
+      .attr('opacity', 0.6)
+      .attr('y', 5)
+      .text(d => d.key)
+      .each((d, i, j) => {
+        const el = d3.select(j[i]);
+        const position = [this.x(this.parseDate(d.values[0].data.date)), this.y(d.values[0].data.value)];
+        const centroid = d.values[0].centroid;
+        const angle = Math.atan2(centroid[1] - position[1], centroid[0] - position[0]);
+        const distance = 20;
+        const box = j[i].getBBox();
+
+        // Location of the position where it should sit
+        const target = {
+          x: Math.cos(angle) * distance + position[0],
+          y: Math.sin(angle) * distance + position[1],
+        };
+
+        // Coordinates bottom two corners of text box
+        let a = {
+          x1: target.x - box.width / 2,
+          y1: target.y + box.height,
+          x2: target.x + box.width / 2,
+          y2: target.y + box.height,
+        };
+
+        // If angle is negative, use the top corners instead
+        if (angle < 0) {
+          a.y1 = target.y;
+          a.y2 = target.y;
+        }
+
+        // Counter for number of collisions
+        let collisions = 0;
+
+        // Test if the label collides any lines
+        this.canvas.selectAll('path.row').each(d => {
+          let val = d.values;
+          for (let i = 0; i < val.length - 1; i++) {
+            let b = {
+              x1: this.x(this.parseDate(val[i].date)),
+              y1: this.y(val[i].value),
+              x2: this.x(this.parseDate(val[i + 1].date)),
+              y2: this.y(val[i + 1].value),
+            };
+            if (intersects(a, b)) collisions++;
+          }
+        });
+
+        // Do not use the label if it collides with
+        // the canvas's edges
+        if (a.x2 > this.width || a.x1 < 0) {
+          el.remove();
+        }
+
+        // Move the label to the target position if there's
+        // no collisions, or remove it if there are any.
+        if (collisions < 2) {
+          el.attr('transform', `translate(${target.x}, ${target.y})`);
+        } else {
+          el.remove();
+        }
+      });
+  };
+
   this.drawDots = function() {
     let dotgroup = this.canvas
       .select('g.dots')
@@ -158,6 +283,8 @@ function Template(svg) {
       .selectAll('g.label')
       .attr('opacity', 0.5);
 
+    this.canvas.selectAll('text.direct').attr('opacity', 0);
+
     this.canvas
       .select('g.labels')
       .selectAll('g.label')
@@ -190,6 +317,8 @@ function Template(svg) {
         if (d.avgRow || d.totalRow) return 1;
         return 0.45;
       });
+
+    this.canvas.selectAll('text.direct').attr('opacity', 0.6);
 
     this.canvas
       .select('g.labels')
