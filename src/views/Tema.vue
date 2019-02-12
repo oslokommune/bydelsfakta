@@ -1,37 +1,31 @@
 <template>
-  <component :is="componentName" v-bind="currentSettings"></component>
+  <div class="main-container">
+    <div class="main-container__cards">
+      <div
+        class="card-container"
+        v-for="(subpage, index) in pages[`${componentName}`].subpages"
+        :key="`subpage-${index}`"
+      >
+        <h2 v-show="subpage.title !== undefined" class="section-heading">{{ subpage.title }}</h2>
+        <graph-card v-for="(card, cardIndex) in subpage.graphs" :key="`card-${cardIndex}`" :settings="card" />
+      </div>
+    </div>
+    <div class="main-container__map">
+      <h3>Kart</h3>
+    </div>
+  </div>
 </template>
 
 <script>
-import page from '../config/pages';
+import { page, pages } from '../config/pages';
 
-import Alder from './subviews/Alder.vue';
-import Boligpriser from './subviews/Boligpriser.vue';
-import Bygningstyper from './subviews/Bygningstyper.vue';
-import Eierform from './subviews/Eierform.vue';
-import Flytting from './subviews/Flytting.vue';
-import Folkemengde from './subviews/Folkemengde.vue';
-import Husholdninger from './subviews/Husholdninger.vue';
-import Innvandrerbefolkningen from './subviews/Innvandrerbefolkningen.vue';
-import Kommunaleboliger from './subviews/Kommunaleboliger.vue';
-import Levekaar from './subviews/Levekaar.vue';
-import Trangboddhet from './subviews/Trangboddhet.vue';
+import GraphCard from '../components/GraphCard.vue';
 
 export default {
   name: 'Tema',
 
   components: {
-    Alder,
-    Boligpriser,
-    Bygningstyper,
-    Eierform,
-    Flytting,
-    Folkemengde,
-    Husholdninger,
-    Innvandrerbefolkningen,
-    Kommunaleboliger,
-    Levekaar,
-    Trangboddhet,
+    GraphCard,
   },
 
   props: {
@@ -48,6 +42,7 @@ export default {
   data() {
     return {
       componentName: this.tema,
+      pages: pages,
     };
   },
 
@@ -65,4 +60,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  min-width: 300px;
+  max-width: 1300px;
+}
+</style>

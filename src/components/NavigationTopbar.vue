@@ -5,12 +5,11 @@
       <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
     </router-link>
     <div class="navigation-topbar">
-      <div
+      <button
         id="select"
         class="navigation-topbar__select"
         @click="showDropdown = !showDropdown"
         @keydown.enter="showDropdown = !showDropdown"
-        tabindex="0"
         @keydown.escape="closeMenu"
         v-click-outside="closeMenu"
         ref="select"
@@ -18,14 +17,10 @@
         <label class="label" :class="{ 'label--active': selectedSubpage !== null }">Velg tema</label>
         <span>{{ selectedSubpage }}</span>
         <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
-      </div>
+      </button>
       <transition name="fade">
         <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
-          <div
-            v-for="(kategori, index) in dropdown"
-            :key="index"
-            class="navigation-topbar__dropdown-column"
-          >
+          <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
             <div
               class="navigation-topbar__dropdown-column--heading"
               :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
@@ -41,7 +36,8 @@
                 :key="subpageIndex"
                 v-text="link.text"
                 :to="onClickSubpage(link.value)"
-              >{{ link.text }}</router-link>
+                >{{ link.text }}</router-link
+              >
             </div>
           </div>
         </div>
@@ -184,8 +180,10 @@ export default {
     font-weight: bold;
     justify-content: space-between;
     letter-spacing: 0.7px;
+    padding: 0;
     position: relative;
     text-transform: uppercase;
+    width: 100%;
 
     &:before {
       border: 0.5px solid black;
