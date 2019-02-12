@@ -13,21 +13,21 @@
     ]
   },
   "data": [
-    { "geography": "Alna", "values": [{ "date": "2017-01-01", "value": 52282.0 }] },
-    { "geography": "Bjerke", "values": [{ "date": "2017-01-01", "value": 59205.0 }] },
-    { "geography": "Frogner", "values": [{ "date": "2017-01-01", "value": 87436.0 }] },
-    { "geography": "Gamle Oslo", "values": [{ "date": "2017-01-01", "value": 73205.0 }] },
-    { "geography": "Grorud", "values": [{ "date": "2017-01-01", "value": 50974.0 }] },
-    { "geography": "Grünerløkka", "values": [{ "date": "2017-01-01", "value": 75851.0 }] },
-    { "geography": "Nordre Aker", "values": [{ "date": "2017-01-01", "value": 75570.0 }] },
-    { "geography": "Nordstrand", "values": [{ "date": "2017-01-01", "value": 61590.0 }] },
-    { "geography": "Oslo i alt", "values": [{ "date": "2017-01-01", "value": 70774.0 }], "avgRow": true },
-    { "geography": "Sagene", "values": [{ "date": "2017-01-01", "value": 79332.0 }] },
-    { "geography": "St.Hanshaugen", "values": [{ "date": "2017-01-01", "value": 82427.0 }] },
-    { "geography": "Stovner", "values": [{ "date": "2017-01-01", "value": 45877.0 }] },
-    { "geography": "Søndre Nordstrand", "values": [{ "date": "2017-01-01", "value": 45080.0 }] },
-    { "geography": "Ullern", "values": [{ "date": "2017-01-01", "value": 75428.0 }] },
-    { "geography": "Vestre Aker", "values": [{ "date": "2017-01-01", "value": 66787.0 }] },
-    { "geography": "Østensjø", "values": [{ "date": "2017-01-01", "value": 56908.0 }] }
+    { "geography": "Bydel Alna", "values": [{ "date": "2017-01-01", "value": 52282.0 }] },
+    { "geography": "Bydel Bjerke", "values": [{ "date": "2017-01-01", "value": 59205.0 }] },
+    { "geography": "Bydel Frogner", "values": [{ "date": "2017-01-01", "value": 87436.0 }] },
+    { "geography": "Bydel Gamle Oslo", "values": [{ "date": "2017-01-01", "value": 73205.0 }] },
+    { "geography": "Bydel Grorud", "values": [{ "date": "2017-01-01", "value": 50974.0 }] },
+    { "geography": "Bydel Grünerløkka", "values": [{ "date": "2017-01-01", "value": 75851.0 }] },
+    { "geography": "Bydel Nordre Aker", "values": [{ "date": "2017-01-01", "value": 75570.0 }] },
+    { "geography": "Bydel Nordstrand", "values": [{ "date": "2017-01-01", "value": 61590.0 }] },
+    { "geography": "Oslo i alt", "values": [{ "date": "2017-01-01", "value": 70774.0 }], "totalRow": true },
+    { "geography": "Bydel Sagene", "values": [{ "date": "2017-01-01", "value": 79332.0 }] },
+    { "geography": "Bydel St.Hanshaugen", "values": [{ "date": "2017-01-01", "value": 82427.0 }] },
+    { "geography": "Bydel Stovner", "values": [{ "date": "2017-01-01", "value": 45877.0 }] },
+    { "geography": "Bydel Søndre Nordstrand", "values": [{ "date": "2017-01-01", "value": 45080.0 }] },
+    { "geography": "Bydel Ullern", "values": [{ "date": "2017-01-01", "value": 75428.0 }] },
+    { "geography": "Bydel Vestre Aker", "values": [{ "date": "2017-01-01", "value": 66787.0 }] },
+    { "geography": "Bydel Østensjø", "values": [{ "date": "2017-01-01", "value": 56908.0 }] }
   ]
 }
