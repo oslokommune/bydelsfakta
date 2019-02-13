@@ -25,10 +25,9 @@ exports[`NavigationTopbar render multiple bydeler correctly 1`] = `
   <div
     class="navigation-topbar"
   >
-    <div
+    <button
       class="navigation-topbar__select"
       id="select"
-      tabindex="0"
     >
       <label
         class="label label--active"
@@ -45,7 +44,7 @@ exports[`NavigationTopbar render multiple bydeler correctly 1`] = `
       >
         arrow_drop_down
       </i>
-    </div>
+    </button>
      
     <!---->
   </div>
@@ -77,10 +76,9 @@ exports[`NavigationTopbar renders correctly 1`] = `
   <div
     class="navigation-topbar"
   >
-    <div
+    <button
       class="navigation-topbar__select"
       id="select"
-      tabindex="0"
     >
       <label
         class="label"
@@ -97,7 +95,7 @@ exports[`NavigationTopbar renders correctly 1`] = `
       >
         arrow_drop_down
       </i>
-    </div>
+    </button>
      
     <!---->
   </div>

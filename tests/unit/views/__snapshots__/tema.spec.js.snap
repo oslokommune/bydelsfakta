@@ -10,7 +10,9 @@ exports[`Tema renders component correctly 1`] = `
     <h2
       class="section-heading"
     >
-      Utvalgte aldersgrupper
+      
+        Utvalgte aldersgrupper
+      
     </h2>
      
     <div
@@ -409,142 +411,12 @@ exports[`Tema renders component correctly 1`] = `
         </div>
       </div>
     </div>
-     
     <h2
       class="section-heading"
     >
-      Medianalder i Bydel BYDELSNAVN
-    </h2>
-     
-    <div
-      class="card-container large"
-    >
-      <div
-        class="card"
-      >
-        <div
-          class="tabs"
-          role="tablist"
-        >
-          <button
-            aria-label="Status"
-            aria-selected="[object Object]"
-            class="tabs__button active"
-            id="tabButton-0"
-            role="tab"
-          >
-            Status
-          </button>
-           
-          <div
-            class="context-menu"
-            role="menu"
-          >
-            <button
-              aria-haspopup="true"
-              aria-label="åpne meny"
-              class="context-menu__button"
-              id="context-menu-button"
-            >
-              <i
-                class="material-icons"
-              >
-                menu
-              </i>
-            </button>
-             
-            <!---->
-          </div>
-        </div>
-         
-        <div
-          class="graph__container"
-        >
-          <svg
-            class="graph__svg"
-            style="font-family: OsloSans;"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-          >
-            <text
-              class="heading"
-              font-size="14"
-              font-weight="bold"
-              y="14"
-            />
-            <g
-              class="canvas"
-              transform="translate(240, 90)"
-            >
-              <g
-                class="axis x"
-              />
-              <g
-                class="axis y"
-              />
-              <g
-                class="axis x2"
-              />
-              <g
-                class="axis y2"
-              />
-              <text
-                class="label-median"
-                font-size="13"
-                text-anchor="middle"
-                x="-175"
-                y="-40"
-              >
-                Aldersfordeling og medianalder
-              </text>
-              <text
-                class="label-mean"
-                font-size="13"
-                text-anchor="middle"
-                x="-85"
-                y="-40"
-              >
-                Gjennomsnittsalder
-              </text>
-            </g>
-            <g
-              class="sourceGroup"
-              fill="#292858"
-              opacity="0"
-            >
-              <text
-                class="source-label"
-                font-size="10"
-              >
-                Kilde: 
-              </text>
-              <text
-                class="source"
-                font-size="10"
-              />
-            </g>
-          </svg>
-           
-          <div
-            class="resize-observer"
-            data-v-b329ee4c=""
-            tabindex="-1"
-          >
-            <object
-              aria-hidden="true"
-              data="about:blank"
-              tabindex="-1"
-              type="text/html"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-     
-    <h2
-      class="section-heading"
-    >
-      Populasjonspyramide
+      
+        Populasjonspyramide
+      
     </h2>
      
     <div
@@ -669,6 +541,138 @@ exports[`Tema renders component correctly 1`] = `
                 transform="translate(10, -16)"
               >
                 Velg delbydel
+              </text>
+            </g>
+            <g
+              class="sourceGroup"
+              fill="#292858"
+              opacity="0"
+            >
+              <text
+                class="source-label"
+                font-size="10"
+              >
+                Kilde: 
+              </text>
+              <text
+                class="source"
+                font-size="10"
+              />
+            </g>
+          </svg>
+           
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2
+      class="section-heading"
+    >
+      
+        Medianalder i Bydel BYDELSNAVN
+      
+    </h2>
+     
+    <div
+      class="card-container large"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="tabs"
+          role="tablist"
+        >
+          <button
+            aria-label="Status"
+            aria-selected="[object Object]"
+            class="tabs__button active"
+            id="tabButton-0"
+            role="tab"
+          >
+            Status
+          </button>
+           
+          <div
+            class="context-menu"
+            role="menu"
+          >
+            <button
+              aria-haspopup="true"
+              aria-label="åpne meny"
+              class="context-menu__button"
+              id="context-menu-button"
+            >
+              <i
+                class="material-icons"
+              >
+                menu
+              </i>
+            </button>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="graph__container"
+        >
+          <svg
+            class="graph__svg"
+            style="font-family: OsloSans;"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <text
+              class="heading"
+              font-size="14"
+              font-weight="bold"
+              y="14"
+            />
+            <g
+              class="canvas"
+              transform="translate(240, 90)"
+            >
+              <g
+                class="axis x"
+              />
+              <g
+                class="axis y"
+              />
+              <g
+                class="axis x2"
+              />
+              <g
+                class="axis y2"
+              />
+              <text
+                class="label-median"
+                font-size="13"
+                text-anchor="middle"
+                x="-175"
+                y="-40"
+              >
+                Aldersfordeling og medianalder
+              </text>
+              <text
+                class="label-mean"
+                font-size="13"
+                text-anchor="middle"
+                x="-85"
+                y="-40"
+              >
+                Gjennomsnittsalder
               </text>
             </g>
             <g

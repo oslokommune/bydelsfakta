@@ -82,6 +82,54 @@ exports[`GraphCard change an active tab 1`] = `
           <g
             class="matrix"
           >
+            <g
+              class="arrows"
+              transform="translate(200,231.05557772968822)"
+            >
+              <g
+                class="arrow"
+                transform="rotate(60) translate(120,-156)"
+              >
+                <path
+                  d="M0,0 h70 l-10,-4 v8 l10,-4 Z"
+                  fill="black"
+                  stroke="black"
+                />
+              </g>
+              <g
+                class="arrow"
+                transform="rotate(180) translate(120,-156)"
+              >
+                <path
+                  d="M0,0 h70 l-10,-4 v8 l10,-4 Z"
+                  fill="black"
+                  stroke="black"
+                />
+              </g>
+              <g
+                class="arrow"
+                transform="rotate(300) translate(120,-156)"
+              >
+                <path
+                  d="M0,0 h70 l-10,-4 v8 l10,-4 Z"
+                  fill="black"
+                  stroke="black"
+                />
+              </g>
+            </g>
+            <g
+              class="values"
+            >
+              <g>
+                <text />
+              </g>
+              <g>
+                <text />
+              </g>
+              <g>
+                <text />
+              </g>
+            </g>
             <text
               style="font-size: 13; font-weight: bold;"
               text-anchor="end"
@@ -496,6 +544,29 @@ exports[`GraphCard change an active tab 1`] = `
               stroke="black"
               stroke-width="2"
             />
+            <text
+              class="label2"
+              style="font-size: 15; font-weight: bold;"
+              text-anchor="middle"
+              transform="rotate(300, 93.0717967697245, 173.20508075688772)"
+              x="81.0717967697245"
+              y="133.20508075688772"
+            />
+            <text
+              class="label3"
+              style="font-size: 15; font-weight: bold;"
+              text-anchor="middle"
+              transform="rotate(60, 303.46410161513774, 173.20508075688772)"
+              x="291.46410161513774"
+              y="135.2050807568877"
+            />
+            <text
+              class="label1"
+              style="font-size: 15; font-weight: bold;"
+              text-anchor="middle"
+              x="203.46410161513776"
+              y="394.4101615137755"
+            />
             <path
               d="M0,346.41016151377545L400,346.41016151377545L200,0L0,346.41016151377545"
               fill="#F0F1F1"
@@ -668,35 +739,6 @@ exports[`GraphCard change an active tab 1`] = `
               stroke="black"
               stroke-width="2"
             />
-            <text
-              class="label2"
-              style="font-size: 15; font-weight: bold;"
-              text-anchor="middle"
-              transform="rotate(300, 93.0717967697245, 173.20508075688772)"
-              x="81.0717967697245"
-              y="133.20508075688772"
-            >
-              % sand
-            </text>
-            <text
-              class="label3"
-              style="font-size: 15; font-weight: bold;"
-              text-anchor="middle"
-              transform="rotate(60, 303.46410161513774, 173.20508075688772)"
-              x="291.46410161513774"
-              y="135.2050807568877"
-            >
-              % dirt
-            </text>
-            <text
-              class="label1"
-              style="font-size: 15; font-weight: bold;"
-              text-anchor="middle"
-              x="203.46410161513776"
-              y="394.4101615137755"
-            >
-              % water
-            </text>
           </g>
           <g
             class="lineContainer"

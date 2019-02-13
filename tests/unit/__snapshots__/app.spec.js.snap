@@ -486,10 +486,9 @@ exports[`App router sends you to bydel alle 1`] = `
       <div
         class="navigation-topbar"
       >
-        <div
+        <button
           class="navigation-topbar__select"
           id="select"
-          tabindex="0"
         >
           <label
             class="label"
@@ -506,7 +505,7 @@ exports[`App router sends you to bydel alle 1`] = `
           >
             arrow_drop_down
           </i>
-        </div>
+        </button>
          
         <!---->
       </div>
@@ -1252,10 +1251,9 @@ exports[`App router sends you to bydel sagene 1`] = `
       <div
         class="navigation-topbar"
       >
-        <div
+        <button
           class="navigation-topbar__select"
           id="select"
-          tabindex="0"
         >
           <label
             class="label"
@@ -1272,7 +1270,7 @@ exports[`App router sends you to bydel sagene 1`] = `
           >
             arrow_drop_down
           </i>
-        </div>
+        </button>
          
         <!---->
       </div>
@@ -2017,10 +2015,9 @@ exports[`App router sends you to homepage 1`] = `
       <div
         class="navigation-topbar"
       >
-        <div
+        <button
           class="navigation-topbar__select"
           id="select"
-          tabindex="0"
         >
           <label
             class="label"
@@ -2037,7 +2034,7 @@ exports[`App router sends you to homepage 1`] = `
           >
             arrow_drop_down
           </i>
-        </div>
+        </button>
          
         <!---->
       </div>
