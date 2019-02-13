@@ -3,7 +3,7 @@ import vueResize from 'vue-resize';
 import router from '../../../src/router';
 import GraphCard from '../../../src/components/GraphCard.vue';
 import clickOutside from '../../../src/directives/clickOutside';
-import page from '../../../src/config/pages';
+import pages from '../../../src/config/pages';
 
 describe('GraphCard', () => {
   let wrapper = null;
@@ -15,7 +15,7 @@ describe('GraphCard', () => {
     localVue.directive('click-outside', clickOutside);
     wrapper = mount(GraphCard, {
       propsData: {
-        settings: page['alder'].aldersgrupper[0],
+        settings: pages['alder'].subpages[0].graphs[0],
       },
       localVue,
       router,
@@ -35,14 +35,14 @@ describe('GraphCard', () => {
   });
 
   test('change an active tab', () => {
-    wrapper.vm.settings = page['eierform'].eierform[0];
+    wrapper.setProps({ settings: pages['eierform'].subpages[0].graphs[0] });
     wrapper.vm.activeTab(1);
     expect(wrapper.vm.active).toEqual(1);
     expect(wrapper.element).toMatchSnapshot();
   });
 
   test('change active tab multiple times', () => {
-    wrapper.vm.settings = page['husholdninger'].totalt[0];
+    wrapper.setProps({ settings: pages['husholdninger'].subpages[0].graphs[0] });
     expect(wrapper.vm.active).toEqual(0);
     wrapper.vm.activeTab(1);
     expect(wrapper.vm.active).toEqual(1);
@@ -57,7 +57,7 @@ describe('GraphCard', () => {
   });
 
   test('if dropdown is true, change to false', () => {
-    wrapper.vm.showDropdown = true;
+    wrapper.setData({ showDropdown: true });
     expect(wrapper.vm.showDropdown).toEqual(true);
     wrapper.vm.closeMenu();
     expect(wrapper.vm.showDropdown).toEqual(false);
