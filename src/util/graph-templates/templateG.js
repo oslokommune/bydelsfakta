@@ -176,7 +176,7 @@ function Template(svg) {
       .select('text.progress-year__value')
       .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .attr('x', this.x(2) + this.x.bandwidth() / 2 - 30)
-      .text(d => d.values[2]);
+      .text(d => d3.format('+')(d.values[2]));
     rows
       .filter(d => !d.avgRow && !d.totalRow)
       .select('rect.progress-year__bar')
@@ -221,7 +221,7 @@ function Template(svg) {
       .select('text.progress-period__value')
       .attr('x', this.x(3) + this.x.bandwidth() / 2 - 30)
       .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
-      .text(d => d.values[3][d.values[3].length - 1] - d.values[3][0]);
+      .text(d => d3.format('+')(d.values[3][d.values[3].length - 1] - d.values[3][0]));
 
     row
       .select('g.progress-period__arrow path')
