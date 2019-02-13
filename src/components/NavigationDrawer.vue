@@ -406,7 +406,7 @@ export default {
 
   &__label {
     align-items: center;
-    color: white;
+    color: rgba(white, 0.85);
     display: flex;
     flex-grow: 1;
     height: 40px;
@@ -433,8 +433,14 @@ export default {
     }
   }
 
+  &:hover:not(&--active) label:not(.compare)::before {
+    transition: all 0s;
+    opacity: 0.15;
+  }
+
   &:not(&--active) &__label:hover {
     background-color: darken($color-purple, 5%);
+    color: white;
 
     // Show the visual border on hover
     &::before {
@@ -461,7 +467,7 @@ input[type='checkbox'] {
 
       &::before {
         background: rgba(white, 0.15);
-        opacity: 0.8;
+        opacity: 0.8 !important;
       }
     }
 
@@ -475,8 +481,14 @@ input[type='checkbox'] {
       position: absolute;
       top: 14px;
       transform: scale(0);
-      transition: all 0.3s ease-in-out;
       width: 10px;
+    }
+
+    &:not(.compare) {
+      &::before,
+      &::after {
+        transition: all 0.3s ease-in-out;
+      }
     }
 
     // unchecked border
@@ -491,7 +503,7 @@ input[type='checkbox'] {
       opacity: 0;
       position: absolute;
       top: 10px;
-      transition: all 0.3s ease-in-out;
+      // transition: all 0.3s ease-in-out;
       width: 18px;
     }
 
@@ -514,7 +526,7 @@ input[type='checkbox'] {
     &::before {
       border: 1px solid $color-blue;
       opacity: 1;
-      transition: all 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out;
     }
   }
 }
