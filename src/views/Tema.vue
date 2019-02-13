@@ -62,12 +62,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.card-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  min-width: 300px;
-  max-width: 1300px;
-}
-</style>
+<style scoped></style>
