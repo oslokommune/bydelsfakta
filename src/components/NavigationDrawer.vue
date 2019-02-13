@@ -1,14 +1,14 @@
 <template>
   <aside id="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
     <nav role="navigation">
       <div
         v-for="link in links"
         :key="link.key"
         class="navigation-link"
         :class="{
-          'navigation-link--active': checkActiveBydel(link.uri),
-          'navigation-link--compare': checkMultipleBydeler(link.key),
+          'navigation-link--active': $route.params.bydel === link.uri && !compareBydeler,
+          'navigation-link--compare': compareBydeler && selected.includes(link.key),
         }"
       >
         <input
@@ -17,17 +17,11 @@
           :value="link.key"
           :id="`checkbox-${link.uri}`"
           @change="onChangeCheckbox"
-          :disabled="disableChecbox(link.key)"
-        >
-        <label :for="`checkbox-${link.uri}`" :class="{'compare' : compareBydeler}"></label>
-        <router-link
-          :id="`a-${link.uri}`"
-          class="navigation-link__label"
-          :to="onClickBydel(link.uri)"
-        >
-          {{
-          link.value
-          }}
+          :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
+        />
+        <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
+        <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">
+          {{ link.value }}
         </router-link>
       </div>
       <div
@@ -35,42 +29,37 @@
         id="sammenlign"
         :class="{ 'navigation-link--active': compareBydeler }"
       >
-        <router-link
-          id="sammenlign-href"
-          :to="onClickSammenlign()"
-          class="navigation-link__label"
-        >Sammenlign bydeler</router-link>
+        <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">
+          Sammenlign bydeler
+        </router-link>
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
-            <button
-              class="navigation-drawer__button"
-              @click="selectAll"
-              aria-label="select all checkboxes"
-            >Velg alle</button>
+            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
+              Velg alle
+            </button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
               aria-label="unselect all checkboxes"
-            >Fjern alle</button>
+            >
+              Fjern alle
+            </button>
           </div>
           <div class="navigation-drawer__select-container">
-            <label for="predefined-select" class="hidden-label">Velg byområde</label>
-            <select
-              id="navigation-drawer-select"
-              class="navigation-drawer__select"
-              v-model="selectedPredefinedOption"
-            >
+            <label for="navigation-drawer-select" class="hidden-label">Velg byområde</label>
+            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
                 :key="index"
                 :value="element.option"
                 :selected="element.selected"
                 :disabled="element.disabled"
-                id="predefined-select"
-              >{{ element.label }}</option>
+              >
+                {{ element.label }}
+              </option>
             </select>
           </div>
         </div>
@@ -135,18 +124,6 @@ export default {
   },
 
   methods: {
-    checkActiveBydel(link) {
-      return this.$route.params.bydel === link && !this.sammenlign;
-    },
-
-    checkMultipleBydeler(key) {
-      return this.compareBydeler && this.selected.includes(key);
-    },
-
-    disableChecbox(key) {
-      return !this.compareBydeler && this.selected.length === 1 && this.selected[0] === key;
-    },
-
     onChangeCheckbox() {
       // Reset selector
       this.selectedPredefinedOption = [];

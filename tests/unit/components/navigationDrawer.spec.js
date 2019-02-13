@@ -46,13 +46,13 @@ describe('NavigationDrawer', () => {
   });
 
   test('selectedPredefinedOption is length of 0', () => {
-    wrapper.vm.selectedPredefinedOption = [];
+    wrapper.setData({ selectedPredefinedOption: [] });
     expect(wrapper.vm.selectedPredefinedOption.length).toEqual(0);
   });
 
   test('selectedPredefinedOption is set to length of 3 and router is pushed to Tema', () => {
     router.push('/bydel/sagene/alder');
-    wrapper.vm.selectedPredefinedOption = ['1', '2', '3'];
+    wrapper.setData({ selectedPredefinedOption: ['1', '2', '3'] });
     expect(wrapper.vm.selected).toEqual(['1', '2', '3']);
     expect(wrapper.vm.$route.path).toEqual('/bydel/1-2-3/alder');
   });

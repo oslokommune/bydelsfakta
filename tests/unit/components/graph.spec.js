@@ -11,7 +11,7 @@ describe('Graph', () => {
     localVue.use(vueResize);
     wrapper = mount(Graph, {
       propsData: {
-        settings: page['alder'].aldersgrupper[0].tabs[0],
+        settings: page['alder'].subpages[0].graphs[0],
       },
       localVue,
     });

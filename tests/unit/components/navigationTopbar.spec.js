@@ -41,7 +41,7 @@ describe('NavigationTopbar', () => {
 
   test('change showDropdown to false if it is true', () => {
     router.push('/bydel/sagene/alder');
-    wrapper.vm.showDropdown = true;
+    wrapper.setData({ showDropdown: true });
     wrapper.vm.closeMenu();
     expect(wrapper.vm.showDropdown).toEqual(false);
   });
