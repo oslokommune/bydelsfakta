@@ -1,3 +1,18 @@
+@import './breakpoints';
+
+#app {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: $break-lg) {
+    flex-direction: row;
+  }
+}
+
+#content {
+  width: 100%;
+}
+
 .main-container {
   display: flex;
   flex-wrap: wrap;
@@ -10,12 +25,24 @@
 
 .main-container__cards {
   display: flex;
-  padding: 2rem;
   flex-flow: row wrap;
   justify-content: flex-start;
   min-width: 300px;
+  padding: 0.25em;
   max-width: 1300px;
   flex: 1 1 900px;
+
+  @media screen and (min-width: $break-sm) {
+    padding: 0.5em;
+  }
+
+  @media screen and (min-width: $break-md) {
+    padding: 1em;
+  }
+
+  @media screen and (min-width: $break-lg) {
+    padding: 2em;
+  }
 }
 
 .main-container__map {

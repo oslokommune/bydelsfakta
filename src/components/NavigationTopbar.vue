@@ -20,7 +20,11 @@
       </button>
       <transition name="fade">
         <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
-          <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
+          <div
+            v-for="(kategori, index) in dropdown"
+            :key="index"
+            class="navigation-topbar__dropdown-column"
+          >
             <div
               class="navigation-topbar__dropdown-column--heading"
               :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
@@ -36,8 +40,7 @@
                 :key="subpageIndex"
                 v-text="link.text"
                 :to="onClickSubpage(link.value)"
-                >{{ link.text }}</router-link
-              >
+              >{{ link.text }}</router-link>
             </div>
           </div>
         </div>
@@ -127,18 +130,29 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '../styles/colors';
+@import '../styles/breakpoints';
 
 .oslo__navigation-topbar {
-  background-color: white;
-  border-bottom: 1px solid $color-grey-300;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
-  width: 100%;
+  margin: 2rem 1rem 0rem 1rem;
+  width: calc(100% - 2rem);
+
+  @media screen and (min-width: $break-lg) {
+    padding: 2rem;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 1px 2px $color-grey-300;
+    margin: 0;
+  }
 
   &-button {
-    display: flex;
+    display: none;
     flex-direction: row;
+
+    @media screen and (min-width: $break-lg) {
+      display: flex;
+    }
   }
 }
 
@@ -158,6 +172,11 @@ export default {
 .label {
   font-size: 16px;
   transition: all 0.3s ease-in-out;
+  display: none;
+
+  @media screen and (min-width: $break-lg) {
+    display: inline-block;
+  }
 
   &--active {
     font-size: 16px;
@@ -237,7 +256,11 @@ export default {
       &--heading {
         font-weight: bold;
         margin-bottom: 1rem;
-        // width: 190px;
+        margin-top: 1rem;
+
+        @media screen and (min-width: $break-lg) {
+          margin-top: 0;
+        }
       }
     }
 
@@ -250,9 +273,14 @@ export default {
       background-color: $color-grey-50;
       border-radius: 4px;
       color: $color-purple;
-      height: 34px;
-      margin-bottom: 0.1rem;
-      padding: 0.5rem;
+      // height: 34px;
+      margin-bottom: 0.5rem;
+      padding: 1rem 0.75rem;
+
+      @media screen and (min-width: $break-lg) {
+        margin-bottom: 0.1rem;
+        padding: 0.5rem;
+      }
 
       &:hover:not(&--active) {
         background-color: $color-grey-100;

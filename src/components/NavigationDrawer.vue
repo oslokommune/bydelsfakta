@@ -1,7 +1,13 @@
 <template>
   <aside id="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
-    <nav role="navigation">
+    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+    <button
+      class="selectedSubpage"
+      @click="showNavigation = !showNavigation"
+      @keydown.esc="showNavigation = false"
+      v-text="selectedSubpage"
+    ></button>
+    <nav role="navigation" class="navigation" :class="{'navigation--show': showNavigation }">
       <div
         v-for="link in links"
         :key="link.key"
@@ -18,48 +24,54 @@
           :id="`checkbox-${link.uri}`"
           @change="onChangeCheckbox"
           :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
-        />
+        >
         <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
-        <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">
-          {{ link.value }}
-        </router-link>
+        <router-link
+          :id="`a-${link.uri}`"
+          class="navigation-link__label"
+          :to="onClickBydel(link.uri)"
+        >{{ link.value }}</router-link>
       </div>
       <div
         class="navigation-link navigation-link__label-compare"
         id="sammenlign"
         :class="{ 'navigation-link--active': compareBydeler }"
       >
-        <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">
-          Sammenlign bydeler
-        </router-link>
+        <router-link
+          id="sammenlign-href"
+          :to="onClickSammenlign()"
+          class="navigation-link__label"
+        >Sammenlign bydeler</router-link>
       </div>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
-            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
-              Velg alle
-            </button>
+            <button
+              class="navigation-drawer__button"
+              @click="selectAll"
+              aria-label="select all checkboxes"
+            >Velg alle</button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
               aria-label="unselect all checkboxes"
-            >
-              Fjern alle
-            </button>
+            >Fjern alle</button>
           </div>
           <div class="navigation-drawer__select-container">
             <label for="navigation-drawer-select" class="hidden-label">Velg byområde</label>
-            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
+            <select
+              id="navigation-drawer-select"
+              class="navigation-drawer__select"
+              v-model="selectedPredefinedOption"
+            >
               <option
                 v-for="(element, index) in options"
                 :key="index"
                 :value="element.option"
                 :selected="element.selected"
                 :disabled="element.disabled"
-              >
-                {{ element.label }}
-              </option>
+              >{{ element.label }}</option>
             </select>
           </div>
         </div>
@@ -81,11 +93,28 @@ export default {
       osloIcon: osloIcon,
       checkedAllCheckbox: false,
       showDropdown: false,
+      showNavigation: false,
       selected: [],
       options: predefinedOptions,
       selectedPredefinedOption: [],
       compareBydeler: false,
     };
+  },
+
+  computed: {
+    selectedSubpage: {
+      get: function() {
+        if (this.compareBydeler) {
+          let count = this.selected.length ? this.selected.length : this.links.length;
+          return 'Sammenlign bydeler (' + count + ')';
+        } else if (!this.selected.length) {
+          return '- Velg bydel -';
+        } else {
+          return this.links[this.selected - 1].value;
+        }
+      },
+      set: function() {},
+    },
   },
 
   created() {
@@ -216,6 +245,8 @@ export default {
       const params = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
       const bydel = bydeler.find(item => item.uri === routes[2]);
 
+      this.showNavigation = false;
+
       if (to.name === 'Home') {
         this.selected = [];
       } else if (to.params.bydel === 'alle') {
@@ -248,16 +279,70 @@ export default {
 
 <style scoped lang="scss">
 @import '../styles/colors';
+@import '../styles/breakpoints';
 
 #navbar {
-  background-color: $color-purple;
+  background: $color-blue;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  position: fixed;
-  width: 21.5em;
-  overflow-y: auto;
-  padding-bottom: 2em;
+  position: relative;
+  flex: 5em 0 0;
+  width: 100%;
+
+  @media screen and (min-width: $break-lg) {
+    background-color: $color-purple;
+    flex-direction: column;
+    padding-bottom: 2em;
+    flex: 21.5em 0 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+.navigation {
+  position: absolute;
+  width: 100%;
+  top: 5em;
+  right: 0;
+  z-index: 1;
+  background: $color-purple;
+  padding: 2em 0;
+  display: none;
+  border-top: 2px solid $color-blue;
+
+  &--show {
+    display: block;
+  }
+
+  @media screen and (min-width: $break-sm) {
+    width: calc(100% - 10em);
+    border-top: none;
+  }
+
+  @media screen and (min-width: $break-lg) {
+    top: 0;
+    display: initial;
+    position: relative;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.selectedSubpage {
+  color: $color-purple;
+  font-weight: 500;
+  font-size: 1.25em;
+  display: block;
+  height: auto;
+  text-align: left;
+  padding-left: 1rem;
+  flex: auto 1 0;
+  cursor: pointer;
+
+  @media screen and (min-width: $break-lg) {
+    display: none;
+  }
 }
 
 .hidden-label {
@@ -269,10 +354,17 @@ export default {
 }
 
 .oslo__logo {
-  align-self: center;
   cursor: pointer;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+  background: $color-purple;
+  object-fit: contain;
+  width: 10em;
+
+  @media screen and (min-width: $break-lg) {
+    align-self: center;
+    background: none;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .navigation-link {
@@ -322,7 +414,7 @@ export default {
     position: relative;
 
     &-compare {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       margin-top: 2rem;
       padding-left: 3.6rem;
     }
@@ -430,11 +522,14 @@ input[type='checkbox'] {
 .navigation-drawer__buttons {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding-right: 1rem;
+  padding: 0 1rem;
 
   .navigation-drawer__button-container {
-    align-self: flex-end;
+    display: flex;
+
+    @media screen and (min-width: $break-lg) {
+      align-self: flex-end;
+    }
 
     .navigation-drawer__button {
       -moz-border-radius: 5px;
@@ -445,7 +540,17 @@ input[type='checkbox'] {
       font-weight: bold;
       margin: 0.5rem;
       padding: 0.3rem 1rem 0.3rem 1rem;
+      height: 42px;
+      width: 50%;
       transition: all 0.3s ease-in-out;
+
+      @media screen and (min-width: $break-md) {
+        width: auto;
+      }
+
+      @media screen and (min-width: $break-md) {
+        height: auto;
+      }
 
       &:disabled {
         opacity: 0.2;
@@ -461,8 +566,11 @@ input[type='checkbox'] {
 
 .navigation-drawer__select-container {
   display: flex;
-  justify-content: flex-end;
   position: relative;
+
+  @media screen and (min-width: $break-lg) {
+    align-self: flex-end;
+  }
 
   .navigation-drawer__select {
     border: 1px solid rgb(248, 198, 107);
@@ -471,7 +579,13 @@ input[type='checkbox'] {
     margin: 0.5rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
     position: relative;
-    width: 205px;
+    width: 100%;
+    height: 42px;
+
+    @media screen and (min-width: $break-lg) {
+      width: 205px;
+      height: auto;
+    }
   }
 
   &:before {
@@ -480,10 +594,10 @@ input[type='checkbox'] {
     content: '';
     height: 0.5rem;
     position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
+    top: calc(50% - 0.35rem);
     transform: rotate(-45deg);
     width: 0.5rem;
+    right: 1.5rem;
   }
 }
 </style>

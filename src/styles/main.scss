@@ -3,13 +3,22 @@
 @import 'layout';
 @import 'graphs';
 @import 'animations';
+@import 'breakpoints';
 
 html {
   background-color: $color-grey-50;
-  font-size: 14px;
+  font-size: 12.5px;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   overflow-y: scroll;
+
+  @media screen and (min-width: 600px) {
+    font-size: 13px;
+  }
+
+  @media screen and (min-width: $break-md) {
+    font-size: 14px;
+  }
 }
 
 body {
@@ -57,6 +66,6 @@ a {
   text-decoration: none;
 }
 
-[role="button"] {
+[role='button'] {
   cursor: pointer;
 }
