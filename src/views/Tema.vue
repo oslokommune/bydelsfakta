@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { page, pages } from '../config/pages';
+import pages from '../config/pages';
 
 import GraphCard from '../components/GraphCard.vue';
 
@@ -56,7 +56,7 @@ export default {
 
   computed: {
     currentSettings() {
-      return { settings: page[this.tema] };
+      return { settings: pages[this.tema] };
     },
   },
 };
