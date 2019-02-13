@@ -60,7 +60,6 @@ export const pages = {
         graphs: [
           {
             size: 'large',
-            title: 'Nøkkeltall for delbydelene',
             tabs: [
               {
                 active: false,
