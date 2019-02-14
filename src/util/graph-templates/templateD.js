@@ -32,7 +32,7 @@ function Template(svg) {
     grouping: [3],
     currency: ['', 'NOK'],
   });
-  const formatPercent = NO.format('.1%');
+  const formatPercent = NO.format('~p');
   const formatFloat = NO.format(',.0f');
 
   this.sortData = function(data) {
@@ -439,7 +439,7 @@ function Template(svg) {
       let sum = d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
 
       if (this.method == 'ratio') {
-        return formatPercent(sum);
+        return d3.format(',.1%')(sum);
       } else {
         return formatFloat(sum);
       }
