@@ -148,7 +148,7 @@ function Template(svg) {
 
     // Find each cell's area and centroid and sort by area
     let areas = [];
-    cells.each((d, i, j) => {
+    cells.each(d => {
       areas.push({
         area: d3.polygonArea(d),
         centroid: d3.polygonCentroid(d),
