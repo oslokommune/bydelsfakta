@@ -93,6 +93,7 @@ export default {
 
     backButton() {
       const route = this.$route;
+      if (route.name === 'Home') return '/';
       return this.selectedSubpage === null
         ? { name: 'Home' }
         : { name: 'Bydel', params: { bydel: route.params.bydel } };
