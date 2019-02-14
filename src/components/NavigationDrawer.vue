@@ -279,7 +279,7 @@ export default {
 
 <style scoped lang="scss">
 @import '../styles/colors';
-@import '../styles/breakpoints';
+@import '../styles/variables';
 
 #navbar {
   background: $color-blue;
@@ -292,8 +292,8 @@ export default {
     background-color: $color-purple;
     flex-direction: column;
     padding-bottom: 2em;
-    flex: 21.5em 0 0;
-    position: sticky;
+    position: fixed;
+    width: $sidebarWidth;
     top: 0;
     height: 100vh;
     overflow-y: auto;

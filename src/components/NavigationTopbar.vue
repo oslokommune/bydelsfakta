@@ -130,7 +130,7 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '../styles/colors';
-@import '../styles/breakpoints';
+@import '../styles/variables';
 
 .oslo__navigation-topbar {
   display: flex;
