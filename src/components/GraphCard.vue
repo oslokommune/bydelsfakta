@@ -207,19 +207,20 @@ export default {
 
   &__dropdown {
     background-color: rgb(178, 210, 216);
+    box-shadow: 0 2px 2px 0 $color-grey-200;
     position: absolute;
     right: 0;
     width: 200px;
     z-index: 1;
 
     &-item {
-      box-shadow: 0 2px 2px 0 $color-grey-200;
       color: $color-purple;
       display: flex;
       flex-direction: row;
       font-weight: bold;
-      padding: 0.5rem;
+      padding: 1rem 0.75rem;
       width: 100%;
+      cursor: pointer;
 
       &:hover {
         background-color: lighten($color-light-blue-2, 5%);
