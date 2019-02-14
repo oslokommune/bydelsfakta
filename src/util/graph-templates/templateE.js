@@ -29,6 +29,8 @@ function Template(svg) {
         ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
         : options.selected;
 
+    this.width = d3.max([this.width, 360]);
+
     this.height = 400;
     this.svg
       .transition()

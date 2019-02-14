@@ -11,12 +11,12 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 90, left: 240, right: 20, bottom: 1 };
+  this.padding = { top: 90, left: 200, right: 20, bottom: 1 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
 
   // Define withs of both charts.
   // gapX is the space between them.
-  this.gapX = 80;
+  this.gapX = 70;
   this.width1 = (this.width - this.gapX) / 2;
   this.width2 = (this.width - this.gapX) / 2;
 
@@ -26,6 +26,8 @@ function Template(svg) {
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
+
+    this.width = d3.max([this.width, 360]);
 
     // Find quartiles, mean and median for each geography
     data.data = data.data.map(bydel => {

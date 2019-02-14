@@ -113,6 +113,7 @@ function Template(svg) {
     // The gutter is the left hand side padding
     // inside of the canvas towards the matrix
     this.gutter = (this.parentWidth() - this.padding.left - 400) / 2;
+    this.gutter = d3.max([this.gutter, 10]);
 
     this.matrix
       .transition()
@@ -131,7 +132,7 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('height', 500 + this.sourceHeight)
-      .attr('width', this.parentWidth());
+      .attr('width', d3.max([this.parentWidth(), 650]));
 
     this.drawMatrix();
     this.drawList();

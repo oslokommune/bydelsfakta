@@ -34,6 +34,8 @@ function Template(svg) {
       return bydel;
     });
 
+    this.width = d3.max([this.width, 420]);
+
     // Resize svg based on number of rows and container width
     this.svg
       .transition()

@@ -14,7 +14,12 @@
           class="tabs__button"
           v-text="tab.label"
         ></button>
-        <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
+        <div
+          @keydown.escape="closeMenu()"
+          v-click-outside="closeMenu"
+          class="context-menu"
+          role="menu"
+        >
           <button
             class="context-menu__button"
             @click="showDropdown = !showDropdown"
@@ -50,7 +55,11 @@
           </div>
         </div>
       </div>
-      <graph v-if="settings.tabs[active] !== undefined" :settings="settings.tabs[active]" ref="graph" />
+      <graph
+        v-if="settings.tabs[active] !== undefined"
+        :settings="settings.tabs[active]"
+        ref="graph"
+      />
     </div>
   </div>
 </template>

@@ -28,6 +28,8 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    this.width = d3.max([this.width, 300]);
+
     this.data.data = this.data.data.sort((a, b) => {
       return (
         b.values[this.series][b.values[this.series].length - 1].value -

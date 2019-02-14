@@ -53,6 +53,8 @@ function Template(svg) {
     this.data.data = this.sortData(this.data.data);
     if (!data.data) return;
 
+    this.width = d3.max([this.width, 600]);
+
     // Set sizes for brush objects
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
     brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);

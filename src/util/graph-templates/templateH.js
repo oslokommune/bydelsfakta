@@ -53,6 +53,7 @@ function Template(svg) {
     this.highlight = options.highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
     this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
     this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
+    this.width1 = d3.max([this.width1, 300]);
     this.width = this.width1 + this.gapX + this.sidebarWidth;
     this.height = this.height1 + this.gapY + this.height2;
 

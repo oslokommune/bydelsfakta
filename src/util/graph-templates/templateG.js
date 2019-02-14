@@ -24,6 +24,8 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    this.width = d3.max([this.width, 560]);
+
     this.svg
       .transition()
       .duration(this.duration)

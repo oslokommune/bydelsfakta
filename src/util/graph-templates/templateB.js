@@ -35,6 +35,8 @@ function Template(svg) {
       return b.values[b.values.length - 1].value - a.values[a.values.length - 1].value;
     });
 
+    this.width = d3.max([this.width, 300]);
+
     this.height = d3.max([480, this.width * 0.5]);
 
     this.svg
