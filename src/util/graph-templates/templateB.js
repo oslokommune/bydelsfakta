@@ -60,7 +60,6 @@ function Template(svg) {
     this.drawLines();
     this.drawAxis();
     this.drawLabels();
-    this.drawInfobox();
     this.drawDots();
     this.drawVoronoi();
     this.drawDirectLabels();
@@ -77,7 +76,6 @@ function Template(svg) {
     this.canvas.append('g').attr('class', 'dots');
     this.canvas.append('g').attr('class', 'voronoi');
     this.canvas.append('g').attr('class', 'labels');
-    this.createInfoBoxElements();
   };
 
   // Line generator for converting values to a data string for svg:paths
@@ -262,7 +260,7 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => d.value)
+      .text(d => d3.format('($.0f')(d.value))
       .attr('x', d => this.x(this.parseDate(d.date)))
       .attr('y', d => this.y(d.value))
       .attr('font-size', 11)
@@ -357,45 +355,35 @@ function Template(svg) {
     let labels = this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .data(labelPositions, d => d.geography);
-
-    let labelsE = labels
-      .enter()
-      .append('g')
+      .data(labelPositions, d => d.geography)
+      .join(
+        enter => {
+          let g = enter.append('g');
+          g.append('line')
+            .attr('stroke-width', 9)
+            .attr('x1', this.width + 22)
+            .attr('x2', this.width + 31);
+          g.append('text').attr('x', this.width + 35);
+          g.append('title');
+          return g;
+        },
+        update => update,
+        exit => exit.remove()
+      )
       .attr('class', 'label')
-      .style('cursor', 'pointer');
-
-    labelsE
-      .append('g')
-      .attr('class', 'label')
-      .style('cursor', 'pointer');
-
-    labelsE.append('text').attr('x', this.width + 35);
-
-    labelsE
-      .append('line')
-      .attr('stroke-width', 9)
-      .attr('x1', this.width + 22)
-      .attr('x2', this.width + 31);
-    labelsE.append('title');
-
-    labels.exit().remove();
-    labels = labels.merge(labelsE);
-
-    labels.attr('class', 'label');
+      .style('cursor', 'pointer')
+      .attr('tabindex', 0);
 
     // Click label to render with highlight (infobox)
-    labels
-      .on('click keyup', (d, i, j) => {
-        if (d3.event && d3.event.type === 'click') j[i].blur();
-        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        if (i === this.highlight) {
-          this.render(this.data, { method: this.method, highlight: -1 });
-        } else {
-          this.render(this.data, { method: this.method, highlight: i });
-        }
-      })
-      .attr('tabindex', 0);
+    labels.on('click keyup', (d, i, j) => {
+      if (d3.event && d3.event.type === 'click') j[i].blur();
+      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+      if (i === this.highlight) {
+        this.render(this.data, { method: this.method, highlight: -1 });
+      } else {
+        this.render(this.data, { method: this.method, highlight: i });
+      }
+    });
 
     // Hover label to highlight itself and its corresponding line
     labels.on('mouseover', d => {
@@ -435,7 +423,11 @@ function Template(svg) {
       .text(d => util.truncate(d.geography, this.padding.right - 40))
       .attr('x', this.width + 35)
       .attr('y', 5)
-      .attr('font-weight', d => {
+      .attr('font-weight', (d, i) => {
+        if (this.highlight >= 0) {
+          return this.highlight === i ? 700 : 400;
+        }
+
         if (d.avgRow || d.totalRow) return 700;
         return 400;
       });
@@ -444,128 +436,16 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
-      .attr('opacity', d => {
+      .attr('opacity', (d, i) => {
+        if (this.highlight >= 0) {
+          return this.highlight === i ? 1 : 0.1;
+        }
         if (d.avgRow || d.totalRow) return 1;
         return 0.45;
       });
 
     // Update content in the <title> element
     labels.select('title').html(d => d.geography);
-  };
-
-  // Runs once in the created() method and creates DOM elements for the
-  // infobox which appears when a series is selected
-  this.createInfoBoxElements = function() {
-    this.infobox = this.svg.append('g').attr('class', 'infobox');
-    this.infoboxBody = this.infobox.append('g').attr('class', 'infobox__body');
-    this.infoboxBody.append('rect').attr('class', 'background');
-    this.infoboxHead = this.infobox.append('g').attr('class', 'infobox__head');
-    this.infoboxHead.append('rect').attr('class', 'background');
-    this.infoboxTitle = this.infoboxHead.append('text');
-    this.infoboxContent = this.infoboxBody.append('g').attr('class', 'infobox__content');
-    this.infoboxHeading = this.infoboxContent.append('text').attr('class', 'infobox__heading');
-    this.infoboxContent.append('rect').attr('class', 'infobox__rule');
-    this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
-  };
-
-  this.drawInfobox = function() {
-    if (this.highlight === -1) {
-      this.infobox.attr('opacity', 0).style('display', 'none');
-      return;
-    }
-
-    let year = d3.timeFormat('%Y');
-    let data = this.data.data[this.highlight].values;
-    let geography = this.data.data[this.highlight].geography;
-    let high = data.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
-    let low = data.reduce((prev, curr) => (prev.value < curr.value ? prev : curr));
-
-    this.infobox
-      .attr('transform', `translate(${this.padding.left + this.width}, ${this.padding.top})`)
-      .style('display', 'block')
-      .transition()
-      .duration(this.duration)
-      .attr('opacity', 1);
-
-    this.infoboxHead
-      .select('rect.background')
-      .attr('height', 30)
-      .attr('width', this.padding.right - 22)
-      .attr('x', 11)
-      .attr('fill', color.purple);
-    this.infoboxTitle
-      .attr('y', 20)
-      .attr('x', 21)
-      .attr('font-size', 14)
-      .attr('font-weight', 700)
-      .text(util.truncate(geography, this.padding.right - 55, 14, 700))
-      .attr('fill', color.blue);
-
-    this.infoboxBody
-      .select('rect.background')
-      .attr('height', this.height - 40)
-      .attr('y', 20)
-      .attr('x', 4)
-      .attr('width', this.padding.right - 8)
-      .attr('fill', color.light_yellow)
-      .attr('stroke', color.purple);
-
-    this.infoboxContent.attr('transform', 'translate(20, 60)');
-    this.infoboxHeading
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
-      .attr('text-transform', 'uppercase')
-      .attr('fill', color.purple)
-      .text(util.truncate(this.data.meta.heading, this.padding.right - 90, 12, 700).toUpperCase());
-
-    this.infoboxTable.selectAll('*').remove();
-
-    this.infoboxTable
-      .append('text')
-      .attr('y', 50)
-      .text('Utvikling');
-    this.infoboxTable
-      .append('text')
-      .attr('y', 75)
-      .text('Utvikling (p.p.)');
-    this.infoboxTable
-      .append('text')
-      .attr('y', 100)
-      .text(`Høyest (${year(this.parseDate(high.date))})`);
-    this.infoboxTable
-      .append('text')
-      .attr('y', 125)
-      .text(`Lavest (${year(this.parseDate(low.date))})`);
-
-    this.infoboxTable
-      .append('text')
-      .attr('font-weight', 700)
-      .attr('y', 50)
-      .attr('x', this.padding.right - 40)
-      .attr('text-anchor', 'end')
-      .text(Math.round(((data[data.length - 1].value - data[0].value) / data[0].value) * 100) + '%');
-
-    this.infoboxTable
-      .append('text')
-      .attr('font-weight', 700)
-      .attr('y', 75)
-      .attr('x', this.padding.right - 40)
-      .attr('text-anchor', 'end')
-      .text(Math.round((data[data.length - 1].ratio - data[0].ratio) * 10000) / 100);
-    this.infoboxTable
-      .append('text')
-      .attr('font-weight', 700)
-      .attr('y', 100)
-      .attr('x', this.padding.right - 40)
-      .attr('text-anchor', 'end')
-      .text(Math.round(high.ratio * 10000) / 100 + '%');
-    this.infoboxTable
-      .append('text')
-      .attr('font-weight', 700)
-      .attr('y', 125)
-      .attr('x', this.padding.right - 40)
-      .attr('text-anchor', 'end')
-      .text(Math.round(low.ratio * 10000) / 100 + '%');
   };
 
   // Updates the shape and style of the lines in the line chart
