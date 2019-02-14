@@ -124,6 +124,7 @@ export default {
         this.selectedSubpage = null;
       } else if (to.name === 'Home') {
         this.sammenlign = false;
+        this.selectedSubpage = null;
       }
     },
   },
@@ -173,11 +174,6 @@ export default {
 .label {
   font-size: 16px;
   transition: all 0.3s ease-in-out;
-  display: none;
-
-  @media screen and (min-width: $break-lg) {
-    display: inline-block;
-  }
 
   &--active {
     font-size: 16px;
