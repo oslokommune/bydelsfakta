@@ -115,32 +115,32 @@ function Template(svg) {
   this.drawList = function() {
     let active = this.selected;
 
-    let row = this.list.selectAll('g.row').data(this.data.data);
-    let rowE = row
-      .enter()
-      .append('g')
-      .attr('class', 'row');
-    row.exit().remove();
-    row = row.merge(rowE);
+    let row = this.list
+      .selectAll('g.row')
+      .data(this.data.data)
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'row');
 
-    rowE
-      .append('rect')
-      .attr('class', 'fill')
-      .attr('width', this.padding.left - this.gutter)
-      .attr('height', this.rowHeight)
-      .attr('fill', color.blue)
-      .style('cursor', 'pointer')
-      .attr('rx', 3);
-    rowE.append('text').attr('class', 'label');
+        // Create background fill for row
+        g.append('rect')
+          .attr('class', 'fill')
+          .attr('width', this.padding.left - this.gutter)
+          .attr('height', this.rowHeight)
+          .attr('fill', color.blue)
+          .style('cursor', 'pointer')
+          .attr('rx', 3);
 
-    row
-      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`)
-      .on('click keyup', (d, i, j) => {
-        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        if (d3.event && d3.event.type === 'click') j[i].blur();
-        this.render(this.data, { selected: i });
+        // Create geography label
+        g.append('text').attr('class', 'label');
       })
-      .attr('tabindex', 0);
+      .attr('tabindex', 0)
+      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+
+    row.on('click keyup', (d, i, j) => {
+      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+      if (d3.event && d3.event.type === 'click') j[i].blur();
+      this.render(this.data, { selected: i });
+    });
 
     row
       .select('rect.fill')
@@ -184,24 +184,25 @@ function Template(svg) {
       });
     });
 
-    let genderGroup = this.pyramid.selectAll('g.gender').data(genderData);
-    let genderGroupE = genderGroup
-      .enter()
-      .append('g')
-      .attr('class', 'gender');
-    genderGroup.exit().remove();
-    genderGroup = genderGroup.merge(genderGroupE);
+    let genderGroup = this.pyramid
+      .selectAll('g.gender')
+      .data(genderData)
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'gender');
 
-    // Create labels
-    genderGroupE
-      .append('text')
-      .datum(d => d)
-      .attr('transform', `translate(${this.width / 2}, 23)`)
-      .attr('x', (d, i) => (i === 0 ? -20 : 20));
+        // create labels
+        g.append('text')
+          .datum(d => d)
+          .attr('transform', `translate(${this.width / 2}, 23)`)
+          .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
-    // Create area
-    genderGroupE.append('path').datum(d => d);
+        // Create area
+        g.append('path').datum(d => d);
 
+        return g;
+      });
+
+    // Style the text
     genderGroup
       .select('text')
       .text(d => d[0].gender)
@@ -214,15 +215,10 @@ function Template(svg) {
       .attr('transform', `translate(${this.width / 2}, 23)`)
       .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
+    // Style the path
     genderGroup
       .select('path')
-      .attr('fill', d => {
-        if (d[0].gender == 'Kvinne') {
-          return color.red;
-        } else {
-          return color.positive;
-        }
-      })
+      .attr('fill', d => (d[0].gender == 'Kvinne' ? color.red : color.positive))
       .transition()
       .duration(this.duration)
       .attr('d', this.area);

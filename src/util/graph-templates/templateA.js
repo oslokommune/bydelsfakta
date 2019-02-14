@@ -328,36 +328,27 @@ function Template(svg) {
     let columns = this.canvas
       .select('g.columns')
       .selectAll('g.column')
-      .data(this.filteredData.meta.series);
-    let columnsE = columns
-      .enter()
-      .append('g')
-      .attr('class', 'column');
-    columns.exit().remove();
-    columns = columns.merge(columnsE);
+      .data(this.filteredData.meta.series)
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'column');
+        g.append('rect').attr('fill', color.light_grey);
+        g.append('rect')
+          .attr('class', 'arrow')
+          .attr('width', 1)
+          .attr('height', 11);
+        g.append('text')
+          .attr('class', 'colHeading')
+          .attr('transform', 'translate(0, -40)');
+        g.append('text')
+          .attr('class', 'colSubheading')
+          .attr('transform', 'translate(0, -20)');
+        return g;
+      });
+
     columns
       .transition()
       .duration(this.duration)
-      .attr('transform', (d, i) => {
-        return `translate(${this.x[i](0)},0)`;
-      });
-    columnsE.append('rect').attr('fill', color.light_grey);
-    columnsE
-      .append('rect')
-      .attr('class', 'arrow')
-      .attr('width', 1)
-      .attr('height', 11);
-    columnsE
-      .append('text')
-      .attr('class', 'colHeading')
-      .attr('transform', 'translate(0, -40)');
-
-    columnsE
-      .append('text')
-      .attr('class', 'colSubheading')
-      .attr('transform', 'translate(0, -20)');
-
-    columnsE.append('rect').attr('class', 'clickTrigger');
+      .attr('transform', (d, i) => `translate(${this.x[i](0)},0)`);
 
     columns
       .select('rect.clickTrigger')

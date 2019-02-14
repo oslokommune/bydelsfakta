@@ -129,19 +129,28 @@ function Template(svg) {
   // Updates the rows
   this.drawRows = function() {
     // Standard select/enter/update/exit pattern
+    // let rows = this.canvas
+    //   .select('g.rows')
+    //   .selectAll('g.row')
+    //   .data(this.data.data);
+    // let rowsE = rows
+    //   .enter()
+    //   .append('g')
+    //   .attr('class', 'row');
+    // rows.exit().remove();
+    // rows = rows.merge(rowsE);
+
     let rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
-      .data(this.data.data);
-    let rowsE = rows
-      .enter()
-      .append('g')
-      .attr('class', 'row');
-    rows.exit().remove();
-    rows = rows.merge(rowsE);
+      .data(this.data.data)
+      .join(enter => {
+        let g = enter.append('g').attr('class', 'row');
+        this.initRowElements(g);
+        return g;
+      });
 
     // Create elements on each row that's created on enter
-    this.initRowElements(rowsE);
 
     // Update row geography, style and position
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
