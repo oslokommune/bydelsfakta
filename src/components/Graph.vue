@@ -1,7 +1,9 @@
 <template>
-  <div class="graph__container">
-    <svg class="graph__svg" ref="svg"></svg>
-    <resize-observer @notify="svg.resize(data, { method: settings.method })"></resize-observer>
+  <div class="shadow" :class="shadowClass">
+    <div class="graph__container" ref="container" @scroll="drawShadows">
+      <svg class="graph__svg" ref="svg"></svg>
+    </div>
+    <resize-observer @notify="handleResize"></resize-observer>
   </div>
 </template>
 
@@ -21,9 +23,22 @@ import TemplateJ from '../util/graph-templates/templateJ';
 export default {
   data: () => ({
     svg: false,
+    shadow: {
+      left: false,
+      right: false,
+    },
     data: null,
     currentTemplate: false,
   }),
+
+  computed: {
+    shadowClass() {
+      let str = '';
+      if (this.shadow.left) str += ' shadow--left';
+      if (this.shadow.right) str += ' shadow--right';
+      return str;
+    },
+  },
 
   watch: {
     settings: function() {
@@ -36,6 +51,20 @@ export default {
   },
 
   methods: {
+    drawShadows() {
+      const width = this.$refs.container.parentElement.clientWidth;
+      const spaceLeft = this.$refs.container.scrollLeft;
+      const spaceRight = this.$refs.container.scrollWidth - width - spaceLeft;
+
+      this.shadow.left = spaceLeft > 5;
+      this.shadow.right = spaceRight > 5;
+    },
+
+    handleResize() {
+      this.svg.resize(this.data, { method: this.settings.method });
+      this.drawShadows();
+    },
+
     async draw() {
       if (this.currentTemplate !== this.settings.template) {
         switch (this.settings.template) {
@@ -80,6 +109,7 @@ export default {
         initialRender: true,
       });
       this.currentTemplate = this.settings.template;
+      this.drawShadows();
     },
   },
   props: {

@@ -201,7 +201,7 @@ export default {
   &__button {
     background-color: $color-light-blue-2;
     border-top-right-radius: 3px;
-    height: 3.5rem;
+    height: 100%;
     width: 4rem;
   }
 
