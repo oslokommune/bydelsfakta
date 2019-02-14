@@ -1,0 +1,12 @@
+{
+  "folkemengde": ["alder", "innvandring", "flytting"],
+  "alder": ["folkemengde", "husholdninger", "levekaar"],
+  "innvandring": ["folkemengde", "flytting", "boligpriser"],
+  "eierform": ["boligpriser", "trangboddhet", "bygningstyper"],
+  "boligpriser": ["trangboddhet", "eierform", "flytting"],
+  "kommunale_boliger": ["boligpriser", "trangboddhet", "husholdninger"],
+  "flytting": ["boligpriser", "folkemengde", "bygningstyper"],
+  "bygningstyper": ["husholdninger", "trangboddhet", "boligpriser"],
+  "husholdninger": ["trangboddhet", "eierform", "bygningstyper"],
+  "levekaar": ["husholdninger", "innvandring", "trangboddhet"]
+}
