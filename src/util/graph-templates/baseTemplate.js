@@ -192,7 +192,11 @@ function Base_Template(svg) {
 
   // The parent container width is needed for each render of a template.
   this.parentWidth = function() {
-    return svg.parentNode.getBoundingClientRect().width;
+    const width = svg.parentNode.getBoundingClientRect().width;
+    const paddingLeft = +getComputedStyle(svg.parentNode).paddingLeft.split('px')[0];
+    const paddingRight = +getComputedStyle(svg.parentNode).paddingRight.split('px')[0];
+    const paddingSum = paddingLeft + paddingRight;
+    return width - paddingSum;
   };
 
   // Placeholder for operations to be run once a child template is initialized
