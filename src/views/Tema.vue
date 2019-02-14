@@ -2,9 +2,11 @@
   <div class="main-container">
     <div class="main-container__cards">
       <template v-for="(subpage, index) in pages[`${componentName}`].subpages">
-        <h2 :key="`subpage-${index}`" v-show="subpage.title !== undefined" class="section-heading">
-          {{ subpage.title }}
-        </h2>
+        <h2
+          :key="`subpage-${index}`"
+          v-show="subpage.title !== undefined"
+          class="section-heading"
+        >{{ subpage.title }}</h2>
         <graph-card
           v-for="(card, cardIndex) in subpage.graphs"
           :key="`${subpage.name}-${cardIndex}`"

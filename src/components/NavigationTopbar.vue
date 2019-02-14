@@ -4,7 +4,10 @@
       <i class="material-icons oslo__topbar">arrow_back</i>
       <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
     </router-link>
-    <div class="navigation-topbar">
+    <div
+      class="navigation-topbar"
+      :class="{'navigation-topbar--hidden' : selectedSubpage === null }"
+    >
       <button
         id="select"
         class="navigation-topbar__select"
@@ -189,6 +192,13 @@ export default {
   width: 100%;
   max-width: 768px;
   position: relative;
+
+  &--hidden {
+    @media screen and (max-width: $break-lg) {
+      display: none;
+    }
+  }
+
   &__select {
     color: rgb(141, 141, 160);
     display: flex;
