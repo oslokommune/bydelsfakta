@@ -11,6 +11,7 @@ const subpages = [
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
+    related: ['alder', 'innvandring', 'flytting'],
   },
   {
     text: 'Alder',
@@ -22,6 +23,7 @@ const subpages = [
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
+    related: ['folkemengde', 'husholdninger', 'levekaar'],
   },
   {
     text: 'Innvandrerbefolkningen',
@@ -33,6 +35,7 @@ const subpages = [
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
+    related: ['folkemengde', 'flytting', 'boligpriser'],
   },
   {
     text: 'Husholdninger',
@@ -44,6 +47,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['trangboddhet', 'eierform', 'bygningstyper'],
   },
   {
     text: 'Trangboddhet',
@@ -55,6 +59,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['boligpriser', 'levekaar', 'eierform'],
   },
   {
     text: 'Eierform',
@@ -66,6 +71,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['boligpriser', 'trangboddhet', 'bygningstyper'],
   },
   {
     text: 'Kommunale boliger',
@@ -77,6 +83,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['boligpriser', 'trangboddhet', 'husholdninger'],
   },
   {
     text: 'Flytting',
@@ -88,6 +95,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['boligpriser', 'folkemengde', 'bygningstyper'],
   },
   {
     text: 'Bygningstyper',
@@ -99,6 +107,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['husholdninger', 'trangboddhet', 'boligpriser'],
   },
   {
     text: 'Boligpriser',
@@ -110,6 +119,7 @@ const subpages = [
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
+    related: ['trangboddhet', 'eierform', 'flytting'],
   },
   {
     text: 'Levekår',
@@ -121,6 +131,7 @@ const subpages = [
       bgColor: 'rgb(248, 198, 107)',
       txtColor: 'rgb(244, 206, 138)',
     },
+    related: ['husholdninger', 'innvandring', 'trangboddhet'],
   },
 ];
 
