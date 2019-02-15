@@ -15,12 +15,13 @@
     </div>
     <div class="main-container__map">
       <h3>Bydelskart</h3>
-      <g-map :district="chosenDistrict" />
+      <g-map :district="geoDistricts" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CardImage from '../components/CardImage.vue';
 import GMap from '../components/GMap.vue';
 import subpages from '../config/subpages';
@@ -35,6 +36,11 @@ export default {
       required: true,
     },
   },
+
+  computed: {
+    ...mapGetters(['geoDistricts']),
+  },
+
   created() {
     this.chosenDistrict = this.districts[`${this.$route.params.bydel}`];
   },

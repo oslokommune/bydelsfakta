@@ -139,10 +139,6 @@ export default {
 
     const routes = route.path.split('/');
 
-    if (routes.length > 3) {
-      this.selectedSubpage = routes[3];
-    }
-
     if (bydelParams[0] === 'alle') {
       this.selected = [];
       this.compareBydeler = true;
@@ -158,6 +154,9 @@ export default {
     onChangeCheckbox() {
       // Reset selector
       this.selectedPredefinedOption = [];
+
+      console.log(event.target);
+      this.$store.dispatch('addDistrict', event.target.value);
 
       if (this.selected.length === 0) {
         this.checkedAllCheckbox = false;
