@@ -142,6 +142,8 @@ export default {
   flex-direction: column;
   margin: 2rem 1rem 0rem 1rem;
   width: calc(100% - 2rem);
+  position: relative;
+  z-index: 2;
 
   @media screen and (min-width: $break-lg) {
     padding: 2rem;
