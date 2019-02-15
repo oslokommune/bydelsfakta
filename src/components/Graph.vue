@@ -1,7 +1,7 @@
 <template>
   <div class="graph__shadow" role="tabpanel" :class="shadowClass">
     <div class="graph__container" ref="container" aria-hidden="true" @scroll="drawShadows">
-      <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="graph__svg" aria-hidden="true" ref="svg"></svg>
     </div>
     <table class="visually-hidden">
       <caption></caption>

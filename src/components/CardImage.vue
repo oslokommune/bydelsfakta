@@ -1,18 +1,15 @@
 <template>
-  <div class="main-container__item">
-    <router-link
-      class="oslo__card-image"
-      :style="{ backgroundImage: `url(${dataBgImage})`, backgroundColor: dataBgColor }"
-      :to="link"
-      :id="dataId"
-    >
-      <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">
-        {{ dataKategori }}
-      </span>
-      <span class="oslo__tema" v-html="dataTema"></span>
-      <span class="oslo__see-more-text">Se mer</span>
-    </router-link>
-  </div>
+  <router-link
+    class="main-container__item"
+    :to="link"
+    :id="dataId"
+    :style="{ backgroundColor: dataBgColor }"
+  >
+    <img :src="dataBgImage" alt class="oslo__img">
+    <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">{{ dataKategori }}</span>
+    <span class="oslo__tema" v-html="dataTema"></span>
+    <span class="oslo__see-more-text">Se mer</span>
+  </router-link>
 </template>
 
 <script>
@@ -63,66 +60,91 @@ export default {
 
 <style scoped lang="scss">
 @import './../styles/colors';
+@import './../styles/variables';
 
-.oslo__card-image {
+.main-container__item {
   background-blend-mode: multiply;
-  border-radius: 4px;
+  border-radius: 2px;
   color: white;
   cursor: pointer;
-  height: 160px;
-  width: 280px;
+  height: 8em;
+  margin: 0.25em 0.5em;
+  flex: 17.5em 1 0;
   padding: 1em;
   display: flex;
   flex-direction: column;
   transform: scale(1);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  position: relative;
+  overflow: hidden;
+
+  @media screen and (min-width: $break-sm) {
+    height: 9em;
+    margin: 0.5em;
+  }
+
+  @media screen and (min-width: $break-md) {
+    height: 10em;
+  }
 
   &:hover {
     transform: scale(1.03);
-    transition: all 0.3s ease-in-out;
   }
 
   &:before {
     content: '';
     position: absolute;
-    left: 100px;
-    bottom: 25px;
-    width: 130px;
+    left: 7em;
+    bottom: 1.75em;
+    right: 2em;
     border: 0.5px solid white;
     box-shadow: 0 1.5px 3px rgba($color-grey-600, 0.95);
-    transition: width 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out;
   }
 
   &:after {
     content: '';
     position: absolute;
-    left: 230px;
-    bottom: 22.5px;
+    right: 2em;
+    bottom: 1.75em;
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
     border-left: 5.5px solid white;
-    transition: left 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out;
+    transform: translateY(2.5px);
   }
 
   &:hover:before {
-    width: 150px;
-    transition: width 0.3s ease-in-out;
+    right: 1em;
   }
 
   &:hover:after {
-    left: 250px;
-    transition: left 0.3s ease-in-out;
+    right: 1em;
   }
 }
 
 .oslo__category {
   align-self: flex-start;
-  padding: 0.25rem 0.5rem;
+  padding: 0.1rem 0.25rem;
   color: $color-purple;
   font-weight: bold;
   margin-bottom: 0.5em;
-  align-items: flex-start;
   text-transform: uppercase;
+
+  @media screen and (min-width: $break-md) {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+.oslo__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  mix-blend-mode: multiply;
 }
 
 .oslo__tema {
