@@ -141,7 +141,7 @@ export default {
   background: white;
   border: 1px solid $color-grey-100;
   border-radius: 3px;
-  box-shadow: 0 1.5px 3px rgba($color-grey-600, 0.95);
+  box-shadow: 0 1px 2px $color-grey-600;
   width: 100%;
 }
 
@@ -152,7 +152,6 @@ export default {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   display: flex;
-  // justify-content: space-between;
   width: 100%;
 
   div:first-of-type a:first-child {
