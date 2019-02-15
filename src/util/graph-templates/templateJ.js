@@ -46,6 +46,7 @@ function Template(svg) {
     this.drawRows();
     this.drawLegend();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
 
     // Move the 'zero line' to the x's zero position
     this.canvas
@@ -94,6 +95,46 @@ function Template(svg) {
       .attr('class', 'zero')
       .attr('stroke-width', 1.5)
       .attr('stroke', 'black');
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    console.log(this.data);
+
+    let headRow = thead.append('tr');
+
+    headRow
+      .selectAll('th')
+      .data(() => {
+        return ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)];
+      })
+      .join('th')
+      .attr('scope', 'col')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    let geographyCell = rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    let valueCells = rows
+      .selectAll('td')
+      .data(d => d.values)
+      .join('td')
+      .text(d => d3.format('~p')(Math.abs(d)));
   };
 
   // Creates and set default styles for the DOM elements on each row

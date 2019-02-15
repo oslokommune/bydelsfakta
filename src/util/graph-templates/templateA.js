@@ -69,6 +69,7 @@ function Template(svg) {
     this.drawRows();
     this.drawAxis();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   this.created = function() {
@@ -156,6 +157,50 @@ function Template(svg) {
     g.append('g').attr('class', 'bars');
 
     return g;
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hRow = thead.append('tr');
+
+    // Header columns
+    hRow
+      .selectAll('th')
+      .data(() => [
+        'Geografi',
+        ...this.data.meta.series.map(d => {
+          return `${d.heading} (${d.subheading})`;
+        }),
+      ])
+      .attr('scope', 'col')
+      .join('th')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography Cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value Cells
+    rows
+      .selectAll('td')
+      .data(d => d.values)
+      .join('td')
+      .text(d => d3.format('~p')(d.ratio));
   };
 
   /**

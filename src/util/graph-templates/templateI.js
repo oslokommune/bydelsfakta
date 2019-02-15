@@ -185,8 +185,8 @@ function Template(svg) {
       .data(() => {
         return ['Geografi', ...this.data.meta.series];
       })
-      .attr('scope', 'col')
       .join('th')
+      .attr('scope', 'col')
       .text(d => d);
 
     let rows = tbody

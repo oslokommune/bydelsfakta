@@ -137,6 +137,7 @@ function Template(svg) {
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
 
     let hRow1 = thead.append('tr');
     let hRow2 = thead.append('tr');
@@ -148,12 +149,10 @@ function Template(svg) {
       });
     });
     dates = [...dates];
-    console.log(dates);
 
     hRow1
       .selectAll('th')
       .data(() => ['Geografi', 'År'])
-      .attr('scope', 'col')
       .join('th')
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i === 1 ? dates.length : 1))
