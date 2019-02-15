@@ -3,7 +3,7 @@ node_modules
 /dist
 /docs
 /src/coverageReport
-
+/src/config/googleMapsKey.js
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 
