@@ -140,6 +140,7 @@ function Template(svg) {
     this.drawGuideLines();
     this.drawValues();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   this.created = function() {
@@ -164,6 +165,47 @@ function Template(svg) {
 
     this.lineContainer = this.canvas.append('g').attr('class', 'lineContainer');
     this.dotContainer = this.canvas.append('g').attr('class', 'dotcontainer');
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let headRow = thead
+      .selectAll('tr')
+      .data([0])
+      .join('tr');
+
+    headRow
+      .selectAll('th')
+      .data(() => {
+        return ['Geografi', ...this.data.meta.series];
+      })
+      .attr('scope', 'col')
+      .join('th')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    let geographyCell = rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    let valueCells = rows
+      .selectAll('td')
+      .data(d => d.values)
+      .join('td')
+      .text(d => d3.format('~p')(d.ratio));
   };
 
   this.drawList = function() {

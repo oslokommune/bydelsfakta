@@ -1,8 +1,13 @@
 <template>
-  <div class="graph__shadow" :class="shadowClass">
-    <div class="graph__container" ref="container" @scroll="drawShadows">
-      <svg class="graph__svg" ref="svg"></svg>
+  <div class="graph__shadow" role="tabpanel" :class="shadowClass">
+    <div class="graph__container" ref="container" aria-hidden="true" @scroll="drawShadows">
+      <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
     </div>
+    <table class="visually-hidden">
+      <caption></caption>
+      <thead></thead>
+      <tbody></tbody>
+    </table>
     <resize-observer @notify="handleResize"></resize-observer>
   </div>
 </template>
@@ -157,39 +162,6 @@ export default {
 
     &--right::after {
       opacity: 1;
-    }
-  }
-
-  // Position and styles for the age selector dropdown menu
-  &__dropdown {
-    position: absolute;
-    top: 9.75em;
-    left: 0;
-    padding: 1em;
-
-    &__label {
-      display: block;
-    }
-
-    &__select {
-      border: 1px solid black;
-      position: relative;
-      height: 3em;
-      padding-left: 0.5em;
-      width: 7em;
-      margin-top: 0.5em;
-
-      &::before,
-      &::after {
-        position: absolute;
-        display: block;
-        content: '';
-        height: 15px;
-        width: 15px;
-        background: black;
-        top: 15px;
-        left: 15px;
-      }
     }
   }
 

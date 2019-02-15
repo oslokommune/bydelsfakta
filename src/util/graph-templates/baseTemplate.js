@@ -53,6 +53,7 @@ function Base_Template(svg) {
   this.formatPercent = d3.format('.0%');
   this.sourceHeight = 25;
   this.duration = 250;
+  this.table = d3.select(svg.parentNode.parentNode).select('table');
 
   // Resize is called from the parent vue component
   // every time the container size changes.

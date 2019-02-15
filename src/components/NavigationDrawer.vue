@@ -8,41 +8,43 @@
       v-text="selectedSubpage"
     ></button>
     <nav role="navigation" class="navigation" :class="{'navigation--show': showNavigation }">
-      <div
-        v-for="link in links"
-        :key="link.key"
-        class="navigation-link"
-        :class="{
+      <ul class="navigation-list">
+        <li
+          v-for="link in links"
+          :key="link.key"
+          class="navigation-link"
+          :class="{
           'navigation-link--active': $route.params.bydel === link.uri && !compareBydeler,
           'navigation-link--compare': compareBydeler && selected.includes(link.key),
         }"
-      >
-        <input
-          type="checkbox"
-          v-model="selected"
-          :value="link.key"
-          :id="`checkbox-${link.uri}`"
-          @change="onChangeCheckbox"
-          :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
         >
-        <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
-        <router-link
-          :id="`a-${link.uri}`"
-          class="navigation-link__label"
-          :to="onClickBydel(link.uri)"
-        >{{ link.value }}</router-link>
-      </div>
-      <div
-        class="navigation-link navigation-link__label-compare"
-        id="sammenlign"
-        :class="{ 'navigation-link--active': compareBydeler }"
-      >
-        <router-link
-          id="sammenlign-href"
-          :to="onClickSammenlign()"
-          class="navigation-link__label"
-        >Sammenlign bydeler</router-link>
-      </div>
+          <input
+            type="checkbox"
+            v-model="selected"
+            :value="link.key"
+            :id="`checkbox-${link.uri}`"
+            @change="onChangeCheckbox"
+            :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
+          >
+          <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
+          <router-link
+            :id="`a-${link.uri}`"
+            class="navigation-link__label"
+            :to="onClickBydel(link.uri)"
+          >{{ link.value }}</router-link>
+        </li>
+        <li
+          class="navigation-link navigation-link__label-compare"
+          id="sammenlign"
+          :class="{ 'navigation-link--active': compareBydeler }"
+        >
+          <router-link
+            id="sammenlign-href"
+            :to="onClickSammenlign()"
+            class="navigation-link__label"
+          >Sammenlign bydeler</router-link>
+        </li>
+      </ul>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
@@ -59,7 +61,7 @@
             >Fjern alle</button>
           </div>
           <div class="navigation-drawer__select-container">
-            <label for="navigation-drawer-select" class="hidden-label">Velg byområde</label>
+            <label for="navigation-drawer-select" class="visually-hidden">Velg byområde</label>
             <select
               id="navigation-drawer-select"
               class="navigation-drawer__select"
@@ -327,6 +329,10 @@ export default {
     width: 100%;
     padding: 0;
   }
+
+  &-list {
+    padding: 0;
+  }
 }
 
 .selectedSubpage {
@@ -343,14 +349,6 @@ export default {
   @media screen and (min-width: $break-lg) {
     display: none;
   }
-}
-
-.hidden-label {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
 }
 
 .oslo__logo {

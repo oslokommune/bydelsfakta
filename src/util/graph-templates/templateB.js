@@ -64,6 +64,7 @@ function Template(svg) {
     this.drawVoronoi();
     this.drawDirectLabels();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   this.created = function() {
@@ -128,6 +129,60 @@ function Template(svg) {
           this.handleMouseleave();
         }
       });
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+
+    let hRow1 = thead.append('tr');
+    let hRow2 = thead.append('tr');
+
+    let dates = new Set();
+    this.data.data.forEach(row => {
+      row.values.forEach(d => {
+        dates.add(d.date);
+      });
+    });
+    dates = [...dates];
+    console.log(dates);
+
+    hRow1
+      .selectAll('th')
+      .data(() => ['Geografi', 'År'])
+      .attr('scope', 'col')
+      .join('th')
+      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('colspan', (d, i) => (i === 1 ? dates.length : 1))
+      .attr('scope', 'col')
+      .text(d => d);
+
+    hRow2
+      .selectAll('th')
+      .data(dates)
+      .join('th')
+      .text(d => d3.timeFormat('%Y')(this.parseDate(d)));
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    let geographyCell = rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    let valueCells = rows
+      .selectAll('td')
+      .data(d => d.values)
+      .join('td')
+      .text(d => d3.format(',.0f')(d.value));
   };
 
   /**
