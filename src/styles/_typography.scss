@@ -8,3 +8,7 @@ h2.section-heading {
 a {
   text-decoration: none;
 }
+
+svg a:not([href$='#']) {
+  text-decoration: underline;
+}
