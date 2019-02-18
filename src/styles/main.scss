@@ -41,6 +41,10 @@ select {
   background-color: transparent;
 }
 
+button:disabled > * {
+  opacity: 0.35;
+}
+
 select {
   -webkit-appearance: none;
 }
@@ -50,7 +54,13 @@ select {
   clip: rect(0 0 0 0);
   height: 1px;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
+}
+
+.hidden {
+  position: fixed !important;
+  visibility: hidden;
+  opacity: 0;
 }
 
 // Dropdown menu on template D
@@ -83,5 +93,65 @@ select {
       top: 15px;
       left: 15px;
     }
+  }
+}
+
+table {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: scroll;
+  margin-bottom: 1em;
+
+  td,
+  th {
+    padding: 0.6em 1em;
+    white-space: nowrap;
+    text-align: right;
+    font-weight: 400;
+    position: relative;
+
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   bottom: 0px;
+    //   left: 0;
+    //   right: 0;
+    //   height: 1px;
+    //   background: rgba(black, 0.05);
+    // }
+  }
+
+  td {
+    text-align: right;
+  }
+
+  thead th:not([colspan='1']) {
+    text-align: center;
+  }
+
+  thead tr:first-child th:first-child,
+  th[scope='row'] {
+    text-align: left;
+    font-weight: 500;
+    background: lighten($color-yellow, 10%);
+    position: sticky;
+    left: 0;
+    max-width: 25em;
+    z-index: 1;
+  }
+  thead {
+    background: rgba($color-yellow, 0.1);
+  }
+
+  caption {
+    position: sticky;
+    max-width: 80vw;
+    left: 1em;
+    font-size: 1em;
+    margin: 1em;
+    font-weight: 500;
+    color: $color-purple;
+    text-align: left;
   }
 }

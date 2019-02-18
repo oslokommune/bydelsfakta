@@ -289,7 +289,7 @@ export default {
   position: relative;
   flex: 5em 0 0;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
 
   @media screen and (min-width: $break-lg) {
     background-color: $color-purple;

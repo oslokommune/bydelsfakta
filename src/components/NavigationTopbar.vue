@@ -143,7 +143,7 @@ export default {
   margin: 2rem 1rem 0rem 1rem;
   width: calc(100% - 2rem);
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding: 1rem 0;
 
   @media screen and (min-width: $break-lg) {

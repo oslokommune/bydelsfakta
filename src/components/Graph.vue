@@ -1,13 +1,22 @@
 <template>
   <div class="graph__shadow" role="tabpanel" :class="shadowClass">
     <div class="graph__container" ref="container" aria-hidden="true" @scroll="drawShadows">
-      <svg xmlns="http://www.w3.org/2000/svg" class="graph__svg" aria-hidden="true" ref="svg"></svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        :class="{'hidden' : showTable}"
+        class="graph__svg"
+        aria-hidden="true"
+        ref="svg"
+      ></svg>
     </div>
-    <table class="visually-hidden">
-      <caption></caption>
-      <thead></thead>
-      <tbody></tbody>
-    </table>
+    <div :class="{'visually-hidden' : !showTable}" class="graph__tablecontainer">
+      <table>
+        <caption></caption>
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <!-- <table class="visually-hidden"> -->
     <resize-observer @notify="handleResize"></resize-observer>
   </div>
 </template>
@@ -122,10 +131,13 @@ export default {
       type: Object,
       required: true,
     },
+    showTable: {
+      type: Boolean,
+      required: true,
+    },
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import './../styles/colors';
@@ -169,6 +181,12 @@ export default {
     position: relative;
     padding: 1em 1em 0 1em;
     overflow: auto;
+  }
+
+  &__tablecontainer {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
   }
 }
 
