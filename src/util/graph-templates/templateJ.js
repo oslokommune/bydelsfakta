@@ -105,8 +105,6 @@ function Template(svg) {
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    console.log(this.data);
-
     let headRow = thead.append('tr');
 
     headRow
@@ -123,14 +121,16 @@ function Template(svg) {
       .data(this.data.data)
       .join('tr');
 
-    let geographyCell = rows
+    // Geography cells
+    rows
       .selectAll('th')
       .data(d => [d.geography])
       .join('th')
       .attr('scope', 'row')
       .text(d => d);
 
-    let valueCells = rows
+    // Value cells
+    rows
       .selectAll('td')
       .data(d => d.values)
       .join('td')

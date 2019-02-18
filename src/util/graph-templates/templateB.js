@@ -97,38 +97,60 @@ function Template(svg) {
       .y(d => this.y(d.value))
       .polygons(flattenData);
 
-    this.canvas
+    let voronoiCells = this.canvas
       .select('g.voronoi')
       .selectAll('path')
       .data(voronoiData)
       .join('path')
       .attr('d', d => 'M' + d.join('L') + 'Z')
-      .attr('fill-opacity', 0)
-      .on('mouseover', (d, i, j) => {
-        let geography = j[i].__data__.data.geography;
-        let date = j[i].__data__.data.date;
+      .attr('fill-opacity', 0);
 
-        if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
-          this.canvas.selectAll('g.dot').attr('opacity', 0);
-          this.canvas
-            .selectAll('g.dotgroup')
-            .filter(dot => {
-              if (dot.geography === geography) {
-                this.handleMouseover(dot.geography);
-                return true;
-              }
-            })
-            .selectAll('g.dot')
-            .filter(dot => dot.date === date)
-            .attr('opacity', 1);
-        }
-      })
-      .on('mouseleave', () => {
-        if (this.highlight === -1) {
-          this.canvas.selectAll('g.dot').attr('opacity', 0);
-          this.handleMouseleave();
-        }
-      });
+    // Highlight a geography when hovering the chart. If the
+    // chart is rendered with a geography highlighted, then only
+    // the selected geography will be affected by hover.
+    voronoiCells.on('mouseover', (d, i, j) => {
+      let geography = j[i].__data__.data.geography;
+      let date = j[i].__data__.data.date;
+
+      if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
+        this.canvas.selectAll('g.dot').attr('opacity', 0);
+        this.canvas
+          .selectAll('g.dotgroup')
+          .filter(dot => {
+            if (dot.geography === geography) {
+              this.handleMouseover(dot.geography);
+              return true;
+            }
+          })
+          .selectAll('g.dot')
+          .filter(dot => dot.date === date)
+          .attr('opacity', 1);
+      }
+    });
+
+    // Remove highlight on mouse leave
+    voronoiCells.on('mouseleave', () => {
+      if (this.highlight === -1) {
+        this.canvas.selectAll('g.dot').attr('opacity', 0);
+        this.handleMouseleave();
+      }
+    });
+
+    // When clicking a voronoi cell, the graph should re-render
+    // with the selected geography highlighted. If the geography
+    // is alredady selected, then we re-render with no highlight.
+    voronoiCells.on('click', (d, i, j) => {
+      let geography = j[i].__data__.data.geography;
+
+      if (this.highlight >= 0 && this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
+        this.render(this.data, { method: this.method, highlight: -1 });
+      } else {
+        this.render(this.data, {
+          method: this.method,
+          highlight: this.data.data.findIndex(d => d.geography === geography),
+        });
+      }
+    });
   };
 
   this.drawTable = function() {
@@ -170,14 +192,16 @@ function Template(svg) {
       .data(this.data.data)
       .join('tr');
 
-    let geographyCell = rows
+    // Geography cells
+    rows
       .selectAll('th')
       .data(d => [d.geography])
       .join('th')
       .attr('scope', 'row')
       .text(d => d);
 
-    let valueCells = rows
+    // Value cells
+    rows
       .selectAll('td')
       .data(d => d.values)
       .join('td')

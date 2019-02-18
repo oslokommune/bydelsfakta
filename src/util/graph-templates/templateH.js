@@ -69,6 +69,7 @@ function Template(svg) {
     this.drawLower();
     this.drawTriggers();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   // Empties canvas and creates the neccessary DOM elements
@@ -82,6 +83,46 @@ function Template(svg) {
     this.createLowerElements();
 
     this.triggersContainer = this.svg.append('g').attr('class', 'triggers');
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hrow = thead.append('tr');
+
+    hrow
+      .selectAll('th')
+      .data(() => ['Geografi', ...this.data.meta.series.map(d => d.heading)])
+      .join('th')
+      .attr('scope', 'col')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => {
+        return [d.values[0], d.values[1], d.values[2], d.values[3][d.values[3].length - 1] - d.values[3][0]];
+      })
+      .join('td')
+      .text(d => d);
   };
 
   // Creates the DOM elements for the sidebar

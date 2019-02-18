@@ -65,6 +65,7 @@ function Template(svg) {
     this.drawDots();
     this.drawVoronoi();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   // Creates elements for this template. Runs from base template along with init()
@@ -91,6 +92,80 @@ function Template(svg) {
 
     // Call method for creating info box elements
     this.createInfoBoxElements();
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text('Data');
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hRow1 = thead.append('tr');
+    let hRow2 = thead.append('tr');
+
+    let dates = new Set();
+    this.data.data.forEach(row => {
+      row.values[0].forEach(d => {
+        dates.add(d.date);
+      });
+    });
+    dates = [...dates];
+
+    hRow1
+      .selectAll('th')
+      .data(() => [
+        'Geografi',
+        ...this.data.meta.series.map(serie => {
+          return `${serie.heading} ${serie.subheading}`;
+        }),
+      ])
+      .join('th')
+      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('colspan', (d, i) => (i > 0 ? dates.length : 1))
+      .attr('scope', 'col')
+      .attr('id', (d, i) => `th_1_${i}`)
+      .text(d => d);
+
+    hRow2
+      .selectAll('th')
+      .data(() => {
+        let out = [];
+        for (var i = 0; i < this.data.meta.series.length; i++) {
+          out = out.concat(dates);
+        }
+        return out;
+      })
+      .join('th')
+      .attr('id', (d, i) => `th_2_${i}`)
+      .text(d => d3.timeFormat('%Y')(this.parseDate(d)));
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .attr('headers', 'th_1_0')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => d.values.map(row => row).flat())
+      .join('td')
+      .attr('headers', (d, i, j) => {
+        let first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
+
+        return `th_1_${first} th_2_${i}`;
+      })
+      .text(d => d3.format(',.0f')(d.value));
   };
 
   this.drawDots = function() {

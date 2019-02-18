@@ -42,6 +42,7 @@ function Template(svg) {
     this.drawPyramid();
     this.drawList();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   // Runs once after init() and is called from base template.
@@ -110,6 +111,89 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`)
       .text('Folkemengde');
+  };
+
+  this.drawTable = function() {
+    let ageRanges = [];
+    for (let i = 0; i < 120; i += 5) {
+      ageRanges.push({
+        label: `${i}–${i + 4} år`,
+        range: [i, i + 4],
+      });
+    }
+
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hRow1 = thead.append('tr');
+    let hRow2 = thead.append('tr');
+
+    hRow1
+      .selectAll('th')
+      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .join('th')
+      .attr('id', (d, i) => `th_2_${i}`)
+      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('colspan', (d, i) => (i === 0 ? 1 : 2))
+      .attr('scope', 'col')
+      .attr('role', 'colgroup')
+      .text(d => d);
+
+    hRow2
+      .selectAll('th')
+      .data(() => ageRanges.map(d => ['Menn', 'Kvinner']).flat())
+      .join('th')
+      .attr('id', (d, i) => `th_1_${i}`)
+      .attr('scope', 'col')
+      .attr('headers', (d, i) => `th_1_${Math.floor(i / 2) + 1}`)
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => {
+        return ageRanges
+          .map(age => {
+            const range = age.range;
+            let menn = 0;
+            let kvinner = 0;
+            for (let i = range[0]; i < range[1]; i++) {
+              menn += d.values[i]['Mann'];
+              kvinner += d.values[i]['Kvinne'];
+            }
+            return [menn, kvinner];
+          })
+          .flat();
+      })
+      .join('td')
+      .attr('headers', (d, i) => {
+        return `th_1_${Math.floor(i / 2) + 1} th_2_${i}`;
+      })
+      .text(d => {
+        if (this.method === 'value') {
+          return d3.format('~f')(d);
+        } else {
+          return d3.format(',.2~p')(d);
+        }
+      });
   };
 
   this.drawList = function() {

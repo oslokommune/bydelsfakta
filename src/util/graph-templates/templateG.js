@@ -37,9 +37,50 @@ function Template(svg) {
     this.drawRows();
     this.drawColumnHeaders();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   this.created = function() {};
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hrow = thead.append('tr');
+
+    hrow
+      .selectAll('th')
+      .data(() => ['Geografi', ...this.data.meta.series.map(d => d.heading)])
+      .join('th')
+      .attr('scope', 'col')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => {
+        return [d.values[0], d.values[1], d.values[2], d.values[3][d.values[3].length - 1] - d.values[3][0]];
+      })
+      .join('td')
+      .text(d => d);
+  };
 
   this.initRowElements = function(rowsE) {
     // Row fill

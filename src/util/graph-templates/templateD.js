@@ -3,7 +3,6 @@
  */
 
 import Base_Template from './baseTemplate';
-// import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
 import ageRanges from '../../config/ageRanges';
@@ -143,6 +142,7 @@ function Template(svg) {
     this.drawRows();
     this.drawLines();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   /**
@@ -275,7 +275,10 @@ function Template(svg) {
   // as sibling element to the SVG.
   this.createAgeSelector = function() {
     let parent = d3.select(this.svg.node().parentNode);
-    let div = parent.insert('div').attr('class', 'graph__dropdown');
+    let div = parent
+      .insert('div')
+      .attr('class', 'graph__dropdown')
+      .attr('aria-hidden', true);
 
     div
       .insert('label')
@@ -284,7 +287,9 @@ function Template(svg) {
       .html('Velg segment');
     let select = div
       .append('select')
+      .attr('aria-hidden', true)
       .attr('id', 'age_selector')
+      .attr('aria-hidden', true)
       .attr('class', 'graph__dropdown__select');
 
     select
@@ -383,16 +388,61 @@ function Template(svg) {
       .call(brushSmall.move, [0, 50].map(this.age));
   };
 
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hrow = thead.append('tr');
+
+    hrow
+      .selectAll('th')
+      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .join('th')
+      .attr('scope', 'col')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => {
+        return ageRanges.map(age => {
+          const range = JSON.parse(age.range);
+          let sum = 0;
+          for (let i = range[0]; i <= range[1]; i++) {
+            sum += d.values[i][this.method];
+          }
+          return sum;
+        });
+      })
+      .join('td')
+      .text(d => {
+        if (this.method === 'value') {
+          return d3.format('~f')(d);
+        } else {
+          return d3.format(',.2~p')(d);
+        }
+      });
+  };
+
   // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
-    // let rows = this.lower.selectAll('g.row').data(this.data.data);
-    // let rowsE = rows
-    //   .enter()
-    //   .append('g')
-    //   .attr('class', 'row');
-    // rows.exit().remove();
-    // rows = rows.merge(rowsE);
-
     let rows = this.lower
       .selectAll('g.row')
       .data(this.data.data, d => d.geography)

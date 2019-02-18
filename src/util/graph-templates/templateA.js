@@ -200,7 +200,13 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => d3.format('~p')(d.ratio));
+      .text(d => {
+        if (this.method === 'value') {
+          return d3.format('~f')(d[this.method]);
+        } else {
+          return d3.format('~p')(d[this.method]);
+        }
+      });
   };
 
   /**

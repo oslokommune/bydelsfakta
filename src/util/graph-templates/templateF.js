@@ -54,6 +54,7 @@ function Template(svg) {
     this.drawAxisLabels();
     this.drawRows();
     this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawTable();
   };
 
   this.created = function() {
@@ -74,6 +75,44 @@ function Template(svg) {
       .attr('x', this.width1 / 2)
       .attr('text-anchor', 'middle')
       .text('Gjennomsnittsalder');
+  };
+
+  this.drawTable = function() {
+    let thead = this.table.select('thead');
+    let tbody = this.table.select('tbody');
+    this.table.select('caption').text(this.data.meta.heading);
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    let hrow = thead.append('tr');
+
+    hrow
+      .selectAll('th')
+      .data(() => ['Geografi', 'Gjennomsnittsalder', 'Medianalder'])
+      .join('th')
+      .attr('scope', 'col')
+      .text(d => d);
+
+    let rows = tbody
+      .selectAll('tr')
+      .data(this.data.data)
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => [d.mean, d.median])
+      .join('td')
+      .text(d => d);
   };
 
   this.initRowElements = function(rowsE) {
