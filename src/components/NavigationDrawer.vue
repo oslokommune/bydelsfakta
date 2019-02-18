@@ -24,7 +24,7 @@
             :value="link.key"
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
-            :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
+            :disabled="!compareBydeler && districts.length === 1 && districts[0] === link.key"
           />
           <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
           <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
@@ -111,7 +111,7 @@ export default {
       },
       set: function() {},
     },
-    ...mapState(['compareDistricts']),
+    ...mapState(['compareDistricts', 'districts']),
   },
 
   created() {
@@ -149,34 +149,13 @@ export default {
     onChangeCheckbox() {
       // Reset selector
       this.selectedPredefinedOption = [];
-
-      console.log(event.target);
       this.$store.dispatch('addDistrict', event.target.value);
-
       if (this.selected.length === 0) {
         this.checkedAllCheckbox = false;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: 'alle', tema: this.$route.params.tema },
-            });
       } else if (this.selected.length === bydeler.length) {
         this.checkedAllCheckbox = true;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: 'alle', tema: this.$route.params.tema },
-            });
       } else if (this.selected.length > 0) {
         this.compareBydeler = true;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: this.selected.join('-') } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: this.selected.join('-'), tema: this.$route.params.tema },
-            });
       }
     },
 
@@ -249,7 +228,6 @@ export default {
       } else if (to.params.bydel === 'alle') {
         this.compareBydeler = true;
         this.selected = [];
-        this.$store.dispatch('selectCompare');
       } else if (params.length > 1) {
         const paramBydel = routes[2].split('-');
         this.compareBydeler = true;
@@ -257,7 +235,6 @@ export default {
       } else if (bydel !== undefined) {
         this.compareBydeler = false;
         this.selected = [bydel.key];
-        this.$store.dispatch('selectDistrict', bydel.key);
       }
     },
 

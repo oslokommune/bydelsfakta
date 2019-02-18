@@ -34,6 +34,7 @@ export default {
       });
 
       //Object.keys(this.bydel).forEach(district => map.data.addGeoJson(this.bydel[district]));
+      console.log('gmap mount', this.bydel);
       map.data.addGeoJson(this.bydel);
 
       const bounds = new window.google.maps.LatLngBounds();
@@ -59,8 +60,10 @@ export default {
     district() {
       this.$refs.mapRef.$mapPromise.then(map => {
         map.data.forEach(feature => map.data.remove(feature));
+        console.log('length', this.district.features.length);
         if (this.district.features.length === 0) return;
         //Object.keys(this.district).forEach(district => map.data.addGeoJson(this.district[district]));
+        console.log('gmap watch', this.bydel);
         map.data.addGeoJson(this.district);
 
         const bounds = new window.google.maps.LatLngBounds();

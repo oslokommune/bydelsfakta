@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import router from './router';
 
 import districts from './config/geoData/districts';
 import bydeler from './config/bydeler';
@@ -9,27 +10,31 @@ Vue.use(Vuex);
 const initialState = () => {
   return {
     compareDistricts: false,
-    districtsValue: [],
+    districts: [],
     districtsGeo: districts,
-    selectedDistricts: [],
   };
 };
 
 const state = {
   compareDistricts: false,
-  districtsValue: [],
+  districts: [],
   districtsGeo: districts,
-  selectedDistricts: [],
 };
 
 const getters = {
   geoDistricts: state => {
-    if (!state.compareDistricts && state.districtsValue.length !== 0) {
-      return state.districtsGeo[`${bydeler.find(item => item.key === state.districtsValue[0]).uri}`];
+    console.log(state.districts);
+    console.log(state.compareDistricts);
+    if (!state.compareDistricts && state.districts.length !== 0) {
+      return { ...state.districtsGeo[`${bydeler.find(item => item.key === state.districts[0]).uri}`] };
+    } else if (state.districts[0] === 'alle') {
+      console.log(state.districtsGeo.oslo);
+      return { ...state.districtsGeo.oslo };
     }
+    state.compareDistricts = true;
     let newGeoData;
     let newGeo = [];
-    state.districtsValue.forEach(id =>
+    state.districts.forEach(id =>
       newGeo.push(state.districtsGeo.oslo.features.find(district => district.properties.id === parseInt(id)))
     );
     newGeoData = { ...state.districtsGeo.oslo, features: newGeo };
@@ -40,15 +45,21 @@ const getters = {
 const mutations = {
   ADD_DISTRICT(state, payload) {
     state.compareDistricts = true;
-    if (state.districtsValue.find(district => district === payload)) {
-      state.districtsValue = state.districtsValue.filter(district => district !== payload);
+    if (state.districts.find(district => district === payload)) {
+      console.log('sup');
+      state.districts = state.districts.filter(district => district !== payload);
     } else {
-      state.districtsValue.push(payload);
+      console.log('hello');
+      state.districts.push(payload);
     }
+  },
+  ADD_DISTRICT_URL(state, payload) {
+    state.compareDistricts = true;
+    state.districts = payload;
   },
   SELECT_DISTRICT(state, payload) {
     state.compareDistricts = false;
-    state.districtsValue = [payload];
+    state.districts = payload;
   },
   SELECT_COMPARE(state) {
     state.compareDistricts = true;
@@ -62,14 +73,38 @@ const mutations = {
 };
 
 const actions = {
-  addDistrict({ commit }, payload) {
+  addDistrictByUrl({ commit }, payload) {
+    const districts = payload.split('-');
+    if (districts.length === 1) {
+      if (districts[0] === 'alle') {
+        commit('ADD_DISTRICT_URL', districts);
+      } else {
+        const districtValue = bydeler.find(district => district.uri === districts[0]);
+        const districtKey = bydeler.find(district => district.key === districts[0]);
+        districtValue === undefined
+          ? commit('ADD_DISTRICT_URL', [districtKey.key])
+          : commit('SELECT_DISTRICT', [districtValue.key]);
+      }
+    } else {
+      commit('ADD_DISTRICT_URL', districts);
+    }
+    router.currentRoute.params.tema === undefined
+      ? router.push({ name: 'Bydel', params: { bydel: districts.join('-') } })
+      : router.push({
+          name: 'Tema',
+          params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
+        });
+  },
+  addDistrict({ state, commit }, payload) {
     commit('ADD_DISTRICT', payload);
-  },
-  selectDistrict({ commit }, payload) {
-    commit('SELECT_DISTRICT', payload);
-  },
-  selectCompare({ commit }) {
-    commit('SELECT_COMPARE');
+    console.log('addDistrict state: ', state);
+
+    router.currentRoute.params.tema === undefined
+      ? router.push({ name: 'Bydel', params: { bydel: state.districts.join('-') } })
+      : router.push({
+          name: 'Tema',
+          params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
+        });
   },
   cleanState({ commit }) {
     commit('CLEAN_STATE');

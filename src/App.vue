@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <navigation-drawer/>
+    <navigation-drawer />
     <div id="content">
-      <navigation-topbar/>
+      <navigation-topbar />
       <main>
-        <router-view/>
+        <router-view />
       </main>
     </div>
   </div>
@@ -18,6 +18,13 @@ export default {
   name: 'App',
   components: { NavigationTopbar, NavigationDrawer },
 
+  created() {
+    if (this.$route.params.bydel === undefined) {
+      return;
+    }
+    this.$store.dispatch('addDistrictByUrl', this.$route.params.bydel);
+  },
+
   watch: {
     $route(to, from) {
       if (to.name === 'Tema' && from.name === 'Bydel') {
@@ -27,4 +34,3 @@ export default {
   },
 };
 </script>
-
