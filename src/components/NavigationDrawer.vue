@@ -1,22 +1,22 @@
 <template>
   <aside id="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
     <button
       class="selectedSubpage"
       @click="showNavigation = !showNavigation"
       @keydown.esc="showNavigation = false"
       v-text="selectedSubpage"
     ></button>
-    <nav role="navigation" class="navigation" :class="{'navigation--show': showNavigation }">
+    <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
       <ul class="navigation-list">
         <li
           v-for="link in links"
           :key="link.key"
           class="navigation-link"
           :class="{
-          'navigation-link--active': $route.params.bydel === link.uri && !compareBydeler,
-          'navigation-link--compare': compareBydeler && selected.includes(link.key),
-        }"
+            'navigation-link--active': $route.params.bydel === link.uri && !compareBydeler,
+            'navigation-link--compare': compareBydeler && selected.includes(link.key),
+          }"
         >
           <input
             type="checkbox"
@@ -25,55 +25,48 @@
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
             :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
-          >
+          />
           <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
-          <router-link
-            :id="`a-${link.uri}`"
-            class="navigation-link__label"
-            :to="onClickBydel(link.uri)"
-          >{{ link.value }}</router-link>
+          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
+            link.value
+          }}</router-link>
         </li>
         <li
           class="navigation-link navigation-link__label-compare"
           id="sammenlign"
           :class="{ 'navigation-link--active': compareBydeler }"
         >
-          <router-link
-            id="sammenlign-href"
-            :to="onClickSammenlign()"
-            class="navigation-link__label"
-          >Sammenlign bydeler</router-link>
+          <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label"
+            >Sammenlign bydeler</router-link
+          >
         </li>
       </ul>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareBydeler">
           <div class="navigation-drawer__button-container">
-            <button
-              class="navigation-drawer__button"
-              @click="selectAll"
-              aria-label="select all checkboxes"
-            >Velg alle</button>
+            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
+              Velg alle
+            </button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
               aria-label="unselect all checkboxes"
-            >Fjern alle</button>
+            >
+              Fjern alle
+            </button>
           </div>
           <div class="navigation-drawer__select-container">
             <label for="navigation-drawer-select" class="visually-hidden">Velg byområde</label>
-            <select
-              id="navigation-drawer-select"
-              class="navigation-drawer__select"
-              v-model="selectedPredefinedOption"
-            >
+            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
                 :key="index"
                 :value="element.option"
                 :selected="element.selected"
                 :disabled="element.disabled"
-              >{{ element.label }}</option>
+                >{{ element.label }}</option
+              >
             </select>
           </div>
         </div>
@@ -83,6 +76,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import bydeler from '../config/bydeler';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg';
@@ -117,6 +111,7 @@ export default {
       },
       set: function() {},
     },
+    ...mapState(['compareDistricts']),
   },
 
   created() {
@@ -250,9 +245,11 @@ export default {
 
       if (to.name === 'Home') {
         this.selected = [];
+        this.$store.dispatch('cleanState');
       } else if (to.params.bydel === 'alle') {
         this.compareBydeler = true;
         this.selected = [];
+        this.$store.dispatch('selectCompare');
       } else if (params.length > 1) {
         const paramBydel = routes[2].split('-');
         this.compareBydeler = true;
@@ -260,6 +257,7 @@ export default {
       } else if (bydel !== undefined) {
         this.compareBydeler = false;
         this.selected = [bydel.key];
+        this.$store.dispatch('selectDistrict', bydel.key);
       }
     },
 

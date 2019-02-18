@@ -25,16 +25,16 @@ export default {
       map.setOptions({
         center: { lat: 0, lng: 0 },
         styles: mapstyles,
-        gestureHandling: 'none',
+        gestureHandling: 'cooperative',
         disableDefaultUI: true,
-        zoomControl: false,
-        fullscreenControl: false,
-        panControl: false,
-        scrollwheel: false,
+        zoomControl: true,
+        fullscreenControl: true,
+        panControl: true,
+        scrollwheel: true,
       });
 
-      console.log(this.bydel);
-      Object.keys(this.bydel).forEach(district => map.data.addGeoJson(this.bydel[district]));
+      //Object.keys(this.bydel).forEach(district => map.data.addGeoJson(this.bydel[district]));
+      map.data.addGeoJson(this.bydel);
 
       const bounds = new window.google.maps.LatLngBounds();
 
@@ -42,6 +42,8 @@ export default {
         fillColor: 'blue',
         strokeWeight: 1,
       });
+
+      if (this.bydel.features.length === 0) return;
 
       map.data.forEach(feature => {
         feature.getGeometry().forEachLatLng(latlng => {
@@ -57,7 +59,9 @@ export default {
     district() {
       this.$refs.mapRef.$mapPromise.then(map => {
         map.data.forEach(feature => map.data.remove(feature));
-        Object.keys(this.district).forEach(district => map.data.addGeoJson(this.district[district]));
+        if (this.district.features.length === 0) return;
+        //Object.keys(this.district).forEach(district => map.data.addGeoJson(this.district[district]));
+        map.data.addGeoJson(this.district);
 
         const bounds = new window.google.maps.LatLngBounds();
 
