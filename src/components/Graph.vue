@@ -1,13 +1,13 @@
 <template>
   <div class="graph__shadow" role="tabpanel" :class="shadowClass">
-    <div class="graph__container" ref="container" aria-hidden="true" @scroll="drawShadows">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        :class="{'hidden' : showTable}"
-        class="graph__svg"
-        aria-hidden="true"
-        ref="svg"
-      ></svg>
+    <div
+      class="graph__container"
+      :class="{'hidden' : showTable}"
+      ref="container"
+      aria-hidden="true"
+      @scroll="drawShadows"
+    >
+      <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
     </div>
     <div :class="{'visually-hidden' : !showTable}" class="graph__tablecontainer">
       <table>
