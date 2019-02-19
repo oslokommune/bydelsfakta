@@ -87,8 +87,6 @@ export default {
     return {
       links: bydeler,
       osloIcon: osloIcon,
-      checkedAllCheckbox: false,
-      showDropdown: false,
       showNavigation: false,
       selected: [],
       options: predefinedOptions,
@@ -115,31 +113,11 @@ export default {
 
   created() {
     const route = this.$route;
-    let key = false;
     if (route.params.bydel === undefined) {
       return;
     }
 
-    const bydelParams = route.params.bydel.split('-');
-
-    if (bydelParams.length === 1) {
-      const bydelKey = bydeler.find(item => item.uri === bydelParams[0]);
-      this.selected = bydelKey === undefined ? bydelParams : [bydelKey.key];
-      if (bydelKey === undefined) key = true;
-    } else if (bydelParams.length > 0) {
-      this.selected = bydelParams[0] === 'alle' ? [] : bydelParams;
-    }
-
-    const routes = route.path.split('/');
-
-    if (bydelParams[0] === 'alle') {
-      this.selected = [];
-    } else if (key) {
-      const bydel = bydeler.find(item => item.key === bydelParams[0]).uri;
-      routes.length > 3
-        ? this.$router.push({ name: 'Tema', params: { bydel: bydel, tema: routes[3] } })
-        : this.$router.push({ name: 'Bydel', params: { bydel: bydel } });
-    }
+    this.selected = this.districts;
   },
 
   methods: {
