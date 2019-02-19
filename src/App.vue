@@ -22,7 +22,7 @@ export default {
     if (this.$route.params.bydel === undefined) {
       return;
     }
-    this.$store.dispatch('addDistrict', this.$route.params.bydel);
+    this.$store.dispatch('addDistrictByUrl', this.$route.params.bydel);
   },
 
   watch: {

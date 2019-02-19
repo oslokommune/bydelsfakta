@@ -28,7 +28,6 @@ const getters = {
     } else if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
-    state.compareDistricts = true;
     let newGeoData;
     let newGeo = [];
     state.districts.forEach(id =>
@@ -49,15 +48,14 @@ const mutations = {
     state.districts = payload;
   },
   CLEAN_STATE(state) {
-    const s = initialState();
-    Object.keys(s).forEach(key => {
-      state[key] = s[key];
-    });
+    state.compareDistricts = false;
+    state.districts = [];
+    state.districtsGeo = districts;
   },
 };
 
 const actions = {
-  addDistrict({ commit }, payload) {
+  addDistrictByUrl({ commit }, payload) {
     const districts = payload.split('-');
     if (districts.length === 1) {
       if (districts[0] === 'alle') {
@@ -100,4 +98,4 @@ const actions = {
   },
 };
 
-export default new Vuex.Store({ state, getters, mutations, actions });
+export default new Vuex.Store({ state, getters, mutations, actions, strict: true });
