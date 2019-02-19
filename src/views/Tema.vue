@@ -14,14 +14,13 @@
     </div>
     <div class="main-container__map">
       <h3>Bydelskart</h3>
-      <leaflet-map id="map" :district="geoDistricts" />
+      <leaflet-map :district="geoDistricts" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import GMap from '../components/GMap.vue';
 import GraphCard from '../components/GraphCard.vue';
 import LeafletMap from '../components/LeafletVue.vue';
 
@@ -32,7 +31,6 @@ export default {
 
   components: {
     GraphCard,
-    GMap,
     LeafletMap,
   },
 
@@ -70,10 +68,4 @@ export default {
 };
 </script>
 
-<style scoped>
-#map {
-  width: 500px;
-  height: 500px;
-  position: relative;
-}
-</style>
+<style scoped></style>

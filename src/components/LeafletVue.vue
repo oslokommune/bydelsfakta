@@ -29,16 +29,10 @@ export default {
       url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png',
       attribution:
         'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      center: L.latLng(59.916950, 10.746589),
+      center: L.latLng(59.91695, 10.746589),
     };
   },
 };
 </script>
 
-<style scoped>
-#leaflet {
-  height: 300px;
-  width: 300px;
-  margin: 0;
-}
-</style>
+<style scoped></style>

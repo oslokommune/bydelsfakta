@@ -52,9 +52,10 @@
 .main-container__map {
   display: flex;
   padding: 2rem;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   justify-content: flex-start;
   min-width: 300px;
   max-width: 500px;
+  max-height: 500px;
   flex: 0 1 400px;
 }
