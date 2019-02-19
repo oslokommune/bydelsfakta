@@ -55,8 +55,8 @@ const mutations = {
 };
 
 const actions = {
-  addDistrictByUrl({ commit }, payload) {
-    const districts = payload.split('-');
+  addDistrict({ commit }, payload) {
+    const districts = payload.district.split('-');
     if (districts.length === 1) {
       if (districts[0] === 'alle') {
         commit('ADD_DISTRICT', districts);
@@ -70,27 +70,14 @@ const actions = {
     } else {
       commit('ADD_DISTRICT', districts);
     }
-    router.currentRoute.params.tema === undefined
-      ? router.push({ name: 'Bydel', params: { bydel: districts.join('-') } })
-      : router.push({
-          name: 'Tema',
-          params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
-        });
-  },
-  addDistrict({ commit }, payload) {
-    const districts = payload.split('-');
-    if (districts.length === 1) {
-      if (districts[0] === 'alle') {
-        commit('ADD_DISTRICT', districts);
-      } else {
-        const districtValue = bydeler.find(district => district.uri === districts[0]);
-        const districtKey = bydeler.find(district => district.key === districts[0]);
-        districtValue === undefined
-          ? commit('ADD_DISTRICT', [districtKey.key])
-          : commit('SELECT_DISTRICT', [districtValue.key]);
-      }
-    } else {
-      commit('ADD_DISTRICT', districts);
+
+    if (payload.pushRoute) {
+      router.currentRoute.params.tema === undefined
+        ? router.push({ name: 'Bydel', params: { bydel: districts.join('-') } })
+        : router.push({
+            name: 'Tema',
+            params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
+          });
     }
   },
   cleanState({ commit }) {

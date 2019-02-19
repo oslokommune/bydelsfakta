@@ -22,7 +22,7 @@ export default {
     if (this.$route.params.bydel === undefined) {
       return;
     }
-    this.$store.dispatch('addDistrictByUrl', this.$route.params.bydel);
+    this.$store.dispatch('addDistrict', { district: this.$route.params.bydel, pushRoute: true });
   },
 
   watch: {
@@ -31,7 +31,7 @@ export default {
         window.scrollTo(0, 0);
       }
       if (to.params.bydel !== undefined) {
-        this.$store.dispatch('addDistrict', to.params.bydel);
+        this.$store.dispatch('addDistrict', { district: to.params.bydel, pushRoute: false });
       }
     },
   },
