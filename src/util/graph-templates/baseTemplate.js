@@ -51,7 +51,7 @@ function Base_Template(svg) {
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
   this.formatPercent = d3.format('.0%');
-  this.sourceHeight = 25;
+  this.sourceHeight = 30;
   this.duration = 250;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
@@ -177,18 +177,16 @@ function Base_Template(svg) {
   };
 
   // Updates and repositions the source reference text
-  this.drawSource = function(str) {
+  this.drawSource = function(str, height) {
+    // Update source text
     this.svg.select('text.source').text(str);
-    let parent = this.svg.node().parentNode.getBoundingClientRect();
-    let source = this.svg
-      .select('g.sourceGroup')
-      .node()
-      .getBBox();
-    let offsetX = parent.width - source.width;
+
+    if (!height) height = this.svg.attr('height');
+
     this.svg
       .select('g.sourceGroup')
       .attr('opacity', 1)
-      .attr('transform', `translate(${offsetX}, ${parent.height - 9})`);
+      .attr('transform', `translate(${0}, ${height - 9})`);
   };
 
   // The parent container width is needed for each render of a template.

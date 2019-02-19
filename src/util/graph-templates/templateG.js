@@ -36,7 +36,10 @@ function Template(svg) {
 
     this.drawRows();
     this.drawColumnHeaders();
-    this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawSource(
+      'Statistisk sentralbyrå (test)',
+      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
+    );
     this.drawTable();
   };
 

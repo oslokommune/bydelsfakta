@@ -53,7 +53,10 @@ function Template(svg) {
     this.drawScales();
     this.drawAxisLabels();
     this.drawRows();
-    this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawSource(
+      'Statistisk sentralbyrå (test)',
+      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
+    );
     this.drawTable();
   };
 

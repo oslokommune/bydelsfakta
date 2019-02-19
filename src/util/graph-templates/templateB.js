@@ -26,7 +26,7 @@ function intersects(a, b) {
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 50, right: 190, bottom: 1, left: 60 };
+  this.padding = { top: 50, right: 190, bottom: 32, left: 60 };
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -63,7 +63,10 @@ function Template(svg) {
     this.drawDots();
     this.drawVoronoi();
     this.drawDirectLabels();
-    this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawSource(
+      'Statistisk sentralbyrå (test)',
+      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
+    );
     this.drawTable();
   };
 

@@ -17,7 +17,7 @@ import positionLabels from '../positionLabels';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 130, left: 60, right: 190, bottom: 10 };
+  this.padding = { top: 130, left: 60, right: 190, bottom: 32 };
 
   // Line generator
   let line = d3
@@ -64,7 +64,10 @@ function Template(svg) {
     this.drawInfobox();
     this.drawDots();
     this.drawVoronoi();
-    this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawSource(
+      'Statistisk sentralbyrå (test)',
+      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
+    );
     this.drawTable();
   };
 

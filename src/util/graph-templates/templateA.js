@@ -68,7 +68,10 @@ function Template(svg) {
     this.drawColumns();
     this.drawRows();
     this.drawAxis();
-    this.drawSource('Statistisk sentralbyrå (test)');
+    this.drawSource(
+      'Statistisk sentralbyrå (test)',
+      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
+    );
     this.drawTable();
   };
 
@@ -369,7 +372,7 @@ function Template(svg) {
         .call(
           d3
             .axisBottom(this.x[i])
-            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
+            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 50)
             .tickFormat(d => (this.method === 'ratio' ? formatPercent(d) : d))
         );
     });

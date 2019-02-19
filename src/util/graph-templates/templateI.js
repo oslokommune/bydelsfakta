@@ -134,12 +134,12 @@ function Template(svg) {
       .attr('height', 500 + this.sourceHeight)
       .attr('width', d3.max([this.parentWidth(), 650]));
 
+    this.drawSource('Statistisk sentralbyrå (test)', 500 + this.sourceHeight);
     this.drawMatrix();
     this.drawList();
     this.updateAxisLabels();
     this.drawGuideLines();
     this.drawValues();
-    this.drawSource('Statistisk sentralbyrå (test)');
     this.drawTable();
   };
 
