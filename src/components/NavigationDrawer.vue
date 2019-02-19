@@ -242,12 +242,10 @@ export default {
   },
 
   watch: {
-    $route(to) {
+    $route(to, from) {
       const routes = to.path.split('/');
       const params = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
       const bydel = bydeler.find(item => item.uri === routes[2]);
-
-      this.showNavigation = false;
 
       if (to.name === 'Home') {
         this.selected = [];
@@ -261,6 +259,13 @@ export default {
       } else if (bydel !== undefined) {
         this.compareBydeler = false;
         this.selected = [bydel.key];
+      }
+
+      // Hide navigation when a selection is made,
+      // but not if 'sammenlign bydeler' og a custom
+      // selection is made.
+      if (!this.compareBydeler || (this.compareBydeler && !this.selected.length)) {
+        this.showNavigation = false;
       }
     },
 
@@ -408,8 +413,8 @@ export default {
     color: rgba(white, 0.85);
     display: flex;
     flex-grow: 1;
-    height: 40px;
-    letter-spacing: 0.3px;
+    height: 3em;
+    letter-spacing: 0.1px;
     position: relative;
 
     &-compare {
