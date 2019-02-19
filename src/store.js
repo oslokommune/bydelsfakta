@@ -7,14 +7,6 @@ import bydeler from './config/bydeler';
 
 Vue.use(Vuex);
 
-const initialState = () => {
-  return {
-    compareDistricts: false,
-    districts: [],
-    districtsGeo: districts,
-  };
-};
-
 const state = {
   compareDistricts: false,
   districts: [],
