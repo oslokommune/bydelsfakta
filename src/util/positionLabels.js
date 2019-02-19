@@ -1,3 +1,12 @@
+/**
+ * @param {array} data - data array from template
+ * @param {number} height - Minimum height between each element
+ * @returns {array} - Data array with newly created 'start' and 'end'
+ * attributes for each of the elements of the array
+ * @description Calculates the ideal non-colliding y-position of labels
+ * based on their initial positions.
+ */
+
 function avoidCollisions(data, height) {
   let spacing = 15;
   let walk = 2;

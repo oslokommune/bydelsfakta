@@ -26,6 +26,9 @@ function cleanSvgData(str) {
   return svg.node().outerHTML;
 }
 
+// Generates a download link with a Blob containing
+// the (cleaned) SVG string and clicks it triggering
+// the file download before removing the link from DOM.
 const downloadSvg = function(svgData, filename) {
   svgData = cleanSvgData(svgData);
 
