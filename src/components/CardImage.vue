@@ -5,7 +5,7 @@
     :id="dataId"
     :style="{ backgroundColor: dataBgColor }"
   >
-    <img :src="dataBgImage" alt class="oslo__img">
+    <img class="oslo__img" :src="dataBgImage" :alt="dataTema" aria-hidden="true">
     <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">{{ dataKategori }}</span>
     <span class="oslo__tema" v-html="dataTema"></span>
     <span class="oslo__see-more-text">Se mer</span>

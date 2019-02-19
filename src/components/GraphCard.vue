@@ -73,8 +73,8 @@
               <i
                 aria-hidden="true"
                 class="material-icons context-menu__dropdown-item-icon"
-              >photo_size_select_actual</i>
-              <span>Vis {{ showTable ? 'graf' : 'tabell' }}</span>
+              >{{ showTable? 'insert_chart_outlined' : 'table_chart'}}</i>
+              <span>Vis {{ showTable ? 'grafikk' : 'tabell' }}</span>
             </button>
           </div>
         </div>
