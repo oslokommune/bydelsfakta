@@ -23,12 +23,9 @@ const state = {
 
 const getters = {
   geoDistricts: state => {
-    console.log(state.districts);
-    console.log(state.compareDistricts);
     if (!state.compareDistricts && state.districts.length !== 0) {
       return { ...state.districtsGeo[`${bydeler.find(item => item.key === state.districts[0]).uri}`] };
     } else if (state.districts[0] === 'alle') {
-      console.log(state.districtsGeo.oslo);
       return { ...state.districtsGeo.oslo };
     }
     state.compareDistricts = true;
@@ -45,24 +42,11 @@ const getters = {
 const mutations = {
   ADD_DISTRICT(state, payload) {
     state.compareDistricts = true;
-    if (state.districts.find(district => district === payload)) {
-      console.log('sup');
-      state.districts = state.districts.filter(district => district !== payload);
-    } else {
-      console.log('hello');
-      state.districts.push(payload);
-    }
-  },
-  ADD_DISTRICT_URL(state, payload) {
-    state.compareDistricts = true;
     state.districts = payload;
   },
   SELECT_DISTRICT(state, payload) {
     state.compareDistricts = false;
     state.districts = payload;
-  },
-  SELECT_COMPARE(state) {
-    state.compareDistricts = true;
   },
   CLEAN_STATE(state) {
     const s = initialState();
@@ -73,20 +57,20 @@ const mutations = {
 };
 
 const actions = {
-  addDistrictByUrl({ commit }, payload) {
+  addDistrict({ commit }, payload) {
     const districts = payload.split('-');
     if (districts.length === 1) {
       if (districts[0] === 'alle') {
-        commit('ADD_DISTRICT_URL', districts);
+        commit('ADD_DISTRICT', districts);
       } else {
         const districtValue = bydeler.find(district => district.uri === districts[0]);
         const districtKey = bydeler.find(district => district.key === districts[0]);
         districtValue === undefined
-          ? commit('ADD_DISTRICT_URL', [districtKey.key])
+          ? commit('ADD_DISTRICT', [districtKey.key])
           : commit('SELECT_DISTRICT', [districtValue.key]);
       }
     } else {
-      commit('ADD_DISTRICT_URL', districts);
+      commit('ADD_DISTRICT', districts);
     }
     router.currentRoute.params.tema === undefined
       ? router.push({ name: 'Bydel', params: { bydel: districts.join('-') } })
@@ -95,16 +79,21 @@ const actions = {
           params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
         });
   },
-  addDistrict({ state, commit }, payload) {
-    commit('ADD_DISTRICT', payload);
-    console.log('addDistrict state: ', state);
-
-    router.currentRoute.params.tema === undefined
-      ? router.push({ name: 'Bydel', params: { bydel: state.districts.join('-') } })
-      : router.push({
-          name: 'Tema',
-          params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
-        });
+  addDistrict({ commit }, payload) {
+    const districts = payload.split('-');
+    if (districts.length === 1) {
+      if (districts[0] === 'alle') {
+        commit('ADD_DISTRICT', districts);
+      } else {
+        const districtValue = bydeler.find(district => district.uri === districts[0]);
+        const districtKey = bydeler.find(district => district.key === districts[0]);
+        districtValue === undefined
+          ? commit('ADD_DISTRICT', [districtKey.key])
+          : commit('SELECT_DISTRICT', [districtValue.key]);
+      }
+    } else {
+      commit('ADD_DISTRICT', districts);
+    }
   },
   cleanState({ commit }) {
     commit('CLEAN_STATE');

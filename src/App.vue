@@ -22,13 +22,16 @@ export default {
     if (this.$route.params.bydel === undefined) {
       return;
     }
-    this.$store.dispatch('addDistrictByUrl', this.$route.params.bydel);
+    this.$store.dispatch('addDistrict', this.$route.params.bydel);
   },
 
   watch: {
     $route(to, from) {
       if (to.name === 'Tema' && from.name === 'Bydel') {
         window.scrollTo(0, 0);
+      }
+      if (to.params.bydel !== undefined) {
+        this.$store.dispatch('addDistrict', to.params.bydel);
       }
     },
   },

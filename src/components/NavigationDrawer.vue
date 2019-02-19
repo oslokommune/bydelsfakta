@@ -149,7 +149,6 @@ export default {
     onChangeCheckbox() {
       // Reset selector
       this.selectedPredefinedOption = [];
-      this.$store.dispatch('addDistrict', event.target.value);
       if (this.selected.length === 0) {
         this.checkedAllCheckbox = false;
       } else if (this.selected.length === bydeler.length) {
@@ -157,6 +156,16 @@ export default {
       } else if (this.selected.length > 0) {
         this.compareBydeler = true;
       }
+
+      const bydel =
+        this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
+
+      this.$route.params.tema === undefined
+        ? this.$router.push({ name: 'Bydel', params: { bydel: bydel } })
+        : this.$router.push({
+            name: 'Tema',
+            params: { bydel: bydel, tema: this.$route.params.tema },
+          });
     },
 
     onClickBydel(bydel) {
