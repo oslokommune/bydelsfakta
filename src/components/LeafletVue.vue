@@ -1,12 +1,20 @@
 <template>
-  <div></div>
+  <l-map :zoom="zoom" :center="center">
+    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+    <l-geo-json :geojson="district"></l-geo-json>
+  </l-map>
 </template>
 
 <script>
-import L from 'leaflet';
+import { LMap, LTileLayer, LGeoJson, L } from 'vue2-leaflet';
 
 export default {
   name: 'LeafletVue',
+  components: {
+    LMap,
+    LTileLayer,
+    LGeoJson,
+  },
 
   props: {
     district: {
@@ -15,18 +23,22 @@ export default {
     },
   },
 
-  mounted() {
-    console.log(window.document);
-    var mymap = L.map('map').setView([36, 116], 4);
-    L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(mymap);
+  data() {
+    return {
+      zoom: 10,
+      url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png',
+      attribution:
+        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      center: L.latLng(59.916950, 10.746589),
+    };
   },
 };
 </script>
 
 <style scoped>
-#mapId {
+#leaflet {
   height: 300px;
+  width: 300px;
+  margin: 0;
 }
 </style>
