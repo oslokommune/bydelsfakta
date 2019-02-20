@@ -24,16 +24,11 @@ export default {
   },
 
   methods: {
-    // Since method is called each time any layer is added,
-    // find all the geoJson layers that exists in map so that
-    // we can compare the number with the number of features
-    // in the geoJSON object so that the .flyToBounds() method
-    // is only called once when every geoJSON layer has been
-    // added to the map. This to ensure good zoom performance.
-    fitBounds(e, b, c) {
+    // Called for each added layer, calls flyToBounds after all the layers are added to the map
+    fitBounds(e) {
       if (!e.layer._bounds) return;
-      const existingGeoJsonLayers = Object.values(e.target._layers).filter(obj => {
-        return obj.defaultOptions && obj.defaultOptions.pane === 'overlayPane';
+      const existingGeoJsonLayers = Object.values(e.target._layers).filter(layer => {
+        return layer.defaultOptions && layer.defaultOptions.pane === 'overlayPane';
       });
 
       if (existingGeoJsonLayers.length === this.district.features.length) {
@@ -57,7 +52,7 @@ export default {
         zoomControl: false,
         attributionControl: false,
         doubleClickZoom: false,
-        dragging: true,
+        dragging: false,
         scrollWheelZoom: false,
         touchZoom: false,
       },
