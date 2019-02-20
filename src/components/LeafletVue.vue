@@ -1,5 +1,5 @@
 <template>
-  <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
+  <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions" @layeradd="fitBounds">
     <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution"></l-tile-layer>
     <l-geo-json ref="geojsonLayer" :geojson="district" :options-style="style"></l-geo-json>
   </l-map>
@@ -23,9 +23,22 @@ export default {
     },
   },
 
-  watch: {
-    district() {
-      this.$refs.leafletMap.mapObject.fitBounds(this.$refs.geojsonLayer.getBounds());
+  methods: {
+    // Since method is called each time any layer is added,
+    // find all the geoJson layers that exists in map so that
+    // we can compare the number with the number of features
+    // in the geoJSON object so that the .flyToBounds() method
+    // is only called once when every geoJSON layer has been
+    // added to the map. This to ensure good zoom performance.
+    fitBounds(e, b, c) {
+      if (!e.layer._bounds) return;
+      const existingGeoJsonLayers = Object.values(e.target._layers).filter(obj => {
+        return obj.defaultOptions && obj.defaultOptions.pane === 'overlayPane';
+      });
+
+      if (existingGeoJsonLayers.length === this.district.features.length) {
+        this.$refs.leafletMap.mapObject.flyToBounds(this.$refs.geojsonLayer.getBounds());
+      }
     },
   },
 
@@ -44,7 +57,7 @@ export default {
         zoomControl: false,
         attributionControl: false,
         doubleClickZoom: false,
-        dragging: false,
+        dragging: true,
         scrollWheelZoom: false,
         touchZoom: false,
       },
