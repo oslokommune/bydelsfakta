@@ -1,13 +1,8 @@
 <template>
   <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
     <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution"></l-tile-layer>
-    <l-feature-group @layeradd="fitMap">
-      <l-geo-json
-        ref="geojsonLayer"
-        @layeradd="fitBounds"
-        :geojson="district"
-        :options-style="style"
-      ></l-geo-json>
+    <l-feature-group @layeradd="fitMap" ref="featureGroup">
+      <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style"></l-geo-json>
     </l-feature-group>
   </l-map>
 </template>
@@ -32,7 +27,7 @@ export default {
   },
 
   methods: {
-    // Called for each added layer, calls flyToBounds after all the layers are added to the map
+    // Called for each added layer, calls fitMap that calls flyToBounds after all the layers are added to the map
     fitBounds(e) {
       if (Object.values(e.target._layers).length === this.district.features.length) {
         this.fitMap();
