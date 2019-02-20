@@ -1,7 +1,7 @@
 <template>
-  <l-map :zoom="zoom" :center="center">
-    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-geo-json :geojson="district"></l-geo-json>
+  <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
+    <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution"></l-tile-layer>
+    <l-geo-json ref="geojsonLayer" :geojson="district" :options-style="style"></l-geo-json>
   </l-map>
 </template>
 
@@ -23,13 +23,31 @@ export default {
     },
   },
 
+  watch: {
+    district() {
+      this.$refs.leafletMap.mapObject.fitBounds(this.$refs.geojsonLayer.getBounds());
+    },
+  },
+
   data() {
     return {
       zoom: 10,
-      url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png',
+      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
       attribution:
-        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       center: L.latLng(59.91695, 10.746589),
+      style: {
+        fillColor: 'blue',
+        weight: 1,
+      },
+      mapOptions: {
+        zoomControl: false,
+        attributionControl: false,
+        doubleClickZoom: false,
+        dragging: false,
+        scrollWheelZoom: false,
+        touchZoom: false,
+      },
     };
   },
 };
