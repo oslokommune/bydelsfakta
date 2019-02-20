@@ -15,17 +15,25 @@
     </div>
     <div class="main-container__map">
       <h3>Bydelskart</h3>
+      <leaflet-map :district="geoDistricts" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CardImage from '../components/CardImage.vue';
+import LeafletMap from '../components/LeafletVue.vue';
 import subpages from '../config/subpages';
+import districts from '../config/geoData/districts';
 
 export default {
   name: 'Bydel',
-  components: { CardImage },
+  components: {
+    CardImage,
+    LeafletMap,
+  },
+
   props: {
     bydel: {
       type: String,
@@ -33,9 +41,15 @@ export default {
     },
   },
 
+  computed: {
+    ...mapGetters(['geoDistricts']),
+  },
+
   data() {
     return {
       items: subpages,
+      chosenDistrict: {},
+      districts: districts,
     };
   },
 };

@@ -1,22 +1,22 @@
 <template>
   <aside id="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome">
+    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
     <button
       class="selectedSubpage"
       @click="showNavigation = !showNavigation"
       @keydown.esc="showNavigation = false"
       v-text="selectedSubpage"
     ></button>
-    <nav role="navigation" class="navigation" :class="{'navigation--show': showNavigation }">
+    <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
       <ul class="navigation-list">
         <li
           v-for="link in links"
           :key="link.key"
           class="navigation-link"
           :class="{
-          'navigation-link--active': $route.params.bydel === link.uri && !compareBydeler,
-          'navigation-link--compare': compareBydeler && selected.includes(link.key),
-        }"
+            'navigation-link--active': $route.params.bydel === link.uri && !compareDistricts,
+            'navigation-link--compare': compareDistricts && selected.includes(link.key),
+          }"
         >
           <input
             type="checkbox"
@@ -24,56 +24,49 @@
             :value="link.key"
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
-            :disabled="!compareBydeler && selected.length === 1 && selected[0] === link.key"
-          >
-          <label :for="`checkbox-${link.uri}`" :class="{ compare: compareBydeler }"></label>
-          <router-link
-            :id="`a-${link.uri}`"
-            class="navigation-link__label"
-            :to="onClickBydel(link.uri)"
-          >{{ link.value }}</router-link>
+            :disabled="!compareDistricts && districts.length === 1 && districts[0] === link.key"
+          />
+          <label :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }"></label>
+          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
+            link.value
+          }}</router-link>
         </li>
         <li
           class="navigation-link navigation-link__label-compare"
           id="sammenlign"
-          :class="{ 'navigation-link--active': compareBydeler }"
+          :class="{ 'navigation-link--active': compareDistricts }"
         >
-          <router-link
-            id="sammenlign-href"
-            :to="onClickSammenlign()"
-            class="navigation-link__label"
-          >Sammenlign bydeler</router-link>
+          <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label"
+            >Sammenlign bydeler</router-link
+          >
         </li>
       </ul>
       <transition name="fade">
-        <div class="navigation-drawer__buttons" v-if="compareBydeler">
+        <div class="navigation-drawer__buttons" v-if="compareDistricts">
           <div class="navigation-drawer__button-container">
-            <button
-              class="navigation-drawer__button"
-              @click="selectAll"
-              aria-label="select all checkboxes"
-            >Velg alle</button>
+            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
+              Velg alle
+            </button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
               aria-label="unselect all checkboxes"
-            >Fjern alle</button>
+            >
+              Fjern alle
+            </button>
           </div>
           <div class="navigation-drawer__select-container">
             <label for="navigation-drawer-select" class="visually-hidden">Velg byområde</label>
-            <select
-              id="navigation-drawer-select"
-              class="navigation-drawer__select"
-              v-model="selectedPredefinedOption"
-            >
+            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
                 :key="index"
                 :value="element.option"
                 :selected="element.selected"
                 :disabled="element.disabled"
-              >{{ element.label }}</option>
+                >{{ element.label }}</option
+              >
             </select>
           </div>
         </div>
@@ -83,6 +76,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import bydeler from '../config/bydeler';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg';
@@ -93,20 +87,17 @@ export default {
     return {
       links: bydeler,
       osloIcon: osloIcon,
-      checkedAllCheckbox: false,
-      showDropdown: false,
       showNavigation: false,
       selected: [],
       options: predefinedOptions,
       selectedPredefinedOption: [],
-      compareBydeler: false,
     };
   },
 
   computed: {
     selectedSubpage: {
       get: function() {
-        if (this.compareBydeler) {
+        if (this.compareDistricts) {
           let count = this.selected.length ? this.selected.length : this.links.length;
           return 'Sammenlign bydeler (' + count + ')';
         } else if (!this.selected.length) {
@@ -117,41 +108,16 @@ export default {
       },
       set: function() {},
     },
+    ...mapState(['compareDistricts', 'districts']),
   },
 
   created() {
     const route = this.$route;
-    let key = false;
     if (route.params.bydel === undefined) {
       return;
     }
 
-    const bydelParams = route.params.bydel.split('-');
-
-    if (bydelParams.length === 1) {
-      const bydelKey = bydeler.find(item => item.uri === bydelParams[0]);
-      this.selected = bydelKey === undefined ? bydelParams : [bydelKey.key];
-      if (bydelKey === undefined) key = true;
-    } else if (bydelParams.length > 0) {
-      this.compareBydeler = true;
-      this.selected = bydelParams[0] === 'alle' ? [] : bydelParams;
-    }
-
-    const routes = route.path.split('/');
-
-    if (routes.length > 3) {
-      this.selectedSubpage = routes[3];
-    }
-
-    if (bydelParams[0] === 'alle') {
-      this.selected = [];
-      this.compareBydeler = true;
-    } else if (key) {
-      const bydel = bydeler.find(item => item.key === bydelParams[0]).uri;
-      routes.length > 3
-        ? this.$router.push({ name: 'Tema', params: { bydel: bydel, tema: routes[3] } })
-        : this.$router.push({ name: 'Bydel', params: { bydel: bydel } });
-    }
+    this.selected = this.districts;
   },
 
   methods: {
@@ -159,31 +125,15 @@ export default {
       // Reset selector
       this.selectedPredefinedOption = [];
 
-      if (this.selected.length === 0) {
-        this.checkedAllCheckbox = false;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: 'alle', tema: this.$route.params.tema },
-            });
-      } else if (this.selected.length === bydeler.length) {
-        this.checkedAllCheckbox = true;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: 'alle', tema: this.$route.params.tema },
-            });
-      } else if (this.selected.length > 0) {
-        this.compareBydeler = true;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: this.selected.join('-') } })
-          : this.$router.push({
-              name: 'Tema',
-              params: { bydel: this.selected.join('-'), tema: this.$route.params.tema },
-            });
-      }
+      const bydel =
+        this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
+
+      this.$route.params.tema === undefined
+        ? this.$router.push({ name: 'Bydel', params: { bydel: bydel } })
+        : this.$router.push({
+            name: 'Tema',
+            params: { bydel: bydel, tema: this.$route.params.tema },
+          });
     },
 
     onClickBydel(bydel) {
@@ -196,7 +146,6 @@ export default {
 
     onClickHome() {
       this.selected = [];
-      this.compareBydeler = false;
       this.$router.push({ name: 'Home' });
     },
 
@@ -209,7 +158,7 @@ export default {
         return this.$route.params.tema === undefined
           ? { name: 'Bydel', params: { bydel: 'alle' } }
           : { name: 'Tema', params: { bydel: 'alle', tema: this.$route.params.tema } };
-      } else if (bydel === undefined && !this.compareBydeler) {
+      } else if (bydel === undefined && !this.compareDistricts) {
         return { name: 'Bydel', params: { bydel: 'alle' } };
       } else {
         return { name: 'Bydel', params: { bydel: this.$route.params.bydel } };
@@ -218,7 +167,6 @@ export default {
 
     selectAll() {
       this.selected = [];
-      this.checkedAllCheckbox = true;
       this.selectedPredefinedOption = [];
       bydeler.forEach(bydel => this.selected.push(bydel.key));
       this.$route.params.tema === undefined
@@ -249,15 +197,13 @@ export default {
 
       if (to.name === 'Home') {
         this.selected = [];
-      } else if (to.params.bydel === 'alle') {
-        this.compareBydeler = true;
+        this.$store.dispatch('cleanState');
+      } else if (to.params.bydel === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
       } else if (params.length > 1) {
         const paramBydel = routes[2].split('-');
-        this.compareBydeler = true;
         this.selected = paramBydel;
       } else if (bydel !== undefined) {
-        this.compareBydeler = false;
         this.selected = [bydel.key];
       }
 
