@@ -59,10 +59,6 @@ export default {
   },
 
   computed: {
-    currentSettings() {
-      return { settings: pages[this.tema] };
-    },
-
     ...mapGetters(['geoDistricts']),
   },
 };

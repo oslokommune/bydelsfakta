@@ -105,8 +105,6 @@ function Template(svg) {
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    console.log(this.data);
-
     let headRow = thead.append('tr');
 
     headRow

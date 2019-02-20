@@ -29,7 +29,11 @@ import districts from '../config/geoData/districts';
 
 export default {
   name: 'Bydel',
-  components: { CardImage, LeafletMap },
+  components: {
+    CardImage,
+    LeafletMap,
+  },
+
   props: {
     bydel: {
       type: String,
@@ -39,14 +43,6 @@ export default {
 
   computed: {
     ...mapGetters(['geoDistricts']),
-  },
-
-  created() {
-    this.chosenDistrict = this.districts[`${this.$route.params.bydel}`];
-  },
-
-  beforeUpdate() {
-    this.chosenDistrict = this.districts[`${this.$route.params.bydel}`];
   },
 
   data() {

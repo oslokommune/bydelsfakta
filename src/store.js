@@ -20,13 +20,15 @@ const getters = {
     } else if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
-    let newGeoData;
-    let newGeo = [];
-    state.districts.forEach(id =>
-      newGeo.push(state.districtsGeo.oslo.features.find(district => district.properties.id === parseInt(id)))
+
+    const features = state.districts.map(id =>
+      state.districtsGeo.oslo.features.find(district => district.properties.id === parseInt(id))
     );
-    newGeoData = { ...state.districtsGeo.oslo, features: newGeo };
-    return newGeoData;
+
+    return {
+      ...state.districtsGeo.oslo,
+      features,
+    };
   },
 };
 
@@ -77,4 +79,10 @@ const actions = {
   },
 };
 
-export default new Vuex.Store({ state, getters, mutations, actions, strict: true });
+export default new Vuex.Store({
+  strict: true,
+  state,
+  getters,
+  mutations,
+  actions,
+});
