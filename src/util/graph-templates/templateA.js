@@ -15,22 +15,30 @@ function Template(svg) {
   this.x2 = d3.scaleLinear();
   this.x = [];
   this.filteredData;
-  this.mobileWidth = 400;
-
-  const formatPercent = d3.format('.0%');
+  this.mobileWidth = 420;
+  this.isMobileView = false;
+  this.isSingleSeries = false;
 
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
-    // Multiseries need larger padding top to make room for tabs
+    this.isSingleSeries = data.meta.series.length === 1;
+    this.isMobileView = this.isSingleSeries && this.parentWidth() < this.mobileWidth;
+
+    // Multiseries need larger padding top to make room for tabs,
+    // mobile views have smaller padding.left
     this.padding.top = data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
+    this.padding.left = this.isMobileView ? 10 : 190;
 
     if (!this.commonRender(data, options)) return;
 
-    if (this.parentWidth() < this.mobileWidth) {
-      this.padding.left = 10;
-    } else {
-      this.padding.left = 190;
+    if (!this.isMobileView && !this.isSingleSeries) {
+      this.width = d3.max([this.width, 600]);
+    }
+
+    if (this.isMobileView || this.isSingleSeries) {
+      this.padding.right = 10;
+      this.gutter = 0;
     }
 
     // Make a filtered copy of the provided data object containing
@@ -203,13 +211,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => {
-        if (this.method === 'value') {
-          return d3.format('~f')(d[this.method]);
-        } else {
-          return d3.format('~p')(d[this.method]);
-        }
-      });
+      .text(d => this.format(d[this.method], this.method));
   };
 
   /**
@@ -240,11 +242,7 @@ function Template(svg) {
       .select('rect.divider')
       .attr('fill-opacity', d => {
         if (this.data.meta.series.length === 1) return 0;
-        if (this.parentWidth() < this.mobileWidth) {
-          return 0;
-        } else {
-          return d.avgRow || d.totalRow ? 0.5 : 0.2;
-        }
+        return this.isMobileView ? 0 : d.avgRow || d.totalRow ? 0.5 : 0.2;
       })
       .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -254,18 +252,14 @@ function Template(svg) {
       .select('text')
       .text(d => d.geography)
       .attr('x', () => {
-        if (this.parentWidth() < this.mobileWidth) return 0;
+        if (this.isMobileView) return 0;
         return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
       })
       .attr('y', () => {
-        if (this.parentWidth() < this.mobileWidth) {
-          return 20;
-        } else {
-          return this.rowHeight / 2 + 6;
-        }
+        return this.isMobileView ? 20 : this.rowHeight / 2 + 6;
       })
       .attr('text-anchor', () => {
-        if (this.parentWidth() < this.mobileWidth) return 'start';
+        if (this.isMobileView) return 'start';
         if (this.data.meta.series.length > 1) return 'start';
         return 'end';
       });
@@ -292,11 +286,11 @@ function Template(svg) {
 
     bars
       .attr('height', (d, i, j) => {
-        if (this.parentWidth() < this.mobileWidth) return 4;
+        if (this.isMobileView) return 4;
         return j[0].parentNode.__data__.totalRow ? 2 : this.barHeight;
       })
       .attr('y', (d, i, j) => {
-        if (this.parentWidth() < this.mobileWidth) {
+        if (this.isMobileView) {
           return (this.rowHeight - this.barHeight) / 2 + 16;
         } else {
           return j[0].parentNode.__data__.totalRow ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
@@ -315,11 +309,7 @@ function Template(svg) {
 
     bars
       .on('mousemove', d => {
-        if (this.method === 'ratio') {
-          this.showTooltip(formatPercent(d.ratio), d3.event);
-        } else {
-          this.showTooltip(Math.round(d[this.method]), d3.event);
-        }
+        this.showTooltip(this.format(d[this.method], this.method), d3.event);
       })
       .on('mouseleave', () => {
         this.hideTooltip();
@@ -373,7 +363,7 @@ function Template(svg) {
           d3
             .axisBottom(this.x[i])
             .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 50)
-            .tickFormat(d => (this.method === 'ratio' ? formatPercent(d) : d))
+            .tickFormat(d => this.format(d, this.method, true))
         );
     });
   };
