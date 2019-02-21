@@ -6,7 +6,7 @@
         :key="item.value"
         :id="item.value"
         :kategori="item.options.kategori"
-        :tema="item.options.tema"
+        :topic="item.options.tema"
         :bg-image="item.options.bgImage"
         :bg-color="item.options.bgColor"
         :txt-color="item.options.txtColor"

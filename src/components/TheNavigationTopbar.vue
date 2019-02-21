@@ -58,7 +58,7 @@ export default {
       items: subpages,
       selectedSubpage: null,
       dropdown: dropdownSubpages,
-      bydeler: allDistricts,
+      allDistricts: allDistricts,
       showDropdown: false,
     };
   },
