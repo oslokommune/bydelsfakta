@@ -151,7 +151,7 @@ function Base_Template(svg) {
     let rect = group.select('rect');
     let text = group.select('text');
 
-    group.attr('transform', `translate(${event.layerX}, ${event.layerY})`);
+    group.attr('transform', `translate(${event.offsetX}, ${event.offsetY})`);
     text.text(str);
     rect.attr('width', text.node().getBBox().width + 20).attr('x', -(text.node().getBBox().width / 2 + 10));
 
