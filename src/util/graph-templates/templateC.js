@@ -661,12 +661,14 @@ function Template(svg) {
           0
         ),
       ])
-      .range([0, this.width]);
+      .range([0, this.width])
+      .nice();
 
     this.y = d3
       .scaleLinear()
       .domain([this.y.min, this.y.max])
-      .range([this.height, 0]);
+      .range([this.height, 0])
+      .nice();
   };
 
   this.drawAxis = function() {

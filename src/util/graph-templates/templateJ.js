@@ -175,29 +175,16 @@ function Template(svg) {
 
   // Updates the rows
   this.drawRows = function() {
-    // Standard select/enter/update/exit pattern
-    // let rows = this.canvas
-    //   .select('g.rows')
-    //   .selectAll('g.row')
-    //   .data(this.data.data);
-    // let rowsE = rows
-    //   .enter()
-    //   .append('g')
-    //   .attr('class', 'row');
-    // rows.exit().remove();
-    // rows = rows.merge(rowsE);
-
     let rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
       .data(this.data.data)
       .join(enter => {
+        // Create elements on each row that's created on enter
         let g = enter.append('g').attr('class', 'row');
         this.initRowElements(g);
         return g;
       });
-
-    // Create elements on each row that's created on enter
 
     // Update row geography, style and position
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
@@ -237,7 +224,10 @@ function Template(svg) {
     let max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
 
     // Set the x-scale's domain and range
-    this.x.domain([min, max]).range([0, this.width]);
+    this.x
+      .domain([min, max])
+      .range([0, this.width])
+      .nice();
 
     // Update the xAxis using the x-scale
     // Calculate the number of ticks based on the width.

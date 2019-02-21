@@ -225,7 +225,10 @@ function Template(svg) {
   this.drawScales = function() {
     this.width1 = (this.width - this.gapX) / 2;
     this.width2 = (this.width - this.gapX) / 2;
-    this.x2.range([0, this.width2]).domain([0, 70]);
+    this.x2
+      .range([0, this.width2])
+      .domain([0, 70])
+      .nice();
     this.x2Axis
       .transition()
       .duration(this.duration)
@@ -239,7 +242,8 @@ function Template(svg) {
 
     this.x
       .range([0, this.width1])
-      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05]);
+      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05])
+      .nice();
     this.xAxis
       .transition()
       .duration(this.duration)

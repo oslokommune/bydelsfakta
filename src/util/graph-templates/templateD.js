@@ -50,7 +50,7 @@ function Template(svg) {
     brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
 
     // Set size for age (scale for brushes)
-    this.age.range([0, this.width - this.paddingUpperLeft]);
+    this.age.range([0, this.width - this.paddingUpperLeft]).nice();
 
     // Resize SVG DOM element
     this.svg
@@ -80,8 +80,14 @@ function Template(svg) {
     let max = this.getMax();
 
     // Set axis and scales based on these max values (for the bars()
-    this.y.domain([0, max]).range([this.height2, 0]);
-    this.x.domain([0, maxAccumulated]).range([0, this.width - this.paddingLowerLeft]);
+    this.y
+      .domain([0, max])
+      .range([this.height2, 0])
+      .nice();
+    this.x
+      .domain([0, maxAccumulated])
+      .range([0, this.width - this.paddingLowerLeft])
+      .nice();
     this.upperYAxis
       .transition()
       .duration(this.duration)

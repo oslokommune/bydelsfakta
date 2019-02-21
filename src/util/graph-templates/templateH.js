@@ -406,18 +406,35 @@ function Template(svg) {
   this.resetScales = function() {
     let dates = d3.extent(this.data.data.actual.concat(this.data.data.projection).map(d => this.parseDate(d.date)));
     dates[0] = d3.timeYear.offset(dates[0], -2);
-    let minPop = d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.5;
+    let minPop = d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.2;
     let maxPop =
-      d3.max(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.high)) * 1.15;
+      d3.max(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.high)) * 1.05;
 
     this.y2
       .range([this.height2, 0])
-      .domain(d3.extent(this.data.data.actual.map(d => d.change).map((d, i) => (i == 1 ? d * 1.3 : d))));
-    this.x.range([0, this.width1]).domain(dates);
-    this.y.range([this.height1, 0]).domain([minPop, maxPop]);
+      .domain(d3.extent(this.data.data.actual.map(d => d.change).map((d, i) => (i == 1 ? d * 1.3 : d))))
+      .nice();
+    this.x
+      .range([0, this.width1])
+      .domain(dates)
+      .nice();
+    this.y
+      .range([this.height1, 0])
+      .domain([minPop, maxPop])
+      .nice();
     this.xAxis.call(d3.axisBottom(this.x).ticks(this.width1 / 60));
-    this.yAxis.call(d3.axisLeft(this.y).ticks(this.height1 / 40));
-    this.y2Axis.call(d3.axisLeft(this.y2).ticks(this.height2 / 20));
+    this.yAxis.call(
+      d3
+        .axisLeft(this.y)
+        .ticks(this.height1 / 40)
+        .tickFormat(d => this.format(d, this.method, true))
+    );
+    this.y2Axis.call(
+      d3
+        .axisLeft(this.y2)
+        .ticks(this.height2 / 20)
+        .tickFormat(d => this.format(d, this.method, true))
+    );
   };
 
   this.init(svg);

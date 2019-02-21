@@ -307,8 +307,14 @@ function Template(svg) {
 
   this.drawAxis = function() {
     let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
-    this.y.range([this.height, 0]).domain([0, 120]);
-    this.x.range([0, this.width]).domain([-max, max]);
+    this.y
+      .range([this.height, 0])
+      .domain([0, 120])
+      .nice();
+    this.x
+      .range([0, this.width])
+      .domain([-max, max])
+      .nice();
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()

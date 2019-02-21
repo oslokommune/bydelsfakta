@@ -10,7 +10,7 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 100, left: 190, right: 20, bottom: 30 };
+  this.padding = { top: 100, left: 190, right: 25, bottom: 30 };
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
   this.x = [];
@@ -37,7 +37,7 @@ function Template(svg) {
     }
 
     if (this.isMobileView || this.isSingleSeries) {
-      this.padding.right = 10;
+      this.padding.right = 25;
       this.gutter = 0;
     }
 
@@ -336,7 +336,9 @@ function Template(svg) {
         startPos += this.gutter;
       }
       let endPos = startPos + this.x2(maxValues[index]);
-      SCALE.domain([0, maxValues[index]]).range([startPos, endPos]);
+      SCALE.domain([0, maxValues[index]])
+        .range([startPos, endPos])
+        .nice();
 
       return SCALE;
     });

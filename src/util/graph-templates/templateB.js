@@ -595,7 +595,8 @@ function Template(svg) {
     this.y = d3
       .scaleLinear()
       .domain([this.y.min, this.y.max])
-      .range([this.height, 0]);
+      .range([this.height, 0])
+      .nice();
   };
 
   // Renders axis based on the updated scales
