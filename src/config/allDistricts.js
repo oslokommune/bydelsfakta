@@ -1,4 +1,4 @@
-const bydeler = [
+const allDistricts = [
   {
     key: '1',
     value: 'Bydel Gamle Oslo',
@@ -76,4 +76,4 @@ const bydeler = [
   },
 ];
 
-export default bydeler;
+export default allDistricts;

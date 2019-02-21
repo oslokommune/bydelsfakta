@@ -50,7 +50,7 @@ describe('TheNavigationDrawer', () => {
     expect(wrapper.vm.selectedPredefinedOption.length).toEqual(0);
   });
 
-  test('selectedPredefinedOption is set to length of 3 and router is pushed to Tema', () => {
+  test('selectedPredefinedOption is set to length of 3 and router is pushed to Topic', () => {
     router.push('/bydel/sagene/alder');
     wrapper.setData({ selectedPredefinedOption: ['1', '2', '3'] });
     expect(wrapper.vm.selected).toEqual(['1', '2', '3']);
@@ -96,7 +96,7 @@ describe('created lifecycle hook', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('bydel is 1 instead of sagene', () => {
+  test('district is 1 instead of sagene', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/1');
@@ -108,7 +108,7 @@ describe('created lifecycle hook', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('bydel is sagene and tema is alder', () => {
+  test('district is sagene and topic is alder', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/sagene/alder');

@@ -48,7 +48,7 @@
 <script>
 import { mapState } from 'vuex';
 import subpages from '../config/subpages';
-import bydeler from '../config/bydeler';
+import allDistricts from '../config/allDistricts';
 import dropdownSubpages from '../config/dropdownSubpages';
 
 export default {
@@ -58,7 +58,7 @@ export default {
       items: subpages,
       selectedSubpage: null,
       dropdown: dropdownSubpages,
-      bydeler: bydeler,
+      bydeler: allDistricts,
       showDropdown: false,
     };
   },
@@ -85,7 +85,7 @@ export default {
       if (this.compareDistricts || id === 'alle') {
         return 'Sammenligne bydeler';
       } else {
-        return id !== undefined ? this.bydeler.find(district => district.uri === id).value : 'Velg bydel';
+        return id !== undefined ? this.allDistricts.find(district => district.uri === id).value : 'Velg bydel';
       }
     },
 

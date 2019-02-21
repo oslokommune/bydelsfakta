@@ -77,7 +77,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import bydeler from '../config/bydeler';
+import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg';
 
@@ -85,7 +85,7 @@ export default {
   name: 'TheNavigationDrawer',
   data() {
     return {
-      links: bydeler,
+      links: allDistricts,
       osloIcon: osloIcon,
       showNavigation: false,
       selected: [],
@@ -152,7 +152,7 @@ export default {
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
       const selectedDistricts = this.selected.join('-');
-      const district = bydeler.find(district => district.uri === routes[2]);
+      const district = allDistricts.find(district => district.uri === routes[2]);
 
       if (district !== undefined && selectedDistricts === district.key) {
         return this.$route.params.topic === undefined
@@ -167,7 +167,7 @@ export default {
 
     selectAll() {
       this.selected = [];
-      this.selected = bydeler.map(district => district.key);
+      this.selected = allDistricts.map(district => district.key);
       this.selectedPredefinedOption = [];
       this.$route.params.topic === undefined
         ? this.$router.push({ name: 'District', params: { district: 'alle' } })
@@ -193,7 +193,7 @@ export default {
     $route(to) {
       const routes = to.path.split('/');
       const params = to.params.district !== undefined ? to.params.district.split('-') : [];
-      const district = bydeler.find(district => district.uri === routes[2]);
+      const district = allDistricts.find(district => district.uri === routes[2]);
 
       if (to.name === 'Home') {
         this.selected = [];

@@ -48,7 +48,7 @@ describe('navigationDrawer', () => {
     cy.url().should('include', '/bydel/alle');
   });
 
-  it('bydel sagene and tema is alder, press bydel sagene again and page is changed to bydel frontpage', () => {
+  it('district sagene and topic is alder, press district sagene again and page is changed to district frontpage', () => {
     cy.get('#a-sagene').click();
     cy.url().should('include', '/bydel/sagene');
     cy.get('#alder').click();

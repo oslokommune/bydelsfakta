@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import router from './router';
 
 import districts from './config/geoData/districts';
-import bydeler from './config/bydeler';
+import bydeler from './config/allDistricts';
 
 Vue.use(Vuex);
 

@@ -55,8 +55,8 @@ describe('TheNavigationTopbar', () => {
   test('return router object when clicking on a subpage', () => {
     router.push('/bydel/sagene/alder');
     expect(wrapper.vm.onClickSubpage('levekaar')).toEqual({
-      name: 'Tema',
-      params: { bydel: 'sagene', tema: 'levekaar' },
+      name: 'Topic',
+      params: { district: 'sagene', topic: 'levekaar' },
     });
   });
 

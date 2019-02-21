@@ -1,8 +1,8 @@
 <template>
   <router-link class="main-container__item" :to="link" :id="dataId" :style="{ backgroundColor: dataBgColor }">
-    <img class="oslo__img" :src="dataBgImage" :alt="dataTema" aria-hidden="true" />
+    <img class="oslo__img" :src="dataBgImage" :alt="dataTopic" aria-hidden="true" />
     <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">{{ dataKategori }}</span>
-    <span class="oslo__tema" v-html="dataTema"></span>
+    <span class="oslo__topic" v-html="dataTopic"></span>
     <span class="oslo__see-more-text">Se mer</span>
   </router-link>
 </template>
@@ -15,7 +15,7 @@ export default {
       type: String,
       required: true,
     },
-    tema: {
+    topic: {
       type: String,
       required: true,
     },
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       dataKategori: this.kategori,
-      dataTema: this.tema,
+      dataTopic: this.topic,
       dataBgImage: this.bgImage,
       dataBgColor: this.bgColor,
       dataTxtColor: this.txtColor,
@@ -142,7 +142,7 @@ export default {
   mix-blend-mode: multiply;
 }
 
-.oslo__tema {
+.oslo__topic {
   font-size: 1.5em;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
