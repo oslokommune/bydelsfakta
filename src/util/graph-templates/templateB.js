@@ -49,6 +49,7 @@ function Template(svg) {
       .select('rect.bg')
       .attr('height', this.height)
       .attr('width', this.width)
+      .attr('x', 1)
       .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'click') j[i].blur();
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
@@ -599,7 +600,12 @@ function Template(svg) {
 
   // Renders axis based on the updated scales
   this.drawAxis = function() {
-    this.yAxis.transition().call(d3.axisLeft(this.y).ticks(this.height / 30));
+    this.yAxis.transition().call(
+      d3
+        .axisLeft(this.y)
+        .ticks(this.height / 30)
+        .tickFormat(d => this.format(d, this.method, true))
+    );
     this.xAxis
       .transition()
       .call(d3.axisBottom(this.x).ticks(this.width / 90))

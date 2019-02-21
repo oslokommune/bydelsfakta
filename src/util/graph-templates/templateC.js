@@ -49,6 +49,7 @@ function Template(svg) {
       .select('rect.bg')
       .attr('height', this.height)
       .attr('width', this.width)
+      .attr('x', 1)
       .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'click') j[i].blur();
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
