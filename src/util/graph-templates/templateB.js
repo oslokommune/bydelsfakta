@@ -269,7 +269,7 @@ function Template(svg) {
         const centroid = d.values[0].centroid;
         const angle = Math.atan2(centroid[1] - position[1], centroid[0] - position[0]);
         const distance = 20;
-        const box = j[i].getBBox();
+        const box = el.node().getBBox();
 
         // Location of the position where it should sit
         const target = {
@@ -586,7 +586,7 @@ function Template(svg) {
     this.x = d3
       .scaleTime()
       .domain([
-        d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0].date), -2),
+        this.parseDate(this.data.data[0].values[0].date),
         this.parseDate(this.data.data[0].values[this.data.data[0].values.length - 1].date),
       ])
       .range([0, this.width]);
@@ -607,9 +607,18 @@ function Template(svg) {
         .ticks(this.height / 30)
         .tickFormat(d => this.format(d, this.method, true))
     );
+
+    // Years between start and end dates
+    let yearCount = d3.timeYear.count(...this.x.domain());
+
     this.xAxis
       .transition()
-      .call(d3.axisBottom(this.x).ticks(d3.timeYear))
+      .call(
+        d3
+          .axisBottom(this.x)
+          .ticks(d3.min([this.width / 60, yearCount]))
+          .tickFormat(this.formatYear)
+      )
       .attr('transform', `translate(0, ${this.height})`);
   };
 
