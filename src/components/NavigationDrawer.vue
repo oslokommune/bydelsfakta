@@ -57,17 +57,8 @@
             </button>
           </div>
           <div class="navigation-drawer__select-container">
-<<<<<<< HEAD
             <label for="navigation-drawer-select" class="visually-hidden">Velg region</label>
-            <select
-              id="navigation-drawer-select"
-              class="navigation-drawer__select"
-              v-model="selectedPredefinedOption"
-            >
-=======
-            <label for="navigation-drawer-select" class="visually-hidden">Velg byområde</label>
             <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
->>>>>>> df4d320d8815b8c2540c47cefb6bf45bc9f11a7d
               <option
                 v-for="(element, index) in options"
                 :key="index"
