@@ -14,7 +14,7 @@
     </div>
     <div class="main-container__map">
       <h3>Bydelskart</h3>
-      <leaflet-map :district="geoDistricts" />
+      <v-leaflet :district="geoDistricts" />
     </div>
   </div>
 </template>
@@ -22,24 +22,24 @@
 <script>
 import { mapGetters } from 'vuex';
 import GraphCard from '../components/GraphCard.vue';
-import LeafletMap from '../components/LeafletVue.vue';
+import VLeaflet from '../components/VLeaflet.vue';
 
 import pages from '../config/pages';
 
 export default {
-  name: 'Tema',
+  name: 'Topic',
 
   components: {
     GraphCard,
-    LeafletMap,
+    VLeaflet,
   },
 
   props: {
-    bydel: {
+    district: {
       type: String,
       required: true,
     },
-    tema: {
+    topic: {
       type: String,
       required: true,
     },
@@ -47,14 +47,14 @@ export default {
 
   data() {
     return {
-      componentName: this.tema,
+      componentName: this.topic,
       pages: pages,
     };
   },
 
   watch: {
-    tema() {
-      this.componentName = this.tema;
+    topic() {
+      this.componentName = this.topic;
     },
   },
 

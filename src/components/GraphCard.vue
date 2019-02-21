@@ -16,12 +16,7 @@
             v-text="tab.label"
           ></button>
         </div>
-        <div
-          @keydown.escape="closeMenu()"
-          v-click-outside="closeMenu"
-          class="context-menu"
-          role="menu"
-        >
+        <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
           <button
             class="context-menu__button"
             @click="showDropdown = !showDropdown"
@@ -41,10 +36,7 @@
               aria-label="lagre graf som png"
               id="context-menu-button-png"
             >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >photo_size_select_actual</i>
+              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Last ned som PNG</span>
             </button>
             <button
@@ -56,13 +48,10 @@
               @keyup.enter="saveSvg(settings.tabs[active].id)"
               id="context-menu-button-svg"
             >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >photo_size_select_actual</i>
+              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
               <span>Lagre som SVG</span>
             </button>
-            
+
             <button
               class="context-menu__dropdown-item"
               aria-hidden="true"
@@ -70,19 +59,18 @@
               @click="toggleShowTable"
               @keyup.enter="toggleShowTable"
             >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >{{ showTable? 'insert_chart_outlined' : 'table_chart'}}</i>
+              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">{{
+                showTable ? 'insert_chart_outlined' : 'table_chart'
+              }}</i>
               <span>Vis {{ showTable ? 'grafikk' : 'tabell' }}</span>
             </button>
           </div>
         </div>
       </nav>
-      <graph
+      <graph-instance
         v-if="settings.tabs[active] !== undefined"
         :settings="settings.tabs[active]"
-        :showTable="showTable"
+        :show-table="showTable"
         ref="graph"
       />
     </div>
@@ -91,12 +79,12 @@
 
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
-import Graph from './Graph.vue';
+import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 
 export default {
   name: 'GraphCard',
-  components: { Graph },
+  components: { GraphInstance },
   data() {
     return {
       active: 0,
@@ -128,14 +116,14 @@ export default {
     },
 
     saveSvg(id) {
-      const filename = `${this.$route.params.bydel}_${id}.svg`;
+      const filename = `${this.$route.params.district}_${id}.svg`;
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
     },
 
     savePng(id) {
       const file = this.$refs.graph.$refs.svg;
-      const filename = `${this.$route.params.bydel}_${id}.png`;
+      const filename = `${this.$route.params.district}_${id}.png`;
       saveSvgAsPng(file, filename, {
         backgroundColor: 'white',
         encoderOptions: 1,

@@ -1,15 +1,15 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import NavigationDrawer from '../../../src/components/NavigationDrawer.vue';
+import TheNavigationDrawer from '../../../src/components/TheNavigationDrawer.vue';
 import router from '../../../src/router';
 
-describe('NavigationDrawer', () => {
+describe('TheNavigationDrawer', () => {
   let wrapper = null;
 
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/sagene');
-    wrapper = mount(NavigationDrawer, {
+    wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
     });
@@ -19,20 +19,20 @@ describe('NavigationDrawer', () => {
     wrapper.destroy();
   });
 
-  test('renders navigationDrawer-component and finds navbar-id', () => {
+  test('renders TheNavigationDrawer-component and finds navbar-id', () => {
     expect(wrapper.attributes().id).toBe('navbar');
   });
 
-  test('renders navigationDrawer correctly', () => {
+  test('renders TheNavigationDrawer correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('render navigationDrawer with route /bydel/gamleoslo correctly', () => {
+  test('render TheNavigationDrawer with route /bydel/gamleoslo correctly', () => {
     router.push('/bydel/gamleoslo');
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('render navigationDrawer with route /bydel/1-2-3-4 correctly', () => {
+  test('render TheNavigationDrawer with route /bydel/1-2-3-4 correctly', () => {
     router.push('/bydel/1-2-3-4');
     expect(wrapper.vm.$route.path).toEqual('/bydel/1-2-3-4');
     router.push('/bydel/test');
@@ -50,7 +50,7 @@ describe('NavigationDrawer', () => {
     expect(wrapper.vm.selectedPredefinedOption.length).toEqual(0);
   });
 
-  test('selectedPredefinedOption is set to length of 3 and router is pushed to Tema', () => {
+  test('selectedPredefinedOption is set to length of 3 and router is pushed to Topic', () => {
     router.push('/bydel/sagene/alder');
     wrapper.setData({ selectedPredefinedOption: ['1', '2', '3'] });
     expect(wrapper.vm.selected).toEqual(['1', '2', '3']);
@@ -63,7 +63,7 @@ describe('created lifecycle hook', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/alle');
-    const wrapper = mount(NavigationDrawer, {
+    const wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
     });
@@ -75,7 +75,7 @@ describe('created lifecycle hook', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/1-2-3-4');
-    const wrapper = mount(NavigationDrawer, {
+    const wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
     });
@@ -88,7 +88,7 @@ describe('created lifecycle hook', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/');
-    const wrapper = mount(NavigationDrawer, {
+    const wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
     });
@@ -96,11 +96,11 @@ describe('created lifecycle hook', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('bydel is 1 instead of sagene', () => {
+  test('district is 1 instead of sagene', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/1');
-    const wrapper = mount(NavigationDrawer, {
+    const wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
     });
@@ -108,11 +108,11 @@ describe('created lifecycle hook', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('bydel is sagene and tema is alder', () => {
+  test('district is sagene and topic is alder', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     router.push('/bydel/sagene/alder');
-    const wrapper = mount(NavigationDrawer, {
+    const wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
     });

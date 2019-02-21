@@ -1,11 +1,11 @@
 import { mount, RouterLinkStub } from '@vue/test-utils';
-import CardImage from '../../../src/components/CardImage.vue';
+import VCategory from '../../../src/components/VCategory.vue';
 
-describe('CardImage', () => {
+describe('VCategory', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    wrapper = mount(CardImage, {
+    wrapper = mount(VCategory, {
       propsData: {
         kategori: 'test',
         tema: 'test',
@@ -23,7 +23,7 @@ describe('CardImage', () => {
     wrapper.destroy();
   });
 
-  test('renders CardImage-component and finds main-container__item-class', () => {
+  test('renders VCategory-component and finds main-container__item-class', () => {
     expect(wrapper.classes('main-container__item')).toBe(true);
   });
 

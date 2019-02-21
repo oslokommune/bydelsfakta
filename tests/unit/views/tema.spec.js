@@ -2,10 +2,10 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import VueResize from 'vue-resize';
 
-import Tema from '../../../src/views/Tema.vue';
+import Topic from '../../../src/views/Topic.vue';
 import clickOutside from '../../../src/directives/clickOutside';
 
-describe('Tema', () => {
+describe('Topic', () => {
   let wrapper = null;
 
   beforeEach(() => {
@@ -14,10 +14,10 @@ describe('Tema', () => {
     localVue.use(VueResize);
     localVue.directive('click-outside', clickOutside);
     const router = new VueRouter();
-    wrapper = mount(Tema, {
+    wrapper = mount(Topic, {
       propsData: {
-        bydel: 'bydel',
-        tema: 'alder',
+        district: 'bydel',
+        topic: 'alder',
       },
       localVue,
       router,
@@ -28,7 +28,7 @@ describe('Tema', () => {
     wrapper.destroy();
   });
 
-  test('renders tema-component and finds main-container class', () => {
+  test('renders topic-component and finds main-container class', () => {
     expect(wrapper.classes('main-container')).toBe(true);
   });
 
@@ -37,8 +37,8 @@ describe('Tema', () => {
   });
 
   test('renders different component when props change', () => {
-    expect(wrapper.vm.tema).toBe('alder');
-    wrapper.setProps({ tema: 'levekaar' });
-    expect(wrapper.vm.tema).toBe('levekaar');
+    expect(wrapper.vm.topic).toBe('alder');
+    wrapper.setProps({ topic: 'levekaar' });
+    expect(wrapper.vm.topic).toBe('levekaar');
   });
 });

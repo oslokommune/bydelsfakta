@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <navigation-drawer />
-    <div id="content">
-      <navigation-topbar />
+  <div class="app">
+    <the-navigation-drawer />
+    <div class="app__content">
+      <the-navigation-topbar />
       <main>
         <router-view />
       </main>
@@ -11,27 +11,27 @@
 </template>
 
 <script>
-import NavigationDrawer from './components/NavigationDrawer.vue';
-import NavigationTopbar from './components/NavigationTopbar.vue';
+import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
+import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
 
 export default {
   name: 'App',
-  components: { NavigationTopbar, NavigationDrawer },
+  components: { TheNavigationTopbar, TheNavigationDrawer },
 
   created() {
-    if (this.$route.params.bydel === undefined) {
+    if (this.$route.params.district === undefined) {
       return;
     }
-    this.$store.dispatch('addDistrict', { district: this.$route.params.bydel, pushRoute: true });
+    this.$store.dispatch('addDistrict', { district: this.$route.params.district, pushRoute: true });
   },
 
   watch: {
     $route(to, from) {
-      if (to.name === 'Tema' && from.name === 'Bydel') {
+      if (to.name === 'Topic' && from.name === 'District') {
         window.scrollTo(0, 0);
       }
-      if (to.params.bydel !== undefined) {
-        this.$store.dispatch('addDistrict', { district: to.params.bydel, pushRoute: false });
+      if (to.params.district !== undefined) {
+        this.$store.dispatch('addDistrict', { district: to.params.district, pushRoute: false });
       }
     },
   },

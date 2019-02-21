@@ -1,5 +1,5 @@
 <template>
-  <aside id="navbar">
+  <aside class="navbar">
     <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
     <button
       class="selectedSubpage"
@@ -14,7 +14,7 @@
           :key="link.key"
           class="navigation-link"
           :class="{
-            'navigation-link--active': $route.params.bydel === link.uri && !compareDistricts,
+            'navigation-link--active': $route.params.district === link.uri && !compareDistricts,
             'navigation-link--compare': compareDistricts && selected.includes(link.key),
           }"
         >
@@ -27,7 +27,7 @@
             :disabled="!compareDistricts && districts.length === 1 && districts[0] === link.key"
           />
           <label :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }"></label>
-          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickBydel(link.uri)">{{
+          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickDistrict(link.uri)">{{
             link.value
           }}</router-link>
         </li>
@@ -77,15 +77,15 @@
 
 <script>
 import { mapState } from 'vuex';
-import bydeler from '../config/bydeler';
+import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg';
 
 export default {
-  name: 'NavigationDrawer',
+  name: 'TheNavigationDrawer',
   data() {
     return {
-      links: bydeler,
+      links: allDistricts,
       osloIcon: osloIcon,
       showNavigation: false,
       selected: [],
@@ -113,7 +113,7 @@ export default {
 
   created() {
     const route = this.$route;
-    if (route.params.bydel === undefined) {
+    if (route.params.district === undefined) {
       return;
     }
 
@@ -125,23 +125,23 @@ export default {
       // Reset selector
       this.selectedPredefinedOption = [];
 
-      const bydel =
+      const district =
         this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
 
-      this.$route.params.tema === undefined
-        ? this.$router.push({ name: 'Bydel', params: { bydel: bydel } })
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district } })
         : this.$router.push({
-            name: 'Tema',
-            params: { bydel: bydel, tema: this.$route.params.tema },
+            name: 'Topic',
+            params: { district, topic: this.$route.params.topic },
           });
     },
 
-    onClickBydel(bydel) {
-      return bydel === this.$route.params.bydel
-        ? { name: 'Bydel', params: { bydel: bydel } }
-        : this.$route.params.tema === undefined
-        ? { name: 'Bydel', params: { bydel: bydel } }
-        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+    onClickDistrict(district) {
+      return district === this.$route.params.district
+        ? { name: 'District', params: { district } }
+        : this.$route.params.topic === undefined
+        ? { name: 'District', params: { district } }
+        : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
     },
 
     onClickHome() {
@@ -151,66 +151,66 @@ export default {
 
     onClickSammenlign() {
       const routes = this.$route.path.split('/');
-      const selectedBydeler = this.selected.join('-');
-      const bydel = bydeler.find(item => item.uri === routes[2]);
+      const selectedDistricts = this.selected.join('-');
+      const district = allDistricts.find(district => district.uri === routes[2]);
 
-      if (bydel !== undefined && selectedBydeler === bydel.key) {
-        return this.$route.params.tema === undefined
-          ? { name: 'Bydel', params: { bydel: 'alle' } }
-          : { name: 'Tema', params: { bydel: 'alle', tema: this.$route.params.tema } };
-      } else if (bydel === undefined && !this.compareDistricts) {
-        return { name: 'Bydel', params: { bydel: 'alle' } };
+      if (district !== undefined && selectedDistricts === district.key) {
+        return this.$route.params.topic === undefined
+          ? { name: 'District', params: { district: 'alle' } }
+          : { name: 'Topic', params: { district: 'alle', topic: this.$route.params.topic } };
+      } else if (district === undefined && !this.compareDistricts) {
+        return { name: 'District', params: { district: 'alle' } };
       } else {
-        return { name: 'Bydel', params: { bydel: this.$route.params.bydel } };
+        return { name: 'District', params: { district: this.$route.params.district } };
       }
     },
 
     selectAll() {
       this.selected = [];
+      this.selected = allDistricts.map(district => district.key);
       this.selectedPredefinedOption = [];
-      bydeler.forEach(bydel => this.selected.push(bydel.key));
-      this.$route.params.tema === undefined
-        ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
         : this.$router.push({
-            name: 'Tema',
-            params: { bydel: 'alle', tema: this.$route.params.tema },
+            name: 'Topic',
+            params: { district: 'alle', topic: this.$route.params.topic },
           });
     },
 
     unselectAll() {
       this.selected = [];
       this.selectedPredefinedOption = [];
-      this.$route.params.tema === undefined
-        ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
         : this.$router.push({
-            name: 'Tema',
-            params: { bydel: 'alle', tema: this.$route.params.tema },
+            name: 'Topic',
+            params: { district: 'alle', topic: this.$route.params.topic },
           });
     },
   },
 
   watch: {
-    $route(to, from) {
+    $route(to) {
       const routes = to.path.split('/');
-      const params = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
-      const bydel = bydeler.find(item => item.uri === routes[2]);
+      const params = to.params.district !== undefined ? to.params.district.split('-') : [];
+      const district = allDistricts.find(district => district.uri === routes[2]);
 
       if (to.name === 'Home') {
         this.selected = [];
         this.$store.dispatch('cleanState');
-      } else if (to.params.bydel === 'alle' && this.selected.length !== this.links.length) {
+      } else if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
       } else if (params.length > 1) {
-        const paramBydel = routes[2].split('-');
-        this.selected = paramBydel;
-      } else if (bydel !== undefined) {
-        this.selected = [bydel.key];
+        const paramDistrict = routes[2].split('-');
+        this.selected = paramDistrict;
+      } else if (district !== undefined) {
+        this.selected = [district.key];
       }
 
       // Hide navigation when a selection is made,
       // but not if 'sammenlign bydeler' og a custom
       // selection is made.
-      if (!this.compareBydeler || (this.compareBydeler && !this.selected.length)) {
+      if (!this.compareDistricts || (this.compareDistricts && !this.selected.length)) {
         this.showNavigation = false;
       }
     },
@@ -218,11 +218,11 @@ export default {
     selectedPredefinedOption() {
       if (this.selectedPredefinedOption.length !== 0) {
         this.selected = this.selectedPredefinedOption;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: this.selected.join('-') } })
+        this.$route.params.topic === undefined
+          ? this.$router.push({ name: 'District', params: { district: this.selected.join('-') } })
           : this.$router.push({
-              name: 'Tema',
-              params: { bydel: this.selected.join('-'), tema: this.$route.params.tema },
+              name: 'Topic',
+              params: { district: this.selected.join('-'), topic: this.$route.params.topic },
             });
       }
     },
@@ -234,7 +234,7 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 
-#navbar {
+.navbar {
   background: $color-blue;
   display: flex;
   position: relative;

@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 
-import Bydel from '../../../src/views/Bydel.vue';
+import Bydel from '../../../src/views/District.vue';
 
 describe('Bydel', () => {
   let wrapper = null;

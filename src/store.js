@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import router from './router';
 
 import districts from './config/geoData/districts';
-import bydeler from './config/bydeler';
+import bydeler from './config/allDistricts';
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ const state = {
 const getters = {
   geoDistricts: state => {
     if (!state.compareDistricts && state.districts.length !== 0) {
-      return { ...state.districtsGeo[`${bydeler.find(item => item.key === state.districts[0]).uri}`] };
+      return { ...state.districtsGeo[`${bydeler.find(district => district.key === state.districts[0]).uri}`] };
     } else if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
@@ -66,11 +66,11 @@ const actions = {
     }
 
     if (payload.pushRoute) {
-      router.currentRoute.params.tema === undefined
-        ? router.push({ name: 'Bydel', params: { bydel: districts.join('-') } })
+      router.currentRoute.params.topic === undefined
+        ? router.push({ name: 'District', params: { district: districts.join('-') } })
         : router.push({
-            name: 'Tema',
-            params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
+            name: 'Topic',
+            params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
           });
     }
   },

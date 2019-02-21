@@ -1,15 +1,15 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import vueResize from 'vue-resize';
-import Graph from '../../../src/components/Graph.vue';
+import GraphInstance from '../../../src/components/GraphInstance.vue';
 import page from '../../../src/config/pages';
 
-describe('Graph', () => {
+describe('GraphInstance', () => {
   let wrapper = null;
 
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(vueResize);
-    wrapper = mount(Graph, {
+    wrapper = mount(GraphInstance, {
       propsData: {
         settings: page['alder'].subpages[0].graphs[0],
       },
@@ -21,7 +21,7 @@ describe('Graph', () => {
     wrapper.destroy();
   });
 
-  test('renders graph-component and finds graph__container-class', () => {
+  test('renders graphInstance-component and finds graph__container-class', () => {
     expect(wrapper.classes('graph__container')).toBe(true);
   });
 

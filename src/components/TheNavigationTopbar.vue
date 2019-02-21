@@ -2,7 +2,7 @@
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
     <router-link :to="backButton()" id="backButton" class="oslo__navigation-topbar-button">
       <i class="material-icons oslo__topbar">arrow_back</i>
-      <h4 class="oslo__topbar oslo__topbar-text">{{ getBydel(this.$route.params.bydel) }}</h4>
+      <h4 class="oslo__topbar oslo__topbar-text">{{ getDistrict(this.$route.params.district) }}</h4>
     </router-link>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedSubpage === null }">
       <button
@@ -48,17 +48,17 @@
 <script>
 import { mapState } from 'vuex';
 import subpages from '../config/subpages';
-import bydeler from '../config/bydeler';
+import allDistricts from '../config/allDistricts';
 import dropdownSubpages from '../config/dropdownSubpages';
 
 export default {
-  name: 'NavigationTopbar',
+  name: 'TheNavigationTopbar',
   data() {
     return {
       items: subpages,
       selectedSubpage: null,
       dropdown: dropdownSubpages,
-      bydeler: bydeler,
+      allDistricts: allDistricts,
       showDropdown: false,
     };
   },
@@ -81,11 +81,11 @@ export default {
       }
     },
 
-    getBydel(id) {
+    getDistrict(id) {
       if (this.compareDistricts || id === 'alle') {
         return 'Sammenligne bydeler';
       } else {
-        return id !== undefined ? this.bydeler.find(bydel => bydel.uri === id).value : 'Velg bydel';
+        return id !== undefined ? this.allDistricts.find(district => district.uri === id).value : 'Velg bydel';
       }
     },
 
@@ -94,7 +94,7 @@ export default {
       if (route.name === 'Home') return '/';
       return this.selectedSubpage === null
         ? { name: 'Home' }
-        : { name: 'Bydel', params: { bydel: route.params.bydel } };
+        : { name: 'District', params: { district: route.params.district } };
     },
 
     checkActiveSubpage(subpage) {
@@ -102,7 +102,7 @@ export default {
     },
 
     onClickSubpage(subpage) {
-      return { name: 'Tema', params: { bydel: this.$route.params.bydel, tema: subpage } };
+      return { name: 'Topic', params: { district: this.$route.params.district, topic: subpage } };
     },
   },
 
@@ -112,7 +112,7 @@ export default {
       if (to.name !== 'Home') {
         if (routes.length > 3) this.selectedSubpage = routes[3];
       }
-      if (to.name === 'Bydel') {
+      if (to.name === 'District') {
         this.selectedSubpage = null;
       } else if (to.name === 'Home') {
         this.selectedSubpage = null;
@@ -128,7 +128,7 @@ export default {
 .oslo__navigation-topbar {
   display: flex;
   flex-direction: column;
-  margin: 2rem 1rem 0rem 1rem;
+  margin: 2rem 1rem 0 1rem;
   width: calc(100% - 2rem);
   position: relative;
   z-index: 3;

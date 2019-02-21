@@ -2,14 +2,14 @@
   <div class="graph__shadow" role="tabpanel" :class="shadowClass">
     <div
       class="graph__container"
-      :class="{'hidden' : showTable}"
+      :class="{ hidden: showTable }"
       ref="container"
       aria-hidden="true"
       @scroll="drawShadows"
     >
       <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
     </div>
-    <div :class="{'visually-hidden' : !showTable}" class="graph__tablecontainer">
+    <div :class="{ 'visually-hidden': !showTable }" class="graph__tablecontainer">
       <table>
         <caption></caption>
         <thead></thead>
