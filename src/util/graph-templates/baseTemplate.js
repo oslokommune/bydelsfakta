@@ -50,10 +50,26 @@ function Base_Template(svg) {
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.formatYear = d3.timeFormat('%Y');
-  this.formatPercent = d3.format('.0%');
+  this.formatPercent = d3.format('.3p'); // 0.0124 -> '12,4%'
+  this.formatDecimal = d3.format(',.4r');
   this.sourceHeight = 30;
   this.duration = 250;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
+
+  this.format = function(num, method, tick = false) {
+    if (method === undefined) throw 'Cannot format number';
+    if (num === undefined) throw 'Missing number';
+
+    if (method === 'ratio' && !tick) {
+      return this.formatPercent(num);
+    } else if (method === 'value' && !tick) {
+      return this.formatDecimal(num);
+    } else if (method === 'ratio' && tick) {
+      return d3.format('~p')(num);
+    } else if (method === 'value' && tick) {
+      return d3.format('~d')(num);
+    }
+  };
 
   // Resize is called from the parent vue component
   // every time the container size changes.

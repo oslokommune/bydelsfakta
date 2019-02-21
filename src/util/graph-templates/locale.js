@@ -28,7 +28,7 @@ const timeFormat = {
 
 const format = {
   decimal: ',',
-  thousands: '',
+  thousands: ' ',
   grouping: [3],
   currency: ['', ' kr'],
   percent: '%',

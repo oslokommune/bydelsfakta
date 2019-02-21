@@ -23,6 +23,9 @@ function Template(svg) {
   this.render = function(data) {
     if (!this.commonRender(data)) return;
 
+    // Template only supports 'ratio' method
+    this.method = 'ratio';
+
     // Convert first two values into negative numbers
     // to support the concept of 'positive' and 'negative'
     // values in this chart.
@@ -137,7 +140,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => d3.format('~p')(Math.abs(d)));
+      .text(d => this.format(Math.abs(d), this.method));
   };
 
   // Creates and set default styles for the DOM elements on each row
@@ -242,7 +245,7 @@ function Template(svg) {
       d3
         .axisTop(this.x)
         .ticks(this.width / 60)
-        .tickFormat(d => Math.abs(d) * 100 + '%')
+        .tickFormat(d => this.format(Math.abs(d), this.method, true))
     );
 
     // Standard select/enter/update/exit pattern for the series

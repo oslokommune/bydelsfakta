@@ -190,13 +190,7 @@ function Template(svg) {
       .attr('headers', (d, i) => {
         return `th_1_${Math.floor(i / 2) + 1} th_2_${i}`;
       })
-      .text(d => {
-        if (this.method === 'value') {
-          return d3.format('~f')(d);
-        } else {
-          return d3.format(',.2~p')(d);
-        }
-      });
+      .text(d => this.format(d, this.method));
   };
 
   this.drawList = function() {

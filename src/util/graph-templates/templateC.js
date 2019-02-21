@@ -142,7 +142,7 @@ function Template(svg) {
       })
       .join('th')
       .attr('id', (d, i) => `th_2_${i}`)
-      .text(d => d3.timeFormat('%Y')(this.parseDate(d)));
+      .text(d => this.formatYear(this.parseDate(d)));
 
     let rows = tbody
       .selectAll('tr')
@@ -168,7 +168,7 @@ function Template(svg) {
 
         return `th_1_${first} th_2_${i}`;
       })
-      .text(d => d3.format(',.0f')(d.value));
+      .text(d => this.format(d[this.method], this.method));
   };
 
   this.drawDots = function() {
@@ -273,7 +273,6 @@ function Template(svg) {
       return;
     }
 
-    let year = d3.timeFormat('%Y');
     let data = this.data.data[this.highlight].values.filter((d, i) => i === this.series)[0];
     let geography = this.data.data[this.highlight].geography;
     let high = this.data.data.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
@@ -339,11 +338,11 @@ function Template(svg) {
     this.infoboxTable
       .append('text')
       .attr('y', 100)
-      .text(`Høyest (${year(this.parseDate(high.date))})`);
+      .text(`Høyest (${this.formatYear(this.parseDate(high.date))})`);
     this.infoboxTable
       .append('text')
       .attr('y', 125)
-      .text(`Lavest (${year(this.parseDate(low.date))})`);
+      .text(`Lavest (${this.formatYear(this.parseDate(low.date))})`);
 
     this.infoboxTable
       .append('text')

@@ -25,15 +25,6 @@ function Template(svg) {
 
   this.age = d3.scaleLinear().domain(extent);
 
-  let NO = d3.formatDefaultLocale({
-    decimal: ',',
-    thousands: '',
-    grouping: [3],
-    currency: ['', 'NOK'],
-  });
-  const formatPercent = NO.format('~p');
-  const formatFloat = NO.format(',.0f');
-
   this.sortData = function(data) {
     data = data.sort((a, b) => {
       let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
@@ -98,13 +89,7 @@ function Template(svg) {
         d3
           .axisLeft(this.y)
           .ticks(4)
-          .tickFormat(d => {
-            if (this.method == 'ratio') {
-              return formatPercent(d);
-            } else {
-              return formatFloat(d);
-            }
-          })
+          .tickFormat(d => this.format(d, this.method))
       );
     this.upperXAxis
       .transition()
@@ -121,14 +106,8 @@ function Template(svg) {
       .call(
         d3
           .axisTop(this.x)
-          .tickFormat(d => {
-            if (this.method == 'ratio') {
-              return formatPercent(d);
-            } else {
-              return formatFloat(d);
-            }
-          })
           .ticks((this.width - this.paddingLowerLeft) / 70)
+          .tickFormat(d => this.format(d, this.method))
       );
 
     // Call brush method on resize, because it handles stuff
@@ -435,13 +414,7 @@ function Template(svg) {
         });
       })
       .join('td')
-      .text(d => {
-        if (this.method === 'value') {
-          return d3.format('~f')(d);
-        } else {
-          return d3.format(',.2~p')(d);
-        }
-      });
+      .text(d => this.format(d, this.method));
   };
 
   // Draws/updates rows content. Triggered each render
@@ -490,12 +463,7 @@ function Template(svg) {
     rows.select('text.geography').text(d => d.geography);
     rows.select('text.value').text(bydel => {
       let sum = d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-
-      if (this.method == 'ratio') {
-        return d3.format(',.1%')(sum);
-      } else {
-        return formatFloat(sum);
-      }
+      return this.format(sum, this.method);
     });
 
     rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);

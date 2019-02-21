@@ -188,7 +188,7 @@ function Template(svg) {
       .selectAll('th')
       .data(dates)
       .join('th')
-      .text(d => d3.timeFormat('%Y')(this.parseDate(d)));
+      .text(d => this.formatYear(this.parseDate(d)));
 
     let rows = tbody
       .selectAll('tr')
@@ -208,7 +208,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => d3.format(',.0f')(d.value));
+      .text(d => this.format(d[this.method], this.method));
   };
 
   /**
@@ -341,7 +341,7 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => d3.format('($.0f')(d.value))
+      .text(d => this.format(d[this.method], this.method))
       .attr('x', d => this.x(this.parseDate(d.date)))
       .attr('y', d => this.y(d.value))
       .attr('font-size', 11)

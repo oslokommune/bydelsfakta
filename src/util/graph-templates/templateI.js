@@ -110,6 +110,9 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    // Template only supports 'ratio' method
+    this.method = 'ratio';
+
     // The gutter is the left hand side padding
     // inside of the canvas towards the matrix
     this.gutter = (this.parentWidth() - this.padding.left - 400) / 2;
@@ -207,7 +210,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => d3.format('~p')(d.ratio));
+      .text(d => this.format(d[this.method], this.method));
   };
 
   this.drawList = function() {
@@ -300,7 +303,7 @@ function Template(svg) {
       .attr('fill', color.purple)
       .text((d, i) => {
         if (this.selected === -1) return '';
-        return this.formatPercent(this.data.data[this.selected].values[i].ratio);
+        return this.format(this.data.data[this.selected].values[i][this.method], this.method);
       });
   };
 
