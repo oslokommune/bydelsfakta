@@ -89,7 +89,7 @@ function Template(svg) {
         d3
           .axisLeft(this.y)
           .ticks(4)
-          .tickFormat(d => this.format(d, this.method))
+          .tickFormat(d => this.format(d, this.method, true))
       );
     this.upperXAxis
       .transition()
@@ -107,7 +107,7 @@ function Template(svg) {
         d3
           .axisTop(this.x)
           .ticks((this.width - this.paddingLowerLeft) / 70)
-          .tickFormat(d => this.format(d, this.method))
+          .tickFormat(d => this.format(d, this.method, true))
       );
 
     // Call brush method on resize, because it handles stuff
@@ -463,7 +463,11 @@ function Template(svg) {
     rows.select('text.geography').text(d => d.geography);
     rows.select('text.value').text(bydel => {
       let sum = d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-      return this.format(sum, this.method);
+      if (this.method === 'ratio') {
+        return this.format(sum, this.method);
+      } else {
+        return d3.format(',d')(sum);
+      }
     });
 
     rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);
@@ -538,7 +542,10 @@ function Template(svg) {
       .attr('d', d => this.line(d.values))
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
       .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
-      .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5));
+      .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
+      .style('stroke-dasharray', d => {
+        if (d.totalRow && this.method === 'ratio') return '4,3';
+      });
   };
 
   // Finds the larges accumulated number within the selected range
