@@ -2,11 +2,9 @@
   <div class="main-container">
     <div class="main-container__cards">
       <template v-for="(subpage, index) in pages[`${componentName}`].subpages">
-        <h2
-          :key="`subpage-${index}`"
-          v-show="subpage.title !== undefined"
-          class="section-heading"
-        >{{ subpage.title }}</h2>
+        <h2 :key="`subpage-${index}`" v-show="subpage.title !== undefined" class="section-heading">
+          {{ subpage.title }}
+        </h2>
         <graph-card
           v-for="(card, cardIndex) in subpage.graphs"
           :key="`${subpage.name}-${cardIndex}`"
@@ -15,21 +13,25 @@
       </template>
     </div>
     <div class="main-container__map">
-      <h3>Kart</h3>
+      <h3>Bydelskart</h3>
+      <leaflet-map :district="geoDistricts" />
     </div>
   </div>
 </template>
 
 <script>
-import pages from '../config/pages';
-
+import { mapGetters } from 'vuex';
 import GraphCard from '../components/GraphCard.vue';
+import LeafletMap from '../components/LeafletVue.vue';
+
+import pages from '../config/pages';
 
 export default {
   name: 'Tema',
 
   components: {
     GraphCard,
+    LeafletMap,
   },
 
   props: {
@@ -57,9 +59,7 @@ export default {
   },
 
   computed: {
-    currentSettings() {
-      return { settings: pages[this.tema] };
-    },
+    ...mapGetters(['geoDistricts']),
   },
 };
 </script>
