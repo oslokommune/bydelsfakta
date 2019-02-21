@@ -1,5 +1,5 @@
 export default [
-  { option: [], label: '- Forhåndsvalg -', selected: true, disabled: true },
+  { option: [], label: '- Velg region -', selected: true, disabled: true },
   { option: ['4', '5', '6', '7', '8'], label: 'Vest' },
   { option: ['1', '2', '3', '9', '10', '11', '12', '13', '14', '15'], label: 'Øst' },
   { option: ['1', '2', '3', '4', '5'], label: 'Indre by' },

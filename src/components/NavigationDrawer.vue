@@ -61,7 +61,7 @@
             >Fjern alle</button>
           </div>
           <div class="navigation-drawer__select-container">
-            <label for="navigation-drawer-select" class="visually-hidden">Velg byområde</label>
+            <label for="navigation-drawer-select" class="visually-hidden">Velg region</label>
             <select
               id="navigation-drawer-select"
               class="navigation-drawer__select"
