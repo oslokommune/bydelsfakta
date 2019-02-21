@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <navigation-drawer />
+    <the-navigation-drawer />
     <div id="content">
-      <navigation-topbar />
+      <the-navigation-topbar />
       <main>
         <router-view />
       </main>
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import NavigationDrawer from './components/NavigationDrawer.vue';
-import NavigationTopbar from './components/NavigationTopbar.vue';
+import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
+import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
 
 export default {
   name: 'App',
-  components: { NavigationTopbar, NavigationDrawer },
+  components: { TheNavigationTopbar, TheNavigationDrawer },
 
   created() {
     if (this.$route.params.bydel === undefined) {

@@ -52,7 +52,7 @@ import bydeler from '../config/bydeler';
 import dropdownSubpages from '../config/dropdownSubpages';
 
 export default {
-  name: 'NavigationTopbar',
+  name: 'TheNavigationTopbar',
   data() {
     return {
       items: subpages,

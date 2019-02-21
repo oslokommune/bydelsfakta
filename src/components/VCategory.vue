@@ -1,11 +1,6 @@
 <template>
-  <router-link
-    class="main-container__item"
-    :to="link"
-    :id="dataId"
-    :style="{ backgroundColor: dataBgColor }"
-  >
-    <img class="oslo__img" :src="dataBgImage" :alt="dataTema" aria-hidden="true">
+  <router-link class="main-container__item" :to="link" :id="dataId" :style="{ backgroundColor: dataBgColor }">
+    <img class="oslo__img" :src="dataBgImage" :alt="dataTema" aria-hidden="true" />
     <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">{{ dataKategori }}</span>
     <span class="oslo__tema" v-html="dataTema"></span>
     <span class="oslo__see-more-text">Se mer</span>
@@ -14,7 +9,7 @@
 
 <script>
 export default {
-  name: 'CardImage',
+  name: 'VCategory',
   props: {
     kategori: {
       type: String,

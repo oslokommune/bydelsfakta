@@ -11,7 +11,7 @@
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson, L } from 'vue2-leaflet';
 
 export default {
-  name: 'LeafletVue',
+  name: 'VLeaflet',
   components: {
     LMap,
     LFeatureGroup,

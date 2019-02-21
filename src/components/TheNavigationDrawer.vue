@@ -82,7 +82,7 @@ import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg';
 
 export default {
-  name: 'NavigationDrawer',
+  name: 'TheNavigationDrawer',
   data() {
     return {
       links: bydeler,

@@ -14,7 +14,7 @@
     </div>
     <div class="main-container__map">
       <h3>Bydelskart</h3>
-      <leaflet-map :district="geoDistricts" />
+      <v-leaflet :district="geoDistricts" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import GraphCard from '../components/GraphCard.vue';
-import LeafletMap from '../components/LeafletVue.vue';
+import VLeaflet from '../components/VLeaflet.vue';
 
 import pages from '../config/pages';
 
@@ -31,7 +31,7 @@ export default {
 
   components: {
     GraphCard,
-    LeafletMap,
+    VLeaflet,
   },
 
   props: {

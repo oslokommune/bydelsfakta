@@ -1,16 +1,16 @@
 import { mount, createLocalVue } from '@vue/test-utils';
-import NavigationTopbar from '../../../src/components/NavigationTopbar.vue';
+import TheNavigationTopbar from '../../../src/components/TheNavigationTopbar.vue';
 import router from '../../../src/router';
 import clickOutside from '../../../src/directives/clickOutside';
 
-describe('NavigationTopbar', () => {
+describe('TheNavigationTopbar', () => {
   let wrapper = null;
 
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(router);
     localVue.directive('click-outside', clickOutside);
-    wrapper = mount(NavigationTopbar, {
+    wrapper = mount(TheNavigationTopbar, {
       localVue,
       router,
     });
