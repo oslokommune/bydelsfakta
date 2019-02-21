@@ -1,6 +1,6 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import App from '../../src/App.vue';
-import Bydel from '../../src/views/Bydel.vue';
+import Bydel from '../../src/views/District.vue';
 import Home from '../../src/views/Home.vue';
 import router from '../../src/router';
 import clickOutside from '../../src/directives/clickOutside';

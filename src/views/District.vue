@@ -28,14 +28,14 @@ import subpages from '../config/subpages';
 import districts from '../config/geoData/districts';
 
 export default {
-  name: 'Bydel',
+  name: 'District',
   components: {
     VCategory,
     VLeaflet,
   },
 
   props: {
-    bydel: {
+    district: {
       type: String,
       required: true,
     },

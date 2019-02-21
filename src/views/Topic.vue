@@ -27,7 +27,7 @@ import VLeaflet from '../components/VLeaflet.vue';
 import pages from '../config/pages';
 
 export default {
-  name: 'Tema',
+  name: 'Topic',
 
   components: {
     GraphCard,
@@ -35,11 +35,11 @@ export default {
   },
 
   props: {
-    bydel: {
+    district: {
       type: String,
       required: true,
     },
-    tema: {
+    topic: {
       type: String,
       required: true,
     },
@@ -47,14 +47,14 @@ export default {
 
   data() {
     return {
-      componentName: this.tema,
+      componentName: this.topic,
       pages: pages,
     };
   },
 
   watch: {
-    tema() {
-      this.componentName = this.tema;
+    topic() {
+      this.componentName = this.topic;
     },
   },
 

@@ -14,7 +14,7 @@
           :key="link.key"
           class="navigation-link"
           :class="{
-            'navigation-link--active': $route.params.bydel === link.uri && !compareDistricts,
+            'navigation-link--active': $route.params.district === link.uri && !compareDistricts,
             'navigation-link--compare': compareDistricts && selected.includes(link.key),
           }"
         >
@@ -113,7 +113,7 @@ export default {
 
   created() {
     const route = this.$route;
-    if (route.params.bydel === undefined) {
+    if (route.params.district === undefined) {
       return;
     }
 
@@ -128,20 +128,20 @@ export default {
       const bydel =
         this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
 
-      this.$route.params.tema === undefined
-        ? this.$router.push({ name: 'Bydel', params: { bydel: bydel } })
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: bydel } })
         : this.$router.push({
-            name: 'Tema',
-            params: { bydel: bydel, tema: this.$route.params.tema },
+            name: 'Topic',
+            params: { district: bydel, topic: this.$route.params.topic },
           });
     },
 
     onClickBydel(bydel) {
-      return bydel === this.$route.params.bydel
-        ? { name: 'Bydel', params: { bydel: bydel } }
-        : this.$route.params.tema === undefined
-        ? { name: 'Bydel', params: { bydel: bydel } }
-        : { name: 'Tema', params: { bydel: bydel, tema: this.$route.params.tema } };
+      return bydel === this.$route.params.district
+        ? { name: 'District', params: { district: bydel } }
+        : this.$route.params.topic === undefined
+        ? { name: 'District', params: { district: bydel } }
+        : { name: 'Topic', params: { district: bydel, topic: this.$route.params.topic } };
     },
 
     onClickHome() {
@@ -155,13 +155,13 @@ export default {
       const bydel = bydeler.find(item => item.uri === routes[2]);
 
       if (bydel !== undefined && selectedBydeler === bydel.key) {
-        return this.$route.params.tema === undefined
-          ? { name: 'Bydel', params: { bydel: 'alle' } }
-          : { name: 'Tema', params: { bydel: 'alle', tema: this.$route.params.tema } };
+        return this.$route.params.topic === undefined
+          ? { name: 'District', params: { district: 'alle' } }
+          : { name: 'Topic', params: { district: 'alle', topic: this.$route.params.topic } };
       } else if (bydel === undefined && !this.compareDistricts) {
-        return { name: 'Bydel', params: { bydel: 'alle' } };
+        return { name: 'District', params: { district: 'alle' } };
       } else {
-        return { name: 'Bydel', params: { bydel: this.$route.params.bydel } };
+        return { name: 'District', params: { district: this.$route.params.district } };
       }
     },
 
@@ -169,22 +169,22 @@ export default {
       this.selected = [];
       this.selectedPredefinedOption = [];
       bydeler.forEach(bydel => this.selected.push(bydel.key));
-      this.$route.params.tema === undefined
-        ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
         : this.$router.push({
-            name: 'Tema',
-            params: { bydel: 'alle', tema: this.$route.params.tema },
+            name: 'Topic',
+            params: { district: 'alle', topic: this.$route.params.topic },
           });
     },
 
     unselectAll() {
       this.selected = [];
       this.selectedPredefinedOption = [];
-      this.$route.params.tema === undefined
-        ? this.$router.push({ name: 'Bydel', params: { bydel: 'alle' } })
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
         : this.$router.push({
-            name: 'Tema',
-            params: { bydel: 'alle', tema: this.$route.params.tema },
+            name: 'Topic',
+            params: { district: 'alle', topic: this.$route.params.topic },
           });
     },
   },
@@ -192,13 +192,13 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      const params = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
+      const params = to.params.district !== undefined ? to.params.district.split('-') : [];
       const bydel = bydeler.find(item => item.uri === routes[2]);
 
       if (to.name === 'Home') {
         this.selected = [];
         this.$store.dispatch('cleanState');
-      } else if (to.params.bydel === 'alle' && this.selected.length !== this.links.length) {
+      } else if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
       } else if (params.length > 1) {
         const paramBydel = routes[2].split('-');
@@ -218,11 +218,11 @@ export default {
     selectedPredefinedOption() {
       if (this.selectedPredefinedOption.length !== 0) {
         this.selected = this.selectedPredefinedOption;
-        this.$route.params.tema === undefined
-          ? this.$router.push({ name: 'Bydel', params: { bydel: this.selected.join('-') } })
+        this.$route.params.topic === undefined
+          ? this.$router.push({ name: 'District', params: { district: this.selected.join('-') } })
           : this.$router.push({
-              name: 'Tema',
-              params: { bydel: this.selected.join('-'), tema: this.$route.params.tema },
+              name: 'Topic',
+              params: { district: this.selected.join('-'), topic: this.$route.params.topic },
             });
       }
     },

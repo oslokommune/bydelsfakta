@@ -66,11 +66,11 @@ const actions = {
     }
 
     if (payload.pushRoute) {
-      router.currentRoute.params.tema === undefined
-        ? router.push({ name: 'Bydel', params: { bydel: districts.join('-') } })
+      router.currentRoute.params.topic === undefined
+        ? router.push({ name: 'District', params: { district: districts.join('-') } })
         : router.push({
-            name: 'Tema',
-            params: { bydel: districts.join('-'), tema: router.currentRoute.params.tema },
+            name: 'Topic',
+            params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
           });
     }
   },

@@ -19,19 +19,19 @@ export default {
   components: { TheNavigationTopbar, TheNavigationDrawer },
 
   created() {
-    if (this.$route.params.bydel === undefined) {
+    if (this.$route.params.district === undefined) {
       return;
     }
-    this.$store.dispatch('addDistrict', { district: this.$route.params.bydel, pushRoute: true });
+    this.$store.dispatch('addDistrict', { district: this.$route.params.district, pushRoute: true });
   },
 
   watch: {
     $route(to, from) {
-      if (to.name === 'Tema' && from.name === 'Bydel') {
+      if (to.name === 'Topic' && from.name === 'District') {
         window.scrollTo(0, 0);
       }
-      if (to.params.bydel !== undefined) {
-        this.$store.dispatch('addDistrict', { district: to.params.bydel, pushRoute: false });
+      if (to.params.district !== undefined) {
+        this.$store.dispatch('addDistrict', { district: to.params.district, pushRoute: false });
       }
     },
   },

@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import VueResize from 'vue-resize';
 
-import Tema from '../../../src/views/Tema.vue';
+import Tema from '../../../src/views/Topic.vue';
 import clickOutside from '../../../src/directives/clickOutside';
 
 describe('Tema', () => {

@@ -116,14 +116,14 @@ export default {
     },
 
     saveSvg(id) {
-      const filename = `${this.$route.params.bydel}_${id}.svg`;
+      const filename = `${this.$route.params.district}_${id}.svg`;
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
     },
 
     savePng(id) {
       const file = this.$refs.graph.$refs.svg;
-      const filename = `${this.$route.params.bydel}_${id}.png`;
+      const filename = `${this.$route.params.district}_${id}.png`;
       saveSvgAsPng(file, filename, {
         backgroundColor: 'white',
         encoderOptions: 1,
