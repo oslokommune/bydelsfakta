@@ -1,5 +1,5 @@
 <template>
-  <aside id="navbar">
+  <aside class="navbar">
     <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
     <button
       class="selectedSubpage"
@@ -190,7 +190,7 @@ export default {
   },
 
   watch: {
-    $route(to, from) {
+    $route(to) {
       const routes = to.path.split('/');
       const params = to.params.bydel !== undefined ? to.params.bydel.split('-') : [];
       const bydel = bydeler.find(item => item.uri === routes[2]);
@@ -234,7 +234,7 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 
-#navbar {
+.navbar {
   background: $color-blue;
   display: flex;
   position: relative;

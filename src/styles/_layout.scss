@@ -1,6 +1,6 @@
 @import './variables';
 
-#app {
+.app {
   display: flex;
   flex-direction: column;
 
@@ -9,7 +9,7 @@
   }
 }
 
-#content {
+.app__content {
   width: 100%;
 
   @media screen and (min-width: $break-lg) {
