@@ -6,6 +6,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
+import { is } from 'bluebird';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -28,7 +29,12 @@ function Template(svg) {
     // Multiseries need larger padding top to make room for tabs,
     // mobile views have smaller padding.left
     this.padding.top = data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
-    this.padding.left = this.isMobileView ? 10 : 190;
+    this.padding.left = this.isMobileView ? 0 : 190;
+    this.padding.bottom = this.isMobileView ? 0 : 30;
+
+    if (this.isMobileView) {
+      this.rowHeight = 37;
+    }
 
     if (!this.commonRender(data, options)) return;
 
@@ -249,14 +255,21 @@ function Template(svg) {
     rows.select('a.hyperlink').attr('xlink:href', `/bydelsfakta#/bydel/sthanshaugen/folkemengde`);
     rows
       .select('a.hyperlink')
+      .style('text-decoration', this.isMobileView ? 'none' : 'underline')
       .select('text')
-      .text(d => d.geography)
+      .text(d => {
+        if (this.isMobileView) {
+          return `${d.geography} (${this.format(d.values[0][this.method], this.method)})`;
+        } else {
+          return d.geography;
+        }
+      })
       .attr('x', () => {
         if (this.isMobileView) return 0;
         return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
       })
       .attr('y', () => {
-        return this.isMobileView ? 20 : this.rowHeight / 2 + 6;
+        return this.isMobileView ? 15 : this.rowHeight / 2 + 4;
       })
       .attr('text-anchor', () => {
         if (this.isMobileView) return 'start';
@@ -286,12 +299,12 @@ function Template(svg) {
 
     bars
       .attr('height', (d, i, j) => {
-        if (this.isMobileView) return 4;
+        if (this.isMobileView) return 7;
         return j[0].parentNode.__data__.totalRow ? 2 : this.barHeight;
       })
       .attr('y', (d, i, j) => {
         if (this.isMobileView) {
-          return (this.rowHeight - this.barHeight) / 2 + 16;
+          return (this.rowHeight - this.barHeight) / 2 + 12;
         } else {
           return j[0].parentNode.__data__.totalRow ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
         }
@@ -356,6 +369,7 @@ function Template(svg) {
     this.xAxis.each((d, i, j) => {
       d3.select(j[i])
         .attr('opacity', () => {
+          if (this.isMobileView) return 0;
           return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
         })
         .transition()
@@ -364,7 +378,7 @@ function Template(svg) {
         .call(
           d3
             .axisBottom(this.x[i])
-            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 50)
+            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
             .tickFormat(d => this.format(d, this.method, true))
         );
     });
@@ -472,12 +486,14 @@ function Template(svg) {
       .attr('y', -10)
       .transition()
       .duration(this.duration)
-      .attr('height', this.height + 10)
+      .attr('height', this.height + 20)
       .duration(this.duration)
       .attr('width', (d, i) => {
         let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
-        if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
-        if (this.filteredData.data.filter(d => d.totalRow).length) {
+
+        if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
+          return 0;
+        } else if (this.filteredData.data.filter(d => d.totalRow).length) {
           return this.x[0](val);
         } else {
           return 0;
@@ -501,7 +517,9 @@ function Template(svg) {
       })
       .attr('opacity', (d, i) => {
         let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
-        if (this.method === 'value' && val > this.x[i].domain()[1]) {
+        if (this.isMobileView) {
+          return 0;
+        } else if (this.method === 'value' && val > this.x[i].domain()[1]) {
           return 0;
         } else {
           return 1;
