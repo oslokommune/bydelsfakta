@@ -16,7 +16,7 @@ const state = {
 const getters = {
   geoDistricts: state => {
     if (!state.compareDistricts && state.districts.length !== 0) {
-      return { ...state.districtsGeo[`${bydeler.find(item => item.key === state.districts[0]).uri}`] };
+      return { ...state.districtsGeo[`${bydeler.find(district => district.key === state.districts[0]).uri}`] };
     } else if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
