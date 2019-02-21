@@ -658,7 +658,7 @@ function Template(svg) {
         d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0][0].date), -2),
         d3.timeMonth.offset(
           this.parseDate(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
-          2
+          0
         ),
       ])
       .range([0, this.width]);
@@ -673,12 +673,17 @@ function Template(svg) {
     this.yAxis
       .transition()
       .duration(this.duration)
-      .call(d3.axisLeft(this.y).ticks(this.height / 30));
+      .call(
+        d3
+          .axisLeft(this.y)
+          .ticks(this.height / 30)
+          .tickFormat(d => this.format(d, this.method, true))
+      );
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
       .duration(this.duration)
-      .call(d3.axisBottom(this.x).ticks(this.width / 110));
+      .call(d3.axisBottom(this.x).ticks(d3.timeYear));
   };
 
   this.init(svg);

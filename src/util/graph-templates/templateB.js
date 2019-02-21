@@ -608,7 +608,7 @@ function Template(svg) {
     );
     this.xAxis
       .transition()
-      .call(d3.axisBottom(this.x).ticks(this.width / 90))
+      .call(d3.axisBottom(this.x).ticks(d3.timeYear))
       .attr('transform', `translate(0, ${this.height})`);
   };
 
