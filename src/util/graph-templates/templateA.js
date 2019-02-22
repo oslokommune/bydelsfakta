@@ -6,7 +6,6 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import color from './colors';
 import d3 from '@/assets/d3';
-import { is } from 'bluebird';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -15,7 +14,7 @@ function Template(svg) {
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
   this.x = [];
-  this.filteredData;
+  this.filteredData = {};
   this.mobileWidth = 420;
   this.isMobileView = false;
   this.isSingleSeries = false;

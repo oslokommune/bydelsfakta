@@ -149,7 +149,7 @@ function Template(svg) {
 
     hRow2
       .selectAll('th')
-      .data(() => ageRanges.map(d => ['Menn', 'Kvinner']).flat())
+      .data(() => ageRanges.map(() => ['Menn', 'Kvinner']).flat())
       .join('th')
       .attr('id', (d, i) => `th_1_${i}`)
       .attr('scope', 'col')
