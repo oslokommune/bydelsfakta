@@ -19,6 +19,9 @@ export default {
   components: { TheNavigationTopbar, TheNavigationDrawer },
 
   created() {
+    if (this.$route.name === 'Home') {
+      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: true });
+    }
     if (this.$route.params.district === undefined) {
       return;
     }

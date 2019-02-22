@@ -7,7 +7,7 @@ import Topic from './views/Topic.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -28,3 +28,14 @@ export default new Router({
     },
   ],
 });
+
+// Temp while we find out what our homepage should look like
+router.beforeEach((to, from, next) => {
+  if (to.name === 'Home') {
+    router.push({ name: 'District', params: { district: 'alle' } });
+  }
+
+  next();
+});
+
+export default router;

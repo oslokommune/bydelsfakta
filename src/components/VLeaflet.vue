@@ -1,8 +1,8 @@
 <template>
   <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
-    <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution"></l-tile-layer>
+    <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution" />
     <l-feature-group @layeradd="fitMap" ref="featureGroup">
-      <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style"></l-geo-json>
+      <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style" />
     </l-feature-group>
   </l-map>
 </template>
@@ -56,7 +56,7 @@ export default {
         zoomControl: false,
         attributionControl: false,
         doubleClickZoom: false,
-        dragging: false,
+        dragging: true,
         scrollWheelZoom: false,
         touchZoom: false,
       },

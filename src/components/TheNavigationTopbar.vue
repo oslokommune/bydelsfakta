@@ -93,7 +93,7 @@ export default {
       const route = this.$route;
       if (route.name === 'Home') return '/';
       return this.selectedSubpage === null
-        ? { name: 'Home' }
+        ? { name: 'District', params: { district: 'alle' } }
         : { name: 'District', params: { district: route.params.district } };
     },
 

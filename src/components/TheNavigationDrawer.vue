@@ -146,7 +146,7 @@ export default {
 
     onClickHome() {
       this.selected = [];
-      this.$router.push({ name: 'Home' });
+      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: true });
     },
 
     onClickSammenlign() {
@@ -195,10 +195,7 @@ export default {
       const params = to.params.district !== undefined ? to.params.district.split('-') : [];
       const district = allDistricts.find(district => district.uri === routes[2]);
 
-      if (to.name === 'Home') {
-        this.selected = [];
-        this.$store.dispatch('cleanState');
-      } else if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
+      if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
       } else if (params.length > 1) {
         const paramDistrict = routes[2].split('-');
