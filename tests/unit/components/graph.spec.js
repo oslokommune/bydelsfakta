@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import vueResize from 'vue-resize';
 import GraphInstance from '../../../src/components/GraphInstance.vue';
-import page from '../../../src/config/pages';
+import page from '../../../src/config/topics';
 
 describe('GraphInstance', () => {
   let wrapper = null;

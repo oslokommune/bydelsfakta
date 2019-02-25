@@ -49,7 +49,7 @@
 import { mapState } from 'vuex';
 import subpages from '../config/subpages';
 import allDistricts from '../config/allDistricts';
-import dropdownSubpages from '../config/dropdownSubpages';
+import dropdownTopics from '../config/dropdownTopics';
 
 export default {
   name: 'TheNavigationTopbar',
@@ -57,7 +57,7 @@ export default {
     return {
       items: subpages,
       selectedSubpage: null,
-      dropdown: dropdownSubpages,
+      dropdown: dropdownTopics,
       allDistricts: allDistricts,
       showDropdown: false,
     };

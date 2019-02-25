@@ -5,7 +5,7 @@
         v-for="item in items"
         :key="item.value"
         :id="item.value"
-        :kategori="item.options.kategori"
+        :category="item.options.kategori"
         :topic="item.options.tema"
         :bg-image="item.options.bgImage"
         :bg-color="item.options.bgColor"

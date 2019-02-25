@@ -1,4 +1,4 @@
-const dropdownSubpages = [
+const dropdownTopics = [
   {
     kategori: 'Befolkning',
     color: 'rgb(182, 63, 50)',
@@ -63,4 +63,4 @@ const dropdownSubpages = [
   },
 ];
 
-export default dropdownSubpages;
+export default dropdownTopics;

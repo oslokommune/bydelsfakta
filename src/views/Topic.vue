@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <template v-for="(subpage, index) in pages[`${componentName}`].subpages">
+      <template v-for="(subpage, index) in topics[`${topic}`].subpages">
         <h2 :key="`subpage-${index}`" v-show="subpage.title !== undefined" class="section-heading">
           {{ subpage.title }}
         </h2>
@@ -9,6 +9,20 @@
           v-for="(card, cardIndex) in subpage.graphs"
           :key="`${subpage.name}-${cardIndex}`"
           :settings="card"
+        />
+      </template>
+      <template>
+        <h2 class="section-heading">Se også</h2>
+        <v-category
+          v-for="(item, relatedIndex) in topics[`${topic}`].related"
+          :key="`related-${relatedIndex}`"
+          :id="topics[`${item}`].value"
+          :category="topics[`${item}`].options.kategori"
+          :topic="topics[`${item}`].options.tema"
+          :bg-image="topics[`${item}`].options.bgImage"
+          :bg-color="topics[`${item}`].options.bgColor"
+          :txt-color="topics[`${item}`].options.txtColor"
+          :link="`/bydel/${$route.params.district}/${topics[`${item}`].value}`"
         />
       </template>
     </div>
@@ -21,10 +35,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import VCategory from '../components/VCategory.vue';
 import GraphCard from '../components/GraphCard.vue';
 import VLeaflet from '../components/VLeaflet.vue';
 
-import pages from '../config/pages';
+import topics from '../config/topics';
 
 export default {
   name: 'Topic',
@@ -32,6 +47,7 @@ export default {
   components: {
     GraphCard,
     VLeaflet,
+    VCategory,
   },
 
   props: {
@@ -47,15 +63,8 @@ export default {
 
   data() {
     return {
-      componentName: this.topic,
-      pages: pages,
+      topics: topics,
     };
-  },
-
-  watch: {
-    topic() {
-      this.componentName = this.topic;
-    },
   },
 
   computed: {

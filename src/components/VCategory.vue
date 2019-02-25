@@ -1,8 +1,8 @@
 <template>
-  <router-link class="main-container__item" :to="link" :id="dataId" :style="{ backgroundColor: dataBgColor }">
-    <img class="oslo__img" :src="dataBgImage" :alt="dataTopic" aria-hidden="true" />
-    <span class="oslo__category" :style="{ backgroundColor: dataTxtColor }">{{ dataKategori }}</span>
-    <span class="oslo__topic" v-html="dataTopic"></span>
+  <router-link class="main-container__item" :to="link" :id="id" :style="{ backgroundColor: bgColor }">
+    <img class="oslo__img" :src="bgImage" :alt="topic" aria-hidden="true" />
+    <span class="oslo__category" :style="{ backgroundColor: txtColor }">{{ category }}</span>
+    <span class="oslo__topic" v-html="topic"></span>
     <span class="oslo__see-more-text">Se mer</span>
   </router-link>
 </template>
@@ -11,7 +11,7 @@
 export default {
   name: 'VCategory',
   props: {
-    kategori: {
+    category: {
       type: String,
       required: true,
     },
@@ -39,16 +39,6 @@ export default {
       type: String,
       required: true,
     },
-  },
-  data() {
-    return {
-      dataKategori: this.kategori,
-      dataTopic: this.topic,
-      dataBgImage: this.bgImage,
-      dataBgColor: this.bgColor,
-      dataTxtColor: this.txtColor,
-      dataId: this.id,
-    };
   },
 };
 </script>

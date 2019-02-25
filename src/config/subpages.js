@@ -1,5 +1,33 @@
 import baseUrl from '../util/config';
 
+const sub = {
+  folkmende: {},
+  alder: {},
+  innvandrerbefolkningen: {},
+  husholdninger: {},
+  trangboddhet: {},
+  eierform: {},
+  kommunaleboliger: {},
+  flytting: {},
+  bygningstyper: {},
+  boligpriser: {},
+  levekaar: {},
+};
+
+const topics = [
+  'folkemengde',
+  'alder',
+  'innvandrerbefolkningen',
+  'husholdninger',
+  'trangboddhet',
+  'eierform',
+  'kommunaleboliger',
+  'flytting',
+  'bygningstyper',
+  'boligpriser',
+  'levekaar',
+];
+
 const subpages = [
   {
     text: 'Folkemengde',

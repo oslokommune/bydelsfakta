@@ -1,6 +1,6 @@
 import baseUrl from '../util/config';
 
-const pages = {
+const topics = {
   folkemengde: {
     text: 'Folkemengde',
     value: 'folkemengde',
@@ -997,4 +997,4 @@ const pages = {
   },
 };
 
-export default pages;
+export default topics;
