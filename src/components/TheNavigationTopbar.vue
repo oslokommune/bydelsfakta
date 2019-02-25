@@ -47,7 +47,6 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-import subpages from '../config/subpages';
 import allDistricts from '../config/allDistricts';
 import dropdownTopics from '../config/dropdownTopics';
 
@@ -55,7 +54,6 @@ export default {
   name: 'TheNavigationTopbar',
   data() {
     return {
-      items: subpages,
       selectedSubpage: null,
       dropdown: dropdownTopics,
       allDistricts: allDistricts,

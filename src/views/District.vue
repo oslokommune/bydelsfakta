@@ -2,15 +2,15 @@
   <div class="main-container">
     <div class="main-container__cards">
       <v-category
-        v-for="item in items"
-        :key="item.value"
-        :id="item.value"
-        :category="item.options.kategori"
-        :topic="item.options.tema"
-        :bg-image="item.options.bgImage"
-        :bg-color="item.options.bgColor"
-        :txt-color="item.options.txtColor"
-        :link="`${$route.path}/${item.value}`"
+        v-for="topicName in names"
+        :key="topics[`${topicName}`].value"
+        :id="topics[`${topicName}`].value"
+        :category="topics[`${topicName}`].options.kategori"
+        :topic="topics[`${topicName}`].options.tema"
+        :bg-image="topics[`${topicName}`].options.bgImage"
+        :bg-color="topics[`${topicName}`].options.bgColor"
+        :txt-color="topics[`${topicName}`].options.txtColor"
+        :link="`${$route.path}/${topics[`${topicName}`].value}`"
       />
     </div>
     <div class="main-container__map">
@@ -24,7 +24,7 @@
 import { mapGetters } from 'vuex';
 import VCategory from '../components/VCategory.vue';
 import VLeaflet from '../components/VLeaflet.vue';
-import subpages from '../config/subpages';
+import { topics, topicNames } from '../config/topics';
 import districts from '../config/geoData/districts';
 
 export default {
@@ -47,7 +47,8 @@ export default {
 
   data() {
     return {
-      items: subpages,
+      names: topicNames,
+      topics: topics,
       chosenDistrict: {},
       districts: districts,
     };

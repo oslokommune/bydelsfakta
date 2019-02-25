@@ -39,7 +39,7 @@ import VCategory from '../components/VCategory.vue';
 import GraphCard from '../components/GraphCard.vue';
 import VLeaflet from '../components/VLeaflet.vue';
 
-import topics from '../config/topics';
+import { topics } from '../config/topics';
 
 export default {
   name: 'Topic',

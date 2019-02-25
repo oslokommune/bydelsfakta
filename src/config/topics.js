@@ -1,6 +1,20 @@
 import baseUrl from '../util/config';
 
-const topics = {
+export const topicNames = [
+  'folkemengde',
+  'alder',
+  'innvandrerbefolkningen',
+  'husholdninger',
+  'trangboddhet',
+  'eierform',
+  'kommunaleboliger',
+  'flytting',
+  'bygningstyper',
+  'boligpriser',
+  'levekaar',
+];
+
+export const topics = {
   folkemengde: {
     text: 'Folkemengde',
     value: 'folkemengde',
@@ -996,5 +1010,3 @@ const topics = {
     related: ['husholdninger', 'innvandrerbefolkningen', 'trangboddhet'],
   },
 };
-
-export default topics;
