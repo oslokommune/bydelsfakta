@@ -35,6 +35,10 @@ router.beforeEach((to, from, next) => {
     router.push({ name: 'District', params: { district: 'alle' } });
   }
 
+  if (to.params.topic !== from.params.topic || (to.name === 'Topic' && from.name === 'District')) {
+    window.scroll(0, 0);
+  }
+
   next();
 });
 

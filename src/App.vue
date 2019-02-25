@@ -30,9 +30,6 @@ export default {
 
   watch: {
     $route(to, from) {
-      if (to.name === 'Topic' && from.name === 'District') {
-        window.scrollTo(0, 0);
-      }
       if (to.params.district !== undefined) {
         this.$store.dispatch('addDistrict', { district: to.params.district, pushRoute: false });
       }

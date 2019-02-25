@@ -2,7 +2,8 @@ import baseUrl from '../util/config';
 
 const pages = {
   folkemengde: {
-    name: 'folkemengde',
+    text: 'Folkemengde',
+    value: 'folkemengde',
     subpages: [
       {
         name: 'fremskriving',
@@ -73,9 +74,18 @@ const pages = {
         ],
       },
     ],
+    related: ['alder', 'innvandrerbefolkningen', 'flytting'],
+    options: {
+      kategori: 'Befolkning',
+      tema: 'Folkemengde',
+      bgImage: `${baseUrl()}/img/folkemengde.png`,
+      bgColor: 'rgb(255, 129, 116)',
+      txtColor: 'rgb(245, 173, 165)',
+    },
   },
   alder: {
-    name: 'alder',
+    text: 'Alder',
+    value: 'alder',
     subpages: [
       {
         name: 'aldersgrupper',
@@ -148,9 +158,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Befolkning',
+      tema: 'Alder',
+      bgImage: `${baseUrl()}/img/alder.png`,
+      bgColor: 'rgb(255, 129, 116)',
+      txtColor: 'rgb(245, 173, 165)',
+    },
+    related: ['folkemengde', 'husholdninger', 'levekaar'],
   },
   innvandrerbefolkningen: {
-    name: 'innvandrerbefolkningen',
+    text: 'Innvandrerbefolkningen',
+    value: 'innvandrerbefolkningen',
     subpages: [
       {
         name: 'befolkning',
@@ -245,9 +264,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Befolkning',
+      tema: 'Innvandrer&shy;befolkningen',
+      bgImage: `${baseUrl()}/img/innvandring.png`,
+      bgColor: 'rgb(255, 129, 116)',
+      txtColor: 'rgb(245, 173, 165)',
+    },
+    related: ['folkemengde', 'flytting', 'boligpriser'],
   },
   eierform: {
-    name: 'eierform',
+    text: 'Eierform',
+    value: 'eierform',
     subpages: [
       {
         name: 'eierform',
@@ -284,9 +312,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Eierform',
+      bgImage: `${baseUrl()}/img/eierform.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['boligpriser', 'trangboddhet', 'bygningstyper'],
   },
   boligpriser: {
-    name: 'boligpriser',
+    text: 'Boligpriser',
+    value: 'boligpriser',
     subpages: [
       {
         name: 'boligpriser',
@@ -332,9 +369,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Boligpriser',
+      bgImage: `${baseUrl()}/img/boligpriser.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['trangboddhet', 'eierform', 'flytting'],
   },
   trangboddhet: {
-    name: 'trangboddhet',
+    text: 'Trangboddhet',
+    value: 'trangboddhet',
     subpages: [
       {
         name: 'helhet',
@@ -449,9 +495,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Trangboddhet',
+      bgImage: `${baseUrl()}/img/trangboddhet.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['boligpriser', 'levekaar', 'eierform'],
   },
   kommunaleboliger: {
-    name: 'kommunaleboliger',
+    text: 'Kommunale boliger',
+    value: 'kommunaleboliger',
     subpages: [
       {
         name: 'blokk',
@@ -480,9 +535,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Kommunale boliger',
+      bgImage: `${baseUrl()}/img/kommunale-boliger.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['boligpriser', 'trangboddhet', 'husholdninger'],
   },
   flytting: {
-    name: 'flytting',
+    text: 'Flytting',
+    value: 'flytting',
     subpages: [
       {
         name: 'hyppighet',
@@ -511,9 +575,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Flytting',
+      bgImage: `${baseUrl()}/img/flytting.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['boligpriser', 'folkemengde', 'bygningstyper'],
   },
   bygningstyper: {
-    name: 'bygningstyper',
+    text: 'Bygningstyper',
+    value: 'bygningstyper',
     subpages: [
       {
         name: 'totalt',
@@ -618,9 +691,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Bygningstyper',
+      bgImage: `${baseUrl()}/img/bygningstyper.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['husholdninger', 'trangboddhet', 'boligpriser'],
   },
   husholdninger: {
-    name: 'husholdninger',
+    text: 'Husholdninger',
+    value: 'husholdninger',
     subpages: [
       {
         name: 'totalt',
@@ -725,9 +807,18 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Bomiljø',
+      tema: 'Husholdninger',
+      bgImage: `${baseUrl()}/img/husholdninger.png`,
+      bgColor: 'rgb(66, 248, 182)',
+      txtColor: 'rgb(199, 247, 201)',
+    },
+    related: ['trangboddhet', 'eierform', 'bygningstyper'],
   },
   levekaar: {
-    name: 'levekaar',
+    text: 'Levekår',
+    value: 'levekaar',
     subpages: [
       {
         name: 'spesifikk',
@@ -895,6 +986,14 @@ const pages = {
         ],
       },
     ],
+    options: {
+      kategori: 'Levekår',
+      tema: 'Levekår',
+      bgImage: `${baseUrl()}/img/levekaar.png`,
+      bgColor: 'rgb(248, 198, 107)',
+      txtColor: 'rgb(244, 206, 138)',
+    },
+    related: ['husholdninger', 'innvandrerbefolkningen', 'trangboddhet'],
   },
 };
 
