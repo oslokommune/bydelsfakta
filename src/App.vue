@@ -29,7 +29,7 @@ export default {
   },
 
   watch: {
-    $route(to, from) {
+    $route(to) {
       if (to.params.district !== undefined) {
         this.$store.dispatch('addDistrict', { district: to.params.district, pushRoute: false });
       }

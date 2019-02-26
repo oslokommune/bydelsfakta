@@ -56,7 +56,7 @@ export default {
         zoomControl: false,
         attributionControl: false,
         doubleClickZoom: false,
-        dragging: true,
+        dragging: false,
         scrollWheelZoom: false,
         touchZoom: false,
       },

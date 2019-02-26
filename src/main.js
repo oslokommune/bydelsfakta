@@ -12,6 +12,7 @@ import 'vue-resize/dist/vue-resize.css';
 import 'leaflet/dist/leaflet.css';
 
 import './styles/main.scss';
+import i18n from './i18n';
 
 // this part resolve an issue where the markers would not appear
 delete L.Icon.Default.prototype._getIconUrl;
@@ -34,5 +35,6 @@ Vue.directive('click-outside', clickOutside);
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App),
 }).$mount('#app');
