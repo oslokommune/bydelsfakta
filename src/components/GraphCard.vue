@@ -1,72 +1,105 @@
 <template>
   <div class="card-container" :class="{ large: settings.size === 'large' }">
     <div class="card">
-      <nav class="card__header">
-        <div class="tabs" role="tablist">
-          <button
-            role="tab"
-            :aria-selected="{ true: active === index }"
-            :aria-label="tab.label"
-            :id="`tabButton-${index}`"
-            v-for="(tab, index) in settings.tabs"
-            :key="index"
-            @click="activeTab(index)"
-            :class="{ active: active === index }"
-            class="tabs__button"
-            v-text="tab.label"
-          ></button>
+      <header class="card__header">
+        <div class="card__headertext">
+          <h2 class="card__title">Tittel datasett</h2>
+          <span class="card__published">Oppdatert 01.09.2018</span>
         </div>
-        <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
-          <button
-            class="context-menu__button"
-            @click="showDropdown = !showDropdown"
-            aria-haspopup="true"
-            :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
-            id="context-menu-button"
-          >
-            <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
-          </button>
-          <div v-if="showDropdown" class="context-menu__dropdown">
+        <nav class="card__nav">
+          <div class="tabs" role="tablist">
             <button
-              :disabled="showTable"
-              @click="savePng(settings.tabs[active].id)"
-              @keyup.enter="saveSvg(settings.tabs[active].id)"
-              class="context-menu__dropdown-item"
-              tabindex="0"
-              aria-label="lagre graf som png"
-              id="context-menu-button-png"
-            >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
-              <span>Last ned som PNG</span>
-            </button>
-            <button
-              :disabled="showTable"
-              class="context-menu__dropdown-item"
-              aria-label="lagre graf som svg"
-              tabindex="0"
-              @click="saveSvg(settings.tabs[active].id)"
-              @keyup.enter="saveSvg(settings.tabs[active].id)"
-              id="context-menu-button-svg"
-            >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
-              <span>Lagre som SVG</span>
-            </button>
+              role="tab"
+              :aria-selected="{ true: active === index }"
+              :aria-label="tab.label"
+              :id="`tabButton-${index}`"
+              v-for="(tab, index) in settings.tabs"
+              :key="index"
+              @click="activeTab(index)"
+              :class="{ active: active === index }"
+              class="tabs__tab"
+              v-text="tab.label"
+            ></button>
 
-            <button
-              class="context-menu__dropdown-item"
-              aria-hidden="true"
-              tabindex="0"
-              @click="toggleShowTable"
-              @keyup.enter="toggleShowTable"
-            >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">{{
-                showTable ? 'insert_chart_outlined' : 'table_chart'
-              }}</i>
-              <span>Vis {{ showTable ? 'grafikk' : 'tabell' }}</span>
-            </button>
+            <div class="card__toggle-menu">
+              <button
+                class="card__toggle-button"
+                @click="showTable = false"
+                :class="{ 'card__toggle-button--active': !showTable }"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
+              </button>
+              <button
+                class="card__toggle-button"
+                @click="showTable = true"
+                :class="{ 'card__toggle-button--active': showTable }"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
+              </button>
+
+              <button class="card__toggle-button">
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">map</i>
+              </button>
+            </div>
           </div>
-        </div>
-      </nav>
+
+          <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
+            <button
+              class="context-menu__button"
+              @click="showDropdown = !showDropdown"
+              aria-haspopup="true"
+              :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
+              id="context-menu-button"
+            >
+              <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
+              <span>Valg</span>
+            </button>
+            <div v-if="showDropdown" class="context-menu__dropdown">
+              <button
+                :disabled="showTable"
+                @click="savePng(settings.tabs[active].id)"
+                @keyup.enter="saveSvg(settings.tabs[active].id)"
+                class="context-menu__dropdown-item"
+                tabindex="0"
+                aria-label="lagre graf som png"
+                id="context-menu-button-png"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon"
+                  >photo_size_select_actual</i
+                >
+                <span>Last ned som PNG</span>
+              </button>
+              <button
+                :disabled="showTable"
+                class="context-menu__dropdown-item"
+                aria-label="lagre graf som svg"
+                tabindex="0"
+                @click="saveSvg(settings.tabs[active].id)"
+                @keyup.enter="saveSvg(settings.tabs[active].id)"
+                id="context-menu-button-svg"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon"
+                  >photo_size_select_actual</i
+                >
+                <span>Lagre som SVG</span>
+              </button>
+
+              <button
+                class="context-menu__dropdown-item"
+                aria-hidden="true"
+                tabindex="0"
+                @click="toggleShowTable"
+                @keyup.enter="toggleShowTable"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">{{
+                  showTable ? 'insert_chart_outlined' : 'table_chart'
+                }}</i>
+                <span>Vis {{ showTable ? 'grafikk' : 'tabell' }}</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
       <graph-instance
         v-if="settings.tabs[active] !== undefined"
         :settings="settings.tabs[active]"
@@ -112,7 +145,7 @@ export default {
 
     activeTab(index) {
       this.active = index;
-      this.showTable = false;
+      // this.showTable = false;
     },
 
     saveSvg(id) {
@@ -139,9 +172,10 @@ export default {
 
 <style scoped lang="scss">
 @import './../styles/colors';
+@import './../styles/variables';
 
 .card-container {
-  padding: 0.5em;
+  padding: 1em;
   flex: 50% 1 10;
   min-width: 300px;
   overflow: hidden;
@@ -159,52 +193,95 @@ export default {
 
 .card {
   background: white;
-  border: 1px solid $color-grey-100;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px $color-grey-600;
+  box-shadow: 0 1px 3px rgba(black, 0.5), 0 3px 6px rgba(black, 0.07);
   width: 100%;
 
   &__header {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #dae3e5;
+    z-index: 1;
+  }
+
+  &__headertext {
+    display: flex;
+    align-items: baseline;
+    padding: 0 1rem;
+  }
+
+  &__title {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: $color-purple;
+  }
+
+  &__published {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: rgba($color-purple, 0.65);
+  }
+
+  &__nav {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+  }
+
+  &__toggle-menu {
+    margin-left: auto;
+    padding: 0 1rem;
+    display: flex;
+  }
+
+  &__toggle-button {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover:not(&--active) {
+      background-color: rgba(#dae3e5, 0.35);
+    }
+
+    &--active {
+      background: $color-blue;
+    }
   }
 }
 
 /* Style the tabs */
 .tabs {
-  background-color: $color-grey-50;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
   display: flex;
-  width: calc(100% - 3em);
+  flex-grow: 1;
   overflow-x: auto;
-  overflow-y: hidden;
+  padding: 4px 0;
 
-  div:first-of-type a:first-child {
-    border-top-left-radius: 3px;
-  }
-
-  &__button {
-    background-color: $color-grey-50;
-    color: rgba($color-purple, 0.8);
+  &__tab {
+    color: rgba($color-purple, 0.65);
     cursor: pointer;
-    float: left;
-    font-weight: bold;
+    font-weight: 500;
     transition: background-color 0.2s;
-    padding: 1em 1.5em;
+    padding: 0.75em;
+    // text-transform: uppercase;
+    white-space: nowrap;
 
     &.active {
-      background-color: #fff;
-      box-shadow: 0 0 0 1px #e0e0e0;
+      color: $color-purple;
       cursor: default;
       position: relative;
-      color: black;
 
       &:after {
-        background-color: white;
-        bottom: -2px;
+        background-color: $color-blue;
+        bottom: -4px;
         content: '';
-        height: 2px;
+        height: 5px;
         left: 0;
         position: absolute;
         right: 0;
@@ -213,8 +290,7 @@ export default {
 
     /* Change background color of tabs on hover */
     &:hover:not(.active) {
-      background-color: #efefef;
-      box-shadow: 0 0 0 1px #e0e0e0;
+      background-color: rgba(#efefef, 0.5);
       position: relative;
     }
   }
@@ -226,10 +302,38 @@ export default {
   z-index: 2;
 
   &__button {
-    background-color: $color-light-blue-2;
-    border-top-right-radius: 3px;
-    height: 100%;
-    width: 4rem;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    height: 3rem;
+    cursor: pointer;
+    background-color: rgba(#dae3e5, 1);
+
+    @media screen and (min-width: $break-sm) {
+      background-color: rgba(#dae3e5, 0);
+      padding-right: 0.95rem;
+      border-radius: 3px;
+      height: 3rem;
+      width: auto;
+
+      &:hover {
+        background-color: rgba(#dae3e5, 0.35);
+      }
+    }
+
+    span {
+      margin-left: 0.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: none;
+
+      @media screen and (min-width: $break-sm) {
+        display: inline-block;
+      }
+    }
   }
 
   &__dropdown {
