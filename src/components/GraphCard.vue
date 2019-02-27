@@ -21,7 +21,7 @@
             class="context-menu__button"
             @click="showDropdown = !showDropdown"
             aria-haspopup="true"
-            :aria-label="showDropdown ? 'Lukk meny' : 'åpne meny'"
+            :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
             id="context-menu-button"
           >
             <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
@@ -33,23 +33,23 @@
               @keyup.enter="saveSvg(settings.tabs[active].id)"
               class="context-menu__dropdown-item"
               tabindex="0"
-              aria-label="lagre graf som png"
+              :aria-label="$t('graphCard.savePNG.aria')"
               id="context-menu-button-png"
             >
               <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
-              <span>Last ned som PNG</span>
+              <span>{{ $t('graphCard.savePNG.label') }}</span>
             </button>
             <button
               :disabled="showTable"
               class="context-menu__dropdown-item"
-              aria-label="lagre graf som svg"
+              :aria-label="$t('graphCard.saveSVG.aria')"
               tabindex="0"
               @click="saveSvg(settings.tabs[active].id)"
               @keyup.enter="saveSvg(settings.tabs[active].id)"
               id="context-menu-button-svg"
             >
               <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">photo_size_select_actual</i>
-              <span>Lagre som SVG</span>
+              <span>{{ $t('graphCard.saveSVG.label') }}</span>
             </button>
 
             <button
@@ -62,7 +62,7 @@
               <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">{{
                 showTable ? 'insert_chart_outlined' : 'table_chart'
               }}</i>
-              <span>Vis {{ showTable ? 'grafikk' : 'tabell' }}</span>
+              <span>{{ showTable ? $t('graphCard.showTable.graph') : $t('graphCard.showTable.table') }}</span>
             </button>
           </div>
         </div>

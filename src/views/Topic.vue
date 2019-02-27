@@ -12,7 +12,7 @@
         />
       </template>
       <template>
-        <h2 class="section-heading">Se også</h2>
+        <h2 class="section-heading">{{ $t('Se også') }}</h2>
         <v-category
           v-for="(item, relatedIndex) in topics[`${topic}`].related"
           :key="`related-${relatedIndex}`"
@@ -27,7 +27,7 @@
       </template>
     </div>
     <div class="main-container__map">
-      <h3>Bydelskart</h3>
+      <h3>{{ $t('topic.map') }}</h3>
       <v-leaflet :district="geoDistricts" />
     </div>
   </div>

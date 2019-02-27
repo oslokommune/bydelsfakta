@@ -1,3 +1,60 @@
 {
-  "message": "hello i18n !!"
+  "graphCard": {
+    "dropdown": {
+      "close": "Lukk meny",
+      "open": "Åpne meny"
+    },
+    "savePNG": {
+      "aria": "lagre graf som png",
+      "label": "Last ned som PNG"
+    },
+    "saveSVG": {
+      "aria": "lagre graf som svg",
+      "label": "Last ned som SVG"
+    },
+    "showTable": {
+      "graph": "Vis grafikk",
+      "table": "Vis tabell"
+    }
+  },
+  "navigationDrawer": {
+    "linkCompare": "Sammenlign bydeler",
+    "selectAll": {
+      "aria": "velg alle checkboxes",
+      "label": "Velg alle"
+    },
+    "unselectAll": {
+      "aria": "fjern alle checkboxes",
+      "label": "Fjern alle"
+    },
+    "select": {
+      "label": "Velg region"
+    },
+    "navigationDistrict": {
+      "compareDistrict": "Sammenlign bydeler",
+      "chooseDistrict": "- Velg bydel -"
+    }
+  },
+  "navigationTopbar": {
+    "selectTopic": {
+      "aria": "velg temaknapp",
+      "label": "Velg tema"
+    },
+    "backButton": {
+      "compareDistrict": "Sammenligne bydeler",
+      "chooseDistrict": "Velg bydel"
+    }
+  },
+  "VCategory": {
+    "seeMore": {
+      "label": "Se mer"
+    }
+  },
+  "district": {
+    "map": "Bydelskart"
+  },
+  "topic": {
+    "seeMore": "Se også",
+    "map": "Bydelskart"
+  }
 }
