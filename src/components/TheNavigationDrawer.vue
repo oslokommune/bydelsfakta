@@ -232,15 +232,17 @@ export default {
 @import '../styles/variables';
 
 .navbar {
-  background: $color-blue;
+  background-color: $color-yellow;
   display: flex;
   position: relative;
   flex: 5em 0 0;
   width: 100%;
   z-index: 4;
+  padding-left: 0rem;
 
   @media screen and (min-width: $break-lg) {
-    background-color: $color-purple;
+    padding-left: 1rem;
+    background-color: inherit;
     flex-direction: column;
     padding-bottom: 2em;
     position: fixed;
@@ -257,7 +259,7 @@ export default {
   top: 5em;
   right: 0;
   z-index: 1;
-  background: $color-purple;
+  background: white;
   padding: 2em 0;
   display: none;
   border-top: 2px solid $color-blue;
@@ -272,6 +274,7 @@ export default {
   }
 
   @media screen and (min-width: $break-lg) {
+    background: initial;
     top: 0;
     display: initial;
     position: relative;
@@ -302,7 +305,7 @@ export default {
 
 .oslo__logo {
   cursor: pointer;
-  background: $color-purple;
+  background: $color-bg;
   object-fit: contain;
   width: 10em;
 
@@ -318,16 +321,17 @@ export default {
   $p: &;
 
   align-items: center;
-  background-color: $color-purple;
-  color: rgba(white, 0.9);
+  background-color: inherit;
   cursor: pointer;
   display: flex;
   position: relative;
   transition: all 0.3s ease-in-out;
   width: 100%;
+  border-radius: 3rem;
+  margin-bottom: 1px;
 
   &--active {
-    background-color: $color-blue;
+    background-color: $color-yellow;
     transition: all 0.3s ease-in-out;
 
     #{$p}__label {
@@ -347,18 +351,33 @@ export default {
   }
 
   &--compare {
-    background-color: lighten($color-purple, 5%);
+    background-color: lighten($color-yellow, 15%);
     transition: background-color 0.3s ease-in-out;
+
+    label::before {
+      opacity: 1 !important;
+    }
+
+    label::after {
+      transform: scale(1) !important;
+      transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
+    }
+  }
+
+  &--compare &__label {
+    color: $color-purple;
   }
 
   &__label {
     align-items: center;
-    color: rgba(white, 0.85);
+    color: rgba($color-purple, 0.85);
     display: flex;
     flex-grow: 1;
     height: 3em;
     letter-spacing: 0.1px;
     position: relative;
+    border-top-right-radius: 3rem;
+    border-bottom-right-radius: 3rem;
 
     &-compare {
       margin-bottom: 1rem;
@@ -385,13 +404,13 @@ export default {
     opacity: 0.15;
   }
 
-  &:not(&--active) &__label:hover {
-    background-color: darken($color-purple, 5%);
-    color: white;
+  &:not(&--active):not(&--compare) &__label:hover {
+    background-color: darken($color-bg, 5%);
+    color: $color-purple;
 
     // Show the visual border on hover
     &::before {
-      background-color: darken($color-purple, 5%);
+      background-color: darken($color-bg, 5%);
       display: block;
     }
   }
@@ -408,9 +427,11 @@ input[type='checkbox'] {
     position: relative;
     vertical-align: middle;
     width: 50px;
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
 
     &:hover {
-      background: darken($color-purple, 10%);
+      background: darken($color-bg, 10%);
 
       &::before {
         background: rgba(white, 0.15);
@@ -420,7 +441,7 @@ input[type='checkbox'] {
 
     // checked inside border
     &::after {
-      background-color: $color-blue;
+      background-color: $color-purple;
       border-radius: 1px;
       content: '';
       height: 10px;
@@ -442,7 +463,7 @@ input[type='checkbox'] {
     &::before {
       -moz-border-radius: 1px;
       -webkit-border-radius: 1px;
-      border: 1px solid white;
+      border: 1px solid $color-purple;
       border-radius: 1px;
       content: '';
       height: 18px;
@@ -450,7 +471,6 @@ input[type='checkbox'] {
       opacity: 0;
       position: absolute;
       top: 10px;
-      // transition: all 0.3s ease-in-out;
       width: 18px;
     }
 
@@ -459,7 +479,7 @@ input[type='checkbox'] {
     }
   }
 
-  &:checked + label {
+  &:checked:not(&-compare) + label {
     position: relative;
     opacity: 1;
 
@@ -471,7 +491,7 @@ input[type='checkbox'] {
 
     // checked border
     &::before {
-      border: 1px solid $color-blue;
+      border: 1px solid $color-purple;
       opacity: 1;
       transition: transform 0.3s ease-in-out;
     }
@@ -493,9 +513,9 @@ input[type='checkbox'] {
     .navigation-drawer__button {
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
-      border: 1px solid rgb(248, 198, 107);
+      border: 1px solid $color-purple;
       border-radius: 5px;
-      color: rgb(248, 198, 107);
+      color: $color-purple;
       font-weight: bold;
       margin: 0.5rem;
       padding: 0.3rem 1rem 0.3rem 1rem;
@@ -532,8 +552,8 @@ input[type='checkbox'] {
   }
 
   .navigation-drawer__select {
-    border: 1px solid rgb(248, 198, 107);
-    color: rgb(248, 198, 107);
+    border: 1px solid $color-purple;
+    color: $color-purple;
     font-weight: bold;
     margin: 0.5rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
@@ -548,8 +568,8 @@ input[type='checkbox'] {
   }
 
   &:before {
-    border-bottom: 2px solid rgb(248, 198, 107);
-    border-left: 2px solid rgb(248, 198, 107);
+    border-bottom: 2px solid $color-purple;
+    border-left: 2px solid $color-purple;
     content: '';
     height: 0.5rem;
     position: absolute;

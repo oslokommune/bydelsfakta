@@ -3,6 +3,8 @@
 .app {
   display: flex;
   flex-direction: column;
+  max-width: 1920px;
+  margin: 0 auto;
 
   @media screen and (min-width: $break-lg) {
     flex-direction: row;
@@ -33,31 +35,24 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   min-width: 300px;
-  padding: 0 0.25em 0em;
-  max-width: 1300px;
-  flex: 1 1 900px;
-
-  @media screen and (min-width: $break-sm) {
-    padding: 0 0.5em 0;
-  }
+  padding: 0;
+  flex: 2 1 800px;
 
   @media screen and (min-width: $break-md) {
-    padding: 1em 1em 0;
+    padding: 1em 0.5em 0;
   }
 
   @media screen and (min-width: $break-lg) {
-    padding: 1em 1.5em 0;
+    padding: 1em 1em 0;
   }
 }
 
 .main-container__map {
   display: flex;
-  padding: 2rem;
+  padding: 1rem;
   flex-flow: row wrap;
   justify-content: flex-start;
-  min-height: 300px;
-  min-width: 300px;
-  max-height: 500px;
-  max-width: 500px;
-  flex: 0 1 400px;
+  height: 300px;
+  min-width: 200px;
+  flex: 1 1 300px;
 }
