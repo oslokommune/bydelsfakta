@@ -4,50 +4,10 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
 <header
   class="oslo__navigation-topbar"
 >
-  <router-link-stub
-    class="oslo__navigation-topbar-button"
-    event="click"
-    id="backButton"
-    tag="a"
-    to="[object Object]"
-  >
-    <i
-      class="material-icons oslo__topbar"
-    >
-      arrow_back
-    </i>
-     
-    <h4
-      class="oslo__topbar oslo__topbar-text"
-    >
-      Bydel Sagene
-    </h4>
-  </router-link-stub>
-   
   <div
     class="navigation-topbar navigation-topbar--hidden"
   >
-    <button
-      aria-label="velg temaknapp"
-      class="navigation-topbar__select"
-      id="select"
-    >
-      <label
-        class="label"
-      >
-        Velg tema
-      </label>
-       
-      <span>
-        
-      </span>
-       
-      <i
-        class="material-icons"
-      >
-        arrow_drop_down
-      </i>
-    </button>
+    <!---->
      
     <!---->
   </div>

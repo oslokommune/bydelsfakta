@@ -7,105 +7,109 @@ exports[`Bydel renders component correctly 1`] = `
   <div
     class="main-container__cards"
   >
-    <v-category-stub
-      bgcolor="rgb(255, 129, 116)"
-      bgimage="/img/folkemengde.png"
-      category="Befolkning"
-      id="folkemengde"
-      link="//folkemengde"
-      topic="Folkemengde"
-      txtcolor="rgb(245, 173, 165)"
-    />
-    <v-category-stub
-      bgcolor="rgb(255, 129, 116)"
-      bgimage="/img/alder.png"
-      category="Befolkning"
-      id="alder"
-      link="//alder"
-      topic="Alder"
-      txtcolor="rgb(245, 173, 165)"
-    />
-    <v-category-stub
-      bgcolor="rgb(255, 129, 116)"
-      bgimage="/img/innvandring.png"
-      category="Befolkning"
-      id="innvandrerbefolkningen"
-      link="//innvandrerbefolkningen"
-      topic="Innvandrer&shy;befolkningen"
-      txtcolor="rgb(245, 173, 165)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/husholdninger.png"
-      category="Bomiljø"
-      id="husholdninger"
-      link="//husholdninger"
-      topic="Husholdninger"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/trangboddhet.png"
-      category="Bomiljø"
-      id="trangboddhet"
-      link="//trangboddhet"
-      topic="Trangboddhet"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/eierform.png"
-      category="Bomiljø"
-      id="eierform"
-      link="//eierform"
-      topic="Eierform"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/kommunale-boliger.png"
-      category="Bomiljø"
-      id="kommunaleboliger"
-      link="//kommunaleboliger"
-      topic="Kommunale boliger"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/flytting.png"
-      category="Bomiljø"
-      id="flytting"
-      link="//flytting"
-      topic="Flytting"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/bygningstyper.png"
-      category="Bomiljø"
-      id="bygningstyper"
-      link="//bygningstyper"
-      topic="Bygningstyper"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/boligpriser.png"
-      category="Bomiljø"
-      id="boligpriser"
-      link="//boligpriser"
-      topic="Boligpriser"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(248, 198, 107)"
-      bgimage="/img/levekaar.png"
-      category="Levekår"
-      id="levekaar"
-      link="//levekaar"
-      topic="Levekår"
-      txtcolor="rgb(244, 206, 138)"
-    />
+    <div
+      class="topics-grid"
+    >
+      <v-category-stub
+        bgcolor="rgb(255, 129, 116)"
+        bgimage="/img/folkemengde.png"
+        category="Befolkning"
+        id="folkemengde"
+        link="//folkemengde"
+        topic="Folkemengde"
+        txtcolor="rgb(245, 173, 165)"
+      />
+      <v-category-stub
+        bgcolor="rgb(255, 129, 116)"
+        bgimage="/img/alder.png"
+        category="Befolkning"
+        id="alder"
+        link="//alder"
+        topic="Alder"
+        txtcolor="rgb(245, 173, 165)"
+      />
+      <v-category-stub
+        bgcolor="rgb(255, 129, 116)"
+        bgimage="/img/innvandring.png"
+        category="Befolkning"
+        id="innvandrerbefolkningen"
+        link="//innvandrerbefolkningen"
+        topic="Innvandrer&shy;befolkningen"
+        txtcolor="rgb(245, 173, 165)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/husholdninger.png"
+        category="Bomiljø"
+        id="husholdninger"
+        link="//husholdninger"
+        topic="Husholdninger"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/trangboddhet.png"
+        category="Bomiljø"
+        id="trangboddhet"
+        link="//trangboddhet"
+        topic="Trangboddhet"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/eierform.png"
+        category="Bomiljø"
+        id="eierform"
+        link="//eierform"
+        topic="Eierform"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/kommunale-boliger.png"
+        category="Bomiljø"
+        id="kommunaleboliger"
+        link="//kommunaleboliger"
+        topic="Kommunale boliger"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/flytting.png"
+        category="Bomiljø"
+        id="flytting"
+        link="//flytting"
+        topic="Flytting"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/bygningstyper.png"
+        category="Bomiljø"
+        id="bygningstyper"
+        link="//bygningstyper"
+        topic="Bygningstyper"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/boligpriser.png"
+        category="Bomiljø"
+        id="boligpriser"
+        link="//boligpriser"
+        topic="Boligpriser"
+        txtcolor="rgb(199, 247, 201)"
+      />
+      <v-category-stub
+        bgcolor="rgb(248, 198, 107)"
+        bgimage="/img/levekaar.png"
+        category="Levekår"
+        id="levekaar"
+        link="//levekaar"
+        topic="Levekår"
+        txtcolor="rgb(244, 206, 138)"
+      />
+    </div>
   </div>
    
   <div

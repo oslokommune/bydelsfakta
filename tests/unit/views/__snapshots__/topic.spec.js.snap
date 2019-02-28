@@ -7,36 +7,12 @@ exports[`Topic renders component correctly 1`] = `
   <div
     class="main-container__cards"
   >
-    <h2
-      class="section-heading"
-    >
-      
-        Utvalgte aldersgrupper
-      
-    </h2>
-     
     <graph-card-stub
       settings="[object Object]"
     />
-    <h2
-      class="section-heading"
-    >
-      
-        Populasjonspyramide
-      
-    </h2>
-     
     <graph-card-stub
       settings="[object Object]"
     />
-    <h2
-      class="section-heading"
-    >
-      
-        Medianalder i Bydel BYDELSNAVN
-      
-    </h2>
-     
     <graph-card-stub
       settings="[object Object]"
     />
