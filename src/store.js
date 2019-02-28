@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { Store } from 'vuex';
 import router from './router';
 
 import districts from './config/geoData/districts';
@@ -79,10 +79,14 @@ const actions = {
   },
 };
 
-export default new Vuex.Store({
+export const storeStructure = {
   strict: true,
   state,
   getters,
   mutations,
   actions,
-});
+};
+
+const store = new Store(storeStructure);
+
+export default store;

@@ -1,9 +1,14 @@
 import { mount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import vueResize from 'vue-resize';
 import router from '../../../src/router';
 import GraphCard from '../../../src/components/GraphCard.vue';
 import clickOutside from '../../../src/directives/clickOutside';
-import topics from '../../../src/config/topics';
+import { topics } from '../../../src/config/topics';
+import store from '../../../src/store';
+import setupI18n from '../../../src/i18n';
+
+const i18n = setupI18n();
 
 describe('GraphCard', () => {
   let wrapper = null;
@@ -12,6 +17,7 @@ describe('GraphCard', () => {
     const localVue = createLocalVue();
     localVue.use(vueResize);
     localVue.use(router);
+    localVue.use(Vuex);
     localVue.directive('click-outside', clickOutside);
     wrapper = mount(GraphCard, {
       propsData: {
@@ -19,6 +25,8 @@ describe('GraphCard', () => {
       },
       localVue,
       router,
+      i18n,
+      store,
     });
   });
 

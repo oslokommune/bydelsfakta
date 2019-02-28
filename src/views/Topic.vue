@@ -12,7 +12,7 @@
         />
       </template>
       <template>
-        <h2 class="section-heading">{{ $t('Se også') }}</h2>
+        <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
         <v-category
           v-for="(item, relatedIndex) in topics[`${topic}`].related"
           :key="`related-${relatedIndex}`"

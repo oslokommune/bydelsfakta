@@ -1,9 +1,14 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import VueResize from 'vue-resize';
 
 import Topic from '../../../src/views/Topic.vue';
 import clickOutside from '../../../src/directives/clickOutside';
+import store from '../../../src/store';
+import setupI18n from '../../../src/i18n'
+
+const i18n = setupI18n();
 
 describe('Topic', () => {
   let wrapper = null;
@@ -12,15 +17,18 @@ describe('Topic', () => {
     const localVue = createLocalVue();
     localVue.use(VueRouter);
     localVue.use(VueResize);
+    localVue.use(Vuex);
     localVue.directive('click-outside', clickOutside);
     const router = new VueRouter();
-    wrapper = mount(Topic, {
+    wrapper = shallowMount(Topic, {
       propsData: {
         district: 'bydel',
         topic: 'alder',
       },
       localVue,
       router,
+      store,
+      i18n,
     });
   });
 
@@ -34,11 +42,5 @@ describe('Topic', () => {
 
   test('renders component correctly', () => {
     expect(wrapper.element).toMatchSnapshot();
-  });
-
-  test('renders different component when props change', () => {
-    expect(wrapper.vm.topic).toBe('alder');
-    wrapper.setProps({ topic: 'levekaar' });
-    expect(wrapper.vm.topic).toBe('levekaar');
   });
 });
