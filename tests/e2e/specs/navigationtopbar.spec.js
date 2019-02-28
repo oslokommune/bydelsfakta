@@ -13,8 +13,8 @@ describe('navigationTopbar', () => {
     cy.url().should('include', '/bydel/sagene/folkemengde');
   });
 
-  it('back button says Velg bydel', () => {
-    cy.get('h4').contains('Velg bydel');
+  it('back button says Sammenligne bydeler', () => {
+    cy.get('h4').contains('Sammenligne bydeler');
   });
 
   it('Go to bydel sagene - back button says Bydel Sagene and sends you to the frontpage', () => {
@@ -37,7 +37,7 @@ describe('navigationTopbar', () => {
     cy.get('h4').contains('Bydel Sagene');
   });
 
-  it('Go to bydel sagene with alder - press button two times - page is frontpage', () => {
+  it('Go to bydel sagene with alder - press button two times - page is alle', () => {
     cy.get('#a-sagene').click();
     cy.url().should('include', '/bydel/sagene');
     cy.get('h4').contains('Bydel Sagene');
@@ -47,10 +47,11 @@ describe('navigationTopbar', () => {
     cy.get('#backButton').click();
     cy.get('#backButton').click();
     cy.url().should('include', '/');
-    cy.get('h4').contains('Velg bydel');
+    cy.get('h4').contains('Sammenligne bydeler');
   });
 
   it('check bydel sagene checkbox - back button says Sammenling bydeler', () => {
+    cy.url().should('include', '/bydel/alle');
     cy.get('#checkbox-sagene').check({ force: true });
     cy.url().should('include', '/bydel/3');
     cy.get('#sammenlign').should('have.class', 'navigation-link--active');
@@ -75,6 +76,6 @@ describe('navigationTopbar', () => {
     cy.url().should('include', '/bydel/3');
     cy.get('#backButton').click();
     cy.url().should('include', '/');
-    cy.get('h4').contains('Velg bydel');
+    cy.get('h4').contains('Sammenligne bydeler');
   });
 });
