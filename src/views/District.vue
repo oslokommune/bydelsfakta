@@ -62,28 +62,16 @@ export default {
 @import '../styles/variables';
 
 .topics-grid {
-  min-width: 300px;
   padding: 0 1em;
   flex: 2 1 800px;
-  justify-content: flex-start;
   display: grid;
-  grid-row-gap: 1em;
-  grid-column-gap: 1em;
-  grid-template-rows: auto;
-
-  grid-template-columns: repeat(1, 1fr);
-  @media screen and (min-width: $break-sm) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media screen and (min-width: $break-md) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
   // Fallback to flexbox
   @media all and (-ms-high-contrast: none) {
     display: flex;
-    flex-flow: row wrap;
+    flex-wrap: wrap;
   }
 }
 </style>
