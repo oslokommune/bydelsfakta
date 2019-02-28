@@ -1,7 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import vueResize from 'vue-resize';
 import GraphInstance from '../../../src/components/GraphInstance.vue';
-import page from '../../../src/config/topics';
+import { topics } from '../../../src/config/topics';
+import store from '../../../src/store';
+import setupI18n from '../../../src/i18n';
+
+const i18n = setupI18n();
 
 describe('GraphInstance', () => {
   let wrapper = null;
@@ -9,11 +14,15 @@ describe('GraphInstance', () => {
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(vueResize);
+    localVue.use(Vuex);
     wrapper = mount(GraphInstance, {
       propsData: {
-        settings: page['alder'].subpages[0].graphs[0],
+        settings: topics['alder'].subpages[0].graphs[0],
+        showTable: false,
       },
       localVue,
+      store,
+      i18n,
     });
   });
 
@@ -22,7 +31,7 @@ describe('GraphInstance', () => {
   });
 
   test('renders graphInstance-component and finds graph__container-class', () => {
-    expect(wrapper.classes('graph__container')).toBe(true);
+    expect(wrapper.classes('graph__shadow')).toBe(true);
   });
 
   test('renders correctly', () => {

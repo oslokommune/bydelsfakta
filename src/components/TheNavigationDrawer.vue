@@ -123,7 +123,7 @@ export default {
       return;
     }
 
-    this.selected = this.districts;
+    this.selected = this.districts[0] === 'alle' ? [] : this.districts;
   },
 
   methods: {

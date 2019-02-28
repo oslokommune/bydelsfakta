@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Topic renders component correctly 1`] = `
+<div
+  class="main-container"
+>
+  <div
+    class="main-container__cards"
+  >
+    <h2
+      class="section-heading"
+    >
+      
+        Utvalgte aldersgrupper
+      
+    </h2>
+     
+    <graph-card-stub
+      settings="[object Object]"
+    />
+    <h2
+      class="section-heading"
+    >
+      
+        Populasjonspyramide
+      
+    </h2>
+     
+    <graph-card-stub
+      settings="[object Object]"
+    />
+    <h2
+      class="section-heading"
+    >
+      
+        Medianalder i Bydel BYDELSNAVN
+      
+    </h2>
+     
+    <graph-card-stub
+      settings="[object Object]"
+    />
+     
+    <h2
+      class="section-heading"
+    >
+      Se også
+    </h2>
+     
+    <v-category-stub
+      bgcolor="rgb(255, 129, 116)"
+      bgimage="/img/folkemengde.png"
+      category="Befolkning"
+      id="folkemengde"
+      link="/bydel/undefined/folkemengde"
+      topic="Folkemengde"
+      txtcolor="rgb(245, 173, 165)"
+    />
+    <v-category-stub
+      bgcolor="rgb(66, 248, 182)"
+      bgimage="/img/husholdninger.png"
+      category="Bomiljø"
+      id="husholdninger"
+      link="/bydel/undefined/husholdninger"
+      topic="Husholdninger"
+      txtcolor="rgb(199, 247, 201)"
+    />
+    <v-category-stub
+      bgcolor="rgb(248, 198, 107)"
+      bgimage="/img/levekaar.png"
+      category="Levekår"
+      id="levekaar"
+      link="/bydel/undefined/levekaar"
+      topic="Levekår"
+      txtcolor="rgb(244, 206, 138)"
+    />
+  </div>
+   
+  <div
+    class="main-container__map"
+  >
+    <h3>
+      Bydelskart
+    </h3>
+     
+    <v-leaflet-stub
+      district="[object Object]"
+    />
+  </div>
+</div>
+`;

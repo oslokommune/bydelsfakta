@@ -1,7 +1,15 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
 import TheNavigationTopbar from '../../../src/components/TheNavigationTopbar.vue';
 import router from '../../../src/router';
 import clickOutside from '../../../src/directives/clickOutside';
+import store from '../../../src/store';
+import setupI18n from '../../../src/i18n';
+
+const i18n = setupI18n();
+
+global.scroll = jest.fn();
+window.scroll = jest.fn();
 
 describe('TheNavigationTopbar', () => {
   let wrapper = null;
@@ -9,10 +17,13 @@ describe('TheNavigationTopbar', () => {
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(router);
+    localVue.use(Vuex);
     localVue.directive('click-outside', clickOutside);
-    wrapper = mount(TheNavigationTopbar, {
+    wrapper = shallowMount(TheNavigationTopbar, {
       localVue,
       router,
+      store,
+      i18n,
     });
   });
 
@@ -58,10 +69,5 @@ describe('TheNavigationTopbar', () => {
       name: 'Topic',
       params: { district: 'sagene', topic: 'levekaar' },
     });
-  });
-
-  test('render multiple bydeler correctly', () => {
-    router.push('/bydel/1-2-3-4/alder');
-    expect(wrapper.element).toMatchSnapshot();
   });
 });

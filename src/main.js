@@ -12,7 +12,9 @@ import 'vue-resize/dist/vue-resize.css';
 import 'leaflet/dist/leaflet.css';
 
 import './styles/main.scss';
-import i18n from './i18n';
+import setupI18n from './i18n';
+
+const i18n = setupI18n();
 
 // this part resolve an issue where the markers would not appear
 delete L.Icon.Default.prototype._getIconUrl;

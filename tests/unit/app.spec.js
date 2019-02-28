@@ -1,9 +1,15 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
 import App from '../../src/App.vue';
-import Bydel from '../../src/views/District.vue';
-import Home from '../../src/views/Home.vue';
 import router from '../../src/router';
 import clickOutside from '../../src/directives/clickOutside';
+import store from '../../src/store';
+import setupI18n from '../../src/i18n';
+
+global.scroll = jest.fn();
+window.scroll = jest.fn();
+
+const i18n = setupI18n();
 
 describe('App', () => {
   let wrapper = null;
@@ -11,10 +17,13 @@ describe('App', () => {
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(router);
+    localVue.use(Vuex);
     localVue.directive('click-outside', clickOutside);
-    wrapper = mount(App, {
+    wrapper = shallowMount(App, {
       localVue,
       router,
+      store,
+      i18n,
     });
   });
 
@@ -23,24 +32,10 @@ describe('App', () => {
   });
 
   test('renders app-component and finds id #app', () => {
-    expect(wrapper.attributes('id')).toBe('app');
+    expect(wrapper.classes('app')).toBe(true);
   });
 
-  test('router sends you to bydel alle', () => {
-    router.push('/bydel/alle');
-    expect(wrapper.find(Bydel).exists()).toBe(true);
-    expect(wrapper.element).toMatchSnapshot();
-  });
-
-  test('router sends you to bydel sagene', () => {
-    router.push('/bydel/sagene');
-    expect(wrapper.find(Bydel).exists()).toBe(true);
-    expect(wrapper.element).toMatchSnapshot();
-  });
-
-  test('router sends you to homepage', () => {
-    router.push('/');
-    expect(wrapper.find(Home).exists()).toBe(true);
+  test('shallowmounts app', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 });

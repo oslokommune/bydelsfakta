@@ -6,7 +6,6 @@ describe('navigationDrawer', () => {
   });
 
   it('Visits the app root url', () => {
-    cy.contains('h1', 'Forside');
     cy.get('nav').contains('a', 'Bydel Gamle Oslo');
     cy.get('#checkbox-gamleoslo').check({ force: true });
     cy.get('#checkbox-gamleoslo').should('be.checked');

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCategory renders correctly 1`] = `
+<a
+  class="main-container__item"
+  id="test"
+  style="background-color: black;"
+>
+  <img
+    alt="test"
+    aria-hidden="true"
+    class="oslo__img"
+    src="test"
+  />
+   
+  <span
+    class="oslo__category"
+    style="background-color: white;"
+  >
+    test
+  </span>
+   
+  <span
+    class="oslo__topic"
+  >
+    test
+  </span>
+   
+  <span
+    class="oslo__see-more-text"
+  >
+    Se mer
+  </span>
+</a>
+`;

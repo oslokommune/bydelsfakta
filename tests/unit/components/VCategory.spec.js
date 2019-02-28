@@ -1,21 +1,31 @@
-import { mount, RouterLinkStub } from '@vue/test-utils';
+import { mount, RouterLinkStub, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import VCategory from '../../../src/components/VCategory.vue';
+import store from '../../../src/store';
+import setupI18n from '../../../src/i18n';
+
+const i18n = setupI18n();
 
 describe('VCategory', () => {
   let wrapper = null;
 
   beforeEach(() => {
+    const localVue = createLocalVue();
+    localVue.use(Vuex);
     wrapper = mount(VCategory, {
       propsData: {
-        kategori: 'test',
-        tema: 'test',
+        category: 'test',
+        topic: 'test',
         bgImage: 'test',
         bgColor: 'black',
         txtColor: 'white',
         id: 'test',
         link: '/test',
       },
+      localVue,
       stubs: { RouterLink: RouterLinkStub },
+      i18n,
+      store,
     });
   });
 
