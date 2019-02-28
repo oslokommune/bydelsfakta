@@ -144,7 +144,6 @@ export default {
 
     activeTab(index) {
       this.active = index;
-      // this.showTable = false;
     },
 
     saveSvg(id) {
@@ -199,7 +198,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid #dae3e5;
+    border-bottom: 1px solid $color-border;
     z-index: 1;
   }
 
@@ -246,7 +245,7 @@ export default {
     cursor: pointer;
 
     &:hover:not(&--active) {
-      background-color: rgba(#dae3e5, 0.35);
+      background-color: rgba($color-border, 0.35);
     }
 
     &--active {
@@ -268,7 +267,6 @@ export default {
     font-weight: 500;
     transition: background-color 0.2s;
     padding: 0.75em;
-    // text-transform: uppercase;
     white-space: nowrap;
 
     &.active {
@@ -289,7 +287,7 @@ export default {
 
     /* Change background color of tabs on hover */
     &:hover:not(.active) {
-      background-color: rgba(#efefef, 0.5);
+      background-color: rgba($color-grey-100, 0.5);
       position: relative;
     }
   }
@@ -309,17 +307,17 @@ export default {
     padding-right: 0.65rem;
     height: 3rem;
     cursor: pointer;
-    background-color: rgba(#dae3e5, 1);
+    background-color: rgba($color-border, 1);
 
     @media screen and (min-width: $break-sm) {
-      background-color: rgba(#dae3e5, 0);
+      background-color: rgba($color-border, 0);
       padding-right: 0.95rem;
       border-radius: 3px;
       height: 3rem;
       width: auto;
 
       &:hover {
-        background-color: rgba(#dae3e5, 0.35);
+        background-color: rgba($color-border, 0.35);
       }
     }
 
