@@ -36,28 +36,34 @@
           id="sammenlign"
           :class="{ 'navigation-link--active': compareDistricts }"
         >
-          <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label"
-            >Sammenlign bydeler</router-link
-          >
+          <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">{{
+            $t('navigationDrawer.linkCompare')
+          }}</router-link>
         </li>
       </ul>
       <transition name="fade">
         <div class="navigation-drawer__buttons" v-if="compareDistricts">
           <div class="navigation-drawer__button-container">
-            <button class="navigation-drawer__button" @click="selectAll" aria-label="select all checkboxes">
-              Velg alle
+            <button
+              class="navigation-drawer__button"
+              @click="selectAll"
+              :aria-label="$t('navigationDrawer.selectAll.aria')"
+            >
+              {{ $t('navigationDrawer.selectAll.label') }}
             </button>
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
               @click="unselectAll"
-              aria-label="unselect all checkboxes"
+              :aria-label="$t('navigationDrawer.unselectAll.aria')"
             >
-              Fjern alle
+              {{ $t('navigationDrawer.unselectAll.label') }}
             </button>
           </div>
           <div class="navigation-drawer__select-container">
-            <label for="navigation-drawer-select" class="visually-hidden">Velg region</label>
+            <label for="navigation-drawer-select" class="visually-hidden">{{
+              $t('navigationDrawer.select.label')
+            }}</label>
             <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
               <option
                 v-for="(element, index) in options"
@@ -99,9 +105,9 @@ export default {
       get: function() {
         if (this.compareDistricts) {
           let count = this.selected.length ? this.selected.length : this.links.length;
-          return 'Sammenlign bydeler (' + count + ')';
+          return `${this.$t('navigationDrawer.navigationDistrict.compareDistrict')} (${count})`;
         } else if (!this.selected.length) {
-          return '- Velg bydel -';
+          return `${this.$t('navigationDrawer.navigationDistrict.chooseDistrict')}`;
         } else {
           return this.links[this.selected - 1].value;
         }

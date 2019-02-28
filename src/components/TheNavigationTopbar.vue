@@ -10,8 +10,11 @@
         @keydown.escape="closeMenu"
         v-click-outside="closeMenu"
         ref="select"
+        :aria-label="$t('navigationTopbar.selectTopic.aria')"
       >
-        <label class="label" :class="{ 'label--active': selectedSubpage !== null }">Velg tema</label>
+        <label class="label" :class="{ 'label--active': selectedSubpage !== null }">{{
+          $t('navigationTopbar.selectTopic.label')
+        }}</label>
         <div class="topic">
           <span>{{ selectedSubpage }}</span>
           <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
@@ -80,9 +83,11 @@ export default {
 
     getDistrict(id) {
       if (this.compareDistricts || id === 'alle') {
-        return 'Sammenligne bydeler';
+        return this.$t('navigationTopbar.backButton.compareDistrict');
       } else {
-        return id !== undefined ? this.allDistricts.find(district => district.uri === id).value : 'Velg bydel';
+        return id !== undefined
+          ? this.allDistricts.find(district => district.uri === id).value
+          : this.$t('navigationTopbar.backButton.chooseDistrict');
       }
     },
 

@@ -3,7 +3,7 @@
     <img class="oslo__img" :src="bgImage" :alt="topic" aria-hidden="true" />
     <span class="oslo__category" :style="{ backgroundColor: txtColor }">{{ category }}</span>
     <span class="oslo__topic" v-html="topic"></span>
-    <span class="oslo__see-more-text">Se mer</span>
+    <span class="oslo__see-more-text">{{ $t('VCategory.seeMore.label') }}</span>
   </router-link>
 </template>
 
