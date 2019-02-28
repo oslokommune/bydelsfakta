@@ -49,11 +49,10 @@ export default {
 
 .main-container__item {
   background-blend-mode: multiply;
-  border-radius: 2px;
   color: white;
   cursor: pointer;
   height: 8em;
-  margin: 0.25em 0.5em;
+  margin: 0;
   flex: 17.5em 1 0;
   padding: 1em;
   display: flex;
@@ -65,11 +64,15 @@ export default {
 
   @media screen and (min-width: $break-sm) {
     height: 9em;
-    margin: 0.5em;
   }
 
   @media screen and (min-width: $break-md) {
     height: 10em;
+  }
+
+  // Fallback to flexbox
+  @media all and (-ms-high-contrast: none) {
+    margin: 0.5em;
   }
 
   &:hover {
