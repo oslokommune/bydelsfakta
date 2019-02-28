@@ -1,10 +1,7 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <template v-for="(subpage, index) in topics[`${topic}`].subpages">
-        <h2 :key="`subpage-${index}`" v-show="subpage.title !== undefined" class="section-heading">
-          {{ subpage.title }}
-        </h2>
+      <template v-for="subpage in topics[`${topic}`].subpages">
         <graph-card
           v-for="(card, cardIndex) in subpage.graphs"
           :key="`${subpage.name}-${cardIndex}`"
@@ -12,7 +9,7 @@
         />
       </template>
       <template>
-        <h2 class="section-heading">{{ $t('Se også') }}</h2>
+        <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
         <v-category
           v-for="(item, relatedIndex) in topics[`${topic}`].related"
           :key="`related-${relatedIndex}`"

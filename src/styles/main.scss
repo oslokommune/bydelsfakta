@@ -12,7 +12,7 @@
 }
 
 html {
-  background-color: $color-grey-50;
+  background-color: $color-bg;
   font-size: 12.5px;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -119,6 +119,10 @@ table {
     text-align: center;
   }
 
+  thead tr:first-child th:first-child {
+    background-color: lighten($color-yellow, 25%) !important;
+  }
+
   thead tr:first-child th:first-child,
   th[scope='row'] {
     text-align: left;
@@ -130,16 +134,16 @@ table {
     z-index: 1;
   }
   thead {
-    background: rgba($color-yellow, 0.1);
+    background: lighten($color-yellow, 25%);
   }
 
   caption {
     position: sticky;
     max-width: 80vw;
-    left: 1em;
-    font-size: 1em;
-    margin: 1em;
-    font-weight: 500;
+    left: 1rem;
+    font-size: 1.15em;
+    margin: 1rem;
+    font-weight: 400;
     color: $color-purple;
     text-align: left;
   }

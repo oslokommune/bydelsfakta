@@ -1,11 +1,8 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
-    <router-link :to="backButton()" id="backButton" class="oslo__navigation-topbar-button">
-      <i class="material-icons oslo__topbar">arrow_back</i>
-      <h4 class="oslo__topbar oslo__topbar-text">{{ getDistrict(this.$route.params.district) }}</h4>
-    </router-link>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedSubpage === null }">
       <button
+        v-if="selectedSubpage"
         id="select"
         class="navigation-topbar__select"
         @click="showDropdown = !showDropdown"
@@ -18,8 +15,10 @@
         <label class="label" :class="{ 'label--active': selectedSubpage !== null }">{{
           $t('navigationTopbar.selectTopic.label')
         }}</label>
-        <span>{{ selectedSubpage }}</span>
-        <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
+        <div class="topic">
+          <span>{{ selectedSubpage }}</span>
+          <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
+        </div>
       </button>
       <transition name="fade">
         <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
@@ -131,17 +130,15 @@ export default {
 .oslo__navigation-topbar {
   display: flex;
   flex-direction: column;
-  margin: 2rem 1rem 0 1rem;
-  width: calc(100% - 2rem);
+  margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+  width: calc(100% - 1rem);
   position: relative;
   z-index: 3;
   padding: 1rem 0;
 
   @media screen and (min-width: $break-lg) {
-    padding: 2rem;
+    padding: 2.5rem 1rem 1rem;
     width: 100%;
-    background-color: white;
-    box-shadow: 0 1px 2px $color-grey-300;
     margin: 0;
   }
 
@@ -169,17 +166,13 @@ export default {
 }
 
 .label {
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
 
-  &--active {
-    font-size: 16px;
-    left: 0;
-    position: absolute;
-    right: auto;
-    transform: translateY(-18px) translateX(-12px) scale(0.75);
-    transition: all 0.3s ease-in-out;
-  }
+.topic {
+  display: flex;
+  align-items: center;
 }
 
 .navigation-topbar {
@@ -194,43 +187,26 @@ export default {
   }
 
   &__select {
-    color: rgb(141, 141, 160);
+    color: $color-purple;
     display: flex;
-    font-size: 24px;
-    font-weight: bold;
-    justify-content: space-between;
-    letter-spacing: 0.7px;
+    flex-direction: column;
+    font-size: 2.25rem;
     padding: 0;
     position: relative;
-    text-transform: uppercase;
     width: 100%;
+    font-weight: 500;
+    padding: 0.5rem;
 
-    &:before {
-      border: 0.5px solid black;
-      bottom: -1px;
-      content: '';
-      left: 0;
-      position: absolute;
-      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
-      width: 100%;
+    @media screen and (min-width: $break-md) {
+      padding: 1rem;
     }
 
     &:focus {
       outline: none;
     }
 
-    &:focus:after {
-      transform: scaleX(1);
-    }
-
-    &:after {
-      border: 1px solid $color-purple;
-      bottom: -1px;
-      content: '';
-      position: absolute;
-      transform: scaleX(0);
-      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
-      width: 100%;
+    &:hover {
+      background-color: darken($color-bg, 5%);
     }
   }
 
@@ -241,11 +217,12 @@ export default {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     width: 100%;
+    max-width: 768px;
     display: flex;
     flex-flow: row wrap;
     position: absolute;
     z-index: 1;
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
 
     &-column {
       display: flex 0 0;
@@ -274,7 +251,6 @@ export default {
       background-color: $color-grey-50;
       border-radius: 4px;
       color: $color-purple;
-      // height: 34px;
       margin-bottom: 0.5rem;
       padding: 1rem 0.75rem;
 

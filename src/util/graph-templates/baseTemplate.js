@@ -95,9 +95,10 @@ function Base_Template(svg) {
     this.heading = this.svg
       .append('text')
       .attr('class', 'heading')
-      .attr('font-size', 14)
-      .attr('font-weight', 'bold')
-      .attr('y', 14);
+      .attr('fill', color.purple)
+      .attr('font-weight', 400)
+      .attr('font-size', '1.15em')
+      .attr('y', '1em');
 
     // Append canvas element
     this.canvas = this.svg
