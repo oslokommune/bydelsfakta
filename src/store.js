@@ -7,13 +7,13 @@ import bydeler from './config/allDistricts';
 
 Vue.use(Vuex);
 
-const state = {
+export const state = {
   compareDistricts: false,
   districts: [],
   districtsGeo: districts,
 };
 
-const getters = {
+export const getters = {
   geoDistricts: state => {
     if (!state.compareDistricts && state.districts.length !== 0) {
       return { ...state.districtsGeo[`${bydeler.find(district => district.key === state.districts[0]).uri}`] };
@@ -32,7 +32,7 @@ const getters = {
   },
 };
 
-const mutations = {
+export const mutations = {
   ADD_DISTRICT(state, payload) {
     state.compareDistricts = true;
     state.districts = payload;
@@ -48,7 +48,7 @@ const mutations = {
   },
 };
 
-const actions = {
+export const actions = {
   addDistrict({ commit }, payload) {
     const districts = payload.district.split('-');
     if (districts.length === 1) {

@@ -20,6 +20,6 @@ module.exports = {
     '<rootDir>/node_modules',
     '<rootDir>/src/coverageReport',
     '<rootDir>/src/main.js',
-    '<rootDir>/src/store.js',
+    '<rootDir>/src/i18n.js',
   ],
 };
