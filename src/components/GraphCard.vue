@@ -178,6 +178,10 @@ export default {
   min-width: 300px;
   overflow: hidden;
 
+  &:first-child {
+    padding-top: 0;
+  }
+
   @media screen and (min-width: 950px) {
     min-width: 400px;
     max-width: 50%;
