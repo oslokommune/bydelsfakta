@@ -20,7 +20,7 @@ export default {
 
   created() {
     if (this.$route.name === 'Home') {
-      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: true });
+      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
     }
     if (this.$route.params.district === undefined) {
       return;

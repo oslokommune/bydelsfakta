@@ -11,7 +11,11 @@
           :bg-image="topics[`${topicName}`].options.bgImage"
           :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
-          :link="`${$route.path}/${topics[`${topicName}`].value}`"
+          :link="
+            $route.name === 'Home'
+              ? `bydel/${district}/${topics[`${topicName}`].value}`
+              : `${$route.path}/${topics[`${topicName}`].value}`
+          "
         />
       </div>
     </div>
@@ -39,7 +43,8 @@ export default {
   props: {
     district: {
       type: String,
-      required: true,
+      required: false,
+      default: 'alle',
     },
   },
 
@@ -87,4 +92,3 @@ export default {
   }
 }
 </style>
-

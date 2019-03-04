@@ -12,10 +12,10 @@ const router = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: District,
     },
     {
-      path: '/bydel/:district',
+      path: '/bydel/:district?',
       name: 'District',
       component: District,
       props: true,
@@ -31,10 +31,6 @@ const router = new Router({
 
 // Temp while we find out what our homepage should look like
 router.beforeEach((to, from, next) => {
-  if (to.name === 'Home') {
-    router.push({ name: 'District', params: { district: 'alle' } });
-  }
-
   if (to.params.topic !== from.params.topic || (to.name === 'Topic' && from.name === 'District')) {
     window.scroll(0, 0);
   }
