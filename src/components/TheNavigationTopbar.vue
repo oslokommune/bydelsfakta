@@ -111,6 +111,9 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
+      if (to.name === 'NotFound') {
+        this.selectedSubpage = null;
+      }
       if (to.name !== 'Home') {
         if (routes.length > 3) this.selectedSubpage = routes[3];
       }
