@@ -72,6 +72,14 @@ export default {
   gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
+  @media screen and (min-width: $break-md) {
+    padding: 0.5em 1em;
+  }
+
+  @media screen and (min-width: $break-md) {
+    padding: 1em;
+  }
+
   // Fallback to flexbox
   @media all and (-ms-high-contrast: none) {
     display: flex;

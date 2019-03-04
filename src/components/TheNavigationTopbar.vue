@@ -144,6 +144,8 @@ export default {
   margin: 1.5rem 0.5rem 0.5rem 0.5rem;
   width: calc(100% - 1rem);
   position: relative;
+  top: 0;
+  background-color: $color-bg;
   z-index: 3;
   padding: 1rem 0;
 
