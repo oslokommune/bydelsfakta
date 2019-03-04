@@ -152,7 +152,8 @@ export default {
 
     onClickHome() {
       this.selected = [];
-      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: true });
+      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
+      this.$router.push({ name: 'Home' });
     },
 
     onClickSammenlign() {
