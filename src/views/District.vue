@@ -20,7 +20,6 @@
       </div>
     </div>
     <div class="main-container__map">
-      <h3>{{ $t('district.map') }}</h3>
       <v-leaflet :district="geoDistricts" />
     </div>
   </div>
