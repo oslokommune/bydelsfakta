@@ -7,6 +7,7 @@
       @keydown.esc="showNavigation = false"
       v-text="selectedSubpage"
     ></button>
+    <div class="version-tag">Alpha</div>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
       <ul class="navigation-list">
         <li
@@ -85,7 +86,7 @@
 import { mapState } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import osloIcon from '../assets/oslo-logo.svg';
+import osloIcon from '../assets/Oslo_komm.svg'; // ../assets/oslo-logo.svg
 
 export default {
   name: 'TheNavigationDrawer',
@@ -238,6 +239,21 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 
+.version-tag {
+  align-self: center;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid $color-purple;
+  border-radius: 1px;
+  font-size: 0.8rem;
+  margin: 0 0.5rem;
+  font-weight: 500;
+
+  @media screen and (min-width: $break-lg) {
+    padding: 0.25rem 0.75rem;
+    transform: translateY(-1rem);
+  }
+}
+
 .navbar {
   background-color: $color-yellow;
   display: flex;
@@ -276,7 +292,7 @@ export default {
   }
 
   @media screen and (min-width: $break-sm) {
-    width: calc(100% - 10em);
+    width: calc(100% - 5.5em);
     border-top: none;
   }
 
@@ -314,13 +330,14 @@ export default {
   cursor: pointer;
   background: $color-bg;
   object-fit: contain;
-  width: 10em;
+  width: 5.5em;
+  padding: 0.5em 1em;
 
   @media screen and (min-width: $break-lg) {
     align-self: center;
     background: none;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0rem;
   }
 }
 
