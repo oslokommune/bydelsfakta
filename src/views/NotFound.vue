@@ -1,5 +1,16 @@
 <template>
-  <h1>Not Found</h1>
+  <div>
+    <h1>Oops! Noe gikk galt.</h1>
+    <div>
+      404 info
+    </div>
+    <div>
+      Feedback-form
+    </div>
+    <div>
+      See more page
+    </div>
+  </div>
 </template>
 
 <script>

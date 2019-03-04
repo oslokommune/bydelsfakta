@@ -41,7 +41,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.params.topic) {
     if (!topicNames.find(name => name === to.params.topic)) {
-      next({ name: 'NotFound', params: { '0': '404' } });
+      next({ name: 'NotFound', params: { '0': '/404' } });
     }
   }
 
