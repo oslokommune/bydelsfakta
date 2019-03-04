@@ -1,5 +1,6 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
+    <h1 v-if="selectedSubpage === null" class="header">{{ getDistrict(this.$route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedSubpage === null }">
       <button
         v-if="selectedSubpage"
@@ -91,14 +92,6 @@ export default {
       }
     },
 
-    backButton() {
-      const route = this.$route;
-      if (route.name === 'Home') return '/';
-      return this.selectedSubpage === null
-        ? { name: 'District', params: { district: 'alle' } }
-        : { name: 'District', params: { district: route.params.district } };
-    },
-
     checkActiveSubpage(subpage) {
       return this.$route.path.includes(subpage);
     },
@@ -126,6 +119,24 @@ export default {
 <style scoped lang="scss">
 @import '../styles/colors';
 @import '../styles/variables';
+
+.header {
+  color: $color-purple;
+  display: flex;
+  flex-direction: column;
+  font-size: 2.25rem;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  font-weight: 500;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  display: none;
+
+  @media screen and (min-width: $break-lg) {
+    display: block;
+  }
+}
 
 .oslo__navigation-topbar {
   display: flex;
