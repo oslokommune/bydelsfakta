@@ -334,11 +334,12 @@ export default {
   flex-basis: auto;
   align-items: center;
   justify-content: center;
-  height: auto;
+  height: 8.5em;
+  min-height: 8.5em;
   background: $color-bg;
 
   @media screen and (min-width: $break-lg) {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     background: none;
   }
 }
