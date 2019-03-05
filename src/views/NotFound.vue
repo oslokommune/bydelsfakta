@@ -1,6 +1,5 @@
 <template>
   <div style="display: flex; flex-direction: column">
-    <h1>Oops! Noe gikk galt.</h1>
     <div>
       404 info
     </div>
