@@ -124,7 +124,7 @@ export default {
   color: $color-purple;
   display: flex;
   flex-direction: column;
-  font-size: 2.25rem;
+  font-size: $font-huge;
   padding: 0;
   position: relative;
   width: 100%;
@@ -179,7 +179,7 @@ export default {
 }
 
 .label {
-  font-size: 1rem;
+  font-size: $font-body;
   margin-bottom: 0.25rem;
 }
 
@@ -203,7 +203,7 @@ export default {
     color: $color-purple;
     display: flex;
     flex-direction: column;
-    font-size: 2.25rem;
+    font-size: $font-huge;
     padding: 0;
     position: relative;
     width: 100%;
@@ -238,7 +238,7 @@ export default {
     padding: 1rem 0.5rem;
 
     &-column {
-      display: flex 0 0;
+      display: flex;
       flex-direction: column;
       flex: 33.333%;
       min-width: 200px;

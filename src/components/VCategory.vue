@@ -110,17 +110,9 @@ export default {
 }
 
 .oslo__topic {
-  font-size: 1.5em;
+  font-size: $font-large;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
   line-height: 1.15em;
-}
-
-.oslo__see-more-text {
-  margin-top: auto;
-  font-size: 1.15rem;
-  font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
-  position: relative;
 }
 </style>

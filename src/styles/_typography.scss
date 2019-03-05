@@ -14,7 +14,7 @@ svg a:not([href$='#']) {
 }
 
 .tick text {
-  font-size: 12px;
+  font-size: $font-small;
   font-weight: 500;
   color: $color-grey-600;
   font-family: monospace;
