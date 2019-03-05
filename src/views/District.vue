@@ -63,27 +63,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/variables';
-
-.topics-grid {
-  padding: 0 1em;
-  flex: 2 1 800px;
-  display: grid;
-  gap: 1em;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-  @media screen and (min-width: $break-md) {
-    padding: 0.5em 1em;
-  }
-
-  @media screen and (min-width: $break-md) {
-    padding: 1em;
-  }
-
-  // Fallback to flexbox
-  @media all and (-ms-high-contrast: none) {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
 </style>

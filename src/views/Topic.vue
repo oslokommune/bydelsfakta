@@ -10,17 +10,19 @@
       </template>
       <template>
         <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
-        <v-category
-          v-for="(item, relatedIndex) in topics[`${topic}`].related"
-          :key="`related-${relatedIndex}`"
-          :id="topics[`${item}`].value"
-          :category="topics[`${item}`].options.kategori"
-          :topic="topics[`${item}`].options.tema"
-          :bg-image="topics[`${item}`].options.bgImage"
-          :bg-color="topics[`${item}`].options.bgColor"
-          :txt-color="topics[`${item}`].options.txtColor"
-          :link="`/bydel/${$route.params.district}/${topics[`${item}`].value}`"
-        />
+        <div class="topics-grid">
+          <v-category
+            v-for="(item, relatedIndex) in topics[`${topic}`].related"
+            :key="`related-${relatedIndex}`"
+            :id="topics[`${item}`].value"
+            :category="topics[`${item}`].options.kategori"
+            :topic="topics[`${item}`].options.tema"
+            :bg-image="topics[`${item}`].options.bgImage"
+            :bg-color="topics[`${item}`].options.bgColor"
+            :txt-color="topics[`${item}`].options.txtColor"
+            :link="`/bydel/${$route.params.district}/${topics[`${item}`].value}`"
+          />
+        </div>
       </template>
     </div>
     <div class="main-container__map">
