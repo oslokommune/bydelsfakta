@@ -1,14 +1,12 @@
 <template>
   <router-link class="main-container__item" :to="link" :id="id" :style="{ backgroundColor: bgColor }">
-    <picture class="oslo__img" aria-hidden="true">
+    <picture>
       <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
       <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />
-      <img :src="bgImage + '.png'" :alt="topic" aria-hidden="true" />
+      <img :src="bgImage + '.png'" :alt="topic" aria-hidden="true" class="oslo__img" />
     </picture>
-
     <span class="oslo__category" :style="{ backgroundColor: txtColor }">{{ category }}</span>
     <span class="oslo__topic" v-html="topic"></span>
-    <!-- <span class="oslo__see-more-text">{{ $t('VCategory.seeMore.label') }}</span> -->
   </router-link>
 </template>
 

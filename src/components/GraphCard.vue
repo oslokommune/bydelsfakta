@@ -83,19 +83,6 @@
                 >
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
               </button>
-
-              <button
-                class="context-menu__dropdown-item"
-                aria-hidden="true"
-                tabindex="0"
-                @click="toggleShowTable"
-                @keyup.enter="toggleShowTable"
-              >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">{{
-                  showTable ? 'insert_chart_outlined' : 'table_chart'
-                }}</i>
-                <span>{{ showTable ? $t('graphCard.showTable.graph') : $t('graphCard.showTable.table') }}</span>
-              </button>
             </div>
           </div>
         </nav>

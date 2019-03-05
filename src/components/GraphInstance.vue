@@ -47,6 +47,8 @@ export default {
 
   computed: {
     shadowClass() {
+      if (this.showTable) return '';
+
       let str = '';
       if (this.shadow.left) str += ' graph__shadow--left';
       if (this.shadow.right) str += ' graph__shadow--right';
