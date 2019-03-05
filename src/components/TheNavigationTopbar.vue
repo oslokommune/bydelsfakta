@@ -84,11 +84,13 @@ export default {
 
     getDistrict(id) {
       if (this.compareDistricts || id === 'alle') {
-        return this.$t('navigationTopbar.backButton.compareDistrict');
+        return this.$t('navigationTopbar.header.compareDistrict');
+      } else if (this.$route.name === 'NotFound') {
+        return this.$t('navigationTopbar.header.notFound');
       } else {
         return id !== undefined
           ? this.allDistricts.find(district => district.uri === id).value
-          : this.$t('navigationTopbar.backButton.chooseDistrict');
+          : this.$t('navigationTopbar.header.chooseDistrict');
       }
     },
 
@@ -104,13 +106,14 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      if (to.name !== 'Home') {
-        if (routes.length > 3) this.selectedSubpage = routes[3];
-      }
-      if (to.name === 'District') {
+      if (to.name === 'NotFound') {
+        this.selectedSubpage = null;
+      } else if (to.name === 'District') {
         this.selectedSubpage = null;
       } else if (to.name === 'Home') {
         this.selectedSubpage = null;
+      } else {
+        if (routes.length > 3) this.selectedSubpage = routes[3];
       }
     },
   },

@@ -43,9 +43,10 @@
       "aria": "velg temaknapp",
       "label": "Velg tema"
     },
-    "backButton": {
+    "header": {
       "compareDistrict": "Sammenligne bydeler",
-      "chooseDistrict": "Velg bydel"
+      "chooseDistrict": "Velg bydel",
+      "notFound": "Oops! Noe gikk galt."
     }
   },
   "VCategory": {

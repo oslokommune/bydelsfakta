@@ -1,5 +1,8 @@
 module.exports = {
   lintOnSave: true,
+  devServer: {
+    host: 'localhost',
+  },
   publicPath: '/bydelsfakta',
   outputDir: 'docs',
   assetsDir: undefined,
