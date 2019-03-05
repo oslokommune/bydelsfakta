@@ -1,0 +1,36 @@
+@media print {
+  @page {
+    margin: 30px;
+  }
+
+  body {
+    transform: scale(0.9);
+    transform-origin: 0 0;
+    max-width: 1600px;
+  }
+  table {
+    page-break-inside: avoid;
+  }
+
+  .navigation-topbar__select label,
+  .card__nav {
+    display: none !important;
+  }
+
+  .card {
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .main-container__cards {
+    flex-basis: 100% !important;
+  }
+
+  .graph__tablecontainer {
+    display: block !important;
+    position: relative;
+    overflow: auto;
+    clip: none;
+    height: auto;
+  }
+}
