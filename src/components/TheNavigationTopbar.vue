@@ -73,11 +73,6 @@ export default {
       const routes = this.$route.path.split('/');
       if (routes.length > 3) this.selectedSubpage = routes[3];
     }
-
-    if (this.$route.name === 'NotFound') {
-      this.selectedSubpage = null;
-      this.$router.push({ name: 'NotFound', params: { 0: '/404' } });
-    }
   },
 
   methods: {
