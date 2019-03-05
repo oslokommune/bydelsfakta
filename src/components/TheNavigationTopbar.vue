@@ -72,6 +72,11 @@ export default {
       const routes = this.$route.path.split('/');
       if (routes.length > 3) this.selectedSubpage = routes[3];
     }
+
+    if (this.$route.name === 'NotFound') {
+      this.selectedSubpage = null;
+      this.$router.push({ name: 'NotFound', params: { 0: '/404' } });
+    }
   },
 
   methods: {
@@ -113,11 +118,9 @@ export default {
       const routes = to.path.split('/');
       if (to.name === 'NotFound') {
         this.selectedSubpage = null;
-      }
-      if (to.name !== 'Home') {
+      } else if (to.name !== 'Home') {
         if (routes.length > 3) this.selectedSubpage = routes[3];
-      }
-      if (to.name === 'District') {
+      } else if (to.name === 'District') {
         this.selectedSubpage = null;
       } else if (to.name === 'Home') {
         this.selectedSubpage = null;
