@@ -315,7 +315,7 @@ function Template(svg) {
       .duration(this.duration)
       .attr('width', (d, i) => {
         if (this.method === 'value' && d.value > this.x[i].domain()[1]) return 0;
-        return this.x[0](d[this.method]);
+        return Math.max(this.x[0](d[this.method]), 0);
       })
       .attr('x', (d, i) => this.x[i](0));
 
