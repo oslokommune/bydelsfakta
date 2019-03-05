@@ -39,11 +39,11 @@
   flex: 2 1 800px;
 
   @media screen and (min-width: $break-md) {
-    padding: 1em 0.5em 0;
+    padding: 0 0.5em;
   }
 
   @media screen and (min-width: $break-lg) {
-    padding: 1em 1em 0;
+    padding: 0em 1em;
   }
 }
 

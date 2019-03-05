@@ -24,7 +24,6 @@
       </template>
     </div>
     <div class="main-container__map">
-      <h3>{{ $t('topic.map') }}</h3>
       <v-leaflet :district="geoDistricts" />
     </div>
   </div>

@@ -1,5 +1,6 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
+    <h1 v-if="selectedSubpage === null" class="header">{{ getDistrict(this.$route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedSubpage === null }">
       <button
         v-if="selectedSubpage"
@@ -96,14 +97,6 @@ export default {
       }
     },
 
-    backButton() {
-      const route = this.$route;
-      if (route.name === 'Home') return '/';
-      return this.selectedSubpage === null
-        ? { name: 'District', params: { district: 'alle' } }
-        : { name: 'District', params: { district: route.params.district } };
-    },
-
     checkActiveSubpage(subpage) {
       return this.$route.path.includes(subpage);
     },
@@ -133,12 +126,32 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 
+.header {
+  color: $color-purple;
+  display: flex;
+  flex-direction: column;
+  font-size: $font-huge;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  font-weight: 500;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  display: none;
+
+  @media screen and (min-width: $break-lg) {
+    display: block;
+  }
+}
+
 .oslo__navigation-topbar {
   display: flex;
   flex-direction: column;
   margin: 1.5rem 0.5rem 0.5rem 0.5rem;
   width: calc(100% - 1rem);
   position: relative;
+  top: 0;
+  background-color: $color-bg;
   z-index: 3;
   padding: 1rem 0;
 
@@ -172,7 +185,7 @@ export default {
 }
 
 .label {
-  font-size: 1rem;
+  font-size: $font-body;
   margin-bottom: 0.25rem;
 }
 
@@ -196,7 +209,7 @@ export default {
     color: $color-purple;
     display: flex;
     flex-direction: column;
-    font-size: 2.25rem;
+    font-size: $font-huge;
     padding: 0;
     position: relative;
     width: 100%;
@@ -231,7 +244,7 @@ export default {
     padding: 1rem 0.5rem;
 
     &-column {
-      display: flex 0 0;
+      display: flex;
       flex-direction: column;
       flex: 33.333%;
       min-width: 200px;

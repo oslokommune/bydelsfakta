@@ -1,9 +1,14 @@
 <template>
   <router-link class="main-container__item" :to="link" :id="id" :style="{ backgroundColor: bgColor }">
-    <img class="oslo__img" :src="bgImage" :alt="topic" aria-hidden="true" />
+    <picture class="oslo__img" aria-hidden="true">
+      <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
+      <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />
+      <img :src="bgImage + '.png'" :alt="topic" aria-hidden="true" />
+    </picture>
+
     <span class="oslo__category" :style="{ backgroundColor: txtColor }">{{ category }}</span>
     <span class="oslo__topic" v-html="topic"></span>
-    <span class="oslo__see-more-text">{{ $t('VCategory.seeMore.label') }}</span>
+    <!-- <span class="oslo__see-more-text">{{ $t('VCategory.seeMore.label') }}</span> -->
   </router-link>
 </template>
 
@@ -51,7 +56,7 @@ export default {
   background-blend-mode: multiply;
   color: white;
   cursor: pointer;
-  height: 8em;
+  height: 6em;
   margin: 0;
   flex: 17.5em 1 0;
   padding: 1em;
@@ -63,11 +68,11 @@ export default {
   overflow: hidden;
 
   @media screen and (min-width: $break-sm) {
-    height: 9em;
+    height: 8em;
   }
 
   @media screen and (min-width: $break-md) {
-    height: 10em;
+    height: 9em;
   }
 
   // Fallback to flexbox
@@ -77,37 +82,6 @@ export default {
 
   &:hover {
     transform: scale(1.03);
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    left: 7em;
-    bottom: 1.75em;
-    right: 2em;
-    border: 0.5px solid white;
-    box-shadow: 0 1.5px 3px rgba($color-grey-600, 0.95);
-    transition: right 0.3s ease-in-out;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    right: 2em;
-    bottom: 1.75em;
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent;
-    border-left: 5.5px solid white;
-    transition: right 0.3s ease-in-out;
-    transform: translateY(2.5px);
-  }
-
-  &:hover:before {
-    right: 1em;
-  }
-
-  &:hover:after {
-    right: 1em;
   }
 }
 
@@ -136,17 +110,9 @@ export default {
 }
 
 .oslo__topic {
-  font-size: 1.5em;
+  font-size: $font-large;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
   line-height: 1.15em;
-}
-
-.oslo__see-more-text {
-  margin-top: auto;
-  font-size: 1.15rem;
-  font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
-  position: relative;
 }
 </style>

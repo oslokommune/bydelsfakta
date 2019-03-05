@@ -52,6 +52,7 @@
               id="context-menu-button"
             >
               <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
+              <span>{{ $t('graphCard.options.label') }}</span>
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown">
               <button
@@ -211,14 +212,14 @@ export default {
   &__title {
     margin-right: 1rem;
     margin-bottom: 0.5rem;
-    font-size: 1.55rem;
+    font-size: $font-large;
     font-weight: 500;
     color: $color-purple;
   }
 
   &__published {
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: $font-small;
     color: rgba($color-purple, 0.65);
   }
 
@@ -309,7 +310,7 @@ export default {
     cursor: pointer;
     background-color: rgba($color-border, 1);
 
-    @media screen and (min-width: $break-sm) {
+    @media screen and (min-width: $break-md) {
       background-color: rgba($color-border, 0);
       padding-right: 0.95rem;
       border-radius: 3px;
@@ -327,7 +328,7 @@ export default {
       text-transform: uppercase;
       display: none;
 
-      @media screen and (min-width: $break-sm) {
+      @media screen and (min-width: $break-md) {
         display: inline-block;
       }
     }
@@ -356,7 +357,7 @@ export default {
 
       &-icon {
         color: rgb(41, 40, 88);
-        font-size: 16px;
+        font-size: $font-large;
       }
 
       span {

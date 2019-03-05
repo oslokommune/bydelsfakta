@@ -249,7 +249,7 @@ export default {
   padding: 0.25rem 0.5rem;
   border: 1px solid $color-purple;
   border-radius: 1px;
-  font-size: 0.8rem;
+  font-size: $font-small;
   margin: 0 0.5rem;
   font-weight: 500;
 
@@ -318,7 +318,7 @@ export default {
 .selectedSubpage {
   color: $color-purple;
   font-weight: 500;
-  font-size: 1.25em;
+  font-size: $font-medium;
   display: block;
   height: auto;
   text-align: left;
