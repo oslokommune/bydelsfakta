@@ -141,6 +141,7 @@ export default {
 
 <style lang="scss" scoped>
 @import './../styles/colors';
+@import './../styles/variables';
 
 .graph {
   &__shadow {
@@ -191,7 +192,7 @@ export default {
 }
 
 .tick text {
-  font-size: 12px;
+  font-size: $font-small;
   font-weight: 500;
   color: $color-grey-600;
   font-family: monospace;
