@@ -15,6 +15,9 @@
     "showTable": {
       "graph": "Vis grafikk",
       "table": "Vis tabell"
+    },
+    "options": {
+      "label": "Valg"
     }
   },
   "navigationDrawer": {
