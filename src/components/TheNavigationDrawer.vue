@@ -1,6 +1,9 @@
 <template>
   <aside class="navbar">
-    <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" @click="onClickHome" />
+    <router-link to="/" class="logo-link">
+      <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" />
+    </router-link>
+
     <button
       class="selectedSubpage"
       @click="showNavigation = !showNavigation"
@@ -149,12 +152,6 @@ export default {
         : this.$route.params.topic === undefined
         ? { name: 'District', params: { district } }
         : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
-    },
-
-    onClickHome() {
-      this.selected = [];
-      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
-      this.$router.push({ name: 'Home' });
     },
 
     onClickSammenlign() {
@@ -331,18 +328,32 @@ export default {
   }
 }
 
-.oslo__logo {
-  cursor: pointer;
+.logo-link {
+  display: flex;
+  align-self: center;
+  flex-basis: auto;
+  align-items: center;
+  justify-content: center;
+  height: auto;
   background: $color-bg;
-  object-fit: contain;
-  width: 5.5em;
-  padding: 0.5em 1em;
 
   @media screen and (min-width: $break-lg) {
-    align-self: center;
+    padding: 1rem 0;
     background: none;
-    margin-top: 1.5rem;
-    margin-bottom: 0rem;
+  }
+}
+
+.oslo__logo {
+  cursor: pointer;
+  object-fit: contain;
+  width: 5.5em;
+  height: 100%;
+  padding: 1.25rem;
+
+  @media screen and (min-width: $break-lg) {
+    width: 6.5em;
+    align-self: center;
+    padding-bottom: 0.75rem;
   }
 }
 
@@ -552,6 +563,10 @@ input[type='checkbox'] {
       width: 50%;
       transition: all 0.3s ease-in-out;
 
+      &:not([disabled]) {
+        cursor: pointer;
+      }
+
       @media screen and (min-width: $break-md) {
         width: auto;
       }
@@ -566,7 +581,7 @@ input[type='checkbox'] {
       }
 
       &:hover:not([disabled]) {
-        box-shadow: 0 0 0 1px #e0e0e0;
+        box-shadow: 0 0 0 1px $color-grey-50;
       }
     }
   }
@@ -589,6 +604,7 @@ input[type='checkbox'] {
     position: relative;
     width: 100%;
     height: 42px;
+    cursor: pointer;
 
     @media screen and (min-width: $break-lg) {
       width: 205px;
