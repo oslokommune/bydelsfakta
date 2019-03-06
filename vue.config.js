@@ -1,9 +1,9 @@
 module.exports = {
   lintOnSave: true,
   devServer: {
-    host: 'localhost',
+    proxy: 'http://localhost:5000',
   },
-  publicPath: '/bydelsfakta',
+  publicPath: '/',
   outputDir: 'docs',
   assetsDir: undefined,
   runtimeCompiler: undefined,
