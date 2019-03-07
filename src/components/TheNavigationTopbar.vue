@@ -17,7 +17,7 @@
           $t('navigationTopbar.selectTopic.label')
         }}</label>
         <div class="topic">
-          <span>{{ selectedSubpage }}</span>
+          <span>{{ getHumanReadableTopic(selectedSubpage) }}</span>
           <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
         </div>
       </button>
@@ -82,6 +82,11 @@ export default {
       if (this.showDropdown) {
         this.showDropdown = false;
       }
+    },
+
+    getHumanReadableTopic(id) {
+      console.log(dropdownTopics);
+      return dropdownTopics.flatMap(obj => obj.links).find(obj => obj.value === id).text || '';
     },
 
     getDistrict(id) {
