@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": [
+      "Historisk utvikling for innvandrere med kort botid i Bydel Grünerløkka (2018)",
+      "Historisk utvikling for innvandrere med lang botid i Bydel Grünerløkka (2018)",
+      "Historisk utvikling for innvandrere to innvandrerforeldre i Bydel Grünerløkka (2018)",
+      "Historisk utvikling for innvandrere én innvandrerforelder i Bydel Grünerløkka (2018)"
+    ],
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "series": [
+      { "heading": "Innvandrer", "subheading": "Kort botid" },
+      { "heading": "Innvandrer", "subheading": "Lang botid" },
+      { "heading": "Norskfødt", "subheading": "2 innvandrerforeldre" },
+      { "heading": "Norskfødt", "subheading": "1 innvandrerforelder" }
+    ],
+    "xAxis": {
+      "format": "time",
+      "title": false
+    },
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http: //ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "files": [
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+
+  "data": [
+    {
+      "linkTo": false,
+      "geography": "Grünerløkka vest",
+      "values": [
+        [
+          { "date": "2016-01-01", "value": 5442, "ratio": 0.055 },
+          { "date": "2017-01-01", "value": 6032, "ratio": 0.056 },
+          { "date": "2018-01-01", "value": 6732, "ratio": 0.055 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 6412, "ratio": 0.032 },
+          { "date": "2017-01-01", "value": 6632, "ratio": 0.029 },
+          { "date": "2018-01-01", "value": 6692, "ratio": 0.028 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 5412, "ratio": 0.025 },
+          { "date": "2017-01-01", "value": 5632, "ratio": 0.023 },
+          { "date": "2018-01-01", "value": 5732, "ratio": 0.022 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 6812, "ratio": 0.035 },
+          { "date": "2017-01-01", "value": 6232, "ratio": 0.034 },
+          { "date": "2018-01-01", "value": 6432, "ratio": 0.036 }
+        ]
+      ]
+    },
+    {
+      "linkTo": false,
+      "geography": "Grünerløkka øst",
+      "values": [
+        [
+          { "date": "2016-01-01", "value": 5242, "ratio": 0.035 },
+          { "date": "2017-01-01", "value": 5422, "ratio": 0.034 },
+          { "date": "2018-01-01", "value": 5732, "ratio": 0.032 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 7412, "ratio": 0.065 },
+          { "date": "2017-01-01", "value": 7362, "ratio": 0.067 },
+          { "date": "2018-01-01", "value": 7332, "ratio": 0.064 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 6412, "ratio": 0.054 },
+          { "date": "2017-01-01", "value": 6612, "ratio": 0.052 },
+          { "date": "2018-01-01", "value": 6732, "ratio": 0.05 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 6402, "ratio": 0.025 },
+          { "date": "2017-01-01", "value": 6632, "ratio": 0.021 },
+          { "date": "2018-01-01", "value": 6732, "ratio": 0.024 }
+        ]
+      ]
+    },
+    {
+      "linkTo": "/grunerlokka/innvandrere",
+      "geography": "Bydel Grünerløkka",
+      "avgRow": true,
+      "values": [
+        [
+          { "date": "2016-01-01", "value": 5412, "ratio": 0.0522 },
+          { "date": "2017-01-01", "value": 5332, "ratio": 0.0512 },
+          { "date": "2018-01-01", "value": 5432, "ratio": 0.0505 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 3812, "ratio": 0.0355 },
+          { "date": "2017-01-01", "value": 4232, "ratio": 0.0341 },
+          { "date": "2018-01-01", "value": 4632, "ratio": 0.0344 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 7012, "ratio": 0.045 },
+          { "date": "2017-01-01", "value": 7132, "ratio": 0.0464 },
+          { "date": "2018-01-01", "value": 7072, "ratio": 0.0451 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 6072, "ratio": 0.0405 },
+          { "date": "2017-01-01", "value": 6032, "ratio": 0.0401 },
+          { "date": "2018-01-01", "value": 6182, "ratio": 0.0404 }
+        ]
+      ]
+    },
+    {
+      "linkTo": "/sammenligne-bydeler/innvandrere",
+      "geography": "Oslo i alt",
+      "totalRow": true,
+      "values": [
+        [
+          { "date": "2016-01-01", "value": 6419, "ratio": 0.035 },
+          { "date": "2017-01-01", "value": 6631, "ratio": 0.041 },
+          { "date": "2018-01-01", "value": 6736, "ratio": 0.044 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 5312, "ratio": 0.035 },
+          { "date": "2017-01-01", "value": 5232, "ratio": 0.041 },
+          { "date": "2018-01-01", "value": 5032, "ratio": 0.044 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 5602, "ratio": 0.035 },
+          { "date": "2017-01-01", "value": 5562, "ratio": 0.041 },
+          { "date": "2018-01-01", "value": 5482, "ratio": 0.044 }
+        ],
+        [
+          { "date": "2016-01-01", "value": 4212, "ratio": 0.035 },
+          { "date": "2017-01-01", "value": 4382, "ratio": 0.041 },
+          { "date": "2018-01-01", "value": 4532, "ratio": 0.044 }
+        ]
+      ]
+    }
+  ]
+}
