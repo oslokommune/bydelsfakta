@@ -11,11 +11,7 @@
           :bg-image="topics[`${topicName}`].options.bgImage"
           :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
-          :link="
-            $route.name === 'Home'
-              ? `bydel/${district}/${topics[`${topicName}`].value}`
-              : `${$route.path}/${topics[`${topicName}`].value}`
-          "
+          :district="district"
         />
       </div>
     </div>

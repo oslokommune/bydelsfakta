@@ -85,7 +85,13 @@ export default {
     },
 
     getHumanReadableTopic(id) {
-      return dropdownTopics.flatMap(obj => obj.links).find(obj => obj.value === id).text || '';
+      const topic = dropdownTopics.flatMap(obj => obj.links).find(obj => obj.value === id);
+      if (topic) {
+        return topic.text;
+      } else {
+        this.selectedSubpage = null;
+        return '';
+      }
     },
 
     getDistrict(id) {

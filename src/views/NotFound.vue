@@ -38,7 +38,7 @@
           :bg-image="topics[`${topicName}`].options.bgImage"
           :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
-          :link="`bydel/alle/${topics[`${topicName}`].value}`"
+          district="alle"
         />
       </div>
     </div>

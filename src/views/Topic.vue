@@ -20,7 +20,7 @@
             :bg-image="topics[`${item}`].options.bgImage"
             :bg-color="topics[`${item}`].options.bgColor"
             :txt-color="topics[`${item}`].options.txtColor"
-            :link="`/bydel/${$route.params.district}/${topics[`${item}`].value}`"
+            :district="$route.params.district"
           />
         </div>
       </div>

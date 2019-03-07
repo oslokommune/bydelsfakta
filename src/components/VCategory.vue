@@ -1,5 +1,5 @@
 <template>
-  <router-link class="main-container__item" :to="link" :id="id" :style="{ backgroundColor: bgColor }">
+  <router-link class="main-container__item" :to="{ name: 'Topic', params: { district, topic: id} }" :id="id" :style="{ backgroundColor: bgColor }">
     <picture>
       <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
       <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />
@@ -34,11 +34,11 @@ export default {
       type: String,
       required: true,
     },
-    link: {
+    id: {
       type: String,
       required: true,
     },
-    id: {
+    district: {
       type: String,
       required: true,
     },
