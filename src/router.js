@@ -30,13 +30,9 @@ const router = new Router({
       props: true,
     },
     {
-      path: '/404',
+      path: '*',
       name: 'NotFound',
       component: NotFound,
-    },
-    {
-      path: '*',
-      redirect: '/404',
     },
   ],
 });
@@ -45,7 +41,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.params.topic) {
     if (!topicNames.find(name => name === to.params.topic)) {
-      next({ name: 'NotFound', params: { '0': '/404' } });
+      next({ name: 'NotFound', params: [to.path] });
     }
   }
 
@@ -59,7 +55,7 @@ router.beforeEach((to, from, next) => {
       } else if (allDistricts.find(district => district.key === districts[0])) {
         next();
       } else {
-        next({ name: 'NotFound', params: { '0': '/404' } });
+        next({ name: 'NotFound', params: [to.path] });
       }
     } else if (districts.length > 1) {
       const errors = [];
@@ -69,7 +65,7 @@ router.beforeEach((to, from, next) => {
         }
       });
       if (errors.length > 0) {
-        next({ name: 'NotFound', params: { '0': '/404' } });
+        next({ name: 'NotFound', params: [to.path] });
       }
     }
   }

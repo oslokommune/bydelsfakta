@@ -60,5 +60,20 @@
   "topic": {
     "seeMore": "Se også",
     "map": "Bydelskart"
+  },
+  "notFound": {
+    "siteNotFound": {
+      "header": "Siden ble ikke funnet.",
+      "paragraph": "Du har ved en feiltakelse blitt sendt til en side som ikke eksiterer.",
+      "button": "Gå til forsiden"
+    },
+    "feedback": {
+      "header": "Pssst...",
+      "paragraph": "Vi vil gjerne høre fra deg om hva som gikk galt slik at vi kan forbedre tjenesten. Du kan sende en e-post til "
+    },
+    "seeMore": {
+      "header": "Eller sjekk ut en av disse sidene",
+      "subheader": "(de fungerer, vi lover)"
+    }
   }
 }

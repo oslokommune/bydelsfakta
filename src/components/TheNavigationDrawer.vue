@@ -1,6 +1,6 @@
 <template>
   <aside class="navbar">
-    <router-link to="/" class="logo-link">
+    <router-link :to="{ name: 'Home' }" class="logo-link">
       <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" />
     </router-link>
 
@@ -214,6 +214,11 @@ export default {
         this.selected = paramDistrict;
       } else if (district !== undefined) {
         this.selected = [district.key];
+      }
+
+      if (to.name === 'Home') {
+        this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
+        this.selected = [];
       }
 
       // Hide navigation when a selection is made,
