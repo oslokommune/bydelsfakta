@@ -78,3 +78,33 @@
     flex-wrap: wrap;
   }
 }
+
+/*
+  Reduce opacity on site when district or topic selectors
+  are open. Even though district selector dropdown isn't relevant
+  on larger screens, the drawer can still be opened while
+  the screen is small and then viewport can be changed,
+  some media query and pseudo selector (:not) hacks are needed.
+*/
+.menuIsOpen,
+.navigationIsOpen {
+  max-height: 100vh;
+  overflow-y: hidden;
+  main,
+  .navigation {
+    opacity: 0.2;
+  }
+}
+.navigationIsOpen:not(.menuIsOpen) {
+  .navigation {
+    opacity: 1;
+  }
+  @media screen and (min-width: $break-lg) {
+    max-height: 100vh;
+    overflow-y: hidden;
+    main,
+    .navigation {
+      opacity: 1;
+    }
+  }
+}

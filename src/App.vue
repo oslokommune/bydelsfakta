@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app" :class="{ menuIsOpen, navigationIsOpen }">
     <the-navigation-drawer />
     <div class="app__content">
       <the-navigation-topbar />
@@ -13,10 +13,15 @@
 <script>
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: { TheNavigationTopbar, TheNavigationDrawer },
+
+  computed: {
+    ...mapState(['menuIsOpen', 'navigationIsOpen']),
+  },
 
   created() {
     if (this.$route.name === 'Home') {
