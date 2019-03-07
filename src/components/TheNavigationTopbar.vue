@@ -49,7 +49,7 @@
   </header>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import dropdownTopics from '../config/dropdownTopics';
 
@@ -65,7 +65,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['compareDistricts']),
+    ...mapState(['compareDistricts', 'menuIsOpen']),
   },
 
   created() {
@@ -76,6 +76,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(['setMenuIsOpen']),
+
     closeMenu() {
       if (this.showDropdown) {
         this.showDropdown = false;
@@ -115,6 +117,10 @@ export default {
       } else {
         if (routes.length > 3) this.selectedSubpage = routes[3];
       }
+    },
+
+    showDropdown() {
+      this.setMenuIsOpen(this.showDropdown);
     },
   },
 };
@@ -239,6 +245,9 @@ export default {
     position: absolute;
     z-index: 1;
     padding: 1rem 0.5rem;
+
+    max-height: calc(100vh - 17rem);
+    overflow: auto;
 
     &-column {
       display: flex;

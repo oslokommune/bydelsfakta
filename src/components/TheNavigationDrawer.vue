@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/Oslo_komm.svg'; // ../assets/oslo-logo.svg
@@ -118,7 +118,7 @@ export default {
       },
       set: function() {},
     },
-    ...mapState(['compareDistricts', 'districts']),
+    ...mapState(['compareDistricts', 'districts', 'navigationIsOpen']),
   },
 
   created() {
@@ -131,6 +131,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(['setNavigationIsOpen']),
+
     onChangeCheckbox() {
       // Reset selector
       this.selectedPredefinedOption = [];
@@ -233,6 +235,10 @@ export default {
             });
       }
     },
+
+    showNavigation() {
+      this.setNavigationIsOpen(this.showNavigation);
+    },
   },
 };
 </script>
@@ -285,9 +291,12 @@ export default {
   right: 0;
   z-index: 1;
   background: white;
-  padding: 2em 0;
+  padding: 0 0 2em;
   display: none;
-  border-top: 2px solid $color-blue;
+  border-top: 2px solid $color-bg;
+  box-shadow: 0 2px 3px rgba($color-grey-600, 0.5);
+  max-height: calc(100vh - 5em);
+  overflow-y: auto;
 
   &--show {
     display: block;
@@ -305,10 +314,15 @@ export default {
     position: relative;
     width: 100%;
     padding: 0;
+    box-shadow: none;
   }
 
   &-list {
-    padding: 0;
+    padding: 0 1em;
+
+    @media screen and (min-width: $break-lg) {
+      padding: 0;
+    }
   }
 }
 
@@ -422,8 +436,13 @@ export default {
 
     &-compare {
       margin-bottom: 1rem;
-      margin-top: 2rem;
-      padding-left: 3.6rem;
+      margin-top: 0rem;
+      padding-left: 4rem;
+
+      @media screen and (min-width: $break-md) {
+        margin-top: 1rem;
+        padding-left: 3.5rem;
+      }
     }
 
     // Add visual border on the left side of text on hover
