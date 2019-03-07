@@ -85,7 +85,6 @@ export default {
     },
 
     getHumanReadableTopic(id) {
-      console.log(dropdownTopics);
       return dropdownTopics.flatMap(obj => obj.links).find(obj => obj.value === id).text || '';
     },
 
