@@ -22,7 +22,7 @@ function Template(svg) {
   // Line generator
   let line = d3
     .line()
-    .x(d => this.x(this.parseDate(d.date)))
+    .x(d => this.x(this.parseYear(d.date)))
     .y(d => this.y(d[this.method]));
 
   this.render = function(data, options = {}) {
@@ -82,7 +82,7 @@ function Template(svg) {
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
-    .x(d => this.x(this.parseDate(d.date)))
+    .x(d => this.x(this.parseYear(d.date)))
     .y(d => this.y(d[this.method]))
 
   this.drawTable = function() {
@@ -130,7 +130,7 @@ function Template(svg) {
       })
       .join('th')
       .attr('id', (d, i) => `th_2_${i}`)
-      .text(d => this.formatYear(this.parseDate(d)));
+      .text(d => this.formatYear(this.parseYear(d)));
 
     let rows = tbody
       .selectAll('tr')
@@ -177,7 +177,7 @@ function Template(svg) {
     dot
       .append('text')
       .text(d => d.value)
-      .attr('x', d => this.x(this.parseDate(d.date)))
+      .attr('x', d => this.x(this.parseYear(d.date)))
       .attr('y', d => this.y(d.value))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
@@ -189,7 +189,7 @@ function Template(svg) {
       .attr('r', 4)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
-      .attr('cx', d => this.x(this.parseDate(d.date)))
+      .attr('cx', d => this.x(this.parseYear(d.date)))
       .attr('cy', d => this.y(d.value));
   };
 
@@ -201,9 +201,10 @@ function Template(svg) {
     let voronoiData = d3
       .voronoi()
       .extent([[1, 1], [this.width, this.height]])
-      .x(d => this.x(this.parseDate(d.date)))
+      .x(d => this.x(this.parseYear(d.date)))
       .y(d => this.y(d.value))
-      .polygons(flattenData);
+      .polygons(flattenData)
+      .filter(Boolean)
 
     let voronoiCells = this.canvas
       .select('g.voronoi')
@@ -572,9 +573,9 @@ function Template(svg) {
     this.x = d3
       .scaleTime()
       .domain([
-        d3.timeMonth.offset(this.parseDate(this.data.data[0].values[0][0].date), -2),
+        d3.timeMonth.offset(this.parseYear(this.data.data[0].values[0][0].date), -2),
         d3.timeMonth.offset(
-          this.parseDate(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
+          this.parseYear(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
           0
         ),
       ])
