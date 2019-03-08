@@ -10,10 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const HOST = '0.0.0.0';
 
-
 app.use(morgan('combined'));
 app.use(history({ verbose: true }));
-app.use(express.static('docs'));
+app.use(express.static('./docs'));
 app.use(bodyParser.json());
 app.use(cors());
 
