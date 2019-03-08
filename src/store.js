@@ -13,6 +13,9 @@ export const state = {
   districtsGeo: districts,
   menuIsOpen: false,
   navigationIsOpen: false,
+  accessToken: null,
+  updateToken: () => {},
+  isAuthenticated: false,
 };
 
 export const getters = {
@@ -54,6 +57,15 @@ export const mutations = {
   SET_NAVIGATION_IS_OPEN(state, payload) {
     state.navigationIsOpen = payload;
   },
+  setAccessToken(state, accessToken) {
+    state.accessToken = accessToken;
+  },
+  setAuthenticated(state, isAuthenticated) {
+    state.isAuthenticated = isAuthenticated;
+  },
+  setKeycloakUpdateToken(state, updateToken) {
+    state.updateToken = updateToken;
+  },
 };
 
 export const actions = {
@@ -90,6 +102,15 @@ export const actions = {
   },
   setNavigationIsOpen({ commit }, payload) {
     commit('SET_NAVIGATION_IS_OPEN', payload);
+  },
+  setAccessToken({ commit }, accessToken) {
+    commit('setAccessToken', accessToken);
+  },
+  setAuthenticated({ commit }, isAuthenticated) {
+    commit('setAuthenticated', isAuthenticated);
+  },
+  setKeycloakUpdateToken({ commit }, updateToken) {
+    commit('setKeycloakUpdateToken', updateToken);
   },
 };
 

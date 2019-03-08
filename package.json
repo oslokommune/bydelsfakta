@@ -10,7 +10,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watchAll",
-    "backend": "nodemon server/server.js",
+    "backend": "env-cmd ./.env nodemon server/server.js",
     "docker": "npm run build:prod && npm run docker:build",
     "docker:build": "docker build -t $npm_package_name:$npm_package_version ."
   },
@@ -22,6 +22,7 @@
     "cors": "^2.8.5",
     "d3": "^5.8.2",
     "express": "^4.16.4",
+    "keycloak-js": "^5.0.0",
     "leaflet": "^1.3.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",

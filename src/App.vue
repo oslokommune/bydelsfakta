@@ -11,19 +11,27 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
-import { mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: { TheNavigationTopbar, TheNavigationDrawer },
 
+  props: {
+    updateToken: {
+      type: Function,
+      required: true,
+    },
+  },
+
   computed: {
-    ...mapState(['menuIsOpen', 'navigationIsOpen']),
+    ...mapState(['menuIsOpen', 'navigationIsOpen', 'isAuthenticated', 'accessToken']),
   },
 
   created() {
+    this.setKeycloakUpdateToken(this.updateToken);
     if (this.$route.name === 'Home') {
       this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
     }
@@ -31,6 +39,10 @@ export default {
       return;
     }
     this.$store.dispatch('addDistrict', { district: this.$route.params.district, pushRoute: true });
+  },
+
+  methods: {
+    ...mapActions(['setKeycloakUpdateToken']),
   },
 
   watch: {

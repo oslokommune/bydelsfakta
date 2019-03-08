@@ -5,6 +5,7 @@ import { L } from 'vue2-leaflet';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import AuthService from './auth/AuthService';
 
 import clickOutside from './directives/clickOutside';
 
@@ -15,6 +16,19 @@ import './styles/main.scss';
 import setupI18n from './i18n';
 
 const i18n = setupI18n();
+
+function initializeEnvironment() {
+  const envs = JSON.parse(window.__GLOBAL_ENVS__);
+  const envsKeys = Object.keys(envs);
+  envsKeys.forEach(envKey => {
+    process.env[envKey] = envs[envKey];
+  });
+  delete window.__GLOBAL_ENVS__;
+}
+
+if (process.env.NODE_ENV !== 'development') {
+  initializeEnvironment();
+}
 
 // this part resolve an issue where the markers would not appear
 delete L.Icon.Default.prototype._getIconUrl;
@@ -34,9 +48,21 @@ Vue.config.performance = process.env.NODE_ENV !== 'production';
 // Directive to detect clicks outside of an element
 Vue.directive('click-outside', clickOutside);
 
+const auth = new AuthService();
+const { updateToken } = auth;
+
+console.log(updateToken);
+
 new Vue({
+  el: '#app',
   router,
   store,
   i18n,
-  render: h => h(App),
-}).$mount('#app');
+  components: { App },
+  template: '<App :updateToken="updateToken" />',
+  data() {
+    return {
+      updateToken,
+    };
+  },
+});
