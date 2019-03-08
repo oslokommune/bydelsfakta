@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Befolkningsutvikling og forventet utvikling i Bydel Grünerløkka",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "publishedDate": "2019-06-01",
+    "dataSource": {
+      "url": "http: //ssb.no/data/1234124/",
+      "label": "Statistisk sentralbyrå"
+    },
+    "files": [
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.xls",
+        "type": "Excel"
+      },
+      {
+        "url": "http: //data.oslo.kommune.no/data/1234123/data.csv",
+        "type": "csv"
+      }
+    ]
+  },
+
+  "data": {
+    "actual": [
+      {
+        "date": "2008-01-01",
+        "population": 42041,
+        "change": false
+      },
+      {
+        "date": "2009-01-01",
+        "population": 42758,
+        "change": 717.0
+      },
+      {
+        "date": "2010-01-01",
+        "population": 43456,
+        "change": 698.0
+      },
+      {
+        "date": "2011-01-01",
+        "population": 44320,
+        "change": 864.0
+      },
+      {
+        "date": "2012-01-01",
+        "population": 45186,
+        "change": 866.0
+      },
+      {
+        "date": "2013-01-01",
+        "population": 45716,
+        "change": 530.0
+      },
+      {
+        "date": "2014-01-01",
+        "population": 46443,
+        "change": 727.0
+      },
+      {
+        "date": "2015-01-01",
+        "population": 47024,
+        "change": 581.0
+      },
+      {
+        "date": "2016-01-01",
+        "population": 47886,
+        "change": 862.0
+      },
+      {
+        "date": "2017-01-01",
+        "population": 48231,
+        "change": 345.0
+      },
+      {
+        "date": "2018-01-01",
+        "population": 48605,
+        "change": 374.0,
+        "deaths": 425,
+        "births": 523,
+        "immigration": 10080,
+        "emigration": 11744
+      }
+    ],
+    "projection": {
+      "date": "2025-01-01",
+      "high": 51320,
+      "expected": 48500,
+      "low": 46600
+    }
+  }
+}

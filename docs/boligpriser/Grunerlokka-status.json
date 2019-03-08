@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "scope": "bydel",
+    "heading": "Gjennomsnittpris (kr) pr kvm for blokkleilighet i Grünerløkka",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "series": [{ "heading": "Default heading", "subheading": " Default subheading" }],
+    "xAxis": { "format": "%", "title": false },
+    "publishedDate": "2019-06-01",
+    "dataSource": { "url": "http://ssb.no/data/1234124/", "label": "Statistisk sentralbyrå" },
+    "files": [
+      { "url": "http://data.oslo.kommune.no/data/1234123/data.xls", "type": "Excel" },
+      { "url": "http://data.oslo.kommune.no/data/1234123/data.csv", "type": "csv" }
+    ]
+  },
+  "data": [
+    { "geography": "Oslo i alt", "values": [{ "date": "2017-01-01", "value": 70774.0 }], "totalRow": true },
+    { "geography": "Grünerløkka", "values": [{ "date": "2017-01-01", "value": 75851.0 }], "aggRow": true },
+    { "geography": "Dælenenga", "values": [{ "date": "2017-01-01", "value": 77768.53597484273 }] },
+    { "geography": "Grünerløkka vest", "values": [{ "date": "2017-01-01", "value": 82213.98315555557 }] },
+    { "geography": "Grünerløkka øst", "values": [{ "date": "2017-01-01", "value": 80280.01323943661 }] },
+    { "geography": "Hasle", "values": [{ "date": "2017-01-01", "value": 70795.53365853662 }] },
+    { "geography": "Løren", "values": [{ "date": "2017-01-01", "value": 75927.32063492063 }] },
+    { "geography": "Rodeløkka", "values": [{ "date": "2017-01-01", "value": 76670.03718120807 }] },
+    { "geography": "Sinsen", "values": [{ "date": "2017-01-01", "value": 72149.24156177157 }] },
+    { "geography": "Sofienberg", "values": [{ "date": "2017-01-01", "value": 74707.57115299343 }] }
+  ]
+}
