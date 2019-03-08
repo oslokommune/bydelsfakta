@@ -2,14 +2,14 @@
   <div class="graph__shadow" role="tabpanel" :class="shadowClass">
     <div
       class="graph__container"
-      :class="{ hidden: showTable }"
+      :class="{ hidden: mode === 'table' }"
       ref="container"
       aria-hidden="true"
       @scroll="drawShadows"
     >
       <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
     </div>
-    <div :class="{ 'visually-hidden': !showTable }" class="graph__tablecontainer">
+    <div :class="{ 'visually-hidden': mode === 'graph' }" class="graph__tablecontainer">
       <table>
         <caption></caption>
         <thead></thead>
@@ -47,7 +47,7 @@ export default {
 
   computed: {
     shadowClass() {
-      if (this.showTable) return '';
+      if (this.mode === 'table') return '';
 
       let str = '';
       if (this.shadow.left) str += ' graph__shadow--left';
@@ -133,8 +133,8 @@ export default {
       type: Object,
       required: true,
     },
-    showTable: {
-      type: Boolean,
+    mode: {
+      type: String,
       required: true,
     },
   },

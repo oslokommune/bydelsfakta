@@ -11,6 +11,8 @@ export const state = {
   compareDistricts: false,
   districts: [],
   districtsGeo: districts,
+  menuIsOpen: false,
+  navigationIsOpen: false,
 };
 
 export const getters = {
@@ -46,6 +48,12 @@ export const mutations = {
     state.districts = [];
     state.districtsGeo = districts;
   },
+  SET_MENU_IS_OPEN(state, payload) {
+    state.menuIsOpen = payload;
+  },
+  SET_NAVIGATION_IS_OPEN(state, payload) {
+    state.navigationIsOpen = payload;
+  },
 };
 
 export const actions = {
@@ -76,6 +84,12 @@ export const actions = {
   },
   cleanState({ commit }) {
     commit('CLEAN_STATE');
+  },
+  setMenuIsOpen({ commit }, payload) {
+    commit('SET_MENU_IS_OPEN', payload);
+  },
+  setNavigationIsOpen({ commit }, payload) {
+    commit('SET_NAVIGATION_IS_OPEN', payload);
   },
 };
 

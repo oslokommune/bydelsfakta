@@ -45,18 +45,6 @@ function Template(svg) {
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    this.canvas
-      .select('rect.bg')
-      .attr('height', this.height)
-      .attr('width', this.width)
-      .attr('x', 1)
-      .on('click keyup', (d, i, j) => {
-        if (d3.event && d3.event.type === 'click') j[i].blur();
-        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        this.render(this.data, { method: this.method, highlight: -1 });
-      })
-      .attr('tabindex', 0);
-
     this.setScales();
     this.drawLines();
     this.drawAxis();
@@ -72,11 +60,6 @@ function Template(svg) {
   };
 
   this.created = function() {
-    this.canvas
-      .insert('rect')
-      .attr('class', 'bg')
-      .attr('fill', 'white');
-
     this.canvas.append('g').attr('class', 'lines');
     this.canvas.append('g').attr('class', 'dots');
     this.canvas.append('g').attr('class', 'voronoi');
@@ -87,7 +70,9 @@ function Template(svg) {
   this.line = d3
     .line()
     .x(d => this.x(this.parseDate(d.date)))
-    .y(d => this.y(d[this.method]));
+    .y(d => {
+      return this.y(d[this.method])
+    });
 
   this.drawVoronoi = function() {
     let flattenData = this.data.data
@@ -251,18 +236,17 @@ function Template(svg) {
     // and for each of them check to see if they collide
     // with any lines and offset them in the right direction
     // towards the voronoi's centroid point.
-    this.canvas
-      .selectAll('text.direct')
+    let label = this.canvas
+      .selectAll('g.direct')
       .data(areas, d => d)
       .join(enter => {
-        return enter.append('text').attr('opacity', 0);
-      })
-      .attr('class', 'direct')
-      .attr('font-size', 11)
-      .attr('text-anchor', 'middle')
-      .attr('opacity', 0.6)
-      .attr('y', 5)
-      .text(d => d.key)
+          let g = enter.append('g').attr('class', 'direct').attr('opacity', 0)
+          g.append('rect')
+          g.append('text')
+          return g
+        },
+        update => update
+      )
       .each((d, i, j) => {
         const el = d3.select(j[i]);
         const position = [this.x(this.parseDate(d.values[0].data.date)), this.y(d.values[0].data.value)];
@@ -322,6 +306,30 @@ function Template(svg) {
           el.remove();
         }
       });
+
+    label.attr('opacity', 0.6)
+      .select('text')
+      .attr('font-size', 11)
+      .attr('text-anchor', 'middle')
+      .attr('y', 5)
+      .text(d => d.key)
+
+    label.select('rect')
+        .attr('height', '1.5em')
+        .attr('y', -10)
+        .attr('fill', 'white')
+        .attr('x', (d,i,j) => {
+          let textWidth = d3.select(j[i].parentNode).select('text').node().getBBox().width
+          return ((textWidth/2) + 5) * -1
+        })
+      .attr('width', (d, i, j) => {
+        let textWidth = d3.select(j[i].parentNode).select('text').node().getBBox().width
+        return textWidth + 10
+      })
+      .attr('rx', 3)
+    
+
+      
   };
 
   this.drawDots = function() {
@@ -456,7 +464,7 @@ function Template(svg) {
       .style('cursor', 'pointer')
       .attr('tabindex', 0);
 
-    // Click label to render with highlight (infobox)
+    // Click label to render with highlight
     labels.on('click keyup', (d, i, j) => {
       if (d3.event && d3.event.type === 'click') j[i].blur();
       if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;

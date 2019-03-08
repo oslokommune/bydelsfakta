@@ -49,6 +49,7 @@ function Base_Template(svg) {
   this.strokeWidth = 1.5;
   this.strokeWidthHighlight = 6;
   this.parseDate = d3.timeParse('%Y-%m-%d');
+  this.parseYear = d3.timeParse('%Y');
   this.formatYear = d3.timeFormat('%Y');
   this.formatPercent = d3.format('.3p'); // 0.0124 -> '12,4%'
   this.formatDecimal = d3.format(',.4r');

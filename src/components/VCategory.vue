@@ -1,5 +1,11 @@
 <template>
-  <router-link class="main-container__item" :to="link" :id="id" :style="{ backgroundColor: bgColor }">
+  <router-link
+    class="main-container__item"
+    :class="{ disabled }"
+    :to="getLink()"
+    :id="id"
+    :style="{ backgroundColor: bgColor }"
+  >
     <picture>
       <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
       <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />
@@ -34,13 +40,23 @@ export default {
       type: String,
       required: true,
     },
-    link: {
-      type: String,
-      required: true,
-    },
     id: {
       type: String,
       required: true,
+    },
+    district: {
+      type: String,
+      required: true,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+    },
+  },
+
+  methods: {
+    getLink() {
+      return this.disabled ? '' : { name: 'Topic', params: { district: this.district, topic: this.id } };
     },
   },
 };
@@ -61,9 +77,19 @@ export default {
   display: flex;
   flex-direction: column;
   transform: scale(1);
-  transition: transform 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   position: relative;
   overflow: hidden;
+
+  &.disabled {
+    opacity: 0.45;
+    background-color: $color-grey-100 !important;
+
+    .oslo__category {
+      background: $color-grey-200 !important;
+      color: $color-grey-600 !important;
+    }
+  }
 
   @media screen and (min-width: $break-sm) {
     height: 8em;
@@ -78,8 +104,10 @@ export default {
     margin: 0.5em;
   }
 
-  &:hover {
-    transform: scale(1.03);
+  &:hover:not(.disabled) {
+    img {
+      transform: scale(1.05);
+    }
   }
 }
 
@@ -105,6 +133,7 @@ export default {
   object-fit: cover;
   z-index: -1;
   mix-blend-mode: multiply;
+  transition: transform 0.25s ease-in-out;
 }
 
 .oslo__topic {

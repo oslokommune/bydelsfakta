@@ -332,6 +332,7 @@ export const topics = {
       bgImage: `${baseUrl()}/img/eierform`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
+      disabled: true
     },
     related: ['boligpriser', 'trangboddhet', 'bygningstyper'],
   },
@@ -389,6 +390,7 @@ export const topics = {
       bgImage: `${baseUrl()}/img/boligpriser`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
+      disabled: true
     },
     related: ['trangboddhet', 'eierform', 'flytting'],
   },

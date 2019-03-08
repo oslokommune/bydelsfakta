@@ -8,7 +8,7 @@
           :settings="card"
         />
       </template>
-      <template>
+      <div class="related">
         <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
         <div class="topics-grid">
           <v-category
@@ -20,10 +20,11 @@
             :bg-image="topics[`${item}`].options.bgImage"
             :bg-color="topics[`${item}`].options.bgColor"
             :txt-color="topics[`${item}`].options.txtColor"
-            :link="`/bydel/${$route.params.district}/${topics[`${item}`].value}`"
+            :district="$route.params.district"
+            :disabled="topics[`${item}`].options.disabled"
           />
         </div>
-      </template>
+      </div>
     </div>
     <div class="main-container__map">
       <v-leaflet :district="geoDistricts" />
@@ -71,4 +72,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.related {
+  width: 100%;
+}
+</style>

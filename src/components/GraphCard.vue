@@ -24,20 +24,24 @@
             <div class="card__toggle-menu">
               <button
                 class="card__toggle-button"
-                @click="showTable = false"
-                :class="{ 'card__toggle-button--active': !showTable }"
+                @click="mode = 'graph'"
+                :class="{ 'card__toggle-button--active': mode === 'graph' }"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
               </button>
               <button
                 class="card__toggle-button"
-                @click="showTable = true"
-                :class="{ 'card__toggle-button--active': showTable }"
+                @click="mode = 'table'"
+                :class="{ 'card__toggle-button--active': mode === 'table' }"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
               </button>
 
-              <button class="card__toggle-button">
+              <button
+                class="card__toggle-button"
+                @click="mode = 'map'"
+                :class="{ 'card__toggle-button--active': mode === 'map' }"
+              >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">map</i>
               </button>
             </div>
@@ -56,7 +60,7 @@
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown">
               <button
-                :disabled="showTable"
+                :disabled="mode !== 'graph'"
                 @click="savePng(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
                 class="context-menu__dropdown-item"
@@ -70,7 +74,7 @@
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
               </button>
               <button
-                :disabled="showTable"
+                :disabled="mode !== 'graph'"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
                 tabindex="0"
@@ -88,11 +92,14 @@
         </nav>
       </header>
       <graph-instance
-        v-if="settings.tabs[active] !== undefined"
+        v-if="settings.tabs[active] !== undefined && mode !== 'map'"
         :settings="settings.tabs[active]"
-        :show-table="showTable"
+        :mode="mode"
         ref="graph"
       />
+      <div class="map-container" v-if="mode === 'map'">
+        <v-leaflet :district="geoDistricts"></v-leaflet>
+      </div>
     </div>
   </div>
 </template>
@@ -101,16 +108,21 @@
 import { saveSvgAsPng } from 'save-svg-as-png';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
+import VLeaflet from '../components/VLeaflet.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'GraphCard',
-  components: { GraphInstance },
+  components: { GraphInstance, VLeaflet },
   data() {
     return {
       active: 0,
       showDropdown: false,
-      showTable: false,
+      mode: 'graph',
     };
+  },
+  computed: {
+    ...mapGetters(['geoDistricts']),
   },
   props: {
     settings: {
@@ -159,6 +171,10 @@ export default {
 <style scoped lang="scss">
 @import './../styles/colors';
 @import './../styles/variables';
+
+.map-container {
+  height: 500px;
+}
 
 .card-container {
   padding: 1em;
