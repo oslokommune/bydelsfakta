@@ -21,6 +21,7 @@
             :bg-color="topics[`${item}`].options.bgColor"
             :txt-color="topics[`${item}`].options.txtColor"
             :district="$route.params.district"
+            :disabled="topics[`${item}`].options.disabled"
           />
         </div>
       </div>

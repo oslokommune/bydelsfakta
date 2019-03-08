@@ -61,7 +61,7 @@
   padding: 0 1em;
   flex: 2 1 800px;
   display: grid;
-  gap: 1em;
+  gap: 0.5em;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
   @media screen and (min-width: $break-md) {
