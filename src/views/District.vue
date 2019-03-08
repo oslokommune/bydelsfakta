@@ -12,6 +12,7 @@
           :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
+          :disabled="topics[`${topicName}`].options.disabled"
         />
       </div>
     </div>
