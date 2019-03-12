@@ -29,8 +29,7 @@ module.exports = () => {
       }
     }
 
-    // Need to add the token inside the request
-    console.log(accessToken);
+    req.headers.authorization = `Bearer ${accessToken.access_token}`;
 
     next();
   };

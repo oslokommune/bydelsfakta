@@ -1,11 +1,26 @@
+/* eslint-disable no-console */
+
 const express = require('express');
 const path = require('path');
+const axios = require('axios');
 
 module.exports = app => {
   app.use('/', express.static(path.join(__dirname, '../docs/')));
 
   app.get('/health', (req, res) => {
     res.send('UP');
+  });
+
+  app.get('/api/dataset/:dataset', (req, res) => {
+    axios({
+      method: 'get',
+      url: `https://bwv5c8snqk.execute-api.eu-west-1.amazonaws.com/dev/${req.params.dataset}`,
+      headers: {
+        Authorization: req.headers.authorization,
+      },
+    })
+      .then(response => res.send(response.data))
+      .catch(error => res.send(error.message));
   });
 
   app.get('/api/test', (req, res) => {
