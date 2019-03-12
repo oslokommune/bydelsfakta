@@ -23,14 +23,6 @@ module.exports = app => {
       .catch(error => res.send(error.message));
   });
 
-  app.get('/api/test', (req, res) => {
-    res.send('TEST');
-  });
-
-  app.get('/api/connect/keycloak', (req, res) => {
-    res.send('np');
-  });
-
   app.use('*', express.static(path.join(__dirname, '../docs/')));
 
   const allConfiguredRoutes = () => {
