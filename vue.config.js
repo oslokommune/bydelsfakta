@@ -1,7 +1,11 @@
 module.exports = {
   lintOnSave: true,
   devServer: {
-    proxy: 'http://localhost:5000',
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:5000',
+      },
+    },
   },
   publicPath: '/',
   outputDir: 'docs',

@@ -20,10 +20,11 @@ export default class KeycloakAuthService {
     this.keycloak.onAuthError = this.onAuthError;
     this.keycloak.onAuthRefreshError = this.onAuthRefreshError;
 
-    this.keycloak.init({});
+    this.keycloak.init({ onLoad: 'login-required' });
   }
 
   login() {
+    console.log('login');
     this.keycloak.login();
   }
 
@@ -46,6 +47,7 @@ export default class KeycloakAuthService {
 
   async updateToken() {
     return await new Promise((resolve, reject) => {
+      console.log('test');
       this.keycloak
         .updateToken(5)
         .success(resolve)

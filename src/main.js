@@ -51,8 +51,6 @@ Vue.directive('click-outside', clickOutside);
 const auth = new AuthService();
 const { updateToken } = auth;
 
-console.log(updateToken);
-
 new Vue({
   el: '#app',
   router,
