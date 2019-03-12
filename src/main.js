@@ -5,7 +5,6 @@ import { L } from 'vue2-leaflet';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import AuthService from './auth/AuthService';
 
 import clickOutside from './directives/clickOutside';
 
@@ -48,19 +47,9 @@ Vue.config.performance = process.env.NODE_ENV !== 'production';
 // Directive to detect clicks outside of an element
 Vue.directive('click-outside', clickOutside);
 
-const auth = new AuthService();
-const { updateToken } = auth;
-
 new Vue({
-  el: '#app',
   router,
   store,
   i18n,
-  components: { App },
-  template: '<App :updateToken="updateToken" />',
-  data() {
-    return {
-      updateToken,
-    };
-  },
-});
+  render: h => h(App),
+}).$mount('#app');
