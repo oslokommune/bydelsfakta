@@ -69,7 +69,7 @@ function Template(svg) {
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
-    .x(d => this.x(this.parseDate(d['År'])))
+    .x(d => this.x(this.parseYear(d['År'])))
     .y(d => {
       return this.y(d[this.method]);
     });
@@ -82,7 +82,7 @@ function Template(svg) {
     let voronoiData = d3
       .voronoi()
       .extent([[1, 1], [this.width, this.height]])
-      .x(d => this.x(this.parseDate(d['År'])))
+      .x(d => this.x(this.parseYear(d['År'])))
       .y(d => this.y(d.value))
       .polygons(flattenData);
 
@@ -100,7 +100,6 @@ function Template(svg) {
     voronoiCells.on('mouseover', (d, i, j) => {
       let geography = j[i].__data__.data.geography;
       let date = j[i]['__data__']['data']['År'];
-      console.log(date);
 
       if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
@@ -175,7 +174,7 @@ function Template(svg) {
       .selectAll('th')
       .data(dates)
       .join('th')
-      .text(d => this.formatYear(this.parseDate(d)));
+      .text(d => this.formatYear(this.parseYear(d)));
 
     let rows = tbody
       .selectAll('tr')
@@ -254,7 +253,7 @@ function Template(svg) {
       )
       .each((d, i, j) => {
         const el = d3.select(j[i]);
-        const position = [this.x(this.parseDate(d.values[0]['data']['År'])), this.y(d.values[0].data.value)];
+        const position = [this.x(this.parseYear(d.values[0]['data']['År'])), this.y(d.values[0].data.value)];
         const centroid = d.values[0].centroid;
         const angle = Math.atan2(centroid[1] - position[1], centroid[0] - position[0]);
         const distance = 20;
@@ -288,9 +287,9 @@ function Template(svg) {
           let val = d.values;
           for (let i = 0; i < val.length - 1; i++) {
             let b = {
-              x1: this.x(this.parseDate(val[i]['År'])),
+              x1: this.x(this.parseYear(val[i]['År'])),
               y1: this.y(val[i].value),
-              x2: this.x(this.parseDate(val[i + 1]['År'])),
+              x2: this.x(this.parseYear(val[i + 1]['År'])),
               y2: this.y(val[i + 1].value),
             };
             if (intersects(a, b)) collisions++;
@@ -363,7 +362,7 @@ function Template(svg) {
     dot
       .append('text')
       .text(d => this.format(d[this.method], this.method))
-      .attr('x', d => this.x(this.parseDate(d['År'])))
+      .attr('x', d => this.x(this.parseYear(d['År'])))
       .attr('y', d => this.y(d.value))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
@@ -375,7 +374,7 @@ function Template(svg) {
       .attr('r', 4)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
-      .attr('cx', d => this.x(this.parseDate(d['År'])))
+      .attr('cx', d => this.x(this.parseYear(d['År'])))
       .attr('cy', d => this.y(d.value));
   };
 
@@ -602,13 +601,13 @@ function Template(svg) {
     this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
 
+    let minDate = d3.min(this.data.data.map(d => d.values[0]['År']).map(this.parseYear));
+    let maxDate = d3.max(this.data.data.map(d => d.values[d.values.length - 1]['År']).map(this.parseYear));
+
     // Set the xScale (time dimension) range and domain
     this.x = d3
       .scaleTime()
-      .domain([
-        this.parseDate(this.data.data[0].values[0]['År']),
-        this.parseDate(this.data.data[0].values[this.data.data[0].values.length - 1]['År']),
-      ])
+      .domain([minDate, maxDate])
       .range([0, this.width]);
 
     // Set the y scale based on max and min values
