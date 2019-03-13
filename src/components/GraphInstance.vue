@@ -7,7 +7,10 @@
       aria-hidden="true"
       @scroll="drawShadows"
     >
-      <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
+      <div class="spinner" v-if="loading">
+        <img src="../assets/spinner.svg" alt="" />
+      </div>
+      <svg class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
     </div>
     <div :class="{ 'visually-hidden': mode === 'graph' }" class="graph__tablecontainer">
       <table>
@@ -43,6 +46,7 @@ export default {
       right: false,
     },
     data: null,
+    loading: true,
     currentTemplate: false,
     allDistricts: false,
   }),
@@ -100,6 +104,8 @@ export default {
     },
 
     async draw(options = {}) {
+      this.loading = true;
+
       if (this.currentTemplate !== this.settings.template && !options.keepData) {
         switch (this.settings.template) {
           case 'a':
@@ -149,6 +155,8 @@ export default {
       });
       this.currentTemplate = this.settings.template;
       this.drawShadows();
+
+      this.loading = false;
     },
   },
   props: {
@@ -214,6 +222,25 @@ export default {
     overflow-x: auto;
     position: relative;
   }
+
+  &__svg {
+    &.loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(black, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tick text {
