@@ -2,7 +2,6 @@
 
 const express = require('express');
 const morgan = require('morgan');
-const history = require('connect-history-api-fallback');
 const cors = require('cors');
 const routes = require('./routes');
 const auth = require('./auth');
@@ -26,7 +25,6 @@ app.use(function(req, res, next) {
 });
 
 routes(app);
-app.use(history({ verbose: true }));
 app.listen(PORT, 'localhost');
 
 console.log(`Running on http://localhost:${PORT}`);
