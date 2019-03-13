@@ -119,7 +119,9 @@ export default {
         }
       }
 
-      this.data = await d3.json(this.settings.url);
+      //this.data = await d3.json(this.settings.url);
+      this.data = await d3.json('http://localhost:5000/api/dataset/boligpriser_historic-4owcY?geography=01');
+      console.log(this.data);
       this.svg.render(this.data, {
         method: this.settings.method,
         initialRender: true,

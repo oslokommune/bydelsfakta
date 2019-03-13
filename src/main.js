@@ -16,19 +16,6 @@ import setupI18n from './i18n';
 
 const i18n = setupI18n();
 
-function initializeEnvironment() {
-  const envs = JSON.parse(window.__GLOBAL_ENVS__);
-  const envsKeys = Object.keys(envs);
-  envsKeys.forEach(envKey => {
-    process.env[envKey] = envs[envKey];
-  });
-  delete window.__GLOBAL_ENVS__;
-}
-
-if (process.env.NODE_ENV !== 'development') {
-  initializeEnvironment();
-}
-
 // this part resolve an issue where the markers would not appear
 delete L.Icon.Default.prototype._getIconUrl;
 
