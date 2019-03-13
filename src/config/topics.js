@@ -369,7 +369,7 @@ export const topics = {
                 id: 'boligpriser_historisk',
                 method: 'value',
                 template: 'b',
-                url: `${baseUrl()}/boligpriser/Oslo_i_alt-historic.json`,
+                url: `http://localhost:5000/api/dataset/boligpriser_historic-4owcY`,
               },
               {
                 active: false,
@@ -377,7 +377,7 @@ export const topics = {
                 id: 'boligpriser_historisk2',
                 method: 'value',
                 template: 'b',
-                url: `${baseUrl()}/boligpriser/Frogner-historic.json`,
+                url: `http://localhost:5000/api/dataset/boligpriser_historic-4owcY`,
               },
             ],
           },

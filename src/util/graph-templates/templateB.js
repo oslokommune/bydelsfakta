@@ -571,7 +571,7 @@ function Template(svg) {
       .style('pointer-events', 'none')
       .attr('fill', 'none')
       .transition()
-      .duration(100)
+      .duration(250)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i, j) => {

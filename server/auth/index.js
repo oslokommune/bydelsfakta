@@ -22,7 +22,7 @@ module.exports = () => {
       }
     } else if (isTokenExpired(accessToken)) {
       try {
-        const result = await refreshToken(data);
+        const result = await refreshToken(accessToken, data);
         accessToken = parseToken(result.data);
       } catch (error) {
         console.log('Error refreshing access token: ', error.message);

@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as d3 from 'd3';
 import TemplateA from '../util/graph-templates/templateA';
 import TemplateB from '../util/graph-templates/templateB';
@@ -43,6 +44,7 @@ export default {
     },
     data: null,
     currentTemplate: false,
+    allDistricts: false,
   }),
 
   computed: {
@@ -54,10 +56,14 @@ export default {
       if (this.shadow.right) str += ' graph__shadow--right';
       return str;
     },
+    ...mapState(['districts', 'compareDistricts']),
   },
 
   watch: {
     settings: function() {
+      this.draw();
+    },
+    districts: function() {
       this.draw();
     },
   },
@@ -120,8 +126,11 @@ export default {
       }
 
       //this.data = await d3.json(this.settings.url);
-      this.data = await d3.json('http://localhost:5000/api/dataset/boligpriser_historic-4owcY?geography=01');
-      console.log(this.data);
+      if (this.compareDistricts) {
+        this.data = await d3.json(`${this.settings.url}?geography=00`);
+      } else {
+        this.data = await d3.json(`${this.settings.url}?geography=${this.districts[0]}`);
+      }
       this.svg.render(this.data, {
         method: this.settings.method,
         initialRender: true,
