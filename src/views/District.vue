@@ -12,7 +12,7 @@
           :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
-          :disabled="disabled.find(item => item === topicName)"
+          :disabled="disabledTopics.find(item => item === topicName)"
         />
       </div>
     </div>
@@ -26,7 +26,7 @@
 import { mapGetters } from 'vuex';
 import VCategory from '../components/VCategory.vue';
 import VLeaflet from '../components/VLeaflet.vue';
-import { topics, topicNames, disabled } from '../config/topics';
+import { topics, topicNames, disabledTopics } from '../config/topics';
 import districts from '../config/geoData/districts';
 
 export default {
@@ -54,7 +54,7 @@ export default {
       topics: topics,
       chosenDistrict: {},
       districts: districts,
-      disabled: disabled,
+      disabledTopics: disabledTopics,
     };
   },
 };

@@ -14,7 +14,7 @@ export const topicNames = [
   'levekaar',
 ];
 
-export const disabled = [
+export const disabledTopics = [
   'folkemengde',
   'alder',
   'innvandrerbefolkningen',
@@ -371,7 +371,6 @@ export const topics = {
       bgImage: `${baseUrl()}/img/eierform`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
-      disabled: true,
     },
     related: ['boligpriser', 'trangboddhet', 'bygningstyper'],
   },
@@ -392,7 +391,7 @@ export const topics = {
                 id: 'boligpriser_status',
                 method: 'value',
                 template: 'a',
-                url: `${baseUrl()}/boligpriser/Oslo_i_alt-status.json`,
+                url: `http://localhost:5000/api/dataset/boligpriser_status-pD7ZV`,
               },
               {
                 active: false,
@@ -400,7 +399,7 @@ export const topics = {
                 id: 'boligpriser_status',
                 method: 'value',
                 template: 'a',
-                url: `${baseUrl()}/boligpriser/Frogner-status.json`,
+                url: `http://localhost:5000/api/dataset/boligpriser_status-pD7ZV`,
               },
               {
                 active: false,
@@ -429,7 +428,6 @@ export const topics = {
       bgImage: `${baseUrl()}/img/boligpriser`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
-      disabled: true,
     },
     related: ['trangboddhet', 'eierform', 'flytting'],
   },
