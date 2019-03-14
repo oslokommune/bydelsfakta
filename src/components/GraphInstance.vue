@@ -142,6 +142,7 @@ export default {
             break;
         }
       }
+      this.currentTemplate = this.settings.template;
 
       //this.data = await d3.json(this.settings.url);
       const geoParam = this.compareDistricts ? '00' : this.districts[0];
@@ -149,11 +150,12 @@ export default {
         this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`);
       }
 
+      if (!this.data) return;
+
       this.svg.render(this.filteredData, {
         method: this.settings.method,
         initialRender: true,
       });
-      this.currentTemplate = this.settings.template;
       this.drawShadows();
 
       this.loading = false;
