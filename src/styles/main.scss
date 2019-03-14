@@ -149,3 +149,15 @@ table {
     text-align: left;
   }
 }
+
+/* The default outline styling, for greatest accessibility. */
+/* You can skip this to just use the browser's defaults. */
+:focus {
+  outline: #08f auto 2px;
+}
+
+/* When mouse is detected, ALL focused elements have outline removed. */
+/* You could apply this selector only to buttons, if you wanted. */
+body.using-mouse :focus {
+  outline: none;
+}
