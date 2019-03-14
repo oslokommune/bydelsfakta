@@ -72,7 +72,10 @@ export default {
 
       return {
         meta: this.data.meta,
-        data: this.data.data.filter(d => this.districts.includes(d.geography)),
+        data: this.data.data.filter(d => {
+          // TODO: change avgRow to d.totalRow as soon as change is made on API response
+          return this.districts.includes(d.geography) || d.avgRow;
+        }),
       };
     },
   },
@@ -164,7 +167,6 @@ export default {
       if (!options.keepData) {
         this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`);
       }
-
       if (!this.data) return;
 
       this.svg.render(this.filteredData, {

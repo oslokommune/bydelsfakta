@@ -495,7 +495,8 @@ function Template(svg) {
       .attr('height', this.height + 20)
       .duration(this.duration)
       .attr('width', (d, i) => {
-        let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
+        console.log(this.filteredData.data, foo);
+        let val = this.filteredData.data.filter(d => d[foo])[0].values[i][this.method];
         if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
           return 0;
         } else if (this.filteredData.data.filter(d => d[foo]).length) {
