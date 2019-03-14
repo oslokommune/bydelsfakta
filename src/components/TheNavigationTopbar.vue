@@ -34,12 +34,15 @@
               <router-link
                 v-for="(link, subpageIndex) in kategori.links"
                 class="navigation-topbar__dropdown-item"
-                :id="`dropdown-href-${link.value}`"
-                :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
+                :id="`dropdown-href-${topics[link].value}`"
+                :class="{
+                  'navigation-topbar__dropdown-item--active': checkActiveSubpage(topics[link].value),
+                  'navigation-topbar__dropdown-item--disabled': disabledTopics.find(topic => topic === topics[link].value),
+                }"
                 :key="subpageIndex"
-                v-text="link.text"
-                :to="onClickSubpage(link.value)"
-                >{{ link.text }}</router-link
+                v-text="topics[link].text"
+                :to="onClickSubpage(topics[link].value)"
+                >{{ topics[`${link}`].text }}</router-link
               >
             </div>
           </div>
@@ -51,16 +54,18 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
-import dropdownTopics from '../config/dropdownTopics';
+import { categories, topics, disabledTopics } from '../config/topics';
 
 export default {
   name: 'TheNavigationTopbar',
   data() {
     return {
       selectedSubpage: null,
-      dropdown: dropdownTopics,
+      dropdown: categories,
       allDistricts: allDistricts,
       showDropdown: false,
+      topics: topics,
+      disabledTopics: disabledTopics,
     };
   },
 
@@ -85,9 +90,8 @@ export default {
     },
 
     getHumanReadableTopic(id) {
-      const topic = dropdownTopics.flatMap(obj => obj.links).find(obj => obj.value === id);
-      if (topic) {
-        return topic.text;
+      if (this.topics[id]) {
+        return this.topics[id].text;
       } else {
         this.selectedSubpage = null;
         return '';
@@ -111,7 +115,9 @@ export default {
     },
 
     onClickSubpage(subpage) {
-      return { name: 'Topic', params: { district: this.$route.params.district, topic: subpage } };
+      return this.disabledTopics.find(topic => topic === subpage)
+        ? ''
+        : { name: 'Topic', params: { district: this.$route.params.district, topic: subpage } };
     },
   },
 
@@ -120,6 +126,7 @@ export default {
       const routes = to.path.split('/');
       if (to.name === 'NotFound') {
         this.selectedSubpage = null;
+        this.showDropdown = false;
       } else if (to.name === 'District') {
         this.selectedSubpage = null;
       } else if (to.name === 'Home') {
@@ -141,10 +148,8 @@ export default {
 
 .header {
   color: $color-purple;
-  display: flex;
   flex-direction: column;
   font-size: $font-huge;
-  padding: 0;
   position: relative;
   width: 100%;
   font-weight: 500;
@@ -223,7 +228,6 @@ export default {
     display: flex;
     flex-direction: column;
     font-size: $font-huge;
-    padding: 0;
     position: relative;
     width: 100%;
     font-weight: 500;
@@ -294,13 +298,18 @@ export default {
         padding: 0.5rem;
       }
 
-      &:hover:not(&--active) {
+      &:hover:not(&--active):not(&--disabled) {
         background-color: $color-grey-100;
         color: black;
       }
 
       &--active {
         background-color: $color-blue;
+      }
+
+      &--disabled {
+        opacity: 0.45;
+        background-color: white;
       }
     }
   }

@@ -21,7 +21,7 @@
             :bg-color="topics[`${item}`].options.bgColor"
             :txt-color="topics[`${item}`].options.txtColor"
             :district="$route.params.district"
-            :disabled="topics[`${item}`].options.disabled"
+            :disabled="disabledTopics.find(topicName => topicName === item)"
           />
         </div>
       </div>
@@ -38,7 +38,7 @@ import VCategory from '../components/VCategory.vue';
 import GraphCard from '../components/GraphCard.vue';
 import VLeaflet from '../components/VLeaflet.vue';
 
-import { topics } from '../config/topics';
+import { topics, disabledTopics } from '../config/topics';
 
 export default {
   name: 'Topic',
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       topics: topics,
+      disabledTopics: disabledTopics,
     };
   },
 
