@@ -1,10 +1,10 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <template v-for="subpage in topics[`${topic}`].subpages">
+      <template v-for="topicItem in topics[`${topic}`].topics">
         <graph-card
-          v-for="(card, cardIndex) in subpage.graphs"
-          :key="`${subpage.name}-${cardIndex}`"
+          v-for="(card, cardIndex) in topicItem.graphs"
+          :key="`${topicItem.name}-${cardIndex}`"
           :settings="card"
         />
       </template>
