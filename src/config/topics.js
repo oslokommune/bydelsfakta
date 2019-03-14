@@ -1,5 +1,8 @@
 import baseUrl from '../util/config';
 
+// Base URL to API
+const API = 'http://localhost:5000/api/dataset';
+
 export const topicNames = [
   'folkemengde',
   'alder',
@@ -391,15 +394,7 @@ export const topics = {
                 id: 'boligpriser_status',
                 method: 'value',
                 template: 'a',
-                url: `http://localhost:5000/api/dataset/boligpriser_status-pD7ZV`,
-              },
-              {
-                active: false,
-                label: 'Status',
-                id: 'boligpriser_status',
-                method: 'value',
-                template: 'a',
-                url: `http://localhost:5000/api/dataset/boligpriser_status-pD7ZV`,
+                url: `${API}/boligpriser_status-pD7ZV`,
               },
               {
                 active: false,
@@ -407,15 +402,7 @@ export const topics = {
                 id: 'boligpriser_historisk',
                 method: 'value',
                 template: 'b',
-                url: `http://localhost:5000/api/dataset/boligpriser_historic-4owcY`,
-              },
-              {
-                active: false,
-                label: 'Historisk2',
-                id: 'boligpriser_historisk2',
-                method: 'value',
-                template: 'b',
-                url: `http://localhost:5000/api/dataset/boligpriser_historic-4owcY`,
+                url: `${API}/boligpriser_historic-4owcY`,
               },
             ],
           },

@@ -35,6 +35,9 @@ function Template(svg) {
       this.rowHeight = 37;
     }
 
+    // Temp fix until meta data is included in data from API
+    if (!data.meta.series.length) data.meta.series.push('');
+
     if (!this.commonRender(data, options)) return;
 
     if (!this.isMobileView && !this.isSingleSeries) {
@@ -384,6 +387,10 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
+    // temp fix until compareDistricts dataset gets 'totalRow'.
+    // It's wrongly labelled 'avgRow'
+    let foo = this.filteredData.data.some(d => d.totalRow) ? 'totalRow' : 'avgRow';
+
     let columns = this.canvas
       .select('g.columns')
       .selectAll('g.column')
@@ -488,11 +495,10 @@ function Template(svg) {
       .attr('height', this.height + 20)
       .duration(this.duration)
       .attr('width', (d, i) => {
-        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
-
+        let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
         if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
           return 0;
-        } else if (this.filteredData.data.filter(d => d.totalRow).length) {
+        } else if (this.filteredData.data.filter(d => d[foo]).length) {
           return this.x[0](val);
         } else {
           return 0;
@@ -501,21 +507,20 @@ function Template(svg) {
 
     columns
       .select('rect.arrow')
-
       .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
       .transition()
       .duration(this.duration)
       .attr('y', () => {
-        let indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
+        let indexOfTotalRow = this.filteredData.data.findIndex(d => d[foo]);
         return indexOfTotalRow * this.rowHeight;
       })
       .attr('x', (d, i) => {
-        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+        let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
         if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
         return this.x[0](val);
       })
       .attr('opacity', (d, i) => {
-        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+        let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
         if (this.isMobileView) {
           return 0;
         } else if (this.method === 'value' && val > this.x[i].domain()[1]) {

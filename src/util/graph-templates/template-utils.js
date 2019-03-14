@@ -6,6 +6,8 @@ import d3 from '@/assets/d3';
 
 const util = {
   truncate: function(str, width, size = 14, weight = 400) {
+    if (!str) return;
+
     width = width.length === 2 ? width[1] - width[0] : width;
     let computedWidth;
 
