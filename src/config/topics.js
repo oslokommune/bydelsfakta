@@ -17,6 +17,45 @@ export const topicNames = [
   'levekaar',
 ];
 
+export const disabledTopics = [
+  'folkemengde',
+  'alder',
+  'innvandrerbefolkningen',
+  'husholdninger',
+  'trangboddhet',
+  'eierform',
+  'kommunaleboliger',
+  'flytting',
+  'bygningstyper',
+  'levekaar',
+];
+
+export const categories = [
+  {
+    kategori: 'Befolkning',
+    color: 'rgb(182, 63, 50)',
+    links: ['folkemengde', 'alder', 'innvandrerbefolkningen'],
+  },
+  {
+    kategori: 'Bomiljø',
+    color: 'rgb(27, 173, 120)',
+    links: [
+      'husholdninger',
+      'trangboddhet',
+      'eierform',
+      'kommunaleboliger',
+      'flytting',
+      'bygningstyper',
+      'boligpriser',
+    ],
+  },
+  {
+    kategori: 'Levekår',
+    color: 'rgb(219, 160, 52)',
+    links: ['levekaar'],
+  },
+];
+
 export const topics = {
   folkemengde: {
     text: 'Folkemengde',
@@ -335,7 +374,6 @@ export const topics = {
       bgImage: `${baseUrl()}/img/eierform`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
-      disabled: true,
     },
     related: ['boligpriser', 'trangboddhet', 'bygningstyper'],
   },
@@ -377,7 +415,6 @@ export const topics = {
       bgImage: `${baseUrl()}/img/boligpriser`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
-      disabled: true,
     },
     related: ['trangboddhet', 'eierform', 'flytting'],
   },

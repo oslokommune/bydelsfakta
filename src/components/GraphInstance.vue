@@ -3,16 +3,23 @@
     <div
       class="graph__container"
       :class="{ hidden: mode === 'table' }"
-      ref="container"
+      ref="graphContainer"
       aria-hidden="true"
       @scroll="drawShadows"
+      v-dragscroll
     >
       <div class="spinner" v-if="loading">
         <img src="../assets/spinner.svg" alt="" />
       </div>
       <svg class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
     </div>
-    <div :class="{ 'visually-hidden': mode === 'graph' }" class="graph__tablecontainer">
+    <div
+      :class="{ 'visually-hidden': mode === 'graph' }"
+      class="graph__tablecontainer"
+      ref="tableContainer"
+      v-dragscroll
+      @scroll="drawShadows"
+    >
       <table>
         <caption></caption>
         <thead></thead>
@@ -37,6 +44,7 @@ import TemplateG from '../util/graph-templates/templateG';
 import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
+import { dragscroll } from 'vue-dragscroll';
 
 export default {
   data: () => ({
@@ -53,10 +61,8 @@ export default {
 
   computed: {
     shadowClass() {
-      if (this.mode === 'table') return '';
-
       let str = '';
-      if (this.shadow.left) str += ' graph__shadow--left';
+      if (this.shadow.left && this.mode === 'graph') str += ' graph__shadow--left';
       if (this.shadow.right) str += ' graph__shadow--right';
       return str;
     },
@@ -90,9 +96,18 @@ export default {
 
   methods: {
     drawShadows() {
-      const width = this.$refs.container.parentElement.clientWidth;
-      const spaceLeft = this.$refs.container.scrollLeft;
-      const spaceRight = this.$refs.container.scrollWidth - width - spaceLeft;
+      let ref;
+      if (this.mode == 'graph') {
+        ref = 'graphContainer';
+      } else if (this.mode === 'table') {
+        ref = 'tableContainer';
+      } else {
+        return;
+      }
+
+      const width = this.$refs[ref].parentElement.clientWidth;
+      const spaceLeft = this.$refs[ref].scrollLeft;
+      const spaceRight = this.$refs[ref].scrollWidth - width - spaceLeft;
 
       this.shadow.left = spaceLeft > 5;
       this.shadow.right = spaceRight > 5;
@@ -170,6 +185,9 @@ export default {
       type: String,
       required: true,
     },
+  },
+  directives: {
+    dragscroll,
   },
 };
 </script>
