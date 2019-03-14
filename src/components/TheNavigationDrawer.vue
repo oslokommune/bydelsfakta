@@ -5,10 +5,10 @@
     </router-link>
 
     <button
-      class="selectedSubpage"
+      class="selectedTopic"
       @click="showNavigation = !showNavigation"
       @keydown.esc="showNavigation = false"
-      v-text="selectedSubpage"
+      v-text="selectedTopic"
     ></button>
     <div class="version-tag">Alpha</div>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
@@ -105,7 +105,7 @@ export default {
   },
 
   computed: {
-    selectedSubpage: {
+    selectedTopic: {
       get: function() {
         if (this.compareDistricts) {
           let count = this.selected.length ? this.selected.length : this.links.length;
@@ -331,7 +331,7 @@ export default {
   }
 }
 
-.selectedSubpage {
+.selectedTopic {
   color: $color-purple;
   font-weight: 500;
   font-size: $font-medium;

@@ -57,7 +57,7 @@ export const topics = {
   folkemengde: {
     text: 'Folkemengde',
     value: 'folkemengde',
-    subpages: [
+    topics: [
       {
         name: 'fremskriving',
         title: 'Befolkningsutvikling og fremskriving',
@@ -139,7 +139,7 @@ export const topics = {
   alder: {
     text: 'Alder',
     value: 'alder',
-    subpages: [
+    topics: [
       {
         name: 'aldersgrupper',
         title: 'Utvalgte aldersgrupper',
@@ -223,7 +223,7 @@ export const topics = {
   innvandrerbefolkningen: {
     text: 'Innvandrerbefolkningen',
     value: 'innvandrerbefolkningen',
-    subpages: [
+    topics: [
       {
         name: 'befolkning',
         title: 'Innvandrerbefolkningen i bydelene',
@@ -329,7 +329,7 @@ export const topics = {
   eierform: {
     text: 'Eierform',
     value: 'eierform',
-    subpages: [
+    topics: [
       {
         name: 'eierform',
         title: 'Eierform',
@@ -377,7 +377,7 @@ export const topics = {
   boligpriser: {
     text: 'Boligpriser',
     value: 'boligpriser',
-    subpages: [
+    topics: [
       {
         name: 'boligpriser',
         title: 'Blokkleilighet',
@@ -434,7 +434,7 @@ export const topics = {
   trangboddhet: {
     text: 'Trangboddhet',
     value: 'trangboddhet',
-    subpages: [
+    topics: [
       {
         name: 'helhet',
         title: 'Trangboddhet i Bydel BYDELSNAVN',
@@ -560,7 +560,7 @@ export const topics = {
   kommunaleboliger: {
     text: 'Kommunale boliger',
     value: 'kommunaleboliger',
-    subpages: [
+    topics: [
       {
         name: 'blokk',
         title: 'Blokkleilighet',
@@ -600,7 +600,7 @@ export const topics = {
   flytting: {
     text: 'Flytting',
     value: 'flytting',
-    subpages: [
+    topics: [
       {
         name: 'hyppighet',
         title: 'Flyttehyppighet',
@@ -640,7 +640,7 @@ export const topics = {
   bygningstyper: {
     text: 'Bygningstyper',
     value: 'bygningstyper',
-    subpages: [
+    topics: [
       {
         name: 'totalt',
         title: 'Eierform',
@@ -756,7 +756,7 @@ export const topics = {
   husholdninger: {
     text: 'Husholdninger',
     value: 'husholdninger',
-    subpages: [
+    topics: [
       {
         name: 'totalt',
         title: 'Husholdningstype',
@@ -872,7 +872,7 @@ export const topics = {
   levekaar: {
     text: 'Levekår',
     value: 'levekaar',
-    subpages: [
+    topics: [
       {
         name: 'spesifikk',
         graphs: [

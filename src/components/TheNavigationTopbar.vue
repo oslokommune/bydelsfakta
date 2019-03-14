@@ -1,9 +1,9 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
-    <h1 v-if="selectedSubpage === null" class="header">{{ getDistrict(this.$route.params.district) }}</h1>
-    <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedSubpage === null }">
+    <h1 v-if="selectedTopic === null" class="header">{{ getDistrict(this.$route.params.district) }}</h1>
+    <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
       <button
-        v-if="selectedSubpage"
+        v-if="selectedTopic"
         id="select"
         class="navigation-topbar__select"
         @click="showDropdown = !showDropdown"
@@ -13,11 +13,11 @@
         ref="select"
         :aria-label="$t('navigationTopbar.selectTopic.aria')"
       >
-        <label class="label" :class="{ 'label--active': selectedSubpage !== null }">{{
+        <label class="label" :class="{ 'label--active': selectedTopic !== null }">{{
           $t('navigationTopbar.selectTopic.label')
         }}</label>
         <div class="topic">
-          <span>{{ getHumanReadableTopic(selectedSubpage) }}</span>
+          <span>{{ getHumanReadableTopic(selectedTopic) }}</span>
           <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
         </div>
       </button>
@@ -32,16 +32,16 @@
             </div>
             <div class="navigation-topbar__dropdown-items">
               <router-link
-                v-for="(link, subpageIndex) in kategori.links"
+                v-for="(link, topicIndex) in kategori.links"
                 class="navigation-topbar__dropdown-item"
                 :id="`dropdown-href-${topics[link].value}`"
                 :class="{
-                  'navigation-topbar__dropdown-item--active': checkActiveSubpage(topics[link].value),
+                  'navigation-topbar__dropdown-item--active': checkActiveTopic(topics[link].value),
                   'navigation-topbar__dropdown-item--disabled': disabledTopics.find(topic => topic === topics[link].value),
                 }"
-                :key="subpageIndex"
+                :key="topicIndex"
                 v-text="topics[link].text"
-                :to="onClickSubpage(topics[link].value)"
+                :to="onClickTopic(topics[link].value)"
                 >{{ topics[`${link}`].text }}</router-link
               >
             </div>
@@ -60,7 +60,7 @@ export default {
   name: 'TheNavigationTopbar',
   data() {
     return {
-      selectedSubpage: null,
+      selectedTopic: null,
       dropdown: categories,
       allDistricts: allDistricts,
       showDropdown: false,
@@ -76,7 +76,7 @@ export default {
   created() {
     if (this.$route.name !== 'Home') {
       const routes = this.$route.path.split('/');
-      if (routes.length > 3) this.selectedSubpage = routes[3];
+      if (routes.length > 3) this.selectedTopic = routes[3];
     }
   },
 
@@ -93,7 +93,7 @@ export default {
       if (this.topics[id]) {
         return this.topics[id].text;
       } else {
-        this.selectedSubpage = null;
+        this.selectedTopic = null;
         return '';
       }
     },
@@ -110,14 +110,14 @@ export default {
       }
     },
 
-    checkActiveSubpage(subpage) {
-      return this.$route.path.includes(subpage);
+    checkActiveTopic(topic) {
+      return this.$route.path.includes(topic);
     },
 
-    onClickSubpage(subpage) {
-      return this.disabledTopics.find(topic => topic === subpage)
+    onClickTopic(topic) {
+      return this.disabledTopics.find(item => item === topic)
         ? ''
-        : { name: 'Topic', params: { district: this.$route.params.district, topic: subpage } };
+        : { name: 'Topic', params: { district: this.$route.params.district, topic } };
     },
   },
 
@@ -125,14 +125,14 @@ export default {
     $route(to) {
       const routes = to.path.split('/');
       if (to.name === 'NotFound') {
-        this.selectedSubpage = null;
+        this.selectedTopic = null;
         this.showDropdown = false;
       } else if (to.name === 'District') {
-        this.selectedSubpage = null;
+        this.selectedTopic = null;
       } else if (to.name === 'Home') {
-        this.selectedSubpage = null;
+        this.selectedTopic = null;
       } else {
-        if (routes.length > 3) this.selectedSubpage = routes[3];
+        if (routes.length > 3) this.selectedTopic = routes[3];
       }
     },
 
