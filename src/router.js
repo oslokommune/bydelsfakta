@@ -5,7 +5,7 @@ import District from './views/District.vue';
 import Topic from './views/Topic.vue';
 import NotFound from './views/NotFound.vue';
 
-import { topicNames } from './config/topics';
+import { topicNames, disabled } from './config/topics';
 import allDistricts from './config/allDistricts';
 
 Vue.use(Router);
@@ -41,7 +41,7 @@ const router = new Router({
 // Temp while we find out what our homepage should look like
 router.beforeEach((to, from, next) => {
   if (to.params.topic) {
-    if (!topicNames.find(name => name === to.params.topic)) {
+    if (!topicNames.find(name => name === to.params.topic) || disabled.find(topic => topic === to.params.topic)) {
       next({ name: 'NotFound', params: [to.path] });
     }
   }

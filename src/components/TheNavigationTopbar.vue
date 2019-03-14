@@ -34,12 +34,12 @@
               <router-link
                 v-for="(link, subpageIndex) in kategori.links"
                 class="navigation-topbar__dropdown-item"
-                :id="`dropdown-href-${link.value}`"
-                :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(link.value) }"
+                :id="`dropdown-href-${topics[link].value}`"
+                :class="{ 'navigation-topbar__dropdown-item--active': checkActiveSubpage(topics[link].value) }"
                 :key="subpageIndex"
-                v-text="link.text"
-                :to="onClickSubpage(link.value)"
-                >{{ link.text }}</router-link
+                v-text="topics[link].text"
+                :to="onClickSubpage(topics[link].value)"
+                >{{ topics[`${link}`].text }}</router-link
               >
             </div>
           </div>
@@ -51,16 +51,17 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
-import dropdownTopics from '../config/dropdownTopics';
+import { categories, topics } from '../config/topics';
 
 export default {
   name: 'TheNavigationTopbar',
   data() {
     return {
       selectedSubpage: null,
-      dropdown: dropdownTopics,
+      dropdown: categories,
       allDistricts: allDistricts,
       showDropdown: false,
+      topics: topics,
     };
   },
 
@@ -85,9 +86,8 @@ export default {
     },
 
     getHumanReadableTopic(id) {
-      const topic = dropdownTopics.flatMap(obj => obj.links).find(obj => obj.value === id);
-      if (topic) {
-        return topic.text;
+      if (this.topics[id]) {
+        return this.topics[id].text;
       } else {
         this.selectedSubpage = null;
         return '';
@@ -120,6 +120,7 @@ export default {
       const routes = to.path.split('/');
       if (to.name === 'NotFound') {
         this.selectedSubpage = null;
+        this.showDropdown = false;
       } else if (to.name === 'District') {
         this.selectedSubpage = null;
       } else if (to.name === 'Home') {
