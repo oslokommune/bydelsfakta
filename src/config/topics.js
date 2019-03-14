@@ -1,5 +1,8 @@
 import baseUrl from '../util/config';
 
+// Base URL to API
+const API = 'http://localhost:5000/api/dataset';
+
 export const topicNames = [
   'folkemengde',
   'alder',
@@ -332,7 +335,7 @@ export const topics = {
       bgImage: `${baseUrl()}/img/eierform`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
-      disabled: true
+      disabled: true,
     },
     related: ['boligpriser', 'trangboddhet', 'bygningstyper'],
   },
@@ -353,15 +356,7 @@ export const topics = {
                 id: 'boligpriser_status',
                 method: 'value',
                 template: 'a',
-                url: `${baseUrl()}/boligpriser/Oslo_i_alt-status.json`,
-              },
-              {
-                active: false,
-                label: 'Status',
-                id: 'boligpriser_status',
-                method: 'value',
-                template: 'a',
-                url: `${baseUrl()}/boligpriser/Frogner-status.json`,
+                url: `${API}/boligpriser_status-pD7ZV`,
               },
               {
                 active: false,
@@ -369,15 +364,7 @@ export const topics = {
                 id: 'boligpriser_historisk',
                 method: 'value',
                 template: 'b',
-                url: `http://localhost:5000/api/dataset/boligpriser_historic-4owcY`,
-              },
-              {
-                active: false,
-                label: 'Historisk2',
-                id: 'boligpriser_historisk2',
-                method: 'value',
-                template: 'b',
-                url: `http://localhost:5000/api/dataset/boligpriser_historic-4owcY`,
+                url: `${API}/boligpriser_historic-4owcY`,
               },
             ],
           },
@@ -390,7 +377,7 @@ export const topics = {
       bgImage: `${baseUrl()}/img/boligpriser`,
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
-      disabled: true
+      disabled: true,
     },
     related: ['trangboddhet', 'eierform', 'flytting'],
   },
