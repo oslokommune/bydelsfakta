@@ -49,7 +49,7 @@ export default {
       required: true,
     },
     disabled: {
-      type: String,
+      type: Boolean,
       required: true,
     },
   },
