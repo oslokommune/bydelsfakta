@@ -8,7 +8,10 @@
       @scroll="drawShadows"
       v-dragscroll
     >
-      <svg class="graph__svg" aria-hidden="true" ref="svg"></svg>
+      <div class="spinner" v-if="loading">
+        <img src="../assets/spinner.svg" alt="" />
+      </div>
+      <svg class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
     </div>
     <div
       :class="{ 'visually-hidden': mode === 'graph' }"
@@ -29,6 +32,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as d3 from 'd3';
 import TemplateA from '../util/graph-templates/templateA';
 import TemplateB from '../util/graph-templates/templateB';
@@ -50,7 +54,9 @@ export default {
       right: false,
     },
     data: null,
+    loading: true,
     currentTemplate: false,
+    allDistricts: false,
   }),
 
   computed: {
@@ -60,11 +66,27 @@ export default {
       if (this.shadow.right) str += ' graph__shadow--right';
       return str;
     },
+    ...mapState(['districts', 'compareDistricts']),
+    filteredData() {
+      if (!this.compareDistricts || this.districts.includes('alle')) return this.data;
+
+      return {
+        meta: this.data.meta,
+        data: this.data.data.filter(d => this.districts.includes(d.geography)),
+      };
+    },
   },
 
   watch: {
     settings: function() {
       this.draw();
+    },
+    districts: function(to, from) {
+      if (from.length > 1 && (to.length > 1 || this.compareDistricts)) {
+        this.draw({ keepData: true });
+      } else {
+        this.draw();
+      }
     },
   },
 
@@ -96,8 +118,10 @@ export default {
       this.drawShadows();
     },
 
-    async draw() {
-      if (this.currentTemplate !== this.settings.template) {
+    async draw(options = {}) {
+      this.loading = true;
+
+      if (this.currentTemplate !== this.settings.template && !options.keepData) {
         switch (this.settings.template) {
           case 'a':
             this.svg = new TemplateA(this.$refs['svg']);
@@ -134,13 +158,20 @@ export default {
         }
       }
 
-      this.data = await d3.json(this.settings.url);
-      this.svg.render(this.data, {
+      //this.data = await d3.json(this.settings.url);
+      const geoParam = this.compareDistricts ? '00' : this.districts[0];
+      if (!options.keepData) {
+        this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`);
+      }
+
+      this.svg.render(this.filteredData, {
         method: this.settings.method,
         initialRender: true,
       });
       this.currentTemplate = this.settings.template;
       this.drawShadows();
+
+      this.loading = false;
     },
   },
   props: {
@@ -209,6 +240,25 @@ export default {
     overflow-x: auto;
     position: relative;
   }
+
+  &__svg {
+    &.loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(black, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tick text {

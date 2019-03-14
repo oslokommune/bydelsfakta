@@ -4,4 +4,4 @@
 /docs/
 /src/coverageReport
 /src/config/geodata
-/backend/server.js
+/server/server.js
