@@ -1,46 +1,46 @@
 const allDistricts = [
   {
-    key: '1',
+    key: '01',
     value: 'Bydel Gamle Oslo',
     uri: 'gamleoslo',
   },
   {
-    key: '2',
+    key: '02',
     value: 'Bydel Grünerløkka',
     uri: 'grunerlokka',
   },
   {
-    key: '3',
+    key: '03',
     value: 'Bydel Sagene',
     uri: 'sagene',
   },
   {
-    key: '4',
+    key: '04',
     value: 'Bydel St. Hanshaugen',
     uri: 'sthanshaugen',
   },
   {
-    key: '5',
+    key: '05',
     value: 'Bydel Frogner',
     uri: 'frogner',
   },
   {
-    key: '6',
+    key: '06',
     value: 'Bydel Ullern',
     uri: 'ullern',
   },
   {
-    key: '7',
+    key: '07',
     value: 'Bydel Vestre Aker',
     uri: 'vestreaker',
   },
   {
-    key: '8',
+    key: '08',
     value: 'Bydel Nordre Aker',
     uri: 'nordreaker',
   },
   {
-    key: '9',
+    key: '09',
     value: 'Bydel Bjerke',
     uri: 'bjerke',
   },

@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as d3 from 'd3';
 import TemplateA from '../util/graph-templates/templateA';
 import TemplateB from '../util/graph-templates/templateB';
@@ -43,6 +44,7 @@ export default {
     },
     data: null,
     currentTemplate: false,
+    allDistricts: false,
   }),
 
   computed: {
@@ -54,11 +56,27 @@ export default {
       if (this.shadow.right) str += ' graph__shadow--right';
       return str;
     },
+    ...mapState(['districts', 'compareDistricts']),
+    filteredData() {
+      if (!this.compareDistricts || this.districts.includes('alle')) return this.data;
+
+      return {
+        meta: this.data.meta,
+        data: this.data.data.filter(d => this.districts.includes(d.geography)),
+      };
+    },
   },
 
   watch: {
     settings: function() {
       this.draw();
+    },
+    districts: function(to, from) {
+      if (from.length > 1 && (to.length > 1 || this.compareDistricts)) {
+        this.draw({ keepData: true });
+      } else {
+        this.draw();
+      }
     },
   },
 
@@ -81,8 +99,8 @@ export default {
       this.drawShadows();
     },
 
-    async draw() {
-      if (this.currentTemplate !== this.settings.template) {
+    async draw(options = {}) {
+      if (this.currentTemplate !== this.settings.template && !options.keepData) {
         switch (this.settings.template) {
           case 'a':
             this.svg = new TemplateA(this.$refs['svg']);
@@ -119,8 +137,13 @@ export default {
         }
       }
 
-      this.data = await d3.json(this.settings.url);
-      this.svg.render(this.data, {
+      //this.data = await d3.json(this.settings.url);
+      const geoParam = this.compareDistricts ? '00' : this.districts[0];
+      if (!options.keepData) {
+        this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`);
+      }
+
+      this.svg.render(this.filteredData, {
         method: this.settings.method,
         initialRender: true,
       });

@@ -11,9 +11,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
-import { mapState } from 'vuex';
 
 export default {
   name: 'App',

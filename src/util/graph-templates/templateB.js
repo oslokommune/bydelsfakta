@@ -69,20 +69,20 @@ function Template(svg) {
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
-    .x(d => this.x(this.parseDate(d.date)))
+    .x(d => this.x(this.parseYear(d['År'])))
     .y(d => {
-      return this.y(d[this.method])
+      return this.y(d[this.method]);
     });
 
   this.drawVoronoi = function() {
     let flattenData = this.data.data
-      .map(geo => geo.values.map(val => ({ date: val.date, value: val.value, geography: geo.geography })))
+      .map(geo => geo.values.map(val => ({ År: val['År'], value: val.value, geography: geo.geography })))
       .flat();
 
     let voronoiData = d3
       .voronoi()
       .extent([[1, 1], [this.width, this.height]])
-      .x(d => this.x(this.parseDate(d.date)))
+      .x(d => this.x(this.parseYear(d['År'])))
       .y(d => this.y(d.value))
       .polygons(flattenData);
 
@@ -99,7 +99,7 @@ function Template(svg) {
     // the selected geography will be affected by hover.
     voronoiCells.on('mouseover', (d, i, j) => {
       let geography = j[i].__data__.data.geography;
-      let date = j[i].__data__.data.date;
+      let date = j[i]['__data__']['data']['År'];
 
       if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
@@ -112,7 +112,7 @@ function Template(svg) {
             }
           })
           .selectAll('g.dot')
-          .filter(dot => dot.date === date)
+          .filter(dot => dot['År'] === date)
           .attr('opacity', 1);
       }
     });
@@ -156,7 +156,7 @@ function Template(svg) {
     let dates = new Set();
     this.data.data.forEach(row => {
       row.values.forEach(d => {
-        dates.add(d.date);
+        dates.add(d['År']);
       });
     });
     dates = [...dates];
@@ -174,7 +174,7 @@ function Template(svg) {
       .selectAll('th')
       .data(dates)
       .join('th')
-      .text(d => this.formatYear(this.parseDate(d)));
+      .text(d => this.formatYear(this.parseYear(d)));
 
     let rows = tbody
       .selectAll('tr')
@@ -239,17 +239,21 @@ function Template(svg) {
     let label = this.canvas
       .selectAll('g.direct')
       .data(areas, d => d)
-      .join(enter => {
-          let g = enter.append('g').attr('class', 'direct').attr('opacity', 0)
-          g.append('rect')
-          g.append('text')
-          return g
+      .join(
+        enter => {
+          let g = enter
+            .append('g')
+            .attr('class', 'direct')
+            .attr('opacity', 0);
+          g.append('rect');
+          g.append('text');
+          return g;
         },
         update => update
       )
       .each((d, i, j) => {
         const el = d3.select(j[i]);
-        const position = [this.x(this.parseDate(d.values[0].data.date)), this.y(d.values[0].data.value)];
+        const position = [this.x(this.parseYear(d.values[0]['data']['År'])), this.y(d.values[0].data.value)];
         const centroid = d.values[0].centroid;
         const angle = Math.atan2(centroid[1] - position[1], centroid[0] - position[0]);
         const distance = 20;
@@ -283,9 +287,9 @@ function Template(svg) {
           let val = d.values;
           for (let i = 0; i < val.length - 1; i++) {
             let b = {
-              x1: this.x(this.parseDate(val[i].date)),
+              x1: this.x(this.parseYear(val[i]['År'])),
               y1: this.y(val[i].value),
-              x2: this.x(this.parseDate(val[i + 1].date)),
+              x2: this.x(this.parseYear(val[i + 1]['År'])),
               y2: this.y(val[i + 1].value),
             };
             if (intersects(a, b)) collisions++;
@@ -307,29 +311,36 @@ function Template(svg) {
         }
       });
 
-    label.attr('opacity', 0.6)
+    label
+      .attr('opacity', 0.6)
       .select('text')
       .attr('font-size', 11)
       .attr('text-anchor', 'middle')
       .attr('y', 5)
-      .text(d => d.key)
+      .text(d => d.key);
 
-    label.select('rect')
-        .attr('height', '1.5em')
-        .attr('y', -10)
-        .attr('fill', 'white')
-        .attr('x', (d,i,j) => {
-          let textWidth = d3.select(j[i].parentNode).select('text').node().getBBox().width
-          return ((textWidth/2) + 5) * -1
-        })
-      .attr('width', (d, i, j) => {
-        let textWidth = d3.select(j[i].parentNode).select('text').node().getBBox().width
-        return textWidth + 10
+    label
+      .select('rect')
+      .attr('height', '1.5em')
+      .attr('y', -10)
+      .attr('fill', 'white')
+      .attr('x', (d, i, j) => {
+        let textWidth = d3
+          .select(j[i].parentNode)
+          .select('text')
+          .node()
+          .getBBox().width;
+        return (textWidth / 2 + 5) * -1;
       })
-      .attr('rx', 3)
-    
-
-      
+      .attr('width', (d, i, j) => {
+        let textWidth = d3
+          .select(j[i].parentNode)
+          .select('text')
+          .node()
+          .getBBox().width;
+        return textWidth + 10;
+      })
+      .attr('rx', 3);
   };
 
   this.drawDots = function() {
@@ -351,7 +362,7 @@ function Template(svg) {
     dot
       .append('text')
       .text(d => this.format(d[this.method], this.method))
-      .attr('x', d => this.x(this.parseDate(d.date)))
+      .attr('x', d => this.x(this.parseYear(d['År'])))
       .attr('y', d => this.y(d.value))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
@@ -363,7 +374,7 @@ function Template(svg) {
       .attr('r', 4)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
-      .attr('cx', d => this.x(this.parseDate(d.date)))
+      .attr('cx', d => this.x(this.parseYear(d['År'])))
       .attr('cy', d => this.y(d.value));
   };
 
@@ -549,7 +560,7 @@ function Template(svg) {
         return enter.append('path').attr('d', d => {
           let initialData = d.values.map(val => {
             return {
-              date: val.date,
+              År: val.År,
               value: 0,
             };
           });
@@ -560,7 +571,7 @@ function Template(svg) {
       .style('pointer-events', 'none')
       .attr('fill', 'none')
       .transition()
-      .duration(100)
+      .duration(250)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
       .attr('stroke', (d, i, j) => {
@@ -590,13 +601,13 @@ function Template(svg) {
     this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
 
+    let minDate = d3.min(this.data.data.map(d => d.values[0]['År']).map(this.parseYear));
+    let maxDate = d3.max(this.data.data.map(d => d.values[d.values.length - 1]['År']).map(this.parseYear));
+
     // Set the xScale (time dimension) range and domain
     this.x = d3
       .scaleTime()
-      .domain([
-        this.parseDate(this.data.data[0].values[0].date),
-        this.parseDate(this.data.data[0].values[this.data.data[0].values.length - 1].date),
-      ])
+      .domain([minDate, maxDate])
       .range([0, this.width]);
 
     // Set the y scale based on max and min values
