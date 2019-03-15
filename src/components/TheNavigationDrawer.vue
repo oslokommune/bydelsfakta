@@ -252,6 +252,8 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 
+$rowHeight: 2.5em;
+
 .version-tag {
   align-self: center;
   padding: 0.25rem 0.5rem;
@@ -387,7 +389,7 @@ export default {
   position: relative;
   transition: all 0.3s ease-in-out;
   width: 100%;
-  border-radius: 3rem;
+  border-radius: $rowHeight / 2;
   margin-bottom: 1px;
 
   &--active {
@@ -433,11 +435,11 @@ export default {
     color: rgba($color-purple, 0.85);
     display: flex;
     flex-grow: 1;
-    height: 3em;
+    height: $rowHeight;
     letter-spacing: 0.1px;
     position: relative;
-    border-top-right-radius: 3rem;
-    border-bottom-right-radius: 3rem;
+    border-top-right-radius: $rowHeight / 2;
+    border-bottom-right-radius: $rowHeight / 2;
 
     &-compare {
       margin-bottom: 1rem;
@@ -487,13 +489,13 @@ input[type='checkbox'] {
   & + label {
     cursor: pointer;
     display: inline-block;
-    height: 40px;
+    height: $rowHeight;
     padding-left: 1rem;
     position: relative;
     vertical-align: middle;
-    width: 50px;
-    border-top-left-radius: 3rem;
-    border-bottom-left-radius: 3rem;
+    width: 46px;
+    border-top-left-radius: $rowHeight / 2;
+    border-bottom-left-radius: $rowHeight / 2;
 
     &:hover {
       background: darken($color-bg, 10%);
@@ -510,9 +512,9 @@ input[type='checkbox'] {
       border-radius: 1px;
       content: '';
       height: 10px;
-      left: 24px;
+      left: 23px;
       position: absolute;
-      top: 14px;
+      top: calc((#{$rowHeight} / 2) - 6px);
       transform: scale(0);
       width: 10px;
     }
@@ -531,12 +533,12 @@ input[type='checkbox'] {
       border: 1px solid $color-purple;
       border-radius: 1px;
       content: '';
-      height: 18px;
+      height: 16px;
       left: 20px;
       opacity: 0;
       position: absolute;
-      top: 10px;
-      width: 18px;
+      top: calc((#{$rowHeight} / 2) - 9px);
+      width: 16px;
     }
 
     &.compare::before {
