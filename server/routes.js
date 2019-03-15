@@ -22,7 +22,15 @@ module.exports = app => {
       },
     })
       .then(response => res.send(response.data[0]))
-      .catch(error => res.send(error.message));
+      .catch(error => {
+        if (error.response) {
+          return Promise.reject(error.response);
+        } else if (error.request) {
+          return Promise.reject(error.request);
+        } else {
+          return Promise.reject(error.message);
+        }
+      });
   });
 
   app.use('*', express.static(path.join(__dirname, '../docs/')));
