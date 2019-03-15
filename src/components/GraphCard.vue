@@ -3,7 +3,7 @@
     <div class="card">
       <header class="card__header">
         <div class="card__headertext">
-          <h2 class="card__title">Tittel datasett</h2>
+          <h2 class="card__title">{{ settings.heading }}</h2>
           <span class="card__published">Oppdatert 01.09.2018</span>
         </div>
         <nav class="card__nav">
@@ -38,6 +38,7 @@
               </button>
 
               <button
+                v-if="settings.map"
                 class="card__toggle-button"
                 @click="mode = 'map'"
                 :class="{ 'card__toggle-button--active': mode === 'map' }"
@@ -98,6 +99,12 @@
         ref="graph"
       />
       <div class="map-container" v-if="mode === 'map'">
+        <div class="legend">
+          <div class="legend__labels">
+            <span v-for="(label, i) in settings.map.labels" :key="i" v-text="label"></span>
+          </div>
+          <div class="colorstrip" :style="gradient"></div>
+        </div>
         <v-leaflet :district="geoDistricts"></v-leaflet>
       </div>
     </div>
@@ -110,6 +117,7 @@ import { mapGetters } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import VLeaflet from './VLeaflet.vue';
+import * as d3 from 'd3';
 
 export default {
   name: 'GraphCard',
@@ -123,6 +131,16 @@ export default {
   },
   computed: {
     ...mapGetters(['geoDistricts']),
+    gradient() {
+      const color = d3.interpolateRdBu;
+
+      let steps = [];
+      for (let i = 0; i <= 1; i += 0.1) {
+        steps.push(color(i));
+      }
+
+      return `background-image: linear-gradient(to right, ${steps})`;
+    },
   },
   props: {
     settings: {
@@ -174,6 +192,29 @@ export default {
 
 .map-container {
   height: 500px;
+}
+
+.legend {
+  padding: 1em;
+  font-weight: 500;
+  border-bottom: 1px solid $color-grey-100;
+  font-size: $font-small;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &__labels {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+}
+
+.colorstrip {
+  height: 0.5em;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .card-container {
