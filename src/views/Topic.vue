@@ -26,9 +26,6 @@
         </div>
       </div>
     </div>
-    <div class="main-container__map">
-      <v-leaflet :district="geoDistricts" />
-    </div>
   </div>
 </template>
 
