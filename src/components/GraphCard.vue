@@ -106,10 +106,10 @@
 
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
+import { mapGetters } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
-import VLeaflet from '../components/VLeaflet.vue';
-import { mapGetters } from 'vuex';
+import VLeaflet from './VLeaflet.vue';
 
 export default {
   name: 'GraphCard',
