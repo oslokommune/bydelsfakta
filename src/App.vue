@@ -6,6 +6,7 @@
       <main>
         <router-view />
       </main>
+      <TheFooter />
     </div>
   </div>
 </template>
@@ -14,10 +15,11 @@
 import { mapState } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
+import TheFooter from './components/TheFooter';
 
 export default {
   name: 'App',
-  components: { TheNavigationTopbar, TheNavigationDrawer },
+  components: { TheNavigationTopbar, TheNavigationDrawer, TheFooter },
 
   computed: {
     ...mapState(['menuIsOpen', 'navigationIsOpen']),
