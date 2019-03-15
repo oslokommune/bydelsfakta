@@ -115,6 +115,10 @@ exports[`GraphCard change an active tab 1`] = `
             >
               menu
             </i>
+             
+            <span>
+              Valg
+            </span>
           </button>
            
           <!---->
@@ -130,9 +134,18 @@ exports[`GraphCard change an active tab 1`] = `
         aria-hidden="true"
         class="graph__container"
       >
+        <div
+          class="spinner"
+        >
+          <img
+            alt=""
+            src="../assets/spinner.svg"
+          />
+        </div>
+         
         <svg
           aria-hidden="true"
-          class="graph__svg"
+          class="graph__svg loading"
           style="font-family: OsloSans;"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -976,6 +989,8 @@ exports[`GraphCard change an active tab 1`] = `
         />
       </div>
     </div>
+     
+    <!---->
   </div>
 </div>
 `;
@@ -1086,6 +1101,10 @@ exports[`GraphCard renders correctly 1`] = `
             >
               menu
             </i>
+             
+            <span>
+              Valg
+            </span>
           </button>
            
           <!---->
@@ -1101,9 +1120,18 @@ exports[`GraphCard renders correctly 1`] = `
         aria-hidden="true"
         class="graph__container"
       >
+        <div
+          class="spinner"
+        >
+          <img
+            alt=""
+            src="../assets/spinner.svg"
+          />
+        </div>
+         
         <svg
           aria-hidden="true"
-          class="graph__svg"
+          class="graph__svg loading"
           style="font-family: OsloSans;"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -1459,6 +1487,8 @@ exports[`GraphCard renders correctly 1`] = `
         />
       </div>
     </div>
+     
+    <!---->
   </div>
 </div>
 `;

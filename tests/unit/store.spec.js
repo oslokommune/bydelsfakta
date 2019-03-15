@@ -14,32 +14,32 @@ describe('mutations', () => {
       districts: [],
     };
 
-    ADD_DISTRICT(state, ['1']);
+    ADD_DISTRICT(state, ['01']);
 
     expect(state.compareDistricts).toEqual(true);
     expect(state.districts.length).toEqual(1);
-    expect(state.districts[0]).toEqual('1');
+    expect(state.districts[0]).toEqual('01');
   });
 
   it('SELECT_DISTRICT', () => {
     const state = {
       compareDistricts: true,
-      districts: ['1', '2', '3'],
+      districts: ['01', '02', '03'],
     };
 
     expect(state.districts.length).toEqual(3);
 
-    SELECT_DISTRICT(state, ['1']);
+    SELECT_DISTRICT(state, ['01']);
 
     expect(state.compareDistricts).toEqual(false);
     expect(state.districts.length).toEqual(1);
-    expect(state.districts[0]).toEqual('1');
+    expect(state.districts[0]).toEqual('01');
   });
 
   it('CLEAN_STATE', () => {
     const state = {
       compareDistricts: true,
-      districts: ['1', '2'],
+      districts: ['01', '02'],
     };
 
     expect(state.compareDistricts).toEqual(true);
@@ -61,21 +61,21 @@ describe('actions', () => {
   });
 
   it('addDistrict with multiple districts', () => {
-    addDistrict({ commit, state }, { district: '1-2-3-4' });
+    addDistrict({ commit, state }, { district: '01-02-03-04' });
 
-    expect(commit.args).toEqual([['ADD_DISTRICT', ['1', '2', '3', '4']]]);
+    expect(commit.args).toEqual([['ADD_DISTRICT', ['01', '02', '03', '04']]]);
   });
 
   it('addDistrict with only one district', () => {
     addDistrict({ commit, state }, { district: 'sagene' });
 
-    expect(commit.args).toEqual([['SELECT_DISTRICT', ['3']]]);
+    expect(commit.args).toEqual([['SELECT_DISTRICT', ['03']]]);
   });
 
   it('addDistrict with only one district from checkbox', () => {
-    addDistrict({ commit, state }, { district: '1' });
+    addDistrict({ commit, state }, { district: '01' });
 
-    expect(commit.args).toEqual([['ADD_DISTRICT', ['1']]]);
+    expect(commit.args).toEqual([['ADD_DISTRICT', ['01']]]);
   });
 
   it('addDistrict with alle as a district', () => {
@@ -112,7 +112,7 @@ describe('getters', () => {
     const state = {
       districtsGeo: districts,
       compareDistricts: false,
-      districts: ['1'],
+      districts: ['01'],
     };
 
     const result = geoDistricts(state);
@@ -123,7 +123,7 @@ describe('getters', () => {
     const state = {
       districtsGeo: districts,
       compareDistricts: true,
-      districts: ['1'],
+      districts: ['01'],
     };
 
     const result = geoDistricts(state);

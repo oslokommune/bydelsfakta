@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import * as d3 from 'd3';
+import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
 import TemplateA from '../util/graph-templates/templateA';
 import TemplateB from '../util/graph-templates/templateB';

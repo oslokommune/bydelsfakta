@@ -17,8 +17,9 @@ describe('GraphInstance', () => {
     localVue.use(Vuex);
     wrapper = mount(GraphInstance, {
       propsData: {
-        settings: topics['alder'].subpages[0].graphs[0],
+        settings: topics['alder'].topics[0].graphs[0],
         showTable: false,
+        mode: 'graph',
       },
       localVue,
       store,

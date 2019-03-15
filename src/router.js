@@ -41,7 +41,7 @@ const router = new Router({
 // Temp while we find out what our homepage should look like
 router.beforeEach((to, from, next) => {
   if (to.params.topic) {
-    if (!topicNames.find(name => name === to.params.topic) || disabledTopics.find(topic => topic === to.params.topic)) {
+    if (!topicNames.find(name => name === to.params.topic) || disabledTopics.includes(to.params.topic)) {
       next({ name: 'NotFound', params: [to.path] });
     }
   }

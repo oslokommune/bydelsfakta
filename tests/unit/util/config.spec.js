@@ -8,6 +8,6 @@ describe('config.js', () => {
 
   test('get /bydelsfakta when in production mode', () => {
     process.env.NODE_ENV = 'production';
-    expect(baseUrl()).toEqual('/bydelsfakta');
+    expect(baseUrl()).toEqual('');
   });
 });

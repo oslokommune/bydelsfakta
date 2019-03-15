@@ -41,33 +41,33 @@ describe('TheNavigationTopbar', () => {
   });
 
   test('returns true if subpage is active', () => {
-    router.push('/bydel/sagene/alder');
-    expect(wrapper.vm.checkActiveSubpage('alder')).toEqual(true);
+    router.push('/bydel/sagene/boligpriser');
+    expect(wrapper.vm.checkActiveTopic('boligpriser')).toEqual(true);
   });
 
   test('return false if subpage is not active', () => {
-    router.push('/bydel/sagene/alder');
-    expect(wrapper.vm.checkActiveSubpage('levekaar')).toEqual(false);
+    router.push('/bydel/sagene/boligpriser');
+    expect(wrapper.vm.checkActiveTopic('levekaar')).toEqual(false);
   });
 
   test('change showDropdown to false if it is true', () => {
-    router.push('/bydel/sagene/alder');
+    router.push('/bydel/sagene/boligpriser');
     wrapper.setData({ showDropdown: true });
     wrapper.vm.closeMenu();
     expect(wrapper.vm.showDropdown).toEqual(false);
   });
 
   test('keep showDropdown as false if false', () => {
-    router.push('/bydel/sagene/alder');
+    router.push('/bydel/sagene/boligpriser');
     wrapper.vm.closeMenu();
     expect(wrapper.vm.showDropdown).toEqual(false);
   });
 
   test('return router object when clicking on a subpage', () => {
-    router.push('/bydel/sagene/alder');
-    expect(wrapper.vm.onClickSubpage('levekaar')).toEqual({
+    router.push('/bydel/sagene/boligpriser');
+    expect(wrapper.vm.onClickTopic('boligpriser')).toEqual({
       name: 'Topic',
-      params: { district: 'sagene', topic: 'levekaar' },
+      params: { district: 'sagene', topic: 'boligpriser' },
     });
   });
 });
