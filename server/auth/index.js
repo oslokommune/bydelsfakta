@@ -19,6 +19,7 @@ module.exports = () => {
         accessToken = parseToken(result.data);
       } catch (error) {
         console.log('Access token error: ', error.message);
+        return Promise.reject(error.response);
       }
     } else if (isTokenExpired(accessToken)) {
       try {
@@ -26,6 +27,7 @@ module.exports = () => {
         accessToken = parseToken(result.data);
       } catch (error) {
         console.log('Error refreshing access token: ', error.message);
+        return Promise.reject(error.response);
       }
     }
 

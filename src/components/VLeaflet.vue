@@ -65,4 +65,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.vue2leaflet-map {
+  z-index: 0;
+}
+</style>
