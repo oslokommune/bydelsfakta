@@ -11,7 +11,10 @@
       <div class="spinner" v-if="loading">
         <img src="../assets/spinner.svg" alt="" />
       </div>
-      <svg class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
+      <div class="error" v-if="error">
+        <h2>{{ error.msg }}</h2>
+      </div>
+      <svg v-if="!error" class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
     </div>
     <div
       :class="{ 'visually-hidden': mode === 'graph' }"
@@ -57,6 +60,7 @@ export default {
     loading: true,
     currentTemplate: false,
     allDistricts: false,
+    error: false,
   }),
 
   computed: {
@@ -124,6 +128,20 @@ export default {
     async draw(options = {}) {
       this.loading = true;
 
+      const geoParam = this.compareDistricts ? '00' : this.districts[0];
+      if (!options.keepData) {
+        this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`).catch(error => {
+          this.error = this.$t('error.connectionLost');
+          this.loading = false;
+        });
+      }
+
+      if (this.data) {
+        this.error = false;
+      } else {
+        return;
+      }
+
       if (this.currentTemplate !== this.settings.template && !options.keepData) {
         switch (this.settings.template) {
           case 'a':
@@ -162,19 +180,11 @@ export default {
       }
       this.currentTemplate = this.settings.template;
 
-      //this.data = await d3.json(this.settings.url);
-      const geoParam = this.compareDistricts ? '00' : this.districts[0];
-      if (!options.keepData) {
-        this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`);
-      }
-      if (!this.data) return;
-
       this.svg.render(this.filteredData, {
         method: this.settings.method,
         initialRender: true,
       });
       this.drawShadows();
-
       this.loading = false;
     },
   },

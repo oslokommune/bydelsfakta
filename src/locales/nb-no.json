@@ -75,5 +75,8 @@
       "header": "Eller sjekk ut en av disse sidene",
       "subheader": "(de fungerer, vi lover)"
     }
+  },
+  "error": {
+    "connectionLost": "Mistet kontakten med datatjener"
   }
 }
