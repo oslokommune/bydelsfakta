@@ -21,6 +21,7 @@ describe('VCategory', () => {
         txtColor: 'white',
         id: 'test',
         link: '/test',
+        district: 'sagene',
       },
       localVue,
       stubs: { RouterLink: RouterLinkStub },

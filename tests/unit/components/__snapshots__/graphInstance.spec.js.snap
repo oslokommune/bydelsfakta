@@ -9,9 +9,18 @@ exports[`GraphInstance renders correctly 1`] = `
     aria-hidden="true"
     class="graph__container"
   >
+    <div
+      class="spinner"
+    >
+      <img
+        alt=""
+        src="../assets/spinner.svg"
+      />
+    </div>
+     
     <svg
       aria-hidden="true"
-      class="graph__svg"
+      class="graph__svg loading"
     />
   </div>
    

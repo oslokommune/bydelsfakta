@@ -21,7 +21,7 @@ describe('GraphCard', () => {
     localVue.directive('click-outside', clickOutside);
     wrapper = mount(GraphCard, {
       propsData: {
-        settings: topics['alder'].subpages[0].graphs[0],
+        settings: topics['alder'].topics[0].graphs[0],
       },
       localVue,
       router,
@@ -43,14 +43,14 @@ describe('GraphCard', () => {
   });
 
   test('change an active tab', () => {
-    wrapper.setProps({ settings: topics['eierform'].subpages[0].graphs[0] });
+    wrapper.setProps({ settings: topics['eierform'].topics[0].graphs[0] });
     wrapper.vm.activeTab(1);
     expect(wrapper.vm.active).toEqual(1);
     expect(wrapper.element).toMatchSnapshot();
   });
 
   test('change active tab multiple times', () => {
-    wrapper.setProps({ settings: topics['husholdninger'].subpages[0].graphs[0] });
+    wrapper.setProps({ settings: topics['husholdninger'].topics[0].graphs[0] });
     expect(wrapper.vm.active).toEqual(0);
     wrapper.vm.activeTab(1);
     expect(wrapper.vm.active).toEqual(1);

@@ -12,100 +12,110 @@ exports[`Bydel renders component correctly 1`] = `
     >
       <v-category-stub
         bgcolor="rgb(255, 129, 116)"
-        bgimage="/img/folkemengde.png"
+        bgimage="/img/folkemengde"
         category="Befolkning"
+        disabled="true"
+        district="bydel"
         id="folkemengde"
-        link="//folkemengde"
         topic="Folkemengde"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
         bgcolor="rgb(255, 129, 116)"
-        bgimage="/img/alder.png"
+        bgimage="/img/alder"
         category="Befolkning"
+        disabled="true"
+        district="bydel"
         id="alder"
-        link="//alder"
         topic="Alder"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
         bgcolor="rgb(255, 129, 116)"
-        bgimage="/img/innvandring.png"
+        bgimage="/img/innvandring"
         category="Befolkning"
+        disabled="true"
+        district="bydel"
         id="innvandrerbefolkningen"
-        link="//innvandrerbefolkningen"
         topic="Innvandrer&shy;befolkningen"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/husholdninger.png"
+        bgimage="/img/husholdninger"
         category="Bomiljø"
+        disabled="true"
+        district="bydel"
         id="husholdninger"
-        link="//husholdninger"
         topic="Husholdninger"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/trangboddhet.png"
+        bgimage="/img/trangboddhet"
         category="Bomiljø"
+        disabled="true"
+        district="bydel"
         id="trangboddhet"
-        link="//trangboddhet"
         topic="Trangboddhet"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/eierform.png"
+        bgimage="/img/eierform"
         category="Bomiljø"
+        disabled="true"
+        district="bydel"
         id="eierform"
-        link="//eierform"
         topic="Eierform"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/kommunale-boliger.png"
+        bgimage="/img/kommunale-boliger"
         category="Bomiljø"
+        disabled="true"
+        district="bydel"
         id="kommunaleboliger"
-        link="//kommunaleboliger"
         topic="Kommunale boliger"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/flytting.png"
+        bgimage="/img/flytting"
         category="Bomiljø"
+        disabled="true"
+        district="bydel"
         id="flytting"
-        link="//flytting"
         topic="Flytting"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/bygningstyper.png"
+        bgimage="/img/bygningstyper"
         category="Bomiljø"
+        disabled="true"
+        district="bydel"
         id="bygningstyper"
-        link="//bygningstyper"
         topic="Bygningstyper"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/boligpriser.png"
+        bgimage="/img/boligpriser"
         category="Bomiljø"
+        district="bydel"
         id="boligpriser"
-        link="//boligpriser"
         topic="Boligpriser"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgcolor="rgb(248, 198, 107)"
-        bgimage="/img/levekaar.png"
+        bgimage="/img/levekaar"
         category="Levekår"
+        disabled="true"
+        district="bydel"
         id="levekaar"
-        link="//levekaar"
         topic="Levekår"
         txtcolor="rgb(244, 206, 138)"
       />
@@ -115,10 +125,6 @@ exports[`Bydel renders component correctly 1`] = `
   <div
     class="main-container__map"
   >
-    <h3>
-      Bydelskart
-    </h3>
-     
     <v-leaflet-stub
       district="[object Object]"
     />

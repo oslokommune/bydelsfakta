@@ -37,7 +37,7 @@
                 :id="`dropdown-href-${topics[link].value}`"
                 :class="{
                   'navigation-topbar__dropdown-item--active': checkActiveTopic(topics[link].value),
-                  'navigation-topbar__dropdown-item--disabled': disabledTopics.find(topic => topic === topics[link].value),
+                  'navigation-topbar__dropdown-item--disabled': disabledTopics.includes(topics[link].value),
                 }"
                 :key="topicIndex"
                 v-text="topics[link].text"
@@ -115,7 +115,7 @@ export default {
     },
 
     onClickTopic(topic) {
-      return this.disabledTopics.find(item => item === topic)
+      return this.disabledTopics.includes(topic)
         ? ''
         : { name: 'Topic', params: { district: this.$route.params.district, topic } };
     },

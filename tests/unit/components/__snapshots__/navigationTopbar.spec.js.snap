@@ -4,6 +4,12 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
 <header
   class="oslo__navigation-topbar"
 >
+  <h1
+    class="header"
+  >
+    Bydel Sagene
+  </h1>
+   
   <div
     class="navigation-topbar navigation-topbar--hidden"
   >

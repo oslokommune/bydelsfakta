@@ -4,17 +4,28 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
 <aside
   class="navbar"
 >
-  <img
-    alt="oslo-logo"
-    class="oslo__logo"
-    src=""
-  />
+  <a
+    class="logo-link router-link-active"
+    href="/"
+  >
+    <img
+      alt="oslo-logo"
+      class="oslo__logo"
+      src=""
+    />
+  </a>
    
   <button
-    class="selectedSubpage"
+    class="selectedTopic"
   >
     Bydel Gamle Oslo
   </button>
+   
+  <div
+    class="version-tag"
+  >
+    Alpha
+  </div>
    
   <nav
     class="navigation"
@@ -29,7 +40,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-gamleoslo"
           type="checkbox"
-          value="1"
+          value="01"
         />
          
         <label
@@ -39,7 +50,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label router-link-exact-active router-link-active"
-          href="#/bydel/gamleoslo"
+          href="/bydel/gamleoslo"
           id="a-gamleoslo"
         >
           Bydel Gamle Oslo
@@ -51,7 +62,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-grunerlokka"
           type="checkbox"
-          value="2"
+          value="02"
         />
          
         <label
@@ -61,7 +72,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/grunerlokka"
+          href="/bydel/grunerlokka"
           id="a-grunerlokka"
         >
           Bydel Grünerløkka
@@ -73,7 +84,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-sagene"
           type="checkbox"
-          value="3"
+          value="03"
         />
          
         <label
@@ -83,7 +94,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/sagene"
+          href="/bydel/sagene"
           id="a-sagene"
         >
           Bydel Sagene
@@ -95,7 +106,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-sthanshaugen"
           type="checkbox"
-          value="4"
+          value="04"
         />
          
         <label
@@ -105,7 +116,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/sthanshaugen"
+          href="/bydel/sthanshaugen"
           id="a-sthanshaugen"
         >
           Bydel St. Hanshaugen
@@ -117,7 +128,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-frogner"
           type="checkbox"
-          value="5"
+          value="05"
         />
          
         <label
@@ -127,7 +138,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/frogner"
+          href="/bydel/frogner"
           id="a-frogner"
         >
           Bydel Frogner
@@ -139,7 +150,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-ullern"
           type="checkbox"
-          value="6"
+          value="06"
         />
          
         <label
@@ -149,7 +160,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/ullern"
+          href="/bydel/ullern"
           id="a-ullern"
         >
           Bydel Ullern
@@ -161,7 +172,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-vestreaker"
           type="checkbox"
-          value="7"
+          value="07"
         />
          
         <label
@@ -171,7 +182,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/vestreaker"
+          href="/bydel/vestreaker"
           id="a-vestreaker"
         >
           Bydel Vestre Aker
@@ -183,7 +194,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-nordreaker"
           type="checkbox"
-          value="8"
+          value="08"
         />
          
         <label
@@ -193,7 +204,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/nordreaker"
+          href="/bydel/nordreaker"
           id="a-nordreaker"
         >
           Bydel Nordre Aker
@@ -205,7 +216,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <input
           id="checkbox-bjerke"
           type="checkbox"
-          value="9"
+          value="09"
         />
          
         <label
@@ -215,7 +226,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/bjerke"
+          href="/bydel/bjerke"
           id="a-bjerke"
         >
           Bydel Bjerke
@@ -237,7 +248,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/grorud"
+          href="/bydel/grorud"
           id="a-grorud"
         >
           Bydel Grorud
@@ -259,7 +270,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/stovner"
+          href="/bydel/stovner"
           id="a-stovner"
         >
           Bydel Stovner
@@ -281,7 +292,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/alna"
+          href="/bydel/alna"
           id="a-alna"
         >
           Bydel Alna
@@ -303,7 +314,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/ostensjo"
+          href="/bydel/ostensjo"
           id="a-ostensjo"
         >
           Bydel Østensjø
@@ -325,7 +336,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/nordstrand"
+          href="/bydel/nordstrand"
           id="a-nordstrand"
         >
           Bydel Nordstrand
@@ -347,7 +358,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
          
         <a
           class="navigation-link__label"
-          href="#/bydel/sondrenordstrand"
+          href="/bydel/sondrenordstrand"
           id="a-sondrenordstrand"
         >
           Bydel Søndre Nordstrand
@@ -360,7 +371,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
       >
         <a
           class="navigation-link__label"
-          href="#/bydel/alle"
+          href="/bydel/alle"
           id="sammenlign-href"
         >
           Sammenlign bydeler
@@ -377,17 +388,28 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
 <aside
   class="navbar"
 >
-  <img
-    alt="oslo-logo"
-    class="oslo__logo"
-    src=""
-  />
+  <a
+    class="logo-link router-link-active"
+    href="/"
+  >
+    <img
+      alt="oslo-logo"
+      class="oslo__logo"
+      src=""
+    />
+  </a>
    
   <button
-    class="selectedSubpage"
+    class="selectedTopic"
   >
     - Velg bydel -
   </button>
+   
+  <div
+    class="version-tag"
+  >
+    Alpha
+  </div>
    
   <nav
     class="navigation"
@@ -402,7 +424,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-gamleoslo"
           type="checkbox"
-          value="1"
+          value="01"
         />
          
         <label
@@ -412,7 +434,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/gamleoslo"
+          href="/bydel/gamleoslo"
           id="a-gamleoslo"
         >
           Bydel Gamle Oslo
@@ -424,7 +446,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-grunerlokka"
           type="checkbox"
-          value="2"
+          value="02"
         />
          
         <label
@@ -434,7 +456,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/grunerlokka"
+          href="/bydel/grunerlokka"
           id="a-grunerlokka"
         >
           Bydel Grünerløkka
@@ -446,7 +468,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-sagene"
           type="checkbox"
-          value="3"
+          value="03"
         />
          
         <label
@@ -456,7 +478,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label router-link-exact-active router-link-active"
-          href="#/bydel/sagene"
+          href="/bydel/sagene"
           id="a-sagene"
         >
           Bydel Sagene
@@ -468,7 +490,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-sthanshaugen"
           type="checkbox"
-          value="4"
+          value="04"
         />
          
         <label
@@ -478,7 +500,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/sthanshaugen"
+          href="/bydel/sthanshaugen"
           id="a-sthanshaugen"
         >
           Bydel St. Hanshaugen
@@ -490,7 +512,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-frogner"
           type="checkbox"
-          value="5"
+          value="05"
         />
          
         <label
@@ -500,7 +522,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/frogner"
+          href="/bydel/frogner"
           id="a-frogner"
         >
           Bydel Frogner
@@ -512,7 +534,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-ullern"
           type="checkbox"
-          value="6"
+          value="06"
         />
          
         <label
@@ -522,7 +544,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/ullern"
+          href="/bydel/ullern"
           id="a-ullern"
         >
           Bydel Ullern
@@ -534,7 +556,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-vestreaker"
           type="checkbox"
-          value="7"
+          value="07"
         />
          
         <label
@@ -544,7 +566,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/vestreaker"
+          href="/bydel/vestreaker"
           id="a-vestreaker"
         >
           Bydel Vestre Aker
@@ -556,7 +578,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-nordreaker"
           type="checkbox"
-          value="8"
+          value="08"
         />
          
         <label
@@ -566,7 +588,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/nordreaker"
+          href="/bydel/nordreaker"
           id="a-nordreaker"
         >
           Bydel Nordre Aker
@@ -578,7 +600,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <input
           id="checkbox-bjerke"
           type="checkbox"
-          value="9"
+          value="09"
         />
          
         <label
@@ -588,7 +610,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/bjerke"
+          href="/bydel/bjerke"
           id="a-bjerke"
         >
           Bydel Bjerke
@@ -610,7 +632,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/grorud"
+          href="/bydel/grorud"
           id="a-grorud"
         >
           Bydel Grorud
@@ -632,7 +654,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/stovner"
+          href="/bydel/stovner"
           id="a-stovner"
         >
           Bydel Stovner
@@ -654,7 +676,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/alna"
+          href="/bydel/alna"
           id="a-alna"
         >
           Bydel Alna
@@ -676,7 +698,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/ostensjo"
+          href="/bydel/ostensjo"
           id="a-ostensjo"
         >
           Bydel Østensjø
@@ -698,7 +720,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/nordstrand"
+          href="/bydel/nordstrand"
           id="a-nordstrand"
         >
           Bydel Nordstrand
@@ -720,7 +742,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
          
         <a
           class="navigation-link__label"
-          href="#/bydel/sondrenordstrand"
+          href="/bydel/sondrenordstrand"
           id="a-sondrenordstrand"
         >
           Bydel Søndre Nordstrand
@@ -733,7 +755,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       >
         <a
           class="navigation-link__label router-link-exact-active router-link-active"
-          href="#/bydel/sagene"
+          href="/bydel/sagene"
           id="sammenlign-href"
         >
           Sammenlign bydeler

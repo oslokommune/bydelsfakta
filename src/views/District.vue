@@ -12,7 +12,7 @@
           :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
-          :disabled="disabledTopics.find(item => item === topicName)"
+          :disabled="disabledTopics.includes(topicName)"
         />
       </div>
     </div>

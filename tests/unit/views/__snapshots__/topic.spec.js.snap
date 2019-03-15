@@ -17,48 +17,55 @@ exports[`Topic renders component correctly 1`] = `
       settings="[object Object]"
     />
      
-    <h2
-      class="section-heading"
+    <div
+      class="related"
     >
-      Se også
-    </h2>
-     
-    <v-category-stub
-      bgcolor="rgb(255, 129, 116)"
-      bgimage="/img/folkemengde.png"
-      category="Befolkning"
-      id="folkemengde"
-      link="/bydel/undefined/folkemengde"
-      topic="Folkemengde"
-      txtcolor="rgb(245, 173, 165)"
-    />
-    <v-category-stub
-      bgcolor="rgb(66, 248, 182)"
-      bgimage="/img/husholdninger.png"
-      category="Bomiljø"
-      id="husholdninger"
-      link="/bydel/undefined/husholdninger"
-      topic="Husholdninger"
-      txtcolor="rgb(199, 247, 201)"
-    />
-    <v-category-stub
-      bgcolor="rgb(248, 198, 107)"
-      bgimage="/img/levekaar.png"
-      category="Levekår"
-      id="levekaar"
-      link="/bydel/undefined/levekaar"
-      topic="Levekår"
-      txtcolor="rgb(244, 206, 138)"
-    />
+      <h2
+        class="section-heading"
+      >
+        Se også
+      </h2>
+       
+      <div
+        class="topics-grid"
+      >
+        <v-category-stub
+          bgcolor="rgb(255, 129, 116)"
+          bgimage="/img/folkemengde"
+          category="Befolkning"
+          disabled="true"
+          district="$route.params.district"
+          id="folkemengde"
+          topic="Folkemengde"
+          txtcolor="rgb(245, 173, 165)"
+        />
+        <v-category-stub
+          bgcolor="rgb(66, 248, 182)"
+          bgimage="/img/husholdninger"
+          category="Bomiljø"
+          disabled="true"
+          district="$route.params.district"
+          id="husholdninger"
+          topic="Husholdninger"
+          txtcolor="rgb(199, 247, 201)"
+        />
+        <v-category-stub
+          bgcolor="rgb(248, 198, 107)"
+          bgimage="/img/levekaar"
+          category="Levekår"
+          disabled="true"
+          district="$route.params.district"
+          id="levekaar"
+          topic="Levekår"
+          txtcolor="rgb(244, 206, 138)"
+        />
+      </div>
+    </div>
   </div>
    
   <div
     class="main-container__map"
   >
-    <h3>
-      Bydelskart
-    </h3>
-     
     <v-leaflet-stub
       district="[object Object]"
     />

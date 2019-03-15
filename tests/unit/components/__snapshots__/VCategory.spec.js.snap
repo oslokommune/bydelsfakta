@@ -4,14 +4,29 @@ exports[`VCategory renders correctly 1`] = `
 <a
   class="main-container__item"
   id="test"
+  link="/test"
   style="background-color: black;"
 >
-  <img
-    alt="test"
-    aria-hidden="true"
-    class="oslo__img"
-    src="test"
-  />
+  <picture>
+    <source
+      alt="test"
+      srcset="test.webp"
+      type="image/webp"
+    />
+     
+    <source
+      alt="test"
+      srcset="test.png"
+      type="image/png"
+    />
+     
+    <img
+      alt="test"
+      aria-hidden="true"
+      class="oslo__img"
+      src="test.png"
+    />
+  </picture>
    
   <span
     class="oslo__category"
@@ -24,12 +39,6 @@ exports[`VCategory renders correctly 1`] = `
     class="oslo__topic"
   >
     test
-  </span>
-   
-  <span
-    class="oslo__see-more-text"
-  >
-    Se mer
   </span>
 </a>
 `;

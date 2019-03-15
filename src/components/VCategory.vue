@@ -49,8 +49,8 @@ export default {
       required: true,
     },
     disabled: {
-      type: String,
-      required: true,
+      type: Boolean,
+      required: false,
     },
   },
 

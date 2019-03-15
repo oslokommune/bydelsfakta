@@ -3,7 +3,7 @@ import Vuex, { Store } from 'vuex';
 import router from './router';
 
 import districts from './config/geoData/districts';
-import bydeler from './config/allDistricts';
+import allDistricts from './config/allDistricts';
 
 Vue.use(Vuex);
 
@@ -18,7 +18,7 @@ export const state = {
 export const getters = {
   geoDistricts: state => {
     if (!state.compareDistricts && state.districts.length !== 0) {
-      return { ...state.districtsGeo[`${bydeler.find(district => district.key === state.districts[0]).uri}`] };
+      return { ...state.districtsGeo[`${allDistricts.find(district => district.key === state.districts[0]).uri}`] };
     } else if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
@@ -63,8 +63,8 @@ export const actions = {
       if (districts[0] === 'alle') {
         commit('ADD_DISTRICT', districts);
       } else {
-        const districtValue = bydeler.find(district => district.uri === districts[0]);
-        const districtKey = bydeler.find(district => district.key === districts[0]);
+        const districtValue = allDistricts.find(district => district.uri === districts[0]);
+        const districtKey = allDistricts.find(district => district.key === districts[0]);
         districtValue === undefined
           ? commit('ADD_DISTRICT', [districtKey.key])
           : commit('SELECT_DISTRICT', [districtValue.key]);
