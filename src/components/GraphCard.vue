@@ -218,19 +218,19 @@ export default {
 }
 
 .card-container {
-  padding: 1em;
   flex: 50% 1 10;
   min-width: 300px;
   overflow: hidden;
+  padding: 1em;
 
   @media screen and (min-width: 950px) {
-    min-width: 400px;
     max-width: 50%;
+    min-width: 400px;
   }
 
   &.large {
-    max-width: 100%;
     flex-basis: 100%;
+    max-width: 100%;
   }
 }
 
@@ -240,54 +240,54 @@ export default {
   width: 100%;
 
   &__header {
-    width: 100%;
+    border-bottom: 1px solid $color-border;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid $color-border;
+    width: 100%;
     z-index: 1;
   }
 
   &__headertext {
-    display: flex;
     align-items: baseline;
+    display: flex;
     padding: 0 1rem;
   }
 
   &__title {
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
+    color: $color-purple;
     font-size: $font-large;
     font-weight: 500;
-    color: $color-purple;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
   }
 
   &__published {
-    text-transform: uppercase;
-    font-size: $font-small;
     color: rgba($color-purple, 0.65);
+    font-size: $font-small;
+    text-transform: uppercase;
   }
 
   &__nav {
-    display: flex;
     align-items: flex-start;
+    display: flex;
     padding-left: 1rem;
     padding-right: 0.5rem;
   }
 
   &__toggle-menu {
+    display: flex;
     margin-left: auto;
     padding: 0 1rem;
-    display: flex;
   }
 
   &__toggle-button {
-    height: 3em;
-    width: 3em;
-    border-radius: 50%;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    border-radius: 50%;
     cursor: pointer;
+    display: flex;
+    height: 3em;
+    justify-content: center;
+    width: 3em;
 
     &:hover:not(&--active) {
       background-color: rgba($color-border, 0.35);
@@ -310,8 +310,8 @@ export default {
     color: rgba($color-purple, 0.65);
     cursor: pointer;
     font-weight: 500;
-    transition: background-color 0.2s;
     padding: 0.75em;
+    transition: background-color 0.2s;
     white-space: nowrap;
 
     &.active {
@@ -319,7 +319,7 @@ export default {
       cursor: default;
       position: relative;
 
-      &:after {
+      &::after {
         background-color: $color-blue;
         bottom: -4px;
         content: '';
@@ -339,26 +339,26 @@ export default {
 }
 
 .context-menu {
-  position: relative;
   margin-left: auto;
+  position: relative;
   z-index: 2;
 
   &__button {
-    border-radius: 0px;
-    display: flex;
     align-items: center;
+    background-color: rgba($color-border, 1);
+    border-radius: 0;
+    cursor: pointer;
+    display: flex;
+    height: 3rem;
     margin-top: 4px;
     padding-left: 0.65rem;
     padding-right: 0.65rem;
-    height: 3rem;
-    cursor: pointer;
-    background-color: rgba($color-border, 1);
 
     @media screen and (min-width: $break-md) {
       background-color: rgba($color-border, 0);
-      padding-right: 0.95rem;
       border-radius: 3px;
       height: 3rem;
+      padding-right: 0.95rem;
       width: auto;
 
       &:hover {
@@ -367,10 +367,10 @@ export default {
     }
 
     span {
-      margin-left: 0.25rem;
-      font-weight: 700;
-      text-transform: uppercase;
       display: none;
+      font-weight: 700;
+      margin-left: 0.25rem;
+      text-transform: uppercase;
 
       @media screen and (min-width: $break-md) {
         display: inline-block;
@@ -388,12 +388,12 @@ export default {
 
     &-item {
       color: $color-purple;
+      cursor: pointer;
       display: flex;
       flex-direction: row;
       font-weight: bold;
       padding: 1rem 0.75rem;
       width: 100%;
-      cursor: pointer;
 
       &:hover {
         background-color: lighten($color-light-blue-2, 5%);

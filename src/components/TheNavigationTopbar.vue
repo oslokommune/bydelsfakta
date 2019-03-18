@@ -148,14 +148,14 @@ export default {
 
 .header {
   color: $color-purple;
+  display: none;
   flex-direction: column;
   font-size: $font-huge;
+  font-weight: 500;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
   position: relative;
   width: 100%;
-  font-weight: 500;
-  padding: 0.5rem;
-  margin-left: 0.5rem;
-  display: none;
 
   @media screen and (min-width: $break-lg) {
     display: block;
@@ -163,20 +163,20 @@ export default {
 }
 
 .oslo__navigation-topbar {
+  background-color: $color-bg;
   display: flex;
   flex-direction: column;
   margin: 1.5rem 0.5rem 0.5rem 0.5rem;
-  width: calc(100% - 1rem);
+  padding: 1rem 0;
   position: relative;
   top: 0;
-  background-color: $color-bg;
+  width: calc(100% - 1rem);
   z-index: 3;
-  padding: 1rem 0;
 
   @media screen and (min-width: $break-lg) {
+    margin: 0;
     padding: 2.5rem 1rem 1rem;
     width: 100%;
-    margin: 0;
   }
 
   &-button {
@@ -208,14 +208,14 @@ export default {
 }
 
 .topic {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .navigation-topbar {
-  width: 100%;
   max-width: 768px;
   position: relative;
+  width: 100%;
 
   &--hidden {
     @media screen and (max-width: $break-lg) {
@@ -228,10 +228,10 @@ export default {
     display: flex;
     flex-direction: column;
     font-size: $font-huge;
-    position: relative;
-    width: 100%;
     font-weight: 500;
     padding: 0.5rem;
+    position: relative;
+    width: 100%;
 
     @media screen and (min-width: $break-md) {
       padding: 1rem;
@@ -249,24 +249,23 @@ export default {
   &__dropdown {
     background-color: white;
     border: 1px solid $color-grey-100;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.65);
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    width: 100%;
-    max-width: 768px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.65);
     display: flex;
     flex-flow: row wrap;
-    position: absolute;
-    z-index: 1;
-    padding: 1rem 0.5rem;
-
     max-height: calc(100vh - 17rem);
+    max-width: 768px;
     overflow: auto;
+    padding: 1rem 0.5rem;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
 
     &-column {
       display: flex;
-      flex-direction: column;
       flex: 33.333%;
+      flex-direction: column;
       min-width: 200px;
       padding: 0.5rem;
 
@@ -308,8 +307,8 @@ export default {
       }
 
       &--disabled {
-        opacity: 0.45;
         background-color: white;
+        opacity: 0.45;
       }
     }
   }

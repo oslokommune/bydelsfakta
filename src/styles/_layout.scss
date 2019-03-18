@@ -26,43 +26,43 @@
 }
 
 .main-container__item {
-  padding: 5px;
   margin-top: 10px;
+  padding: 5px;
 }
 
 .main-container__cards {
   display: flex;
+  flex: 2 1 800px;
   flex-flow: row wrap;
   justify-content: flex-start;
   min-width: 300px;
   padding: 0;
-  flex: 2 1 800px;
 
   @media screen and (min-width: $break-md) {
     padding: 0 0.5em;
   }
 
   @media screen and (min-width: $break-lg) {
-    padding: 0em 1em;
+    padding: 0 1em;
   }
 }
 
 .main-container__map {
   display: flex;
-  padding: 1rem;
   flex-flow: row wrap;
-  justify-content: flex-start;
   height: 300px;
   min-width: 250px;
   flex: 1 1 400px;
+  justify-content: flex-start;
+  padding: 1rem;
 }
 
 .topics-grid {
-  padding: 0 1em;
-  flex: 2 1 800px;
   display: grid;
+  flex: 2 1 800px;
   gap: 0.5em;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  padding: 0 1em;
 
   @media screen and (min-width: $break-md) {
     padding: 1em;
@@ -90,18 +90,22 @@
 .navigationIsOpen {
   max-height: 100vh;
   overflow-y: hidden;
+
   main,
   .navigation {
     opacity: 0.2;
   }
 }
+
 .navigationIsOpen:not(.menuIsOpen) {
   .navigation {
     opacity: 1;
   }
+
   @media screen and (min-width: $break-lg) {
     max-height: 100vh;
     overflow-y: hidden;
+
     main,
     .navigation {
       opacity: 1;
