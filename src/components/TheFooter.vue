@@ -12,7 +12,7 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/_variables';
 @import '../styles/_colors';
 
@@ -31,38 +31,38 @@ export default {};
     font-weight: 500;
     text-decoration: underline;
   }
-}
 
-.columns {
-  border-top: 1px solid $color-grey-100;
-  display: grid;
-  gap: 1.5rem 0.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  .columns {
+    border-top: 1px solid $color-grey-100;
+    display: grid;
+    gap: 1.5rem 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
-  @media screen and (min-width: $break-lg) {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    @media screen and (min-width: $break-lg) {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    // Fallback to flexbox
+    @media all and (-ms-high-contrast: none) {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 
-  // Fallback to flexbox
-  @media all and (-ms-high-contrast: none) {
-    display: flex;
-    flex-wrap: wrap;
+  .column {
+    padding: 1rem 1rem 0 0;
+    @media screen and (min-width: $break-lg) {
+      padding: 1rem 2.5rem 0 0;
+    }
   }
-}
 
-.column {
-  padding: 1rem 1rem 0 0;
-  @media screen and (min-width: $break-lg) {
-    padding: 1rem 2.5rem 0 0;
+  ul {
+    padding: 0;
+    list-style-type: none;
   }
-}
 
-ul {
-  padding: 0;
-  list-style-type: none;
-}
-
-li {
-  margin: 0;
+  li {
+    margin: 0;
+  }
 }
 </style>
