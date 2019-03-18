@@ -60,72 +60,70 @@ export const topics = {
   folkemengde: {
     text: 'Folkemengde',
     value: 'folkemengde',
-    topics: [
+    cards: [
       {
-        name: 'fremskriving',
-        title: 'Befolkningsutvikling og fremskriving',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'folkemengde_utvikling_historisk',
-                template: 'h',
-                url: `${baseUrl()}/mockDataH.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk (prosent)',
-                id: 'folkemengde_utvikling_historisk-prosent',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'folkemengde_utvikling_historisk',
+            template: 'h',
+            url: `${baseUrl()}/mockDataH.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk (prosent)',
+            id: 'folkemengde_utvikling_historisk-prosent',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
       {
-        name: 'Utvikling',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'folkemengde_utvikling_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk (prosent)',
-                id: 'folkemengde_utvikling_historisk-prosent',
-                template: 'b',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'folkemengde_utvikling_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk (prosent)',
+            id: 'folkemengde_utvikling_historisk-prosent',
+            template: 'b',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
       {
-        name: 'Nøkkeltall',
-        title: 'Nøkkeltall for delbydelene',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Nøkkeltall',
-                id: 'folkemengde_nokkeltall',
-                template: 'g',
-                url: `${baseUrl()}/mockDataG.json`,
-              },
-            ],
+            active: false,
+            label: 'Nøkkeltall',
+            id: 'folkemengde_nokkeltall',
+            template: 'g',
+            url: `${baseUrl()}/mockDataG.json`,
           },
         ],
       },
@@ -142,74 +140,71 @@ export const topics = {
   alder: {
     text: 'Alder',
     value: 'alder',
-    topics: [
+    cards: [
       {
-        name: 'aldersgrupper',
-        title: 'Utvalgte aldersgrupper',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Antall',
-                id: 'alder_segment_antall',
-                template: 'd',
-                url: `${baseUrl()}/mockDataD2.json`,
-                method: 'value',
-              },
-              {
-                active: false,
-                label: 'Andel',
-                id: 'alder_segment_andel',
-                template: 'd',
-                url: `${baseUrl()}/mockDataD2.json`,
-                method: 'ratio',
-              },
-            ],
+            active: false,
+            label: 'Antall',
+            id: 'alder_segment_antall',
+            template: 'd',
+            url: `${baseUrl()}/mockDataD2.json`,
+            method: 'value',
+          },
+          {
+            active: false,
+            label: 'Andel',
+            id: 'alder_segment_andel',
+            template: 'd',
+            url: `${baseUrl()}/mockDataD2.json`,
+            method: 'ratio',
           },
         ],
       },
       {
-        name: 'populasjonsgrupper',
-        title: 'Populasjonspyramide',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'alder_distribusjon_status',
-                template: 'e',
-                url: `${baseUrl()}/mockDataD2.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'alder_distribusjon_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'alder_distribusjon_status',
+            template: 'e',
+            url: `${baseUrl()}/mockDataD2.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'alder_distribusjon_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
       {
-        name: 'median',
-        title: 'Medianalder i Bydel BYDELSNAVN',
-        graphs: [
+        size: 'large',
+        heading: 'Medianalder',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'alder_medianalder_status',
-                template: 'f',
-                url: `${baseUrl()}/mockDataD2.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'alder_medianalder_status',
+            template: 'f',
+            url: `${baseUrl()}/mockDataD2.json`,
           },
         ],
       },
@@ -226,96 +221,104 @@ export const topics = {
   innvandrerbefolkningen: {
     text: 'Innvandrerbefolkningen',
     value: 'innvandrerbefolkningen',
-    topics: [
+    cards: [
       {
-        name: 'befolkning',
-        title: 'Innvandrerbefolkningen i bydelene',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'innvandring_befolkning_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataA2.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'innvandring_befolkning_historisk',
-                template: 'c',
-                url: `${baseUrl()}/mockDataC.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'innvandring_befolkning_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataA2.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'innvandring_befolkning_historisk',
+            template: 'c',
+            url: `${baseUrl()}/mockDataC.json`,
           },
         ],
       },
       {
-        name: 'under16',
-        title: 'Befolkning under 16 år fordelt på innvandrerbakgrunn',
-        graphs: [
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'innvandring_under16-totalt_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer1.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'innvandring_under16-totalt_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'innvandring_under16-totalt_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer1.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'innvandring_under16-en-innvandrerforelder_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer2.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'innvandring_under16-en-innvandrerforelder_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'innvandring_under16-totalt_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Status',
+            id: 'innvandring_under16-en-innvandrerforelder_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer2.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'innvandring_under16-to-innvandrerforeldre_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'innvandring_under16-to-innvandrerforeldre_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'innvandring_under16-en-innvandrerforelder_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Status',
+            id: 'innvandring_under16-to-innvandrerforeldre_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'innvandring_under16-to-innvandrerforeldre_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
@@ -332,38 +335,37 @@ export const topics = {
   eierform: {
     text: 'Eierform',
     value: 'eierform',
-    topics: [
+    cards: [
       {
-        name: 'eierform',
-        title: 'Eierform',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'eierform_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Matrise',
-                id: 'eierform_matrise',
-                template: 'i',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataI.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'eierform_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'eierform_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Matrise',
+            id: 'eierform_matrise',
+            template: 'i',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataI.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'eierform_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
@@ -383,7 +385,7 @@ export const topics = {
     cards: [
       {
         size: 'large',
-        heading: 'Blokkleiligheter',
+        heading: '',
         map: {
           labels: ['Lavere boligpriser', 'Høyere boligpriser'],
           url: `${API}/boligpriser_status-pD7ZV`,
@@ -420,30 +422,29 @@ export const topics = {
   trangboddhet: {
     text: 'Trangboddhet',
     value: 'trangboddhet',
-    topics: [
+    cards: [
       {
-        name: 'helhet',
-        title: 'Trangboddhet i Bydel BYDELSNAVN',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'trangboddhet_alle_status',
-                template: 'j',
-                url: `${baseUrl()}/mockDataJ.json`,
-                method: 'ratio',
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'trangboddhet_alle_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'trangboddhet_alle_status',
+            template: 'j',
+            url: `${baseUrl()}/mockDataJ.json`,
+            method: 'ratio',
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'trangboddhet_alle_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
@@ -546,30 +547,29 @@ export const topics = {
   kommunaleboliger: {
     text: 'Kommunale boliger',
     value: 'kommunaleboliger',
-    topics: [
+    cards: [
       {
-        name: 'blokk',
-        title: 'Blokkleilighet',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'blokkleilighet_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'blokkleilighet_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'blokkleilighet_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'blokkleilighet_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
@@ -586,30 +586,29 @@ export const topics = {
   flytting: {
     text: 'Flytting',
     value: 'flytting',
-    topics: [
+    cards: [
       {
-        name: 'hyppighet',
-        title: 'Flyttehyppighet',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'flyttehyppighet_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'flyttehyppighet_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'flyttehyppighet_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'flyttehyppighet_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
@@ -626,106 +625,115 @@ export const topics = {
   bygningstyper: {
     text: 'Bygningstyper',
     value: 'bygningstyper',
-    topics: [
+    cards: [
       {
-        name: 'totalt',
-        title: 'Eierform',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'eierform_totalt_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'eierform_totalt_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-              {
-                active: false,
-                label: 'Matrise',
-                id: 'eierform_totalt_matrise',
-                method: 'ratio',
-                template: 'i',
-                url: `${baseUrl()}/mockDataI.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'eierform_totalt_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'eierform_totalt_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+          {
+            active: false,
+            label: 'Matrise',
+            id: 'eierform_totalt_matrise',
+            method: 'ratio',
+            template: 'i',
+            url: `${baseUrl()}/mockDataI.json`,
           },
         ],
       },
       {
-        name: 'spesifikk',
-        graphs: [
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'eierform_blokk_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Antall',
-                id: 'eierform_blokk_antall',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-            ],
+            active: false,
+            label: 'Andel',
+            id: 'eierform_blokk_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'eierform_rekkehus_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Antall',
-                id: 'eierform_rekkehus_antall',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-            ],
+            active: false,
+            label: 'Antall',
+            id: 'eierform_blokk_antall',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'eierform_rekkehus_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'eierform_enebolig_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Antall',
-                id: 'eierform_enebolig_antall',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-            ],
+            active: false,
+            label: 'Antall',
+            id: 'eierform_rekkehus_antall',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'eierform_enebolig_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Antall',
+            id: 'eierform_enebolig_antall',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
       },
@@ -742,106 +750,115 @@ export const topics = {
   husholdninger: {
     text: 'Husholdninger',
     value: 'husholdninger',
-    topics: [
+    cards: [
       {
-        name: 'totalt',
-        title: 'Husholdningstype',
-        graphs: [
+        size: 'large',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'husholdning_totalt_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataA.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'husholdning_totalt_historisk',
-                template: 'c',
-                url: `${baseUrl()}/mockDataC.json`,
-              },
-              {
-                active: false,
-                label: 'Matrise',
-                id: 'husholdning_totalt_matrise',
-                method: 'ratio',
-                template: 'i',
-                url: `${baseUrl()}/mockDataI.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'husholdning_totalt_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataA.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'husholdning_totalt_historisk',
+            template: 'c',
+            url: `${baseUrl()}/mockDataC.json`,
+          },
+          {
+            active: false,
+            label: 'Matrise',
+            id: 'husholdning_totalt_matrise',
+            method: 'ratio',
+            template: 'i',
+            url: `${baseUrl()}/mockDataI.json`,
           },
         ],
       },
       {
-        name: 'spesifikk',
-        graphs: [
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'husholdning_1-barn_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer1.json`,
-              },
-              {
-                active: false,
-                label: 'Antall',
-                id: 'husholdning_1-barn_antall',
-                template: 'a',
-                method: 'value',
-                url: `${baseUrl()}/mockDataAinnvandrer1.json`,
-              },
-            ],
+            active: false,
+            label: 'Andel',
+            id: 'husholdning_1-barn_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer1.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'husholdning_2-barn_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Antall',
-                id: 'husholdning_2-barn_antall',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-            ],
+            active: false,
+            label: 'Antall',
+            id: 'husholdning_1-barn_antall',
+            template: 'a',
+            method: 'value',
+            url: `${baseUrl()}/mockDataAinnvandrer1.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'husholdning_2-barn_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'husholdning_3-barn_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Antall',
-                id: 'husholdning_3-barn_antall',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-            ],
+            active: false,
+            label: 'Antall',
+            id: 'husholdning_2-barn_antall',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'husholdning_3-barn_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Antall',
+            id: 'husholdning_3-barn_antall',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
         ],
       },
@@ -858,169 +875,204 @@ export const topics = {
   levekaar: {
     text: 'Levekår',
     value: 'levekaar',
-    topics: [
+    cards: [
       {
-        name: 'spesifikk',
-        graphs: [
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_funksjonsevne_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_funksjonsevne_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Andel',
+            id: 'levekar_funksjonsevne_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_lav-utdanning_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_lav-utdanning_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_funksjonsevne_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_lav-utdanning_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_fattige_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_fattige_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_lav-utdanning_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_fattige_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_ikke-sysselsatte_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_ikke-sysselsatte_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_fattige_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_ikke-sysselsatte_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_vgs_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_vgs_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_ikke-sysselsatte_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_vgs_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_dodsrate_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_dodsrate_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_vgs_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_dodsrate_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_trangbodde_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_trangbodde_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_dodsrate_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_trangbodde_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
           },
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Andel',
-                id: 'levekar_innvandrere_andel',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl()}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'levekar_innvandrere_historisk',
-                template: 'b',
-                url: `${baseUrl()}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_trangbodde_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
+          },
+        ],
+      },
+      {
+        size: 'small',
+        heading: '',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_innvandrere_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl()}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_innvandrere_historisk',
+            template: 'b',
+            url: `${baseUrl()}/mockDataB.json`,
           },
         ],
       },
