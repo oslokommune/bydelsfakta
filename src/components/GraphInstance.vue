@@ -196,6 +196,7 @@ export default {
       this.svg.render(this.filteredData, {
         method: this.settings.method,
         initialRender: true,
+        compareDistricts: this.compareDistricts,
       });
       this.drawShadows();
       this.loading = false;
