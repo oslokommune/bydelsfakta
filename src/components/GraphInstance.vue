@@ -48,6 +48,7 @@ import TemplateG from '../util/graph-templates/templateG';
 import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
+import districtNames from '../config/districtNames.js';
 
 export default {
   data: () => ({
@@ -121,6 +122,7 @@ export default {
     },
 
     handleResize() {
+      if (this.loading) return;
       this.svg.resize(this.data, { method: this.settings.method });
       this.drawShadows();
     },
@@ -130,10 +132,19 @@ export default {
 
       const geoParam = this.compareDistricts ? '00' : this.districts[0];
       if (!options.keepData) {
-        this.data = await d3.json(`${this.settings.url}?geography=${geoParam}`).catch(error => {
-          this.error = this.$t('error.connectionLost');
-          this.loading = false;
-        });
+        this.data = await d3
+          .json(`${this.settings.url}?geography=${geoParam}`)
+          .then(data => {
+            data.data.map(district => {
+              district.geography = districtNames[district.geography];
+              return district;
+            });
+            return data;
+          })
+          .catch(error => {
+            this.error = this.$t('error.connectionLost');
+            this.loading = false;
+          });
       }
 
       if (this.data) {
