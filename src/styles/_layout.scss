@@ -3,8 +3,8 @@
 .app {
   display: flex;
   flex-direction: column;
-  max-width: 1600px;
   margin: 0 auto;
+  max-width: 1600px;
 
   @media screen and (min-width: $break-lg) {
     flex-direction: row;
@@ -49,11 +49,11 @@
 
 .main-container__map {
   display: flex;
+  flex: 1 1 400px;
   flex-flow: row wrap;
   height: 300px;
-  min-width: 250px;
-  flex: 1 1 400px;
   justify-content: flex-start;
+  min-width: 250px;
   padding: 1rem;
 }
 

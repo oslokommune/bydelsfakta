@@ -383,8 +383,8 @@ input[type='checkbox'] {
   display: none;
 
   & + label {
-    border-top-left-radius: $rowHeight / 2;
     border-bottom-left-radius: $rowHeight / 2;
+    border-top-left-radius: $rowHeight / 2;
     cursor: pointer;
     display: inline-block;
     height: $rowHeight;
@@ -466,14 +466,13 @@ input[type='checkbox'] {
 
   align-items: center;
   background-color: inherit;
+  border-radius: $rowHeight / 2;
   cursor: pointer;
   display: flex;
   margin-bottom: 1px;
   position: relative;
   transition: all 0.3s ease-in-out;
   width: 100%;
-  border-radius: $rowHeight / 2;
-  margin-bottom: 1px;
 
   &--compare {
     background-color: lighten($color-yellow, 15%);
@@ -511,14 +510,14 @@ input[type='checkbox'] {
 
   &__label {
     align-items: center;
+    border-bottom-right-radius: $rowHeight / 2;
+    border-top-right-radius: $rowHeight / 2;
     color: rgba($color-purple, 0.85);
     display: flex;
     flex-grow: 1;
     height: $rowHeight;
     letter-spacing: 0.1px;
     position: relative;
-    border-top-right-radius: $rowHeight / 2;
-    border-bottom-right-radius: $rowHeight / 2;
 
     &-compare {
       margin-bottom: 1rem;

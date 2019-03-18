@@ -195,26 +195,26 @@ export default {
 }
 
 .legend {
-  padding: 1em;
-  font-weight: 500;
   border-bottom: 1px solid $color-grey-100;
   font-size: $font-small;
-  text-transform: uppercase;
+  font-weight: 500;
   letter-spacing: 0.05em;
+  padding: 1em;
+  text-transform: uppercase;
 
   &__labels {
     display: flex;
-    max-width: 500px;
-    margin: 0 auto;
     justify-content: space-between;
+    margin: 0 auto;
+    max-width: 500px;
   }
 }
 
 .colorstrip {
   height: 0.5em;
-  width: 100%;
-  max-width: 500px;
   margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
 }
 
 .card-container {
