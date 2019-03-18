@@ -98,14 +98,16 @@
         :mode="mode"
         ref="graph"
       />
-      <div class="map-container" v-if="mode === 'map'">
+      <div v-if="mode === 'map'">
         <div class="legend">
           <div class="legend__labels">
             <span v-for="(label, i) in settings.map.labels" :key="i" v-text="label"></span>
           </div>
           <div class="colorstrip" :style="gradient"></div>
         </div>
-        <v-leaflet :district="geoDistricts"></v-leaflet>
+        <div class="map-container">
+          <v-leaflet :district="geoDistricts"></v-leaflet>
+        </div>
       </div>
     </div>
   </div>
