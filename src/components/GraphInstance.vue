@@ -75,11 +75,13 @@ export default {
     filteredData() {
       if (!this.compareDistricts || this.districts.includes('alle')) return this.data;
 
+      const selectedDistrictNames = this.districts.map(id => districtNames[id]);
+
       return {
         meta: this.data.meta,
         data: this.data.data.filter(d => {
           // TODO: change avgRow to d.totalRow as soon as change is made on API response
-          return this.districts.includes(d.geography) || d.avgRow;
+          return selectedDistrictNames.includes(d.geography) || d.avgRow;
         }),
       };
     },
