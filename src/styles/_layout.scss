@@ -3,7 +3,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  max-width: 1920px;
+  max-width: 1600px;
   margin: 0 auto;
 
   @media screen and (min-width: $break-lg) {
@@ -22,7 +22,7 @@
 .main-container {
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 10vh;
+  padding-bottom: 4vh;
 }
 
 .main-container__item {
@@ -53,8 +53,8 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   height: 300px;
-  min-width: 200px;
-  flex: 1 1 300px;
+  min-width: 250px;
+  flex: 1 1 400px;
 }
 
 .topics-grid {
@@ -62,14 +62,14 @@
   flex: 2 1 800px;
   display: grid;
   gap: 0.5em;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
   @media screen and (min-width: $break-md) {
     padding: 1em;
   }
 
   @media screen and (min-width: $break-lg) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   // Fallback to flexbox

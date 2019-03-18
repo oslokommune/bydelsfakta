@@ -22,12 +22,12 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
-    this.isSingleSeries = data.meta.series.length === 1;
+    this.isSingleSeries = data.meta && data.meta.series && data.meta.series.length === 1 || true;
     this.isMobileView = this.isSingleSeries && this.parentWidth() < this.mobileWidth;
 
     // Multiseries need larger padding top to make room for tabs,
     // mobile views have smaller padding.left
-    this.padding.top = data.meta.series.length <= 1 && this.selected === -1 ? 40 : 100;
+    this.padding.top = this.isSingleSeries <= 1 && this.selected === -1 ? 40 : 100;
     this.padding.left = this.isMobileView ? 0 : 190;
     this.padding.bottom = this.isMobileView ? 0 : 30;
 
@@ -36,7 +36,7 @@ function Template(svg) {
     }
 
     // Temp fix until meta data is included in data from API
-    if (!data.meta.series.length) data.meta.series.push('');
+    if (!data.meta.series || !data.meta.series.length) data.meta.series.push('');
 
     if (!this.commonRender(data, options)) return;
 

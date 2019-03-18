@@ -380,31 +380,30 @@ export const topics = {
   boligpriser: {
     text: 'Boligpriser',
     value: 'boligpriser',
-    topics: [
+    cards: [
       {
-        name: 'boligpriser',
-        title: 'Blokkleilighet',
-        graphs: [
+        size: 'large',
+        heading: 'Blokkleiligheter',
+        map: {
+          labels: ['Lavere boligpriser', 'Høyere boligpriser'],
+          url: `${API}/boligpriser_status-pD7ZV`,
+        },
+        tabs: [
           {
-            size: 'large',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'boligpriser_status',
-                method: 'value',
-                template: 'a',
-                url: `${API}/boligpriser_status-pD7ZV`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'boligpriser_historisk',
-                method: 'value',
-                template: 'b',
-                url: `${API}/boligpriser_historic-4owcY`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'boligpriser_status',
+            method: 'value',
+            template: 'a',
+            url: `${API}/boligpriser_status-pD7ZV`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'boligpriser_historisk',
+            method: 'value',
+            template: 'b',
+            url: `${API}/boligpriser_historic-4owcY`,
           },
         ],
       },
