@@ -1,29 +1,9 @@
 <template>
   <footer class="footer">
     <div class="columns">
-      <div class="column">
-        <h3>Bydelsfakta</h3>
-        <p>
-          Bydelsfakta blir publisert av <a href="#">Seksjon for Plan og Strategi</a> i Oslo kommune og er utviklet av
-          <a href="#">Oslo Origo</a>.
-        </p>
-      </div>
-      <div class="column">
-        <h3>Noe du lurer på?</h3>
-        <p>
-          Dette nettstedet er under utvikling. Har du innspill eller noe du lurer på setter vi stor pris på
-          tilbakemelding til
-          <a href="mailto:bydelsfakta@oslo.kommune.no">bydelsfakta@oslo.kommune.no</a>
-        </p>
-      </div>
-      <div class="column">
-        <h3>Se også</h3>
-        <ul>
-          <li><a href="#">Statistikkbanken</a></li>
-          <li><a href="#">Statistiske publikasjoner</a></li>
-          <li><a href="#">Statistisk sentralbyrå</a></li>
-        </ul>
-      </div>
+      <div class="column" v-html="$t('footer.columnOne')"></div>
+      <div class="column" v-html="$t('footer.columnTwo')"></div>
+      <div class="column" v-html="$t('footer.columnThree')"></div>
     </div>
   </footer>
 </template>
