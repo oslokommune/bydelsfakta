@@ -6,7 +6,7 @@ import VueResize from 'vue-resize';
 import Topic from '../../../src/views/Topic.vue';
 import clickOutside from '../../../src/directives/clickOutside';
 import store from '../../../src/store';
-import setupI18n from '../../../src/i18n'
+import setupI18n from '../../../src/i18n';
 
 const i18n = setupI18n();
 

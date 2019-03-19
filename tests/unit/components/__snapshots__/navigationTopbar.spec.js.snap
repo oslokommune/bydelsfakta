@@ -7,7 +7,7 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
   <h1
     class="header"
   >
-    Bydel Sagene
+    Velg bydel
   </h1>
    
   <div

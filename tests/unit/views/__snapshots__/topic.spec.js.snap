@@ -62,13 +62,5 @@ exports[`Topic renders component correctly 1`] = `
       </div>
     </div>
   </div>
-   
-  <div
-    class="main-container__map"
-  >
-    <v-leaflet-stub
-      district="[object Object]"
-    />
-  </div>
 </div>
 `;

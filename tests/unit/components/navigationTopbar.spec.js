@@ -40,11 +40,6 @@ describe('TheNavigationTopbar', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('returns true if subpage is active', () => {
-    router.push('/bydel/sagene/boligpriser');
-    expect(wrapper.vm.checkActiveTopic('boligpriser')).toEqual(true);
-  });
-
   test('return false if subpage is not active', () => {
     router.push('/bydel/sagene/boligpriser');
     expect(wrapper.vm.checkActiveTopic('levekaar')).toEqual(false);

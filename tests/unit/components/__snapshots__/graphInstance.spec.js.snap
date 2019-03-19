@@ -18,6 +18,8 @@ exports[`GraphInstance renders correctly 1`] = `
       />
     </div>
      
+    <!---->
+     
     <svg
       aria-hidden="true"
       class="graph__svg loading"

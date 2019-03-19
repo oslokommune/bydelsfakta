@@ -16,6 +16,8 @@ exports[`App shallowmounts app 1`] = `
         name="default"
       />
     </main>
+     
+    <the-footer-stub />
   </div>
 </div>
 `;
