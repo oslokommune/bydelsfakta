@@ -10,7 +10,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
-import {color} from './colors';
+import { color } from './colors';
 import d3 from '@/assets/d3';
 import positionLabels from '../positionLabels';
 
@@ -20,10 +20,10 @@ function Template(svg) {
   this.padding = { top: 130, left: 60, right: 190, bottom: 32 };
 
   // Line generator
-  let line = d3
-    .line()
-    .x(d => this.x(this.parseYear(d.date)))
-    .y(d => this.y(d[this.method]));
+  // let line = d3
+  //   .line()
+  //   .x(d => this.x(this.parseYear(d.date)))
+  //   .y(d => this.y(d[this.method]));
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -83,7 +83,7 @@ function Template(svg) {
   this.line = d3
     .line()
     .x(d => this.x(this.parseYear(d.date)))
-    .y(d => this.y(d[this.method]))
+    .y(d => this.y(d[this.method]));
 
   this.drawTable = function() {
     let thead = this.table.select('thead');
@@ -204,7 +204,7 @@ function Template(svg) {
       .x(d => this.x(this.parseYear(d.date)))
       .y(d => this.y(d.value))
       .polygons(flattenData)
-      .filter(Boolean)
+      .filter(Boolean);
 
     let voronoiCells = this.canvas
       .select('g.voronoi')
@@ -235,8 +235,8 @@ function Template(svg) {
           .filter(dot => dot.date === date)
           .attr('opacity', 1);
       }
-    })
-    
+    });
+
     // Remove highlight on mouse leave
     voronoiCells.on('mouseleave', () => {
       if (this.highlight === -1) {
@@ -244,7 +244,6 @@ function Template(svg) {
         this.handleMouseleave();
       }
     });
-
 
     // When clicking a voronoi cell, the graph should re-render
     // with the selected geography highlighted. If the geography
@@ -278,7 +277,6 @@ function Template(svg) {
     this.infoboxContent.append('rect').attr('class', 'infobox__rule');
     this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
   };
-
 
   // Updates the tabs. Highlights the active series
   this.drawTabs = function() {
@@ -513,8 +511,6 @@ function Template(svg) {
         return 0.45;
       });
 
-
-
     // Update content in the <title> element
     labels.select('title').html(d => d.geography);
   };
@@ -564,7 +560,6 @@ function Template(svg) {
         if (d.totalRow) return '4,3';
       });
   };
-
 
   this.setScales = function() {
     this.y.max = d3.max(this.data.data.map(row => d3.max(row.values[this.series].map(d => d[this.method])))) * 1.05;

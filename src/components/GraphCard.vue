@@ -109,7 +109,7 @@
           <v-leaflet
             :district="geoDistricts"
             :scale="settings.map.scale"
-            :dataUrl="`${settings.map.url}?geography=${district}`"
+            :data-url="`${settings.map.url}?geography=${district}`"
           ></v-leaflet>
         </div>
       </div>
@@ -123,7 +123,6 @@ import { mapGetters, mapState } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import VLeaflet from './VLeaflet.vue';
-import * as d3 from 'd3';
 import { interpolator } from '../util/graph-templates/colors';
 
 export default {
@@ -248,8 +247,8 @@ export default {
 .card {
   background: white;
   box-shadow: 0 1px 3px rgba(black, 0.5), 0 3px 6px rgba(black, 0.07);
-  width: 100%;
   min-height: 18em;
+  width: 100%;
 
   &__header {
     border-bottom: 1px solid $color-border;

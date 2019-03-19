@@ -285,7 +285,7 @@ function Template(svg) {
         } else {
           return false;
         }
-      })
+      });
 
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
 

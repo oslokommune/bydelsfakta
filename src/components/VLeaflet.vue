@@ -10,7 +10,7 @@
 <script>
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson, L } from 'vue2-leaflet';
 import * as d3 from 'd3';
-import { color, interpolator } from '../util/graph-templates/colors.js';
+import { color, interpolator } from '../util/graph-templates/colors';
 
 export default {
   name: 'VLeaflet',
@@ -29,10 +29,14 @@ export default {
     dataUrl: {
       type: String,
       required: false,
+      default: '',
     },
     scale: {
       type: Array,
       required: false,
+      default() {
+        return [];
+      },
     },
   },
 
@@ -51,7 +55,7 @@ export default {
       }
     },
 
-    fitMap(e) {
+    fitMap() {
       this.$refs.leafletMap.mapObject.flyToBounds(this.$refs.geojsonLayer.getBounds(), {
         duration: 0.6,
       });
@@ -75,7 +79,7 @@ export default {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
 
-        let dataValue = data.find(geo => geo.geography == layerId).values[0].value;
+        let dataValue = data.find(geo => geo.geography === layerId).values[0].value;
         const fill = interpolator(colorStrength(dataValue));
 
         const popupContent = `
@@ -122,10 +126,10 @@ export default {
 }
 
 .leaflet-popup-content {
-  padding: 1.5rem !important;
-  margin: 0 !important;
+  font-family: 'OsloSans', serif !important;
   font-size: 1rem !important;
-  font-family: 'OsloSans' !important;
+  margin: 0 !important;
+  padding: 1.5rem !important;
 
   & > p,
   & > h4 {
@@ -136,9 +140,9 @@ export default {
 
 .leaflet-popup-content-wrapper {
   background: $color-purple !important;
-  color: $color-yellow !important;
   border: 0 !important;
   border-radius: 0 !important;
+  color: $color-yellow !important;
 }
 
 .leaflet-popup-tip {

@@ -6,7 +6,7 @@
       <main>
         <router-view />
       </main>
-      <TheFooter />
+      <the-footer />
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
 import { mapState } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
-import TheFooter from './components/TheFooter';
+import TheFooter from './components/TheFooter.vue';
 
 export default {
   name: 'App',

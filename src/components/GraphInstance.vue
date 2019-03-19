@@ -48,7 +48,7 @@ import TemplateG from '../util/graph-templates/templateG';
 import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
-import districtNames from '../config/districtNames.js';
+import districtNames from '../config/districtNames';
 
 export default {
   data: () => ({
@@ -107,7 +107,7 @@ export default {
   methods: {
     drawShadows() {
       let ref;
-      if (this.mode == 'graph') {
+      if (this.mode === 'graph') {
         ref = 'graphContainer';
       } else if (this.mode === 'table') {
         ref = 'tableContainer';
@@ -143,7 +143,7 @@ export default {
             });
             return data;
           })
-          .catch(error => {
+          .catch(() => {
             this.error = this.$t('error.connectionLost');
             this.loading = false;
           });

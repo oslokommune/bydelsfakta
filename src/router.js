@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import District from './views/District.vue';
-import Topic from './views/Topic.vue';
-import NotFound from './views/NotFound.vue';
-
 import { topicNames, disabledTopics } from './config/topics';
 import allDistricts from './config/allDistricts';
+
+const District = () => import('./views/District.vue');
+const Topic = () => import('./views/Topic.vue');
+const NotFound = () => import('./views/NotFound.vue');
 
 Vue.use(Router);
 

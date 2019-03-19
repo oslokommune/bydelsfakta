@@ -10,7 +10,7 @@
  */
 
 import Base_Template from './baseTemplate';
-import {color} from './colors';
+import { color } from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {

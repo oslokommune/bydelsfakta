@@ -27,7 +27,6 @@
 import { mapGetters } from 'vuex';
 import VCategory from '../components/VCategory.vue';
 import GraphCard from '../components/GraphCard.vue';
-import VLeaflet from '../components/VLeaflet.vue';
 
 import { topics, disabledTopics } from '../config/topics';
 
@@ -36,7 +35,6 @@ export default {
 
   components: {
     GraphCard,
-    VLeaflet,
     VCategory,
   },
 
