@@ -227,24 +227,25 @@ export default {
 
     &::before,
     &::after {
-      z-index: 1;
+      bottom: 0;
       content: '';
       display: block;
-      width: 2em;
+      opacity: 0;
       position: absolute;
       top: 0;
-      bottom: 0;
-      opacity: 0;
       transition: opacity 0.1s ease-in-out;
+      width: 2em;
+      z-index: 1;
     }
 
     &::before {
-      left: 0;
       background: linear-gradient(to right, rgba(black, 0.3), rgba(black, 0.1) 60%, rgba(black, 0) 100%);
+      left: 0;
     }
+
     &::after {
-      right: 0;
       background: linear-gradient(to left, rgba(black, 0.3), rgba(black, 0.1) 60%, rgba(black, 0) 100%);
+      right: 0;
     }
 
     &--left::before {
@@ -257,15 +258,15 @@ export default {
   }
 
   &__container {
-    position: relative;
-    padding: 1em 1em 0 1em;
     overflow: auto;
+    padding: 1em 1em 0 1em;
+    position: relative;
   }
 
   &__tablecontainer {
-    width: 100%;
     overflow-x: auto;
     position: relative;
+    width: 100%;
   }
 
   &__svg {
@@ -277,22 +278,22 @@ export default {
 }
 
 .spinner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  align-items: center;
   background-color: rgba(black, 0.05);
   display: flex;
+  height: 100%;
   justify-content: center;
-  align-items: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .tick text {
-  font-size: $font-small;
-  font-weight: 500;
   color: $color-grey-600;
   font-family: monospace;
+  font-size: $font-small;
+  font-weight: 500;
   text-rendering: geometricPrecision;
 }
 </style>

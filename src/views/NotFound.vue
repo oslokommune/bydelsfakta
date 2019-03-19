@@ -68,11 +68,11 @@ export default {
 
 .notFound {
   &-container {
+    color: $color-purple;
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
     max-width: 1100px;
-    color: $color-purple;
+    padding: 0 2rem;
 
     &--row {
       display: flex;
@@ -93,31 +93,31 @@ export default {
     }
 
     &--inner {
-      background: $color-yellow;
-      width: 100%;
-      padding-top: 100%;
-      display: flex;
       align-items: center;
+      background: $color-yellow;
+      display: flex;
       justify-content: center;
+      padding-top: 100%;
       position: relative;
+      width: 100%;
     }
 
     &--label {
+      color: $color-purple;
+      font-size: 3em;
       position: absolute;
       top: 50%;
       transform: translateY(-0.7em);
-      font-size: 3em;
-      color: $color-purple;
     }
   }
 
   &__information {
-    width: 100%;
-    margin: 0 0 0 1rem;
     display: flex;
     flex: 350px 0 1;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 0 1rem;
+    width: 100%;
 
     &--header {
       font-size: $font-large;
@@ -126,17 +126,18 @@ export default {
     }
 
     &--frontpage-link {
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.33);
       background-color: rgb(255, 255, 255);
-      padding: 0.3rem 1.5rem;
-      font-weight: normal;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.33);
       font-size: 16px;
+      font-weight: normal;
+      padding: 0.3rem 1.5rem;
       width: 160px;
     }
   }
 
   &__topics-grid {
     @extend .topics-grid;
+
     padding: 0;
   }
 }
