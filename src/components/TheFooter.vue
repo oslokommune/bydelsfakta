@@ -17,10 +17,10 @@ export default {};
 @import '../styles/_colors';
 
 .footer {
-  padding: 1rem;
-  margin-bottom: 3rem;
   color: $color-grey-500;
   font-size: 0.9em;
+  margin-bottom: 3rem;
+  padding: 1rem;
 
   @media screen and (min-width: $break-md) {
     padding: 2rem;
@@ -51,14 +51,15 @@ export default {};
 
   .column {
     padding: 1rem 1rem 0 0;
+
     @media screen and (min-width: $break-lg) {
       padding: 1rem 2.5rem 0 0;
     }
   }
 
   ul {
-    padding: 0;
     list-style-type: none;
+    padding: 0;
   }
 
   li {

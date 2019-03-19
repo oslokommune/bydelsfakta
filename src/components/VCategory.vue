@@ -66,24 +66,37 @@ export default {
 @import './../styles/colors';
 @import './../styles/variables';
 
+.oslo__category {
+  align-self: flex-start;
+  color: $color-purple;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  padding: 0.1rem 0.25rem;
+  text-transform: uppercase;
+
+  @media screen and (min-width: $break-md) {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
 .main-container__item {
   background-blend-mode: multiply;
   color: white;
   cursor: pointer;
+  display: flex;
+  flex: 17.5em 1 0;
+  flex-direction: column;
   height: 6em;
   margin: 0;
-  flex: 17.5em 1 0;
+  overflow: hidden;
   padding: 1em;
-  display: flex;
-  flex-direction: column;
+  position: relative;
   transform: scale(1);
   transition: all 0.15s ease-in-out;
-  position: relative;
-  overflow: hidden;
 
   &.disabled {
-    opacity: 0.45;
     background-color: $color-grey-100 !important;
+    opacity: 0.45;
 
     .oslo__category {
       background: $color-grey-200 !important;
@@ -111,35 +124,22 @@ export default {
   }
 }
 
-.oslo__category {
-  align-self: flex-start;
-  padding: 0.1rem 0.25rem;
-  color: $color-purple;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-  text-transform: uppercase;
-
-  @media screen and (min-width: $break-md) {
-    padding: 0.25rem 0.5rem;
-  }
-}
-
 .oslo__img {
+  height: 100%;
+  left: 0;
+  mix-blend-mode: multiply;
+  object-fit: cover;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  mix-blend-mode: multiply;
   transition: transform 0.25s ease-in-out;
+  width: 100%;
+  z-index: -1;
 }
 
 .oslo__topic {
   font-size: $font-large;
   font-weight: bold;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
   line-height: 1.15em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
 }
 </style>
