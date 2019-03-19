@@ -2,15 +2,13 @@
   <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
     <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution" />
     <l-feature-group @layeradd="fitMap" ref="featureGroup">
-      <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style">
-        <l-popup>Hello!</l-popup>
-      </l-geo-json>
+      <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style"></l-geo-json>
     </l-feature-group>
   </l-map>
 </template>
 
 <script>
-import { LPopup, LMap, LTileLayer, LFeatureGroup, LGeoJson, L } from 'vue2-leaflet';
+import { LMap, LTileLayer, LFeatureGroup, LGeoJson, L } from 'vue2-leaflet';
 import * as d3 from 'd3';
 import { color, interpolator } from '../util/graph-templates/colors.js';
 
@@ -21,7 +19,6 @@ export default {
     LFeatureGroup,
     LTileLayer,
     LGeoJson,
-    LPopup,
   },
 
   props: {
@@ -64,6 +61,10 @@ export default {
       if (!url) return;
       let data = await fetch(url).then(d => d.json().then(d => d.data));
 
+      this.createChoropleth(data);
+    },
+
+    createChoropleth(data) {
       const colorStrength = d3
         .scaleLinear()
         .range([0, 1])
@@ -101,10 +102,10 @@ export default {
         weight: 2,
       },
       mapOptions: {
-        zoomControl: true,
+        zoomControl: false,
         attributionControl: false,
         doubleClickZoom: false,
-        dragging: true,
+        dragging: false,
         scrollWheelZoom: false,
         touchZoom: false,
       },
