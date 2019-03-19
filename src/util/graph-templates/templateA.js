@@ -4,7 +4,7 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
-import color from './colors';
+import { color } from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
@@ -22,7 +22,7 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
-    this.isSingleSeries = data.meta && data.meta.series && data.meta.series.length === 1 || true;
+    this.isSingleSeries = (data.meta && data.meta.series && data.meta.series.length === 1) || true;
     this.isMobileView = this.isSingleSeries && this.parentWidth() < this.mobileWidth;
 
     // Multiseries need larger padding top to make room for tabs,
@@ -163,15 +163,12 @@ function Template(svg) {
       .attr('height', 1)
       .attr('y', this.rowHeight);
 
-    // Row Geography
-    let hyperlink = g.append('a').attr('class', 'hyperlink');
-
-    // Text element inside of hyperlink
-    hyperlink
-      .append('text')
+    // Text element
+    g.append('text')
       .attr('class', 'geography')
       .attr('fill', color.purple)
-      .attr('y', this.rowHeight / 2 + 6);
+      .attr('y', this.rowHeight / 2 + 6)
+      .on('click', util.goto);
 
     g.append('g').attr('class', 'bars');
 
@@ -254,10 +251,7 @@ function Template(svg) {
       })
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    rows.select('a.hyperlink').attr('xlink:href', `/bydelsfakta#/bydel/sthanshaugen/folkemengde`);
     rows
-      .select('a.hyperlink')
-      .style('text-decoration', this.isMobileView ? 'none' : 'underline')
       .select('text')
       .text(d => {
         if (this.isMobileView) {
@@ -277,7 +271,21 @@ function Template(svg) {
         if (this.isMobileView) return 'start';
         if (this.data.meta.series.length > 1) return 'start';
         return 'end';
-      });
+      })
+      .style('cursor', d => {
+        if ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow)) {
+          return 'pointer';
+        } else {
+          return false;
+        }
+      })
+      .style('text-decoration', d => {
+        if ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow)) {
+          return 'underline';
+        } else {
+          return false;
+        }
+      })
 
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
 

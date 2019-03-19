@@ -98,14 +98,20 @@
         :mode="mode"
         ref="graph"
       />
-      <div class="map-container" v-if="mode === 'map'">
+      <div v-if="mode === 'map'">
         <div class="legend">
           <div class="legend__labels">
             <span v-for="(label, i) in settings.map.labels" :key="i" v-text="label"></span>
           </div>
           <div class="colorstrip" :style="gradient"></div>
         </div>
-        <v-leaflet :district="geoDistricts"></v-leaflet>
+        <div class="map-container">
+          <v-leaflet
+            :district="geoDistricts"
+            :scale="settings.map.scale"
+            :dataUrl="`${settings.map.url}?geography=${district}`"
+          ></v-leaflet>
+        </div>
       </div>
     </div>
   </div>
@@ -113,11 +119,12 @@
 
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import VLeaflet from './VLeaflet.vue';
 import * as d3 from 'd3';
+import { interpolator } from '../util/graph-templates/colors';
 
 export default {
   name: 'GraphCard',
@@ -130,13 +137,17 @@ export default {
     };
   },
   computed: {
+    ...mapState(['districts']),
     ...mapGetters(['geoDistricts']),
+    district() {
+      if (this.districts[0] === 'alle') return '00';
+      if (this.districts.length === 1) return this.districts[0];
+      return '00';
+    },
     gradient() {
-      const color = d3.interpolateRdBu;
-
       let steps = [];
       for (let i = 0; i <= 1; i += 0.1) {
-        steps.push(color(i));
+        steps.push(interpolator(i));
       }
 
       return `background-image: linear-gradient(to right, ${steps})`;
@@ -238,6 +249,7 @@ export default {
   background: white;
   box-shadow: 0 1px 3px rgba(black, 0.5), 0 3px 6px rgba(black, 0.07);
   width: 100%;
+  min-height: 18em;
 
   &__header {
     border-bottom: 1px solid $color-border;

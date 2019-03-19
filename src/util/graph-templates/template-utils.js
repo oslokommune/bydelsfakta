@@ -3,6 +3,8 @@
  */
 
 import d3 from '@/assets/d3';
+import router from '../../router';
+import allDistricts from '../../config/allDistricts';
 
 const util = {
   truncate: function(str, width, size = 14, weight = 400) {
@@ -32,6 +34,27 @@ const util = {
     }
 
     return str;
+  },
+
+  goto: function(geo) {
+    let district = allDistricts.find(d => d.value === geo.geography);
+    const topic = router.currentRoute.params.topic;
+
+    if (geo.geography === 'Oslo i alt') {
+      district = {
+        uri: 'alle',
+      };
+    }
+
+    if (!district || !topic) return;
+
+    router.push({
+      name: 'Topic',
+      params: {
+        district: district.uri,
+        topic,
+      },
+    });
   },
 };
 

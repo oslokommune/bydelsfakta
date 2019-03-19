@@ -23,7 +23,7 @@
 
 import d3 from '@/assets/d3';
 import debounce from '../debounce';
-import color from './colors';
+import { color } from './colors';
 import * as locale from './locale';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
@@ -55,6 +55,7 @@ function Base_Template(svg) {
   this.formatDecimal = d3.format(',.4r');
   this.sourceHeight = 30;
   this.duration = 250;
+  this.isCompare;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
   this.format = function(num, method, tick = false) {
@@ -229,6 +230,7 @@ function Base_Template(svg) {
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
+    this.isCompare = options.compareDistricts || false;
     this.method = options.method || 'value';
     this.highlight = options.highlight === undefined || options.highlight == null ? -1 : options.highlight;
     this.series = options.series || 0;

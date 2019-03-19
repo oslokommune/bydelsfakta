@@ -385,9 +385,10 @@ export const topics = {
     cards: [
       {
         size: 'large',
-        heading: '',
+        heading: 'Blokkleiligheter',
         map: {
           labels: ['Lavere boligpriser', 'Høyere boligpriser'],
+          scale: [40000, 95000],
           url: `${API}/boligpriser_status-pD7ZV`,
         },
         tabs: [
