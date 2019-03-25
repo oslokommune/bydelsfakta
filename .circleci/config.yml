@@ -1,0 +1,103 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+      - run:
+          name: npm install
+          command: npm install
+      - save_cache:
+          name: Save cache
+          key: v1-dependencies0{{ checksum "package-lock.json" }}
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore cache
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-
+      - run:
+          name: npm run eslint and npm run test:unit
+          command: |
+            npm run lint
+            npm run test:unit
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            # ftallback to using the latest cache if no exact mach is found
+            - v1-dependencies-
+      - run:
+        name: npm install
+        command: |
+          npm install
+          npm run build
+
+      - persist_to_workspace:
+          root: docs
+          paths: .
+
+workflows:
+  version: 2.1
+  develop:
+    jobs:
+      - install:
+          filters:
+            branches:
+              only: dev
+          context: develop
+      - test:
+          filters:
+            branches:
+              only: dev
+          requires:
+            - install
+      - build:
+          filters:
+            branches:
+              only: dev
+          requires:
+            - install
+            - test
+  build-deploy:
+    jobs:
+      - deploy-develop:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: dev
+          context: develop
+      - deploy-prod:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: master
+          context: production
