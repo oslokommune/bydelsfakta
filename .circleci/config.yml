@@ -69,7 +69,6 @@ workflows:
           filters:
             branches:
               only: dev
-          context: dev
       - test:
           filters:
             branches:
