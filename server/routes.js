@@ -3,6 +3,7 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const auth = require('./auth');
 
 module.exports = app => {
   app.use('/', express.static(path.join(__dirname, '../docs/')));
@@ -11,7 +12,8 @@ module.exports = app => {
     res.send('UP');
   });
 
-  app.get('/api/dataset/:dataset', (req, res) => {
+  app.get('/api/dataset/:dataset', auth(), (req, res) => {
+    console.log('test');
     axios({
       method: 'get',
       url: `https://bwv5c8snqk.execute-api.eu-west-1.amazonaws.com/dev/${req.params.dataset}?geography=${

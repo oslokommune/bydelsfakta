@@ -12,6 +12,7 @@ const data = {
 let accessToken = null;
 
 module.exports = () => {
+  console.log('test');
   return async (req, res, next) => {
     if (accessToken === null) {
       try {
