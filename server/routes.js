@@ -5,6 +5,8 @@ const path = require('path');
 const axios = require('axios');
 const auth = require('./auth');
 
+const API_URL = process.env.BYDELSFAKTA_API_URL;
+
 module.exports = app => {
   app.use('/', express.static(path.join(__dirname, '../docs/')));
 
@@ -13,12 +15,9 @@ module.exports = app => {
   });
 
   app.get('/api/dataset/:dataset', auth(), (req, res) => {
-    console.log('test');
     axios({
       method: 'get',
-      url: `https://bwv5c8snqk.execute-api.eu-west-1.amazonaws.com/dev/${req.params.dataset}?geography=${
-        req.query.geography
-      }`,
+      url: `${API_URL}${req.params.dataset}?geography=${req.query.geography}`,
       headers: {
         Authorization: req.headers.authorization,
       },

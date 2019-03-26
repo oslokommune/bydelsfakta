@@ -6,6 +6,7 @@ const cors = require('cors');
 const routes = require('./routes');
 
 const app = express();
+const HOST = '0.0.0.0';
 const PORT = process.env.PORT || 5000;
 
 app.use(morgan('combined'));
@@ -23,6 +24,6 @@ app.use(function(req, res, next) {
 });
 
 routes(app);
-app.listen(PORT, 'localhost');
+app.listen(PORT, HOST);
 
 console.log(`Running on http://localhost:${PORT}`);

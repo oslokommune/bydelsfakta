@@ -3,11 +3,16 @@
 const axios = require('axios');
 const querystring = require('querystring');
 
+const envs = {
+  access_token_url: `${process.env.KEYCLOAK_URL}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
+  grant_type_client: process.env.KEYCLOAK_GRANT_TYPE_CLIENT,
+};
+
 const request = async params => {
   try {
     return await axios({
       method: 'post',
-      url: process.env.KEYCLOAK_URL_TOKEN,
+      url: envs.access_token_url,
       data: querystring.stringify(params),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -23,7 +28,7 @@ const request = async params => {
 
 const getToken = async params => {
   const options = Object.assign({}, params, {
-    grant_type: process.env.KEYCLOAK_GRANT_TYPE_CLIENT,
+    grant_type: envs.grant_type_client,
   });
 
   return request(options);
