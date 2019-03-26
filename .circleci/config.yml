@@ -17,14 +17,14 @@ jobs:
       - restore_cache:
           name: Restore cache
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run:
           name: npm install
           command: npm install
       - save_cache:
           name: Save cache
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - ./node_modules/
 
@@ -34,7 +34,7 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore cache
-            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run:
           name: npm run eslint and npm run test:unit
@@ -50,7 +50,7 @@ jobs:
       - restore_cache:
           name: Restore cache
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
+            - v1-dependencies-{{ checksum "package.json" }}
             # ftallback to using the latest cache if no exact mach is found
             - v1-dependencies-
       - run:
