@@ -17,14 +17,14 @@ jobs:
       - restore_cache:
           name: Restore cache
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-
       - run:
-          name: npm install
-          command: npm install
+          name: yarn install
+          command: yarn install
       - save_cache:
           name: Save cache
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules/
 
@@ -34,13 +34,13 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore cache
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: npm run eslint and npm run test:unit
+          name: yarn run lint && yarn run test:unit
           command: |
-            npm run lint
-            npm run test:unit
+            yarn run lint
+            yarn run test:unit
 
   build:
     <<: *defaults
@@ -50,14 +50,14 @@ jobs:
       - restore_cache:
           name: Restore cache
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
             # ftallback to using the latest cache if no exact mach is found
-            - v1-dependencies-
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-        name: npm install
+        name: yarn install
         command: |
-          npm install
-          npm run build
+          yarn install
+          yarn run build
 
       - persist_to_workspace:
           root: docs
