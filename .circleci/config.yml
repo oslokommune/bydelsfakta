@@ -1,9 +1,4 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
-
 defaults: &defaults
   working_directory: ~/repo
   docker:
@@ -17,14 +12,14 @@ jobs:
       - restore_cache:
           name: Restore cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-            - yarn-packages-
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run:
-          name: yarn install
-          command: yarn install
+          name: npm install
+          command: npm install
       - save_cache:
           name: Save cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - ./node_modules/
 
@@ -34,31 +29,29 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore cache
-            - yarn-packages-{{ checksum "yarn.lock" }}
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run:
-          name: yarn run lint && yarn run test:unit
+          name: npm run eslint and npm run test:unit
           command: |
-            yarn run lint
-            yarn run test:unit
+            npm run lint
+            npm run test:unit
 
   build:
     <<: *defaults
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           name: Restore cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-            # ftallback to using the latest cache if no exact mach is found
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run:
-        name: yarn install
-        command: |
-          yarn install
-          yarn run build
-
+          name: npm run build
+          command: |
+            npm install
+            npm run build
       - persist_to_workspace:
           root: docs
           paths: .
