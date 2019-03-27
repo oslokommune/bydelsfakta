@@ -58,13 +58,14 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker:
+      - setup_remote_docker
       - run:
           name: docker build and docker push
           command: |
-            docker build -t $DOCKER_IMAGE:develop-$CIRCLE_SHA1 .
+            echo 'export CIRCLE_SHA1_SHORT="$(echo $CIRCLE_SHA1 | cut -c -7)"' >> $BASH_ENV
+            docker build -t $DOCKER_IMAGE:develop-$CIRCLE_SHA1_SHORT .
             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker push $DOCKER_IMAGE:develop-$CIRCLE_SHA1
+            docker push $DOCKER_IMAGE:develop-$CIRCLE_SHA1_SHORT
 
 workflows:
   version: 2
