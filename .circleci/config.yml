@@ -64,7 +64,7 @@ jobs:
           command: |
             docker build -t $DOCKER_IMAGE:develop-$CIRCLE_SHA1 .
             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker push $DOCKER_IMAGE:$CIRCLE_SHA1
+            docker push $DOCKER_IMAGE:develop-$CIRCLE_SHA1
 
 workflows:
   version: 2
