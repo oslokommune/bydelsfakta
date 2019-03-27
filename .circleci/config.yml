@@ -55,6 +55,16 @@ jobs:
       - persist_to_workspace:
           root: docs
           paths: .
+  deploy-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: docker build and docker push
+          command: |
+            docker build -t $DOCKER_IMAGE:develop-$CIRCLE_SHA1 .
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push $DOCKER_IMAGE:$CIRCLE_SHA1
 
 workflows:
   version: 2
@@ -74,6 +84,30 @@ workflows:
           filters:
             branches:
               only: dev
+          requires:
+            - test
+      - deploy-test:
+          filters:
+            branches:
+              only: dev
+          requires:
+            - build
+  master:
+    jobs:
+      - install:
+          filters:
+            branches:
+              only: master
+      - test:
+          filters:
+            branches:
+              only: master
+          requires:
+            - install
+      - build:
+          filters:
+            branches:
+              only: master
           requires:
             - install
             - test
