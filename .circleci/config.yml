@@ -1,0 +1,137 @@
+version: 2
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: npm install
+          command: npm install
+      - save_cache:
+          name: Save cache
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules/
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: npm run eslint and npm run test:unit
+          command: |
+            npm run lint
+            npm run test:unit
+
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore cache
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: npm run build
+          command: |
+            npm run build
+      - persist_to_workspace:
+          root: docs
+          paths: .
+  deploy-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: docker build and docker push
+          command: |
+            export CIRCLE_SHA1_SHORT="$(echo $CIRCLE_SHA1 | cut -c -7)"
+            docker build -t $DOCKER_IMAGE:develop-$CIRCLE_SHA1_SHORT .
+            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+            docker push $DOCKER_IMAGE:develop-$CIRCLE_SHA1_SHORT
+  deploy-prod:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: docker build and docker push
+          command: |
+            export CIRCLE_SHA1_SHORT="$(echo $CIRCLE_SHA1 | cut -c -7)"
+            docker build -t $DOCKER_IMAGE:prod-$CIRCLE_SHA1_SHORT .
+            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+            docker push $DOCKER_IMAGE:prod-$CIRCLE_SHA1_SHORT
+
+
+workflows:
+  version: 2
+  develop:
+    jobs:
+      - install:
+          filters:
+            branches:
+              only: dev
+      - test:
+          filters:
+            branches:
+              only: dev
+          requires:
+            - install
+      - build:
+          filters:
+            branches:
+              only: dev
+          requires:
+            - install
+            - test
+      - deploy-test:
+          filters:
+            branches:
+              only: dev
+          requires:
+            - install
+            - test
+            - build
+  master:
+    jobs:
+      - install:
+          filters:
+            branches:
+              only: master
+      - test:
+          filters:
+            branches:
+              only: master
+          requires:
+            - install
+      - build:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test
+      - deploy-prod:
+          filters:
+            branches:
+              only: master
+          requires:
+            - install
+            - test
+            - build

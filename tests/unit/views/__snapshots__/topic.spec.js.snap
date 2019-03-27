@@ -43,7 +43,6 @@ exports[`Topic renders component correctly 1`] = `
           bgcolor="rgb(66, 248, 182)"
           bgimage="/img/husholdninger"
           category="Bomiljø"
-          disabled="true"
           district="$route.params.district"
           id="husholdninger"
           topic="Husholdninger"
