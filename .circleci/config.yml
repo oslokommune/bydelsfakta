@@ -1,5 +1,6 @@
 version: 2
 defaults: &defaults
+  machine: true
   working_directory: ~/repo
   docker:
     - image: circleci/node:10
@@ -85,12 +86,15 @@ workflows:
             branches:
               only: dev
           requires:
+            - install
             - test
       - deploy-test:
           filters:
             branches:
               only: dev
           requires:
+            - install
+            - test
             - build
   master:
     jobs:
