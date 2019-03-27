@@ -44,7 +44,6 @@ exports[`Bydel renders component correctly 1`] = `
         bgcolor="rgb(66, 248, 182)"
         bgimage="/img/husholdninger"
         category="Bomiljø"
-        disabled="true"
         district="bydel"
         id="husholdninger"
         topic="Husholdninger"
