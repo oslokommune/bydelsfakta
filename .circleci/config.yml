@@ -52,15 +52,15 @@ jobs:
           command: |
             npm run build
       - persist_to_workspace:
-          root: docs
-          paths: ./docs
+          root: .
+          paths: docs
   deploy-test:
     <<: *defaults
     steps:
       - checkout
       - setup_remote_docker
       - attach_workspace:
-          at: /repo/docs
+          at: ~/repo
       - run:
           name: docker build and docker push
           command: |
