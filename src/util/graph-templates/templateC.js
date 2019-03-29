@@ -50,8 +50,8 @@ function Template(svg) {
     this.drawLines();
     this.drawTabs();
     this.drawLabels();
-    this.drawDots();
-    this.drawVoronoi();
+    // this.drawDots();
+    // this.drawVoronoi();
     this.drawSource(
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
@@ -435,19 +435,24 @@ function Template(svg) {
     let labels = this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .data(labelPositions, d => d.geography)
-      .join(enter => {
-        let g = enter
-          .append('g')
-          .attr('class', 'label')
-          .style('cursor', 'pointer');
-        g.append('text').attr('x', this.width + 35);
-        g.append('line')
-          .attr('stroke-width', 9)
-          .attr('x1', this.width + 22)
-          .attr('x2', this.width + 31);
-        g.append('title');
-      })
+      .data(labelPositions)
+      .join(
+        enter => {
+          let g = enter
+            .append('g')
+            .attr('class', 'label')
+            .style('cursor', 'pointer');
+          g.append('text').attr('x', this.width + 35);
+          g.append('line')
+            .attr('stroke-width', 9)
+            .attr('x1', this.width + 22)
+            .attr('x2', this.width + 31);
+          g.append('title');
+          return g
+        },
+        update => update,
+        exit => exit.remove()
+      )
       .attr('class', 'label')
       .style('cursor', 'pointer')
       .attr('tabindex', 0);
@@ -534,17 +539,7 @@ function Template(svg) {
       .select('g.lines')
       .selectAll('path.row')
       .data(this.data.data, d => d.geography)
-      .join(enter => {
-        return enter.append('path').attr('d', d => {
-          let initialData = d.values[this.series].map(val => {
-            return {
-              date: val.date,
-              value: 0,
-            };
-          });
-          return this.line(initialData);
-        });
-      })
+      .join(enter => enter.append('path'))
       .attr('class', 'row')
       .style('pointer-events', 'none')
       .attr('fill', 'none')

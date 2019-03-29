@@ -191,12 +191,11 @@ function Template(svg) {
       .data(() => [
         'Geografi',
         ...this.data.meta.series.map(d => {
-          if(typeof(d) === 'string') {
-            return d
-          } else if(d.heading) {
+          if (typeof d === 'string') {
+            return d;
+          } else if (d.heading) {
             return `${d.heading} ${d.subheading}`;
           }
-          
         }),
       ])
       .attr('scope', 'col')
@@ -400,7 +399,6 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
-
     let columns = this.canvas
       .select('g.columns')
       .selectAll('g.column')
@@ -497,8 +495,15 @@ function Template(svg) {
       .attr('height', this.height + 20)
       .duration(this.duration)
       .attr('width', (d, i) => {
-        // let val = this.filteredData.data.filter(d => d[foo])[0].values[i][this.method];
-        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+
+        let val;
+        let totalRow = this.filteredData.data.find(d => d.totalRow);
+
+        if(totalRow && totalRow.values && totalRow.values[i]) {
+          val = totalRow.values[i][this.method];
+        } else {
+          return
+        }
 
         if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
           return 0;
@@ -519,16 +524,28 @@ function Template(svg) {
         return indexOfTotalRow * this.rowHeight;
       })
       .attr('x', (d, i) => {
-        // let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
 
-        let val = this.filteredData.data.filter(d => d.geography === 'Oslo i alt')[0].values[i][this.method];
+        let val;
+        let totalRow = this.filteredData.data.find(d => d.totalRow);
+
+        if (totalRow && totalRow.values && totalRow.values[i]) {
+          val = totalRow.values[i][this.method];
+        } else {
+          return
+        }
 
         if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
         return this.x[0](val);
       })
       .attr('opacity', (d, i) => {
-        // let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
-        let val = this.filteredData.data.filter(d => d.geography === 'Oslo i alt')[0].values[i][this.method];
+        let val;
+        let totalRow = this.filteredData.data.find(d => d.totalRow);
+
+        if (totalRow && totalRow.values && totalRow.values[i]) {
+          val = totalRow.values[i][this.method];
+        } else {
+          return
+        }
 
         if (this.isMobileView) {
           return 0;
