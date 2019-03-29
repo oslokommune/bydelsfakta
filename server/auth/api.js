@@ -19,10 +19,11 @@ const request = async params => {
       },
     });
   } catch (error) {
+    console.log(error)
     if (error.errno === 'ETIMEDOUT') {
       return Promise.reject(new Error('Timeout'));
     }
-    return Promise.reject(error.response);
+    return Promise.reject(error);
   }
 };
 
