@@ -224,8 +224,11 @@ function Base_Template(svg) {
   this.commonRender = function(data, options = {}) {
     if (data === undefined || data.data === undefined) return;
 
-    data.data = Array.isArray(data.data) ? data.data.sort((a, b) => a.totalRow - b.totalRow) : data.data;
-    this.data = data;
+    if (!Array.isArray(data.data)) {
+      this.data = data.data;
+    } else {
+      this.data = this.sortData(data);
+    }
 
     this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
@@ -240,6 +243,15 @@ function Base_Template(svg) {
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     return true;
+  };
+
+  this.sortData = function(data) {
+    data.data = data.data
+      .sort((a, b) => b.values[0][this.method] - a.values[0][this.method])
+      .sort((a, b) => (b.avgRow ? -1 : 0))
+      .sort((a, b) => (b.totalRow ? -1 : 0));
+
+    return data;
   };
 
   // Placeholder for the render method

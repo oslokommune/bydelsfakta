@@ -22,6 +22,16 @@ exports[`Bydel renders component correctly 1`] = `
       />
       <v-category-stub
         bgcolor="rgb(255, 129, 116)"
+        bgimage="/img/folkemengde"
+        category="Befolkning"
+        disabled="true"
+        district="bydel"
+        id="befolkningsendringer"
+        topic="Befolknings&shy;endringer"
+        txtcolor="rgb(245, 173, 165)"
+      />
+      <v-category-stub
+        bgcolor="rgb(255, 129, 116)"
         bgimage="/img/alder"
         category="Befolkning"
         disabled="true"
@@ -37,27 +47,27 @@ exports[`Bydel renders component correctly 1`] = `
         disabled="true"
         district="bydel"
         id="innvandrerbefolkningen"
-        topic="Innvandrer&shy;befolkningen"
+        topic="Personer med innvandrer&shy;bakgrunn"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
+        bgcolor="rgb(255, 129, 116)"
         bgimage="/img/husholdninger"
-        category="Bomiljø"
+        category="Befolkning"
         district="bydel"
         id="husholdninger"
         topic="Husholdninger"
-        txtcolor="rgb(199, 247, 201)"
+        txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/trangboddhet"
-        category="Bomiljø"
+        bgcolor="rgb(248, 198, 107)"
+        bgimage="/img/levekaar"
+        category="Levekår"
         disabled="true"
         district="bydel"
-        id="trangboddhet"
-        topic="Trangboddhet"
-        txtcolor="rgb(199, 247, 201)"
+        id="levekaar"
+        topic="Levekårs&shy;indikatorer"
+        txtcolor="rgb(244, 206, 138)"
       />
       <v-category-stub
         bgcolor="rgb(66, 248, 182)"
@@ -67,26 +77,6 @@ exports[`Bydel renders component correctly 1`] = `
         district="bydel"
         id="eierform"
         topic="Eierform"
-        txtcolor="rgb(199, 247, 201)"
-      />
-      <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/kommunale-boliger"
-        category="Bomiljø"
-        disabled="true"
-        district="bydel"
-        id="kommunaleboliger"
-        topic="Kommunale boliger"
-        txtcolor="rgb(199, 247, 201)"
-      />
-      <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/flytting"
-        category="Bomiljø"
-        disabled="true"
-        district="bydel"
-        id="flytting"
-        topic="Flytting"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
@@ -109,14 +99,14 @@ exports[`Bydel renders component correctly 1`] = `
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
-        bgcolor="rgb(248, 198, 107)"
-        bgimage="/img/levekaar"
-        category="Levekår"
+        bgcolor="rgb(66, 248, 182)"
+        bgimage="/img/trangboddhet"
+        category="Bomiljø"
         disabled="true"
         district="bydel"
-        id="levekaar"
-        topic="Levekår"
-        txtcolor="rgb(244, 206, 138)"
+        id="trangboddhet"
+        topic="Trangboddhet"
+        txtcolor="rgb(199, 247, 201)"
       />
     </div>
   </div>
@@ -127,6 +117,7 @@ exports[`Bydel renders component correctly 1`] = `
     <v-leaflet-stub
       dataurl=""
       district="[object Object]"
+      method="value"
       scale=""
     />
   </div>

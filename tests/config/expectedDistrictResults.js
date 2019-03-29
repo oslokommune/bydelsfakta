@@ -4,7 +4,7 @@ export const allDistricts = {
   features: [
     {
       type: 'Feature',
-      properties: { name: 'Bydel Søndre Nordstrand', id: 15 },
+      properties: { name: 'Bydel Søndre Nordstrand', id: '15' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -116,7 +116,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Nordstrand', id: 14 },
+      properties: { name: 'Bydel Nordstrand', id: '14' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -206,7 +206,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Østensjø', id: 13 },
+      properties: { name: 'Bydel Østensjø', id: '13' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -286,7 +286,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Gamle Oslo', id: 1 },
+      properties: { name: 'Bydel Gamle Oslo', id: '01' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -349,7 +349,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Frogner', id: 5 },
+      properties: { name: 'Bydel Frogner', id: '05' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -405,7 +405,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Grünerløkka', id: 2 },
+      properties: { name: 'Bydel Grünerløkka', id: '02' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -452,7 +452,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Ullern', id: 6 },
+      properties: { name: 'Bydel Ullern', id: '06' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -519,7 +519,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel St. Hanshaugen', id: 4 },
+      properties: { name: 'Bydel St. Hanshaugen', id: '04' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -559,7 +559,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Sagene', id: 3 },
+      properties: { name: 'Bydel Sagene', id: '03' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -596,7 +596,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Alna', id: 12 },
+      properties: { name: 'Bydel Alna', id: '12' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -691,7 +691,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Bjerke', id: 9 },
+      properties: { name: 'Bydel Bjerke', id: '09' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -755,7 +755,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Nordre Aker', id: 8 },
+      properties: { name: 'Bydel Nordre Aker', id: '08' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -846,7 +846,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Stovner', id: 11 },
+      properties: { name: 'Bydel Stovner', id: '11' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -908,7 +908,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Vestre Aker', id: 7 },
+      properties: { name: 'Bydel Vestre Aker', id: '07' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -1013,7 +1013,7 @@ export const allDistricts = {
     },
     {
       type: 'Feature',
-      properties: { name: 'Bydel Grorud', id: 10 },
+      properties: { name: 'Bydel Grorud', id: '10' },
       geometry: {
         type: 'Polygon',
         coordinates: [
@@ -1116,7 +1116,7 @@ export const oneDistrictCompare = {
   features: [
     {
       type: 'Feature',
-      properties: { name: 'Bydel Gamle Oslo', id: 1 },
+      properties: { name: 'Bydel Gamle Oslo', id: '01' },
       geometry: {
         type: 'Polygon',
         coordinates: [

@@ -17,7 +17,7 @@ import positionLabels from '../positionLabels';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 130, left: 60, right: 190, bottom: 32 };
+  this.padding = { top: 100, left: 60, right: 190, bottom: 32 };
 
   // Line generator
   // let line = d3
@@ -32,13 +32,13 @@ function Template(svg) {
 
     this.data.data = this.data.data.sort((a, b) => {
       return (
-        b.values[this.series][b.values[this.series].length - 1].value -
-        a.values[this.series][a.values[this.series].length - 1].value
+        b.values[this.series][b.values[this.series].length - 1][this.method] -
+        a.values[this.series][a.values[this.series].length - 1][this.method]
       );
     });
 
-    this.heading.attr('y', 90).text(this.data.meta.heading[this.series]);
-    this.height = 400;
+    this.heading.attr('y', 90).text('');
+    this.height = 460;
     this.svg
       .transition()
       .duration(this.duration)
@@ -50,8 +50,8 @@ function Template(svg) {
     this.drawLines();
     this.drawTabs();
     this.drawLabels();
-    this.drawDots();
-    this.drawVoronoi();
+    // this.drawDots();
+    // this.drawVoronoi();
     this.drawSource(
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
@@ -82,6 +82,7 @@ function Template(svg) {
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
+    .curve(d3.curveCardinal)
     .x(d => this.x(this.parseYear(d.date)))
     .y(d => this.y(d[this.method]));
 
@@ -176,7 +177,7 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => d.value)
+      .text(d => d[this.method])
       .attr('x', d => this.x(this.parseYear(d.date)))
       .attr('y', d => this.y(d.value))
       .attr('font-size', 11)
@@ -195,7 +196,9 @@ function Template(svg) {
 
   this.drawVoronoi = function() {
     let flattenData = this.data.data
-      .map(geo => geo.values[this.series].map(val => ({ date: val.date, value: val.value, geography: geo.geography })))
+      .map(geo =>
+        geo.values[this.series].map(val => ({ date: val.date, value: val[this.method], geography: geo.geography }))
+      )
       .flat();
 
     let voronoiData = d3
@@ -298,14 +301,14 @@ function Template(svg) {
       .append('rect')
       .attr('class', 'bar')
       .attr('height', 4)
-      .attr('width', this.tabWidth)
+      .attr('width', d => util.getTextWidth(d.heading))
       .attr('y', 37)
       .attr('fill', color.blue);
 
     tabE
       .append('text')
       .attr('class', 'heading')
-      .attr('font-size', 16)
+      // .attr('font-size', 16)
       .attr('y', 5);
     tabE
       .append('text')
@@ -316,7 +319,7 @@ function Template(svg) {
     tabE
       .append('rect')
       .attr('class', 'tabOverlay')
-      .attr('width', this.tabWidth)
+      .attr('width', d => util.getTextWidth(d.heading))
       .attr('height', 60)
       .attr('opacity', 0)
       .attr('y', -20);
@@ -324,15 +327,24 @@ function Template(svg) {
     tab.exit().remove();
     tab = tab.merge(tabE);
 
-    tab.attr('transform', (d, i) => `translate(${i * (this.tabWidth + this.tabGap)}, 0)`);
+    tab.attr('transform', (d, i, j) => {
+      let dist = 0;
+
+      for (let x = 0; x < i; x++) {
+        dist += util.getTextWidth(j[x].__data__.heading);
+        dist += this.tabGap;
+      }
+
+      return `translate(${dist}, 0)`;
+    });
 
     tab
       .select('text.heading')
-      .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
+      // .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
       .text(d => d.heading);
     tab
       .select('text.subHeading')
-      .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
+      // .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
       .text(d => d.subheading);
 
     tab
@@ -369,8 +381,8 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-opacity', 0.05)
-      .attr('stroke-width', 2)
+      .attr('stroke-opacity', 0.1)
+      .attr('stroke-width', 3)
       .filter(d => d.geography === geo)
       .attr('stroke-opacity', 1)
       .attr('stroke-width', 4);
@@ -399,11 +411,11 @@ function Template(svg) {
       .selectAll('path.row')
       .attr('stroke-width', d => {
         if (d.avgRow) return 5;
-        return 2;
+        return 3;
       })
       .attr('stroke-opacity', d => {
         if (d.totalRow || d.avgRow) return 1;
-        return 0.1;
+        return 0.2;
       });
   };
 
@@ -414,7 +426,7 @@ function Template(svg) {
     // the original y-position and the available height in pixels
     let labelPositions = positionLabels(
       this.data.data.map(row => {
-        row.y = this.y(row.values[this.series][row.values[this.series].length - 1].value);
+        row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
         return row;
       }),
       this.height
@@ -423,19 +435,24 @@ function Template(svg) {
     let labels = this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .data(labelPositions, d => d.geography)
-      .join(enter => {
-        let g = enter
-          .append('g')
-          .attr('class', 'label')
-          .style('cursor', 'pointer');
-        g.append('text').attr('x', this.width + 35);
-        g.append('line')
-          .attr('stroke-width', 9)
-          .attr('x1', this.width + 22)
-          .attr('x2', this.width + 31);
-        g.append('title');
-      })
+      .data(labelPositions)
+      .join(
+        enter => {
+          let g = enter
+            .append('g')
+            .attr('class', 'label')
+            .style('cursor', 'pointer');
+          g.append('text').attr('x', this.width + 35);
+          g.append('line')
+            .attr('stroke-width', 9)
+            .attr('x1', this.width + 22)
+            .attr('x2', this.width + 31);
+          g.append('title');
+          return g;
+        },
+        update => update,
+        exit => exit.remove()
+      )
       .attr('class', 'label')
       .style('cursor', 'pointer')
       .attr('tabindex', 0);
@@ -522,17 +539,7 @@ function Template(svg) {
       .select('g.lines')
       .selectAll('path.row')
       .data(this.data.data, d => d.geography)
-      .join(enter => {
-        return enter.append('path').attr('d', d => {
-          let initialData = d.values[this.series].map(val => {
-            return {
-              date: val.date,
-              value: 0,
-            };
-          });
-          return this.line(initialData);
-        });
-      })
+      .join(enter => enter.append('path'))
       .attr('class', 'row')
       .style('pointer-events', 'none')
       .attr('fill', 'none')
@@ -546,15 +553,15 @@ function Template(svg) {
         return d3.interpolateRainbow(i / j.length);
       })
       .attr('stroke-width', (d, i) => {
-        if (this.highlight === i) return 5;
-        if (d.avgRow) return 5;
-        return 2;
+        if (this.highlight === i) return 6;
+        if (d.avgRow) return 6;
+        return 3;
       })
       .attr('stroke-opacity', (d, i) => {
-        if (this.highlight >= 0 && this.highlight !== i) return 0.1;
+        if (this.highlight >= 0 && this.highlight !== i) return 0.2;
         if (this.highlight >= 0 && this.highlight === i) return 1;
         if (d.totalRow || d.avgRow) return 1;
-        return 0.2;
+        return 0.3;
       })
       .style('stroke-dasharray', d => {
         if (d.totalRow) return '4,3';
@@ -565,15 +572,15 @@ function Template(svg) {
     this.y.max = d3.max(this.data.data.map(row => d3.max(row.values[this.series].map(d => d[this.method])))) * 1.05;
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values[this.series].map(d => d[this.method])))) / 1.05;
 
+    // Find min and max years for the data
+    const minYear = this.parseYear(d3.min(this.data.data.map(d => d.values[0][0].date)));
+    const maxYear = this.parseYear(
+      this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date
+    );
+
     this.x = d3
       .scaleTime()
-      .domain([
-        d3.timeMonth.offset(this.parseYear(this.data.data[0].values[0][0].date), -2),
-        d3.timeMonth.offset(
-          this.parseYear(this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date),
-          0
-        ),
-      ])
+      .domain([d3.timeMonth.offset(minYear, 0), d3.timeMonth.offset(maxYear, 0)])
       .range([0, this.width])
       .nice();
 

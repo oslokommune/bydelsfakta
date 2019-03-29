@@ -28,7 +28,7 @@
       <p>
         {{ $t('notFound.seeMore.subheader') }}
       </p>
-      <div class="notFound__topics-grid">
+      <div class="topics-grid">
         <v-category
           v-for="topicName in seeMoreTopics"
           :key="topics[`${topicName}`].value"
@@ -54,7 +54,7 @@ export default {
   components: { VCategory },
   data() {
     return {
-      seeMoreTopics: ['folkemengde', 'alder', 'innvandrerbefolkningen'],
+      seeMoreTopics: ['husholdninger', 'boligpriser'],
       topics: topics,
     };
   },
@@ -65,6 +65,10 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 @import '../styles/layout';
+
+.topics-grid {
+  padding: 0;
+}
 
 .notFound {
   &-container {

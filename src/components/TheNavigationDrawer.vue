@@ -89,7 +89,7 @@
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import osloIcon from '../assets/Oslo_komm.svg'; // ../assets/oslo-logo.svg
+import osloIcon from '../assets/oslo-logo.svg'; //
 
 export default {
   name: 'TheNavigationDrawer',
@@ -369,13 +369,13 @@ $rowHeight: 2.5em;
   cursor: pointer;
   height: 100%;
   object-fit: contain;
-  padding: 1.25rem;
-  width: 5.5em;
+  padding: 1rem 0.25rem;
+  width: 8em;
 
   @media screen and (min-width: $break-lg) {
     align-self: center;
-    padding-bottom: 0.75rem;
-    width: 6.5em;
+    padding: 0;
+    width: 10em;
   }
 }
 

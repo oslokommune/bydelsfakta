@@ -31,6 +31,16 @@ export default {
       required: false,
       default: '',
     },
+    series: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    method: {
+      type: String,
+      required: false,
+      default: 'value',
+    },
     scale: {
       type: Array,
       required: false,
@@ -65,7 +75,7 @@ export default {
       if (!url) return;
       let data = await fetch(url).then(d => d.json().then(d => d.data));
 
-      this.createChoropleth(data);
+      this.createChoropleth(data, this.series);
     },
 
     createChoropleth(data) {
@@ -78,8 +88,14 @@ export default {
       for (let key in layers) {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
+        let dataValue;
 
-        let dataValue = data.find(geo => geo.geography === layerId).values[0].value;
+        if (this.series) {
+          dataValue = data.find(geo => geo.geography === layerId).values[this.series][this.method];
+        } else {
+          dataValue = data.find(geo => geo.geography === layerId).values[0][this.method];
+        }
+
         const fill = interpolator(colorStrength(dataValue));
 
         const popupContent = `

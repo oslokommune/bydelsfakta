@@ -150,15 +150,7 @@ function Template(svg) {
     this.list = this.svg
       .append('g')
       .attr('class', 'list')
-      .attr('transform', `translate(3, ${this.padding.top})`);
-    this.list
-      .append('text')
-      .text('Velg delbydel')
-      .attr('font-size', 12)
-      .style('text-transform', 'uppercase')
-      .attr('font-weight', 700)
-      .attr('fill', color.purple)
-      .attr('transform', 'translate(10, -16)');
+      .attr('transform', `translate(0, 36)`);
 
     this.canvas.selectAll('*').remove();
 
@@ -229,14 +221,14 @@ function Template(svg) {
       .append('rect')
       .attr('class', 'fill')
       .attr('width', this.padding.left)
-      .attr('height', this.rowHeight)
+      .attr('height', this.rowHeight - 4)
       .attr('fill', color.blue)
       .style('cursor', 'pointer')
       .attr('rx', 3);
     rowE.append('text').attr('class', 'label');
 
     row
-      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`)
+      .attr('transform', (d, i) => `translate(0, ${i * (this.rowHeight - 4)})`)
       .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (d3.event && d3.event.type === 'click') j[i].blur();
@@ -275,7 +267,7 @@ function Template(svg) {
     row
       .select('text.label')
       .text(d => d.geography)
-      .attr('y', this.rowHeight / 2 + 5)
+      .attr('y', this.rowHeight / 2 + 3)
       .attr('x', 10)
       .attr('font-weight', d => (d.totalRow || d.avgRow ? 700 : 400))
       .attr('fill', color.purple)
@@ -569,9 +561,21 @@ function Template(svg) {
   };
 
   this.updateAxisLabels = function() {
-    this.matrix.select('text.label1').text(`Andel ${this.data.meta.series[0].toLowerCase()} (%)`);
-    this.matrix.select('text.label2').text(`Andel ${this.data.meta.series[1].toLowerCase()} (%)`);
-    this.matrix.select('text.label3').text(`Andel ${this.data.meta.series[2].toLowerCase()} (%)`);
+    let label1Text, label2Text, label3Text;
+
+    if (typeof this.data.meta.series === 'string') {
+      label1Text = `Andel ${this.data.meta.series[0].toLowerCase()} (%)`;
+      label2Text = `Andel ${this.data.meta.series[1].toLowerCase()} (%)`;
+      label3Text = `Andel ${this.data.meta.series[2].toLowerCase()} (%)`;
+    } else {
+      label1Text = `Andel ${this.data.meta.series[0].heading.toLowerCase()} (%)`;
+      label2Text = `Andel ${this.data.meta.series[1].heading.toLowerCase()} (%)`;
+      label3Text = `Andel ${this.data.meta.series[2].heading.toLowerCase()} (%)`;
+    }
+
+    this.matrix.select('text.label1').text(label1Text);
+    this.matrix.select('text.label2').text(label2Text);
+    this.matrix.select('text.label3').text(label3Text);
   };
 
   // Calculate the starting and ending coordinates
