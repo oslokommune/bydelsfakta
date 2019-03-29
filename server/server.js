@@ -17,7 +17,7 @@ app.use(function(req, res, next) {
     'X-XSS-Protection': '1; mode=block',
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'deny',
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'Cache-Control': 'public, max-age=31557600',
   });
   res.removeHeader('X-Powered-By');
   next();

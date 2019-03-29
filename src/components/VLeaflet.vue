@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import { LMap, LTileLayer, LFeatureGroup, LGeoJson, L } from 'vue2-leaflet';
+import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
+import L from 'leaflet';
 import * as d3 from 'd3';
 import { color, interpolator } from '../util/graph-templates/colors';
 

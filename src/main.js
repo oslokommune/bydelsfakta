@@ -1,7 +1,7 @@
-import '@babel/polyfill';
+import 'whatwg-fetch';
 import Vue from 'vue';
 import VueResize from 'vue-resize';
-import { L } from 'vue2-leaflet';
+import { Icon } from 'leaflet';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -17,9 +17,9 @@ import setupI18n from './i18n';
 const i18n = setupI18n();
 
 // this part resolve an issue where the markers would not appear
-delete L.Icon.Default.prototype._getIconUrl;
+delete Icon.Default.prototype._getIconUrl;
 
-L.Icon.Default.mergeOptions({
+Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
@@ -28,7 +28,7 @@ L.Icon.Default.mergeOptions({
 Vue.use(VueResize);
 
 Vue.config.productionTip = false;
-Vue.config.devtools = true;
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
 Vue.config.performance = process.env.NODE_ENV !== 'production';
 
 // Directive to detect clicks outside of an element

@@ -315,9 +315,9 @@ $rowHeight: 2.5em;
   }
 
   @media screen and (min-width: $break-lg) {
-    background: initial;
+    background: none;
     box-shadow: none;
-    display: initial;
+    display: block;
     padding: 0;
     position: relative;
     top: 0;
