@@ -12,7 +12,7 @@
         <img src="../assets/spinner.svg" alt="" />
       </div>
       <div class="error" v-if="error">
-        <h2>{{ error.msg }}</h2>
+        <h2>{{ errorMessage }}</h2>
       </div>
       <svg v-if="!error" class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
     </div>
@@ -62,6 +62,7 @@ export default {
     currentTemplate: false,
     allDistricts: false,
     error: false,
+    errorMessage: '',
   }),
 
   computed: {
@@ -80,8 +81,7 @@ export default {
       return {
         meta: this.data.meta,
         data: this.data.data.filter(d => {
-          // TODO: change avgRow to d.totalRow as soon as change is made on API response
-          return selectedDistrictNames.includes(d.geography) || d.avgRow;
+          return selectedDistrictNames.includes(d.geography) || d.totalRow;
         }),
       };
     },
@@ -143,14 +143,16 @@ export default {
             });
             return data;
           })
-          .catch(() => {
-            this.error = this.$t('error.connectionLost');
+          .catch(err => {
+            this.error = true;
+            this.errorMessage = this.$t('error.connectionLost');
             this.loading = false;
           });
       }
 
       if (this.data) {
         this.error = false;
+        this.errorMessage = '';
       } else {
         return;
       }
@@ -272,7 +274,7 @@ export default {
 
   &__svg {
     &.loading {
-      opacity: 0.5;
+      opacity: 0.95;
       pointer-events: none;
     }
   }
@@ -280,11 +282,16 @@ export default {
 
 .spinner {
   align-items: center;
+  animation-delay: 0.5s;
+  animation-duration: 0.1s;
+  animation-iteration-count: 1;
+  animation-name: fadeIn;
   background-color: rgba(black, 0.05);
   display: flex;
   height: 100%;
   justify-content: center;
   left: 0;
+  opacity: 0;
   position: absolute;
   top: 0;
   width: 100%;
@@ -296,5 +303,14 @@ export default {
   font-size: $font-small;
   font-weight: 500;
   text-rendering: geometricPrecision;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
