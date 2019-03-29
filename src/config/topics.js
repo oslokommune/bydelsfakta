@@ -753,7 +753,7 @@ export const topics = {
     related: ['trangboddhet', 'eierform', 'bygningstyper'],
   },
   levekaar: {
-    text: 'Levekår',
+    text: 'Levekårsindikatorer',
     value: 'levekaar',
     cards: [
       {
