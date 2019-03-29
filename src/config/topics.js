@@ -5,48 +5,38 @@ const API = `${apiUrl}/api/dataset`;
 
 export const topicNames = [
   'folkemengde',
+  'befolkningsendringer',
   'alder',
   'innvandrerbefolkningen',
   'husholdninger',
-  'trangboddhet',
+  'levekaar',
   'eierform',
-  'kommunaleboliger',
-  'flytting',
   'bygningstyper',
   'boligpriser',
-  'levekaar',
+  'trangboddhet',
 ];
 
 export const disabledTopics = [
   'folkemengde',
+  'befolkningsendringer',
   'alder',
   'innvandrerbefolkningen',
-  'trangboddhet',
-  'eierform',
-  'kommunaleboliger',
-  'flytting',
-  'bygningstyper',
   'levekaar',
+  'eierform',
+  'bygningstyper',
+  'trangboddhet',
 ];
 
 export const categories = [
   {
     kategori: 'Befolkning',
     color: 'rgb(182, 63, 50)',
-    links: ['folkemengde', 'alder', 'innvandrerbefolkningen'],
+    links: ['folkemengde', 'befolkningsendringer', 'alder', 'innvandrerbefolkningen', 'husholdninger'],
   },
   {
     kategori: 'Bomiljø',
     color: 'rgb(27, 173, 120)',
-    links: [
-      'husholdninger',
-      'trangboddhet',
-      'eierform',
-      'kommunaleboliger',
-      'flytting',
-      'bygningstyper',
-      'boligpriser',
-    ],
+    links: ['trangboddhet', 'eierform', 'bygningstyper', 'boligpriser'],
   },
   {
     kategori: 'Levekår',
@@ -127,7 +117,7 @@ export const topics = {
         ],
       },
     ],
-    related: ['alder', 'innvandrerbefolkningen', 'flytting'],
+    related: ['alder', 'innvandrerbefolkningen', 'befolkningsendringer'],
     options: {
       kategori: 'Befolkning',
       tema: 'Folkemengde',
@@ -136,6 +126,21 @@ export const topics = {
       txtColor: 'rgb(245, 173, 165)',
     },
   },
+
+  befolkningsendringer: {
+    text: 'Befolkningsendringer',
+    value: 'befolkningsendringer',
+    cards: [],
+    options: {
+      kategori: 'Befolkning',
+      tema: 'Befolknings&shy;endringer',
+      bgImage: `${baseUrl}/img/folkemengde`,
+      bgColor: 'rgb(255, 129, 116)',
+      txtColor: 'rgb(245, 173, 165)',
+    },
+    related: ['alder', 'folkemengde', 'innvandrerbefolkningen'],
+  },
+
   alder: {
     text: 'Alder',
     value: 'alder',
@@ -218,7 +223,7 @@ export const topics = {
     related: ['folkemengde', 'husholdninger', 'levekaar'],
   },
   innvandrerbefolkningen: {
-    text: 'Innvandrerbefolkningen',
+    text: 'Personer med innvandrerbakgrunn',
     value: 'innvandrerbefolkningen',
     cards: [
       {
@@ -324,12 +329,12 @@ export const topics = {
     ],
     options: {
       kategori: 'Befolkning',
-      tema: 'Innvandrer&shy;befolkningen',
+      tema: 'Personer med innvandrer&shy;bakgrunn',
       bgImage: `${baseUrl}/img/innvandring`,
       bgColor: 'rgb(255, 129, 116)',
       txtColor: 'rgb(245, 173, 165)',
     },
-    related: ['folkemengde', 'flytting', 'boligpriser'],
+    related: ['folkemengde', 'befolkningsendringer', 'boligpriser'],
   },
   eierform: {
     text: 'Eierform',
@@ -417,7 +422,7 @@ export const topics = {
       bgColor: 'rgb(66, 248, 182)',
       txtColor: 'rgb(199, 247, 201)',
     },
-    related: ['trangboddhet', 'eierform', 'flytting'],
+    related: ['trangboddhet', 'eierform', 'befolkningsendringer'],
   },
   trangboddhet: {
     text: 'Trangboddhet',
@@ -544,84 +549,6 @@ export const topics = {
     },
     related: ['boligpriser', 'levekaar', 'eierform'],
   },
-  kommunaleboliger: {
-    text: 'Kommunale boliger',
-    value: 'kommunaleboliger',
-    cards: [
-      {
-        size: 'large',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Status',
-            id: 'blokkleilighet_status',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'blokkleilighet_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-    ],
-    options: {
-      kategori: 'Bomiljø',
-      tema: 'Kommunale boliger',
-      bgImage: `${baseUrl}/img/kommunale-boliger`,
-      bgColor: 'rgb(66, 248, 182)',
-      txtColor: 'rgb(199, 247, 201)',
-    },
-    related: ['boligpriser', 'trangboddhet', 'husholdninger'],
-  },
-  flytting: {
-    text: 'Flytting',
-    value: 'flytting',
-    cards: [
-      {
-        size: 'large',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Status',
-            id: 'flyttehyppighet_status',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'flyttehyppighet_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-    ],
-    options: {
-      kategori: 'Bomiljø',
-      tema: 'Flytting',
-      bgImage: `${baseUrl}/img/flytting`,
-      bgColor: 'rgb(66, 248, 182)',
-      txtColor: 'rgb(199, 247, 201)',
-    },
-    related: ['boligpriser', 'folkemengde', 'bygningstyper'],
-  },
   bygningstyper: {
     text: 'Bygningstyper',
     value: 'bygningstyper',
@@ -659,6 +586,33 @@ export const topics = {
           },
         ],
       },
+
+      {
+        size: 'large',
+        heading: 'Kommunale boliger',
+        map: {
+          labels: ['', ''],
+          url: ``,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Status',
+            id: 'blokkleilighet_status',
+            template: 'a',
+            method: 'ratio',
+            url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'blokkleilighet_historisk',
+            template: 'b',
+            url: `${baseUrl}/mockDataB.json`,
+          },
+        ],
+      },
+
       {
         size: 'small',
         heading: '',
@@ -753,10 +707,13 @@ export const topics = {
     cards: [
       {
         size: 'large',
-        heading: '',
+        heading: 'Husholdningstyper',
         map: {
-          labels: ['', ''],
-          url: ``,
+          labels: ['Færre aleneboende', 'Flere aleneboende'],
+          url: `${API}/Husholdning-totalt-status-FzFf5`,
+          method: 'ratio',
+          series: 0,
+          scale: [0.25, 0.6],
         },
         tabs: [
           {
@@ -787,11 +744,11 @@ export const topics = {
       },
     ],
     options: {
-      kategori: 'Bomiljø',
+      kategori: 'Befolkning',
       tema: 'Husholdninger',
       bgImage: `${baseUrl}/img/husholdninger`,
-      bgColor: 'rgb(66, 248, 182)',
-      txtColor: 'rgb(199, 247, 201)',
+      bgColor: 'rgb(255, 129, 116)',
+      txtColor: 'rgb(245, 173, 165)',
     },
     related: ['trangboddhet', 'eierform', 'bygningstyper'],
   },
@@ -1002,7 +959,7 @@ export const topics = {
     ],
     options: {
       kategori: 'Levekår',
-      tema: 'Levekår',
+      tema: 'Levekårs&shy;indikatorer',
       bgImage: `${baseUrl}/img/levekaar`,
       bgColor: 'rgb(248, 198, 107)',
       txtColor: 'rgb(244, 206, 138)',
