@@ -22,12 +22,12 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
-    this.isSingleSeries = (data.meta && data.meta.series && data.meta.series.length === 1) || true;
+    this.isSingleSeries = data.meta && data.meta.series && data.meta.series.length <= 1;
     this.isMobileView = this.isSingleSeries && this.parentWidth() < this.mobileWidth;
 
     // Multiseries need larger padding top to make room for tabs,
     // mobile views have smaller padding.left
-    this.padding.top = this.isSingleSeries <= 1 && this.selected === -1 ? 40 : 100;
+    this.padding.top = this.isSingleSeries && this.selected === -1 ? 40 : 100;
     this.padding.left = this.isMobileView ? 0 : 190;
     this.padding.bottom = this.isMobileView ? 0 : 30;
 
@@ -191,7 +191,12 @@ function Template(svg) {
       .data(() => [
         'Geografi',
         ...this.data.meta.series.map(d => {
-          return `${d.heading} (${d.subheading})`;
+          if(typeof(d) === 'string') {
+            return d
+          } else if(d.heading) {
+            return `${d.heading} ${d.subheading}`;
+          }
+          
         }),
       ])
       .attr('scope', 'col')
@@ -395,24 +400,30 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
-    // temp fix until compareDistricts dataset gets 'totalRow'.
-    // It's wrongly labelled 'avgRow'
-    let foo = this.filteredData.data.some(d => d.totalRow) ? 'totalRow' : 'avgRow';
 
     let columns = this.canvas
       .select('g.columns')
       .selectAll('g.column')
-      .data(this.filteredData.meta.series)
+      .data(this.filteredData.meta.series, d => d.heading + d.subheading)
       .join(enter => {
         let g = enter.append('g').attr('class', 'column');
-        g.append('rect').attr('fill', color.light_grey);
+
+        g.append('rect')
+          .attr('fill', color.light_grey)
+          .attr('class', 'colFill');
+
+        g.append('rect')
+          .attr('fill', color.light_grey)
+          .attr('class', 'clickTrigger');
+
         g.append('rect')
           .attr('class', 'arrow')
           .attr('width', 1)
           .attr('height', 11);
         g.append('text')
           .attr('class', 'colHeading')
-          .attr('transform', 'translate(0, -40)');
+          .attr('transform', 'translate(0, -40)')
+          .style('pointer-events', 'none');
         g.append('text')
           .attr('class', 'colSubheading')
           .attr('transform', 'translate(0, -20)');
@@ -430,9 +441,10 @@ function Template(svg) {
         if (this.data.meta.series.length > 1) return 'pointer';
       })
       .attr('width', (d, i) => {
+        if (this.data.meta.series.length === 1) return 0;
         return this.x[i].range()[1] - this.x[i].range()[0] + this.gutter;
       })
-      .attr('height', this.height + 80)
+      .attr('height', this.padding.top)
       .attr('transform', `translate(0, -60)`)
       .attr('fill', 'black')
       .attr('opacity', 0)
@@ -446,24 +458,6 @@ function Template(svg) {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (this.data.meta.series.length === 1) return;
         let target = this.selected > -1 ? -1 : i;
-
-        // Move affected column to index 0 in DOM to ensure smooth transitions
-        let columnToBeMoved = j[i].parentElement;
-        columnToBeMoved.parentElement.prepend(columnToBeMoved);
-
-        // Move affected rects to index 0 in DOM to ensure smooth transitions
-        let barsToBeMoved = this.canvas
-          .select('g.rows')
-          .selectAll('g.row')
-          .selectAll('rect.bar')
-          .filter((dd, ii) => {
-            return ii === i;
-          });
-
-        barsToBeMoved.each(function() {
-          let barElement = d3.select(this).node();
-          barElement.parentElement.prepend(barElement);
-        });
 
         this.render(this.data, { selected: target, method: this.method });
       })
@@ -496,17 +490,19 @@ function Template(svg) {
     });
 
     columns
-      .select('rect')
+      .select('rect.colFill')
       .attr('y', -10)
       .transition()
       .duration(this.duration)
       .attr('height', this.height + 20)
       .duration(this.duration)
       .attr('width', (d, i) => {
-        let val = this.filteredData.data.filter(d => d[foo])[0].values[i][this.method];
+        // let val = this.filteredData.data.filter(d => d[foo])[0].values[i][this.method];
+        let val = this.filteredData.data.filter(d => d.totalRow)[0].values[i][this.method];
+
         if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
           return 0;
-        } else if (this.filteredData.data.filter(d => d[foo]).length) {
+        } else if (this.filteredData.data.filter(d => d.totalRow).length) {
           return this.x[0](val);
         } else {
           return 0;
@@ -519,16 +515,21 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('y', () => {
-        let indexOfTotalRow = this.filteredData.data.findIndex(d => d[foo]);
+        let indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
         return indexOfTotalRow * this.rowHeight;
       })
       .attr('x', (d, i) => {
-        let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
+        // let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
+
+        let val = this.filteredData.data.filter(d => d.geography === 'Oslo i alt')[0].values[i][this.method];
+
         if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
         return this.x[0](val);
       })
       .attr('opacity', (d, i) => {
-        let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
+        // let val = this.filteredData.data.filter(d => d.avgRow)[0].values[i][this.method];
+        let val = this.filteredData.data.filter(d => d.geography === 'Oslo i alt')[0].values[i][this.method];
+
         if (this.isMobileView) {
           return 0;
         } else if (this.method === 'value' && val > this.x[i].domain()[1]) {

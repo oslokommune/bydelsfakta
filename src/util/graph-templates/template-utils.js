@@ -11,6 +11,20 @@ const util = {
     if (!str) return;
 
     width = width.length === 2 ? width[1] - width[0] : width;
+
+    let computedWidth = this.getTextWidth(str, size, weight);
+
+    let overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
+
+    if (overflowingCharacters) {
+      str = str.substring(0, str.length - overflowingCharacters - 1);
+      str += '...';
+    }
+
+    return str;
+  },
+
+  getTextWidth: function(str, size = 14, weight = 400) {
     let computedWidth;
 
     // create placeholder svg
@@ -26,14 +40,7 @@ const util = {
       });
     svg.remove();
 
-    let overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
-
-    if (overflowingCharacters) {
-      str = str.substring(0, str.length - overflowingCharacters - 1);
-      str += '...';
-    }
-
-    return str;
+    return computedWidth;
   },
 
   goto: function(geo) {
