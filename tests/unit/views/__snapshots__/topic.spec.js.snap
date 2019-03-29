@@ -40,13 +40,13 @@ exports[`Topic renders component correctly 1`] = `
           txtcolor="rgb(245, 173, 165)"
         />
         <v-category-stub
-          bgcolor="rgb(66, 248, 182)"
+          bgcolor="rgb(255, 129, 116)"
           bgimage="/img/husholdninger"
-          category="Bomiljø"
+          category="Befolkning"
           district="$route.params.district"
           id="husholdninger"
           topic="Husholdninger"
-          txtcolor="rgb(199, 247, 201)"
+          txtcolor="rgb(245, 173, 165)"
         />
         <v-category-stub
           bgcolor="rgb(248, 198, 107)"
@@ -55,7 +55,7 @@ exports[`Topic renders component correctly 1`] = `
           disabled="true"
           district="$route.params.district"
           id="levekaar"
-          topic="Levekår"
+          topic="Levekårs&shy;indikatorer"
           txtcolor="rgb(244, 206, 138)"
         />
       </div>
