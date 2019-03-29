@@ -12,7 +12,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watchAll",
-    "backend": "env-cmd ./.env nodemon server/server.js",
+    "backend": "env-cmd ./.env.local nodemon server/server.js",
     "docker": "npm run build:prod && npm run docker:build",
     "docker:build": "docker build -t $npm_package_name:$npm_package_version ."
   },

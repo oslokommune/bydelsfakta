@@ -18,16 +18,16 @@ module.exports = () => {
         const result = await getToken(data);
         accessToken = parseToken(result.data);
       } catch (error) {
-        console.log('Access token error: ', error.message);
-        return Promise.reject(error.response);
+        console.log('Access token error: ', error);
+        return Promise.reject(error);
       }
     } else if (isTokenExpired(accessToken)) {
       try {
         const result = await refreshToken(accessToken, data);
         accessToken = parseToken(result.data);
       } catch (error) {
-        console.log('Error refreshing access token: ', error.message);
-        return Promise.reject(error.response);
+        console.log('Error refreshing access token: ', error);
+        return Promise.reject(error);
       }
     }
 
