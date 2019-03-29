@@ -66,4 +66,8 @@ export default {};
     margin: 0;
   }
 }
+
+.footer .column {
+  flex: 1;
+}
 </style>

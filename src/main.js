@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import 'whatwg-fetch';
 import Vue from 'vue';
 import VueResize from 'vue-resize';

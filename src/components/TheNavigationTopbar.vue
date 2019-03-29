@@ -224,6 +224,7 @@ export default {
   }
 
   &__select {
+    align-items: flex-start;
     color: $color-purple;
     display: flex;
     flex-direction: column;
