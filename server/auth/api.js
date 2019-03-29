@@ -9,6 +9,14 @@ const envs = {
 };
 
 const request = async params => {
+  console.log('ALL THE REQUESTS: ');
+  console.log('client_id: ', process.env.KEYCLOAK_CLIENT_ID);
+  console.log('client_secret: ', process.env.KEYCLOAK_CLIENT_SECRET);
+  console.log('Realm: ', process.env.KEYCLOAK_REALM);
+  console.log('grant type client: ', process.env.KEYCLOAK_GRANT_TYPE_CLIENT);
+  console.log('grant refresh: ', process.env.KEYCLOAK_GRANT_TYPE_REFRESH);
+  console.log('bydelsfakta api: ', process.env.BYDELSFAKTA_API_URL);
+  console.log('PLATTFORM API: ', envs.access_token_url);
   try {
     return await axios({
       method: 'post',
