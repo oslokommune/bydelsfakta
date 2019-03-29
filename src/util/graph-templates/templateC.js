@@ -448,7 +448,7 @@ function Template(svg) {
             .attr('x1', this.width + 22)
             .attr('x2', this.width + 31);
           g.append('title');
-          return g
+          return g;
         },
         update => update,
         exit => exit.remove()

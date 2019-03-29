@@ -34,6 +34,7 @@ export default {
     series: {
       type: Number,
       required: false,
+      default: null,
     },
     method: {
       type: String,

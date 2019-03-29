@@ -570,7 +570,7 @@ function Template(svg) {
     } else {
       label1Text = `Andel ${this.data.meta.series[0].heading.toLowerCase()} (%)`;
       label2Text = `Andel ${this.data.meta.series[1].heading.toLowerCase()} (%)`;
-      label3Text = `Andel ${this.data.meta.series[2].heading.toLowerCase()} (%)`;      
+      label3Text = `Andel ${this.data.meta.series[2].heading.toLowerCase()} (%)`;
     }
 
     this.matrix.select('text.label1').text(label1Text);

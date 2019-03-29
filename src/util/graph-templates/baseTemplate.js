@@ -251,7 +251,6 @@ function Base_Template(svg) {
       .sort((a, b) => (b.avgRow ? -1 : 0))
       .sort((a, b) => (b.totalRow ? -1 : 0));
 
-
     return data;
   };
 

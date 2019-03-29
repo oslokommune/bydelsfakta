@@ -452,7 +452,7 @@ function Template(svg) {
       .on('mouseleave', () => {
         this.render(this.data, { highlight: -1, selected: this.selected, method: this.method });
       })
-      .on('click keyup', (d, i, j) => {
+      .on('click keyup', (d, i) => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (this.data.meta.series.length === 1) return;
         let target = this.selected > -1 ? -1 : i;
@@ -495,14 +495,13 @@ function Template(svg) {
       .attr('height', this.height + 20)
       .duration(this.duration)
       .attr('width', (d, i) => {
-
         let val;
         let totalRow = this.filteredData.data.find(d => d.totalRow);
 
-        if(totalRow && totalRow.values && totalRow.values[i]) {
+        if (totalRow && totalRow.values && totalRow.values[i]) {
           val = totalRow.values[i][this.method];
         } else {
-          return
+          return;
         }
 
         if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
@@ -524,14 +523,13 @@ function Template(svg) {
         return indexOfTotalRow * this.rowHeight;
       })
       .attr('x', (d, i) => {
-
         let val;
         let totalRow = this.filteredData.data.find(d => d.totalRow);
 
         if (totalRow && totalRow.values && totalRow.values[i]) {
           val = totalRow.values[i][this.method];
         } else {
-          return
+          return;
         }
 
         if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
@@ -544,7 +542,7 @@ function Template(svg) {
         if (totalRow && totalRow.values && totalRow.values[i]) {
           val = totalRow.values[i][this.method];
         } else {
-          return
+          return;
         }
 
         if (this.isMobileView) {

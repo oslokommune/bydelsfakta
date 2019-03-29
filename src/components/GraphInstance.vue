@@ -143,7 +143,7 @@ export default {
             });
             return data;
           })
-          .catch(err => {
+          .catch(() => {
             this.error = true;
             this.errorMessage = this.$t('error.connectionLost');
             this.loading = false;
