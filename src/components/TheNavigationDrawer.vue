@@ -311,7 +311,7 @@ $rowHeight: 2.5em;
 
   @media screen and (min-width: $break-sm) {
     border-top: none;
-    width: calc(100% - 5.5em);
+    width: calc(100% - 8rem);
   }
 
   @media screen and (min-width: $break-lg) {
@@ -355,12 +355,12 @@ $rowHeight: 2.5em;
   background: $color-bg;
   display: flex;
   flex-basis: auto;
-  height: 8.5em;
+  height: 5rem;
   justify-content: center;
-  min-height: 8.5em;
 
   @media screen and (min-width: $break-lg) {
     background: none;
+    height: 8em;
     padding: 0.5rem 0;
   }
 }
@@ -369,7 +369,7 @@ $rowHeight: 2.5em;
   cursor: pointer;
   height: 100%;
   object-fit: contain;
-  padding: 1rem 0.25rem;
+  padding: 0.25rem 0.25rem;
   width: 8em;
 
   @media screen and (min-width: $break-lg) {
