@@ -69,6 +69,7 @@ function Template(svg) {
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
+    .curve(d3.curveCardinal)
     .x(d => this.x(this.parseYear(d['År'])))
     .y(d => {
       return this.y(d[this.method]);
@@ -251,6 +252,7 @@ function Template(svg) {
         },
         update => update
       )
+      .style('pointer-events', 'none')
       .each((d, i, j) => {
         const el = d3.select(j[i]);
         const position = [this.x(this.parseYear(d.values[0]['data']['År'])), this.y(d.values[0].data.value)];

@@ -89,7 +89,7 @@
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import osloIcon from '../assets/Oslo_komm.svg'; // ../assets/oslo-logo.svg
+import osloIcon from '../assets/oslo-logo.svg'; //
 
 export default {
   name: 'TheNavigationDrawer',
@@ -311,7 +311,7 @@ $rowHeight: 2.5em;
 
   @media screen and (min-width: $break-sm) {
     border-top: none;
-    width: calc(100% - 5.5em);
+    width: calc(100% - 8rem);
   }
 
   @media screen and (min-width: $break-lg) {
@@ -355,12 +355,12 @@ $rowHeight: 2.5em;
   background: $color-bg;
   display: flex;
   flex-basis: auto;
-  height: 8.5em;
+  height: 5rem;
   justify-content: center;
-  min-height: 8.5em;
 
   @media screen and (min-width: $break-lg) {
     background: none;
+    height: 8em;
     padding: 0.5rem 0;
   }
 }
@@ -369,13 +369,13 @@ $rowHeight: 2.5em;
   cursor: pointer;
   height: 100%;
   object-fit: contain;
-  padding: 1.25rem;
-  width: 5.5em;
+  padding: 0.25rem 0.25rem;
+  width: 8em;
 
   @media screen and (min-width: $break-lg) {
     align-self: center;
-    padding-bottom: 0.75rem;
-    width: 6.5em;
+    padding: 0;
+    width: 10em;
   }
 }
 

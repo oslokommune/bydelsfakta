@@ -110,6 +110,8 @@
             :district="geoDistricts"
             :scale="settings.map.scale"
             :data-url="`${settings.map.url}?geography=${district}`"
+            :series="settings.map.series"
+            :method="settings.map.method"
           ></v-leaflet>
         </div>
       </div>
@@ -191,6 +193,12 @@ export default {
         top: -20,
         left: -20,
       });
+    },
+  },
+
+  watch: {
+    '$route.params.topic'() {
+      this.active = 0;
     },
   },
 };

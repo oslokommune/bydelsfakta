@@ -24,7 +24,7 @@ export const getters = {
     }
 
     const features = state.districts.map(id =>
-      state.districtsGeo.oslo.features.find(district => district.properties.id === parseInt(id))
+      state.districtsGeo.oslo.features.find(district => district.properties.id === id)
     );
 
     return {

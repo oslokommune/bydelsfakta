@@ -175,7 +175,7 @@ export default {
 
   @media screen and (min-width: $break-lg) {
     margin: 0;
-    padding: 2.5rem 1rem 1rem;
+    padding: 0.75rem 1rem 0.5rem;
     width: 100%;
   }
 
