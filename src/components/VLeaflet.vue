@@ -118,9 +118,12 @@ export default {
 
         const fill = interpolator(colorStrength(dataValue));
 
+        // Set number formatting for popup
+        const format = this.settings.method === 'ratio' ? d3.format('.3p') : d3.format(',.4r');
+
         const popupContent = `
           <h4>${layer.feature.properties.name}</h4>
-          <p>${d3.format('n')(dataValue)}</p>
+          <p>${format(dataValue)}</p>
         `;
 
         layer.setStyle({ fillColor: fill, fillOpacity: 0.6 }).bindPopup(popupContent);
