@@ -9,6 +9,7 @@
         <nav class="card__nav">
           <div class="tabs" role="tablist">
             <button
+              :disabled="mode === 'map'"
               role="tab"
               :aria-selected="{ true: active === index }"
               :aria-label="tab.label"
@@ -98,22 +99,13 @@
         :mode="mode"
         ref="graph"
       />
-      <div v-if="mode === 'map'">
-        <div class="legend">
-          <div class="legend__labels">
-            <span v-for="(label, i) in settings.map.labels" :key="i" v-text="label"></span>
-          </div>
-          <div class="colorstrip" :style="gradient"></div>
-        </div>
-        <div class="map-container">
-          <v-leaflet
-            :district="geoDistricts"
-            :scale="settings.map.scale"
-            :data-url="`${settings.map.url}?geography=${district}`"
-            :series="settings.map.series"
-            :method="settings.map.method"
-          ></v-leaflet>
-        </div>
+      <div class="map-container" v-if="mode === 'map'">
+        <v-leaflet
+          v-if="settings.map"
+          :district="geoDistricts"
+          :settings="settings.map"
+          :data-url="`${settings.map.url}?geography=${district}`"
+        ></v-leaflet>
       </div>
     </div>
   </div>
@@ -125,7 +117,6 @@ import { mapGetters, mapState } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import VLeaflet from './VLeaflet.vue';
-import { interpolator } from '../util/graph-templates/colors';
 
 export default {
   name: 'GraphCard',
@@ -144,14 +135,6 @@ export default {
       if (this.districts[0] === 'alle') return '00';
       if (this.districts.length === 1) return this.districts[0];
       return '00';
-    },
-    gradient() {
-      let steps = [];
-      for (let i = 0; i <= 1; i += 0.1) {
-        steps.push(interpolator(i));
-      }
-
-      return `background-image: linear-gradient(to right, ${steps})`;
     },
   },
   props: {
@@ -199,6 +182,7 @@ export default {
   watch: {
     '$route.params.topic'() {
       this.active = 0;
+      this.mode = 'graph';
     },
   },
 };
@@ -209,30 +193,7 @@ export default {
 @import './../styles/variables';
 
 .map-container {
-  height: 500px;
-}
-
-.legend {
-  border-bottom: 1px solid $color-grey-100;
-  font-size: $font-small;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: 1em;
-  text-transform: uppercase;
-
-  &__labels {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 auto;
-    max-width: 500px;
-  }
-}
-
-.colorstrip {
-  height: 0.5em;
-  margin: 0 auto;
-  max-width: 500px;
-  width: 100%;
+  height: 560px;
 }
 
 .card-container {
@@ -332,6 +293,15 @@ export default {
     padding: 0.75em;
     transition: background-color 0.2s;
     white-space: nowrap;
+
+    &[disabled],
+    &.active[disabled] {
+      color: rgba($color-purple, 0.35);
+      opacity: 0.8;
+      &::after {
+        opacity: 0;
+      }
+    }
 
     &.active {
       color: $color-purple;

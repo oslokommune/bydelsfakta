@@ -23,19 +23,19 @@
   "navigationDrawer": {
     "linkCompare": "Sammenlign bydeler",
     "selectAll": {
-      "aria": "velg alle checkboxes",
+      "aria": "velg alle sjekkbokser",
       "label": "Velg alle"
     },
     "unselectAll": {
-      "aria": "fjern alle checkboxes",
+      "aria": "fjern alle sjekkbokser",
       "label": "Fjern alle"
     },
     "select": {
-      "label": "Velg region"
+      "label": "Velg byområde"
     },
     "navigationDistrict": {
       "compareDistrict": "Sammenlign bydeler",
-      "chooseDistrict": "- Velg bydel -"
+      "chooseDistrict": "- Velg byområde -"
     }
   },
   "navigationTopbar": {
@@ -83,5 +83,8 @@
   },
   "error": {
     "connectionLost": "Mistet kontakten med datatjener"
+  },
+  "loading": {
+    "loadingData": "Henter data"
   }
 }

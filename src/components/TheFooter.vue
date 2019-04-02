@@ -50,6 +50,7 @@ export default {};
   }
 
   .column {
+    flex: 1;
     padding: 1rem 1rem 0 0;
 
     @media screen and (min-width: $break-lg) {
@@ -65,9 +66,5 @@ export default {};
   li {
     margin: 0;
   }
-}
-
-.footer .column {
-  flex: 1;
 }
 </style>

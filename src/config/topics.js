@@ -147,68 +147,62 @@ export const topics = {
     cards: [
       {
         size: 'large',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
+        heading: 'Aldersdistribusjon',
+        map: false,
         tabs: [
           {
             active: false,
             label: 'Antall',
             id: 'alder_segment_antall',
             template: 'd',
-            url: `${baseUrl}/mockDataD2.json`,
+            url: `${baseUrl}/mockDataD.json`,
             method: 'value',
+            help: 'Dette er hjelp',
           },
           {
             active: false,
             label: 'Andel',
             id: 'alder_segment_andel',
             template: 'd',
-            url: `${baseUrl}/mockDataD2.json`,
+            url: `${baseUrl}/mockDataD.json`,
             method: 'ratio',
           },
         ],
       },
       {
         size: 'large',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
+        heading: 'Populasjonspyramide',
+        map: false,
         tabs: [
           {
             active: false,
             label: 'Status',
             id: 'alder_distribusjon_status',
             template: 'e',
-            url: `${baseUrl}/mockDataD2.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'alder_distribusjon_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
+            method: 'value',
+            url: `${baseUrl}/mockDataD.json`,
           },
         ],
       },
       {
         size: 'large',
-        heading: 'Medianalder',
+        heading: 'Gjennomsnitt- og medianalder',
         map: {
-          labels: ['', ''],
-          url: ``,
+          labels: ['Lavere gjennomsnittsalder', 'Høyere gjennomsnittsalder'],
+          scale: [32, 39],
+          method: 'avg',
+          url: `${baseUrl}/mockDataD.json`,
         },
         tabs: [
           {
             active: false,
             label: 'Status',
             id: 'alder_medianalder_status',
+            method: 'total',
             template: 'f',
-            url: `${baseUrl}/mockDataD2.json`,
+            help:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vestibulum malesuada arcu id pulvinar. Donec congue quam nec elit molestie, vel feugiat lorem euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer feugiat urna risus, nec interdum risus laoreet id.',
+            url: `${baseUrl}/mockDataD.json`,
           },
         ],
       },
@@ -393,6 +387,7 @@ export const topics = {
         map: {
           labels: ['Lavere boligpriser', 'Høyere boligpriser'],
           scale: [40000, 95000],
+          method: 'value',
           url: `${API}/boligpriser_status-pD7ZV`,
         },
         tabs: [

@@ -10,11 +10,19 @@
     >
       <div class="spinner" v-if="loading">
         <img src="../assets/spinner.svg" alt="" />
+        <span class="spinner__text">{{ $t('loading.loadingData') }}</span>
       </div>
       <div class="error" v-if="error">
         <h2>{{ errorMessage }}</h2>
       </div>
-      <svg v-if="!error" class="graph__svg" aria-hidden="true" ref="svg" :class="{ loading }"></svg>
+      <svg
+        v-if="!error"
+        class="graph__svg"
+        aria-hidden="true"
+        ref="svg"
+        :class="{ loading }"
+        @click="showHelp = false"
+      ></svg>
     </div>
     <div
       :class="{ 'visually-hidden': mode === 'graph' }"
@@ -31,6 +39,12 @@
     </div>
     <!-- <table class="visually-hidden"> -->
     <resize-observer @notify="handleResize"></resize-observer>
+    <div class="help" v-if="settings.help && mode === 'graph'">
+      <button class="help__button" @click="showHelp = !showHelp">
+        <i aria-hidden="true" class="material-icons">help_outline</i>
+      </button>
+      <div v-if="showHelp" class="help__text">{{ settings.help }}</div>
+    </div>
   </div>
 </template>
 
@@ -63,6 +77,7 @@ export default {
     allDistricts: false,
     error: false,
     errorMessage: '',
+    showHelp: false,
   }),
 
   computed: {
@@ -235,6 +250,7 @@ export default {
       content: '';
       display: block;
       opacity: 0;
+      pointer-events: none;
       position: absolute;
       top: 0;
       transition: opacity 0.1s ease-in-out;
@@ -275,7 +291,11 @@ export default {
 
   &__svg {
     &.loading {
-      opacity: 0.95;
+      animation-delay: 0.5s;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-name: fadeOut;
       pointer-events: none;
     }
   }
@@ -284,11 +304,13 @@ export default {
 .spinner {
   align-items: center;
   animation-delay: 0.5s;
-  animation-duration: 0.1s;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
   animation-iteration-count: 1;
   animation-name: fadeIn;
   background-color: rgba(black, 0.05);
   display: flex;
+  flex-direction: column;
   height: 100%;
   justify-content: center;
   left: 0;
@@ -296,6 +318,11 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 999;
+
+  &__text {
+    padding: 0.75em;
+  }
 }
 
 .tick text {
@@ -306,6 +333,72 @@ export default {
   text-rendering: geometricPrecision;
 }
 
+.help {
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  z-index: 1;
+
+  &__button {
+    align-items: center;
+    border-radius: 50%;
+    color: $color-purple;
+    cursor: pointer;
+    display: flex;
+    height: 3em;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3em;
+
+    & > i {
+      font-size: 1.5em;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: $color-blue;
+    }
+
+    &::before {
+      background: white;
+      content: '';
+      display: block;
+      height: 4rem;
+      position: absolute;
+      right: -0.5rem;
+      top: -0.5rem;
+      width: 4rem;
+      z-index: -1;
+    }
+  }
+
+  &__text {
+    background: $color-purple;
+    border-radius: 3px;
+    box-shadow: 0 3px 4px rgba($color-purple, 0.5);
+    color: $color-yellow;
+    font-weight: 500;
+    padding: 1em;
+    position: absolute;
+    right: 0;
+    top: 3em;
+    width: 250px;
+
+    &::before {
+      border-bottom: 0.75em solid $color-purple;
+      border-left: 0.75em solid transparent;
+      border-right: 0.75em solid transparent;
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0.75em;
+      top: -0.5em;
+    }
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -313,6 +406,16 @@ export default {
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 </style>

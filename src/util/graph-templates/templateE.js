@@ -12,6 +12,7 @@
 import Base_Template from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -63,7 +64,7 @@ function Template(svg) {
     // Create heading (label) for the list
     this.list
       .append('text')
-      .text('Velg delbydel')
+      .text('Velg geografi')
       .attr('font-size', 12)
       .style('text-transform', 'uppercase')
       .attr('font-weight', 700)
@@ -149,7 +150,7 @@ function Template(svg) {
 
     hRow2
       .selectAll('th')
-      .data(() => ageRanges.map(() => ['Menn', 'Kvinner']).flat())
+      .data(() => ageRanges.map(() => ['mann', 'kvinne']).flat())
       .join('th')
       .attr('id', (d, i) => `th_1_${i}`)
       .attr('scope', 'col')
@@ -179,8 +180,8 @@ function Template(svg) {
             let menn = 0;
             let kvinner = 0;
             for (let i = range[0]; i < range[1]; i++) {
-              menn += d.values[i]['Mann'];
-              kvinner += d.values[i]['Kvinne'];
+              menn += d.values[i]['mann'];
+              kvinner += d.values[i]['kvinne'];
             }
             return [menn, kvinner];
           })
@@ -250,7 +251,7 @@ function Template(svg) {
     .curve(d3.curveStep)
     .x0(() => this.x(0))
     .x1(d => {
-      if (d.gender == 'Kvinne') {
+      if (d.gender == 'kvinne') {
         return this.x(d.value);
       } else {
         return this.x(-d.value);
@@ -259,7 +260,7 @@ function Template(svg) {
     .y((d, i) => this.y(i));
 
   this.drawPyramid = function() {
-    let genderData = ['Mann', 'Kvinne'].map(gender => {
+    let genderData = ['mann', 'kvinne'].map(gender => {
       return this.data.data[this.selected].values.map(d => {
         return { gender, value: d[gender] };
       });
@@ -286,7 +287,7 @@ function Template(svg) {
     // Style the text
     genderGroup
       .select('text')
-      .text(d => d[0].gender)
+      .text(d => util.capitalize(d[0].gender))
       .attr('text-anchor', (d, i) => (i === 0 ? 'end' : 'start'))
       .attr('font-size', 16)
       .attr('font-weight', 700)
@@ -299,7 +300,7 @@ function Template(svg) {
     // Style the path
     genderGroup
       .select('path')
-      .attr('fill', d => (d[0].gender == 'Kvinne' ? color.red : color.positive))
+      .attr('fill', d => (d[0].gender == 'kvinne' ? color.red : color.positive))
       .transition()
       .duration(this.duration)
       .attr('d', this.area);

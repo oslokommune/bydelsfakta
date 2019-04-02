@@ -19,31 +19,49 @@ function Template(svg) {
   this.yGutter = 130; // space between upper and lower charts
   this.y = d3.scaleLinear();
   this.handle;
+  this.dropDownParent;
+
+  this.minWidth = 600;
 
   let extent = [0, 119];
   let gBrushSmall, gBrushLarge;
 
   this.age = d3.scaleLinear().domain(extent);
 
-  this.sortData = function(data) {
-    data = data.sort((a, b) => {
-      let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-      let totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+  function sortData(input, method) {
+    input.sort((a, b) => {
+      let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
+      let totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
       return totB - totA;
     });
 
-    data = data.sort((a, b) => a.avgRow - b.avgRow);
-    data = data.sort((a, b) => a.totalRow - b.totalRow);
-    return data;
-  };
+    input.sort((a, b) => a.avgRow - b.avgRow);
+    input.sort((a, b) => a.totalRow - b.totalRow);
+    return input;
+  }
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
 
-    this.data.data = this.sortData(this.data.data);
     if (!data.data) return;
 
-    this.width = d3.max([this.width, 600]);
+    sortData(data.data, this.method);
+
+    this.width = d3.max([this.width, this.minWidth]);
+
+    if (this.parentWidth() < this.minWidth) {
+      this.upper.attr('opacity', 0);
+      this.middle.attr('opacity', 0);
+      this.yGutter = 0;
+      this.dropDownParent.style('top', '32px');
+    } else {
+      this.upper.attr('opacity', 1);
+      this.middle.attr('opacity', 1);
+      this.yGutter = 130;
+      this.dropDownParent.style('top', 'none');
+    }
+
+    this.lower.attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
 
     // Set sizes for brush objects
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
@@ -262,25 +280,27 @@ function Template(svg) {
   // Creates the styled age selector as normal HTML
   // as sibling element to the SVG.
   this.createAgeSelector = function() {
-    let parent = d3.select(this.svg.node().parentNode);
-    let div = parent
+    let parent = d3.select(this.svg.node().parentNode.parentNode);
+    this.dropDownParent = parent
       .insert('div')
       .attr('class', 'graph__dropdown')
       .attr('aria-hidden', true);
 
-    div
+    this.dropDownParent
       .insert('label')
       .attr('for', 'age_selector')
       .attr('class', 'graph__dropdown__label')
       .html('Velg segment');
-    let select = div
-      .append('select')
+
+    let selectElement = this.dropDownParent
+      .insert('select')
       .attr('aria-hidden', true)
       .attr('id', 'age_selector')
       .attr('aria-hidden', true)
-      .attr('class', 'graph__dropdown__select');
+      .attr('class', 'child graph__dropdown__select')
+      .attr('data-no-dragscroll', true);
 
-    select
+    selectElement
       .selectAll('option')
       .data(ageRanges)
       .join('option')
@@ -289,7 +309,7 @@ function Template(svg) {
 
     // Add eventlistener to the selector, and capture the value
     // and pass it on when re-rendering the chart
-    select.on('input', (d, i, j) => {
+    selectElement.on('input', (d, i, j) => {
       this.render(this.data, { method: this.method, range: j[i].value });
     });
   };
@@ -304,10 +324,7 @@ function Template(svg) {
       .append('g')
       .attr('class', 'middle')
       .attr('transform', `translate(0, ${this.height2 + 40})`);
-    this.lower = this.canvas
-      .append('g')
-      .attr('class', 'lower')
-      .attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
+    this.lower = this.canvas.append('g').attr('class', 'lower');
 
     this.lower
       .append('text')
