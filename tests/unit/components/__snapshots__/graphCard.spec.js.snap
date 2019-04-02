@@ -141,6 +141,12 @@ exports[`GraphCard change an active tab 1`] = `
             alt=""
             src="../assets/spinner.svg"
           />
+           
+          <span
+            class="spinner__text"
+          >
+            Henter data
+          </span>
         </div>
          
         <!---->
@@ -175,6 +181,8 @@ exports[`GraphCard change an active tab 1`] = `
           type="text/html"
         />
       </div>
+       
+      <!---->
     </div>
      
     <!---->
@@ -198,7 +206,7 @@ exports[`GraphCard renders correctly 1`] = `
         <h2
           class="card__title"
         >
-          
+          Aldersdistribusjon
         </h2>
          
         <span
@@ -259,16 +267,7 @@ exports[`GraphCard renders correctly 1`] = `
               </i>
             </button>
              
-            <button
-              class="card__toggle-button"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                map
-              </i>
-            </button>
+            <!---->
           </div>
         </div>
          
@@ -314,6 +313,12 @@ exports[`GraphCard renders correctly 1`] = `
             alt=""
             src="../assets/spinner.svg"
           />
+           
+          <span
+            class="spinner__text"
+          >
+            Henter data
+          </span>
         </div>
          
         <!---->
@@ -347,6 +352,23 @@ exports[`GraphCard renders correctly 1`] = `
           tabindex="-1"
           type="text/html"
         />
+      </div>
+       
+      <div
+        class="help"
+      >
+        <button
+          class="help__button"
+        >
+          <i
+            aria-hidden="true"
+            class="material-icons"
+          >
+            help_outline
+          </i>
+        </button>
+         
+        <!---->
       </div>
     </div>
      

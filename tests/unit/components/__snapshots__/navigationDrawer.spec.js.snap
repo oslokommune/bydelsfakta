@@ -387,7 +387,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         class="navigation-drawer__button-container"
       >
         <button
-          aria-label="velg alle checkboxes"
+          aria-label="velg alle sjekkbokser"
           class="navigation-drawer__button"
         >
           
@@ -396,7 +396,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         </button>
          
         <button
-          aria-label="fjern alle checkboxes"
+          aria-label="fjern alle sjekkbokser"
           class="navigation-drawer__button"
         >
           
@@ -412,7 +412,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
           class="visually-hidden"
           for="navigation-drawer-select"
         >
-          Velg region
+          Velg byområde
         </label>
          
         <select
@@ -423,7 +423,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
             disabled="disabled"
             value=""
           >
-            - Velg region -
+            - Velg byområde -
           </option>
           <option
             value="04,05,06,07,08"
@@ -869,7 +869,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         class="navigation-drawer__button-container"
       >
         <button
-          aria-label="velg alle checkboxes"
+          aria-label="velg alle sjekkbokser"
           class="navigation-drawer__button"
         >
           
@@ -878,7 +878,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         </button>
          
         <button
-          aria-label="fjern alle checkboxes"
+          aria-label="fjern alle sjekkbokser"
           class="navigation-drawer__button"
           disabled="disabled"
         >
@@ -895,7 +895,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
           class="visually-hidden"
           for="navigation-drawer-select"
         >
-          Velg region
+          Velg byområde
         </label>
          
         <select
@@ -906,7 +906,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
             disabled="disabled"
             value=""
           >
-            - Velg region -
+            - Velg byområde -
           </option>
           <option
             value="04,05,06,07,08"

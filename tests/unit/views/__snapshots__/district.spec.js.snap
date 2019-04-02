@@ -117,8 +117,7 @@ exports[`Bydel renders component correctly 1`] = `
     <v-leaflet-stub
       dataurl=""
       district="[object Object]"
-      method="value"
-      scale=""
+      settings="[object Object]"
     />
   </div>
 </div>
