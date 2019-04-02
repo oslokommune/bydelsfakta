@@ -75,7 +75,7 @@ export default {
       if (!url) return;
       let data = await fetch(url).then(d => d.json().then(d => d.data));
 
-      this.createChoropleth(data, this.series);
+      this.createChoropleth(data);
     },
 
     createChoropleth(data) {
@@ -90,10 +90,17 @@ export default {
         const layerId = layer.feature.properties.id;
         let dataValue;
 
-        if (this.series) {
-          dataValue = data.find(geo => geo.geography === layerId).values[this.series][this.method];
+        if (this.method === 'avg') {
+          let values = data.find(geo => geo.geography == layerId).values.map(d => d.value);
+          let mean = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
+
+          dataValue = mean;
         } else {
-          dataValue = data.find(geo => geo.geography === layerId).values[0][this.method];
+          if (this.series) {
+            dataValue = data.find(geo => geo.geography === layerId).values[this.series][this.method];
+          } else {
+            dataValue = data.find(geo => geo.geography === layerId).values[0][this.method];
+          }
         }
 
         const fill = interpolator(colorStrength(dataValue));
@@ -122,10 +129,10 @@ export default {
         weight: 2,
       },
       mapOptions: {
-        zoomControl: false,
+        zoomControl: true,
         attributionControl: false,
         doubleClickZoom: false,
-        dragging: false,
+        dragging: true,
         scrollWheelZoom: false,
         touchZoom: false,
       },
