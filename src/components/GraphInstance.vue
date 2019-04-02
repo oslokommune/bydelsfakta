@@ -335,26 +335,26 @@ export default {
 
 .help {
   position: absolute;
-  top: 0.5em;
   right: 0.5em;
+  top: 0.5em;
   z-index: 1;
 
   &__button {
-    right: 0;
-    top: 0;
-    height: 3em;
-    width: 3em;
-    display: flex;
+    align-items: center;
     border-radius: 50%;
-    position: absolute;
     color: $color-purple;
     cursor: pointer;
-    align-items: center;
+    display: flex;
+    height: 3em;
     justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3em;
 
     & > i {
-      pointer-events: none;
       font-size: 1.5em;
+      pointer-events: none;
     }
 
     &:hover {
@@ -362,39 +362,39 @@ export default {
     }
 
     &::before {
+      background: white;
       content: '';
       display: block;
-      position: absolute;
-      top: -0.5rem;
-      right: -0.5rem;
       height: 4rem;
+      position: absolute;
+      right: -0.5rem;
+      top: -0.5rem;
       width: 4rem;
-      background: white;
       z-index: -1;
     }
   }
 
   &__text {
-    padding: 1em;
     background: $color-purple;
+    border-radius: 3px;
+    box-shadow: 0 3px 4px rgba($color-purple, 0.5);
     color: $color-yellow;
     font-weight: 500;
+    padding: 1em;
     position: absolute;
-    top: 3em;
     right: 0;
-    border-radius: 3px;
+    top: 3em;
     width: 250px;
-    box-shadow: 0 3px 4px rgba($color-purple, 0.5);
 
     &::before {
       border-bottom: 0.75em solid $color-purple;
       border-left: 0.75em solid transparent;
       border-right: 0.75em solid transparent;
-      top: -0.5em;
       content: '';
       display: block;
       position: absolute;
       right: 0.75em;
+      top: -0.5em;
     }
   }
 }

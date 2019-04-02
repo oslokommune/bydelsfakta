@@ -1,10 +1,20 @@
 <template>
-  <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
-    <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution" />
-    <l-feature-group @layeradd="fitMap" ref="featureGroup">
-      <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style"></l-geo-json>
-    </l-feature-group>
-  </l-map>
+  <div style="height: 100%; width: 100%;">
+    <div class="legend" v-if="settings.labels">
+      <div class="legend__labels">
+        <span v-for="(label, i) in settings.labels" :key="i" v-text="label"></span>
+      </div>
+      <div class="colorstrip" :style="gradient"></div>
+    </div>
+    <div class="container">
+      <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
+        <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution" />
+        <l-feature-group @layeradd="fitMap" ref="featureGroup">
+          <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style"></l-geo-json>
+        </l-feature-group>
+      </l-map>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -23,6 +33,11 @@ export default {
   },
 
   props: {
+    settings: {
+      type: Object,
+      required: false,
+      default: () => ({}),
+    },
     district: {
       type: Object,
       required: true,
@@ -32,22 +47,16 @@ export default {
       required: false,
       default: '',
     },
-    series: {
-      type: Number,
-      required: false,
-      default: null,
-    },
-    method: {
-      type: String,
-      required: false,
-      default: 'value',
-    },
-    scale: {
-      type: Array,
-      required: false,
-      default() {
-        return [];
-      },
+  },
+
+  computed: {
+    gradient() {
+      let steps = [];
+      for (let i = 0; i <= 1; i += 0.1) {
+        steps.push(interpolator(i));
+      }
+
+      return `background-image: linear-gradient(to right, ${steps})`;
     },
   },
 
@@ -74,16 +83,17 @@ export default {
 
     async getData(url) {
       if (!url) return;
-      let data = await fetch(url).then(d => d.json().then(d => d.data));
-
-      this.createChoropleth(data);
+      this.data = await fetch(url).then(d => d.json().then(d => d.data));
+      this.createChoropleth(this.data);
     },
 
     createChoropleth(data) {
       const colorStrength = d3
         .scaleLinear()
         .range([0, 1])
-        .domain(this.scale);
+        .domain(this.settings.scale);
+
+      let allDataValues = [];
 
       const layers = this.$refs.geojsonLayer.mapObject._layers;
       for (let key in layers) {
@@ -91,18 +101,20 @@ export default {
         const layerId = layer.feature.properties.id;
         let dataValue;
 
-        if (this.method === 'avg') {
+        if (this.settings.method === 'avg') {
           let values = data.find(geo => geo.geography == layerId).values.map(d => d.value);
           let mean = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
 
           dataValue = mean;
         } else {
-          if (this.series) {
-            dataValue = data.find(geo => geo.geography === layerId).values[this.series][this.method];
+          if (this.settings.series) {
+            dataValue = data.find(geo => geo.geography === layerId).values[this.settings.series][this.settings.method];
           } else {
-            dataValue = data.find(geo => geo.geography === layerId).values[0][this.method];
+            dataValue = data.find(geo => geo.geography === layerId).values[0][this.settings.method];
           }
         }
+
+        allDataValues.push(dataValue);
 
         const fill = interpolator(colorStrength(dataValue));
 
@@ -113,11 +125,21 @@ export default {
 
         layer.setStyle({ fillColor: fill, fillOpacity: 0.6 }).bindPopup(popupContent);
       }
+
+      // Add circles
+      d3.select('.colorstrip')
+        .selectAll('.circle')
+        .data(allDataValues)
+        .join('div')
+        .attr('class', 'circle')
+        .transition()
+        .style('left', d => colorStrength(d) * 100 + '%');
     },
   },
 
   data() {
     return {
+      data: [],
       zoom: 10,
       url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
       attribution:
@@ -144,9 +166,55 @@ export default {
 
 <style lang="scss">
 @import '../styles/_colors.scss';
+@import '../styles/variables';
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.legend + .container {
+  height: calc(100% - 50px);
+}
 
 .vue2leaflet-map {
   z-index: 0;
+}
+
+.legend {
+  border-bottom: 1px solid $color-grey-100;
+  font-size: $font-small;
+  font-weight: 500;
+  height: 50px;
+  letter-spacing: 0.05em;
+  padding: 1em;
+  text-transform: uppercase;
+
+  &__labels {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+}
+
+.colorstrip {
+  height: 0.5em;
+  margin: 0.25em auto 0;
+  max-width: 500px;
+  position: relative;
+  width: 100%;
+}
+
+.circle {
+  background: rgba(black, 0.4);
+  border: 2px solid rgba(black, 0.5);
+  border-radius: 50%;
+  height: 0.8em;
+  mix-blend-mode: multiply;
+  position: absolute;
+  transform: translate(-0.15em, -0.15em);
+  width: 0.8em;
 }
 
 .leaflet-popup-content {

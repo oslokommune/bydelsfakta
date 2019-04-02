@@ -94,8 +94,9 @@ function Base_Template(svg) {
     this.svg.selectAll('*').remove();
 
     // Remove dropdown element
-    d3.select(svg.parentNode.parentNode).select('.graph__dropdown').remove()
-    
+    d3.select(svg.parentNode.parentNode)
+      .select('.graph__dropdown')
+      .remove();
 
     // Append heading element
     this.heading = this.svg

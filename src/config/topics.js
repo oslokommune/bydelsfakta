@@ -387,6 +387,7 @@ export const topics = {
         map: {
           labels: ['Lavere boligpriser', 'Høyere boligpriser'],
           scale: [40000, 95000],
+          method: 'value',
           url: `${API}/boligpriser_status-pD7ZV`,
         },
         tabs: [
