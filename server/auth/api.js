@@ -27,7 +27,6 @@ const request = async params => {
       },
     });
   } catch (error) {
-    console.log(JSON.stringify(error));
     if (error.errno === 'ETIMEDOUT') {
       return Promise.reject(new Error('Timeout'));
     }
