@@ -43,6 +43,12 @@ const util = {
     return computedWidth;
   },
 
+  capitalize: function(str) {
+    let arr = str.split('');
+    arr[0] = arr[0].toUpperCase();
+    return arr.join('');
+  },
+
   goto: function(geo) {
     let district = allDistricts.find(d => d.value === geo.geography);
     const topic = router.currentRoute.params.topic;
