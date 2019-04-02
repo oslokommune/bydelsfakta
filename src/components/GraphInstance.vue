@@ -210,13 +210,14 @@ export default {
       }
       this.currentTemplate = this.settings.template;
 
+      this.loading = false;
+
       this.svg.render(this.filteredData, {
         method: this.settings.method,
         initialRender: true,
         compareDistricts: this.compareDistricts,
       });
       this.drawShadows();
-      this.loading = false;
     },
   },
   props: {
