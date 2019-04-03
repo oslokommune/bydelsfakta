@@ -88,34 +88,40 @@ export default {
     },
 
     createChoropleth(data) {
+      // Color calulator defined by the scale set in the map settings
       const colorStrength = d3
         .scaleLinear()
         .range([0, 1])
         .domain(this.settings.scale);
 
-      let allDataValues = [];
+      // Store data to create
+      let allLayerData = [];
 
+      // Find all the layers on the map
       const layers = this.$refs.geojsonLayer.mapObject._layers;
+
+      // Map layers in the map with the data returned
       for (let key in layers) {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
+        const dataObj = data.find(geo => geo.geography === layerId);
+        const geography = dataObj.geography;
+
+        // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
-
         if (this.settings.method === 'avg') {
-          let values = data.find(geo => geo.geography == layerId).values.map(d => d.value);
+          let values = dataObj.values.map(d => d.value);
           let mean = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
-
           dataValue = mean;
         } else {
           if (this.settings.series) {
-            dataValue = data.find(geo => geo.geography === layerId).values[this.settings.series][this.settings.method];
+            dataValue = dataObj.values[this.settings.series][this.settings.method];
           } else {
-            dataValue = data.find(geo => geo.geography === layerId).values[0][this.settings.method];
+            dataValue = dataObj.values[0][this.settings.method];
           }
         }
 
-        allDataValues.push(dataValue);
-
+        // Calculate the fill color based on the value
         const fill = interpolator(colorStrength(dataValue));
 
         // Set number formatting for popup
@@ -126,17 +132,27 @@ export default {
           <p>${format(dataValue)}</p>
         `;
 
+        // Bind colors and popup content to the layer
         layer.setStyle({ fillColor: fill, fillOpacity: 0.6 }).bindPopup(popupContent);
+
+        // Store the layer data for use in legend
+        allLayerData.push({ dataValue, geography, layer });
       }
 
-      // Add circles
+      // For each layer add an interactive dot on the legend.
+      // Clicking the dot triggers the popop on the respective layer.
       d3.select('.colorstrip')
-        .selectAll('.circle')
-        .data(allDataValues)
+        .selectAll('.legend-dot')
+        .data(allLayerData)
         .join('div')
-        .attr('class', 'circle')
+        .attr('class', 'legend-dot')
         .transition()
-        .style('left', d => colorStrength(d) * 100 + '%');
+        .style('left', d => colorStrength(d.dataValue) * 100 + '%')
+        .each((d, i, j) => {
+          j[i].addEventListener('click', () => {
+            d.layer.openPopup();
+          });
+        });
     },
   },
 
@@ -160,7 +176,7 @@ export default {
         doubleClickZoom: false,
         dragging: true,
         scrollWheelZoom: false,
-        touchZoom: false,
+        touchZoom: true,
       },
     };
   },
@@ -209,7 +225,7 @@ export default {
   width: 100%;
 }
 
-.circle {
+.legend-dot {
   background: rgba(black, 0.4);
   border: 2px solid rgba(black, 0.5);
   border-radius: 50%;
@@ -217,7 +233,18 @@ export default {
   mix-blend-mode: multiply;
   position: absolute;
   transform: translate(-0.15em, -0.15em);
+  transform-origin: 50%;
+  transition: all 0.1s;
   width: 0.8em;
+
+  &:hover {
+    background-color: white;
+    border: 2px solid $color-purple;
+    mix-blend-mode: none;
+    opacity: 1;
+    transform: translate(-0.15em, -0.15em) scale(1.6);
+    z-index: 2;
+  }
 }
 
 .leaflet-popup-content {

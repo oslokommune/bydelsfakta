@@ -13,6 +13,7 @@ export const state = {
   districtsGeo: districts,
   menuIsOpen: false,
   navigationIsOpen: false,
+  isTouchDevice: false,
 };
 
 export const getters = {
@@ -54,6 +55,9 @@ export const mutations = {
   SET_NAVIGATION_IS_OPEN(state, payload) {
     state.navigationIsOpen = payload;
   },
+  SET_TOUCH_DEVICE(state, payload) {
+    state.isTouchDevice = payload;
+  },
 };
 
 export const actions = {
@@ -81,6 +85,10 @@ export const actions = {
             params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
           });
     }
+  },
+
+  setTouchDevice({ commit }, payload) {
+    commit('SET_TOUCH_DEVICE', payload);
   },
   cleanState({ commit }) {
     commit('CLEAN_STATE');

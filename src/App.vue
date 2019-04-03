@@ -35,6 +35,12 @@ export default {
     this.$store.dispatch('addDistrict', { district: this.$route.params.district, pushRoute: true });
   },
 
+  mounted() {
+    if ('ontouchstart' in document.documentElement) {
+      this.$store.dispatch('setTouchDevice', true);
+    }
+  },
+
   watch: {
     $route(to) {
       if (to.params.district !== undefined) {

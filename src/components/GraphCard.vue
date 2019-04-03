@@ -298,6 +298,7 @@ export default {
     &.active[disabled] {
       color: rgba($color-purple, 0.35);
       opacity: 0.8;
+
       &::after {
         opacity: 0;
       }
