@@ -73,13 +73,6 @@ export default {
     ...mapState(['compareDistricts', 'menuIsOpen']),
   },
 
-  created() {
-    if (this.$route.name !== 'Home') {
-      const routes = this.$route.path.split('/');
-      if (routes.length > 3) this.selectedTopic = routes[3];
-    }
-  },
-
   methods: {
     ...mapActions(['setMenuIsOpen']),
 

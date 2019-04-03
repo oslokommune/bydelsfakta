@@ -23,6 +23,7 @@
     "nodemon": "^1.18.10",
     "save-svg-as-png": "^1.4.12",
     "vue": "^2.6.10",
+    "vue-analytics": "^5.16.4",
     "vue-dragscroll": "^1.8.3",
     "vue-i18n": "^8.10.0",
     "vue-resize": "^0.4.5",
