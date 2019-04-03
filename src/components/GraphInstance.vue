@@ -6,7 +6,7 @@
       ref="graphContainer"
       aria-hidden="true"
       @scroll="drawShadows"
-      v-dragscroll
+      v-dragscroll.x="!isTouchDevice"
     >
       <div class="spinner" v-if="loading">
         <img src="../assets/spinner.svg" alt="" />
@@ -28,7 +28,7 @@
       :class="{ 'visually-hidden': mode === 'graph' }"
       class="graph__tablecontainer"
       ref="tableContainer"
-      v-dragscroll
+      v-dragscroll.x="!isTouchDevice"
       @scroll="drawShadows"
     >
       <table>
@@ -87,7 +87,7 @@ export default {
       if (this.shadow.right) str += ' graph__shadow--right';
       return str;
     },
-    ...mapState(['districts', 'compareDistricts']),
+    ...mapState(['districts', 'compareDistricts', 'isTouchDevice']),
     filteredData() {
       if (!this.compareDistricts || this.districts.includes('alle')) return this.data;
 
