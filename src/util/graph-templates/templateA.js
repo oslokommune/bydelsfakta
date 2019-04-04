@@ -52,6 +52,7 @@ function Template(svg) {
     // Make a filtered copy of the provided data object containing
     // to house only the selected series (if one has been selected)
     this.filteredData = JSON.parse(JSON.stringify(this.data));
+
     if (this.selected > -1) {
       this.filteredData.meta.series = [this.data.meta.series[this.selected]];
       this.filteredData.data = this.filteredData.data.map(bydel => {
@@ -62,9 +63,24 @@ function Template(svg) {
 
     // Sort by highest value in first series
     this.filteredData.data = this.filteredData.data
-      .sort((a, b) => b.values[0][this.method] - a.values[0][this.method])
-      .sort((a, b) => (b.avgRow ? -1 : 0))
-      .sort((a, b) => (b.totalRow ? -1 : 0));
+      .sort((a, b) => {
+        if (!b.values.length || !a.values.length) return -1;
+        if (!b.values[0] || !a.values[0]) return -1;
+        if (!b.values[0][this.method] || a.values[0][this.method]) return -1;
+        return b.values[0][this.method] - a.values[0][this.method];
+      })
+      .sort((a, b) => {
+        if (!b.values.length || !a.values.length) return -1;
+        if (!b.values[0] || !a.values[0]) return -1;
+        if (!b.values[0][this.method] || a.values[0][this.method]) return -1;
+        return b.avgRow ? -1 : 0;
+      })
+      .sort((a, b) => {
+        if (!b.values.length || !a.values.length) return -1;
+        if (!b.values[0] || !a.values[0]) return -1;
+        if (!b.values[0][this.method] || a.values[0][this.method]) return -1;
+        return b.totalRow ? -1 : 0;
+      });
 
     this.svg
       .transition()
@@ -346,7 +362,12 @@ function Template(svg) {
   this.setScales = function() {
     let maxValues = this.filteredData.meta.series.map((row, i) => {
       return d3.max(
-        this.filteredData.data.filter(d => !(this.method === 'value' && d.totalRow)).map(d => d.values[i][this.method])
+        this.filteredData.data
+          .filter(d => !(this.method === 'value' && d.totalRow))
+          .map(d => {
+            if (!d.values || !d.values[i] || !d.values[i][this.method]) return 0;
+            return d.values[i][this.method];
+          })
       );
     });
 

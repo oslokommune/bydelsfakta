@@ -235,7 +235,12 @@ function Base_Template(svg) {
       this.data = this.sortData(data);
     }
 
-    this.heading.text(this.data.meta.heading);
+    if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
+      this.heading.text(this.data.meta.heading);
+    } else {
+      this.heading.text('Insert heading here');
+    }
+
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     this.isCompare = options.compareDistricts || false;
@@ -252,9 +257,24 @@ function Base_Template(svg) {
 
   this.sortData = function(data) {
     data.data = data.data
-      .sort((a, b) => b.values[0][this.method] - a.values[0][this.method])
-      .sort((a, b) => (b.avgRow ? -1 : 0))
-      .sort((a, b) => (b.totalRow ? -1 : 0));
+      .sort((a, b) => {
+        if (!b.values.length || !a.values.length) return 0;
+        if (!b.values[0] || !a.values[0]) return 0;
+        if (!b.values[0][this.method] || a.values[0][this.method]) return 0;
+        return b.values[0][this.method] - a.values[0][this.method];
+      })
+      .sort((a, b) => {
+        if (!b.values.length || !a.values.length) return 0;
+        if (!b.values[0] || !a.values[0]) return 0;
+        if (!b.values[0][this.method] || a.values[0][this.method]) return 0;
+        return b.avgRow ? -1 : 0;
+      })
+      .sort((a, b) => {
+        if (!b.values.length || !a.values.length) return 0;
+        if (!b.values[0] || !a.values[0]) return 0;
+        if (!b.values[0][this.method] || a.values[0][this.method]) return 0;
+        return b.totalRow ? -1 : 0;
+      });
 
     return data;
   };

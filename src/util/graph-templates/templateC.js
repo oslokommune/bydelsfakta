@@ -56,7 +56,7 @@ function Template(svg) {
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
     );
-    this.drawTable();
+    // this.drawTable();
   };
 
   // Creates elements for this template. Runs from base template along with init()
@@ -573,10 +573,19 @@ function Template(svg) {
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values[this.series].map(d => d[this.method])))) / 1.05;
 
     // Find min and max years for the data
-    const minYear = this.parseYear(d3.min(this.data.data.map(d => d.values[0][0].date)));
-    const maxYear = this.parseYear(
-      this.data.data[0].values[this.series][this.data.data[0].values[this.series].length - 1].date
-    );
+    const maxYear = this.parseYear(d3.max(this.data.data.map(row => {
+      if (!row.values || !row.values.length) return;
+      return row.values.map(val => val[val.length - 1].date)
+    }))[0])
+    const minYear = this.parseYear(d3.min(this.data.data.map(row => {
+      if (!row.values || !row.values.length) return;
+      return row.values.map(val => val[0].date)
+    }))[0])
+
+
+
+
+
 
     this.x = d3
       .scaleTime()
