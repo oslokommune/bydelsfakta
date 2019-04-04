@@ -28,7 +28,7 @@ function getColumnNames(thead) {
   } else {
     let firstRow = [];
     let lastRow = [];
-    tr[0].querySelectorAll('th:not(:first-child)').forEach((th, i) => firstRow.push(th.innerHTML));
+    tr[0].querySelectorAll('th:not(:first-child)').forEach(th => firstRow.push(th.innerHTML));
     tr[1].querySelectorAll('th').forEach(th => lastRow.push(th.innerHTML));
     let ratio = tr[1].querySelectorAll('th').length / (tr[0].querySelectorAll('th').length - 1);
 
