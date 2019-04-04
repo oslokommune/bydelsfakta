@@ -364,7 +364,6 @@ $rowHeight: 2.5em;
   cursor: pointer;
   height: 100%;
   object-fit: contain;
-  padding: 0.25rem 0.25rem;
   width: 8em;
 
   @media screen and (min-width: $break-lg) {
