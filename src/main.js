@@ -16,11 +16,12 @@ import 'leaflet/dist/leaflet.css';
 import './styles/main.scss';
 import setupI18n from './i18n';
 
-let GA_KEY = '';
-
 function initializeEnvironment() {
   const envs = JSON.parse(window.__GLOBAL_ENVS__);
-  GA_KEY = envs.VUE_APP_GOOGLE_ANALYTICS_ID;
+  const envsKeys = Object.keys(envs);
+  envsKeys.forEach(envKey => {
+    process.env[envKey] = envs[envKey];
+  });
   delete window.__GLOBAL_ENVS__;
 }
 
@@ -49,7 +50,7 @@ Vue.config.performance = process.env.NODE_ENV !== 'production';
 Vue.directive('click-outside', clickOutside);
 
 Vue.use(VueAnalytics, {
-  id: GA_KEY || process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
+  id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
   router,
   debug: {
     sendHitTask: process.env.NODE_ENV === 'production',
