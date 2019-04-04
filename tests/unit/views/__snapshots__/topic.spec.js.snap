@@ -50,7 +50,6 @@ exports[`Topic renders component correctly 1`] = `
           bgcolor="rgb(248, 198, 107)"
           bgimage="/img/levekaar"
           category="Levekår"
-          disabled="true"
           id="levekaar"
           topic="Levekårs&shy;indikatorer"
           txtcolor="rgb(244, 206, 138)"

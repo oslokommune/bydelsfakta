@@ -23,15 +23,12 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    // Template only supports 'ratio' method
-    console.log(this.method)
-
     // Convert first two values into negative numbers
     // to support the concept of 'positive' and 'negative'
     // values in this chart.
     this.data.data = data.data.map(district => {
       district.values.forEach((val, i) => {
-        if(i < 2) {
+        if (i < 2) {
           district.values[i][this.method] = Math.abs(district.values[i][this.method]) * -1;
         }
       });
