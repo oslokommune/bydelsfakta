@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['addDistrict']),
+    ...mapActions(['addDistrict', 'setTouchDevice']),
   },
 
   created() {
@@ -41,7 +41,7 @@ export default {
 
   mounted() {
     if ('ontouchstart' in document.documentElement) {
-      this.$store.dispatch('setTouchDevice', true);
+      this.setTouchDevice(true);
     }
   },
 
