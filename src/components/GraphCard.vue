@@ -89,6 +89,19 @@
                 >
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
               </button>
+
+              <button
+                :disabled="mode === 'map'"
+                class="context-menu__dropdown-item"
+                :aria-label="$t('graphCard.saveCSV.aria')"
+                tabindex="0"
+                @click="saveCsv()"
+                @keyup.enter="saveCsv()"
+                id="context-menu-button-svg"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">cloud_download</i>
+                <span>{{ $t('graphCard.saveCSV.label') }}</span>
+              </button>
             </div>
           </div>
         </nav>
@@ -116,6 +129,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
+import tableToCsv from '../util/tableToCsv';
 import VLeaflet from './VLeaflet.vue';
 
 export default {
@@ -163,6 +177,7 @@ export default {
       const filename = `${this.$route.params.district}_${id}.svg`;
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
+      this.closeMenu();
     },
 
     savePng(id) {
@@ -176,6 +191,12 @@ export default {
         top: -20,
         left: -20,
       });
+      this.closeMenu();
+    },
+
+    saveCsv() {
+      tableToCsv(this.$refs.graph.$refs.tableContainer.querySelector('table'));
+      this.closeMenu();
     },
   },
 
