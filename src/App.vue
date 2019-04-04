@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
 import TheFooter from './components/TheFooter.vue';
@@ -25,26 +25,30 @@ export default {
     ...mapState(['menuIsOpen', 'navigationIsOpen']),
   },
 
+  methods: {
+    ...mapActions(['addDistrict', 'setTouchDevice']),
+  },
+
   created() {
     if (this.$route.name === 'Home') {
-      this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
+      this.addDistrict({ district: 'alle', pushRoute: false });
     }
     if (this.$route.params.district === undefined) {
       return;
     }
-    this.$store.dispatch('addDistrict', { district: this.$route.params.district, pushRoute: true });
+    this.addDistrict({ district: this.$route.params.district, pushRoute: true });
   },
 
   mounted() {
     if ('ontouchstart' in document.documentElement) {
-      this.$store.dispatch('setTouchDevice', true);
+      this.setTouchDevice(true);
     }
   },
 
   watch: {
     $route(to) {
       if (to.params.district !== undefined) {
-        this.$store.dispatch('addDistrict', { district: to.params.district, pushRoute: false });
+        this.addDistrict({ district: to.params.district, pushRoute: false });
       }
     },
   },

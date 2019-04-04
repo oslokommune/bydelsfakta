@@ -1,6 +1,7 @@
 import '@babel/polyfill';
 import 'whatwg-fetch';
 import Vue from 'vue';
+import VueAnalytics from 'vue-analytics';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
 import App from './App.vue';
@@ -14,6 +15,19 @@ import 'leaflet/dist/leaflet.css';
 
 import './styles/main.scss';
 import setupI18n from './i18n';
+
+function initializeEnvironment() {
+  const envs = JSON.parse(window.__GLOBAL_ENVS__);
+  const envsKeys = Object.keys(envs);
+  envsKeys.forEach(envKey => {
+    process.env[envKey] = envs[envKey];
+  });
+  delete window.__GLOBAL_ENVS__;
+}
+
+if (process.env.NODE_ENV !== 'development') {
+  initializeEnvironment();
+}
 
 const i18n = setupI18n();
 
@@ -34,6 +48,14 @@ Vue.config.performance = process.env.NODE_ENV !== 'production';
 
 // Directive to detect clicks outside of an element
 Vue.directive('click-outside', clickOutside);
+
+Vue.use(VueAnalytics, {
+  id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
+  router,
+  debug: {
+    sendHitTask: process.env.NODE_ENV === 'production',
+  },
+});
 
 new Vue({
   router,
