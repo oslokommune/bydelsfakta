@@ -56,7 +56,7 @@ function Template(svg) {
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
     );
-    // this.drawTable();
+    this.drawTable();
   };
 
   // Creates elements for this template. Runs from base template along with init()
