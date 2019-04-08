@@ -424,10 +424,6 @@ export const topics = {
       {
         size: 'large',
         heading: 'Trangbodde husstander',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
         tabs: [
           {
             active: false,
@@ -855,31 +851,34 @@ export const topics = {
           },
         ],
       },
-      // {
-      //   size: 'small',
-      //   heading: '',
-      //   map: {
-      //     labels: ['', ''],
-      //     url: ``,
-      //   },
-      //   tabs: [
-      //     {
-      //       active: false,
-      //       label: 'Andel',
-      //       id: 'levekar_fattige_andel',
-      //       template: 'a',
-      //       method: 'ratio',
-      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
-      //     },
-      //     {
-      //       active: false,
-      //       label: 'Historisk',
-      //       id: 'levekar_fattige_historisk',
-      //       template: 'b',
-      //       url: `${baseUrl}/mockDataB.json`,
-      //     },
-      //   ],
-      // },
+      {
+        size: 'small',
+        heading: 'Fattige barnehusholdninger',
+        map: {
+          labels: ['Flere', 'Færre'],
+          scale: [0.3, 0],
+          method: 'ratio',
+          url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+        },
+        tabs: [
+          {
+            active: false,
+            label: 'Andel',
+            id: 'levekar_fattige_andel',
+            template: 'a',
+            method: 'ratio',
+            url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+          },
+          {
+            active: false,
+            label: 'Historisk',
+            id: 'levekar_fattige_historisk',
+            method: 'ratio',
+            template: 'b',
+            url: `${API}/Fattige_barnehusholdninger_his-GoaU8`,
+          },
+        ],
+      },
       // {
       //   size: 'small',
       //   heading: '',
