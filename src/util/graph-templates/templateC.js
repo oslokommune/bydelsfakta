@@ -19,14 +19,13 @@ function Template(svg) {
 
   this.padding = { top: 100, left: 60, right: 190, bottom: 32 };
 
-  // Line generator
-  // let line = d3
-  //   .line()
-  //   .x(d => this.x(this.parseYear(d.date)))
-  //   .y(d => this.y(d[this.method]));
-
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
+
+    this.data.data.map((geo, i, j) => {
+      geo.color = d3.interpolateRainbow(i / j.length);
+      return geo;
+    });
 
     this.width = d3.max([this.width, 300]);
 
@@ -50,8 +49,8 @@ function Template(svg) {
     this.drawLines();
     this.drawTabs();
     this.drawLabels();
-    // this.drawDots();
-    // this.drawVoronoi();
+    this.drawDots();
+    this.drawVoronoi();
     this.drawSource(
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
@@ -87,15 +86,15 @@ function Template(svg) {
     .y(d => this.y(d[this.method]));
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text('Data');
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hRow1 = thead.append('tr');
-    let hRow2 = thead.append('tr');
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
 
     let dates = new Set();
     this.data.data.forEach(row => {
@@ -133,7 +132,7 @@ function Template(svg) {
       .attr('id', (d, i) => `th_2_${i}`)
       .text(d => this.formatYear(this.parseYear(d)));
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -153,7 +152,7 @@ function Template(svg) {
       .data(d => d.values.map(row => row).flat())
       .join('td')
       .attr('headers', (d, i, j) => {
-        let first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
+        const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
 
         return `th_1_${first} th_2_${i}`;
       })
@@ -161,14 +160,14 @@ function Template(svg) {
   };
 
   this.drawDots = function() {
-    let dotgroup = this.canvas
+    const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
       .data(this.data.data, d => d.geography)
       .join('g')
       .attr('class', 'dotgroup');
 
-    let dot = dotgroup
+    const dot = dotgroup
       .selectAll('g.dot')
       .data(d => d.values[this.series], d => d.geography)
       .join('g')
@@ -195,13 +194,13 @@ function Template(svg) {
   };
 
   this.drawVoronoi = function() {
-    let flattenData = this.data.data
+    const flattenData = this.data.data
       .map(geo =>
         geo.values[this.series].map(val => ({ date: val.date, value: val[this.method], geography: geo.geography }))
       )
       .flat();
 
-    let voronoiData = d3
+    const voronoiData = d3
       .voronoi()
       .extent([[1, 1], [this.width, this.height]])
       .x(d => this.x(this.parseYear(d.date)))
@@ -209,7 +208,7 @@ function Template(svg) {
       .polygons(flattenData)
       .filter(Boolean);
 
-    let voronoiCells = this.canvas
+    const voronoiCells = this.canvas
       .select('g.voronoi')
       .selectAll('path')
       .data(voronoiData)
@@ -221,8 +220,8 @@ function Template(svg) {
     // chart is rendered with a geography highlighted, then only
     // the selected geography will be affected by hover.
     voronoiCells.on('mouseover', (d, i, j) => {
-      let geography = j[i].__data__.data.geography;
-      let date = j[i].__data__.data.date;
+      const geography = j[i].__data__.data.geography;
+      const date = j[i].__data__.data.date;
 
       if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
@@ -252,7 +251,7 @@ function Template(svg) {
     // with the selected geography highlighted. If the geography
     // is alredady selected, then we re-render with no highlight.
     voronoiCells.on('click', (d, i, j) => {
-      let geography = j[i].__data__.data.geography;
+      const geography = j[i].__data__.data.geography;
 
       if (this.highlight >= 0 && this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
         this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
@@ -292,7 +291,7 @@ function Template(svg) {
       .attr('y', 40);
 
     let tab = this.tabs.selectAll('g.tab').data(this.data.meta.series);
-    let tabE = tab
+    const tabE = tab
       .enter()
       .append('g')
       .attr('class', 'tab');
@@ -424,7 +423,7 @@ function Template(svg) {
     // Get y-position for each label calculated using
     // simple collision detection algorithm. Passing in
     // the original y-position and the available height in pixels
-    let labelPositions = positionLabels(
+    const labelPositions = positionLabels(
       this.data.data.map(row => {
         row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
         return row;
@@ -432,13 +431,13 @@ function Template(svg) {
       this.height
     );
 
-    let labels = this.canvas
+    const labels = this.canvas
       .select('g.labels')
       .selectAll('g.label')
       .data(labelPositions)
       .join(
         enter => {
-          let g = enter
+          const g = enter
             .append('g')
             .attr('class', 'label')
             .style('cursor', 'pointer');
@@ -491,8 +490,8 @@ function Template(svg) {
       .attr('x2', this.width + 31)
       .attr('stroke', (d, i, j) => {
         if (d.totalRow) return 'black';
-        if (d.avgRow) return color.purple;
-        return d3.interpolateRainbow(i / j.length);
+        if (d.avgRow) return color.yellow;
+        return d.color;
       })
       .style('stroke-dasharray', d => {
         if (d.totalRow) return '2,1';
@@ -548,9 +547,9 @@ function Template(svg) {
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values[this.series]))
       .attr('stroke', (d, i, j) => {
-        if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
-        return d3.interpolateRainbow(i / j.length);
+        if (d.totalRow) return 'black';
+        return d.color;
       })
       .attr('stroke-width', (d, i) => {
         if (this.highlight === i) return 6;

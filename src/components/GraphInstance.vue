@@ -89,6 +89,8 @@ export default {
     },
     ...mapState(['districts', 'compareDistricts', 'isTouchDevice']),
     filteredData() {
+      this.sortData(this.data);
+
       if (!this.compareDistricts || this.districts.includes('alle')) return this.data;
 
       const selectedDistrictNames = this.districts.map(id => districtNames[id]);
@@ -140,8 +142,32 @@ export default {
 
     handleResize() {
       if (this.loading) return;
+      if (!this.svg.resize) return;
       this.svg.resize(this.data, { method: this.settings.method });
       this.drawShadows();
+    },
+
+    sortData(data) {
+      const template = this.settings.template;
+
+      data.data.sort((a, b) => {
+        if (template === 'b' && a.values && a.values.length && b.values && b.values.length) {
+          return (
+            b.values[b.values.length - 1][this.settings.method] - a.values[a.values.length - 1][this.settings.method]
+          );
+        }
+
+        if (b.totalRow) return -2;
+        if (b.avgRow) return -1;
+
+        if (template === 'a') {
+          if (a.values.length && b.values.length) {
+            return b.values[0][this.settings.method] - a.values[0][this.settings.method];
+          }
+        }
+      });
+
+      return data;
     },
 
     async draw(options = {}) {

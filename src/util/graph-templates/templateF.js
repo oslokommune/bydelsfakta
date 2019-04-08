@@ -11,7 +11,7 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
 
-  this.padding = { top: 90, left: 200, right: 20, bottom: 1 };
+  this.padding = { top: 90, left: 250, right: 20, bottom: 1 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
 
   // Define withs of both charts.
@@ -30,21 +30,27 @@ function Template(svg) {
     this.width = d3.max([this.width, 360]);
 
     // Find quartiles, mean and median for each geography
-    data.data = data.data.map(bydel => {
-      if (bydel.low) return bydel;
-      let ages = [];
-      bydel.values.forEach((val, age) => {
-        for (let i = 0; i < val.value; i++) {
-          ages.push(age);
-        }
-      });
-      bydel.low = d3.quantile(ages, 0.25);
-      bydel.median = d3.quantile(ages, 0.5);
-      bydel.high = d3.quantile(ages, 0.75);
-      bydel.mean = Math.round(d3.mean(ages) * 100) / 100;
+    data.data = data.data
+      .map(bydel => {
+        if (bydel.low) return bydel;
+        let ages = [];
+        bydel.values.forEach((val, age) => {
+          for (let i = 0; i < val.value; i++) {
+            ages.push(age);
+          }
+        });
+        bydel.low = d3.quantile(ages, 0.25);
+        bydel.median = d3.quantile(ages, 0.5);
+        bydel.high = d3.quantile(ages, 0.75);
+        bydel.mean = Math.round(d3.mean(ages) * 100) / 100;
 
-      return bydel;
-    });
+        return bydel;
+      })
+      .sort((a, b) => {
+        if (b.totalRow) return -3;
+        if (b.avgRow) return -2;
+        return a.mean - b.mean;
+      });
 
     this.svg
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
@@ -242,7 +248,7 @@ function Template(svg) {
 
     this.x
       .range([0, this.width1])
-      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05])
+      .domain([d3.min(this.data.data.map(d => d.mean)), d3.max(this.data.data.map(d => d.mean))])
       .nice();
     this.xAxis
       .transition()

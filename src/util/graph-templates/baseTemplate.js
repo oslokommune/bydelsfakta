@@ -129,7 +129,7 @@ function Base_Template(svg) {
 
   // Creates DOM elements for generic tooltip
   this.addTooltipElement = function() {
-    let group = this.svg
+    const group = this.svg
       .append('g')
       .attr('class', 'tooltip')
       .attr('opacity', 0)
@@ -155,9 +155,9 @@ function Base_Template(svg) {
   // using the d3.event as an argument
   // to position the tooltip
   this.showTooltip = function(str, event) {
-    let group = this.svg.select('g.tooltip');
-    let rect = group.select('rect');
-    let text = group.select('text');
+    const group = this.svg.select('g.tooltip');
+    const rect = group.select('rect');
+    const text = group.select('text');
 
     group.attr('transform', `translate(${event.offsetX}, ${event.offsetY})`);
     text.text(str);
@@ -168,14 +168,14 @@ function Base_Template(svg) {
 
   // Hides the generic tooltip
   this.hideTooltip = function() {
-    let group = this.svg.select('g.tooltip').attr('opacity', 0);
+    const group = this.svg.select('g.tooltip').attr('opacity', 0);
     group.select('rect');
     group.select('text').text('');
   };
 
   // Creates DOM elements for generic source reference
   this.addSourceElement = function() {
-    let group = this.svg
+    const group = this.svg
       .append('g')
       .attr('class', 'sourceGroup')
       .attr('fill', color.purple)
@@ -192,7 +192,7 @@ function Base_Template(svg) {
       .attr('class', 'source')
       .attr('font-size', 10)
       .attr('transform', () => {
-        let labelWidth = group
+        const labelWidth = group
           .select('.source-label')
           .node()
           .getBBox().width;
@@ -228,12 +228,7 @@ function Base_Template(svg) {
   // All templates share these common operations when rendered
   this.commonRender = function(data, options = {}) {
     if (data === undefined || data.data === undefined) return;
-
-    if (!Array.isArray(data.data)) {
-      this.data = data.data;
-    } else {
-      this.data = this.sortData(data);
-    }
+    this.data = data;
 
     if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
       this.heading.text(this.data.meta.heading);
@@ -253,30 +248,6 @@ function Base_Template(svg) {
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     return true;
-  };
-
-  this.sortData = function(data) {
-    data.data = data.data
-      .sort((a, b) => {
-        if (!b.values.length || !a.values.length) return 0;
-        if (!b.values[0] || !a.values[0]) return 0;
-        if (!b.values[0][this.method] || a.values[0][this.method]) return 0;
-        return b.values[0][this.method] - a.values[0][this.method];
-      })
-      .sort((a, b) => {
-        if (!b.values.length || !a.values.length) return 0;
-        if (!b.values[0] || !a.values[0]) return 0;
-        if (!b.values[0][this.method] || a.values[0][this.method]) return 0;
-        return b.avgRow ? -1 : 0;
-      })
-      .sort((a, b) => {
-        if (!b.values.length || !a.values.length) return 0;
-        if (!b.values[0] || !a.values[0]) return 0;
-        if (!b.values[0][this.method] || a.values[0][this.method]) return 0;
-        return b.totalRow ? -1 : 0;
-      });
-
-    return data;
   };
 
   // Placeholder for the render method
