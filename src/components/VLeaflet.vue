@@ -4,7 +4,7 @@
       <div class="legend__labels">
         <span v-for="(label, i) in settings.labels" :key="i" v-text="label"></span>
       </div>
-      <div class="colorstrip" :style="gradient"></div>
+      <div class="colorstrip" ref="colorstrip" :style="gradient"></div>
     </div>
     <div class="container">
       <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
@@ -107,6 +107,8 @@ export default {
         const dataObj = data.find(geo => geo.geography === layerId);
         const geography = dataObj.geography;
 
+        if (!dataObj.values || !dataObj.values.length) return;
+
         // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
         if (this.settings.method === 'avg') {
@@ -133,7 +135,7 @@ export default {
         `;
 
         // Bind colors and popup content to the layer
-        layer.setStyle({ fillColor: fill, fillOpacity: 0.6 }).bindPopup(popupContent);
+        layer.setStyle({ fillColor: fill, fillOpacity: 0.6, weight: 1 }).bindPopup(popupContent);
 
         // Store the layer data for use in legend
         allLayerData.push({ dataValue, geography, layer });
@@ -141,7 +143,7 @@ export default {
 
       // For each layer add an interactive dot on the legend.
       // Clicking the dot triggers the popop on the respective layer.
-      d3.select('.colorstrip')
+      d3.select(this.$refs.colorstrip)
         .selectAll('.legend-dot')
         .data(allLayerData)
         .join('div')
@@ -165,10 +167,10 @@ export default {
         '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       center: L.latLng(59.91695, 10.746589),
       style: {
-        fillColor: color.yellow,
-        fillOpacity: 0.7,
+        fillColor: '#222',
+        fillOpacity: 0.3,
         color: color.purple,
-        weight: 2,
+        weight: 4,
       },
       mapOptions: {
         zoomControl: true,
