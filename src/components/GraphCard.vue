@@ -11,7 +11,6 @@
             <button
               :disabled="mode === 'map'"
               role="tab"
-              :aria-selected="{ true: active === index }"
               :aria-label="tab.label"
               :id="`tabButton-${index}`"
               v-for="(tab, index) in settings.tabs"
