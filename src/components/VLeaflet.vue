@@ -52,10 +52,15 @@ export default {
   computed: {
     gradient() {
       let steps = [];
-      for (let i = 0; i <= 1; i += 0.1) {
-        steps.push(interpolator(i));
+      if (this.settings.reverse) {
+        for (let i = 1; i >= 0; i -= 0.05) {
+          steps.push(interpolator(i));
+        }
+      } else {
+        for (let i = 0; i <= 1; i += 0.05) {
+          steps.push(interpolator(i));
+        }
       }
-
       return `background-image: linear-gradient(to right, ${steps})`;
     },
   },
@@ -124,7 +129,9 @@ export default {
         }
 
         // Calculate the fill color based on the value
-        const fill = interpolator(colorStrength(dataValue));
+        const fill = this.settings.reverse
+          ? interpolator(1 - colorStrength(dataValue))
+          : interpolator(colorStrength(dataValue));
 
         // Set number formatting for popup
         const format = this.settings.method === 'ratio' ? d3.format('.3p') : d3.format(',.4r');
