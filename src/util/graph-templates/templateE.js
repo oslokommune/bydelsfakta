@@ -32,7 +32,7 @@ function Template(svg) {
 
     this.width = d3.max([this.width, 360]);
 
-    this.height = 400;
+    this.height = 500;
     this.svg
       .transition()
       .duration(this.duration)
