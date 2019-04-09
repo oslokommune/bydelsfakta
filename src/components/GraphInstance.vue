@@ -165,6 +165,12 @@ export default {
             return b.values[0][this.settings.method] - a.values[0][this.settings.method];
           }
         }
+
+        if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
+          const sumA = a.values[0][this.settings.method] + a.values[3][this.settings.method];
+          const sumB = b.values[0][this.settings.method] + b.values[3][this.settings.method];
+          return sumB - sumA;
+        }
       });
 
       return data;
@@ -179,7 +185,7 @@ export default {
           .json(`${this.settings.url}?geography=${geoParam}`)
           .then(data => {
             data.data.map(district => {
-              district.geography = districtNames[district.geography];
+              district.geography = districtNames[district.geography] || district.geography;
               return district;
             });
             return data;
