@@ -117,13 +117,10 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      if (to.name === 'NotFound') {
+
+      if (to.name !== 'Topic') {
         this.selectedTopic = null;
         this.showDropdown = false;
-      } else if (to.name === 'District') {
-        this.selectedTopic = null;
-      } else if (to.name === 'Home') {
-        this.selectedTopic = null;
       } else {
         if (routes.length > 3) this.selectedTopic = routes[3];
       }

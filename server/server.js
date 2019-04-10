@@ -1,11 +1,8 @@
 'use strict';
 
-const cheerio = require('cheerio');
 const cors = require('cors');
 const express = require('express');
-const fs = require('fs');
 const morgan = require('morgan');
-const path = require('path');
 const routes = require('./routes');
 
 const app = express();
@@ -14,20 +11,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(morgan('combined'));
 app.use(cors());
-
-const envs = JSON.stringify({
-  NODE_ENV: process.env.NODE_ENV,
-  VUE_APP_GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
-});
-
-const $ = cheerio.load(fs.readFileSync(path.join(__dirname, '../docs/index.html')));
-$('body').find('#bydelsfakta-globals').remove();
-$('<script id="bydelsfakta-globals">' +
-  'window.__GLOBAL_ENVS__ = \'' + envs + '\'' +
-  '</script>')
-  .prependTo('body');
-
-fs.writeFileSync(path.join(__dirname, '../docs/index.html'), $.html(), { encoding: 'utf8', flag: 'w' });
 
 app.use(function(req, res, next) {
   res.set({

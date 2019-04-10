@@ -9,7 +9,7 @@ import ageRanges from '../../config/ageRanges';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
-  this.template = 'd'
+  this.template = 'd';
 
   this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
   this.height = 0; // calculated on render. Height of the lower part

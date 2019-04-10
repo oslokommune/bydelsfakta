@@ -10,7 +10,7 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
-  this.template = 'j'
+  this.template = 'j';
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 58 };
   this.x = d3.scaleLinear();

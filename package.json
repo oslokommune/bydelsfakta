@@ -20,6 +20,7 @@
     "@babel/polyfill": "^7.4.0",
     "d3": "^5.9.2",
     "leaflet": "^1.4.0",
+    "leaflet-gesture-handling": "^1.1.8",
     "nodemon": "^1.18.10",
     "save-svg-as-png": "^1.4.12",
     "vue": "^2.6.10",

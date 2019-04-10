@@ -16,19 +16,6 @@ import 'leaflet/dist/leaflet.css';
 import './styles/main.scss';
 import setupI18n from './i18n';
 
-function initializeEnvironment() {
-  const envs = JSON.parse(window.__GLOBAL_ENVS__);
-  const envsKeys = Object.keys(envs);
-  envsKeys.forEach(envKey => {
-    process.env[envKey] = envs[envKey];
-  });
-  delete window.__GLOBAL_ENVS__;
-}
-
-if (process.env.NODE_ENV !== 'development') {
-  initializeEnvironment();
-}
-
 const i18n = setupI18n();
 
 // this part resolve an issue where the markers would not appear

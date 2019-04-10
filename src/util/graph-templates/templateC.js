@@ -492,7 +492,7 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', (d, i, j) => {
+      .attr('stroke', d => {
         if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
         return d.color;
@@ -550,7 +550,7 @@ function Template(svg) {
       .duration(100)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values[this.series]))
-      .attr('stroke', (d, i, j) => {
+      .attr('stroke', (d) => {
         if (d.avgRow) return color.yellow;
         if (d.totalRow) return 'black';
         return d.color;

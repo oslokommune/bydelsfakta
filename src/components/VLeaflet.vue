@@ -21,6 +21,7 @@
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
 import L from 'leaflet';
 import * as d3 from 'd3';
+import { GestureHandling } from 'leaflet-gesture-handling';
 import { color, interpolator } from '../util/graph-templates/colors';
 
 export default {
@@ -66,6 +67,7 @@ export default {
   },
 
   mounted() {
+    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
     this.getData(this.dataUrl);
   },
   updated() {
@@ -117,9 +119,8 @@ export default {
         // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
         if (this.settings.method === 'avg') {
-          let values = dataObj.values.map(d => d.value);
-          let mean = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
-          dataValue = mean;
+          const values = dataObj.values.map(d => d.value);
+          dataValue = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
         } else {
           if (this.settings.series) {
             dataValue = dataObj.values[this.settings.series][this.settings.method];
@@ -186,6 +187,7 @@ export default {
         dragging: true,
         scrollWheelZoom: false,
         touchZoom: true,
+        gestureHandling: true,
       },
     };
   },
