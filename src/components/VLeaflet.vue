@@ -112,9 +112,8 @@ export default {
         // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
         if (this.settings.method === 'avg') {
-          let values = dataObj.values.map(d => d.value);
-          let mean = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
-          dataValue = mean;
+          const values = dataObj.values.map(d => d.value);
+          dataValue = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
         } else {
           if (this.settings.series) {
             dataValue = dataObj.values[this.settings.series][this.settings.method];

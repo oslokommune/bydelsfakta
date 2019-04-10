@@ -50,7 +50,7 @@
           <div class="navigation-drawer__button-container">
             <button
               class="navigation-drawer__button"
-              @click="selectAll"
+              @click="selectAll(true)"
               :aria-label="$t('navigationDrawer.selectAll.aria')"
             >
               {{ $t('navigationDrawer.selectAll.label') }}
@@ -58,7 +58,7 @@
             <button
               class="navigation-drawer__button"
               :disabled="selected.length === 0"
-              @click="unselectAll"
+              @click="selectAll(false)"
               :aria-label="$t('navigationDrawer.unselectAll.aria')"
             >
               {{ $t('navigationDrawer.unselectAll.label') }}
@@ -163,20 +163,9 @@ export default {
       }
     },
 
-    selectAll() {
+    selectAll(yes) {
       this.selected = [];
-      this.selected = allDistricts.map(district => district.key);
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
-    },
-
-    unselectAll() {
-      this.selected = [];
+      this.selected = yes ? allDistricts.map(district => district.key) : [];
       this.selectedPredefinedOption = [];
       this.$route.params.topic === undefined
         ? this.$router.push({ name: 'District', params: { district: 'alle' } })

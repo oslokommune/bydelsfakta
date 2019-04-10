@@ -11,9 +11,9 @@
             <button
               :disabled="mode === 'map'"
               role="tab"
-              :aria-selected="{ true: active === index }"
+              :aria-selected="active === index"
               :aria-label="tab.label"
-              :id="`tabButton-${index}`"
+              :id="`tabButton-${settings.heading}-${index}`"
               v-for="(tab, index) in settings.tabs"
               :key="index"
               @click="activeTab(index)"
@@ -97,7 +97,7 @@
                 tabindex="0"
                 @click="saveCsv()"
                 @keyup.enter="saveCsv()"
-                id="context-menu-button-svg"
+                id="context-menu-button-csv"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">cloud_download</i>
                 <span>{{ $t('graphCard.saveCSV.label') }}</span>
