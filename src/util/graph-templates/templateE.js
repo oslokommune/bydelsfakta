@@ -16,6 +16,7 @@ import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'e'
 
   this.padding = { top: 70, right: 55, bottom: 50, left: 300 };
   this.y = d3.scaleLinear();

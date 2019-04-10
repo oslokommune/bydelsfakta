@@ -10,6 +10,7 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'f'
 
   this.padding = { top: 90, left: 250, right: 20, bottom: 1 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;

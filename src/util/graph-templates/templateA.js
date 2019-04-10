@@ -18,6 +18,7 @@ function Template(svg) {
   this.mobileWidth = 420;
   this.isMobileView = false;
   this.isSingleSeries = false;
+  this.template = 'a';
 
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
@@ -256,13 +257,12 @@ function Template(svg) {
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     rows.select('text.valueText').text(d => {
-      if(d.values.length === 0) {
-        return 'Ikke tilgjengelig'
+      if (d.values.length === 0) {
+        return 'Ikke tilgjengelig';
       } else {
-        return ''
+        return '';
       }
-      
-    })
+    });
 
     rows
       .select('text.geography')

@@ -25,6 +25,7 @@ function intersects(a, b) {
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'b';
 
   this.padding = { top: 50, right: 190, bottom: 32, left: 60 };
 
@@ -387,7 +388,7 @@ function Template(svg) {
         }
       })
       .attr('x', d => this.x(this.parseYear(d['date'])))
-      .attr('y', d => this.y(d.value))
+      .attr('y', d => this.y(d[this.method]))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
       .attr('text-anchor', 'middle')
@@ -399,7 +400,7 @@ function Template(svg) {
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
       .attr('cx', d => this.x(this.parseYear(d['date'])))
-      .attr('cy', d => this.y(d.value));
+      .attr('cy', d => this.y(d[this.method]));
   };
 
   this.handleMouseover = function(geo) {
@@ -501,8 +502,7 @@ function Template(svg) {
 
     // Click label to render with highlight
     labels.on('click keyup', (d, a, j) => {
-
-      const i = this.data.data.findIndex(row => row.geography === d.geography)
+      const i = this.data.data.findIndex(row => row.geography === d.geography);
 
       if (d3.event && d3.event.type === 'click') j[i].blur();
       if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;

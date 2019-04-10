@@ -16,8 +16,9 @@ import positionLabels from '../positionLabels';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'c';
 
-  this.padding = { top: 100, left: 60, right: 190, bottom: 32 };
+  this.padding = { top: 140, left: 60, right: 190, bottom: 32 };
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -36,8 +37,7 @@ function Template(svg) {
       );
     });
 
-    this.heading.attr('y', 90).text('');
-    this.height = 460;
+    this.height = 500;
     this.svg
       .transition()
       .duration(this.duration)
@@ -64,7 +64,7 @@ function Template(svg) {
     this.tabs = this.svg
       .insert('g')
       .attr('class', 'tabs')
-      .attr('transform', 'translate(3, 23)');
+      .attr('transform', 'translate(3, 65)');
 
     // stroke below tabs
     this.tabs.append('rect').attr('class', 'rule');
@@ -176,9 +176,13 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => d[this.method])
+      .text(d => {
+        if (d && d[this.method]) {
+          return this.format(d[this.method], this.method);
+        }
+      })
       .attr('x', d => this.x(this.parseYear(d.date)))
-      .attr('y', d => this.y(d.value))
+      .attr('y', d => this.y(d[this.method]))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
       .attr('text-anchor', 'middle')
@@ -190,7 +194,7 @@ function Template(svg) {
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
       .attr('cx', d => this.x(this.parseYear(d.date)))
-      .attr('cy', d => this.y(d.value));
+      .attr('cy', d => this.y(d[this.method]));
   };
 
   this.drawVoronoi = function() {

@@ -25,6 +25,7 @@ import d3 from '@/assets/d3';
 import debounce from '../debounce';
 import { color } from './colors';
 import * as locale from './locale';
+import allDistricts from '../../config/allDistricts';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
 d3.formatDefaultLocale(locale.format);
@@ -231,9 +232,31 @@ function Base_Template(svg) {
     this.data = data;
 
     if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
-      this.heading.text(this.data.meta.heading);
+      const heading = this.data.meta.heading;
+      const district = allDistricts.find(d => d.key === this.data.district);
+      const geo = district ? ` i ${district.value}` : '';
+      let year = '';
+
+      switch (this.template) {
+        case 'a':
+        case 'i':
+          if (!this.data.data[0].values.length) break;
+          year = `(${this.data.data[0].values[0].date})`;
+          break;
+
+        case 'd':
+        case 'e':
+        case 'f':
+          year = `(${this.data.data[0].aargang})`;
+          break;
+
+        default:
+          break;
+      }
+
+      this.heading.text(`${heading} ${geo} ${year}`);
     } else {
-      this.heading.text('Insert heading here');
+      this.heading.text('--- Missing heading ---');
     }
 
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
