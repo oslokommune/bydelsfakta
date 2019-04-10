@@ -35,27 +35,24 @@ exports[`GraphCard change an active tab 1`] = `
         >
           <button
             aria-label="Status"
-            aria-selected="[object Object]"
             class="tabs__tab"
-            id="tabButton-0"
+            id="tabButton--0"
             role="tab"
           >
             Status
           </button>
           <button
             aria-label="Matrise"
-            aria-selected="[object Object]"
             class="tabs__tab active"
-            id="tabButton-1"
+            id="tabButton--1"
             role="tab"
           >
             Matrise
           </button>
           <button
             aria-label="Historisk"
-            aria-selected="[object Object]"
             class="tabs__tab"
-            id="tabButton-2"
+            id="tabButton--2"
             role="tab"
           >
             Historisk
@@ -225,18 +222,16 @@ exports[`GraphCard renders correctly 1`] = `
         >
           <button
             aria-label="Antall"
-            aria-selected="[object Object]"
             class="tabs__tab active"
-            id="tabButton-0"
+            id="tabButton-Aldersdistribusjon-0"
             role="tab"
           >
             Antall
           </button>
           <button
             aria-label="Andel"
-            aria-selected="[object Object]"
             class="tabs__tab"
-            id="tabButton-1"
+            id="tabButton-Aldersdistribusjon-1"
             role="tab"
           >
             Andel
