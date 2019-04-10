@@ -19,9 +19,7 @@ export const topicNames = [
 export const disabledTopics = [
   'folkemengde',
   'befolkningsendringer',
-  'alder',
   'innvandrerbefolkningen',
-  'levekaar',
   'eierform',
   'bygningstyper',
   'trangboddhet',
@@ -155,7 +153,7 @@ export const topics = {
             label: 'Antall',
             id: 'alder_segment_antall',
             template: 'd',
-            url: `${baseUrl}/mockDataD.json`,
+            url: `${API}/Alder-distribusjon-status-TqWvs`,
             method: 'value',
             help: 'Dette er hjelp',
           },
@@ -164,7 +162,7 @@ export const topics = {
             label: 'Andel',
             id: 'alder_segment_andel',
             template: 'd',
-            url: `${baseUrl}/mockDataD.json`,
+            url: `${API}/Alder-distribusjon-status-TqWvs`,
             method: 'ratio',
           },
         ],
@@ -180,7 +178,7 @@ export const topics = {
             id: 'alder_distribusjon_status',
             template: 'e',
             method: 'value',
-            url: `${baseUrl}/mockDataD.json`,
+            url: `${API}/Alder-distribusjon-status-TqWvs`,
           },
         ],
       },
@@ -189,9 +187,10 @@ export const topics = {
         heading: 'Gjennomsnitt- og medianalder',
         map: {
           labels: ['Lavere gjennomsnittsalder', 'Høyere gjennomsnittsalder'],
-          scale: [32, 39],
+          scale: [32, 43],
+          reverse: true,
           method: 'avg',
-          url: `${baseUrl}/mockDataD.json`,
+          url: `${API}/Alder-distribusjon-status-TqWvs`,
         },
         tabs: [
           {
@@ -202,7 +201,7 @@ export const topics = {
             template: 'f',
             help:
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vestibulum malesuada arcu id pulvinar. Donec congue quam nec elit molestie, vel feugiat lorem euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer feugiat urna risus, nec interdum risus laoreet id.',
-            url: `${baseUrl}/mockDataD.json`,
+            url: `${API}/Alder-distribusjon-status-TqWvs`,
           },
         ],
       },
@@ -222,7 +221,7 @@ export const topics = {
     cards: [
       {
         size: 'large',
-        heading: '',
+        heading: 'Innvandring fra land',
         map: {
           labels: ['', ''],
           url: ``,
@@ -230,96 +229,142 @@ export const topics = {
         tabs: [
           {
             active: false,
-            label: 'Status',
+            label: 'Status - Andel',
             id: 'innvandring_befolkning_status',
             template: 'a',
             method: 'ratio',
-            url: `${baseUrl}/mockDataA2.json`,
+            url: `${baseUrl}/mockDataInnvandringLandStatus.json`,
           },
+
           {
             active: false,
-            label: 'Historisk',
+            label: 'Status - Antall',
+            id: 'innvandring_befolkning_status',
+            template: 'a',
+            method: 'value',
+            url: `${baseUrl}/mockDataInnvandringLandStatus.json`,
+          },
+
+          {
+            active: false,
+            label: 'Historisk - andel',
             id: 'innvandring_befolkning_historisk',
-            template: 'c',
-            url: `${baseUrl}/mockDataC.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Status',
-            id: 'innvandring_under16-totalt_status',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer1.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'innvandring_under16-totalt_historisk',
             template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Status',
-            id: 'innvandring_under16-en-innvandrerforelder_status',
-            template: 'a',
             method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer2.json`,
+            url: `${baseUrl}/mockDataInnvandringLand.json`,
           },
+
           {
             active: false,
-            label: 'Historisk',
-            id: 'innvandring_under16-en-innvandrerforelder_historisk',
+            label: 'Historisk - antall',
+            id: 'innvandring_befolkning_historisk',
             template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
+            method: 'value',
+            url: `${baseUrl}/mockDataInnvandringLand.json`,
           },
         ],
       },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Status',
-            id: 'innvandring_under16-to-innvandrerforeldre_status',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'innvandring_under16-to-innvandrerforeldre_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
+
+      // {
+      //   size: 'large',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Status',
+      //       id: 'innvandring_befolkning_status',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataA2.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'innvandring_befolkning_historisk',
+      //       template: 'c',
+      //       url: `${baseUrl}/mockDataC.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Status',
+      //       id: 'innvandring_under16-totalt_status',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer1.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'innvandring_under16-totalt_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Status',
+      //       id: 'innvandring_under16-en-innvandrerforelder_status',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer2.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'innvandring_under16-en-innvandrerforelder_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Status',
+      //       id: 'innvandring_under16-to-innvandrerforeldre_status',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'innvandring_under16-to-innvandrerforeldre_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
     ],
     options: {
       kategori: 'Befolkning',
@@ -404,7 +449,7 @@ export const topics = {
             label: 'Historisk',
             id: 'boligpriser_historisk',
             method: 'value',
-            template: 'b',
+            template: 'c',
             url: `${API}/boligpriser_historic-4owcY`,
           },
         ],
@@ -425,11 +470,7 @@ export const topics = {
     cards: [
       {
         size: 'large',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
+        heading: 'Trangbodde husstander',
         tabs: [
           {
             active: false,
@@ -441,99 +482,153 @@ export const topics = {
           },
           {
             active: false,
+            label: 'Status0',
+            id: 'trangboddhet_alle_status',
+            template: 'j',
+            url: `${baseUrl}/mockDataJ.json`,
+            method: 'value',
+          },
+          {
+            active: false,
+            label: 'Status2',
+            id: 'trangboddhet_alle_status',
+            template: 'a',
+            url: `${baseUrl}/mockDataJ.json`,
+            method: 'ratio',
+          },
+          {
+            active: false,
+            label: 'Status3',
+            id: 'trangboddhet_alle_status',
+            template: 'a',
+            url: `${baseUrl}/mockDataJ.json`,
+            method: 'value',
+          },
+          {
+            active: false,
             label: 'Historisk',
             id: 'trangboddhet_alle_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
+            template: 'c',
+            method: 'ratio',
+            url: `${baseUrl}/trangboddhet_historisk.json`,
+          },
+          {
+            active: false,
+            label: 'Historisk2',
+            id: 'trangboddhet_alle_historisk',
+            template: 'c',
+            method: 'value',
+            url: `${baseUrl}/trangboddhet_historisk.json`,
           },
         ],
       },
       {
-        name: 'spesifikk',
-        title: 'Mellomtittel test',
-        graphs: [
+        size: 'small',
+        heading: 'Under 0.5 rom per person',
+        map: {
+          labels: ['Færre', 'Flere'],
+          method: 'ratio',
+          reverse: true,
+          scale: [0.01, 0.06],
+          url: `${baseUrl}/trangboddhet_05.json`,
+        },
+        tabs: [
           {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'trangboddhet_under0.5_status',
-                method: 'ratio',
-                template: 'a',
-                url: `${baseUrl}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'trangboddhet_under0.5_historisk',
-                template: 'b',
-                url: `${baseUrl}/mockDataB.json`,
-              },
-            ],
-          },
-          {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'trangboddhet_0.5-0.9_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'trangboddhet_0.5-0.9_historisk',
-                template: 'b',
-                url: `${baseUrl}/mockDataB.json`,
-              },
-            ],
-          },
-          {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'trangboddhet_1.0-1.9_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'trangboddhet_1.0-1.9_historisk',
-                template: 'b',
-                url: `${baseUrl}/mockDataB.json`,
-              },
-            ],
-          },
-          {
-            size: 'small',
-            tabs: [
-              {
-                active: false,
-                label: 'Status',
-                id: 'trangboddhet_over2_status',
-                template: 'a',
-                method: 'ratio',
-                url: `${baseUrl}/mockDataAinnvandrer3.json`,
-              },
-              {
-                active: false,
-                label: 'Historisk',
-                id: 'trangboddhet_over2_historisk',
-                template: 'b',
-                url: `${baseUrl}/mockDataB.json`,
-              },
-            ],
+            active: false,
+            label: 'Status',
+            id: 'trangboddhet_alle_status',
+            template: 'a',
+            url: `${baseUrl}/trangboddhet_05.json`,
+            method: 'ratio',
           },
         ],
       },
+      // {
+      //   name: 'spesifikk',
+      //   title: 'Mellomtittel test',
+      //   graphs: [
+      //     {
+      //       size: 'small',
+      //       tabs: [
+      //         {
+      //           active: false,
+      //           label: 'Status',
+      //           id: 'trangboddhet_under0.5_status',
+      //           method: 'ratio',
+      //           template: 'a',
+      //           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //         },
+      //         {
+      //           active: false,
+      //           label: 'Historisk',
+      //           id: 'trangboddhet_under0.5_historisk',
+      //           template: 'b',
+      //           url: `${baseUrl}/mockDataB.json`,
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       size: 'small',
+      //       tabs: [
+      //         {
+      //           active: false,
+      //           label: 'Status',
+      //           id: 'trangboddhet_0.5-0.9_status',
+      //           template: 'a',
+      //           method: 'ratio',
+      //           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //         },
+      //         {
+      //           active: false,
+      //           label: 'Historisk',
+      //           id: 'trangboddhet_0.5-0.9_historisk',
+      //           template: 'b',
+      //           url: `${baseUrl}/mockDataB.json`,
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       size: 'small',
+      //       tabs: [
+      //         {
+      //           active: false,
+      //           label: 'Status',
+      //           id: 'trangboddhet_1.0-1.9_status',
+      //           template: 'a',
+      //           method: 'ratio',
+      //           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //         },
+      //         {
+      //           active: false,
+      //           label: 'Historisk',
+      //           id: 'trangboddhet_1.0-1.9_historisk',
+      //           template: 'b',
+      //           url: `${baseUrl}/mockDataB.json`,
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       size: 'small',
+      //       tabs: [
+      //         {
+      //           active: false,
+      //           label: 'Status',
+      //           id: 'trangboddhet_over2_status',
+      //           template: 'a',
+      //           method: 'ratio',
+      //           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //         },
+      //         {
+      //           active: false,
+      //           label: 'Historisk',
+      //           id: 'trangboddhet_over2_historisk',
+      //           template: 'b',
+      //           url: `${baseUrl}/mockDataB.json`,
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ],
     options: {
       kategori: 'Bomiljø',
@@ -751,37 +846,40 @@ export const topics = {
     text: 'Levekårsindikatorer',
     value: 'levekaar',
     cards: [
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Andel',
+      //       id: 'levekar_funksjonsevne_andel',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'levekar_funksjonsevne_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
       {
         size: 'small',
-        heading: '',
+        heading: 'Personer med lav utdanning',
         map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Andel',
-            id: 'levekar_funksjonsevne_andel',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'levekar_funksjonsevne_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
+          labels: ['Færre', 'Flere'],
+          url: `${API}/Lav_utdanning_status-fYdyK`,
+          scale: [0, 0.5],
+          reverse: true,
+          method: 'ratio',
         },
         tabs: [
           {
@@ -790,23 +888,27 @@ export const topics = {
             id: 'levekar_lav-utdanning_andel',
             template: 'a',
             method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
+            url: `${API}/Lav_utdanning_status-fYdyK`,
           },
           {
             active: false,
             label: 'Historisk',
             id: 'levekar_lav-utdanning_historisk',
+            method: 'ratio',
             template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
+            url: `${API}/Lav_utdanning_historisk-qBXzf`,
           },
         ],
       },
       {
         size: 'small',
-        heading: '',
+        heading: 'Fattige barnehusholdninger',
         map: {
-          labels: ['', ''],
-          url: ``,
+          labels: ['Færre', 'Flere'],
+          reverse: true,
+          scale: [0, 0.3],
+          method: 'ratio',
+          url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
         },
         tabs: [
           {
@@ -815,142 +917,143 @@ export const topics = {
             id: 'levekar_fattige_andel',
             template: 'a',
             method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
+            url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
           },
           {
             active: false,
             label: 'Historisk',
             id: 'levekar_fattige_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Andel',
-            id: 'levekar_ikke-sysselsatte_andel',
-            template: 'a',
             method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'levekar_ikke-sysselsatte_historisk',
             template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
+            url: `${API}/Fattige_barnehusholdninger_his-GoaU8`,
           },
         ],
       },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Andel',
-            id: 'levekar_vgs_andel',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'levekar_vgs_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Andel',
-            id: 'levekar_dodsrate_andel',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'levekar_dodsrate_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Andel',
-            id: 'levekar_trangbodde_andel',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'levekar_trangbodde_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
-      {
-        size: 'small',
-        heading: '',
-        map: {
-          labels: ['', ''],
-          url: ``,
-        },
-        tabs: [
-          {
-            active: false,
-            label: 'Andel',
-            id: 'levekar_innvandrere_andel',
-            template: 'a',
-            method: 'ratio',
-            url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          },
-          {
-            active: false,
-            label: 'Historisk',
-            id: 'levekar_innvandrere_historisk',
-            template: 'b',
-            url: `${baseUrl}/mockDataB.json`,
-          },
-        ],
-      },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Andel',
+      //       id: 'levekar_ikke-sysselsatte_andel',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'levekar_ikke-sysselsatte_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Andel',
+      //       id: 'levekar_vgs_andel',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'levekar_vgs_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Andel',
+      //       id: 'levekar_dodsrate_andel',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'levekar_dodsrate_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Andel',
+      //       id: 'levekar_trangbodde_andel',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'levekar_trangbodde_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
+      // {
+      //   size: 'small',
+      //   heading: '',
+      //   map: {
+      //     labels: ['', ''],
+      //     url: ``,
+      //   },
+      //   tabs: [
+      //     {
+      //       active: false,
+      //       label: 'Andel',
+      //       id: 'levekar_innvandrere_andel',
+      //       template: 'a',
+      //       method: 'ratio',
+      //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
+      //     },
+      //     {
+      //       active: false,
+      //       label: 'Historisk',
+      //       id: 'levekar_innvandrere_historisk',
+      //       template: 'b',
+      //       url: `${baseUrl}/mockDataB.json`,
+      //     },
+      //   ],
+      // },
     ],
     options: {
       kategori: 'Levekår',

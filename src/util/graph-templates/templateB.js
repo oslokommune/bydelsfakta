@@ -25,18 +25,23 @@ function intersects(a, b) {
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'b';
 
   this.padding = { top: 50, right: 190, bottom: 32, left: 60 };
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    this.data.data = this.data.data.sort((a, b) => {
-      return b.values[b.values.length - 1].value - a.values[a.values.length - 1].value;
-    });
+    this.data.data
+      .map((geo, i, j) => {
+        geo.color = d3.interpolateRainbow(i / j.length);
+        return geo;
+      })
+      .sort((a, b) => {
+        return b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method];
+      });
 
     this.width = d3.max([this.width, 300]);
-
     this.height = d3.max([480, this.width * 0.5]);
 
     this.svg
@@ -70,37 +75,51 @@ function Template(svg) {
   this.line = d3
     .line()
     .curve(d3.curveCardinal)
-    .x(d => this.x(this.parseYear(d['År'])))
+    .x(d => this.x(this.parseYear(d.date)))
     .y(d => {
       return this.y(d[this.method]);
     });
 
   this.drawVoronoi = function() {
-    let flattenData = this.data.data
-      .map(geo => geo.values.map(val => ({ År: val['År'], value: val.value, geography: geo.geography })))
+    const flattenData = this.data.data
+      .map(geo => geo.values.map(val => ({ date: val['date'], value: val[this.method], geography: geo.geography })))
       .flat();
 
-    let voronoiData = d3
+    const voronoiData = d3
       .voronoi()
       .extent([[1, 1], [this.width, this.height]])
-      .x(d => this.x(this.parseYear(d['År'])))
+      .x(d => this.x(this.parseYear(d['date'])))
       .y(d => this.y(d.value))
-      .polygons(flattenData);
+      .polygons(flattenData)
+      .filter(d => {
+        if (d) return d;
+      })
+      .map(arr => {
+        arr.forEach((d, i) => {
+          d[0] = Math.round(d[0]);
+          d[1] = Math.round(d[1]);
+          arr[i] = d;
+        });
+        return arr;
+      });
 
-    let voronoiCells = this.canvas
+    const voronoiCells = this.canvas
       .select('g.voronoi')
       .selectAll('path')
       .data(voronoiData)
       .join('path')
-      .attr('d', d => 'M' + d.join('L') + 'Z')
+      .attr('d', d => {
+        const path = 'M' + d.join('L') + 'Z';
+        return path;
+      })
       .attr('fill-opacity', 0);
 
     // Highlight a geography when hovering the chart. If the
     // chart is rendered with a geography highlighted, then only
     // the selected geography will be affected by hover.
     voronoiCells.on('mouseover', (d, i, j) => {
-      let geography = j[i].__data__.data.geography;
-      let date = j[i]['__data__']['data']['År'];
+      const geography = j[i].__data__.data.geography;
+      const date = j[i]['__data__']['data']['date'];
 
       if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
@@ -113,7 +132,7 @@ function Template(svg) {
             }
           })
           .selectAll('g.dot')
-          .filter(dot => dot['År'] === date)
+          .filter(dot => dot['date'] === date)
           .attr('opacity', 1);
       }
     });
@@ -130,7 +149,7 @@ function Template(svg) {
     // with the selected geography highlighted. If the geography
     // is alredady selected, then we re-render with no highlight.
     voronoiCells.on('click', (d, i, j) => {
-      let geography = j[i].__data__.data.geography;
+      const geography = j[i].__data__.data.geography;
 
       if (this.highlight >= 0 && this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
         this.render(this.data, { method: this.method, highlight: -1 });
@@ -144,20 +163,20 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hRow1 = thead.append('tr');
-    let hRow2 = thead.append('tr');
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
 
     let dates = new Set();
     this.data.data.forEach(row => {
       row.values.forEach(d => {
-        dates.add(d['År']);
+        dates.add(d['date']);
       });
     });
     dates = [...dates];
@@ -177,7 +196,7 @@ function Template(svg) {
       .join('th')
       .text(d => this.formatYear(this.parseYear(d)));
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -212,7 +231,7 @@ function Template(svg) {
    */
   this.drawDirectLabels = function() {
     // Find the voronoi cells
-    let cells = this.canvas.select('g.voronoi').selectAll('path');
+    const cells = this.canvas.select('g.voronoi').selectAll('path');
 
     // Find each cell's area and centroid and sort by area
     let areas = [];
@@ -237,12 +256,12 @@ function Template(svg) {
     // and for each of them check to see if they collide
     // with any lines and offset them in the right direction
     // towards the voronoi's centroid point.
-    let label = this.canvas
+    const label = this.canvas
       .selectAll('g.direct')
       .data(areas, d => d)
       .join(
         enter => {
-          let g = enter
+          const g = enter
             .append('g')
             .attr('class', 'direct')
             .attr('opacity', 0);
@@ -255,7 +274,7 @@ function Template(svg) {
       .style('pointer-events', 'none')
       .each((d, i, j) => {
         const el = d3.select(j[i]);
-        const position = [this.x(this.parseYear(d.values[0]['data']['År'])), this.y(d.values[0].data.value)];
+        const position = [this.x(this.parseYear(d.values[0]['data']['date'])), this.y(d.values[0].data.value)];
         const centroid = d.values[0].centroid;
         const angle = Math.atan2(centroid[1] - position[1], centroid[0] - position[0]);
         const distance = 20;
@@ -268,7 +287,7 @@ function Template(svg) {
         };
 
         // Coordinates bottom two corners of text box
-        let a = {
+        const a = {
           x1: target.x - box.width / 2,
           y1: target.y + box.height,
           x2: target.x + box.width / 2,
@@ -286,12 +305,12 @@ function Template(svg) {
 
         // Test if the label collides any lines
         this.canvas.selectAll('path.row').each(d => {
-          let val = d.values;
+          const val = d.values;
           for (let i = 0; i < val.length - 1; i++) {
-            let b = {
-              x1: this.x(this.parseYear(val[i]['År'])),
+            const b = {
+              x1: this.x(this.parseYear(val[i]['date'])),
               y1: this.y(val[i].value),
-              x2: this.x(this.parseYear(val[i + 1]['År'])),
+              x2: this.x(this.parseYear(val[i + 1]['date'])),
               y2: this.y(val[i + 1].value),
             };
             if (intersects(a, b)) collisions++;
@@ -327,7 +346,7 @@ function Template(svg) {
       .attr('y', -10)
       .attr('fill', 'white')
       .attr('x', (d, i, j) => {
-        let textWidth = d3
+        const textWidth = d3
           .select(j[i].parentNode)
           .select('text')
           .node()
@@ -335,7 +354,7 @@ function Template(svg) {
         return (textWidth / 2 + 5) * -1;
       })
       .attr('width', (d, i, j) => {
-        let textWidth = d3
+        const textWidth = d3
           .select(j[i].parentNode)
           .select('text')
           .node()
@@ -346,14 +365,14 @@ function Template(svg) {
   };
 
   this.drawDots = function() {
-    let dotgroup = this.canvas
+    const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
       .data(this.data.data, d => d.geography)
       .join('g')
       .attr('class', 'dotgroup');
 
-    let dot = dotgroup
+    const dot = dotgroup
       .selectAll('g.dot')
       .data(d => d.values, d => d.geography)
       .join('g')
@@ -363,9 +382,13 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => this.format(d[this.method], this.method))
-      .attr('x', d => this.x(this.parseYear(d['År'])))
-      .attr('y', d => this.y(d.value))
+      .text(d => {
+        if (d && d[this.method]) {
+          return this.format(d[this.method], this.method);
+        }
+      })
+      .attr('x', d => this.x(this.parseYear(d['date'])))
+      .attr('y', d => this.y(d[this.method]))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
       .attr('text-anchor', 'middle')
@@ -376,8 +399,8 @@ function Template(svg) {
       .attr('r', 4)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
-      .attr('cx', d => this.x(this.parseYear(d['År'])))
-      .attr('cy', d => this.y(d.value));
+      .attr('cx', d => this.x(this.parseYear(d['date'])))
+      .attr('cy', d => this.y(d[this.method]));
   };
 
   this.handleMouseover = function(geo) {
@@ -447,21 +470,21 @@ function Template(svg) {
 
   // Updates labels on the right hand side
   this.drawLabels = function() {
-    let labelPositions = positionLabels(
+    const labelPositions = positionLabels(
       this.data.data.map(row => {
-        row.y = this.y(row.values[row.values.length - 1].value);
+        row.y = this.y(row.values[row.values.length - 1][this.method]);
         return row;
       }),
       this.height
     );
 
-    let labels = this.canvas
+    const labels = this.canvas
       .select('g.labels')
       .selectAll('g.label')
       .data(labelPositions, d => d.geography)
       .join(
         enter => {
-          let g = enter.append('g');
+          const g = enter.append('g');
           g.append('line')
             .attr('stroke-width', 9)
             .attr('x1', this.width + 22)
@@ -478,9 +501,12 @@ function Template(svg) {
       .attr('tabindex', 0);
 
     // Click label to render with highlight
-    labels.on('click keyup', (d, i, j) => {
+    labels.on('click keyup', (d, a, j) => {
+      const i = this.data.data.findIndex(row => row.geography === d.geography);
+
       if (d3.event && d3.event.type === 'click') j[i].blur();
       if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+
       if (i === this.highlight) {
         this.render(this.data, { method: this.method, highlight: -1 });
       } else {
@@ -508,10 +534,10 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', (d, i, j) => {
+      .attr('stroke', d => {
         if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
-        return d3.interpolateRainbow(i / j.length);
+        return d.color;
       })
       .style('stroke-dasharray', d => {
         if (d.totalRow) return '2,1';
@@ -538,7 +564,9 @@ function Template(svg) {
     labels
       .transition()
       .duration(this.duration)
-      .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
+      .attr('transform', d => {
+        return `translate(0, ${d.start})`;
+      })
       .attr('opacity', (d, i) => {
         if (this.highlight >= 0) {
           return this.highlight === i ? 1 : 0.1;
@@ -558,17 +586,7 @@ function Template(svg) {
       .select('g.lines')
       .selectAll('path.row')
       .data(this.data.data, d => d.geography)
-      .join(enter => {
-        return enter.append('path').attr('d', d => {
-          let initialData = d.values.map(val => {
-            return {
-              År: val.År,
-              value: 0,
-            };
-          });
-          return this.line(initialData);
-        });
-      })
+      .join('path')
       .attr('class', 'row')
       .style('pointer-events', 'none')
       .attr('fill', 'none')
@@ -576,10 +594,10 @@ function Template(svg) {
       .duration(250)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
-      .attr('stroke', (d, i, j) => {
+      .attr('stroke', d => {
         if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
-        return d3.interpolateRainbow(i / j.length);
+        return d.color;
       })
       .attr('stroke-width', (d, i) => {
         if (this.highlight === i) return 5;
@@ -600,11 +618,17 @@ function Template(svg) {
   // Resets the scales based on the provided data on each render
   this.setScales = function() {
     // Find the min and max values and add some padding
-    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
+    this.y.max =
+      d3.max(
+        this.data.data.map(row => {
+          return d3.max(row.values.map(d => d[this.method]));
+        })
+      ) * 1.1;
+
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
 
-    let minDate = d3.min(this.data.data.map(d => d.values[0]['År']).map(this.parseYear));
-    let maxDate = d3.max(this.data.data.map(d => d.values[d.values.length - 1]['År']).map(this.parseYear));
+    const minDate = d3.min(this.data.data.map(d => d.values[0].date).map(this.parseYear));
+    const maxDate = d3.max(this.data.data.map(d => d.values[d.values.length - 1].date).map(this.parseYear));
 
     // Set the xScale (time dimension) range and domain
     this.x = d3
@@ -630,7 +654,7 @@ function Template(svg) {
     );
 
     // Years between start and end dates
-    let yearCount = d3.timeYear.count(...this.x.domain());
+    const yearCount = d3.timeYear.count(...this.x.domain());
 
     this.xAxis
       .transition()

@@ -10,6 +10,7 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'j';
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 58 };
   this.x = d3.scaleLinear();
@@ -18,23 +19,21 @@ function Template(svg) {
   this.colors = d3
     .scaleOrdinal()
     .domain([0, 1, 2, 3])
-    .range(['#C57066', '#834B44', '#838296', '#4F4E6A']);
+    .range(['#4F4E6A', '#C57066', '#838296', '#834B44']);
 
-  this.render = function(data) {
-    if (!this.commonRender(data)) return;
-
-    // Template only supports 'ratio' method
-    this.method = 'ratio';
+  this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
 
     // Convert first two values into negative numbers
     // to support the concept of 'positive' and 'negative'
     // values in this chart.
-    this.data.data = data.data.map(bydel => {
-      bydel.values = bydel.values.map((value, i) => {
-        if (value < 0) return value;
-        return i < 2 ? value * -1 : value;
+    this.data.data = data.data.map(district => {
+      district.values.forEach((val, i) => {
+        if (i === 0 || i === 3) {
+          district.values[i][this.method] = Math.abs(district.values[i][this.method]) * -1;
+        }
       });
-      return bydel;
+      return district;
     });
 
     this.width = d3.max([this.width, 420]);
@@ -140,7 +139,9 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => this.format(Math.abs(d), this.method));
+      .text(d => {
+        return this.format(Math.abs(d), this.method);
+      });
   };
 
   // Creates and set default styles for the DOM elements on each row
@@ -217,7 +218,7 @@ function Template(svg) {
     let seriesData = d3
       .stack()
       .keys([1, 0, 2, 3])
-      .offset(d3.stackOffsetDiverging)(this.data.data.map(bydel => bydel.values));
+      .offset(d3.stackOffsetDiverging)(this.data.data.map(bydel => bydel.values.map(d => d[this.method])));
 
     // Find the minimum and maximum values (and add a bit of padding) for the x scale
     let min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;

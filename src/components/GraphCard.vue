@@ -11,9 +11,8 @@
             <button
               :disabled="mode === 'map'"
               role="tab"
-              :aria-selected="{ true: active === index }"
               :aria-label="tab.label"
-              :id="`tabButton-${index}`"
+              :id="`tabButton-${settings.heading}-${index}`"
               v-for="(tab, index) in settings.tabs"
               :key="index"
               @click="activeTab(index)"
@@ -89,6 +88,19 @@
                 >
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
               </button>
+
+              <button
+                :disabled="mode === 'map'"
+                class="context-menu__dropdown-item"
+                :aria-label="$t('graphCard.saveCSV.aria')"
+                tabindex="0"
+                @click="saveCsv()"
+                @keyup.enter="saveCsv()"
+                id="context-menu-button-csv"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">cloud_download</i>
+                <span>{{ $t('graphCard.saveCSV.label') }}</span>
+              </button>
             </div>
           </div>
         </nav>
@@ -116,6 +128,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
+import tableToCsv from '../util/tableToCsv';
 import VLeaflet from './VLeaflet.vue';
 
 export default {
@@ -163,6 +176,7 @@ export default {
       const filename = `${this.$route.params.district}_${id}.svg`;
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
+      this.closeMenu();
     },
 
     savePng(id) {
@@ -176,6 +190,12 @@ export default {
         top: -20,
         left: -20,
       });
+      this.closeMenu();
+    },
+
+    saveCsv() {
+      tableToCsv(this.$refs.graph.$refs.tableContainer.querySelector('table'));
+      this.closeMenu();
     },
   },
 
@@ -267,14 +287,35 @@ export default {
     display: flex;
     height: 3em;
     justify-content: center;
+    position: relative;
     width: 3em;
+
+    &::before {
+      background: $color-blue;
+      border-radius: 50%;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: scale(0);
+      transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
+      z-index: 0;
+    }
+
+    & > i {
+      user-select: none;
+      z-index: 1;
+    }
 
     &:hover:not(&--active) {
       background-color: rgba($color-border, 0.35);
     }
 
-    &--active {
-      background: $color-blue;
+    &--active::before {
+      transform: scale(1);
+      transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
     }
   }
 }

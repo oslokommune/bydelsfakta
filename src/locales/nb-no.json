@@ -12,6 +12,10 @@
       "aria": "lagre graf som svg",
       "label": "Last ned som SVG"
     },
+    "saveCSV": {
+      "aria": "last ned data som som csv",
+      "label": "Last ned data (.csv)"
+    },
     "showTable": {
       "graph": "Vis grafikk",
       "table": "Vis tabell"
