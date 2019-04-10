@@ -20,6 +20,7 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'h';
 
   this.padding = { top: 40, left: 80, right: 20, bottom: 20 };
   this.height1 = 400;

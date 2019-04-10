@@ -16,6 +16,7 @@ import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'e';
 
   this.padding = { top: 70, right: 55, bottom: 50, left: 300 };
   this.y = d3.scaleLinear();
@@ -32,7 +33,7 @@ function Template(svg) {
 
     this.width = d3.max([this.width, 360]);
 
-    this.height = 400;
+    this.height = 500;
     this.svg
       .transition()
       .duration(this.duration)

@@ -18,6 +18,7 @@ function Template(svg) {
   this.mobileWidth = 420;
   this.isMobileView = false;
   this.isSingleSeries = false;
+  this.template = 'a';
 
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
@@ -61,27 +62,6 @@ function Template(svg) {
       });
     }
 
-    // Sort by highest value in first series
-    this.filteredData.data = this.filteredData.data
-      .sort((a, b) => {
-        if (!b.values.length || !a.values.length) return -1;
-        if (!b.values[0] || !a.values[0]) return -1;
-        if (!b.values[0][this.method] || a.values[0][this.method]) return -1;
-        return b.values[0][this.method] - a.values[0][this.method];
-      })
-      .sort((a, b) => {
-        if (!b.values.length || !a.values.length) return -1;
-        if (!b.values[0] || !a.values[0]) return -1;
-        if (!b.values[0][this.method] || a.values[0][this.method]) return -1;
-        return b.avgRow ? -1 : 0;
-      })
-      .sort((a, b) => {
-        if (!b.values.length || !a.values.length) return -1;
-        if (!b.values[0] || !a.values[0]) return -1;
-        if (!b.values[0][this.method] || a.values[0][this.method]) return -1;
-        return b.totalRow ? -1 : 0;
-      });
-
     this.svg
       .transition()
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
@@ -112,7 +92,7 @@ function Template(svg) {
     this.canvas.append('g').attr('class', 'rows');
 
     // Create and initialise the close button
-    let close = this.canvas
+    const close = this.canvas
       .append('g')
       .attr('class', 'close')
       .style('display', 'none')
@@ -160,7 +140,7 @@ function Template(svg) {
    * Creates all the DOM elements inside of each row
    */
   this.initRowElements = function(el) {
-    let g = el.append('g').attr('class', 'row');
+    const g = el.append('g').attr('class', 'row');
 
     // Row fill
     g.insert('rect')
@@ -188,18 +168,23 @@ function Template(svg) {
 
     g.append('g').attr('class', 'bars');
 
+    g.append('text')
+      .attr('class', 'valueText')
+      .attr('fill', color.purple)
+      .attr('y', this.rowHeight / 2 + 6);
+
     return g;
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hRow = thead.append('tr');
+    const hRow = thead.append('tr');
 
     // Header columns
     hRow
@@ -218,7 +203,7 @@ function Template(svg) {
       .join('th')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -244,13 +229,13 @@ function Template(svg) {
    */
   this.drawRows = function() {
     // Select all existing rows (DOM elements) that matches the data
-    let rows = this.canvas
+    const rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
       .data(this.filteredData.data, d => d.geography)
       .join(
         enter => {
-          let el = this.initRowElements(enter);
+          const el = this.initRowElements(enter);
           el.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
           return el;
         },
@@ -271,10 +256,18 @@ function Template(svg) {
       })
       .attr('width', this.padding.left + this.width + this.padding.right);
 
+    rows.select('text.valueText').text(d => {
+      if (d.values.length === 0) {
+        return 'Ikke tilgjengelig';
+      } else {
+        return '';
+      }
+    });
+
     rows
-      .select('text')
+      .select('text.geography')
       .text(d => {
-        if (this.isMobileView) {
+        if (this.isMobileView && d.values.length) {
           return `${d.geography} (${this.format(d.values[0][this.method], this.method)})`;
         } else {
           return d.geography;
@@ -321,7 +314,7 @@ function Template(svg) {
       return color.purple;
     });
 
-    let bars = rows
+    const bars = rows
       .selectAll('rect.bar')
       .data(d => d.values)
       .join('rect')
@@ -360,7 +353,8 @@ function Template(svg) {
   };
 
   this.setScales = function() {
-    let maxValues = this.filteredData.meta.series.map((row, i) => {
+    if (!this.filteredData.meta.series || !this.filteredData.meta.series.length) return;
+    const maxValues = this.filteredData.meta.series.map((row, i) => {
       return d3.max(
         this.filteredData.data
           .filter(d => !(this.method === 'value' && d.totalRow))
@@ -379,11 +373,11 @@ function Template(svg) {
     this.x = this.filteredData.meta.series.map((series, index) => {
       const SCALE = d3.scaleLinear();
       let startPos = 0;
-      for (let j = 0; j < index; j++) {
-        startPos += this.x2(maxValues[j]);
+      for (let i = 0; i < index; i++) {
+        startPos += this.x2(maxValues[i]);
         startPos += this.gutter;
       }
-      let endPos = startPos + this.x2(maxValues[index]);
+      const endPos = startPos + this.x2(maxValues[index]);
       SCALE.domain([0, maxValues[index]])
         .range([startPos, endPos])
         .nice();
@@ -420,12 +414,12 @@ function Template(svg) {
   };
 
   this.drawColumns = function() {
-    let columns = this.canvas
+    const columns = this.canvas
       .select('g.columns')
       .selectAll('g.column')
       .data(this.filteredData.meta.series, d => d.heading + d.subheading)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'column');
+        const g = enter.append('g').attr('class', 'column');
 
         g.append('rect')
           .attr('fill', color.light_grey)
@@ -476,7 +470,7 @@ function Template(svg) {
       .on('click keyup', (d, i) => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (this.data.meta.series.length === 1) return;
-        let target = this.selected > -1 ? -1 : i;
+        const target = this.selected > -1 ? -1 : i;
 
         this.render(this.data, { selected: target, method: this.method });
       })
@@ -517,7 +511,7 @@ function Template(svg) {
       .duration(this.duration)
       .attr('width', (d, i) => {
         let val;
-        let totalRow = this.filteredData.data.find(d => d.totalRow);
+        const totalRow = this.filteredData.data.find(d => d.totalRow);
 
         if (totalRow && totalRow.values && totalRow.values[i]) {
           val = totalRow.values[i][this.method];
@@ -540,12 +534,12 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('y', () => {
-        let indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
+        const indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
         return indexOfTotalRow * this.rowHeight;
       })
       .attr('x', (d, i) => {
         let val;
-        let totalRow = this.filteredData.data.find(d => d.totalRow);
+        const totalRow = this.filteredData.data.find(d => d.totalRow);
 
         if (totalRow && totalRow.values && totalRow.values[i]) {
           val = totalRow.values[i][this.method];
@@ -558,12 +552,12 @@ function Template(svg) {
       })
       .attr('opacity', (d, i) => {
         let val;
-        let totalRow = this.filteredData.data.find(d => d.totalRow);
+        const totalRow = this.filteredData.data.find(d => d.totalRow);
 
         if (totalRow && totalRow.values && totalRow.values[i]) {
           val = totalRow.values[i][this.method];
         } else {
-          return;
+          return 0;
         }
 
         if (this.isMobileView) {

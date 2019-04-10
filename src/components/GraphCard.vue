@@ -11,7 +11,6 @@
             <button
               :disabled="mode === 'map'"
               role="tab"
-              :aria-selected="active === index"
               :aria-label="tab.label"
               :id="`tabButton-${settings.heading}-${index}`"
               v-for="(tab, index) in settings.tabs"
@@ -288,14 +287,35 @@ export default {
     display: flex;
     height: 3em;
     justify-content: center;
+    position: relative;
     width: 3em;
+
+    &::before {
+      background: $color-blue;
+      border-radius: 50%;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: scale(0);
+      transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
+      z-index: 0;
+    }
+
+    & > i {
+      user-select: none;
+      z-index: 1;
+    }
 
     &:hover:not(&--active) {
       background-color: rgba($color-border, 0.35);
     }
 
-    &--active {
-      background: $color-blue;
+    &--active::before {
+      transform: scale(1);
+      transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
     }
   }
 }
