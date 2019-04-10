@@ -18,7 +18,7 @@
         }}</label>
         <div class="topic">
           <span>{{ getHumanReadableTopic(selectedTopic) }}</span>
-          <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
+          <i class="icon icon__arrow" :class="{ rotate: showDropdown }"></i>
         </div>
       </button>
       <transition name="fade">
@@ -127,6 +127,7 @@ export default {
       } else {
         if (routes.length > 3) this.selectedTopic = routes[3];
       }
+      this.closeMenu();
     },
 
     showDropdown() {
@@ -203,6 +204,26 @@ export default {
 .topic {
   align-items: center;
   display: flex;
+
+  & > .icon {
+    margin-left: 0.5rem;
+  }
+}
+
+.icon {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  height: 2rem;
+  transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
+  width: 2rem;
+
+  &.rotate {
+    transform: rotateX(180deg);
+  }
+
+  &__arrow {
+    background-image: url('/icons/arrow.svg');
+  }
 }
 
 .navigation-topbar {
