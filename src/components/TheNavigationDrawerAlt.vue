@@ -399,15 +399,6 @@ input[type='checkbox'] {
       width: 16px;
     }
 
-    &:hover {
-      background: darken($color-bg, 10%);
-
-      &::before {
-        background: rgba(white, 0.15);
-        opacity: 0.8 !important;
-      }
-    }
-
     // checked inside border
     &::after {
       background-color: $color-purple;
@@ -479,6 +470,11 @@ input[type='checkbox'] {
     }
   }
 
+  &:not(&--compare):not(&--active):hover {
+    background-color: rgba($color-purple, 0.05);
+    transition-duration: 0.05s;
+  }
+
   &--active {
     background-color: $color-yellow;
     transition: all 0.3s ease-in-out;
@@ -486,10 +482,6 @@ input[type='checkbox'] {
     #{$p}__label {
       color: $color-purple;
       font-weight: 500;
-    }
-
-    label:hover {
-      background: none !important;
     }
 
     input[type='checkbox']:checked + label {
@@ -537,22 +529,6 @@ input[type='checkbox'] {
 
   &--compare &__label {
     color: $color-purple;
-  }
-
-  &:hover:not(&--active) label:not(.compare)::before {
-    opacity: 0.15;
-    transition: all 0s;
-  }
-
-  &:not(&--active):not(&--compare) &__label:hover {
-    background-color: darken($color-bg, 5%);
-    color: $color-purple;
-
-    // Show the visual border on hover
-    &::before {
-      background-color: darken($color-bg, 5%);
-      display: block;
-    }
   }
 }
 
