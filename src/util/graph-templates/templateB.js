@@ -534,7 +534,7 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', (d) => {
+      .attr('stroke', d => {
         if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
         return d.color;
@@ -564,7 +564,7 @@ function Template(svg) {
     labels
       .transition()
       .duration(this.duration)
-      .attr('transform', (d) => {
+      .attr('transform', d => {
         return `translate(0, ${d.start})`;
       })
       .attr('opacity', (d, i) => {
@@ -594,7 +594,7 @@ function Template(svg) {
       .duration(250)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
-      .attr('stroke', (d) => {
+      .attr('stroke', d => {
         if (d.totalRow) return 'black';
         if (d.avgRow) return color.yellow;
         return d.color;

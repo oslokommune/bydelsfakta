@@ -287,26 +287,26 @@ export default {
     display: flex;
     height: 3em;
     justify-content: center;
-    width: 3em;
     position: relative;
+    width: 3em;
 
     &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
       background: $color-blue;
       border-radius: 50%;
-      z-index: 0;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
       transform: scale(0);
       transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
+      z-index: 0;
     }
 
     & > i {
-      z-index: 1;
       user-select: none;
+      z-index: 1;
     }
 
     &:hover:not(&--active) {
