@@ -488,7 +488,7 @@ function Template(svg) {
     rows.select('text.value').text(district => {
       const sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
 
-      this.method === 'ratio' ? this.format(sum, this.method) : d3.format(',d')(sum);
+      return this.method === 'ratio' ? this.format(sum, this.method) : d3.format(',d')(sum);
     });
 
     rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);

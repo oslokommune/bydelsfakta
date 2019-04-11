@@ -37,20 +37,10 @@ function Template(svg) {
         geo.color = d3.interpolateRainbow(i / j.length);
         return geo;
       })
-<<<<<<< HEAD
       .filter(d => {
-        if (this.method === 'value' && (d.avgRow || d.totalRow)) {
-          return false;
-        } else {
-          return true;
-        }
+        return !(this.method === 'value' && (d.avgRow || d.totalRow));
       })
-      .sort((a, b) => {
-        return b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method];
-      });
-=======
       .sort((a, b) => b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method]);
->>>>>>> Changed arrow-functions to one-liners and let to const
 
     this.width = d3.max([this.width, 300]);
     this.height = d3.max([480, this.width * 0.5]);

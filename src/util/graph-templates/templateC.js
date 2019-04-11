@@ -29,11 +29,7 @@ function Template(svg) {
         return geo;
       })
       .filter(d => {
-        if (this.method === 'value' && (d.avgRow || d.totalRow)) {
-          return false;
-        } else {
-          return true;
-        }
+        return !(this.method === 'value' && (d.avgRow || d.totalRow));
       })
       .sort((a, b) => {
         return (
