@@ -91,7 +91,7 @@ export default {
     filteredData() {
       this.sortData(this.data);
 
-      if (!this.compareDistricts || this.districts.includes('alle')) return this.data;
+      if (!this.compareDistricts || this.districts.includes('alle') || this.settings.noFilter) return this.data;
 
       const selectedDistrictNames = this.districts.map(id => districtNames[id]);
 
