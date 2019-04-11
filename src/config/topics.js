@@ -932,8 +932,11 @@ export const topics = {
         size: 'small',
         heading: 'Ikke-fullført vgs',
         map: {
-          labels: ['', ''],
-          url: ``,
+          labels: ['Færre', 'Flere'],
+          url: `${API}/Levekar-vgs-historisk-t2ZTn`,
+          method: 'ratio',
+          scale: [0.1, 0.5],
+          reverse: true,
         },
         tabs: [
           {
