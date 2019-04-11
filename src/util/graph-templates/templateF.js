@@ -32,20 +32,20 @@ function Template(svg) {
 
     // Find quartiles, mean and median for each geography
     data.data = data.data
-      .map(bydel => {
-        if (bydel.low) return bydel;
+      .map(district => {
+        if (district.low) return district;
         let ages = [];
-        bydel.values.forEach((val, age) => {
+        district.values.forEach((val, age) => {
           for (let i = 0; i < val.value; i++) {
             ages.push(age);
           }
         });
-        bydel.low = d3.quantile(ages, 0.25);
-        bydel.median = d3.quantile(ages, 0.5);
-        bydel.high = d3.quantile(ages, 0.75);
-        bydel.mean = Math.round(d3.mean(ages) * 100) / 100;
+        district.low = d3.quantile(ages, 0.25);
+        district.median = d3.quantile(ages, 0.5);
+        district.high = d3.quantile(ages, 0.75);
+        district.mean = Math.round(d3.mean(ages) * 100) / 100;
 
-        return bydel;
+        return district;
       })
       .sort((a, b) => {
         if (b.totalRow) return -3;
@@ -88,14 +88,14 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hrow = thead.append('tr');
+    const hrow = thead.append('tr');
 
     hrow
       .selectAll('th')
@@ -104,7 +104,7 @@ function Template(svg) {
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -266,7 +266,7 @@ function Template(svg) {
   // render
   this.drawRows = function() {
     let rows = this.canvas.selectAll('g.row').data(this.data.data);
-    let rowsE = rows
+    const rowsE = rows
       .enter()
       .append('g')
       .attr('class', 'row');

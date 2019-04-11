@@ -47,14 +47,14 @@ function Template(svg) {
   this.created = function() {};
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hrow = thead.append('tr');
+    const hrow = thead.append('tr');
 
     hrow
       .selectAll('th')
@@ -63,7 +63,7 @@ function Template(svg) {
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -79,9 +79,7 @@ function Template(svg) {
     // Value cells
     rows
       .selectAll('td')
-      .data(d => {
-        return [d.values[0], d.values[1], d.values[2], d.values[3][d.values[3].length - 1] - d.values[3][0]];
-      })
+      .data(d => [d.values[0], d.values[1], d.values[2], d.values[3][d.values[3].length - 1] - d.values[3][0]])
       .join('td')
       .text(d => d);
   };
@@ -211,7 +209,7 @@ function Template(svg) {
   };
 
   this.renderProgressYear = function(rows) {
-    let x = d3
+    const x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
       .domain([
@@ -245,21 +243,21 @@ function Template(svg) {
    * scale on the y axis.
    */
   this.renderProgressPeriod = function(data, index, arr) {
-    let min = d3.min(data.values[3]) / 1.05;
-    let max = d3.max(data.values[3]) * 1.05;
-    let row = d3.select(arr[index]);
+    const min = d3.min(data.values[3]) / 1.05;
+    const max = d3.max(data.values[3]) * 1.05;
+    const row = d3.select(arr[index]);
 
-    let x = d3
+    const x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
       .domain([0, data.values[3].length]);
 
-    let y = d3
+    const y = d3
       .scaleLinear()
       .range([this.rowHeight, 0])
       .domain([min, max]);
 
-    let line = d3
+    const line = d3
       .line()
       .x((d, i) => x(i))
       .y(d => y(d));
@@ -287,7 +285,7 @@ function Template(svg) {
 
   this.drawRows = function() {
     let rows = this.canvas.selectAll('g.row').data(this.data.data.sort((a, b) => a.avgRow - b.avgRow));
-    let rowsE = rows
+    const rowsE = rows
       .enter()
       .append('g')
       .attr('class', 'row');
@@ -324,7 +322,7 @@ function Template(svg) {
 
   this.drawColumnHeaders = function() {
     let column = this.canvas.selectAll('g.column').data(this.data.meta.series);
-    let columnE = column
+    const columnE = column
       .enter()
       .append('g')
       .attr('class', 'column');

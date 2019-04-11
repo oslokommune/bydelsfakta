@@ -37,6 +37,7 @@ function Template(svg) {
         geo.color = d3.interpolateRainbow(i / j.length);
         return geo;
       })
+<<<<<<< HEAD
       .filter(d => {
         if (this.method === 'value' && (d.avgRow || d.totalRow)) {
           return false;
@@ -47,6 +48,9 @@ function Template(svg) {
       .sort((a, b) => {
         return b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method];
       });
+=======
+      .sort((a, b) => b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method]);
+>>>>>>> Changed arrow-functions to one-liners and let to const
 
     this.width = d3.max([this.width, 300]);
     this.height = d3.max([480, this.width * 0.5]);
@@ -83,9 +87,7 @@ function Template(svg) {
     .line()
     .curve(d3.curveCardinal)
     .x(d => this.x(this.parseYear(d.date)))
-    .y(d => {
-      return this.y(d[this.method]);
-    });
+    .y(d => this.y(d[this.method]));
 
   this.drawVoronoi = function() {
     const flattenData = this.data.data
@@ -115,10 +117,7 @@ function Template(svg) {
       .selectAll('path')
       .data(voronoiData)
       .join('path')
-      .attr('d', d => {
-        const path = 'M' + d.join('L') + 'Z';
-        return path;
-      })
+      .attr('d', d => 'M' + d.join('L') + 'Z')
       .attr('fill-opacity', 0);
 
     // Highlight a geography when hovering the chart. If the
@@ -332,11 +331,7 @@ function Template(svg) {
 
         // Move the label to the target position if there's
         // no collisions, or remove it if there are any.
-        if (collisions < 2) {
-          el.attr('transform', `translate(${target.x}, ${target.y})`);
-        } else {
-          el.remove();
-        }
+        collisions < 2 ? el.attr('transform', `translate(${target.x}, ${target.y})`) : el.remove();
       });
 
     label
@@ -446,10 +441,7 @@ function Template(svg) {
     this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .attr('opacity', d => {
-        if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
-      });
+      .attr('opacity', d => (d.avgRow || d.totalRow ? 1 : 0.45));
 
     this.canvas.selectAll('text.direct').attr('opacity', 0.6);
 
@@ -457,22 +449,13 @@ function Template(svg) {
       .select('g.labels')
       .selectAll('g.label')
       .select('text')
-      .attr('font-weight', d => {
-        if (d.avgRow || d.totalRow) return 700;
-        return 400;
-      });
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
 
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-width', d => {
-        if (d.avgRow) return 5;
-        return 2;
-      })
-      .attr('stroke-opacity', d => {
-        if (d.totalRow || d.avgRow) return 1;
-        return 0.2;
-      });
+      .attr('stroke-width', d => (d.avgRow ? 5 : 2))
+      .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.2));
   };
 
   // Updates labels on the right hand side
@@ -571,9 +554,7 @@ function Template(svg) {
     labels
       .transition()
       .duration(this.duration)
-      .attr('transform', d => {
-        return `translate(0, ${d.start})`;
-      })
+      .attr('transform', d => `translate(0, ${d.start})`)
       .attr('opacity', (d, i) => {
         if (this.highlight >= 0) {
           return this.highlight === i ? 1 : 0.1;
@@ -625,12 +606,7 @@ function Template(svg) {
   // Resets the scales based on the provided data on each render
   this.setScales = function() {
     // Find the min and max values and add some padding
-    this.y.max =
-      d3.max(
-        this.data.data.map(row => {
-          return d3.max(row.values.map(d => d[this.method]));
-        })
-      ) * 1.1;
+    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
 
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
 

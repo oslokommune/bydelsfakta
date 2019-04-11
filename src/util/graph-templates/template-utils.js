@@ -12,9 +12,9 @@ const util = {
 
     width = width.length === 2 ? width[1] - width[0] : width;
 
-    let computedWidth = this.getTextWidth(str, size, weight);
+    const computedWidth = this.getTextWidth(str, size, weight);
 
-    let overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
+    const overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
 
     if (overflowingCharacters) {
       str = str.substring(0, str.length - overflowingCharacters - 1);
@@ -28,7 +28,7 @@ const util = {
     let computedWidth;
 
     // create placeholder svg
-    let svg = d3.select('body').append('svg');
+    const svg = d3.select('body').append('svg');
 
     svg
       .append('text')

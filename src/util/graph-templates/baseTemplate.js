@@ -56,7 +56,7 @@ function Base_Template(svg) {
   this.formatDecimal = d3.format(',.4r');
   this.sourceHeight = 30;
   this.duration = 250;
-  this.isCompare;
+  this.isCompare = false;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
   this.format = function(num, method, tick = false) {

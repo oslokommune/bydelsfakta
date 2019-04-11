@@ -27,7 +27,7 @@ function Template(svg) {
     if (!this.commonRender(data, options)) return;
 
     this.selected =
-      options.selected == null || options.selected == undefined
+      options.selected === null || options.selected === undefined
         ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
         : options.selected;
 
@@ -72,7 +72,7 @@ function Template(svg) {
       .attr('fill', color.purple)
       .attr('transform', 'translate(10, -16)');
 
-    // Holds the pyradmid elements
+    // Holds the pyramid elements
     this.pyramid = this.canvas.append('g').attr('class', 'pyramid');
 
     // Append three yAxis groups
@@ -127,16 +127,16 @@ function Template(svg) {
       });
     }
 
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
 
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hRow1 = thead.append('tr');
-    let hRow2 = thead.append('tr');
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
 
     hRow1
       .selectAll('th')
@@ -158,7 +158,7 @@ function Template(svg) {
       .attr('headers', (d, i) => `th_1_${Math.floor(i / 2) + 1}`)
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -196,13 +196,13 @@ function Template(svg) {
   };
 
   this.drawList = function() {
-    let active = this.selected;
+    const active = this.selected;
 
-    let row = this.list
+    const row = this.list
       .selectAll('g.row')
       .data(this.data.data)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'row');
+        const g = enter.append('g').attr('class', 'row');
 
         // Create background fill for row
         g.append('rect')
@@ -227,13 +227,13 @@ function Template(svg) {
 
     row
       .select('rect.fill')
-      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
+      .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : 0))
       .on('mouseenter', function(d, i) {
-        if (i == active) return;
+        if (i === active) return;
         d3.select(this).attr('fill-opacity', 0.15);
       })
       .on('mouseleave', function(d, i) {
-        if (i == active) return;
+        if (i === active) return;
         d3.select(this).attr('fill-opacity', 0);
       });
 
@@ -252,7 +252,7 @@ function Template(svg) {
     .curve(d3.curveStep)
     .x0(() => this.x(0))
     .x1(d => {
-      if (d.gender == 'kvinne') {
+      if (d.gender === 'kvinne') {
         return this.x(d.value);
       } else {
         return this.x(-d.value);
@@ -261,17 +261,15 @@ function Template(svg) {
     .y((d, i) => this.y(i));
 
   this.drawPyramid = function() {
-    let genderData = ['mann', 'kvinne'].map(gender => {
-      return this.data.data[this.selected].values.map(d => {
-        return { gender, value: d[gender] };
-      });
+    const genderData = ['mann', 'kvinne'].map(gender => {
+      return this.data.data[this.selected].values.map(d => ({ gender, value: d[gender] }));
     });
 
-    let genderGroup = this.pyramid
+    const genderGroup = this.pyramid
       .selectAll('g.gender')
       .data(genderData)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'gender');
+        const g = enter.append('g').attr('class', 'gender');
 
         // create labels
         g.append('text')
@@ -301,14 +299,14 @@ function Template(svg) {
     // Style the path
     genderGroup
       .select('path')
-      .attr('fill', d => (d[0].gender == 'kvinne' ? color.red : color.positive))
+      .attr('fill', d => (d[0].gender === 'kvinne' ? color.red : color.positive))
       .transition()
       .duration(this.duration)
       .attr('d', this.area);
   };
 
   this.drawAxis = function() {
-    let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
+    const max = d3.max(this.data.data[this.selected].values.map(d => d.value));
     this.y
       .range([this.height, 0])
       .domain([0, 120])
@@ -328,16 +326,16 @@ function Template(svg) {
           .tickFormat(d => Math.abs(d))
       );
     this.yAxis.each((d, i, j) => {
-      if (d.type == 'left') {
+      if (d.type === 'left') {
         d3.select(j[i])
           .call(d3.axisLeft(this.y).tickFormat(d => d + ' år'))
           .selectAll('text');
-      } else if (d.type == 'right') {
+      } else if (d.type === 'right') {
         d3.select(j[i])
           .call(d3.axisRight(this.y).tickFormat(d => d + ' år'))
           .attr('transform', `translate(${this.width}, 0)`)
           .selectAll('text');
-      } else if (d.type == 'lines') {
+      } else if (d.type === 'lines') {
         let axis = d3.select(j[i]);
 
         axis.call(d3.axisLeft(this.y).tickSize(-this.width));

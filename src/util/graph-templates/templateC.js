@@ -129,7 +129,7 @@ function Template(svg) {
       .selectAll('th')
       .data(() => {
         let out = [];
-        for (var i = 0; i < this.data.meta.series.length; i++) {
+        for (let i = 0; i < this.data.meta.series.length; i++) {
           out = out.concat(dates);
         }
         return out;
@@ -418,14 +418,8 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-width', d => {
-        if (d.avgRow) return 5;
-        return 3;
-      })
-      .attr('stroke-opacity', d => {
-        if (d.totalRow || d.avgRow) return 1;
-        return 0.2;
-      });
+      .attr('stroke-width', d => (d.avgRow ? 5 : 3))
+      .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.2));
   };
 
   // Updates the labels
