@@ -31,6 +31,26 @@
         </li>
       </ul>
 
+      <header class="navigation-header">
+        <select
+          id="navigation-drawer-select"
+          class="navigation-header__select"
+          v-model="selectedPredefinedOption"
+          v-if="compareDistricts"
+        >
+          <option
+            v-for="(element, index) in options"
+            :key="index"
+            :value="element.option"
+            :selected="element.selected"
+            :disabled="element.disabled"
+            >{{ element.label }}</option
+          >
+        </select>
+        <span v-else>
+          Velg en bydel
+        </span>
+      </header>
       <ul class="navigation-list">
         <li
           v-for="link in links"
@@ -320,7 +340,45 @@ $rowHeight: 2.5em;
     padding: 0 1em;
 
     @media screen and (min-width: $break-lg) {
+      margin: 0;
       padding: 0;
+    }
+  }
+
+  &-header {
+    align-items: center;
+    border-bottom: 1px solid darken($color-border, 20%);
+    display: flex;
+    font-weight: 500;
+    height: 4rem;
+    margin-bottom: 0.5rem;
+    padding: 1em 0 0.5rem;
+    padding-left: 46px;
+
+    & > select {
+      border: 1px solid rgba(black, 0.1);
+      border-radius: 1px;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      position: relative;
+      width: 100%;
+
+      &::after {
+        background: red;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        z-index: 2;
+      }
+    }
+
+    & > span {
+      padding: 1rem 0;
     }
   }
 }
@@ -543,7 +601,7 @@ input[type='checkbox'] {
   width: 100%;
 
   &::after {
-    background: $color-border;
+    background: darken($color-border, 20%);
     bottom: -5px;
     content: '';
     display: block;
