@@ -293,7 +293,8 @@ function Template(svg) {
         }
       })
       .style('text-decoration', d => {
-        if ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow)) {
+        const isDistrict = util.allDistricts.some(district => district.value === d.geography);
+        if ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) || isDistrict) {
           return 'underline';
         } else {
           return false;
@@ -481,7 +482,10 @@ function Template(svg) {
       .style('display', () => {
         return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
       })
-      .text(d => d.heading)
+      .text((d, i) => {
+        const colWidth = this.x[i].range()[1] - this.x[i].range()[0];
+        return util.truncate(d.heading, colWidth);
+      })
       .append('title')
       .html(d => d.heading);
 

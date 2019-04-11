@@ -178,9 +178,12 @@ function Template(svg) {
 
     headRow
       .selectAll('th')
-      .data(() => {
-        return ['Geografi', ...this.data.meta.series];
-      })
+      .data(() => [
+        'Geografi',
+        ...this.data.meta.series.map(serie => {
+          return `${serie.heading} ${serie.subheading}`;
+        }),
+      ])
       .join('th')
       .attr('scope', 'col')
       .text(d => d);

@@ -69,6 +69,8 @@ const util = {
       },
     });
   },
+
+  allDistricts: allDistricts,
 };
 
 export default util;

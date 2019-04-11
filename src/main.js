@@ -4,10 +4,10 @@ import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
+import './util/polyfills';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-
 import clickOutside from './directives/clickOutside';
 
 import 'vue-resize/dist/vue-resize.css';

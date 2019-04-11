@@ -86,8 +86,8 @@ export default {
   display: flex;
   flex: 17.5em 1 0;
   flex-direction: column;
-  height: 6em;
   margin: 0;
+  min-height: 6em;
   overflow: hidden;
   padding: 1em;
   position: relative;
@@ -105,11 +105,11 @@ export default {
   }
 
   @media screen and (min-width: $break-sm) {
-    height: 8em;
+    height: 9em;
   }
 
   @media screen and (min-width: $break-md) {
-    height: 9em;
+    height: 9.5em;
   }
 
   // Fallback to flexbox
