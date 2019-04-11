@@ -12,7 +12,7 @@ import d3 from '@/assets/d3';
 import positionLabels from '../positionLabels';
 
 function intersects(a, b) {
-  var det, gamma, lambda;
+  let det, gamma, lambda;
   det = (a.x2 - a.x1) * (b.y2 - b.y1) - (b.x2 - b.x1) * (a.y2 - a.y1);
   if (det === 0) {
     return false;
@@ -38,15 +38,9 @@ function Template(svg) {
         return geo;
       })
       .filter(d => {
-        if (this.method === 'value' && (d.avgRow || d.totalRow)) {
-          return false;
-        } else {
-          return true;
-        }
+        return !(this.method === 'value' && (d.avgRow || d.totalRow));
       })
-      .sort((a, b) => {
-        return b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method];
-      });
+      .sort((a, b) => b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method]);
 
     this.width = d3.max([this.width, 300]);
     this.height = d3.max([480, this.width * 0.5]);
@@ -83,9 +77,7 @@ function Template(svg) {
     .line()
     .curve(d3.curveCardinal)
     .x(d => this.x(this.parseYear(d.date)))
-    .y(d => {
-      return this.y(d[this.method]);
-    });
+    .y(d => this.y(d[this.method]));
 
   this.drawVoronoi = function() {
     const flattenData = this.data.data
@@ -98,9 +90,7 @@ function Template(svg) {
       .x(d => this.x(this.parseYear(d['date'])))
       .y(d => this.y(d.value))
       .polygons(flattenData)
-      .filter(d => {
-        if (d) return d;
-      })
+      .filter(d => (d ? d : false))
       .map(arr => {
         arr.forEach((d, i) => {
           d[0] = Math.round(d[0]);
@@ -115,10 +105,7 @@ function Template(svg) {
       .selectAll('path')
       .data(voronoiData)
       .join('path')
-      .attr('d', d => {
-        const path = 'M' + d.join('L') + 'Z';
-        return path;
-      })
+      .attr('d', d => 'M' + d.join('L') + 'Z')
       .attr('fill-opacity', 0);
 
     // Highlight a geography when hovering the chart. If the
@@ -332,11 +319,7 @@ function Template(svg) {
 
         // Move the label to the target position if there's
         // no collisions, or remove it if there are any.
-        if (collisions < 2) {
-          el.attr('transform', `translate(${target.x}, ${target.y})`);
-        } else {
-          el.remove();
-        }
+        collisions < 2 ? el.attr('transform', `translate(${target.x}, ${target.y})`) : el.remove();
       });
 
     label
@@ -446,10 +429,7 @@ function Template(svg) {
     this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .attr('opacity', d => {
-        if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
-      });
+      .attr('opacity', d => (d.avgRow || d.totalRow ? 1 : 0.45));
 
     this.canvas.selectAll('text.direct').attr('opacity', 0.6);
 
@@ -457,22 +437,13 @@ function Template(svg) {
       .select('g.labels')
       .selectAll('g.label')
       .select('text')
-      .attr('font-weight', d => {
-        if (d.avgRow || d.totalRow) return 700;
-        return 400;
-      });
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
 
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-width', d => {
-        if (d.avgRow) return 5;
-        return 2;
-      })
-      .attr('stroke-opacity', d => {
-        if (d.totalRow || d.avgRow) return 1;
-        return 0.2;
-      });
+      .attr('stroke-width', d => (d.avgRow ? 5 : 2))
+      .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.2));
   };
 
   // Updates labels on the right hand side
@@ -541,14 +512,8 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', d => {
-        if (d.totalRow) return 'black';
-        if (d.avgRow) return color.yellow;
-        return d.color;
-      })
-      .style('stroke-dasharray', d => {
-        if (d.totalRow) return '2,1';
-      });
+      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
+      .style('stroke-dasharray', d => (d.totalRow ? '2,1' : false));
 
     // Update the text string and position.
     // Default opacity is low to allow labels overlapping
@@ -571,9 +536,7 @@ function Template(svg) {
     labels
       .transition()
       .duration(this.duration)
-      .attr('transform', d => {
-        return `translate(0, ${d.start})`;
-      })
+      .attr('transform', d => `translate(0, ${d.start})`)
       .attr('opacity', (d, i) => {
         if (this.highlight >= 0) {
           return this.highlight === i ? 1 : 0.1;
@@ -601,36 +564,21 @@ function Template(svg) {
       .duration(250)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
-      .attr('stroke', d => {
-        if (d.totalRow) return 'black';
-        if (d.avgRow) return color.yellow;
-        return d.color;
-      })
-      .attr('stroke-width', (d, i) => {
-        if (this.highlight === i) return 5;
-        if (d.avgRow) return 5;
-        return 2;
-      })
+      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
+      .attr('stroke-width', (d, i) => (this.highlight === i ? 5 : d.avgRow ? 5 : 2))
       .attr('stroke-opacity', (d, i) => {
         if (this.highlight >= 0 && this.highlight !== i) return 0.1;
         if (this.highlight >= 0 && this.highlight === i) return 1;
         if (d.totalRow || d.avgRow) return 1;
         return 0.2;
       })
-      .style('stroke-dasharray', d => {
-        if (d.totalRow) return '4,3';
-      });
+      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false));
   };
 
   // Resets the scales based on the provided data on each render
   this.setScales = function() {
     // Find the min and max values and add some padding
-    this.y.max =
-      d3.max(
-        this.data.data.map(row => {
-          return d3.max(row.values.map(d => d[this.method]));
-        })
-      ) * 1.1;
+    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
 
     this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
 

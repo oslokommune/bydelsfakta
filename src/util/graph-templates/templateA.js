@@ -56,9 +56,9 @@ function Template(svg) {
 
     if (this.selected > -1) {
       this.filteredData.meta.series = [this.data.meta.series[this.selected]];
-      this.filteredData.data = this.filteredData.data.map(bydel => {
-        bydel.values = [bydel.values[this.selected]];
-        return bydel;
+      this.filteredData.data = this.filteredData.data.map(district => {
+        district.values = [district.values[this.selected]];
+        return district;
       });
     }
 
@@ -70,9 +70,7 @@ function Template(svg) {
     // Move the close button
     this.canvas
       .select('g.close')
-      .style('display', () => {
-        return this.selected > -1 ? 'block' : 'none';
-      })
+      .style('display', () => (this.selected > -1 ? 'block' : 'none'))
       .attr('transform', `translate(${this.width - 30}, -60)`)
       .attr('tabindex', this.selected === -1 ? false : 0);
 
@@ -135,7 +133,7 @@ function Template(svg) {
   };
 
   /**
-   * @param  {nodelist} rowsE - The newly created rows
+   * @param  {element} rowsE - The newly created rows
    *
    * Creates all the DOM elements inside of each row
    */
@@ -256,13 +254,7 @@ function Template(svg) {
       })
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    rows.select('text.valueText').text(d => {
-      if (d.values.length === 0) {
-        return 'Ikke tilgjengelig';
-      } else {
-        return '';
-      }
-    });
+    rows.select('text.valueText').text(d => (d.values.length === 0 ? 'Ikke tilgjengelig' : ''));
 
     rows
       .select('text.geography')
@@ -277,28 +269,16 @@ function Template(svg) {
         if (this.isMobileView) return 0;
         return this.data.meta.series.length > 1 ? -this.padding.left + 10 : -10;
       })
-      .attr('y', () => {
-        return this.isMobileView ? 15 : this.rowHeight / 2 + 4;
-      })
+      .attr('y', () => (this.isMobileView ? 15 : this.rowHeight / 2 + 4))
       .attr('text-anchor', () => {
         if (this.isMobileView) return 'start';
         if (this.data.meta.series.length > 1) return 'start';
         return 'end';
       })
-      .style('cursor', d => {
-        if ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow)) {
-          return 'pointer';
-        } else {
-          return false;
-        }
-      })
+      .style('cursor', d => ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) ? 'pointer' : false))
       .style('text-decoration', d => {
         const isDistrict = util.allDistricts.some(district => district.value === d.geography);
-        if ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) || isDistrict) {
-          return 'underline';
-        } else {
-          return false;
-        }
+        return (this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) || isDistrict ? 'underline' : false;
       });
 
     rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
@@ -309,11 +289,7 @@ function Template(svg) {
       .html(d => d.geography);
 
     // Add attributes to total and avg rows
-    rows.attr('fill', d => {
-      if (d.avgRow) return color.yellow;
-      if (d.totalRow) return color.purple;
-      return color.purple;
-    });
+    rows.attr('fill', d => (d.avgRow ? color.yellow : d.totalRow ? color.purple : color.purple));
 
     const bars = rows
       .selectAll('rect.bar')
@@ -333,9 +309,9 @@ function Template(svg) {
           return j[0].parentNode.__data__.totalRow ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
         }
       })
-      .attr('opacity', (d, i) => {
-        return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-      })
+      .attr('opacity', (d, i) =>
+        i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2
+      )
       .transition()
       .duration(this.duration)
       .attr('width', (d, i) => {
@@ -451,9 +427,7 @@ function Template(svg) {
 
     columns
       .select('rect.clickTrigger')
-      .style('cursor', () => {
-        if (this.data.meta.series.length > 1) return 'pointer';
-      })
+      .style('cursor', () => (this.data.meta.series.length > 1 ? 'pointer' : 'default'))
       .attr('width', (d, i) => {
         if (this.data.meta.series.length === 1) return 0;
         return this.x[i].range()[1] - this.x[i].range()[0] + this.gutter;
@@ -479,9 +453,7 @@ function Template(svg) {
 
     columns
       .select('text.colHeading')
-      .style('display', () => {
-        return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
-      })
+      .style('display', () => (this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none'))
       .text((d, i) => {
         const colWidth = this.x[i].range()[1] - this.x[i].range()[0];
         return util.truncate(d.heading, colWidth);
@@ -492,19 +464,21 @@ function Template(svg) {
     columns
       .select('text.colSubheading')
       .text((d, i) => util.truncate(d.subheading, this.x[i].range()))
-      .style('display', () => {
-        return this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none';
-      })
+      .style('display', () => (this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none'))
       .append('title')
       .html(d => d.subheading);
 
-    columns.select('text.colHeading').attr('opacity', (d, i) => {
-      return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-    });
+    columns
+      .select('text.colHeading')
+      .attr('opacity', (d, i) =>
+        i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2
+      );
 
-    columns.select('text.colSubheading').attr('opacity', (d, i) => {
-      return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-    });
+    columns
+      .select('text.colSubheading')
+      .attr('opacity', (d, i) =>
+        i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2
+      );
 
     columns
       .select('rect.colFill')
@@ -537,10 +511,7 @@ function Template(svg) {
       .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
       .transition()
       .duration(this.duration)
-      .attr('y', () => {
-        const indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
-        return indexOfTotalRow * this.rowHeight;
-      })
+      .attr('y', () => this.filteredData.data.findIndex(d => d.totalRow) * this.rowHeight)
       .attr('x', (d, i) => {
         let val;
         const totalRow = this.filteredData.data.find(d => d.totalRow);
