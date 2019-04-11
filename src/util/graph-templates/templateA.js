@@ -56,9 +56,9 @@ function Template(svg) {
 
     if (this.selected > -1) {
       this.filteredData.meta.series = [this.data.meta.series[this.selected]];
-      this.filteredData.data = this.filteredData.data.map(bydel => {
-        bydel.values = [bydel.values[this.selected]];
-        return bydel;
+      this.filteredData.data = this.filteredData.data.map(district => {
+        district.values = [district.values[this.selected]];
+        return district;
       });
     }
 
@@ -289,11 +289,7 @@ function Template(svg) {
       .html(d => d.geography);
 
     // Add attributes to total and avg rows
-    rows.attr('fill', d => {
-      if (d.avgRow) return color.yellow;
-      if (d.totalRow) return color.purple;
-      return color.purple;
-    });
+    rows.attr('fill', d => (d.avgRow ? color.yellow : d.totalRow ? color.purple : color.purple));
 
     const bars = rows
       .selectAll('rect.bar')
@@ -431,9 +427,7 @@ function Template(svg) {
 
     columns
       .select('rect.clickTrigger')
-      .style('cursor', () => {
-        if (this.data.meta.series.length > 1) return 'pointer';
-      })
+      .style('cursor', () => (this.data.meta.series.length > 1 ? 'pointer' : 'default'))
       .attr('width', (d, i) => {
         if (this.data.meta.series.length === 1) return 0;
         return this.x[i].range()[1] - this.x[i].range()[0] + this.gutter;
@@ -474,13 +468,17 @@ function Template(svg) {
       .append('title')
       .html(d => d.subheading);
 
-    columns.select('text.colHeading').attr('opacity', (d, i) => {
-      return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-    });
+    columns
+      .select('text.colHeading')
+      .attr('opacity', (d, i) =>
+        i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2
+      );
 
-    columns.select('text.colSubheading').attr('opacity', (d, i) => {
-      return i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2;
-    });
+    columns
+      .select('text.colSubheading')
+      .attr('opacity', (d, i) =>
+        i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2
+      );
 
     columns
       .select('rect.colFill')
@@ -513,10 +511,7 @@ function Template(svg) {
       .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
       .transition()
       .duration(this.duration)
-      .attr('y', () => {
-        const indexOfTotalRow = this.filteredData.data.findIndex(d => d.totalRow);
-        return indexOfTotalRow * this.rowHeight;
-      })
+      .attr('y', () => this.filteredData.data.findIndex(d => d.totalRow) * this.rowHeight)
       .attr('x', (d, i) => {
         let val;
         const totalRow = this.filteredData.data.find(d => d.totalRow);

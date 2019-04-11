@@ -311,15 +311,7 @@ function Template(svg) {
       .attr('width', 16)
       .attr('rx', 3)
       // Cheap trick to ensure correct colors on the legend
-      .attr('fill', (d, i) => {
-        if (i === 0) {
-          return this.colors(1);
-        } else if (i === 1) {
-          return this.colors(0);
-        } else {
-          return this.colors(i);
-        }
-      });
+      .attr('fill', (d, i) => (i === 0 ? this.colors(1) : i === 1 ? this.colors(0) : this.colors(i)));
     groupE.append('text').attr('y', 8);
 
     // Update the label for each series in the legend

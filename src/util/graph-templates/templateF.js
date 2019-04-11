@@ -47,11 +47,7 @@ function Template(svg) {
 
         return district;
       })
-      .sort((a, b) => {
-        if (b.totalRow) return -3;
-        if (b.avgRow) return -2;
-        return a.mean - b.mean;
-      });
+      .sort((a, b) => (b.totalRow ? -3 : b.avgRow ? -2 : a.mean - b.mean));
 
     this.svg
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)

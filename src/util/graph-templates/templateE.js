@@ -251,19 +251,13 @@ function Template(svg) {
     .area()
     .curve(d3.curveStep)
     .x0(() => this.x(0))
-    .x1(d => {
-      if (d.gender === 'kvinne') {
-        return this.x(d.value);
-      } else {
-        return this.x(-d.value);
-      }
-    })
+    .x1(d => (d.gender === 'kvinne' ? this.x(d.value) : this.x(-d.value)))
     .y((d, i) => this.y(i));
 
   this.drawPyramid = function() {
-    const genderData = ['mann', 'kvinne'].map(gender => {
-      return this.data.data[this.selected].values.map(d => ({ gender, value: d[gender] }));
-    });
+    const genderData = ['mann', 'kvinne'].map(gender =>
+      this.data.data[this.selected].values.map(d => ({ gender, value: d[gender] }))
+    );
 
     const genderGroup = this.pyramid
       .selectAll('g.gender')

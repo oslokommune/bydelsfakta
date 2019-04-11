@@ -525,8 +525,8 @@ function Template(svg) {
     // Update position of the dot (group)
     dot
       .attr('transform', d => {
-        let pos_y = y(d.values[1].ratio);
-        let pos_x = x(d.values[2].ratio - d.values[0].ratio);
+        const pos_y = y(d.values[1].ratio);
+        const pos_x = x(d.values[2].ratio - d.values[0].ratio);
         return `translate(${pos_x}, ${pos_y})`;
       })
       .attr('data-x', d => x(d.values[2].ratio - d.values[0].ratio))

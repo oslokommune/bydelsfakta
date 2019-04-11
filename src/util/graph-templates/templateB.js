@@ -12,7 +12,7 @@ import d3 from '@/assets/d3';
 import positionLabels from '../positionLabels';
 
 function intersects(a, b) {
-  var det, gamma, lambda;
+  let det, gamma, lambda;
   det = (a.x2 - a.x1) * (b.y2 - b.y1) - (b.x2 - b.x1) * (a.y2 - a.y1);
   if (det === 0) {
     return false;
@@ -100,9 +100,7 @@ function Template(svg) {
       .x(d => this.x(this.parseYear(d['date'])))
       .y(d => this.y(d.value))
       .polygons(flattenData)
-      .filter(d => {
-        if (d) return d;
-      })
+      .filter(d => (d ? d : false))
       .map(arr => {
         arr.forEach((d, i) => {
           d[0] = Math.round(d[0]);
@@ -524,14 +522,8 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', d => {
-        if (d.totalRow) return 'black';
-        if (d.avgRow) return color.yellow;
-        return d.color;
-      })
-      .style('stroke-dasharray', d => {
-        if (d.totalRow) return '2,1';
-      });
+      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
+      .style('stroke-dasharray', d => (d.totalRow ? '2,1' : false));
 
     // Update the text string and position.
     // Default opacity is low to allow labels overlapping
@@ -582,25 +574,15 @@ function Template(svg) {
       .duration(250)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
-      .attr('stroke', d => {
-        if (d.totalRow) return 'black';
-        if (d.avgRow) return color.yellow;
-        return d.color;
-      })
-      .attr('stroke-width', (d, i) => {
-        if (this.highlight === i) return 5;
-        if (d.avgRow) return 5;
-        return 2;
-      })
+      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
+      .attr('stroke-width', (d, i) => (this.highlight === i ? 5 : d.avgRow ? 5 : 2))
       .attr('stroke-opacity', (d, i) => {
         if (this.highlight >= 0 && this.highlight !== i) return 0.1;
         if (this.highlight >= 0 && this.highlight === i) return 1;
         if (d.totalRow || d.avgRow) return 1;
         return 0.2;
       })
-      .style('stroke-dasharray', d => {
-        if (d.totalRow) return '4,3';
-      });
+      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false));
   };
 
   // Resets the scales based on the provided data on each render

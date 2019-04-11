@@ -281,7 +281,7 @@ function Template(svg) {
   // Creates the styled age selector as normal HTML
   // as sibling element to the SVG.
   this.createAgeSelector = function() {
-    let parent = d3.select(this.svg.node().parentNode.parentNode);
+    const parent = d3.select(this.svg.node().parentNode.parentNode);
     this.dropDownParent = parent
       .insert('div')
       .attr('class', 'graph__dropdown')
@@ -293,7 +293,7 @@ function Template(svg) {
       .attr('class', 'graph__dropdown__label')
       .html('Velg segment');
 
-    let selectElement = this.dropDownParent
+    const selectElement = this.dropDownParent
       .insert('select')
       .attr('aria-hidden', true)
       .attr('id', 'age_selector')
@@ -395,14 +395,14 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hrow = thead.append('tr');
+    const hrow = thead.append('tr');
 
     hrow
       .selectAll('th')
@@ -411,7 +411,7 @@ function Template(svg) {
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -443,11 +443,11 @@ function Template(svg) {
 
   // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
-    let rows = this.lower
+    const rows = this.lower
       .selectAll('g.row')
       .data(this.data.data, d => d.geography)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'row');
+        const g = enter.append('g').attr('class', 'row');
         g.append('rect')
           .attr('class', 'rowFill')
           .attr('fill', color.purple)
@@ -486,7 +486,7 @@ function Template(svg) {
       .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => d.geography);
     rows.select('text.value').text(district => {
-      let sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+      const sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
 
       this.method === 'ratio' ? this.format(sum, this.method) : d3.format(',d')(sum);
     });
@@ -515,7 +515,7 @@ function Template(svg) {
     rows
       .select('rect.bar')
       .on('mousemove', d => {
-        let sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
+        const sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
         this.showTooltip(sum, d3.event);
       })
       .on('mouseleave', () => {
@@ -538,13 +538,10 @@ function Template(svg) {
   // Draws/updates lines in the line chart. Triggered each render
   this.drawLines = function() {
     // Select lines
-    let lines = this.upper.selectAll('path.line').data(
-      this.data.data.filter(d => {
-        if (this.method == 'ratio') return d;
-        return !d.avgRow && !d.totalRow;
-      })
-    );
-    let linesE = lines
+    let lines = this.upper
+      .selectAll('path.line')
+      .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)));
+    const linesE = lines
       .enter()
       .append('path')
       .attr('class', 'line')
@@ -564,9 +561,7 @@ function Template(svg) {
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
       .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
-      .style('stroke-dasharray', d => {
-        if (d.totalRow && this.method === 'ratio') return '4,3';
-      });
+      .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
   };
 
   // Finds the larges accumulated number within the selected range
