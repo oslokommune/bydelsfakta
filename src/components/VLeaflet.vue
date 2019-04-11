@@ -112,9 +112,9 @@ export default {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
         const dataObj = data.find(geo => geo.geography === layerId);
-        const geography = dataObj.geography;
+        if (!dataObj || !dataObj.values || !dataObj.values.length) return;
 
-        if (!dataObj.values || !dataObj.values.length) return;
+        const geography = dataObj.geography;
 
         // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
