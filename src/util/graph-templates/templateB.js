@@ -32,10 +32,17 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    this.data.data
+    this.data.data = this.data.data
       .map((geo, i, j) => {
         geo.color = d3.interpolateRainbow(i / j.length);
         return geo;
+      })
+      .filter(d => {
+        if (this.method === 'value' && (d.avgRow || d.totalRow)) {
+          return false;
+        } else {
+          return true;
+        }
       })
       .sort((a, b) => {
         return b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method];
