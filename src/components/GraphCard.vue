@@ -127,11 +127,11 @@
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
+import * as d3 from 'd3';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import tableToCsv from '../util/tableToCsv';
 import VLeaflet from './VLeaflet.vue';
-import * as d3 from 'd3';
 
 export default {
   name: 'GraphCard',
