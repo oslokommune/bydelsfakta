@@ -31,8 +31,8 @@ function Template(svg) {
 
   function sortData(input, method) {
     input.sort((a, b) => {
-      let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
-      let totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
+      const totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
+      const totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
       return totB - totA;
     });
 
@@ -93,10 +93,10 @@ function Template(svg) {
     }
 
     // Find the larges accumulated number within the selected range
-    let maxAccumulated = this.getMaxAccumulated();
+    const maxAccumulated = this.getMaxAccumulated();
 
     // Find the largest single age to scale y axis behind brush within the selected range
-    let max = this.getMax();
+    const max = this.getMax();
 
     // Set axis and scales based on these max values (for the bars()
     this.y
@@ -241,11 +241,11 @@ function Template(svg) {
       .append('path')
       .attr('fill', color.purple)
       .style('pointer-events', 'none')
-      .attr('d', d => {
-        return d.type === 'e'
+      .attr('d', d =>
+        d.type === 'e'
           ? 'M0 0h11c6 0 10 4 10 10v17c0 6-4 10-10 10H0V0z'
-          : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z';
-      });
+          : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z'
+      );
 
     this.handle
       .append('rect')
@@ -281,7 +281,7 @@ function Template(svg) {
   // Creates the styled age selector as normal HTML
   // as sibling element to the SVG.
   this.createAgeSelector = function() {
-    let parent = d3.select(this.svg.node().parentNode.parentNode);
+    const parent = d3.select(this.svg.node().parentNode.parentNode);
     this.dropDownParent = parent
       .insert('div')
       .attr('class', 'graph__dropdown')
@@ -293,7 +293,7 @@ function Template(svg) {
       .attr('class', 'graph__dropdown__label')
       .html('Velg segment');
 
-    let selectElement = this.dropDownParent
+    const selectElement = this.dropDownParent
       .insert('select')
       .attr('aria-hidden', true)
       .attr('id', 'age_selector')
@@ -395,14 +395,14 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hrow = thead.append('tr');
+    const hrow = thead.append('tr');
 
     hrow
       .selectAll('th')
@@ -411,7 +411,7 @@ function Template(svg) {
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -443,11 +443,11 @@ function Template(svg) {
 
   // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
-    let rows = this.lower
+    const rows = this.lower
       .selectAll('g.row')
       .data(this.data.data, d => d.geography)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'row');
+        const g = enter.append('g').attr('class', 'row');
         g.append('rect')
           .attr('class', 'rowFill')
           .attr('fill', color.purple)
@@ -485,13 +485,10 @@ function Template(svg) {
       .delay(this.duration)
       .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => d.geography);
-    rows.select('text.value').text(bydel => {
-      let sum = d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-      if (this.method === 'ratio') {
-        return this.format(sum, this.method);
-      } else {
-        return d3.format(',d')(sum);
-      }
+    rows.select('text.value').text(district => {
+      const sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+
+      return this.method === 'ratio' ? this.format(sum, this.method) : d3.format(',d')(sum);
     });
 
     rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);
@@ -501,12 +498,12 @@ function Template(svg) {
       .select('rect.bar')
       .transition()
       .duration(this.duration)
-      .attr('width', bydel => {
-        if (this.method == 'value' && (bydel.avgRow || bydel.totalRow)) {
+      .attr('width', district => {
+        if (this.method === 'value' && (district.avgRow || district.totalRow)) {
           return 0;
         }
         return this.x(
-          d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]))
+          d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]))
         );
       })
       .attr('x', this.paddingLowerLeft)
@@ -518,7 +515,7 @@ function Template(svg) {
     rows
       .select('rect.bar')
       .on('mousemove', d => {
-        let sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
+        const sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
         this.showTooltip(sum, d3.event);
       })
       .on('mouseleave', () => {
@@ -541,13 +538,10 @@ function Template(svg) {
   // Draws/updates lines in the line chart. Triggered each render
   this.drawLines = function() {
     // Select lines
-    let lines = this.upper.selectAll('path.line').data(
-      this.data.data.filter(d => {
-        if (this.method == 'ratio') return d;
-        return !d.avgRow && !d.totalRow;
-      })
-    );
-    let linesE = lines
+    let lines = this.upper
+      .selectAll('path.line')
+      .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)));
+    const linesE = lines
       .enter()
       .append('path')
       .attr('class', 'line')
@@ -567,9 +561,7 @@ function Template(svg) {
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
       .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
-      .style('stroke-dasharray', d => {
-        if (d.totalRow && this.method === 'ratio') return '4,3';
-      });
+      .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
   };
 
   // Finds the larges accumulated number within the selected range
@@ -577,15 +569,9 @@ function Template(svg) {
     return (
       d3.max(
         this.data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel =>
-            d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
+          .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
+          .map(district =>
+            d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
           )
       ) * 1.05
     );
@@ -596,14 +582,8 @@ function Template(svg) {
     return (
       d3.max(
         this.data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
+          .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
+          .map(district => d3.max(district.values.map(val => val[this.method])))
       ) * 1.05
     );
   };

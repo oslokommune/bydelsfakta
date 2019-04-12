@@ -23,20 +23,22 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    this.data.data.map((geo, i, j) => {
-      geo.color = d3.interpolateRainbow(i / j.length);
-      return geo;
-    });
+    this.data.data = this.data.data
+      .map((geo, i, j) => {
+        geo.color = d3.interpolateRainbow(i / j.length);
+        return geo;
+      })
+      .filter(d => {
+        return !(this.method === 'value' && (d.avgRow || d.totalRow));
+      })
+      .sort((a, b) => {
+        return (
+          b.values[this.series][b.values[this.series].length - 1][this.method] -
+          a.values[this.series][a.values[this.series].length - 1][this.method]
+        );
+      });
 
     this.width = d3.max([this.width, 300]);
-
-    this.data.data = this.data.data.sort((a, b) => {
-      return (
-        b.values[this.series][b.values[this.series].length - 1][this.method] -
-        a.values[this.series][a.values[this.series].length - 1][this.method]
-      );
-    });
-
     this.height = 500;
     this.svg
       .transition()
@@ -123,7 +125,7 @@ function Template(svg) {
       .selectAll('th')
       .data(() => {
         let out = [];
-        for (var i = 0; i < this.data.meta.series.length; i++) {
+        for (let i = 0; i < this.data.meta.series.length; i++) {
           out = out.concat(dates);
         }
         return out;
@@ -176,11 +178,7 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => {
-        if (d && d[this.method]) {
-          return this.format(d[this.method], this.method);
-        }
-      })
+      .text(d => (d && d[this.method] ? this.format(d[this.method], this.method) : false))
       .attr('x', d => this.x(this.parseYear(d.date)))
       .attr('y', d => this.y(d[this.method]))
       .attr('font-size', 11)
@@ -404,22 +402,13 @@ function Template(svg) {
       .select('g.labels')
       .selectAll('g.label')
       .select('text')
-      .attr('font-weight', d => {
-        if (d.avgRow || d.totalRow) return 700;
-        return 400;
-      });
+      .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
 
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-width', d => {
-        if (d.avgRow) return 5;
-        return 3;
-      })
-      .attr('stroke-opacity', d => {
-        if (d.totalRow || d.avgRow) return 1;
-        return 0.2;
-      });
+      .attr('stroke-width', d => (d.avgRow ? 5 : 3))
+      .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.2));
   };
 
   // Updates the labels
@@ -492,14 +481,8 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', d => {
-        if (d.totalRow) return 'black';
-        if (d.avgRow) return color.yellow;
-        return d.color;
-      })
-      .style('stroke-dasharray', d => {
-        if (d.totalRow) return '2,1';
-      });
+      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
+      .style('stroke-dasharray', d => (d.totalRow ? '2,1' : false));
 
     // Style the text label element
     labels
@@ -550,25 +533,15 @@ function Template(svg) {
       .duration(100)
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values[this.series]))
-      .attr('stroke', d => {
-        if (d.avgRow) return color.yellow;
-        if (d.totalRow) return 'black';
-        return d.color;
-      })
-      .attr('stroke-width', (d, i) => {
-        if (this.highlight === i) return 6;
-        if (d.avgRow) return 6;
-        return 3;
-      })
+      .attr('stroke', d => (d.avgRow ? color.yellow : d.totalRow ? 'black' : d.color))
+      .attr('stroke-width', (d, i) => (this.highlight === i ? 6 : d.avgRow ? 6 : 3))
       .attr('stroke-opacity', (d, i) => {
         if (this.highlight >= 0 && this.highlight !== i) return 0.2;
-        if (this.highlight >= 0 && this.highlight === i) return 1;
-        if (d.totalRow || d.avgRow) return 1;
+        else if (this.highlight >= 0 && this.highlight === i) return 1;
+        else if (d.totalRow || d.avgRow) return 1;
         return 0.3;
       })
-      .style('stroke-dasharray', d => {
-        if (d.totalRow) return '4,3';
-      });
+      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false));
   };
 
   this.setScales = function() {

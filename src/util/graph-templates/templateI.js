@@ -164,28 +164,31 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let headRow = thead
+    const headRow = thead
       .selectAll('tr')
       .data([0])
       .join('tr');
 
     headRow
       .selectAll('th')
-      .data(() => {
-        return ['Geografi', ...this.data.meta.series];
-      })
+      .data(() => [
+        'Geografi',
+        ...this.data.meta.series.map(serie => {
+          return `${serie.heading} ${serie.subheading}`;
+        }),
+      ])
       .join('th')
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -207,11 +210,11 @@ function Template(svg) {
   };
 
   this.drawList = function() {
-    let active = this.selected;
-    let dots = this.dotContainer.selectAll('g');
+    const active = this.selected;
+    const dots = this.dotContainer.selectAll('g');
 
     let row = this.list.selectAll('g.row').data(this.data.data);
-    let rowE = row
+    const rowE = row
       .enter()
       .append('g')
       .attr('class', 'row');
@@ -243,22 +246,22 @@ function Template(svg) {
 
     row
       .select('rect.fill')
-      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
+      .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : 0))
       .on('mouseenter', function(d, i) {
-        if (i == active) return;
+        if (i === active) return;
         d3.select(this).attr('fill-opacity', 0.25);
         dots
-          .filter((d, index) => i == index)
+          .filter((d, index) => i === index)
           .select('circle')
           .attr('r', 8)
           .attr('fill-opacity', 1)
           .attr('stroke-opacity', 1);
       })
       .on('mouseleave', function(d, i) {
-        if (i == active) return;
+        if (i === active) return;
         d3.select(this).attr('fill-opacity', 0);
         dots
-          .filter((d, index) => i == index)
+          .filter((d, index) => i === index)
           .select('circle')
           .attr('r', 6)
           .attr('fill-opacity', fillOpacity)
@@ -276,7 +279,7 @@ function Template(svg) {
   };
 
   this.drawValues = function() {
-    let values = this.values.attr('transform', `translate(${x(0)}, ${y(0.333)})`).selectAll('g');
+    const values = this.values.attr('transform', `translate(${x(0)}, ${y(0.333)})`).selectAll('g');
 
     values.attr(`transform`, (d, i) => {
       if (i === 1) {
@@ -398,7 +401,7 @@ function Template(svg) {
     this.arrows.attr('transform', `translate(${x(0)},${y(0.333)})`);
 
     // Create the arrow parent and arrow DOM elements
-    let arrow = this.arrows
+    const arrow = this.arrows
       .selectAll('g.arrow')
       .data([1, 3, 5])
       .join(enter => {
@@ -472,19 +475,19 @@ function Template(svg) {
 
     // Find the node element on the selected index
     // and store its coordinates (m, n)
-    let el = this.dotContainer.selectAll('g').filter((d, i) => i == this.selected);
-    let circ = el.select('circle');
-    let m = +el.attr('data-x');
-    let n = +el.attr('data-y');
+    const el = this.dotContainer.selectAll('g').filter((d, i) => i === this.selected);
+    const circ = el.select('circle');
+    const m = +el.attr('data-x');
+    const n = +el.attr('data-y');
 
-    let xx = d3
+    const xx = d3
       .scaleLinear()
       .range([-1, 1])
       .domain([1, 0]);
 
     // Generate the data to draw the guide lines
     // based on the coordinates of the selected node
-    let lineData = [
+    const lineData = [
       [{ x: x.invert(m), y: y.invert(n) }, { x: xx(circ.attr('data-0')), y: 0 }],
       [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-1') - 1, y: circ.attr('data-1') }],
       [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-2'), y: 1 - circ.attr('data-2') }],
@@ -494,7 +497,7 @@ function Template(svg) {
     // the guide lines using the lineData
     let lines = this.lineContainer.selectAll('path.lines').data(lineData);
     lines.exit().remove();
-    let linesE = lines
+    const linesE = lines
       .enter()
       .append('path')
       .attr('class', 'lines');
@@ -515,15 +518,15 @@ function Template(svg) {
     // Create dots (groups)
     let dot = this.dotContainer.selectAll('g').data(this.data.data);
     dot.exit().remove();
-    let dotE = dot.enter().append('g');
+    const dotE = dot.enter().append('g');
     dotE.append('circle');
     dot = dot.merge(dotE);
 
     // Update position of the dot (group)
     dot
       .attr('transform', d => {
-        let pos_y = y(d.values[1].ratio);
-        let pos_x = x(d.values[2].ratio - d.values[0].ratio);
+        const pos_y = y(d.values[1].ratio);
+        const pos_x = x(d.values[2].ratio - d.values[0].ratio);
         return `translate(${pos_x}, ${pos_y})`;
       })
       .attr('data-x', d => x(d.values[2].ratio - d.values[0].ratio))
@@ -582,19 +585,19 @@ function Template(svg) {
   // Calculate the starting and ending coordinates
   // for the angled ticks
   this.getTick = function(x1, y1, angle, dist) {
-    let s = d3
+    const s = d3
       .scaleLinear()
       .domain([0, 1])
       .range([0, this.height]);
-    let rad = angle * (Math.PI / 180);
-    let distX = s(dist) * Math.cos(rad);
-    let distY = s(dist) * Math.sin(rad);
-    let x2 = x.invert(distX + x(x1));
-    let y2 = y.invert(distY + y(y1));
+    const rad = angle * (Math.PI / 180);
+    const distX = s(dist) * Math.cos(rad);
+    const distY = s(dist) * Math.sin(rad);
+    const x2 = x.invert(distX + x(x1));
+    const y2 = y.invert(distY + y(y1));
     return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
   };
 
-  let tickData = [
+  const tickData = [
     // group 1
     this.getTick(-0.9, 0.1, 180, 0.02),
     this.getTick(-0.8, 0.2, 180, 0.02),

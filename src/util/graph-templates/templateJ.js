@@ -103,25 +103,23 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
     this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let headRow = thead.append('tr');
+    const headRow = thead.append('tr');
 
     headRow
       .selectAll('th')
-      .data(() => {
-        return ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)];
-      })
+      .data(() => ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)])
       .join('th')
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const rows = tbody
       .selectAll('tr')
       .data(this.data.data)
       .join('tr');
@@ -139,9 +137,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => {
-        return this.format(Math.abs(d), this.method);
-      });
+      .text(d => this.format(Math.abs(d), this.method));
   };
 
   // Creates and set default styles for the DOM elements on each row
@@ -176,7 +172,7 @@ function Template(svg) {
 
   // Updates the rows
   this.drawRows = function() {
-    let rows = this.canvas
+    const rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
       .data(this.data.data)
@@ -215,14 +211,14 @@ function Template(svg) {
     // Create the stack data using the .offset method to create negative values
     // The order of keys in the .keys() method determines the order of the series
     // in the stack
-    let seriesData = d3
+    const seriesData = d3
       .stack()
       .keys([1, 0, 2, 3])
-      .offset(d3.stackOffsetDiverging)(this.data.data.map(bydel => bydel.values.map(d => d[this.method])));
+      .offset(d3.stackOffsetDiverging)(this.data.data.map(district => district.values.map(d => d[this.method])));
 
     // Find the minimum and maximum values (and add a bit of padding) for the x scale
-    let min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;
-    let max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
+    const min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;
+    const max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
 
     // Set the x-scale's domain and range
     this.x
@@ -242,7 +238,7 @@ function Template(svg) {
     // Standard select/enter/update/exit pattern for the series
     // using the series data created using d3.stack()
     let series = this.bars.selectAll('g.series').data(seriesData);
-    let seriesE = series
+    const seriesE = series
       .enter()
       .append('g')
       .attr('class', 'series');
@@ -255,7 +251,7 @@ function Template(svg) {
     // Standard select/enter/update/exit pattern for
     // the bars in each series
     let bar = series.selectAll('rect').data(d => d);
-    let barE = bar.enter().append('rect');
+    const barE = bar.enter().append('rect');
     bar.exit().remove();
     bar = bar.merge(barE);
 
@@ -301,7 +297,7 @@ function Template(svg) {
 
     // Standard select/enter/update/exit pattern for each series
     let group = this.legendBox.selectAll('g.group').data(this.data.meta.series);
-    let groupE = group
+    const groupE = group
       .enter()
       .append('g')
       .attr('class', 'group');
@@ -315,15 +311,7 @@ function Template(svg) {
       .attr('width', 16)
       .attr('rx', 3)
       // Cheap trick to ensure correct colors on the legend
-      .attr('fill', (d, i) => {
-        if (i === 0) {
-          return this.colors(1);
-        } else if (i === 1) {
-          return this.colors(0);
-        } else {
-          return this.colors(i);
-        }
-      });
+      .attr('fill', (d, i) => (i === 0 ? this.colors(1) : i === 1 ? this.colors(0) : this.colors(i)));
     groupE.append('text').attr('y', 8);
 
     // Update the label for each series in the legend
