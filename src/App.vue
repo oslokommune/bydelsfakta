@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['addDistrict', 'setTouchDevice']),
+    ...mapActions(['addDistrict', 'setTouchDevice', 'setIE11Compatibility']),
   },
 
   created() {
@@ -42,6 +42,9 @@ export default {
   mounted() {
     if ('ontouchstart' in document.documentElement) {
       this.setTouchDevice(true);
+    }
+    if (!!window.MSInputMethodContext && !!document.documentMode) {
+      this.setIE11Compatibility(true);
     }
   },
 
