@@ -94,7 +94,7 @@
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveCSV.aria')"
                 tabindex="0"
-                @click.prevent="saveCsv()"
+                @click="saveCsv()"
                 @keyup.enter="saveCsv()"
                 id="context-menu-button-csv"
               >
