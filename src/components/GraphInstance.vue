@@ -184,6 +184,8 @@ export default {
         this.data = await d3
           .json(`${this.settings.url}?geography=${geoParam}`)
           .then(data => {
+            this.$emit('updateDate', data.meta.publishedDate);
+
             data.data.map(district => {
               district.geography = districtNames[district.geography] || district.geography;
               return district;
@@ -350,7 +352,7 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 3;
 
   &__text {
     padding: 0.75em;

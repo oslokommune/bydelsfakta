@@ -14,6 +14,7 @@ export const state = {
   menuIsOpen: false,
   navigationIsOpen: false,
   isTouchDevice: false,
+  ie11: false,
 };
 
 export const getters = {
@@ -58,6 +59,9 @@ export const mutations = {
   SET_TOUCH_DEVICE(state, payload) {
     state.isTouchDevice = payload;
   },
+  SET_IE11_COMPATIBILITY(state, payload) {
+    state.ie11 = payload;
+  },
 };
 
 export const actions = {
@@ -98,6 +102,9 @@ export const actions = {
   },
   setNavigationIsOpen({ commit }, payload) {
     commit('SET_NAVIGATION_IS_OPEN', payload);
+  },
+  setIE11Compatibility({ commit }, payload) {
+    commit('SET_IE11_COMPATIBILITY', payload);
   },
 };
 

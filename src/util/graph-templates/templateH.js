@@ -406,7 +406,8 @@ function Template(svg) {
   this.resetScales = function() {
     const dates = d3.extent(this.data.data.actual.concat(this.data.data.projection).map(d => this.parseDate(d.date)));
     dates[0] = d3.timeYear.offset(dates[0], -2);
-    const minPop = d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.2;
+    const minPop =
+      d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.2;
     const maxPop =
       d3.max(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.high)) * 1.05;
 
