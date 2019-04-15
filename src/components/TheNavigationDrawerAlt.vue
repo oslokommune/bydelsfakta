@@ -276,8 +276,17 @@ $rowHeight: 2.5em;
   padding: 0.25rem 0.5rem;
 
   @media screen and (min-width: $break-lg) {
+    background: white;
     padding: 0.25rem 0.75rem;
     transform: translateY(-1rem);
+  }
+
+  @media screen and (min-width: 1200px) {
+    position: fixed;
+    right: 1.5rem;
+    top: 1.5rem;
+    transform: scale(1.45);
+    transform-origin: 100% 0;
   }
 }
 
