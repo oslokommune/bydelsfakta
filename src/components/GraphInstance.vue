@@ -40,7 +40,11 @@
     <!-- <table class="visually-hidden"> -->
     <resize-observer @notify="handleResize"></resize-observer>
     <div class="help" v-if="settings.help && mode === 'graph'">
-      <button class="help__button" @click="showHelp = !showHelp">
+      <button
+        class="help__button"
+        @click="showHelp = !showHelp"
+        :aria-label="showHelp ? $t('graphCard.help.ariaHide') : $t('graphCard.help.ariaShow')"
+      >
         <i aria-hidden="true" class="material-icons">help_outline</i>
       </button>
       <div v-if="showHelp" class="help__text">{{ settings.help }}</div>
