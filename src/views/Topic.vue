@@ -31,12 +31,10 @@ import { topics, disabledTopics } from '../config/topics';
 
 export default {
   name: 'Topic',
-
   components: {
     GraphCard,
     VCategory,
   },
-
   props: {
     district: {
       type: String,

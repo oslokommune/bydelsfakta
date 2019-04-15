@@ -26,10 +26,6 @@ export default {
       type: String,
       required: true,
     },
-    bgColor: {
-      type: String,
-      required: true,
-    },
     txtColor: {
       type: String,
       required: true,
