@@ -51,13 +51,13 @@
           <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
             <button
               class="context-menu__button"
+              :class="{ 'card__toggle-button--active': showDropdown }"
               @click="showDropdown = !showDropdown"
               aria-haspopup="true"
               :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
               id="context-menu-button"
             >
               <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
-              <span>{{ $t('graphCard.options.label') }}</span>
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown">
               <button
@@ -230,7 +230,6 @@ export default {
 .card-container {
   flex: 50% 1 10;
   min-width: 300px;
-  overflow: hidden;
   padding: 1em;
 
   @media screen and (min-width: 950px) {
@@ -282,13 +281,13 @@ export default {
     align-items: flex-start;
     display: flex;
     padding-left: 1rem;
-    padding-right: 0.5rem;
+    padding-right: 0;
   }
 
   &__toggle-menu {
     display: flex;
     margin-left: auto;
-    padding: 0 1rem;
+    padding: 0 0 0 1rem;
   }
 
   &__toggle-button {
@@ -339,7 +338,7 @@ export default {
   padding: 4px 0;
 
   &__tab {
-    color: rgba($color-purple, 0.65);
+    color: $color-purple;
     cursor: pointer;
     font-weight: 500;
     padding: 0.75em;
@@ -349,6 +348,7 @@ export default {
     &[disabled],
     &.active[disabled] {
       color: rgba($color-purple, 0.35);
+      cursor: default;
       opacity: 0.8;
 
       &::after {
@@ -357,7 +357,6 @@ export default {
     }
 
     &.active {
-      color: $color-purple;
       cursor: default;
       position: relative;
 
@@ -373,7 +372,7 @@ export default {
     }
 
     /* Change background color of tabs on hover */
-    &:hover:not(.active) {
+    &:hover:not(.active):not(:disabled) {
       background-color: rgba($color-grey-100, 0.5);
       position: relative;
     }
@@ -383,12 +382,12 @@ export default {
 .context-menu {
   margin-left: auto;
   position: relative;
-  z-index: 2;
+  z-index: 4;
 
   &__button {
     align-items: center;
     background-color: rgba($color-border, 1);
-    border-radius: 0;
+    border-radius: 0 !important;
     cursor: pointer;
     display: flex;
     height: 3rem;
@@ -396,14 +395,17 @@ export default {
     padding-left: 0.65rem;
     padding-right: 0.65rem;
 
+    &.card__toggle-button--active {
+      background-color: $color-purple;
+      color: $color-blue;
+    }
+
     @media screen and (min-width: $break-md) {
       background-color: rgba($color-border, 0);
-      border-radius: 3px;
       height: 3rem;
-      padding-right: 0.95rem;
       width: auto;
 
-      &:hover {
+      &:hover:not(.card__toggle-button--active) {
         background-color: rgba($color-border, 0.35);
       }
     }
@@ -421,29 +423,37 @@ export default {
   }
 
   &__dropdown {
-    background-color: rgb(178, 210, 216);
+    background-color: $color-purple;
     box-shadow: 0 2px 2px 0 $color-grey-200;
     position: absolute;
     right: 0;
-    width: 200px;
+    width: 240px;
     z-index: 1;
 
     &-item {
-      color: $color-purple;
+      align-items: center;
+      color: $color-blue;
       cursor: pointer;
       display: flex;
       flex-direction: row;
-      font-weight: bold;
-      padding: 1rem 0.75rem;
+      font-weight: 500;
+      padding: 1.5rem 0.75rem;
       width: 100%;
 
-      &:hover {
-        background-color: lighten($color-light-blue-2, 5%);
+      &:disabled {
+        text-decoration: line-through;
+      }
+
+      & + & {
+        border-top: 1px solid rgba(white, 0.1);
+      }
+
+      &:hover:not(:disabled) {
+        background-color: darken($color-purple, 10%);
       }
 
       &-icon {
-        color: rgb(41, 40, 88);
-        font-size: $font-large;
+        font-size: $font-medium;
       }
 
       span {

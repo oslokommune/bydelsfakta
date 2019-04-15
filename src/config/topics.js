@@ -808,6 +808,7 @@ export const topics = {
           {
             active: false,
             label: 'Historisk (andel)',
+            help: 'Skifte i datagrunnlaget fra SSB mellom 2012 og 2014.',
             id: 'husholdning_totalt_historisk',
             template: 'c',
             url: `${API}/Husholdning-totalt-historisk-NZrxf`,
@@ -817,6 +818,7 @@ export const topics = {
           {
             active: false,
             label: 'Historisk (antall)',
+            help: 'Skifte i datagrunnlaget fra SSB mellom 2012 og 2014.',
             id: 'husholdning_totalt_historisk',
             template: 'c',
             url: `${API}/Husholdning-totalt-historisk-NZrxf`,
@@ -902,6 +904,7 @@ export const topics = {
             active: false,
             label: 'Historisk (andel)',
             id: 'levekar_lav-utdanning_historisk',
+            help: 'Skifte i datagrunnlaget fra SSB mellom 2014 og 2015.',
             method: 'ratio',
             template: 'b',
             url: `${API}/Lav_utdanning_historisk-qBXzf`,
@@ -910,6 +913,7 @@ export const topics = {
             active: false,
             label: 'Historisk (antall)',
             id: 'levekar_lav-utdanning_historisk',
+            help: 'Skifte i datagrunnlaget fra SSB mellom 2014 og 2015.',
             method: 'value',
             template: 'b',
             url: `${API}/Lav_utdanning_historisk-qBXzf`,

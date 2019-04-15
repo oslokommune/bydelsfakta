@@ -9,5 +9,5 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 }
 
 if (typeof SVGElement.prototype.blur === 'undefined') {
-  SVGElement.prototype.blur = function(){};
+  SVGElement.prototype.blur = function() {};
 }
