@@ -18,16 +18,16 @@
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': !compareDistricts }"
             :to="onClickUtforsk()"
-            >Utforsk<br />en bydel</router-link
-          >
+            v-html="$t('navigationDrawer.selectOne.tab')"
+          ></router-link>
         </li>
         <li class="state-toggle__element">
           <router-link
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': compareDistricts }"
             :to="onClickSammenlign()"
-            >Sammenlign bydeler</router-link
-          >
+            v-html="$t('navigationDrawer.linkCompare')"
+          ></router-link>
         </li>
       </ul>
 
@@ -37,6 +37,7 @@
           class="navigation-header__select"
           v-model="selectedPredefinedOption"
           v-if="compareDistricts"
+          :aria-label="$t('navigationDrawer.select.label')"
         >
           <option
             v-for="(element, index) in options"
@@ -48,7 +49,7 @@
           >
         </select>
         <span v-else>
-          Velg en bydel
+          {{ $t('navigationDrawer.selectOne.label') }}
         </span>
       </header>
       <ul class="navigation-list">
