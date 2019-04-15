@@ -19,11 +19,7 @@ exports[`GraphCard change an active tab 1`] = `
           
         </h2>
          
-        <span
-          class="card__published"
-        >
-          Oppdatert 01.09.2018
-        </span>
+        <!---->
       </div>
        
       <nav
@@ -206,11 +202,7 @@ exports[`GraphCard renders correctly 1`] = `
           Aldersdistribusjon
         </h2>
          
-        <span
-          class="card__published"
-        >
-          Oppdatert 01.09.2018
-        </span>
+        <!---->
       </div>
        
       <nav

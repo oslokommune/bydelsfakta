@@ -4,7 +4,7 @@
       <header class="card__header">
         <div class="card__headertext">
           <h2 class="card__title">{{ settings.heading }}</h2>
-          <span class="card__published">Oppdatert 01.09.2018</span>
+          <span class="card__published" v-if="date">Oppdatert {{ date }}</span>
         </div>
         <nav class="card__nav">
           <div class="tabs" role="tablist">
@@ -106,6 +106,7 @@
         </nav>
       </header>
       <graph-instance
+        @updateDate="setDate"
         v-if="settings.tabs[active] !== undefined && mode !== 'map'"
         :settings="settings.tabs[active]"
         :mode="mode"
@@ -127,6 +128,7 @@
 import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
 import canvg from 'canvg';
+import * as d3 from 'd3';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import tableToCsv from '../util/tableToCsv';
@@ -140,6 +142,7 @@ export default {
       active: 0,
       showDropdown: false,
       mode: 'graph',
+      date: '',
     };
   },
   computed: {
@@ -158,6 +161,12 @@ export default {
     },
   },
   methods: {
+    setDate(dateStr) {
+      const parseTime = d3.timeParse('%Y-%m-%d');
+      const formatTime = d3.timeFormat('%x');
+      this.date = formatTime(parseTime(dateStr));
+    },
+
     closeMenu() {
       if (this.showDropdown) {
         this.showDropdown = false;
