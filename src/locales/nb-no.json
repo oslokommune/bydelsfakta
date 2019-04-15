@@ -103,5 +103,8 @@
   },
   "loading": {
     "loadingData": "Henter data"
+  },
+  "ie11": {
+    "disabled": "Utilgjengelig i Internet Explorer"
   }
 }

@@ -70,6 +70,7 @@
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
                 class="context-menu__dropdown-item"
                 tabindex="0"
+                :title="$t('graphCard.savePNG.aria')"
                 :aria-label="$t('graphCard.savePNG.aria')"
                 id="context-menu-button-png"
               >
@@ -81,6 +82,7 @@
               <button
                 role="menuitem"
                 :disabled="mode !== 'graph' || ie11"
+                :title="ie11 ? $t('ie11.disabled') : $t('graphCard.saveSVG.aria')"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
                 tabindex="0"
@@ -98,6 +100,7 @@
                 role="menuitem"
                 :disabled="mode === 'map'"
                 class="context-menu__dropdown-item"
+                :title="$t('graphCard.saveCSV.aria')"
                 :aria-label="$t('graphCard.saveCSV.aria')"
                 tabindex="0"
                 @click="saveCsv()"
