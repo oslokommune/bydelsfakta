@@ -86,11 +86,12 @@ export default {
 
   &.disabled {
     filter: grayscale(1);
-    opacity: 0.45;
+    opacity: 0.95;
+    text-decoration: line-through;
 
     .oslo__category {
-      background: $color-grey-200 !important;
-      color: $color-grey-600 !important;
+      background: #555555 !important;
+      color: white;
     }
   }
 

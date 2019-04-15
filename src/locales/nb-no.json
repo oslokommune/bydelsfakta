@@ -22,6 +22,15 @@
     },
     "options": {
       "label": "Valg"
+    },
+    "help": {
+      "ariaShow": "Vis hjelpetekst",
+      "ariaHide": "Skjul hjelpetext"
+    },
+    "mode": {
+      "map": "Kart",
+      "table": "Tabell",
+      "graph": "Graf"
     }
   },
   "navigationDrawer": {
@@ -29,6 +38,10 @@
     "selectAll": {
       "aria": "velg alle sjekkbokser",
       "label": "Velg alle"
+    },
+    "selectOne": {
+      "tab": "Utforsk<br/>en bydel",
+      "label": "Velg en bydel"
     },
     "unselectAll": {
       "aria": "fjern alle sjekkbokser",
@@ -90,5 +103,8 @@
   },
   "loading": {
     "loadingData": "Henter data"
+  },
+  "ie11": {
+    "disabled": "Utilgjengelig i Internet Explorer"
   }
 }

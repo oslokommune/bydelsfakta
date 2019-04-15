@@ -58,6 +58,7 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-menu"
           >
             <button
+              aria-label="Graf"
               class="card__toggle-button card__toggle-button--active"
             >
               <i
@@ -69,6 +70,7 @@ exports[`GraphCard change an active tab 1`] = `
             </button>
              
             <button
+              aria-label="Tabell"
               class="card__toggle-button"
             >
               <i
@@ -80,6 +82,7 @@ exports[`GraphCard change an active tab 1`] = `
             </button>
              
             <button
+              aria-label="Kart"
               class="card__toggle-button"
             >
               <i
@@ -94,7 +97,6 @@ exports[`GraphCard change an active tab 1`] = `
          
         <div
           class="context-menu"
-          role="menu"
         >
           <button
             aria-haspopup="true"
@@ -229,6 +231,7 @@ exports[`GraphCard renders correctly 1`] = `
             class="card__toggle-menu"
           >
             <button
+              aria-label="Graf"
               class="card__toggle-button card__toggle-button--active"
             >
               <i
@@ -240,6 +243,7 @@ exports[`GraphCard renders correctly 1`] = `
             </button>
              
             <button
+              aria-label="Tabell"
               class="card__toggle-button"
             >
               <i
@@ -256,7 +260,6 @@ exports[`GraphCard renders correctly 1`] = `
          
         <div
           class="context-menu"
-          role="menu"
         >
           <button
             aria-haspopup="true"
@@ -337,6 +340,7 @@ exports[`GraphCard renders correctly 1`] = `
         class="help"
       >
         <button
+          aria-label="Vis hjelpetekst"
           class="help__button"
         >
           <i
