@@ -1,11 +1,5 @@
 <template>
-  <router-link
-    class="main-container__item"
-    :class="{ disabled }"
-    :to="getLink()"
-    :id="id"
-    :style="{ backgroundColor: bgColor }"
-  >
+  <router-link class="main-container__item" :class="{ disabled }" :to="getLink()" :id="id">
     <picture>
       <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
       <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />
@@ -95,7 +89,7 @@ export default {
   transition: all 0.15s ease-in-out;
 
   &.disabled {
-    background-color: $color-grey-100 !important;
+    filter: grayscale(1);
     opacity: 0.45;
 
     .oslo__category {
@@ -127,7 +121,6 @@ export default {
 .oslo__img {
   height: 100%;
   left: 0;
-  mix-blend-mode: multiply;
   object-fit: cover;
   position: absolute;
   top: 0;
