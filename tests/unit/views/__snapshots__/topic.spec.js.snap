@@ -30,7 +30,6 @@ exports[`Topic renders component correctly 1`] = `
         class="topics-grid"
       >
         <v-category-stub
-          bgcolor="rgb(255, 129, 116)"
           bgimage="/img/folkemengde"
           category="Befolkning"
           disabled="true"
@@ -39,7 +38,6 @@ exports[`Topic renders component correctly 1`] = `
           txtcolor="rgb(245, 173, 165)"
         />
         <v-category-stub
-          bgcolor="rgb(255, 129, 116)"
           bgimage="/img/husholdninger"
           category="Befolkning"
           id="husholdninger"
@@ -47,7 +45,6 @@ exports[`Topic renders component correctly 1`] = `
           txtcolor="rgb(245, 173, 165)"
         />
         <v-category-stub
-          bgcolor="rgb(248, 198, 107)"
           bgimage="/img/levekaar"
           category="Levekår"
           id="levekaar"

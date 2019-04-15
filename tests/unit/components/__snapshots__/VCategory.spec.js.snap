@@ -2,10 +2,10 @@
 
 exports[`VCategory renders correctly 1`] = `
 <a
+  bgcolor="black"
   class="main-container__item"
   id="test"
   link="/test"
-  style="background-color: black;"
 >
   <picture>
     <source

@@ -12,7 +12,6 @@
             :category="topics[`${item}`].options.kategori"
             :topic="topics[`${item}`].options.tema"
             :bg-image="topics[`${item}`].options.bgImage"
-            :bg-color="topics[`${item}`].options.bgColor"
             :txt-color="topics[`${item}`].options.txtColor"
             :district="$route.params.district"
             :disabled="disabledTopics.includes(item)"
@@ -32,12 +31,10 @@ import { topics, disabledTopics } from '../config/topics';
 
 export default {
   name: 'Topic',
-
   components: {
     GraphCard,
     VCategory,
   },
-
   props: {
     district: {
       type: String,

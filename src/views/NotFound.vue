@@ -36,7 +36,6 @@
           :category="topics[`${topicName}`].options.kategori"
           :topic="topics[`${topicName}`].options.tema"
           :bg-image="topics[`${topicName}`].options.bgImage"
-          :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
           district="alle"
         />
