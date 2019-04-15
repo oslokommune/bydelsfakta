@@ -75,7 +75,7 @@
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
               </button>
               <button
-                :disabled="mode !== 'graph'"
+                :disabled="mode !== 'graph' || ie11"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
                 tabindex="0"
@@ -127,6 +127,7 @@
 <script>
 import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
+import canvg from 'canvg';
 import * as d3 from 'd3';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
@@ -145,7 +146,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['districts']),
+    ...mapState(['districts', 'ie11']),
     ...mapGetters(['geoDistricts']),
     district() {
       if (this.districts[0] === 'alle') return '00';
@@ -198,6 +199,7 @@ export default {
         height: file.height.baseVal.value + 40,
         top: -20,
         left: -20,
+        canvg,
       });
       this.closeMenu();
     },
