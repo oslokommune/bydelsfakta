@@ -17,7 +17,7 @@
           $t('navigationTopbar.selectTopic.label')
         }}</label>
         <div class="topic">
-          <span>{{ getHumanReadableTopic(selectedTopic) }}</span>
+          <h1 class="header">{{ getHumanReadableTopic(selectedTopic) }}</h1>
           <i class="icon icon__arrow" :class="{ rotate: showDropdown }"></i>
         </div>
       </button>
@@ -201,6 +201,14 @@ export default {
 .topic {
   align-items: center;
   display: flex;
+  width: 100%;
+
+  .header {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
 
   & > .icon {
     margin-left: 0.5rem;
