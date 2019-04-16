@@ -5,11 +5,13 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Alder',
   value: 'alder',
+  show: true,
   cards: [
     {
       size: 'large',
       heading: 'Aldersdistribusjon',
       map: false,
+      show: true,
       tabs: [
         {
           active: false,
@@ -19,6 +21,7 @@ export default {
           url: `${API}/Alder-distribusjon-status-TqWvs`,
           method: 'value',
           help: 'Dette er hjelp',
+          show: true,
         },
         {
           active: false,
@@ -27,6 +30,7 @@ export default {
           template: 'd',
           url: `${API}/Alder-distribusjon-status-TqWvs`,
           method: 'ratio',
+          show: true,
         },
       ],
     },
@@ -34,6 +38,7 @@ export default {
       size: 'large',
       heading: 'Populasjonspyramide',
       map: false,
+      show: true,
       tabs: [
         {
           active: false,
@@ -42,18 +47,21 @@ export default {
           template: 'e',
           method: 'value',
           url: `${API}/Alder-distribusjon-status-TqWvs`,
+          show: true,
         },
       ],
     },
     {
       size: 'large',
       heading: 'Gjennomsnitt- og medianalder',
+      show: true,
       map: {
         labels: ['Lavere gjennomsnittsalder', 'Høyere gjennomsnittsalder'],
         scale: [32, 43],
         reverse: true,
         method: 'avg',
         url: `${API}/Alder-distribusjon-status-TqWvs`,
+        show: true,
       },
       tabs: [
         {
@@ -65,6 +73,7 @@ export default {
           help:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vestibulum malesuada arcu id pulvinar. Donec congue quam nec elit molestie, vel feugiat lorem euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer feugiat urna risus, nec interdum risus laoreet id.',
           url: `${API}/Alder-distribusjon-status-TqWvs`,
+          show: true,
         },
       ],
     },

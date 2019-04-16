@@ -3,6 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Folkemengde',
   value: 'folkemengde',
+  show: null,
   cards: [
     {
       size: 'large',
@@ -11,6 +12,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      show: null,
       tabs: [
         {
           active: false,
@@ -18,6 +20,7 @@ export default {
           id: 'folkemengde_utvikling_historisk',
           template: 'h',
           url: `${baseUrl}/mockDataH.json`,
+          show: null,
         },
         {
           active: false,
@@ -25,6 +28,7 @@ export default {
           id: 'folkemengde_utvikling_historisk-prosent',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
+          show: null,
         },
       ],
     },
@@ -35,6 +39,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      show: null,
       tabs: [
         {
           active: false,
@@ -42,6 +47,7 @@ export default {
           id: 'folkemengde_utvikling_historisk',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
+          show: null,
         },
         {
           active: false,
@@ -50,6 +56,7 @@ export default {
           template: 'b',
           method: 'ratio',
           url: `${baseUrl}/mockDataB.json`,
+          show: null,
         },
       ],
     },
@@ -60,6 +67,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      show: null,
       tabs: [
         {
           active: false,
@@ -67,6 +75,7 @@ export default {
           id: 'folkemengde_nokkeltall',
           template: 'g',
           url: `${baseUrl}/mockDataG.json`,
+          show: null,
         },
       ],
     },

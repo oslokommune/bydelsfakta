@@ -5,6 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Husholdninger',
   value: 'husholdninger',
+  show: true,
   cards: [
     {
       size: 'large',
@@ -16,6 +17,7 @@ export default {
         series: 0,
         scale: [0.25, 0.6],
       },
+      show: true,
       tabs: [
         {
           active: false,
@@ -24,6 +26,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Husholdning-totalt-status-FzFf5`,
+          show: true,
         },
         {
           active: false,
@@ -33,6 +36,7 @@ export default {
           template: 'c',
           url: `${API}/Husholdning-totalt-historisk-NZrxf`,
           method: 'ratio',
+          show: true,
         },
 
         {
@@ -43,6 +47,7 @@ export default {
           template: 'c',
           url: `${API}/Husholdning-totalt-historisk-NZrxf`,
           method: 'value',
+          show: true,
         },
 
         {
@@ -52,6 +57,7 @@ export default {
           method: 'ratio',
           template: 'i',
           url: `${API}/Husholdning-totalt-matrise-e9w4m`,
+          show: true,
         },
       ],
     },

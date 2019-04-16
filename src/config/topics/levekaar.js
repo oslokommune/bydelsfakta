@@ -5,6 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Levekårsindikatorer',
   value: 'levekaar',
+  show: true,
   cards: [
     // {
     //   size: 'small',
@@ -41,6 +42,7 @@ export default {
         reverse: true,
         method: 'ratio',
       },
+      show: true,
       tabs: [
         {
           active: false,
@@ -49,6 +51,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Lav_utdanning_status-fYdyK`,
+          show: true,
         },
         {
           active: false,
@@ -57,6 +60,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/Lav_utdanning_status-fYdyK`,
+          show: true,
         },
         {
           active: false,
@@ -66,6 +70,7 @@ export default {
           method: 'ratio',
           template: 'b',
           url: `${API}/Lav_utdanning_historisk-qBXzf`,
+          show: true,
         },
         {
           active: false,
@@ -75,6 +80,7 @@ export default {
           method: 'value',
           template: 'b',
           url: `${API}/Lav_utdanning_historisk-qBXzf`,
+          show: true,
         },
       ],
     },
@@ -88,6 +94,7 @@ export default {
         method: 'ratio',
         url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
       },
+      show: true,
       tabs: [
         {
           active: false,
@@ -96,6 +103,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+          show: true,
         },
         {
           active: false,
@@ -104,6 +112,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+          show: true,
         },
         {
           active: false,
@@ -112,6 +121,7 @@ export default {
           method: 'ratio',
           template: 'b',
           url: `${API}/Fattige_barnehusholdninger_his-GoaU8`,
+          show: true,
         },
         {
           active: false,
@@ -120,6 +130,7 @@ export default {
           method: 'value',
           template: 'b',
           url: `${API}/Fattige_barnehusholdninger_his-GoaU8`,
+          show: true,
         },
       ],
     },
@@ -133,6 +144,7 @@ export default {
         scale: [0.1, 0.5],
         reverse: true,
       },
+      show: true,
       tabs: [
         {
           active: false,
@@ -141,6 +153,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Levekar-vgs-status-vFLio`,
+          show: true,
         },
         {
           active: false,
@@ -149,6 +162,7 @@ export default {
           template: 'b',
           method: 'ratio',
           url: `${API}/Levekar-vgs-historisk-t2ZTn`,
+          show: true,
         },
       ],
     },

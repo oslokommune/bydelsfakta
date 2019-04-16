@@ -3,6 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Trangboddhet',
   value: 'trangboddhet',
+  show: null,
   cards: [
     {
       size: 'large',
