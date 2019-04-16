@@ -142,7 +142,16 @@ function Template(svg) {
 
     hRow1
       .selectAll('th')
-      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .data(() => [
+        'Geografi',
+        ...ageRanges.map(d => {
+          let str = '';
+          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+          str += d.label;
+          str += this.method === 'ratio' ? ' (%)' : '';
+          return str;
+        }),
+      ])
       .join('th')
       .attr('id', (d, i) => `${uuid}_th_2_${i}`)
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
