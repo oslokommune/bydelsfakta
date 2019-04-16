@@ -11,7 +11,13 @@
           :bg-image="topics[`${topicName}`].options.bgImage"
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
-          :disabled="disabledTopics.includes(topicName)"
+          :disabled="
+            topics[`${topicName}`].show === productionMode && topics[`${topicName}`].show !== null
+              ? false
+              : topics[`${topicName}`].show === true && productionMode === false
+              ? false
+              : productionMode !== null
+          "
         />
       </div>
     </div>
@@ -22,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import VCategory from '../components/VCategory.vue';
 import VLeaflet from '../components/VLeaflet.vue';
 import { topics, topicNames, disabledTopics } from '../config/topics';
@@ -44,6 +50,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['productionMode']),
     ...mapGetters(['geoDistricts']),
   },
 
@@ -55,6 +62,19 @@ export default {
       districts: districts,
       disabledTopics: disabledTopics,
     };
+  },
+
+  methods: {
+    showCategory(bool) {
+      console.log('show: ', bool);
+      console.log('production: ', this.productionMode);
+
+      return bool === this.productionMode && bool !== null
+        ? false
+        : bool === true && this.productionMode === false
+        ? false
+        : this.productionMode !== null;
+    },
   },
 };
 </script>
