@@ -51,11 +51,12 @@ select {
 }
 
 .visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
   height: 1px;
+  left: -10000px;
   overflow: hidden;
-  position: fixed;
+  position: absolute;
+  top: auto;
+  width: 1px;
 }
 
 .hidden {

@@ -127,6 +127,8 @@ function Template(svg) {
       });
     }
 
+    const uuid = Math.floor(Math.random() * 100000);
+
     const thead = this.table.select('thead');
     const tbody = this.table.select('tbody');
 
@@ -140,22 +142,30 @@ function Template(svg) {
 
     hRow1
       .selectAll('th')
-      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .data(() => [
+        'Geografi',
+        ...ageRanges.map(d => {
+          let str = '';
+          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+          str += d.label;
+          str += this.method === 'ratio' ? ' (%)' : '';
+          return str;
+        }),
+      ])
       .join('th')
-      .attr('id', (d, i) => `th_2_${i}`)
+      .attr('id', (d, i) => `${uuid}_th_2_${i}`)
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i === 0 ? 1 : 2))
       .attr('scope', 'col')
-      .attr('role', 'colgroup')
       .text(d => d);
 
     hRow2
       .selectAll('th')
       .data(() => ageRanges.map(() => ['mann', 'kvinne']).flat())
       .join('th')
-      .attr('id', (d, i) => `th_1_${i}`)
+      .attr('id', (d, i) => `${uuid}_th_1_${i}`)
       .attr('scope', 'col')
-      .attr('headers', (d, i) => `th_1_${Math.floor(i / 2) + 1}`)
+      .attr('headers', (d, i) => `${uuid}_th_2_${Math.floor(i / 2) + 1}`)
       .text(d => d);
 
     const rows = tbody
@@ -169,6 +179,7 @@ function Template(svg) {
       .data(d => [d.geography])
       .join('th')
       .attr('scope', 'row')
+      .attr('headers', `${uuid}_th_2_0`)
       .text(d => d);
 
     // Value cells
@@ -190,7 +201,7 @@ function Template(svg) {
       })
       .join('td')
       .attr('headers', (d, i) => {
-        return `th_1_${Math.floor(i / 2) + 1} th_2_${i}`;
+        return `${uuid}_th_2_${Math.floor(i / 2) + 1} ${uuid}_th_1_${i}`;
       })
       .text(d => this.format(d, this.method));
   };

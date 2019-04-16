@@ -26,6 +26,7 @@
                 class="card__toggle-button"
                 @click="mode = 'graph'"
                 :class="{ 'card__toggle-button--active': mode === 'graph' }"
+                :aria-label="$t('graphCard.mode.graph')"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
               </button>
@@ -33,6 +34,7 @@
                 class="card__toggle-button"
                 @click="mode = 'table'"
                 :class="{ 'card__toggle-button--active': mode === 'table' }"
+                :aria-label="$t('graphCard.mode.table')"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
               </button>
@@ -42,13 +44,14 @@
                 class="card__toggle-button"
                 @click="mode = 'map'"
                 :class="{ 'card__toggle-button--active': mode === 'map' }"
+                :aria-label="$t('graphCard.mode.map')"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">map</i>
               </button>
             </div>
           </div>
 
-          <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu" role="menu">
+          <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
             <button
               class="context-menu__button"
               :class="{ 'card__toggle-button--active': showDropdown }"
@@ -59,13 +62,15 @@
             >
               <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
             </button>
-            <div v-if="showDropdown" class="context-menu__dropdown">
+            <div v-if="showDropdown" class="context-menu__dropdown" role="menu">
               <button
+                role="menuitem"
                 :disabled="mode !== 'graph'"
                 @click="savePng(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
                 class="context-menu__dropdown-item"
                 tabindex="0"
+                :title="$t('graphCard.savePNG.aria')"
                 :aria-label="$t('graphCard.savePNG.aria')"
                 id="context-menu-button-png"
               >
@@ -75,7 +80,9 @@
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
               </button>
               <button
+                role="menuitem"
                 :disabled="mode !== 'graph' || ie11"
+                :title="ie11 ? $t('ie11.disabled') : $t('graphCard.saveSVG.aria')"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
                 tabindex="0"
@@ -90,8 +97,10 @@
               </button>
 
               <button
+                role="menuitem"
                 :disabled="mode === 'map'"
                 class="context-menu__dropdown-item"
+                :title="$t('graphCard.saveCSV.aria')"
                 :aria-label="$t('graphCard.saveCSV.aria')"
                 tabindex="0"
                 @click="saveCsv()"

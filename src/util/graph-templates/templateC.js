@@ -110,15 +110,25 @@ function Template(svg) {
       .selectAll('th')
       .data(() => [
         'Geografi',
-        ...this.data.meta.series.map(serie => {
-          return `${serie.heading} ${serie.subheading}`;
+        ...this.data.meta.series.map(d => {
+          let str = '';
+          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+
+          if (typeof d === 'string') {
+            str += d;
+          } else if (d.heading) {
+            str += `${d.heading} ${d.subheading}`;
+          }
+
+          str += this.method === 'ratio' ? ' (%)' : '';
+          return str;
         }),
       ])
       .join('th')
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i > 0 ? dates.length : 1))
       .attr('scope', 'col')
-      .attr('id', (d, i) => `th_1_${i}`)
+      .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`)
       .text(d => d);
 
     hRow2
@@ -131,7 +141,7 @@ function Template(svg) {
         return out;
       })
       .join('th')
-      .attr('id', (d, i) => `th_2_${i}`)
+      .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
       .text(d => this.formatYear(this.parseYear(d)));
 
     const rows = tbody
@@ -145,7 +155,7 @@ function Template(svg) {
       .data(d => [d.geography])
       .join('th')
       .attr('scope', 'row')
-      .attr('headers', 'th_1_0')
+      .attr('headers', `${this.data.meta.heading}_th_1_0`)
       .text(d => d);
 
     // Value cells
@@ -156,9 +166,9 @@ function Template(svg) {
       .attr('headers', (d, i, j) => {
         const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
 
-        return `th_1_${first} th_2_${i}`;
+        return `${this.data.meta.heading}_th_1_${first} th_2_${i}`;
       })
-      .text(d => this.format(d[this.method], this.method));
+      .text(d => this.format(d[this.method], this.method, false, true));
   };
 
   this.drawDots = function() {
