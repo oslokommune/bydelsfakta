@@ -177,7 +177,12 @@ function Template(svg) {
 
     hRow1
       .selectAll('th')
-      .data(() => ['Geografi', 'År'])
+      .data(() => [
+        'Geografi',
+        (() => {
+          return this.method === 'ratio' ? 'Andel (%)' : 'Antall';
+        })(),
+      ])
       .join('th')
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i === 1 ? dates.length : 1))
@@ -208,7 +213,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => this.format(d[this.method], this.method));
+      .text(d => this.format(d[this.method], this.method, false, true));
   };
 
   /**

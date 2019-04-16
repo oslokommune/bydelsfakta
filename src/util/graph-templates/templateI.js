@@ -180,8 +180,18 @@ function Template(svg) {
       .selectAll('th')
       .data(() => [
         'Geografi',
-        ...this.data.meta.series.map(serie => {
-          return `${serie.heading} ${serie.subheading}`;
+        ...this.data.meta.series.map(d => {
+          let str = '';
+          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+
+          if (typeof d === 'string') {
+            str += d;
+          } else if (d.heading) {
+            str += `${d.heading} ${d.subheading}`;
+          }
+
+          str += this.method === 'ratio' ? ' (%)' : '';
+          return str;
         }),
       ])
       .join('th')
@@ -206,7 +216,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .text(d => this.format(d[this.method], this.method));
+      .text(d => this.format(d[this.method], this.method, false, true));
   };
 
   this.drawList = function() {

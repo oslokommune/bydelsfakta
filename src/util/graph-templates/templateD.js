@@ -406,7 +406,16 @@ function Template(svg) {
 
     hrow
       .selectAll('th')
-      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .data(() => [
+        'Geografi',
+        ...ageRanges.map(d => {
+          let str = '';
+          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+          str += d.label;
+          str += this.method === 'ratio' ? ' (%)' : '';
+          return str;
+        }),
+      ])
       .join('th')
       .attr('scope', 'col')
       .text(d => d);
@@ -438,7 +447,7 @@ function Template(svg) {
         });
       })
       .join('td')
-      .text(d => this.format(d, this.method));
+      .text(d => this.format(d, this.method, false, true));
   };
 
   // Draws/updates rows content. Triggered each render

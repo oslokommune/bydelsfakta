@@ -28,7 +28,6 @@ import * as locale from './locale';
 import allDistricts from '../../config/allDistricts';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
-d3.formatDefaultLocale(locale.format);
 
 function Base_Template(svg) {
   // Declaring local variables here to prevent templates to be
@@ -52,26 +51,26 @@ function Base_Template(svg) {
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.parseYear = d3.timeParse('%Y');
   this.formatYear = d3.timeFormat('%Y');
-  this.formatPercent = d3.format('.3p'); // 0.0124 -> '12,4%'
-  this.formatDecimal = d3.format(',.4r');
+  this.formatPercent = locale.norwegianLocale.format('.3~p'); // 0.0124 -> '12,4%'
+  this.formatDecimal = locale.norwegianLocale.format(',.0f');
   this.sourceHeight = 30;
   this.duration = 250;
   this.isCompare = false;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
-  this.format = function(num, method, tick = false) {
+  this.format = function(num, method, tick = false, table = false) {
     if (method === undefined) throw 'Cannot format number';
     if (num === undefined) throw 'Missing number';
 
-    if (method === 'ratio' && !tick) {
-      return this.formatPercent(num);
-    } else if (method === 'value' && !tick) {
-      return this.formatDecimal(num);
-    } else if (method === 'ratio' && tick) {
-      return d3.format('~p')(num);
-    } else if (method === 'value' && tick) {
-      return d3.format('~d')(num);
+    if (tick) {
+      return method === 'ratio' ? d3.format('~p')(num) : d3.format('~d')(num);
     }
+
+    if (table) {
+      return method === 'ratio' ? locale.tableLocale.format('.3~p')(num) : locale.tableLocale.format(',.0f')(num);
+    }
+
+    return method === 'ratio' ? this.formatPercent(num) : this.formatDecimal(num);
   };
 
   // Resize is called from the parent vue component
