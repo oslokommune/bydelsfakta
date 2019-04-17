@@ -15,6 +15,7 @@ export const state = {
   navigationIsOpen: false,
   isTouchDevice: false,
   ie11: false,
+  productionMode: null, // null: development, false: test, true: prod
 };
 
 export const getters = {
@@ -62,6 +63,9 @@ export const mutations = {
   SET_IE11_COMPATIBILITY(state, payload) {
     state.ie11 = payload;
   },
+  SET_PRODUCTION_MODE(state, payload) {
+    state.productionMode = payload === 'production' ? true : payload === 'test' ? false : null;
+  },
 };
 
 export const actions = {
@@ -105,6 +109,9 @@ export const actions = {
   },
   setIE11Compatibility({ commit }, payload) {
     commit('SET_IE11_COMPATIBILITY', payload);
+  },
+  setProductionMode({ commit }, payload) {
+    commit('SET_PRODUCTION_MODE', payload);
   },
 };
 

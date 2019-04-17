@@ -8,18 +8,26 @@
         </div>
         <nav class="card__nav">
           <div class="tabs" role="tablist">
-            <button
-              :disabled="mode === 'map'"
-              role="tab"
-              :aria-label="tab.label"
-              :id="`tabButton-${settings.heading}-${index}`"
-              v-for="(tab, index) in settings.tabs"
-              :key="index"
-              @click="activeTab(index)"
-              :class="{ active: active === index }"
-              class="tabs__tab"
-              v-text="tab.label"
-            ></button>
+            <template v-for="(tab, index) in settings.tabs">
+              <button
+                :disabled="mode === 'map'"
+                role="tab"
+                :aria-label="tab.label"
+                :id="`tabButton-${settings.heading}-${index}`"
+                :key="index"
+                @click="activeTab(index)"
+                :class="{ active: active === index }"
+                class="tabs__tab"
+                v-text="tab.label"
+                v-if="
+                  tab.production === productionMode && tab.production !== null
+                    ? true
+                    : tab.production === true && productionMode === false
+                    ? true
+                    : productionMode === null
+                "
+              ></button>
+            </template>
 
             <div class="card__toggle-menu">
               <button
@@ -155,7 +163,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['districts', 'ie11']),
+    ...mapState(['districts', 'ie11', 'productionMode']),
     ...mapGetters(['geoDistricts']),
     district() {
       if (this.districts[0] === 'alle') return '00';

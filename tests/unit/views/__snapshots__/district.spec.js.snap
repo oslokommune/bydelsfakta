@@ -13,7 +13,6 @@ exports[`Bydel renders component correctly 1`] = `
       <v-category-stub
         bgimage="/img/folkemengde"
         category="Befolkning"
-        disabled="true"
         district="bydel"
         id="folkemengde"
         topic="Folkemengde"
@@ -22,7 +21,6 @@ exports[`Bydel renders component correctly 1`] = `
       <v-category-stub
         bgimage="/img/folkemengde"
         category="Befolkning"
-        disabled="true"
         district="bydel"
         id="befolkningsendringer"
         topic="Befolknings&shy;endringer"
@@ -63,7 +61,6 @@ exports[`Bydel renders component correctly 1`] = `
       <v-category-stub
         bgimage="/img/eierform"
         category="Bomiljø"
-        disabled="true"
         district="bydel"
         id="eierform"
         topic="Eierform"
@@ -72,7 +69,6 @@ exports[`Bydel renders component correctly 1`] = `
       <v-category-stub
         bgimage="/img/bygningstyper"
         category="Bomiljø"
-        disabled="true"
         district="bydel"
         id="bygningstyper"
         topic="Bygningstyper"
@@ -89,7 +85,6 @@ exports[`Bydel renders component correctly 1`] = `
       <v-category-stub
         bgimage="/img/trangboddhet"
         category="Bomiljø"
-        disabled="true"
         district="bydel"
         id="trangboddhet"
         topic="Trangboddhet"

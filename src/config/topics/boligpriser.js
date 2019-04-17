@@ -5,6 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Boligpriser',
   value: 'boligpriser',
+  production: true,
   cards: [
     {
       size: 'large',
@@ -15,6 +16,7 @@ export default {
         method: 'value',
         url: `${API}/boligpriser_status-pD7ZV`,
       },
+      production: true,
       tabs: [
         {
           active: false,
@@ -23,6 +25,7 @@ export default {
           method: 'value',
           template: 'a',
           url: `${API}/boligpriser_status-pD7ZV`,
+          production: true,
         },
         {
           active: false,
@@ -31,6 +34,7 @@ export default {
           method: 'value',
           template: 'c',
           url: `${API}/boligpriser_historic-4owcY`,
+          production: true,
         },
       ],
     },

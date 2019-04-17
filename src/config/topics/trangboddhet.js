@@ -3,10 +3,12 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Trangboddhet',
   value: 'trangboddhet',
+  production: null,
   cards: [
     {
       size: 'large',
       heading: 'Trangbodde husstander',
+      production: null,
       tabs: [
         {
           active: false,
@@ -15,6 +17,7 @@ export default {
           template: 'j',
           url: `${baseUrl}/mockDataJ.json`,
           method: 'ratio',
+          production: null,
         },
         {
           active: false,
@@ -23,6 +26,7 @@ export default {
           template: 'j',
           url: `${baseUrl}/mockDataJ.json`,
           method: 'value',
+          production: null,
         },
         {
           active: false,
@@ -31,6 +35,7 @@ export default {
           template: 'a',
           url: `${baseUrl}/mockDataJ.json`,
           method: 'ratio',
+          production: null,
         },
         {
           active: false,
@@ -39,6 +44,7 @@ export default {
           template: 'a',
           url: `${baseUrl}/mockDataJ.json`,
           method: 'value',
+          production: null,
         },
         {
           active: false,
@@ -47,6 +53,7 @@ export default {
           template: 'c',
           method: 'ratio',
           url: `${baseUrl}/trangboddhet_historisk.json`,
+          production: null,
         },
         {
           active: false,
@@ -55,6 +62,7 @@ export default {
           template: 'c',
           method: 'value',
           url: `${baseUrl}/trangboddhet_historisk.json`,
+          production: null,
         },
       ],
     },
@@ -68,6 +76,7 @@ export default {
         scale: [0.01, 0.06],
         url: `${baseUrl}/trangboddhet_05.json`,
       },
+      production: null,
       tabs: [
         {
           active: false,
@@ -76,6 +85,7 @@ export default {
           template: 'a',
           url: `${baseUrl}/trangboddhet_05.json`,
           method: 'ratio',
+          production: null,
         },
       ],
     },

@@ -3,6 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Bygningstyper',
   value: 'bygningstyper',
+  production: null,
   cards: [
     {
       size: 'large',
@@ -11,6 +12,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      production: null,
       tabs: [
         {
           active: false,
@@ -19,6 +21,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
         {
           active: false,
@@ -26,6 +29,7 @@ export default {
           id: 'eierform_totalt_historisk',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
+          production: null,
         },
         {
           active: false,
@@ -34,6 +38,7 @@ export default {
           method: 'ratio',
           template: 'i',
           url: `${baseUrl}/mockDataI.json`,
+          production: null,
         },
       ],
     },
@@ -45,6 +50,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      production: null,
       tabs: [
         {
           active: false,
@@ -53,6 +59,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
         {
           active: false,
@@ -60,6 +67,7 @@ export default {
           id: 'blokkleilighet_historisk',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
+          production: null,
         },
       ],
     },
@@ -71,6 +79,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      production: null,
       tabs: [
         {
           active: false,
@@ -79,6 +88,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
         {
           active: false,
@@ -87,6 +97,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
       ],
     },
@@ -97,6 +108,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      production: null,
       tabs: [
         {
           active: false,
@@ -105,6 +117,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
         {
           active: false,
@@ -113,6 +126,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
       ],
     },
@@ -123,6 +137,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
+      production: null,
       tabs: [
         {
           active: false,
@@ -131,6 +146,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
         {
           active: false,
@@ -139,6 +155,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
+          production: null,
         },
       ],
     },

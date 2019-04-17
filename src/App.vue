@@ -26,10 +26,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(['addDistrict', 'setTouchDevice', 'setIE11Compatibility']),
+    ...mapActions(['addDistrict', 'setTouchDevice', 'setIE11Compatibility', 'setProductionMode']),
   },
 
   created() {
+    this.setProductionMode(process.env.VUE_APP_PRODUCTION_DATA);
+
     if (this.$route.name === 'Home') {
       this.addDistrict({ district: 'alle', pushRoute: false });
     }

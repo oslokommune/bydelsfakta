@@ -3,6 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
+  production: null,
   cards: [],
   options: {
     kategori: 'Befolkning',
