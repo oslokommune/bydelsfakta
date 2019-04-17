@@ -19,7 +19,13 @@
                 :class="{ active: active === index }"
                 class="tabs__tab"
                 v-text="tab.label"
-                v-if="tab.show === productionMode ? true : tab.show === true && !productionMode"
+                v-if="
+                  tab.show === productionMode && tab.show !== null
+                    ? true
+                    : tab.show === true && productionMode === false
+                    ? true
+                    : productionMode === null
+                "
               ></button>
             </template>
 
