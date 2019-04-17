@@ -26,7 +26,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Husholdning-totalt-status-FzFf5`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -36,7 +36,7 @@ export default {
           template: 'c',
           url: `${API}/Husholdning-totalt-historisk-NZrxf`,
           method: 'ratio',
-          show: true,
+          production: true,
         },
 
         {
@@ -47,7 +47,7 @@ export default {
           template: 'c',
           url: `${API}/Husholdning-totalt-historisk-NZrxf`,
           method: 'value',
-          show: true,
+          production: true,
         },
 
         {
@@ -57,7 +57,7 @@ export default {
           method: 'ratio',
           template: 'i',
           url: `${API}/Husholdning-totalt-matrise-e9w4m`,
-          show: true,
+          production: true,
         },
       ],
     },

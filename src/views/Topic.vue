@@ -6,9 +6,9 @@
           :key="`card-${cardIndex}`"
           :settings="card"
           v-if="
-            card.show === productionMode && card.show !== null
+            card.production === productionMode && card.production !== null
               ? true
-              : card.show === true && productionMode === false
+              : card.production === true && productionMode === false
               ? true
               : productionMode === null
           "
@@ -27,9 +27,9 @@
             :txt-color="topics[`${item}`].options.txtColor"
             :district="$route.params.district"
             :disabled="
-              topics[`${topic}`].show === productionMode && topics[`${topic}`].show !== null
+              topics[`${topic}`].production === productionMode && topics[`${topic}`].production !== null
                 ? false
-                : topics[`${topic}`].show === true && productionMode === false
+                : topics[`${topic}`].production === true && productionMode === false
                 ? false
                 : productionMode !== null
             "

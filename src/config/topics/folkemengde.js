@@ -20,7 +20,7 @@ export default {
           id: 'folkemengde_utvikling_historisk',
           template: 'h',
           url: `${baseUrl}/mockDataH.json`,
-          show: null,
+          production: null,
         },
         {
           active: false,
@@ -28,7 +28,7 @@ export default {
           id: 'folkemengde_utvikling_historisk-prosent',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
-          show: null,
+          production: null,
         },
       ],
     },
@@ -39,7 +39,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
-      show: null,
+      production: null,
       tabs: [
         {
           active: false,
@@ -47,7 +47,7 @@ export default {
           id: 'folkemengde_utvikling_historisk',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
-          show: null,
+          production: null,
         },
         {
           active: false,
@@ -56,7 +56,7 @@ export default {
           template: 'b',
           method: 'ratio',
           url: `${baseUrl}/mockDataB.json`,
-          show: null,
+          production: null,
         },
       ],
     },
@@ -67,7 +67,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
-      show: null,
+      production: null,
       tabs: [
         {
           active: false,
@@ -75,7 +75,7 @@ export default {
           id: 'folkemengde_nokkeltall',
           template: 'g',
           url: `${baseUrl}/mockDataG.json`,
-          show: null,
+          production: null,
         },
       ],
     },

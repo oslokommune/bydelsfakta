@@ -3,7 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Eierform',
   value: 'eierform',
-  show: null,
+  production: null,
   cards: [
     {
       size: 'large',
@@ -12,7 +12,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
-      show: null,
+      production: null,
       tabs: [
         {
           active: false,
@@ -21,7 +21,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          show: null,
+          production: null,
         },
         {
           active: false,
@@ -30,7 +30,7 @@ export default {
           template: 'i',
           method: 'ratio',
           url: `${baseUrl}/mockDataI.json`,
-          show: null,
+          production: null,
         },
         {
           active: false,
@@ -38,7 +38,7 @@ export default {
           id: 'eierform_historisk',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
-          show: null,
+          production: null,
         },
       ],
     },

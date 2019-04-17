@@ -20,9 +20,9 @@
                 class="tabs__tab"
                 v-text="tab.label"
                 v-if="
-                  tab.show === productionMode && tab.show !== null
+                  tab.production === productionMode && tab.production !== null
                     ? true
-                    : tab.show === true && productionMode === false
+                    : tab.production === true && productionMode === false
                     ? true
                     : productionMode === null
                 "

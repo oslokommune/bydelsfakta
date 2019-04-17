@@ -5,12 +5,12 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Personer med innvandrerbakgrunn',
   value: 'innvandrerbefolkningen',
-  show: true,
+  production: true,
   cards: [
     {
       size: 'large',
       heading: 'Landbakgrunn',
-      show: true,
+      production: true,
       tabs: [
         {
           active: false,
@@ -20,7 +20,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/Landbakgrunn-innvandringsgrupp-cLcKm`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -30,7 +30,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Landbakgrunn-innvandringsgrupp-cLcKm`,
-          show: true,
+          production: true,
         },
 
         {
@@ -41,7 +41,7 @@ export default {
           template: 'c',
           method: 'ratio',
           url: `${API}/Landbakgrunn-innvandringsgrupp-87zEq`,
-          show: true,
+          production: true,
         },
       ],
     },
@@ -55,7 +55,7 @@ export default {
         reverse: true,
         method: 'ratio',
       },
-      show: true,
+      production: true,
       tabs: [
         {
           active: false,
@@ -64,7 +64,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Andel-innvandrere-under-16-sta-imHqA`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -73,7 +73,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/Andel-innvandrere-under-16-sta-imHqA`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -82,7 +82,7 @@ export default {
           template: 'b',
           method: 'ratio',
           url: `${API}/Andel-innvandrere-under-16-his-5EUaC`,
-          show: true,
+          production: true,
         },
       ],
     },
@@ -96,7 +96,7 @@ export default {
         reverse: true,
         method: 'ratio',
       },
-      show: true,
+      production: true,
       tabs: [
         {
           active: false,
@@ -105,7 +105,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Andel-under-16-med-en-innvandr-rRuib`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -114,7 +114,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/Andel-under-16-med-en-innvandr-rRuib`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -123,7 +123,7 @@ export default {
           template: 'b',
           method: 'ratio',
           url: `${API}/Andel-under-16-med-en-innvandr-JnGas`,
-          show: true,
+          production: true,
         },
       ],
     },
@@ -137,7 +137,7 @@ export default {
         method: 'ratio',
         url: `${API}/Andel-under-16-med-to-innvandr-jVhZm`,
       },
-      show: true,
+      production: true,
       tabs: [
         {
           active: false,
@@ -146,7 +146,7 @@ export default {
           template: 'a',
           method: 'ratio',
           url: `${API}/Andel-under-16-med-to-innvandr-jVhZm`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -155,7 +155,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/Andel-under-16-med-to-innvandr-jVhZm`,
-          show: true,
+          production: true,
         },
         {
           active: false,
@@ -164,7 +164,7 @@ export default {
           template: 'b',
           method: 'ratio',
           url: `${API}/Andel-under-16-med-to-innvandr-Zgj32`,
-          show: true,
+          production: true,
         },
       ],
     },

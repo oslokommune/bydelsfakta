@@ -12,9 +12,9 @@
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
           :disabled="
-            topics[`${topicName}`].show === productionMode && topics[`${topicName}`].show !== null
+            topics[`${topicName}`].production === productionMode && topics[`${topicName}`].production !== null
               ? false
-              : topics[`${topicName}`].show === true && productionMode === false
+              : topics[`${topicName}`].production === true && productionMode === false
               ? false
               : productionMode !== null
           "
@@ -62,19 +62,6 @@ export default {
       districts: districts,
       disabledTopics: disabledTopics,
     };
-  },
-
-  methods: {
-    showCategory(bool) {
-      console.log('show: ', bool);
-      console.log('production: ', this.productionMode);
-
-      return bool === this.productionMode && bool !== null
-        ? false
-        : bool === true && this.productionMode === false
-        ? false
-        : this.productionMode !== null;
-    },
   },
 };
 </script>
