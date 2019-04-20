@@ -15,6 +15,20 @@ import 'leaflet/dist/leaflet.css';
 import './styles/main.scss';
 import setupI18n from './i18n';
 
+let envs = {};
+
+if (process.env.VUE_APP_NODE_ENV !== 'development') {
+  envs = JSON.parse(window.__GLOBAL_ENVS__);
+  document.getElementById('bydelsfakta-globals').remove();
+  process.env = {
+    ...process.env,
+    ...envs,
+  };
+  console.log(process.env);
+}
+
+console.log(process.env);
+
 const i18n = setupI18n();
 
 // this part resolve an issue where the markers would not appear
@@ -36,7 +50,7 @@ Vue.config.performance = process.env.NODE_ENV !== 'production';
 Vue.directive('click-outside', clickOutside);
 
 Vue.use(VueAnalytics, {
-  id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
+  id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID || envs.VUE_APP_GOOGLE_ANALYTICS_ID,
   router,
   debug: {
     sendHitTask: process.env.NODE_ENV === 'production',
