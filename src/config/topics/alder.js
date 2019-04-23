@@ -5,7 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Alder',
   value: 'alder',
-  show: true,
+  production: true,
   cards: [
     {
       size: 'large',
