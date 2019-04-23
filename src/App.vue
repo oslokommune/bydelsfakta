@@ -30,7 +30,13 @@ export default {
   },
 
   created() {
-    this.setProductionMode(process.env.VUE_APP_PRODUCTION_DATA);
+    if (process.env.NODE_ENV === 'production') {
+      const envs = JSON.parse(window.__GLOBAL_ENVS__);
+      this.setProductionMode(envs.VUE_APP_PRODUCTION_DATA);
+      document.getElementById('bydelsfakta-globals').remove();
+    } else {
+      this.setProductionMode(process.env.VUE_APP_PRODUCTION_DATA);
+    }
 
     if (this.$route.name === 'Home') {
       this.addDistrict({ district: 'alle', pushRoute: false });
@@ -48,6 +54,7 @@ export default {
     if (!!window.MSInputMethodContext && !!document.documentMode) {
       this.setIE11Compatibility(true);
     }
+
   },
 
   watch: {
