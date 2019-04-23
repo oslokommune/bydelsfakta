@@ -5,7 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Husholdninger',
   value: 'husholdninger',
-  show: true,
+  production: true,
   cards: [
     {
       size: 'large',
@@ -17,7 +17,7 @@ export default {
         series: 0,
         scale: [0.25, 0.6],
       },
-      show: true,
+      production: true,
       tabs: [
         {
           active: false,

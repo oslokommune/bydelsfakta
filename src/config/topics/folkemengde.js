@@ -3,7 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Folkemengde',
   value: 'folkemengde',
-  show: null,
+  production: null,
   cards: [
     {
       size: 'large',
@@ -12,7 +12,7 @@ export default {
         labels: ['', ''],
         url: ``,
       },
-      show: null,
+      production: null,
       tabs: [
         {
           active: false,
