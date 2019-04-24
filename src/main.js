@@ -15,6 +15,8 @@ import 'leaflet/dist/leaflet.css';
 import './styles/main.scss';
 import setupI18n from './i18n';
 
+const production = process.env.NODE_ENV === 'production';
+const envs = production ? JSON.parse(window.__GLOBAL_ENVS__) : {}
 const i18n = setupI18n();
 
 // this part resolve an issue where the markers would not appear
@@ -29,17 +31,17 @@ Icon.Default.mergeOptions({
 Vue.use(VueResize);
 
 Vue.config.productionTip = false;
-Vue.config.devtools = process.env.NODE_ENV !== 'production';
-Vue.config.performance = process.env.NODE_ENV !== 'production';
+Vue.config.devtools = !production;
+Vue.config.performance = !production;
 
 // Directive to detect clicks outside of an element
 Vue.directive('click-outside', clickOutside);
 
 Vue.use(VueAnalytics, {
-  id: process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
+  id: production ? envs.VUE_APP_GOOGLE_ANALYTICS_ID : process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
   router,
   debug: {
-    sendHitTask: process.env.NODE_ENV === 'production',
+    sendHitTask: production,
   },
 });
 
