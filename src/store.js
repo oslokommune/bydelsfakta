@@ -64,7 +64,7 @@ export const mutations = {
     state.ie11 = payload;
   },
   SET_PRODUCTION_MODE(state, payload) {
-    state.productionMode = payload === 'production' ? true : payload === 'test' ? false : null;
+    state.productionMode = payload === 'prod' ? true : payload === 'dev' ? false : null;
   },
 };
 
