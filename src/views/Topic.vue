@@ -1,7 +1,19 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <graph-card v-for="(card, cardIndex) in topics[topic].cards" :key="`card-${cardIndex}`" :settings="card" />
+      <template v-for="(card, cardIndex) in topics[topic].cards">
+        <graph-card
+          :key="`card-${cardIndex}`"
+          :settings="card"
+          v-if="
+            card.production === productionMode && card.production !== null
+              ? true
+              : card.production === true && productionMode === false
+              ? true
+              : productionMode === null
+          "
+        />
+      </template>
       <div class="related">
         <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
         <div class="topics-grid">
@@ -14,7 +26,13 @@
             :bg-image="topics[`${item}`].options.bgImage"
             :txt-color="topics[`${item}`].options.txtColor"
             :district="$route.params.district"
-            :disabled="disabledTopics.includes(item)"
+            :disabled="
+              topics[`${topic}`].production === productionMode && topics[`${topic}`].production !== null
+                ? false
+                : topics[`${topic}`].production === true && productionMode === false
+                ? false
+                : productionMode !== null
+            "
           />
         </div>
       </div>
@@ -23,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import VCategory from '../components/VCategory.vue';
 import GraphCard from '../components/GraphCard.vue';
 
@@ -54,6 +72,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['productionMode']),
     ...mapGetters(['geoDistricts']),
   },
 };
