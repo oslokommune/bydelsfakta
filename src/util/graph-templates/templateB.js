@@ -197,7 +197,13 @@ function Template(svg) {
 
     const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(
+        JSON.parse(JSON.stringify(this.data.data)).sort((a, b) => {
+          if (a.avgRow && b.totalRow) return -1;
+          if (b.avgRow && a.totalRow) return 1;
+          return b.totalRow ? -1 : b.avgRow ? -1 : 1;
+        })
+      )
       .join('tr');
 
     // Geography cells
