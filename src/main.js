@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
+import VueMeta from 'vue-meta';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
 import './util/polyfills';
@@ -16,7 +17,7 @@ import './styles/main.scss';
 import setupI18n from './i18n';
 
 const production = process.env.NODE_ENV === 'production';
-const envs = production ? JSON.parse(window.__GLOBAL_ENVS__) : {}
+const envs = production ? JSON.parse(window.__GLOBAL_ENVS__) : {};
 const i18n = setupI18n();
 
 // this part resolve an issue where the markers would not appear
@@ -28,6 +29,7 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
+Vue.use(VueMeta);
 Vue.use(VueResize);
 
 Vue.config.productionTip = false;

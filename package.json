@@ -28,6 +28,7 @@
     "vue-analytics": "^5.16.4",
     "vue-dragscroll": "^1.8.3",
     "vue-i18n": "^8.10.0",
+    "vue-meta": "^1.6.0",
     "vue-resize": "^0.4.5",
     "vue-router": "^3.0.6",
     "vue2-leaflet": "^2.1.0",
