@@ -278,7 +278,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 @import './../styles/colors';
 @import './../styles/variables';
@@ -472,7 +471,6 @@ export default {
   }
 }
 </style>
-
 
 <style lang="scss">
 .compareDistrictsTable tbody tr:last-child th::after {
