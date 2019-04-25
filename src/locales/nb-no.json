@@ -31,6 +31,9 @@
       "map": "Kart",
       "table": "Tabell",
       "graph": "Graf"
+    },
+    "table": {
+      "footnote": "Inkluderer befolkningen i Sentrum, Marka og uten registrert adresse."
     }
   },
   "navigationDrawer": {
