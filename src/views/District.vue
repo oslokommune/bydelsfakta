@@ -33,6 +33,7 @@ import VCategory from '../components/VCategory.vue';
 import VLeaflet from '../components/VLeaflet.vue';
 import { topics, topicNames, disabledTopics } from '../config/topics';
 import districts from '../config/geoData/districts';
+import { getDistrictName } from '../util';
 
 export default {
   name: 'District',
@@ -49,8 +50,14 @@ export default {
     },
   },
 
+  metaInfo() {
+    return {
+      title: `${this.compareDistricts ? 'Sammenlign bydeler' : getDistrictName(this.district)} | Bydelsfakta`,
+    };
+  },
+
   computed: {
-    ...mapState(['productionMode']),
+    ...mapState(['productionMode', 'compareDistricts']),
     ...mapGetters(['geoDistricts']),
   },
 

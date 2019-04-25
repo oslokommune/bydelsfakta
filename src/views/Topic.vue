@@ -46,6 +46,7 @@ import VCategory from '../components/VCategory.vue';
 import GraphCard from '../components/GraphCard.vue';
 
 import { topics, disabledTopics } from '../config/topics';
+import { getDistrictName, getHumanReadableTopic } from '../util';
 
 export default {
   name: 'Topic',
@@ -64,6 +65,14 @@ export default {
     },
   },
 
+  metaInfo() {
+    return {
+      title: `${getHumanReadableTopic(this.topic)} | ${
+        this.compareDistricts ? 'Sammenlign bydeler' : getDistrictName(this.district)
+      } | Bydelsfakta`,
+    };
+  },
+
   data() {
     return {
       topics: topics,
@@ -72,7 +81,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['productionMode']),
+    ...mapState(['productionMode', 'compareDistricts']),
     ...mapGetters(['geoDistricts']),
   },
 };
