@@ -201,6 +201,7 @@ export default {
 .topic {
   align-items: center;
   display: flex;
+  text-align: left;
   width: 100%;
 
   .header {
