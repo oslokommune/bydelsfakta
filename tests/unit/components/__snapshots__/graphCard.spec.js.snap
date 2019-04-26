@@ -151,13 +151,17 @@ exports[`GraphCard change an active tab 1`] = `
       <div
         class="graph__tablecontainer visually-hidden"
       >
-        <table>
+        <table
+          class=""
+        >
           <caption />
            
           <thead />
            
           <tbody />
         </table>
+         
+        <!---->
       </div>
        
       <div
@@ -314,13 +318,17 @@ exports[`GraphCard renders correctly 1`] = `
       <div
         class="graph__tablecontainer visually-hidden"
       >
-        <table>
+        <table
+          class=""
+        >
           <caption />
            
           <thead />
            
           <tbody />
         </table>
+         
+        <!---->
       </div>
        
       <div

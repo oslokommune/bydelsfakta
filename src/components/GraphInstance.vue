@@ -31,11 +31,14 @@
       v-dragscroll.x="!isTouchDevice"
       @scroll="drawShadows"
     >
-      <table>
+      <table :class="{ compareDistrictsTable: compareDistricts }">
         <caption></caption>
         <thead></thead>
         <tbody></tbody>
       </table>
+      <p v-if="compareDistricts" class="table-footnote">
+        <small>{{ $t('graphCard.table.footnote') }}</small>
+      </p>
     </div>
     <!-- <table class="visually-hidden"> -->
     <resize-observer @notify="handleResize"></resize-observer>
@@ -191,6 +194,7 @@ export default {
             this.$emit('updateDate', data.meta.publishedDate);
 
             data.data.map(district => {
+              district.id = district.geography;
               district.geography = districtNames[district.geography] || district.geography;
               return district;
             });
@@ -339,6 +343,16 @@ export default {
   }
 }
 
+.table-footnote {
+  left: 0;
+  padding: 0 1rem;
+  position: sticky;
+
+  &::before {
+    content: '* ';
+  }
+}
+
 .spinner {
   align-items: center;
   animation-delay: 0.5s;
@@ -455,5 +469,11 @@ export default {
   to {
     opacity: 0;
   }
+}
+</style>
+
+<style lang="scss">
+.compareDistrictsTable tbody tr:last-child th::after {
+  content: ' *';
 }
 </style>

@@ -57,6 +57,11 @@ export default {
       topics: topics,
     };
   },
+  metaInfo() {
+    return {
+      title: 'Page not found | Bydelsfakta',
+    };
+  },
 };
 </script>
 

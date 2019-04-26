@@ -482,6 +482,7 @@ function Template(svg) {
           .attr('width', this.width)
           .attr('height', 1)
           .attr('y', this.rowHeight);
+        return g;
       });
 
     rows.select('rect.rowFill').attr('width', this.width);
