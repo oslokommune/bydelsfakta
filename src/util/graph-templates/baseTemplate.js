@@ -131,13 +131,20 @@ function Base_Template(svg) {
       .select('.graph__dropdown')
       .remove();
 
+    this.background = this.svg
+      .append('rect')
+      .attr('class', 'background')
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .attr('fill', 'white');
+
     // Append heading element
     this.heading = this.svg
       .append('text')
       .attr('class', 'heading')
       .attr('fill', color.purple)
-      .attr('font-weight', 400)
-      .attr('font-size', '1.15em')
+      .attr('font-weight', 500)
+      .attr('font-size', '1em')
       .attr('y', '1em');
 
     // Append canvas element
