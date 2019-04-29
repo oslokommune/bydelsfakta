@@ -195,7 +195,9 @@ export default {
 
             data.data.map(district => {
               district.id = district.geography;
+              district.noLink = !districtNames[district.geography]; // add noLink flag if geography is not a district
               district.geography = districtNames[district.geography] || district.geography;
+
               return district;
             });
             return data;
@@ -259,6 +261,7 @@ export default {
         method: this.settings.method,
         initialRender: true,
         compareDistricts: this.compareDistricts,
+        range: '[0, 40]', // default range
       });
       this.drawShadows();
       this.svg.setHeading(this.settings.heading);

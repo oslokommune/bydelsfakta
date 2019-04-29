@@ -1,5 +1,6 @@
 export default [
-  { range: '[0, 119]', label: 'Alle', selected: true },
+  { range: '', label: '-- Velg --', selected: true, disabled: true },
+  { range: '[0, 119]', label: 'Alle' },
   { range: '[0, 1]', label: '0–1 år' },
   { range: '[0, 5]', label: '0–5 år' },
   { range: '[6, 12]', label: '6–12 år' },
