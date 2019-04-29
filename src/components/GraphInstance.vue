@@ -195,7 +195,9 @@ export default {
 
             data.data.map(district => {
               district.id = district.geography;
+              district.noLink = !districtNames[district.geography]; // add noLink flag if geography is not a district
               district.geography = districtNames[district.geography] || district.geography;
+
               return district;
             });
             return data;

@@ -286,8 +286,12 @@ function Template(svg) {
         if (this.data.meta.series.length > 1) return 'start';
         return 'end';
       })
-      .style('cursor', d => ((this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) ? 'pointer' : false))
+      .style('cursor', d => {
+        if (d.noLink) return false;
+        return (this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) ? 'pointer' : false;
+      })
       .style('text-decoration', d => {
+        if (d.noLink) return;
         const isDistrict = util.allDistricts.some(district => district.value === d.geography);
         return (this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) || isDistrict ? 'underline' : false;
       });
