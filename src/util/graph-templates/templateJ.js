@@ -105,7 +105,6 @@ function Template(svg) {
   this.drawTable = function() {
     const thead = this.table.select('thead');
     const tbody = this.table.select('tbody');
-    this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
@@ -121,7 +120,13 @@ function Template(svg) {
 
     const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(
+        JSON.parse(JSON.stringify(this.data.data)).sort((a, b) => {
+          if (a.avgRow && b.totalRow) return -1;
+          if (b.avgRow && a.totalRow) return 1;
+          return b.totalRow ? -1 : b.avgRow ? -1 : 1;
+        })
+      )
       .join('tr');
 
     // Geography cells

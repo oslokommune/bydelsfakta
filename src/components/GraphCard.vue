@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container" :class="{ large: settings.size === 'large' }">
+  <section class="card-container" :class="{ large: settings.size === 'large' }">
     <div class="card">
       <header class="card__header">
         <div class="card__headertext">
@@ -138,7 +138,7 @@
         ></v-leaflet>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

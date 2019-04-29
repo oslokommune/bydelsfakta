@@ -6,7 +6,40 @@ export default {
   text: 'Personer med innvandrerbakgrunn',
   value: 'innvandrerbefolkningen',
   production: true,
+
   cards: [
+    {
+      size: 'large',
+      heading: 'Innvandrere',
+      production: true,
+      tabs: [
+        {
+          active: false,
+          label: 'Antall',
+          template: 'a',
+          method: 'ratio',
+          url: `${API}/innvandring-befolking-status`,
+          production: true,
+        },
+
+        {
+          active: true,
+          label: 'Historisk (andel)',
+          template: 'c',
+          method: 'ratio',
+          url: `${API}/innvandring-befolking-historisk`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Historisk (antall)',
+          template: 'c',
+          method: 'value',
+          url: `${API}/innvandring-befolking-historisk`,
+          production: true,
+        },
+      ],
+    },
     {
       size: 'large',
       heading: 'Landbakgrunn',

@@ -20,6 +20,12 @@ import TheFooter from './components/TheFooter.vue';
 
 export default {
   name: 'App',
+  metaInfo() {
+    return {
+      title: 'Bydelsfakta',
+    };
+  },
+
   components: { TheNavigationTopbar, TheNavigationDrawer, TheNavigationDrawerAlt, TheFooter },
 
   computed: {
@@ -55,7 +61,6 @@ export default {
     if (!!window.MSInputMethodContext && !!document.documentMode) {
       this.setIE11Compatibility(true);
     }
-
   },
 
   watch: {

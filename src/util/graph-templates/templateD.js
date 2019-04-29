@@ -23,11 +23,11 @@ function Template(svg) {
   this.dropDownParent;
 
   this.minWidth = 600;
-
-  let extent = [0, 119];
   let gBrushSmall, gBrushLarge;
 
-  this.age = d3.scaleLinear().domain(extent);
+  this.age = d3.scaleLinear().domain([0, 119]);
+
+  let extent = [];
 
   function sortData(input, method) {
     input.sort((a, b) => {
@@ -80,7 +80,7 @@ function Template(svg) {
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     // Move the brushes if a range was selected and save the new extent
-    if (options.range) {
+    if (options.range && typeof options.range === 'string') {
       extent = JSON.parse(options.range);
       gBrushLarge
         .transition()
@@ -168,7 +168,7 @@ function Template(svg) {
     // If there's brush event, we get the selection here
     // and saves the extent (years) to the global variable.
     if (!d3.event) {
-      s = extent.map(self.age);
+      return;
     } else {
       s = d3.event.selection || self.age.range();
       extent = s.map(val => Math.round(self.age.invert(val)));
@@ -305,6 +305,7 @@ function Template(svg) {
       .selectAll('option')
       .data(ageRanges)
       .join('option')
+      .attr('disabled', d => d.disabled)
       .attr('value', d => d.range)
       .text(d => d.label);
 
@@ -330,10 +331,10 @@ function Template(svg) {
     this.lower
       .append('text')
       .attr('class', 'xAxis-title')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
+      .attr('font-size', '1em')
+      .attr('font-weight', 500)
       .attr('fill', color.purple)
-      .attr('transform', `translate(${this.paddingLowerLeft}, ${-28})`);
+      .attr('transform', `translate(${this.paddingLowerLeft}, ${-32})`);
 
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
     brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
@@ -397,7 +398,6 @@ function Template(svg) {
   this.drawTable = function() {
     const thead = this.table.select('thead');
     const tbody = this.table.select('tbody');
-    this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
@@ -437,14 +437,16 @@ function Template(svg) {
     rows
       .selectAll('td')
       .data(d => {
-        return ageRanges.map(age => {
-          const range = JSON.parse(age.range);
-          let sum = 0;
-          for (let i = range[0]; i <= range[1]; i++) {
-            sum += d.values[i][this.method];
-          }
-          return sum;
-        });
+        return ageRanges
+          .filter(d => !d.disabled)
+          .map(age => {
+            const range = JSON.parse(age.range);
+            let sum = 0;
+            for (let i = range[0]; i <= range[1]; i++) {
+              sum += d.values[i][this.method];
+            }
+            return sum;
+          });
       })
       .join('td')
       .text(d => this.format(d, this.method, false, true));
@@ -482,6 +484,7 @@ function Template(svg) {
           .attr('width', this.width)
           .attr('height', 1)
           .attr('y', this.rowHeight);
+        return g;
       });
 
     rows.select('rect.rowFill').attr('width', this.width);

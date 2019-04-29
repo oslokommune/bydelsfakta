@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GraphCard change an active tab 1`] = `
-<div
+<section
   class="card-container large"
 >
   <div
@@ -151,13 +151,17 @@ exports[`GraphCard change an active tab 1`] = `
       <div
         class="graph__tablecontainer visually-hidden"
       >
-        <table>
+        <table
+          class=""
+        >
           <caption />
            
           <thead />
            
           <tbody />
         </table>
+         
+        <!---->
       </div>
        
       <div
@@ -178,11 +182,11 @@ exports[`GraphCard change an active tab 1`] = `
      
     <!---->
   </div>
-</div>
+</section>
 `;
 
 exports[`GraphCard renders correctly 1`] = `
-<div
+<section
   class="card-container large"
 >
   <div
@@ -314,13 +318,17 @@ exports[`GraphCard renders correctly 1`] = `
       <div
         class="graph__tablecontainer visually-hidden"
       >
-        <table>
+        <table
+          class=""
+        >
           <caption />
            
           <thead />
            
           <tbody />
         </table>
+         
+        <!---->
       </div>
        
       <div
@@ -357,5 +365,5 @@ exports[`GraphCard renders correctly 1`] = `
      
     <!---->
   </div>
-</div>
+</section>
 `;

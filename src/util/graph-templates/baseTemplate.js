@@ -84,6 +84,39 @@ function Base_Template(svg) {
     });
   }, 250);
 
+  // Sets the heading for the graph on load. Accepts a custom heading from `topics.js`
+  this.setHeading = function(str = false) {
+    if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
+      const heading = str || this.data.meta.heading;
+      const district = allDistricts.find(d => d.key === this.data.district);
+      const geo = district ? ` i ${district.value}` : '';
+      let year = '';
+
+      switch (this.template) {
+        case 'a':
+        case 'i':
+          if (!this.data.data[0].values.length) break;
+          year = `(${this.data.data[0].values[0].date})`;
+          break;
+
+        case 'd':
+        case 'e':
+        case 'f':
+          year = `(${this.data.data[0].aargang})`;
+          break;
+
+        default:
+          break;
+      }
+
+      const text = `${heading} ${geo} ${year}`;
+      d3.select(this.svg.node().parentNode.parentNode)
+        .select('caption')
+        .html(text);
+      this.heading.text(text);
+    }
+  };
+
   // Common operations to be run once a template is initialized
   this.init = function() {
     this.svg = d3.select(svg).style('font-family', 'OsloSans');
@@ -98,13 +131,20 @@ function Base_Template(svg) {
       .select('.graph__dropdown')
       .remove();
 
+    this.background = this.svg
+      .append('rect')
+      .attr('class', 'background')
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .attr('fill', 'white');
+
     // Append heading element
     this.heading = this.svg
       .append('text')
       .attr('class', 'heading')
       .attr('fill', color.purple)
-      .attr('font-weight', 400)
-      .attr('font-size', '1.15em')
+      .attr('font-weight', 500)
+      .attr('font-size', '1em')
       .attr('y', '1em');
 
     // Append canvas element
@@ -230,36 +270,7 @@ function Base_Template(svg) {
     if (data === undefined || data.data === undefined) return;
     this.data = data;
 
-    if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
-      const heading = this.data.meta.heading;
-      const district = allDistricts.find(d => d.key === this.data.district);
-      const geo = district ? ` i ${district.value}` : '';
-      let year = '';
-
-      switch (this.template) {
-        case 'a':
-        case 'i':
-          if (!this.data.data[0].values.length) break;
-          year = `(${this.data.data[0].values[0].date})`;
-          break;
-
-        case 'd':
-        case 'e':
-        case 'f':
-          year = `(${this.data.data[0].aargang})`;
-          break;
-
-        default:
-          break;
-      }
-
-      this.heading.text(`${heading} ${geo} ${year}`);
-    } else {
-      this.heading.text('--- Missing heading ---');
-    }
-
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-
     this.isCompare = options.compareDistricts || false;
     this.method = options.method || 'value';
     this.highlight = options.highlight === undefined || options.highlight == null ? -1 : options.highlight;
