@@ -169,7 +169,6 @@ function Template(svg) {
     // and saves the extent (years) to the global variable.
     if (!d3.event) {
       return;
-      s = extent.map(self.age);
     } else {
       s = d3.event.selection || self.age.range();
       extent = s.map(val => Math.round(self.age.invert(val)));
