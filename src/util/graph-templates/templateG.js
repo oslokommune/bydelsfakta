@@ -49,7 +49,6 @@ function Template(svg) {
   this.drawTable = function() {
     const thead = this.table.select('thead');
     const tbody = this.table.select('tbody');
-    this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();

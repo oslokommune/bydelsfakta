@@ -250,6 +250,7 @@ export default {
             break;
         }
       }
+
       this.currentTemplate = this.settings.template;
 
       this.loading = false;
@@ -260,6 +261,7 @@ export default {
         compareDistricts: this.compareDistricts,
       });
       this.drawShadows();
+      this.svg.setHeading(this.settings.heading);
     },
   },
   props: {

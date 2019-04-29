@@ -31,7 +31,7 @@ function Template(svg) {
     this.width = d3.max([this.width, 360]);
 
     // Find quartiles, mean and median for each geography
-    data.data = data.data
+    data.data = JSON.parse(JSON.stringify(data.data))
       .map(district => {
         if (district.low) return district;
         let ages = [];
@@ -47,7 +47,11 @@ function Template(svg) {
 
         return district;
       })
-      .sort((a, b) => (b.totalRow ? -3 : b.avgRow ? -2 : a.mean - b.mean));
+      .sort((a, b) => {
+        if (a.avgRow && b.totalRow) return -1;
+        if (b.avgRow && a.totalRow) return 1;
+        return b.totalRow ? -1 : b.avgRow ? -1 : a.mean - b.mean;
+      });
 
     this.svg
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
@@ -86,7 +90,6 @@ function Template(svg) {
   this.drawTable = function() {
     const thead = this.table.select('thead');
     const tbody = this.table.select('tbody');
-    this.table.select('caption').text(this.data.meta.heading);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
