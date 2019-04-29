@@ -259,6 +259,7 @@ export default {
         method: this.settings.method,
         initialRender: true,
         compareDistricts: this.compareDistricts,
+        range: '[0, 40]', // default range
       });
       this.drawShadows();
       this.svg.setHeading(this.settings.heading);
