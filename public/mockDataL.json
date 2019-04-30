@@ -1,0 +1,2422 @@
+{
+  "meta": {
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "heading": "Inn- og utflyttinger",
+    "publishedDate": "2019-06-01"
+  },
+
+  "data": [
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 13
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 32
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 31
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 43
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 67
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 104
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 165
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 139
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 81
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 71
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 49
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 34
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 29
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 23
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 12
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 9
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 5
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 21
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 19
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 31
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 57
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 149
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 242
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 254
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 172
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 155
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 101
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 86
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 49
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 24
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 15
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 6
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 9
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 3
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 11
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 18
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 23
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 32
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 92
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 157
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 210
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 152
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 124
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 63
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 52
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 32
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 26
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 30
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 8
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 8
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 5
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 3
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 143
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 108
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 91
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 42
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 43
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 60
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 20
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 15
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 3
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 101
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 81
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 44
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 56
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 94
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 61
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 26
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 9
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 4
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 122
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 85
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 41
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 48
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 59
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 54
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 28
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 13
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 3
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 3
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 98
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 77
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 31
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 25
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 42
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 65
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 73
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 43
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 46
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 40
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 21
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 25
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 15
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 18
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 26
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 20
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 37
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 32
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "90 år og eldre",
+      "value": 58
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 82
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 42
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 24
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 48
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 161
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 194
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 143
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 56
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 38
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 40
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 35
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 27
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 21
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 15
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 17
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 18
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 16
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 19
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Til annen bydel",
+      "geography": "Alna",
+      "age": "90 år og eldre",
+      "value": 33
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 174
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 61
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 19
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 36
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 128
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 168
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 143
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 111
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 68
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 48
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 35
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 49
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 53
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 36
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 32
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 14
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 10
+    },
+    {
+      "direction": "out",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Ut av Oslo",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 10
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 13
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 32
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 31
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 43
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 67
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 104
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 165
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 139
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 81
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 71
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 49
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 34
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 29
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 23
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 12
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 9
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 5
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 23
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 34
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 38
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 45
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 132
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 244
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 304
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 225
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 179
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 119
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 76
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 56
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 28
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 19
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 9
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 4
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 4
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "90 år og eldre",
+      "value": 3
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 46
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 41
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 44
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 57
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 143
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 254
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 211
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 141
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 92
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 64
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 31
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 36
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 24
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 14
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 7
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Innvandrer",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 3
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 143
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 108
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 91
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 42
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 43
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 60
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 20
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 15
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 3
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 143
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 86
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 57
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 61
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 83
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 59
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 30
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 7
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 3
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 70
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 40
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 24
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 26
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 42
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 36
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 8
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Norskfødte /m innv.foreldre",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 9
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 98
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 77
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 31
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 25
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 42
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 65
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 73
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 43
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 46
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 40
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 21
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 25
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 15
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 18
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 26
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 20
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 37
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 32
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Innenfor bydelen",
+      "geography": "Alna",
+      "age": "90 år og eldre",
+      "value": 58
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 110
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 46
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 11
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 31
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 147
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 295
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 171
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 98
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 42
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 50
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 37
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 24
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 23
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 16
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 9
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 18
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 20
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "85-89 år",
+      "value": 19
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Fra annen bydel",
+      "geography": "Alna",
+      "age": "90 år og eldre",
+      "value": 23
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "Under 5 år",
+      "value": 41
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "5–9 år",
+      "value": 18
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "10-14 år",
+      "value": 19
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "15-19 år",
+      "value": 28
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "20-24 år",
+      "value": 138
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "25-29 år",
+      "value": 161
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "30-34 år",
+      "value": 78
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "35-39 år",
+      "value": 32
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "40-44 år",
+      "value": 20
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "45-49 år",
+      "value": 23
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "50-54 år",
+      "value": 24
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "55-59 år",
+      "value": 18
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "60-64 år",
+      "value": 12
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "65-69 år",
+      "value": 10
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "70-74 år",
+      "value": 3
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "75-79 år",
+      "value": 3
+    },
+    {
+      "direction": "in",
+      "immigrant_type": "Øvrige",
+      "year": "2017",
+      "moving_type": "Inn til  Oslo",
+      "geography": "Alna",
+      "age": "80-84 år",
+      "value": 3
+    }
+  ]
+}
