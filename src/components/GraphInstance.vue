@@ -69,6 +69,7 @@ import TemplateG from '../util/graph-templates/templateG';
 import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
+import TemplateL from '../util/graph-templates/templateL';
 import districtNames from '../config/districtNames';
 
 export default {
@@ -248,6 +249,10 @@ export default {
           case 'j':
             this.svg = new TemplateJ(this.$refs['svg']);
             break;
+          case 'l':
+            this.svg = new TemplateL(this.$refs['svg']);
+            break;
+
           default:
             break;
         }
