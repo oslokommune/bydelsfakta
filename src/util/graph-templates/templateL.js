@@ -17,7 +17,7 @@ function Template(svg) {
   this.links;
   this.labels;
   this.sankeyData;
-  this.order = ['age', 'immigrant_type', 'moving_type'];
+  this.order = ['immigrant_type', 'moving_type'];
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -106,7 +106,7 @@ function parseData(data, order) {
 
   // DYNAMIC COLUMN ORDER
   let links = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < order.length; i++) {
     const direction = 'in';
     let source, target;
 
@@ -118,7 +118,7 @@ function parseData(data, order) {
       source = { moving_type: movingTypeIn };
     }
 
-    if (i === 2) {
+    if (i === order.length - 1) {
       target = { geography };
     } else if (order[i + 1] === 'age') {
       target = { age: agesIn };
@@ -131,25 +131,25 @@ function parseData(data, order) {
     links.push(...createLinks(data, source, target, direction));
   }
 
-  for (let i = 3; i < 6; i++) {
+  for (let i = order.length; i < order.length * 2; i++) {
     const direction = 'out';
     let source, target;
 
-    if (i === 3) {
+    if (i === order.length) {
       source = { geography };
-    } else if (order[6 - i] === 'age') {
+    } else if (order[order.length * 2 - i] === 'age') {
       source = { age: agesOut };
-    } else if (order[6 - i] === 'immigrant_type') {
+    } else if (order[order.length * 2 - i] === 'immigrant_type') {
       source = { immigrant_type: immigrantTypeOut };
-    } else if (order[6 - i] === 'moving_type') {
+    } else if (order[order.length * 2 - i] === 'moving_type') {
       source = { moving_type: movingTypeOut };
     }
 
-    if (order[6 - i - 1] === 'age') {
+    if (order[order.length * 2 - i - 1] === 'age') {
       target = { age: agesOut };
-    } else if (order[6 - i - 1] === 'immigrant_type') {
+    } else if (order[order.length * 2 - i - 1] === 'immigrant_type') {
       target = { immigrant_type: immigrantTypeOut };
-    } else if (order[6 - i - 1] === 'moving_type') {
+    } else if (order[order.length * 2 - i - 1] === 'moving_type') {
       target = { moving_type: movingTypeOut };
     }
 
