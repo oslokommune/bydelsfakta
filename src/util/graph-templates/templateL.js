@@ -11,16 +11,24 @@ import d3 from '@/assets/d3';
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'l';
-  this.padding = { top: 70, left: 1, right: 1, bottom: 1 };
+  this.padding = { top: 70, left: 1, right: 1, bottom: 30 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
   this.nodes;
   this.links;
   this.labels;
   this.sankeyData;
-  this.order = ['immigrant_type', 'moving_type'];
+  this.order = [
+    { id: 'immigrant_type', disabled: false, label: 'Innvandrer' },
+    { id: 'moving_type', disabled: false, label: 'Type' },
+    { id: 'age', disabled: false, label: 'Alder' },
+  ];
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
+
+    if (options.order) {
+      this.order = options.order;
+    }
 
     this.sankeyData = parseData(data.data, this.order);
 
@@ -37,6 +45,7 @@ function Template(svg) {
     drawNodes(this, graph);
     drawLinks(this, graph);
     drawLabels(this, graph);
+    drawControls(this);
 
     this.drawSource(
       'Statistisk sentralbyrå (test)',
@@ -49,6 +58,7 @@ function Template(svg) {
     this.canvas.append('g').attr('class', 'links');
     this.canvas.append('g').attr('class', 'nodes');
     this.canvas.append('g').attr('class', 'labels');
+    this.canvas.append('g').attr('class', 'controls');
   };
 
   this.init(svg);
@@ -69,7 +79,9 @@ function generateSankey(self) {
   return sankey(self.sankeyData);
 }
 
-function parseData(data, order) {
+function parseData(data, orderObject) {
+  const order = orderObject.filter(d => !d.disabled).map(d => d.id);
+
   const immigrantTypeIn = [
     ...new Set(data.filter(d => d.direction === 'in').map(d => d.direction + ' | ' + d.immigrant_type)),
   ];
@@ -289,7 +301,6 @@ function drawLabels(self, data) {
       if (d.direction === 'out') return 'end';
       return 'start';
     })
-    .attr('tx', 100)
     .attr('transform', d => {
       const offset = d.direction === 'out' ? -5 : 17;
       return `translate(${offset}, 6)`;
@@ -309,4 +320,144 @@ function drawHeadings(self, data) {
     .attr('x', (d, i) => self.width / 4 + (self.width / 2) * i)
     .attr('width', self.width / 2)
     .attr('text-anchor', 'middle');
+}
+
+function drawControls(self) {
+  const g = self.canvas.select('g.controls').attr('transform', `translate(0, ${self.height})`);
+  const items = g
+    .selectAll('g.item')
+    .data(self.order, d => d.id)
+    .join(enter => {
+      let g = enter.append('g');
+
+      g.append('rect').attr('class', 'bg');
+      const tick = g.append('g').attr('class', 'tick');
+      tick.append('rect').attr('class', 'bigbox');
+      tick.append('rect').attr('class', 'smallbox');
+
+      g.append('text');
+      return g;
+    })
+    .attr('class', 'item')
+    .style('cursor', 'move')
+    .call(styleControllerItem);
+
+  items.transition().attr('transform', (d, i) => `translate(${i * 140 - 2}, 0)`);
+
+  items.call(
+    d3
+      .drag()
+      .on('start', dragStart)
+      .on('drag', dragging)
+      .on('end', (d, i, j) => dragEnd(d, i, j, self))
+  );
+
+  items.on('click', function(d, i, j) {
+    const currentlyDisabled = self.order.filter(d => !d.disabled).length;
+    if (currentlyDisabled === 1 && !d.disabled) return;
+
+    d.disabled = !d.disabled;
+    d3.select(this).call(styleControllerItem);
+    self.order = getOrder(j);
+    self.render(self.data);
+  });
+}
+
+function dragStart(d, i, j) {
+  d3.selectAll(j).attr('opacity', 0.4);
+  d3.select(this)
+    .attr('opacity', 1)
+    .raise();
+}
+
+function dragging(d, i, j) {
+  const pos = d3.event.x;
+  if (pos < -40) return;
+  d3.select(this).attr('transform', `translate(${pos - 70}, 0)`);
+}
+
+function dragEnd(d, i, j, self) {
+  d3.selectAll(j).attr('opacity', 1);
+  let newOrder = getOrder(j);
+
+  if (self.order.map(d => d.id).join('') === newOrder.map(d => d.id).join('')) {
+    resetItemsPosition(j);
+    return;
+  }
+
+  self.order = newOrder;
+  self.render(self.data);
+}
+
+// Finds the translated x-position of
+// the provided element
+function getXPos(el) {
+  return d3
+    .select(el)
+    .attr('transform')
+    .split('(')[1]
+    .split(',')[0];
+}
+
+function resetItemsPosition(el) {
+  d3.selectAll(el)
+    .transition()
+    .attr('transform', (d, i) => `translate(${i * 140 - 2}, 0.5)`);
+}
+
+function styleControllerItem(el) {
+  const tickbox = el.select('g.tick');
+
+  tickbox
+    .select('.bigbox')
+    .attr('height', 14)
+    .attr('width', 14)
+    .attr('fill', 'white')
+    .attr('stroke', color.purple)
+    .attr('rx', 2)
+    .attr('x', 9)
+    .attr('y', 8);
+
+  tickbox
+    .select('.smallbox')
+    .attr('fill', color.purple)
+    .attr('rx', 1)
+    .transition()
+
+    .attr('x', d => {
+      return d.disabled ? 16 : 12;
+    })
+    .attr('y', d => {
+      return d.disabled ? 15 : 11;
+    })
+    .attr('height', d => {
+      return d.disabled ? 0 : 8;
+    })
+    .attr('width', d => {
+      return d.disabled ? 0 : 8;
+    });
+
+  el.select('rect.bg')
+    .attr('width', 136)
+    .attr('x', 2)
+    .attr('height', 30)
+    .attr('stroke', d => (d.disabled ? color.purple : 'white'))
+    .attr('stroke-opacity', d => (d.disabled ? 0.5 : 1))
+    .attr('fill', d => (d.disabled ? '#eee' : color.purple));
+
+  el.select('text')
+    .attr('x', 28)
+    .attr('y', 20)
+    .attr('fill', d => (d.disabled ? color.purple : 'white'))
+    .attr('opacity', d => (d.disabled ? 0.8 : 1))
+    .attr('font-weight', 500)
+    .style('pointer-events', 'none')
+    .text(d => d.label);
+}
+
+function getOrder(el) {
+  return el
+    .map(d => d)
+    .sort((a, b) => getXPos(a) - getXPos(b))
+    .map(d => d.__data__);
 }
