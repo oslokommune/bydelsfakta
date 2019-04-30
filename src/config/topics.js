@@ -24,7 +24,7 @@ export const topicNames = [
 
 export const disabledTopics = [
   'folkemengde',
-  'befolkningsendringer',
+  // 'befolkningsendringer',
   // 'innvandrerbefolkningen',
   'eierform',
   'bygningstyper',
