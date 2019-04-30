@@ -20,6 +20,7 @@
     "@babel/polyfill": "^7.4.3",
     "canvg": "^1.5.3",
     "d3": "^5.9.2",
+    "d3-sankey": "^0.12.1",
     "leaflet": "^1.4.0",
     "leaflet-gesture-handling": "^1.1.8",
     "nodemon": "^1.18.11",
