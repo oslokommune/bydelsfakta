@@ -35,6 +35,7 @@
                 @click="mode = 'graph'"
                 :class="{ 'card__toggle-button--active': mode === 'graph' }"
                 :aria-label="$t('graphCard.mode.graph')"
+                :title="$t('graphCard.mode.graph')"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
               </button>
@@ -43,6 +44,7 @@
                 @click="mode = 'table'"
                 :class="{ 'card__toggle-button--active': mode === 'table' }"
                 :aria-label="$t('graphCard.mode.table')"
+                :title="$t('graphCard.mode.table')"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
               </button>
@@ -53,6 +55,7 @@
                 @click="mode = 'map'"
                 :class="{ 'card__toggle-button--active': mode === 'map' }"
                 :aria-label="$t('graphCard.mode.map')"
+                :title="$t('graphCard.mode.map')"
               >
                 <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">map</i>
               </button>
@@ -67,6 +70,7 @@
               aria-haspopup="true"
               :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
               id="context-menu-button"
+              :title="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
             >
               <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
             </button>
@@ -262,7 +266,8 @@ export default {
 
 .card {
   background: white;
-  box-shadow: 0 1px 3px rgba(black, 0.5), 0 3px 6px rgba(black, 0.07);
+  // box-shadow: 0 1px 3px rgba(black, 0.5), 0 3px 6px rgba(black, 0.07);
+  border: 1px solid $color-border;
   min-height: 18em;
   width: 100%;
 
@@ -444,7 +449,7 @@ export default {
     box-shadow: 0 2px 2px 0 $color-grey-200;
     position: absolute;
     right: 0;
-    width: 240px;
+    width: 310px;
     z-index: 1;
 
     &-item {
@@ -475,6 +480,7 @@ export default {
 
       span {
         margin-left: 0.5rem;
+        text-align: left;
       }
     }
   }
