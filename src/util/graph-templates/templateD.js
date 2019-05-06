@@ -13,7 +13,7 @@ function Template(svg) {
 
   this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
   this.height = 0; // calculated on render. Height of the lower part
-  this.height2 = 100; // height of the upper chart
+  this.height2 = 140; // height of the upper chart
   this.width = 1000;
   this.paddingUpperLeft = 190; // padding left of the upper chart
   this.paddingLowerLeft = 300; // padding left of the lower chart
@@ -197,15 +197,34 @@ function Template(svg) {
     d3.selectAll('rect.selection')
       .attr('x', s[0])
       .attr('opacity', 1)
-      .attr('width', s[1] - s[0]);
+      .attr('width', s[1] - s[0])
+      .filter((d, i) => i === 1)
+      .on('mouseover', () => {
+        this.showTooltip('Dra for å velge alderssegment', d3.event, 700);
+      })
+      .on('mouseleave', () => {
+        this.hideTooltip();
+      });
 
     // Move invisible handles
     d3.selectAll('.handle--e')
       .attr('width', 21)
-      .attr('x', s[1]);
+      .attr('x', s[1])
+      .on('mouseover', () => {
+        this.showTooltip('Dra for å velge alderssegment', d3.event, 700);
+      })
+      .on('mouseleave', () => {
+        this.hideTooltip();
+      });
     d3.selectAll('.handle--w')
       .attr('width', 21)
-      .attr('x', s[0] - 21);
+      .attr('x', s[0] - 21)
+      .on('mouseover', () => {
+        this.showTooltip('Dra for å velge alderssegment', d3.event, 700);
+      })
+      .on('mouseleave', () => {
+        this.hideTooltip();
+      });
 
     // Move visible handles
     self.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
@@ -575,6 +594,20 @@ function Template(svg) {
       .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
       .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
+
+    lines.on('mouseover', (d, i, j) => {
+      lines.attr('opacity', 0.1).attr('stroke', color.blue);
+      d3.select(j[i])
+        .attr('opacity', 1)
+        .attr('stroke', color.purple);
+
+      this.showTooltip(d.geography, d3.event);
+    });
+
+    lines.on('mouseleave', (d, i, j) => {
+      lines.attr('opacity', 1).attr('stroke', color.blue);
+      this.hideTooltip();
+    });
   };
 
   // Finds the larges accumulated number within the selected range
