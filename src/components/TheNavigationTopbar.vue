@@ -12,6 +12,7 @@
         v-click-outside="closeMenu"
         ref="select"
         :aria-label="$t('navigationTopbar.selectTopic.aria')"
+        :title="$t('navigationTopbar.selectTopic.aria')"
       >
         <label class="label" :class="{ 'label--active': selectedTopic !== null }">{{
           $t('navigationTopbar.selectTopic.label')
@@ -26,7 +27,7 @@
           <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
             <div
               class="navigation-topbar__dropdown-column--heading"
-              :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
+              :style="{ color: kategori.color, 'border-top-color': kategori.color }"
             >
               <span>{{ kategori.kategori }}</span>
             </div>
@@ -269,10 +270,7 @@ export default {
 
   &__dropdown {
     background-color: white;
-    border: 1px solid $color-grey-100;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.65);
+    border: 3px solid $color-border;
     display: flex;
     flex-flow: row wrap;
     max-height: calc(100vh - 17rem);
@@ -291,9 +289,14 @@ export default {
       padding: 0.5rem;
 
       &--heading {
-        font-weight: bold;
+        font-weight: 700;
         margin-bottom: 1rem;
         margin-top: 1rem;
+        padding-top: 0.5rem;
+
+        & > span {
+          padding-left: 0.5rem;
+        }
 
         @media screen and (min-width: $break-lg) {
           margin-top: 0;
