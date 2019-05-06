@@ -15,7 +15,7 @@ function Template(svg) {
   this.height = 0; // calculated on render. Height of the lower part
   this.height2 = 100; // height of the upper chart
   this.width = 1000;
-  this.paddingUpperLeft = 160; // padding left of the upper chart
+  this.paddingUpperLeft = 190; // padding left of the upper chart
   this.paddingLowerLeft = 300; // padding left of the lower chart
   this.yGutter = 130; // space between upper and lower charts
   this.y = d3.scaleLinear();
@@ -66,7 +66,7 @@ function Template(svg) {
 
     // Set sizes for brush objects
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 18]]);
 
     // Set size for age (scale for brushes)
     this.age.range([0, this.width - this.paddingUpperLeft]).nice();
@@ -291,7 +291,7 @@ function Template(svg) {
       .insert('label')
       .attr('for', 'age_selector')
       .attr('class', 'graph__dropdown__label')
-      .html('Velg segment');
+      .html('Velg aldersgruppe');
 
     const selectElement = this.dropDownParent
       .insert('select')
@@ -366,7 +366,7 @@ function Template(svg) {
     gBrushSmall
       .select('.overlay')
       .attr('stroke', color.purple)
-      .attr('rx', 6);
+      .attr('rx', 2);
 
     this.upperXAxis = this.upper
       .append('g')
@@ -408,13 +408,15 @@ function Template(svg) {
       .selectAll('th')
       .data(() => [
         'Geografi',
-        ...ageRanges.map(d => {
-          let str = '';
-          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
-          str += d.label;
-          str += this.method === 'ratio' ? ' (%)' : '';
-          return str;
-        }),
+        ...ageRanges
+          .filter(d => !d.disabled)
+          .map(d => {
+            let str = '';
+            str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+            str += d.label;
+            str += this.method === 'ratio' ? ' (%)' : '';
+            return str;
+          }),
       ])
       .join('th')
       .attr('scope', 'col')
@@ -499,8 +501,7 @@ function Template(svg) {
     rows.select('text.geography').text(d => d.geography);
     rows.select('text.value').text(district => {
       const sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-
-      return this.method === 'ratio' ? this.format(sum, this.method) : d3.format(',d')(sum);
+      return this.format(sum, this.method);
     });
 
     rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);
