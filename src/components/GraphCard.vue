@@ -266,7 +266,6 @@ export default {
 
 .card {
   background: white;
-  // box-shadow: 0 1px 3px rgba(black, 0.5), 0 3px 6px rgba(black, 0.07);
   border: 1px solid $color-border;
   min-height: 18em;
   width: 100%;
