@@ -23,6 +23,7 @@ import L from 'leaflet';
 import * as d3 from 'd3';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import { color, interpolator } from '../util/graph-templates/colors';
+import * as locale from '@/util/graph-templates/locale';
 
 export default {
   name: 'VLeaflet',
@@ -135,7 +136,10 @@ export default {
           : interpolator(colorStrength(dataValue));
 
         // Set number formatting for popup
-        const format = this.settings.method === 'ratio' ? d3.format('.3p') : d3.format(',.4r');
+        const format =
+          this.settings.method === 'ratio'
+            ? locale.norwegianLocale.format('.3~p')
+            : locale.norwegianLocale.format(',.0f');
 
         const popupContent = `
           <h4>${layer.feature.properties.name}</h4>
