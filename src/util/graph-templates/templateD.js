@@ -604,7 +604,7 @@ function Template(svg) {
       this.showTooltip(d.geography, d3.event);
     });
 
-    lines.on('mouseleave', (d, i, j) => {
+    lines.on('mouseleave', () => {
       lines.attr('opacity', 1).attr('stroke', color.blue);
       this.hideTooltip();
     });
