@@ -11,18 +11,6 @@ import { color } from './colors';
 import d3 from '@/assets/d3';
 import positionLabels from '../positionLabels';
 
-function intersects(a, b) {
-  let det, gamma, lambda;
-  det = (a.x2 - a.x1) * (b.y2 - b.y1) - (b.x2 - b.x1) * (a.y2 - a.y1);
-  if (det === 0) {
-    return false;
-  } else {
-    lambda = ((b.y2 - b.y1) * (b.x2 - a.x1) + (b.x1 - b.x2) * (b.y2 - a.y1)) / det;
-    gamma = ((a.y1 - a.y2) * (b.x2 - a.x1) + (a.x2 - a.x1) * (b.y2 - a.y1)) / det;
-    return 0 < lambda && lambda < 1 && (0 < gamma && gamma < 1);
-  }
-}
-
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'b';
@@ -36,9 +24,6 @@ function Template(svg) {
       .map((geo, i, j) => {
         geo.color = d3.interpolateRainbow(i / j.length);
         return geo;
-      })
-      .filter(d => {
-        return !(this.method === 'value' && (d.avgRow || d.totalRow));
       })
       .sort((a, b) => b.values[b.values.length - 1][this.method] - a.values[a.values.length - 1][this.method]);
 
@@ -57,7 +42,6 @@ function Template(svg) {
     this.drawLabels();
     this.drawDots();
     this.drawVoronoi();
-    this.drawDirectLabels();
     this.drawSource(
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
@@ -75,12 +59,14 @@ function Template(svg) {
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
-    .curve(d3.curveCardinal)
     .x(d => this.x(this.parseYear(d.date)))
     .y(d => this.y(d[this.method]));
 
   this.drawVoronoi = function() {
     const flattenData = this.data.data
+      .filter(d => {
+        return !(this.method === 'value' && (d.avgRow || d.totalRow));
+      })
       .map(geo => geo.values.map(val => ({ date: val['date'], value: val[this.method], geography: geo.geography })))
       .flat();
 
@@ -221,154 +207,16 @@ function Template(svg) {
       .text(d => this.format(d[this.method], this.method, false, true));
   };
 
-  /**
-   * Direct labels are drawn near lines where there's room
-   * for them. This is acheived by finding the largest
-   * voronoi cell for each line and sorting them, storing only
-   * the 4 largest to limit to maximum 4 direct labels.
-   * The labels are offset by shifting them towards the center
-   * point its voronoi cell (centroid) by the distance
-   * stored in the local 'distance' constant.
-   * To calculate if there's room for the label to be drawn
-   * we check for collisions with (each part of) each line,
-   * and remove the ones who collide.
-   */
-  this.drawDirectLabels = function() {
-    // Find the voronoi cells
-    const cells = this.canvas.select('g.voronoi').selectAll('path');
-
-    // Find each cell's area and centroid and sort by area
-    let areas = [];
-    cells.each(d => {
-      areas.push({
-        area: d3.polygonArea(d),
-        centroid: d3.polygonCentroid(d),
-        data: d.data,
-      });
-    });
-    areas.sort((a, b) => b.area - a.area);
-
-    // Nest cells by their geography and save only
-    // the labels for the largest 4 cells
-    areas = d3
-      .nest()
-      .key(d => d.data.geography)
-      .entries(areas)
-      .filter((d, i) => i < 4);
-
-    // Create the text labels for each of these geographies
-    // and for each of them check to see if they collide
-    // with any lines and offset them in the right direction
-    // towards the voronoi's centroid point.
-    const label = this.canvas
-      .selectAll('g.direct')
-      .data(areas, d => d)
-      .join(
-        enter => {
-          const g = enter
-            .append('g')
-            .attr('class', 'direct')
-            .attr('opacity', 0);
-          g.append('rect');
-          g.append('text');
-          return g;
-        },
-        update => update
-      )
-      .style('pointer-events', 'none')
-      .each((d, i, j) => {
-        const el = d3.select(j[i]);
-        const position = [this.x(this.parseYear(d.values[0]['data']['date'])), this.y(d.values[0].data.value)];
-        const centroid = d.values[0].centroid;
-        const angle = Math.atan2(centroid[1] - position[1], centroid[0] - position[0]);
-        const distance = 20;
-        const box = el.node().getBBox();
-
-        // Location of the position where it should sit
-        const target = {
-          x: Math.cos(angle) * distance + position[0],
-          y: Math.sin(angle) * distance + position[1],
-        };
-
-        // Coordinates bottom two corners of text box
-        const a = {
-          x1: target.x - box.width / 2,
-          y1: target.y + box.height,
-          x2: target.x + box.width / 2,
-          y2: target.y + box.height,
-        };
-
-        // If angle is negative, use the top corners instead
-        if (angle < 0) {
-          a.y1 = target.y;
-          a.y2 = target.y;
-        }
-
-        // Counter for number of collisions
-        let collisions = 0;
-
-        // Test if the label collides any lines
-        this.canvas.selectAll('path.row').each(d => {
-          const val = d.values;
-          for (let i = 0; i < val.length - 1; i++) {
-            const b = {
-              x1: this.x(this.parseYear(val[i]['date'])),
-              y1: this.y(val[i].value),
-              x2: this.x(this.parseYear(val[i + 1]['date'])),
-              y2: this.y(val[i + 1].value),
-            };
-            if (intersects(a, b)) collisions++;
-          }
-        });
-
-        // Do not use the label if it collides with
-        // the canvas's edges
-        if (a.x2 > this.width || a.x1 < 0) {
-          el.remove();
-        }
-
-        // Move the label to the target position if there's
-        // no collisions, or remove it if there are any.
-        collisions < 2 ? el.attr('transform', `translate(${target.x}, ${target.y})`) : el.remove();
-      });
-
-    label
-      .attr('opacity', 0.6)
-      .select('text')
-      .attr('font-size', 11)
-      .attr('text-anchor', 'middle')
-      .attr('y', 5)
-      .text(d => d.key);
-
-    label
-      .select('rect')
-      .attr('height', '1.5em')
-      .attr('y', -10)
-      .attr('fill', 'white')
-      .attr('x', (d, i, j) => {
-        const textWidth = d3
-          .select(j[i].parentNode)
-          .select('text')
-          .node()
-          .getBBox().width;
-        return (textWidth / 2 + 5) * -1;
-      })
-      .attr('width', (d, i, j) => {
-        const textWidth = d3
-          .select(j[i].parentNode)
-          .select('text')
-          .node()
-          .getBBox().width;
-        return textWidth + 10;
-      })
-      .attr('rx', 3);
-  };
-
   this.drawDots = function() {
     const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
-      .data(this.data.data, d => d.geography)
+      .data(
+        this.data.data.filter(d => {
+          return !(this.method === 'value' && (d.avgRow || d.totalRow));
+        }),
+        d => d.geography
+      )
       .join('g')
       .attr('class', 'dotgroup');
 
@@ -453,16 +301,20 @@ function Template(svg) {
       .select('g.lines')
       .selectAll('path.row')
       .attr('stroke-width', d => (d.avgRow ? 5 : 2))
-      .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.2));
+      .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.4));
   };
 
   // Updates labels on the right hand side
   this.drawLabels = function() {
     const labelPositions = positionLabels(
-      this.data.data.map(row => {
-        row.y = this.y(row.values[row.values.length - 1][this.method]);
-        return row;
-      }),
+      this.data.data
+        .filter(d => {
+          return !(this.method === 'value' && (d.avgRow || d.totalRow));
+        })
+        .map(row => {
+          row.y = this.y(row.values[row.values.length - 1][this.method]);
+          return row;
+        }),
       this.height
     );
 
@@ -489,11 +341,8 @@ function Template(svg) {
       .attr('tabindex', 0);
 
     // Click label to render with highlight
-    labels.on('click keyup', (d, a, j) => {
+    labels.on('click', (d, a, j) => {
       const i = this.data.data.findIndex(row => row.geography === d.geography);
-
-      if (d3.event && d3.event.type === 'click') j[i].blur();
-      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
 
       if (i === this.highlight) {
         this.render(this.data, { method: this.method, highlight: -1 });
@@ -549,10 +398,10 @@ function Template(svg) {
       .attr('transform', d => `translate(0, ${d.start})`)
       .attr('opacity', (d, i) => {
         if (this.highlight >= 0) {
-          return this.highlight === i ? 1 : 0.1;
+          return this.highlight === i ? 1 : 0.6;
         }
         if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
+        return 0.6;
       });
 
     // Update content in the <title> element
@@ -561,11 +410,22 @@ function Template(svg) {
 
   // Updates the shape and style of the lines in the line chart
   this.drawLines = function() {
+    // Subtract 1 from highlight when method id 'value'
+    // because we're removing 'Oslo' i alt with filter
+    if (this.highlight >= 0 && this.method === 'value') {
+      this.highlight--;
+    }
+
     // Each line is a path element
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .data(this.data.data, d => d.geography)
+      .data(
+        this.data.data.filter(d => {
+          return !(this.method === 'value' && (d.avgRow || d.totalRow));
+        }),
+        d => d.geography
+      )
       .join('path')
       .attr('class', 'row')
       .style('pointer-events', 'none')
@@ -575,22 +435,41 @@ function Template(svg) {
       .delay((d, i) => i * 30)
       .attr('d', d => this.line(d.values))
       .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
-      .attr('stroke-width', (d, i) => (this.highlight === i ? 5 : d.avgRow ? 5 : 2))
+      .attr('stroke-width', (d, i) => (this.highlight === i ? 5 : d.avgRow ? 5 : 3))
       .attr('stroke-opacity', (d, i) => {
-        if (this.highlight >= 0 && this.highlight !== i) return 0.1;
+        if (this.highlight >= 0 && this.highlight !== i) return 0.25;
         if (this.highlight >= 0 && this.highlight === i) return 1;
         if (d.totalRow || d.avgRow) return 1;
         return 0.2;
       })
-      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false));
+      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false))
+      .each((d, i, j) => {
+        if (this.highlight >= 0 && i === this.highlight) {
+          d3.select(j[i]).raise();
+        }
+      });
   };
 
   // Resets the scales based on the provided data on each render
   this.setScales = function() {
     // Find the min and max values and add some padding
-    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values.map(d => d[this.method])))) * 1.1;
+    this.y.max =
+      d3.max(
+        this.data.data
+          .filter(d => {
+            return !(this.method === 'value' && (d.avgRow || d.totalRow));
+          })
+          .map(row => d3.max(row.values.map(d => d[this.method])))
+      ) * 1.1;
 
-    this.y.min = d3.min(this.data.data.map(row => d3.min(row.values.map(d => d[this.method])))) * 0.8;
+    this.y.min =
+      d3.min(
+        this.data.data
+          .filter(d => {
+            return !(this.method === 'value' && (d.avgRow || d.totalRow));
+          })
+          .map(row => d3.min(row.values.map(d => d[this.method])))
+      ) * 0.8;
 
     const minDate = d3.min(this.data.data.map(d => d.values[0].date).map(this.parseYear));
     const maxDate = d3.max(this.data.data.map(d => d.values[d.values.length - 1].date).map(this.parseYear));
