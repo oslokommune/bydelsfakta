@@ -60,7 +60,7 @@
   },
   "navigationTopbar": {
     "selectTopic": {
-      "aria": "velg temaknapp",
+      "aria": "Åpne temameny",
       "label": "Velg tema"
     },
     "header": {
