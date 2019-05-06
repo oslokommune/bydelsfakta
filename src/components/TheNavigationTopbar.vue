@@ -195,7 +195,7 @@ export default {
 }
 
 .label {
-  font-size: $font-body;
+  font-size: 1.35rem;
   margin-bottom: 0.25rem;
 }
 
