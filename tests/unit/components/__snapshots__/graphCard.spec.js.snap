@@ -205,7 +205,7 @@ exports[`GraphCard renders correctly 1`] = `
         <h2
           class="card__title"
         >
-          Aldersdistribusjon
+          Befolkningen etter alder
         </h2>
          
         <!---->
@@ -221,7 +221,7 @@ exports[`GraphCard renders correctly 1`] = `
           <button
             aria-label="Antall"
             class="tabs__tab active"
-            id="tabButton-Aldersdistribusjon-0"
+            id="tabButton-Befolkningen etter alder-0"
             role="tab"
           >
             Antall
@@ -229,7 +229,7 @@ exports[`GraphCard renders correctly 1`] = `
           <button
             aria-label="Andel"
             class="tabs__tab"
-            id="tabButton-Aldersdistribusjon-1"
+            id="tabButton-Befolkningen etter alder-1"
             role="tab"
           >
             Andel

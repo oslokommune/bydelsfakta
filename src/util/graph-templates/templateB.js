@@ -341,7 +341,7 @@ function Template(svg) {
       .attr('tabindex', 0);
 
     // Click label to render with highlight
-    labels.on('click', (d, a, j) => {
+    labels.on('click', d => {
       const i = this.data.data.findIndex(row => row.geography === d.geography);
 
       if (i === this.highlight) {
