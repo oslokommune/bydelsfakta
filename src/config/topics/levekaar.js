@@ -139,7 +139,7 @@ export default {
       heading: 'Ikke-fullført vgs',
       map: {
         labels: ['Færre', 'Flere'],
-        url: `${API}/Levekar-vgs-historisk-t2ZTn`,
+        url: `${API}/Levekar-vgs-status-vFLio`,
         method: 'ratio',
         scale: [0.1, 0.5],
         reverse: true,
@@ -157,10 +157,29 @@ export default {
         },
         {
           active: false,
+          label: 'Antall',
+          id: 'levekar_vgs_andel',
+          template: 'a',
+          method: 'value',
+          url: `${API}/Levekar-vgs-status-vFLio`,
+          production: true,
+        },
+        {
+          active: false,
           label: 'Historisk (andel)',
           id: 'levekar_vgs-historisk',
           template: 'b',
           method: 'ratio',
+          url: `${API}/Levekar-vgs-historisk-t2ZTn`,
+          production: true,
+        },
+
+        {
+          active: false,
+          label: 'Historisk (antall)',
+          id: 'levekar_vgs-historisk',
+          template: 'b',
+          method: 'value',
           url: `${API}/Levekar-vgs-historisk-t2ZTn`,
           production: true,
         },
