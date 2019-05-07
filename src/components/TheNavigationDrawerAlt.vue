@@ -25,7 +25,7 @@
           <router-link
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': compareDistricts }"
-            :to="onClickSammenlign()"
+            :to="compareDistricts ? '' : { name: 'District', params: { district: 'alle' } }"
             v-html="$t('navigationDrawer.linkCompare')"
           ></router-link>
         </li>
@@ -71,9 +71,13 @@
             :disabled="!compareDistricts"
           />
           <label :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }"></label>
-          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickDistrict(link.uri)">{{
-            link.value
-          }}</router-link>
+          <router-link
+            :id="`a-${link.uri}`"
+            @click.native="onClickCompareDistricts(link.key)"
+            class="navigation-link__label"
+            :to="onClickDistrict(link.uri)"
+            >{{ link.value }}</router-link
+          >
         </li>
       </ul>
     </nav>
@@ -146,7 +150,7 @@ export default {
     onClickDistrict(district) {
       if (this.compareDistricts) {
         // TODO: Check/uncheck the checkbox
-        return '#';
+        return '';
       } else {
         return district === this.$route.params.district
           ? { name: 'District', params: { district } }
@@ -154,6 +158,29 @@ export default {
           ? { name: 'District', params: { district } }
           : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
       }
+    },
+
+    onClickCompareDistricts(key) {
+      console.log(this.selected);
+      if (this.selected.includes(key)) {
+        this.selected = this.selected.filter(item => item !== key);
+      } else {
+        this.selected.push(key);
+      }
+
+      this.selected.length === 0
+        ? this.$route.params.topic === undefined
+          ? this.$router.push({ name: 'District', params: { district: 'alle' } })
+          : this.$router.push({
+              name: 'Topic',
+              params: { district: 'alle', topic: this.$route.params.topic },
+            })
+        : this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: this.selected.join('-') } })
+        : this.$router.push({
+            name: 'Topic',
+            params: { district: this.selected.join('-'), topic: this.$route.params.topic },
+          });
     },
 
     onClickUtforsk() {
@@ -167,22 +194,6 @@ export default {
       const name = this.$route.params.topic ? 'Topic' : 'District';
 
       return { name, params: { district } };
-    },
-
-    onClickSammenlign() {
-      const routes = this.$route.path.split('/');
-      const selectedDistricts = this.selected.join('-');
-      const district = allDistricts.find(district => district.uri === routes[2]);
-
-      if (district !== undefined && selectedDistricts === district.key) {
-        return this.$route.params.topic === undefined
-          ? { name: 'District', params: { district: 'alle' } }
-          : { name: 'Topic', params: { district: 'alle', topic: this.$route.params.topic } };
-      } else if (district === undefined && !this.compareDistricts) {
-        return { name: 'District', params: { district: 'alle' } };
-      } else {
-        return { name: 'District', params: { district: this.$route.params.district } };
-      }
     },
 
     selectAll() {
