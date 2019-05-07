@@ -442,18 +442,14 @@ function Template(svg) {
     this.y.max =
       d3.max(
         this.data.data
-          .filter(d => {
-            return !(this.method === 'value' && (d.avgRow || d.totalRow));
-          })
+          .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
           .map(row => d3.max(row.values.map(d => d[this.method])))
       ) * 1.1;
 
     this.y.min =
       d3.min(
         this.data.data
-          .filter(d => {
-            return !(this.method === 'value' && (d.avgRow || d.totalRow));
-          })
+          .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
           .map(row => d3.min(row.values.map(d => d[this.method])))
       ) * 0.8;
 

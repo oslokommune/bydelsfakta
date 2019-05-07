@@ -282,7 +282,7 @@ function Template(svg) {
       .attr('opacity', (d, i, j) => {
         const parent = d3.select(j[i].parentNode);
         const avgOrTotal = JSON.parse(parent.attr('data-avgRow')) || JSON.parse(parent.attr('data-totalRow'));
-        return (avgOrTotal && this.method === 'value') ? 1 : 0; 
+        return avgOrTotal && this.method === 'value' ? 1 : 0;
       });
 
     rows

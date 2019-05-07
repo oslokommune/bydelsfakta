@@ -163,7 +163,6 @@ function Template(svg) {
       .join('td')
       .attr('headers', (d, i, j) => {
         const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
-
         return `${this.data.meta.heading}_th_1_${first} th_2_${i}`;
       })
       .text(d => this.format(d[this.method], this.method, false, true));
@@ -173,12 +172,7 @@ function Template(svg) {
     const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
-      .data(
-        this.data.data.filter(d => {
-          return !(this.method === 'value' && (d.avgRow || d.totalRow));
-        }),
-        d => d.geography
-      )
+      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join('g')
       .attr('class', 'dotgroup');
 
@@ -392,10 +386,7 @@ function Template(svg) {
     this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .attr('opacity', d => {
-        if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
-      });
+      .attr('opacity', d => (d.avgRow || d.totalRow ? 1 : 0.45));
 
     this.canvas
       .select('g.labels')
