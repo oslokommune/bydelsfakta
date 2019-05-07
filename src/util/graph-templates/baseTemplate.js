@@ -194,7 +194,7 @@ function Base_Template(svg) {
   // Displays generic tooltip,
   // using the d3.event as an argument
   // to position the tooltip
-  this.showTooltip = function(str, event) {
+  this.showTooltip = function(str, event, delay = 0) {
     const group = this.svg.select('g.tooltip');
     const rect = group.select('rect');
     const text = group.select('text');
@@ -203,14 +203,23 @@ function Base_Template(svg) {
     text.text(str);
     rect.attr('width', text.node().getBBox().width + 20).attr('x', -(text.node().getBBox().width / 2 + 10));
 
-    group.attr('opacity', 1);
+    group
+      .transition()
+      .duration(0)
+      .delay(delay)
+      .attr('opacity', 1);
   };
 
   // Hides the generic tooltip
   this.hideTooltip = function() {
-    const group = this.svg.select('g.tooltip').attr('opacity', 0);
+    const group = this.svg.select('g.tooltip');
     group.select('rect');
     group.select('text').text('');
+    group
+      .transition()
+      .duration(0)
+      .delay(1)
+      .attr('opacity', 0);
   };
 
   // Creates DOM elements for generic source reference

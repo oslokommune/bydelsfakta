@@ -94,13 +94,7 @@ exports[`Bydel renders component correctly 1`] = `
   </div>
    
   <div
-    class="main-container__map"
-  >
-    <v-leaflet-stub
-      dataurl=""
-      district="[object Object]"
-      settings="[object Object]"
-    />
-  </div>
+    class="main-container__description"
+  />
 </div>
 `;

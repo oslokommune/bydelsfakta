@@ -19,7 +19,7 @@ function Template(svg) {
   this.colors = d3
     .scaleOrdinal()
     .domain([0, 1, 2, 3])
-    .range(['#4F4E6A', '#C57066', '#838296', '#834B44']);
+    .range(['#C57066', '#834B44', '#838296', '#4F4E6A']);
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -29,7 +29,7 @@ function Template(svg) {
     // values in this chart.
     this.data.data = data.data.map(district => {
       district.values.forEach((val, i) => {
-        if (i === 0 || i === 3) {
+        if (i === 0 || i === 1) {
           district.values[i][this.method] = Math.abs(district.values[i][this.method]) * -1;
         }
       });
@@ -87,7 +87,7 @@ function Template(svg) {
       .attr('font-size', 13)
       .attr('y', -40)
       .attr('text-anchor', 'start')
-      .text('Ikke trangbodde husstander');
+      .text('Ikke-trangbodde husstander');
 
     // Containers for rows and bars need to be in this order
     // to allow pointer events on bars
@@ -270,27 +270,15 @@ function Template(svg) {
       .attr('x', d => this.x(d[0]))
       .attr('width', d => this.x(d[1]) - this.x(d[0]));
 
-    // Add interaction to the bars
+    // Show and hide tooltips
     bar
-      .on('mouseenter', function() {
-        bar
-          .transition()
-          .duration(this.duration)
-          .delay(200)
-          .attr('opacity', 0.3);
-        d3.select(this)
-          .transition()
-          .duration(this.duration)
-          .attr('opacity', 1);
+      .on('mouseenter', d => {
+        this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
       })
       .on('mousemove', d => {
         this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
       })
       .on('mouseleave', () => {
-        bar
-          .transition()
-          .duration(this.duration)
-          .attr('opacity', 1);
         this.hideTooltip();
       });
   };

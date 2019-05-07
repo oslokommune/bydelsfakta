@@ -28,9 +28,6 @@ function Template(svg) {
         geo.color = d3.interpolateRainbow(i / j.length);
         return geo;
       })
-      .filter(d => {
-        return !(this.method === 'value' && (d.avgRow || d.totalRow));
-      })
       .sort((a, b) => {
         return (
           b.values[this.series][b.values[this.series].length - 1][this.method] -
@@ -75,15 +72,11 @@ function Template(svg) {
     this.canvas.append('g').attr('class', 'dots');
     this.canvas.append('g').attr('class', 'voronoi');
     this.canvas.append('g').attr('class', 'labels');
-
-    // Call method for creating info box elements
-    this.createInfoBoxElements();
   };
 
   // Line generator for converting values to a data string for svg:paths
   this.line = d3
     .line()
-    .curve(d3.curveCardinal)
     .x(d => this.x(this.parseYear(d.date)))
     .y(d => this.y(d[this.method]));
 
@@ -170,7 +163,6 @@ function Template(svg) {
       .join('td')
       .attr('headers', (d, i, j) => {
         const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
-
         return `${this.data.meta.heading}_th_1_${first} th_2_${i}`;
       })
       .text(d => this.format(d[this.method], this.method, false, true));
@@ -180,7 +172,7 @@ function Template(svg) {
     const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
-      .data(this.data.data, d => d.geography)
+      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join('g')
       .attr('class', 'dotgroup');
 
@@ -212,6 +204,7 @@ function Template(svg) {
 
   this.drawVoronoi = function() {
     const flattenData = this.data.data
+      .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
       .map(geo =>
         geo.values[this.series].map(val => ({ date: val.date, value: val[this.method], geography: geo.geography }))
       )
@@ -280,21 +273,6 @@ function Template(svg) {
         });
       }
     });
-  };
-
-  // Creates info box elements called from created()
-  this.createInfoBoxElements = function() {
-    // Create infobox placeholder
-    this.infobox = this.svg.append('g').attr('class', 'infobox');
-    this.infoboxBody = this.infobox.append('g').attr('class', 'infobox__body');
-    this.infoboxBody.append('rect').attr('class', 'background');
-    this.infoboxHead = this.infobox.append('g').attr('class', 'infobox__head');
-    this.infoboxHead.append('rect').attr('class', 'background');
-    this.infoboxTitle = this.infoboxHead.append('text');
-    this.infoboxContent = this.infoboxBody.append('g').attr('class', 'infobox__content');
-    this.infoboxHeading = this.infoboxContent.append('text').attr('class', 'infobox__heading');
-    this.infoboxContent.append('rect').attr('class', 'infobox__rule');
-    this.infoboxTable = this.infoboxContent.append('g').attr('class', 'infobox__table');
   };
 
   // Updates the tabs. Highlights the active series
@@ -408,10 +386,7 @@ function Template(svg) {
     this.canvas
       .select('g.labels')
       .selectAll('g.label')
-      .attr('opacity', d => {
-        if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
-      });
+      .attr('opacity', d => (d.avgRow || d.totalRow ? 1 : 0.45));
 
     this.canvas
       .select('g.labels')
@@ -432,10 +407,12 @@ function Template(svg) {
     // simple collision detection algorithm. Passing in
     // the original y-position and the available height in pixels
     const labelPositions = positionLabels(
-      this.data.data.map(row => {
-        row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
-        return row;
-      }),
+      this.data.data
+        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+        .map(row => {
+          row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
+          return row;
+        }),
       this.height
     );
 
@@ -523,10 +500,10 @@ function Template(svg) {
       .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
       .attr('opacity', (d, i) => {
         if (this.highlight >= 0) {
-          return this.highlight === i ? 1 : 0.1;
+          return this.highlight === i ? 1 : 0.6;
         }
         if (d.avgRow || d.totalRow) return 1;
-        return 0.45;
+        return 0.6;
       });
 
     // Update content in the <title> element
@@ -539,7 +516,7 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .data(this.data.data, d => d.geography)
+      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join(enter => enter.append('path'))
       .attr('class', 'row')
       .style('pointer-events', 'none')
@@ -560,8 +537,18 @@ function Template(svg) {
   };
 
   this.setScales = function() {
-    this.y.max = d3.max(this.data.data.map(row => d3.max(row.values[this.series].map(d => d[this.method])))) * 1.05;
-    this.y.min = d3.min(this.data.data.map(row => d3.min(row.values[this.series].map(d => d[this.method])))) / 1.05;
+    this.y.max =
+      d3.max(
+        this.data.data
+          .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+          .map(row => d3.max(row.values[this.series].map(d => d[this.method])))
+      ) * 1.05;
+    this.y.min =
+      d3.min(
+        this.data.data
+          .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+          .map(row => d3.min(row.values[this.series].map(d => d[this.method])))
+      ) / 1.05;
 
     // Find min and max years for the data
     const maxYear = this.parseYear(
