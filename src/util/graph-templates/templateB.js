@@ -64,9 +64,7 @@ function Template(svg) {
 
   this.drawVoronoi = function() {
     const flattenData = this.data.data
-      .filter(d => {
-        return !(this.method === 'value' && (d.avgRow || d.totalRow));
-      })
+      .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
       .map(geo => geo.values.map(val => ({ date: val['date'], value: val[this.method], geography: geo.geography })))
       .flat();
 
@@ -211,12 +209,7 @@ function Template(svg) {
     const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
-      .data(
-        this.data.data.filter(d => {
-          return !(this.method === 'value' && (d.avgRow || d.totalRow));
-        }),
-        d => d.geography
-      )
+      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join('g')
       .attr('class', 'dotgroup');
 
@@ -308,9 +301,7 @@ function Template(svg) {
   this.drawLabels = function() {
     const labelPositions = positionLabels(
       this.data.data
-        .filter(d => {
-          return !(this.method === 'value' && (d.avgRow || d.totalRow));
-        })
+        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
         .map(row => {
           row.y = this.y(row.values[row.values.length - 1][this.method]);
           return row;
@@ -420,12 +411,7 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .data(
-        this.data.data.filter(d => {
-          return !(this.method === 'value' && (d.avgRow || d.totalRow));
-        }),
-        d => d.geography
-      )
+      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join('path')
       .attr('class', 'row')
       .style('pointer-events', 'none')

@@ -210,9 +210,7 @@ function Template(svg) {
 
   this.drawVoronoi = function() {
     const flattenData = this.data.data
-      .filter(d => {
-        return !(this.method === 'value' && (d.avgRow || d.totalRow));
-      })
+      .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
       .map(geo =>
         geo.values[this.series].map(val => ({ date: val.date, value: val[this.method], geography: geo.geography }))
       )
@@ -419,9 +417,7 @@ function Template(svg) {
     // the original y-position and the available height in pixels
     const labelPositions = positionLabels(
       this.data.data
-        .filter(d => {
-          return !(this.method === 'value' && (d.avgRow || d.totalRow));
-        })
+        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
         .map(row => {
           row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
           return row;
@@ -529,12 +525,7 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .data(
-        this.data.data.filter(d => {
-          return !(this.method === 'value' && (d.avgRow || d.totalRow));
-        }),
-        d => d.geography
-      )
+      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join(enter => enter.append('path'))
       .attr('class', 'row')
       .style('pointer-events', 'none')
@@ -558,17 +549,13 @@ function Template(svg) {
     this.y.max =
       d3.max(
         this.data.data
-          .filter(d => {
-            return !(this.method === 'value' && (d.avgRow || d.totalRow));
-          })
+          .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
           .map(row => d3.max(row.values[this.series].map(d => d[this.method])))
       ) * 1.05;
     this.y.min =
       d3.min(
         this.data.data
-          .filter(d => {
-            return !(this.method === 'value' && (d.avgRow || d.totalRow));
-          })
+          .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
           .map(row => d3.min(row.values[this.series].map(d => d[this.method])))
       ) / 1.05;
 
