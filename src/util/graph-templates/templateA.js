@@ -23,6 +23,10 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
+    if (data.data[0].values.length === 1 && data.meta.series.length > 1) {
+      data.meta.series = [data.meta.series[0]];
+    }
+
     this.isSingleSeries = data.meta && data.meta.series && data.meta.series.length <= 1;
     this.isMobileView = this.isSingleSeries && this.parentWidth() < this.mobileWidth;
 
@@ -168,8 +172,7 @@ function Template(svg) {
 
     g.append('text')
       .attr('class', 'valueText')
-      .attr('fill', color.purple)
-      .attr('y', this.rowHeight / 2 + 6);
+      .attr('fill', color.purple);
 
     return g;
   };
@@ -250,7 +253,9 @@ function Template(svg) {
         },
         update => update.transition().attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`)
       )
-      .attr('class', 'row');
+      .attr('class', 'row')
+      .attr('data-avgRow', d => d.avgRow)
+      .attr('data-totalRow', d => d.totalRow);
 
     // Dynamic styling, sizing and positioning based on data and container size
     rows
@@ -265,7 +270,24 @@ function Template(svg) {
       })
       .attr('width', this.padding.left + this.width + this.padding.right);
 
-    rows.select('text.valueText').text(d => (d.values.length === 0 ? 'Ikke tilgjengelig' : ''));
+    rows
+      .selectAll('text.valueText')
+      .data(d => d.values)
+      .join('text')
+      .attr('class', 'valueText')
+      .attr('fill', color.purple)
+      .attr('y', this.rowHeight / 2 + 4)
+      .attr('x', (d, i) => this.x[i](0))
+      .text(d => (d[this.method] ? this.format(d[this.method], this.method) : 'Ikke tilgjengelig'))
+      .attr('opacity', (d, i, j) => {
+        const parent = d3.select(j[i].parentNode);
+        const avgOrTotal = JSON.parse(parent.attr('data-avgRow')) || JSON.parse(parent.attr('data-totalRow'));
+        if (avgOrTotal && this.method === 'value') {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
 
     rows
       .select('text.geography')
@@ -330,7 +352,7 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('width', (d, i) => {
-        if (this.method === 'value' && d.value > this.x[i].domain()[1]) return 0;
+        if (this.method === 'value' && d[this.method] > this.x[i].domain()[1]) return 0;
         return Math.max(this.x[0](d[this.method]), 0);
       })
       .attr('x', (d, i) => this.x[i](0));
@@ -349,7 +371,7 @@ function Template(svg) {
     const maxValues = this.filteredData.meta.series.map((row, i) => {
       return d3.max(
         this.filteredData.data
-          .filter(d => !(this.method === 'value' && d.totalRow))
+          .filter(d => !(this.method === 'value' && (d.totalRow || d.avgRow)))
           .map(d => {
             if (!d.values || !d.values[i] || !d.values[i][this.method]) return 0;
             return d.values[i][this.method];
