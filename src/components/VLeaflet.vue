@@ -1,6 +1,7 @@
 <template>
   <div style="height: 100%; width: 100%;">
     <div class="legend" v-if="settings.labels">
+      <h2 class="legend__heading" v-if="settings.heading">{{ settings.heading }}</h2>
       <div class="legend__labels">
         <span v-for="(label, i) in settings.labels" :key="i" v-text="label"></span>
       </div>
@@ -208,7 +209,7 @@ export default {
 }
 
 .legend + .container {
-  height: calc(100% - 50px);
+  height: calc(100% - 90px);
 }
 
 .vue2leaflet-map {
@@ -217,18 +218,30 @@ export default {
 
 .legend {
   border-bottom: 1px solid $color-grey-100;
+  display: flex;
+  flex-direction: column;
   font-size: $font-small;
   font-weight: 500;
-  height: 50px;
-  letter-spacing: 0.05em;
+  height: 90px;
+  justify-content: center;
   padding: 1em;
-  text-transform: uppercase;
+
+  &__heading {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 0 0 0.5rem;
+    padding: 0;
+    text-align: center;
+    text-transform: none;
+  }
 
   &__labels {
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
     max-width: 500px;
+    width: 100%;
   }
 }
 
