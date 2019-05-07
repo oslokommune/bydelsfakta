@@ -74,7 +74,7 @@ export default {
           template: 'c',
           method: 'ratio',
           url: `${API}/Landbakgrunn-innvandringsgrupp-87zEq`,
-          production: true,
+          production: false,
         },
       ],
     },
