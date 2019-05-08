@@ -27,9 +27,9 @@
             :txt-color="topics[`${item}`].options.txtColor"
             :district="$route.params.district"
             :disabled="
-              topics[`${topic}`].production === productionMode && topics[`${topic}`].production !== null
+              topics[`${item}`].production === productionMode && topics[`${item}`].production !== null
                 ? false
-                : topics[`${topic}`].production === true && productionMode === false
+                : topics[`${item}`].production === true && productionMode === false
                 ? false
                 : productionMode !== null
             "

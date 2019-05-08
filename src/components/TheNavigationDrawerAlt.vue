@@ -17,7 +17,7 @@
           <router-link
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': !compareDistricts }"
-            :to="onClickUtforsk()"
+            :to="onClickTab(false)"
             v-html="$t('navigationDrawer.selectOne.tab')"
           ></router-link>
         </li>
@@ -25,7 +25,7 @@
           <router-link
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': compareDistricts }"
-            :to="compareDistricts ? '' : { name: 'District', params: { district: 'alle' } }"
+            :to="onClickTab(true)"
             v-html="$t('navigationDrawer.linkCompare')"
           ></router-link>
         </li>
@@ -68,12 +68,15 @@
             :value="link.key"
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
-            :disabled="!compareDistricts"
+            v-if="compareDistricts"
+            tabindex="1"
           />
-          <label :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }"></label>
+          <label v-if="compareDistricts" :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }">
+            <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
+          </label>
           <router-link
+            v-if="!compareDistricts"
             :id="`a-${link.uri}`"
-            @click.native="onClickCompareDistricts(link.key)"
             class="navigation-link__label"
             :to="onClickDistrict(link.uri)"
             >{{ link.value }}</router-link
@@ -130,7 +133,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['setNavigationIsOpen']),
+    ...mapActions(['setNavigationIsOpen', 'addDistrict']),
 
     onChangeCheckbox() {
       // Reset selector
@@ -148,75 +151,17 @@ export default {
     },
 
     onClickDistrict(district) {
-      if (this.compareDistricts) {
-        // TODO: Check/uncheck the checkbox
-        return '';
-      } else {
-        return district === this.$route.params.district
-          ? { name: 'District', params: { district } }
-          : this.$route.params.topic === undefined
-          ? { name: 'District', params: { district } }
-          : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
-      }
-    },
-
-    onClickCompareDistricts(key) {
-      console.log(this.selected);
-      if (this.selected.includes(key)) {
-        this.selected = this.selected.filter(item => item !== key);
-      } else {
-        this.selected.push(key);
-      }
-
-      this.selected.length === 0
-        ? this.$route.params.topic === undefined
-          ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-          : this.$router.push({
-              name: 'Topic',
-              params: { district: 'alle', topic: this.$route.params.topic },
-            })
+      return district === this.$route.params.district
+        ? { name: 'District', params: { district } }
         : this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: this.selected.join('-') } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: this.selected.join('-'), topic: this.$route.params.topic },
-          });
+        ? { name: 'District', params: { district } }
+        : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
     },
 
-    onClickUtforsk() {
-      let district;
-      if (this.selected.length) {
-        district = allDistricts.find(d => d.key === this.selected[0]).uri;
-      } else {
-        district = allDistricts[0].uri;
-      }
+    onClickTab(compare) {
+      const name = !compare ? (this.$route.params.topic ? 'Topic' : 'District') : 'District';
 
-      const name = this.$route.params.topic ? 'Topic' : 'District';
-
-      return { name, params: { district } };
-    },
-
-    selectAll() {
-      this.selected = [];
-      this.selected = allDistricts.map(district => district.key);
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
-    },
-
-    unselectAll() {
-      this.selected = [];
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
+      return { name, params: { district: compare ? 'alle' : allDistricts[0].uri } };
     },
   },
 
@@ -234,14 +179,13 @@ export default {
       if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
       } else if (params.length > 1) {
-        const paramDistrict = routes[2].split('-');
-        this.selected = paramDistrict;
+        this.selected = routes[2].split('-');
       } else if (district !== undefined) {
         this.selected = [district.key];
       }
 
       if (to.name === 'Home') {
-        this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
+        this.addDistrict({ district: 'alle', pushRoute: false });
         this.selected = [];
       }
 
@@ -373,8 +317,7 @@ $rowHeight: 2.5em;
     font-weight: 500;
     height: 4rem;
     margin-bottom: 0.5rem;
-    padding: 1em 0 0.5rem;
-    padding-left: 46px;
+    padding: 1em 0 0.5rem 46px;
 
     & > select {
       border: 1px solid rgba(black, 0.1);
@@ -461,7 +404,7 @@ input[type='checkbox'] {
     padding-left: 1rem;
     position: relative;
     vertical-align: middle;
-    width: 46px;
+    width: 100%;
 
     // unchecked border
     &::before {
@@ -579,9 +522,10 @@ input[type='checkbox'] {
     flex-grow: 1;
     height: $rowHeight;
     letter-spacing: 0.1px;
+    margin-left: 46px;
     position: relative;
 
-    &-compare {
+    &--compare {
       margin-bottom: 1rem;
       margin-top: 0;
       padding-left: 4rem;
@@ -590,6 +534,10 @@ input[type='checkbox'] {
         margin-top: 1rem;
         padding-left: 3.5rem;
       }
+    }
+
+    &--span {
+      margin-left: 32px;
     }
 
     // Add visual border on the left side of text on hover

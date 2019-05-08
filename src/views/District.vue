@@ -52,7 +52,9 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.compareDistricts ? 'Sammenlign bydeler' : getDistrictName(this.district)} | Bydelsfakta`,
+      title: `${
+        this.compareDistricts || this.district === 'alle' ? 'Sammenlign bydeler' : getDistrictName(this.district)
+      } | Bydelsfakta`,
     };
   },
 
