@@ -3,7 +3,7 @@
     <div class="card">
       <header class="card__header">
         <div class="card__headertext">
-          <h2 class="card__title">{{ settings.heading }} ({{ showAsTabs ? 'tabs' : 'select' }})</h2>
+          <h2 class="card__title">{{ settings.heading }}</h2>
         </div>
         <nav class="card__nav">
           <div class="tabs" ref="tabsRef" role="tablist">
