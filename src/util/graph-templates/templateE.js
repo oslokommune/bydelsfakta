@@ -18,9 +18,9 @@ function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'e';
 
-  this.padding = { top: 70, right: 55, bottom: 50, left: 300 };
+  this.padding = { top: 70, right: 85, bottom: 50, left: 360 };
   this.y = d3.scaleLinear();
-  this.gutter = 100;
+  this.gutter = 140;
   this.yAxis = []; // three yAxis (left, right and gridlines)
 
   this.render = function(data, options) {
@@ -97,24 +97,21 @@ function Template(svg) {
     this.canvas
       .append('g')
       .attr('class', 'yAxis-title')
-      .attr('transform', `translate(-50, ${this.height / 2})`)
       .append('text')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
+      .attr('font-size', '1em')
       .attr('fill', color.purple)
       .text('Alder')
       .attr('text-anchor', 'middle')
-      .attr('transform', `rotate(-90)`);
+      .attr('transform', `rotate(-90) translate(0, -20)`);
 
     // Label for the x axis
     this.canvas
       .append('text')
       .attr('class', 'xAxis-title')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
+      .attr('font-size', '1em')
       .attr('fill', color.purple)
       .attr('text-anchor', 'middle')
-      .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`)
+      .attr('transform', `translate(${this.width / 2}, ${this.height + 40})`)
       .text('Folkemengde');
   };
 
@@ -315,15 +312,17 @@ function Template(svg) {
   };
 
   this.drawAxis = function() {
-    const max = d3.max(this.data.data[this.selected].values.map(d => d.value));
+    const max = d3.max(this.data.data[this.selected].values.map(d => d.value)) / 1.75;
     this.y
       .range([this.height, 0])
       .domain([0, 120])
       .nice();
+
     this.x
       .range([0, this.width])
       .domain([-max, max])
       .nice();
+
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()

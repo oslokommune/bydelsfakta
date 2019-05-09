@@ -21,16 +21,15 @@
         />
       </div>
     </div>
-    <div class="main-container__map">
-      <v-leaflet :district="geoDistricts" />
+    <div class="main-container__description">
+      <!-- TODO: Add text description of the application -->
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import VCategory from '../components/VCategory.vue';
-import VLeaflet from '../components/VLeaflet.vue';
 import { topics, topicNames, disabledTopics } from '../config/topics';
 import districts from '../config/geoData/districts';
 import { getDistrictName } from '../util';
@@ -39,7 +38,6 @@ export default {
   name: 'District',
   components: {
     VCategory,
-    VLeaflet,
   },
 
   props: {
@@ -52,15 +50,15 @@ export default {
 
   metaInfo() {
     return {
-      title: `${
-        this.compareDistricts || this.district === 'alle' ? 'Sammenlign bydeler' : getDistrictName(this.district)
-      } | Bydelsfakta`,
+      title:
+        this.compareDistricts || this.district === 'alle'
+          ? 'Bydelsfakta'
+          : `${getDistrictName(this.district)} | Bydelsfakta`,
     };
   },
 
   computed: {
     ...mapState(['productionMode', 'compareDistricts']),
-    ...mapGetters(['geoDistricts']),
   },
 
   data() {

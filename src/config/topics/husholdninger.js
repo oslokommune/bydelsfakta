@@ -21,10 +21,19 @@ export default {
       tabs: [
         {
           active: false,
-          label: 'Status',
+          label: 'Andel',
           id: 'husholdning_totalt_status',
           template: 'a',
           method: 'ratio',
+          url: `${API}/Husholdning-totalt-status-FzFf5`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Antall',
+          id: 'husholdning_totalt_status',
+          template: 'a',
+          method: 'value',
           url: `${API}/Husholdning-totalt-status-FzFf5`,
           production: true,
         },

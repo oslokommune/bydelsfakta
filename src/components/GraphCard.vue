@@ -4,7 +4,38 @@
       <header class="card__header">
         <div class="card__headertext">
           <h2 class="card__title">{{ settings.heading }}</h2>
-          <span class="card__published" v-if="date">Oppdatert {{ date }}</span>
+
+          <div class="card__toggle-menu">
+            <button
+              class="card__toggle-button"
+              @click="mode = 'graph'"
+              :class="{ 'card__toggle-button--active': mode === 'graph' }"
+              :aria-label="$t('graphCard.mode.graph')"
+              :title="$t('graphCard.mode.graph')"
+            >
+              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
+            </button>
+            <button
+              class="card__toggle-button"
+              @click="mode = 'table'"
+              :class="{ 'card__toggle-button--active': mode === 'table' }"
+              :aria-label="$t('graphCard.mode.table')"
+              :title="$t('graphCard.mode.table')"
+            >
+              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
+            </button>
+
+            <button
+              v-if="settings.map"
+              class="card__toggle-button"
+              @click="mode = 'map'"
+              :class="{ 'card__toggle-button--active': mode === 'map' }"
+              :aria-label="$t('graphCard.mode.map')"
+              :title="$t('graphCard.mode.map')"
+            >
+              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">place</i>
+            </button>
+          </div>
         </div>
         <nav class="card__nav">
           <div class="tabs" role="tablist">
@@ -28,38 +59,6 @@
                 "
               ></button>
             </template>
-
-            <div class="card__toggle-menu">
-              <button
-                class="card__toggle-button"
-                @click="mode = 'graph'"
-                :class="{ 'card__toggle-button--active': mode === 'graph' }"
-                :aria-label="$t('graphCard.mode.graph')"
-                :title="$t('graphCard.mode.graph')"
-              >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
-              </button>
-              <button
-                class="card__toggle-button"
-                @click="mode = 'table'"
-                :class="{ 'card__toggle-button--active': mode === 'table' }"
-                :aria-label="$t('graphCard.mode.table')"
-                :title="$t('graphCard.mode.table')"
-              >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
-              </button>
-
-              <button
-                v-if="settings.map"
-                class="card__toggle-button"
-                @click="mode = 'map'"
-                :class="{ 'card__toggle-button--active': mode === 'map' }"
-                :aria-label="$t('graphCard.mode.map')"
-                :title="$t('graphCard.mode.map')"
-              >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">map</i>
-              </button>
-            </div>
           </div>
 
           <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
@@ -308,7 +307,7 @@ export default {
   &__toggle-menu {
     display: flex;
     margin-left: auto;
-    padding: 0 0 0 1rem;
+    padding: 0;
   }
 
   &__toggle-button {
@@ -316,10 +315,10 @@ export default {
     border-radius: 50%;
     cursor: pointer;
     display: flex;
-    height: 3em;
+    height: 2.5em;
     justify-content: center;
     position: relative;
-    width: 3em;
+    width: 2.5em;
 
     &::before {
       background: $color-blue;

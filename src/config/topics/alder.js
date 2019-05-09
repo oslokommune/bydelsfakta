@@ -9,7 +9,7 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Aldersdistribusjon',
+      heading: 'Befolkningen etter alder',
       map: false,
       production: true,
       tabs: [
@@ -38,7 +38,7 @@ export default {
     },
     {
       size: 'large',
-      heading: 'Populasjonspyramide',
+      heading: 'Befolkningspyramide',
       map: false,
       production: true,
       tabs: [
