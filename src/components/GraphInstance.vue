@@ -365,7 +365,7 @@ export default {
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
   animation-name: fadeIn;
-  background-color: rgba(black, 0.05);
+  background-color: rgba($color-light-blue, 1);
   display: flex;
   flex-direction: column;
   height: 100%;
