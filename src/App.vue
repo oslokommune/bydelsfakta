@@ -1,6 +1,6 @@
 <template>
   <div class="app" :class="{ menuIsOpen, navigationIsOpen }">
-    <the-navigation-drawer-alt />
+    <the-navigation-drawer />
     <div class="app__content">
       <the-navigation-topbar />
       <main>
@@ -14,7 +14,6 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
-import TheNavigationDrawerAlt from './components/TheNavigationDrawerAlt.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
 import TheFooter from './components/TheFooter.vue';
 
@@ -26,7 +25,7 @@ export default {
     };
   },
 
-  components: { TheNavigationTopbar, TheNavigationDrawer, TheNavigationDrawerAlt, TheFooter },
+  components: { TheNavigationTopbar, TheNavigationDrawer, TheFooter },
 
   computed: {
     ...mapState(['menuIsOpen', 'navigationIsOpen']),
