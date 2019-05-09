@@ -12,6 +12,46 @@
     ></button>
     <div class="version-tag">Alpha</div>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
+      <ul class="state-toggle">
+        <li class="state-toggle__element">
+          <router-link
+            class="state-toggle__link"
+            :class="{ 'state-toggle__link--active': !compareDistricts }"
+            :to="onClickTab(false)"
+            v-html="$t('navigationDrawer.selectOne.tab')"
+          ></router-link>
+        </li>
+        <li class="state-toggle__element">
+          <router-link
+            class="state-toggle__link"
+            :class="{ 'state-toggle__link--active': compareDistricts }"
+            :to="onClickTab(true)"
+            v-html="$t('navigationDrawer.linkCompare')"
+          ></router-link>
+        </li>
+      </ul>
+
+      <header class="navigation-header">
+        <select
+          id="navigation-drawer-select"
+          class="navigation-header__select"
+          v-model="selectedPredefinedOption"
+          v-if="compareDistricts"
+          :aria-label="$t('navigationDrawer.select.label')"
+        >
+          <option
+            v-for="(element, index) in options"
+            :key="index"
+            :value="element.option"
+            :selected="element.selected"
+            :disabled="element.disabled"
+            >{{ element.label }}</option
+          >
+        </select>
+        <span v-else>
+          {{ $t('navigationDrawer.selectOne.label') }}
+        </span>
+      </header>
       <ul class="navigation-list">
         <li
           v-for="link in links"
@@ -28,59 +68,21 @@
             :value="link.key"
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
-            :disabled="!compareDistricts && districts.length === 1 && districts[0] === link.key"
+            v-if="compareDistricts"
+            tabindex="1"
           />
-          <label :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }"></label>
-          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickDistrict(link.uri)">{{
-            link.value
-          }}</router-link>
-        </li>
-        <li
-          class="navigation-link navigation-link__label-compare"
-          id="sammenlign"
-          :class="{ 'navigation-link--active': compareDistricts }"
-        >
-          <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">{{
-            $t('navigationDrawer.linkCompare')
-          }}</router-link>
+          <label v-if="compareDistricts" :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }">
+            <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
+          </label>
+          <router-link
+            v-if="!compareDistricts"
+            :id="`a-${link.uri}`"
+            class="navigation-link__label"
+            :to="onClickDistrict(link.uri)"
+            >{{ link.value }}</router-link
+          >
         </li>
       </ul>
-      <transition name="fade">
-        <div class="navigation-drawer__buttons" v-if="compareDistricts">
-          <div class="navigation-drawer__button-container">
-            <button
-              class="navigation-drawer__button"
-              @click="selectAll(true)"
-              :aria-label="$t('navigationDrawer.selectAll.aria')"
-            >
-              {{ $t('navigationDrawer.selectAll.label') }}
-            </button>
-            <button
-              class="navigation-drawer__button"
-              :disabled="selected.length === 0"
-              @click="selectAll(false)"
-              :aria-label="$t('navigationDrawer.unselectAll.aria')"
-            >
-              {{ $t('navigationDrawer.unselectAll.label') }}
-            </button>
-          </div>
-          <div class="navigation-drawer__select-container">
-            <label for="navigation-drawer-select" class="visually-hidden">{{
-              $t('navigationDrawer.select.label')
-            }}</label>
-            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
-              <option
-                v-for="(element, index) in options"
-                :key="index"
-                :value="element.option"
-                :selected="element.selected"
-                :disabled="element.disabled"
-                >{{ element.label }}</option
-              >
-            </select>
-          </div>
-        </div>
-      </transition>
     </nav>
   </aside>
 </template>
@@ -89,7 +91,7 @@
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import osloIcon from '../assets/oslo-logo.svg';
+import osloIcon from '../assets/oslo-logo.svg'; //
 
 export default {
   name: 'TheNavigationDrawer',
@@ -121,8 +123,17 @@ export default {
     ...mapState(['compareDistricts', 'districts', 'navigationIsOpen']),
   },
 
+  created() {
+    const route = this.$route;
+    if (route.params.district === undefined) {
+      return;
+    }
+
+    this.selected = this.districts[0] === 'alle' ? [] : this.districts;
+  },
+
   methods: {
-    ...mapActions(['setNavigationIsOpen', 'cleanState', 'addDistrict']),
+    ...mapActions(['setNavigationIsOpen', 'addDistrict']),
 
     onChangeCheckbox() {
       // Reset selector
@@ -147,51 +158,28 @@ export default {
         : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
     },
 
-    onClickSammenlign() {
-      const routes = this.$route.path.split('/');
-      const selectedDistricts = this.selected.join('-');
-      const district = allDistricts.find(district => district.uri === routes[2]);
+    onClickTab(compare) {
+      const name = !compare ? (this.$route.params.topic ? 'Topic' : 'District') : 'District';
 
-      if (district !== undefined && selectedDistricts === district.key) {
-        return this.$route.params.topic === undefined
-          ? { name: 'District', params: { district: 'alle' } }
-          : { name: 'Topic', params: { district: 'alle', topic: this.$route.params.topic } };
-      } else if (district === undefined && !this.compareDistricts) {
-        return { name: 'District', params: { district: 'alle' } };
-      } else {
-        return { name: 'District', params: { district: this.$route.params.district } };
-      }
-    },
-
-    selectAll(yes) {
-      this.selected = [];
-      this.selected = yes ? allDistricts.map(district => district.key) : [];
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
+      return { name, params: { district: compare ? 'alle' : allDistricts[0].uri } };
     },
   },
 
   watch: {
-    $route(to, from) {
+    $route(to) {
       const routes = to.path.split('/');
       const params = to.params.district !== undefined ? to.params.district.split('-') : [];
       const district = allDistricts.find(district => district.uri === routes[2]);
 
       if (to.name === 'NotFound') {
-        this.cleanState();
+        this.$store.dispatch('cleanState');
         this.selected = [];
       }
 
       if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
       } else if (params.length > 1) {
-        const paramDistrict = routes[2].split('-');
-        this.selected = paramDistrict;
+        this.selected = routes[2].split('-');
       } else if (district !== undefined) {
         this.selected = [district.key];
       }
@@ -206,10 +194,6 @@ export default {
       // selection is made.
       if (!this.compareDistricts || (this.compareDistricts && !this.selected.length)) {
         this.showNavigation = false;
-      }
-
-      if (from.name === null) {
-        this.selected = this.districts;
       }
     },
 
@@ -248,8 +232,17 @@ $rowHeight: 2.5em;
   padding: 0.25rem 0.5rem;
 
   @media screen and (min-width: $break-lg) {
+    background: white;
     padding: 0.25rem 0.75rem;
     transform: translateY(-1rem);
+  }
+
+  @media screen and (min-width: 1200px) {
+    position: fixed;
+    right: 1.5rem;
+    top: 1.5rem;
+    transform: scale(1.45);
+    transform-origin: 100% 0;
   }
 }
 
@@ -312,7 +305,44 @@ $rowHeight: 2.5em;
     padding: 0 1em;
 
     @media screen and (min-width: $break-lg) {
+      margin: 0;
       padding: 0;
+    }
+  }
+
+  &-header {
+    align-items: center;
+    border-bottom: 1px solid darken($color-border, 20%);
+    display: flex;
+    font-weight: 500;
+    height: 4rem;
+    margin-bottom: 0.5rem;
+    padding: 1em 0 0.5rem 46px;
+
+    & > select {
+      border: 1px solid rgba(black, 0.1);
+      border-radius: 1px;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      position: relative;
+      width: 100%;
+
+      &::after {
+        background: red;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        z-index: 2;
+      }
+    }
+
+    & > span {
+      padding: 1rem 0;
     }
   }
 }
@@ -374,7 +404,7 @@ input[type='checkbox'] {
     padding-left: 1rem;
     position: relative;
     vertical-align: middle;
-    width: 46px;
+    width: 100%;
 
     // unchecked border
     &::before {
@@ -389,15 +419,6 @@ input[type='checkbox'] {
       position: absolute;
       top: calc((#{$rowHeight} / 2) - 9px);
       width: 16px;
-    }
-
-    &:hover {
-      background: darken($color-bg, 10%);
-
-      &::before {
-        background: rgba(white, 0.15);
-        opacity: 0.8 !important;
-      }
     }
 
     // checked inside border
@@ -471,6 +492,11 @@ input[type='checkbox'] {
     }
   }
 
+  &:not(&--compare):not(&--active):hover {
+    background-color: rgba($color-purple, 0.05);
+    transition-duration: 0.05s;
+  }
+
   &--active {
     background-color: $color-yellow;
     transition: all 0.3s ease-in-out;
@@ -478,10 +504,6 @@ input[type='checkbox'] {
     #{$p}__label {
       color: $color-purple;
       font-weight: 500;
-    }
-
-    label:hover {
-      background: none !important;
     }
 
     input[type='checkbox']:checked + label {
@@ -500,9 +522,10 @@ input[type='checkbox'] {
     flex-grow: 1;
     height: $rowHeight;
     letter-spacing: 0.1px;
+    margin-left: 46px;
     position: relative;
 
-    &-compare {
+    &--compare {
       margin-bottom: 1rem;
       margin-top: 0;
       padding-left: 4rem;
@@ -511,6 +534,10 @@ input[type='checkbox'] {
         margin-top: 1rem;
         padding-left: 3.5rem;
       }
+    }
+
+    &--span {
+      margin-left: 32px;
     }
 
     // Add visual border on the left side of text on hover
@@ -530,108 +557,74 @@ input[type='checkbox'] {
   &--compare &__label {
     color: $color-purple;
   }
-
-  &:hover:not(&--active) label:not(.compare)::before {
-    opacity: 0.15;
-    transition: all 0s;
-  }
-
-  &:not(&--active):not(&--compare) &__label:hover {
-    background-color: darken($color-bg, 5%);
-    color: $color-purple;
-
-    // Show the visual border on hover
-    &::before {
-      background-color: darken($color-bg, 5%);
-      display: block;
-    }
-  }
 }
 
-.navigation-drawer__buttons {
+.state-toggle {
   display: flex;
-  flex-direction: column;
-  padding: 0 1rem;
-
-  .navigation-drawer__button-container {
-    display: flex;
-
-    @media screen and (min-width: $break-lg) {
-      align-self: flex-end;
-    }
-
-    .navigation-drawer__button {
-      border: 1px solid $color-purple;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px;
-      color: $color-purple;
-      font-weight: bold;
-      height: 42px;
-      margin: 0.5rem;
-      padding: 0.3rem 1rem 0.3rem 1rem;
-      transition: all 0.3s ease-in-out;
-      width: 50%;
-
-      &:not([disabled]) {
-        cursor: pointer;
-      }
-
-      @media screen and (min-width: $break-md) {
-        width: auto;
-      }
-
-      @media screen and (min-width: $break-md) {
-        height: auto;
-      }
-
-      &:disabled {
-        opacity: 0.2;
-        transition: opacity 0.3s ease-in-out;
-      }
-
-      &:hover:not([disabled]) {
-        box-shadow: 0 0 0 1px $color-grey-50;
-      }
-    }
-  }
-}
-
-.navigation-drawer__select-container {
-  display: flex;
+  height: 4.5em;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   position: relative;
+  width: 100%;
 
-  @media screen and (min-width: $break-lg) {
-    align-self: flex-end;
+  &::after {
+    background: darken($color-border, 20%);
+    bottom: -5px;
+    content: '';
+    display: block;
+    height: 1px;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    right: 0;
   }
 
-  .navigation-drawer__select {
-    border: 1px solid $color-purple;
-    color: $color-purple;
-    cursor: pointer;
-    font-weight: bold;
-    height: 42px;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+  &__element {
+    align-items: center;
+    display: flex;
+    flex: 50% 0 0;
+    height: 100%;
+    justify-content: center;
+    margin: 0;
     position: relative;
+    text-align: center;
+  }
+
+  &__link {
+    align-items: center;
+    border-radius: 3px;
+    color: rgba($color-purple, 0.75);
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    justify-content: center;
     width: 100%;
 
-    @media screen and (min-width: $break-lg) {
-      height: auto;
-      width: 205px;
+    &::after {
+      background: $color-blue;
+      bottom: -5px;
+      content: '';
+      display: block;
+      height: 5px;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      right: 0;
     }
-  }
 
-  &::before {
-    border-bottom: 2px solid $color-purple;
-    border-left: 2px solid $color-purple;
-    content: '';
-    height: 0.5rem;
-    position: absolute;
-    right: 1.5rem;
-    top: calc(50% - 0.35rem);
-    transform: rotate(-45deg);
-    width: 0.5rem;
+    &:hover:not(&--active) {
+      background: rgba($color-purple, 0.04);
+    }
+
+    &--active {
+      color: $color-purple;
+
+      &::after {
+        opacity: 1;
+      }
+    }
   }
 }
 </style>

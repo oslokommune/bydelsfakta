@@ -32,6 +32,101 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     role="navigation"
   >
     <ul
+      class="state-toggle"
+    >
+      <li
+        class="state-toggle__element"
+      >
+        <a
+          class="state-toggle__link router-link-exact-active router-link-active"
+          href="/bydel/gamleoslo"
+        >
+          Utforsk
+          <br />
+          en bydel
+        </a>
+      </li>
+       
+      <li
+        class="state-toggle__element"
+      >
+        <a
+          class="state-toggle__link state-toggle__link--active"
+          href="/bydel/alle"
+        >
+          Sammenlign bydeler
+        </a>
+      </li>
+    </ul>
+     
+    <header
+      class="navigation-header"
+    >
+      <select
+        aria-label="Velg byområde"
+        class="navigation-header__select"
+        id="navigation-drawer-select"
+      >
+        <option
+          disabled="disabled"
+          value=""
+        >
+          - Velg byområde -
+        </option>
+        <option
+          value="04,05,06,07,08"
+        >
+          Vest
+        </option>
+        <option
+          value="01,02,03,09,10,11,12,13,14,15"
+        >
+          Øst
+        </option>
+        <option
+          value="01,02,03,04,05"
+        >
+          Indre by
+        </option>
+        <option
+          value="01,02,03"
+        >
+          Indre by øst
+        </option>
+        <option
+          value="04,05"
+        >
+          Indre by vest
+        </option>
+        <option
+          value="06,07,08,09,10,11,12,13,14,15"
+        >
+          Ytre by
+        </option>
+        <option
+          value="06,07,08"
+        >
+          Ytre by vest
+        </option>
+        <option
+          value="09,10,11,12"
+        >
+          Ytre by øst
+        </option>
+        <option
+          value="13,14,15"
+        >
+          Ytre by sør
+        </option>
+        <option
+          value="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15"
+        >
+          Velg alle
+        </option>
+      </select>
+    </header>
+     
+    <ul
       class="navigation-list"
     >
       <li
@@ -39,6 +134,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
       >
         <input
           id="checkbox-gamleoslo"
+          tabindex="1"
           type="checkbox"
           value="01"
         />
@@ -46,21 +142,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-gamleoslo"
-        />
-         
-        <a
-          class="navigation-link__label router-link-exact-active router-link-active"
-          href="/bydel/gamleoslo"
-          id="a-gamleoslo"
         >
-          Bydel Gamle Oslo
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Gamle Oslo
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-grunerlokka"
+          tabindex="1"
           type="checkbox"
           value="02"
         />
@@ -68,21 +165,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-grunerlokka"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/grunerlokka"
-          id="a-grunerlokka"
         >
-          Bydel Grünerløkka
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Grünerløkka
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-sagene"
+          tabindex="1"
           type="checkbox"
           value="03"
         />
@@ -90,21 +188,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-sagene"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/sagene"
-          id="a-sagene"
         >
-          Bydel Sagene
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Sagene
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-sthanshaugen"
+          tabindex="1"
           type="checkbox"
           value="04"
         />
@@ -112,21 +211,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-sthanshaugen"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/sthanshaugen"
-          id="a-sthanshaugen"
         >
-          Bydel St. Hanshaugen
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel St. Hanshaugen
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-frogner"
+          tabindex="1"
           type="checkbox"
           value="05"
         />
@@ -134,21 +234,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-frogner"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/frogner"
-          id="a-frogner"
         >
-          Bydel Frogner
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Frogner
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-ullern"
+          tabindex="1"
           type="checkbox"
           value="06"
         />
@@ -156,21 +257,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-ullern"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/ullern"
-          id="a-ullern"
         >
-          Bydel Ullern
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Ullern
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-vestreaker"
+          tabindex="1"
           type="checkbox"
           value="07"
         />
@@ -178,21 +280,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-vestreaker"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/vestreaker"
-          id="a-vestreaker"
         >
-          Bydel Vestre Aker
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Vestre Aker
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-nordreaker"
+          tabindex="1"
           type="checkbox"
           value="08"
         />
@@ -200,21 +303,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-nordreaker"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/nordreaker"
-          id="a-nordreaker"
         >
-          Bydel Nordre Aker
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Nordre Aker
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-bjerke"
+          tabindex="1"
           type="checkbox"
           value="09"
         />
@@ -222,21 +326,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-bjerke"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/bjerke"
-          id="a-bjerke"
         >
-          Bydel Bjerke
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Bjerke
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-grorud"
+          tabindex="1"
           type="checkbox"
           value="10"
         />
@@ -244,21 +349,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-grorud"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/grorud"
-          id="a-grorud"
         >
-          Bydel Grorud
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Grorud
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-stovner"
+          tabindex="1"
           type="checkbox"
           value="11"
         />
@@ -266,21 +372,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-stovner"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/stovner"
-          id="a-stovner"
         >
-          Bydel Stovner
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Stovner
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-alna"
+          tabindex="1"
           type="checkbox"
           value="12"
         />
@@ -288,21 +395,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-alna"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/alna"
-          id="a-alna"
         >
-          Bydel Alna
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Alna
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-ostensjo"
+          tabindex="1"
           type="checkbox"
           value="13"
         />
@@ -310,21 +418,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-ostensjo"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/ostensjo"
-          id="a-ostensjo"
         >
-          Bydel Østensjø
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Østensjø
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-nordstrand"
+          tabindex="1"
           type="checkbox"
           value="14"
         />
@@ -332,21 +441,22 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-nordstrand"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/nordstrand"
-          id="a-nordstrand"
         >
-          Bydel Nordstrand
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Nordstrand
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-sondrenordstrand"
+          tabindex="1"
           type="checkbox"
           value="15"
         />
@@ -354,130 +464,17 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <label
           class="compare"
           for="checkbox-sondrenordstrand"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/sondrenordstrand"
-          id="a-sondrenordstrand"
         >
-          Bydel Søndre Nordstrand
-        </a>
-      </li>
-       
-      <li
-        class="navigation-link navigation-link__label-compare navigation-link--active"
-        id="sammenlign"
-      >
-        <a
-          class="navigation-link__label"
-          href="/bydel/alle"
-          id="sammenlign-href"
-        >
-          Sammenlign bydeler
-        </a>
-      </li>
-    </ul>
-     
-    <div
-      class="navigation-drawer__buttons"
-      name="fade"
-    >
-      <div
-        class="navigation-drawer__button-container"
-      >
-        <button
-          aria-label="velg alle sjekkbokser"
-          class="navigation-drawer__button"
-        >
-          
-            Velg alle
-          
-        </button>
-         
-        <button
-          aria-label="fjern alle sjekkbokser"
-          class="navigation-drawer__button"
-        >
-          
-            Fjern alle
-          
-        </button>
-      </div>
-       
-      <div
-        class="navigation-drawer__select-container"
-      >
-        <label
-          class="visually-hidden"
-          for="navigation-drawer-select"
-        >
-          Velg byområde
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Søndre Nordstrand
+          </span>
         </label>
          
-        <select
-          class="navigation-drawer__select"
-          id="navigation-drawer-select"
-        >
-          <option
-            disabled="disabled"
-            value=""
-          >
-            - Velg byområde -
-          </option>
-          <option
-            value="04,05,06,07,08"
-          >
-            Vest
-          </option>
-          <option
-            value="01,02,03,09,10,11,12,13,14,15"
-          >
-            Øst
-          </option>
-          <option
-            value="01,02,03,04,05"
-          >
-            Indre by
-          </option>
-          <option
-            value="01,02,03"
-          >
-            Indre by øst
-          </option>
-          <option
-            value="04,05"
-          >
-            Indre by vest
-          </option>
-          <option
-            value="06,07,08,09,10,11,12,13,14,15"
-          >
-            Ytre by
-          </option>
-          <option
-            value="06,07,08"
-          >
-            Ytre by vest
-          </option>
-          <option
-            value="09,10,11,12"
-          >
-            Ytre by øst
-          </option>
-          <option
-            value="13,14,15"
-          >
-            Ytre by sør
-          </option>
-          <option
-            value="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15"
-          >
-            Velg alle
-          </option>
-        </select>
-      </div>
-    </div>
+        <!---->
+      </li>
+    </ul>
   </nav>
 </aside>
 `;
@@ -514,6 +511,101 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
     role="navigation"
   >
     <ul
+      class="state-toggle"
+    >
+      <li
+        class="state-toggle__element"
+      >
+        <a
+          class="state-toggle__link"
+          href="/bydel/gamleoslo"
+        >
+          Utforsk
+          <br />
+          en bydel
+        </a>
+      </li>
+       
+      <li
+        class="state-toggle__element"
+      >
+        <a
+          class="state-toggle__link state-toggle__link--active"
+          href="/bydel/alle"
+        >
+          Sammenlign bydeler
+        </a>
+      </li>
+    </ul>
+     
+    <header
+      class="navigation-header"
+    >
+      <select
+        aria-label="Velg byområde"
+        class="navigation-header__select"
+        id="navigation-drawer-select"
+      >
+        <option
+          disabled="disabled"
+          value=""
+        >
+          - Velg byområde -
+        </option>
+        <option
+          value="04,05,06,07,08"
+        >
+          Vest
+        </option>
+        <option
+          value="01,02,03,09,10,11,12,13,14,15"
+        >
+          Øst
+        </option>
+        <option
+          value="01,02,03,04,05"
+        >
+          Indre by
+        </option>
+        <option
+          value="01,02,03"
+        >
+          Indre by øst
+        </option>
+        <option
+          value="04,05"
+        >
+          Indre by vest
+        </option>
+        <option
+          value="06,07,08,09,10,11,12,13,14,15"
+        >
+          Ytre by
+        </option>
+        <option
+          value="06,07,08"
+        >
+          Ytre by vest
+        </option>
+        <option
+          value="09,10,11,12"
+        >
+          Ytre by øst
+        </option>
+        <option
+          value="13,14,15"
+        >
+          Ytre by sør
+        </option>
+        <option
+          value="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15"
+        >
+          Velg alle
+        </option>
+      </select>
+    </header>
+     
+    <ul
       class="navigation-list"
     >
       <li
@@ -521,6 +613,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       >
         <input
           id="checkbox-gamleoslo"
+          tabindex="1"
           type="checkbox"
           value="01"
         />
@@ -528,21 +621,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-gamleoslo"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/gamleoslo"
-          id="a-gamleoslo"
         >
-          Bydel Gamle Oslo
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Gamle Oslo
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-grunerlokka"
+          tabindex="1"
           type="checkbox"
           value="02"
         />
@@ -550,21 +644,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-grunerlokka"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/grunerlokka"
-          id="a-grunerlokka"
         >
-          Bydel Grünerløkka
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Grünerløkka
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-sagene"
+          tabindex="1"
           type="checkbox"
           value="03"
         />
@@ -572,21 +667,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-sagene"
-        />
-         
-        <a
-          class="navigation-link__label router-link-exact-active router-link-active"
-          href="/bydel/sagene"
-          id="a-sagene"
         >
-          Bydel Sagene
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Sagene
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-sthanshaugen"
+          tabindex="1"
           type="checkbox"
           value="04"
         />
@@ -594,21 +690,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-sthanshaugen"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/sthanshaugen"
-          id="a-sthanshaugen"
         >
-          Bydel St. Hanshaugen
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel St. Hanshaugen
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-frogner"
+          tabindex="1"
           type="checkbox"
           value="05"
         />
@@ -616,21 +713,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-frogner"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/frogner"
-          id="a-frogner"
         >
-          Bydel Frogner
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Frogner
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-ullern"
+          tabindex="1"
           type="checkbox"
           value="06"
         />
@@ -638,21 +736,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-ullern"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/ullern"
-          id="a-ullern"
         >
-          Bydel Ullern
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Ullern
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-vestreaker"
+          tabindex="1"
           type="checkbox"
           value="07"
         />
@@ -660,21 +759,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-vestreaker"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/vestreaker"
-          id="a-vestreaker"
         >
-          Bydel Vestre Aker
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Vestre Aker
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-nordreaker"
+          tabindex="1"
           type="checkbox"
           value="08"
         />
@@ -682,21 +782,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-nordreaker"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/nordreaker"
-          id="a-nordreaker"
         >
-          Bydel Nordre Aker
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Nordre Aker
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-bjerke"
+          tabindex="1"
           type="checkbox"
           value="09"
         />
@@ -704,21 +805,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-bjerke"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/bjerke"
-          id="a-bjerke"
         >
-          Bydel Bjerke
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Bjerke
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-grorud"
+          tabindex="1"
           type="checkbox"
           value="10"
         />
@@ -726,21 +828,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-grorud"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/grorud"
-          id="a-grorud"
         >
-          Bydel Grorud
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Grorud
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-stovner"
+          tabindex="1"
           type="checkbox"
           value="11"
         />
@@ -748,21 +851,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-stovner"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/stovner"
-          id="a-stovner"
         >
-          Bydel Stovner
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Stovner
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-alna"
+          tabindex="1"
           type="checkbox"
           value="12"
         />
@@ -770,21 +874,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-alna"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/alna"
-          id="a-alna"
         >
-          Bydel Alna
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Alna
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-ostensjo"
+          tabindex="1"
           type="checkbox"
           value="13"
         />
@@ -792,21 +897,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-ostensjo"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/ostensjo"
-          id="a-ostensjo"
         >
-          Bydel Østensjø
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Østensjø
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-nordstrand"
+          tabindex="1"
           type="checkbox"
           value="14"
         />
@@ -814,21 +920,22 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-nordstrand"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/nordstrand"
-          id="a-nordstrand"
         >
-          Bydel Nordstrand
-        </a>
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Nordstrand
+          </span>
+        </label>
+         
+        <!---->
       </li>
       <li
         class="navigation-link"
       >
         <input
           id="checkbox-sondrenordstrand"
+          tabindex="1"
           type="checkbox"
           value="15"
         />
@@ -836,131 +943,17 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <label
           class="compare"
           for="checkbox-sondrenordstrand"
-        />
-         
-        <a
-          class="navigation-link__label"
-          href="/bydel/sondrenordstrand"
-          id="a-sondrenordstrand"
         >
-          Bydel Søndre Nordstrand
-        </a>
-      </li>
-       
-      <li
-        class="navigation-link navigation-link__label-compare navigation-link--active"
-        id="sammenlign"
-      >
-        <a
-          class="navigation-link__label router-link-exact-active router-link-active"
-          href="/bydel/sagene"
-          id="sammenlign-href"
-        >
-          Sammenlign bydeler
-        </a>
-      </li>
-    </ul>
-     
-    <div
-      class="navigation-drawer__buttons"
-      name="fade"
-    >
-      <div
-        class="navigation-drawer__button-container"
-      >
-        <button
-          aria-label="velg alle sjekkbokser"
-          class="navigation-drawer__button"
-        >
-          
-            Velg alle
-          
-        </button>
-         
-        <button
-          aria-label="fjern alle sjekkbokser"
-          class="navigation-drawer__button"
-          disabled="disabled"
-        >
-          
-            Fjern alle
-          
-        </button>
-      </div>
-       
-      <div
-        class="navigation-drawer__select-container"
-      >
-        <label
-          class="visually-hidden"
-          for="navigation-drawer-select"
-        >
-          Velg byområde
+          <span
+            class="navigation-link__label navigation-link__label--span"
+          >
+            Bydel Søndre Nordstrand
+          </span>
         </label>
          
-        <select
-          class="navigation-drawer__select"
-          id="navigation-drawer-select"
-        >
-          <option
-            disabled="disabled"
-            value=""
-          >
-            - Velg byområde -
-          </option>
-          <option
-            value="04,05,06,07,08"
-          >
-            Vest
-          </option>
-          <option
-            value="01,02,03,09,10,11,12,13,14,15"
-          >
-            Øst
-          </option>
-          <option
-            value="01,02,03,04,05"
-          >
-            Indre by
-          </option>
-          <option
-            value="01,02,03"
-          >
-            Indre by øst
-          </option>
-          <option
-            value="04,05"
-          >
-            Indre by vest
-          </option>
-          <option
-            value="06,07,08,09,10,11,12,13,14,15"
-          >
-            Ytre by
-          </option>
-          <option
-            value="06,07,08"
-          >
-            Ytre by vest
-          </option>
-          <option
-            value="09,10,11,12"
-          >
-            Ytre by øst
-          </option>
-          <option
-            value="13,14,15"
-          >
-            Ytre by sør
-          </option>
-          <option
-            value="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15"
-          >
-            Velg alle
-          </option>
-        </select>
-      </div>
-    </div>
+        <!---->
+      </li>
+    </ul>
   </nav>
 </aside>
 `;
