@@ -50,7 +50,10 @@ export default {
 
   metaInfo() {
     return {
-      title: this.compareDistricts ? 'Bydelsfakta' : `${getDistrictName(this.district)} | Bydelsfakta`,
+      title:
+        this.compareDistricts || this.district === 'alle'
+          ? 'Bydelsfakta'
+          : `${getDistrictName(this.district)} | Bydelsfakta`,
     };
   },
 

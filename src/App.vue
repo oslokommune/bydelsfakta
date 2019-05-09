@@ -19,7 +19,6 @@ import TheFooter from './components/TheFooter.vue';
 
 export default {
   name: 'App',
-
   metaInfo() {
     return {
       title: 'Bydelsfakta',
