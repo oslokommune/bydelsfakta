@@ -1,81 +1,33 @@
-import { baseUrl } from '../../util/config';
+import { apiUrl, baseUrl } from '../../util/config';
+
+const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Folkemengde',
   value: 'folkemengde',
-  production: null,
+  production: true,
   cards: [
     {
       size: 'large',
-      heading: '',
-      map: {
-        labels: ['', ''],
-        url: ``,
-      },
-      production: null,
+      heading: 'Befolkningsutvikling',
+      production: true,
       tabs: [
         {
           active: false,
-          label: 'Historisk',
-          id: 'folkemengde_utvikling_historisk',
-          template: 'h',
-          url: `${baseUrl}/mockDataH.json`,
-          production: null,
+          label: 'Folkemengde',
+          method: 'value',
+          template: 'b',
+          url: `${API}/folkemengde-utvikling-historisk`,
+          production: true,
         },
+
         {
           active: false,
-          label: 'Historisk (prosent)',
-          id: 'folkemengde_utvikling_historisk-prosent',
-          template: 'b',
-          url: `${baseUrl}/mockDataB.json`,
-          production: null,
-        },
-      ],
-    },
-    {
-      size: 'large',
-      heading: '',
-      map: {
-        labels: ['', ''],
-        url: ``,
-      },
-      production: null,
-      tabs: [
-        {
-          active: false,
-          label: 'Historisk',
-          id: 'folkemengde_utvikling_historisk',
-          template: 'b',
-          url: `${baseUrl}/mockDataB.json`,
-          production: null,
-        },
-        {
-          active: false,
-          label: 'Historisk (prosent)',
-          id: 'folkemengde_utvikling_historisk-prosent',
-          template: 'b',
+          label: 'Prosentvis endring',
           method: 'ratio',
-          url: `${baseUrl}/mockDataB.json`,
-          production: null,
-        },
-      ],
-    },
-    {
-      size: 'large',
-      heading: '',
-      map: {
-        labels: ['', ''],
-        url: ``,
-      },
-      production: null,
-      tabs: [
-        {
-          active: false,
-          label: 'Nøkkeltall',
-          id: 'folkemengde_nokkeltall',
-          template: 'g',
-          url: `${baseUrl}/mockDataG.json`,
-          production: null,
+          template: 'b',
+          url: `${API}/folkemengde-utvikling-historisk-prosent`,
+          production: true,
         },
       ],
     },

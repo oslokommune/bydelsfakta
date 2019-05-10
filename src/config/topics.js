@@ -22,7 +22,7 @@ export const topicNames = [
   'trangboddhet',
 ];
 
-export const disabledTopics = ['folkemengde', 'befolkningsendringer', 'eierform', 'bygningstyper'];
+export const disabledTopics = ['befolkningsendringer', 'eierform', 'bygningstyper'];
 
 export const categories = [
   {
