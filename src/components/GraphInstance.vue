@@ -116,7 +116,11 @@ export default {
       this.draw();
     },
     districts: function(to, from) {
-      if (from.length > 1 && (to.length > 1 || this.compareDistricts)) {
+      if (
+        from.length > 1 &&
+        (to.length > 1 || this.compareDistricts) &&
+        this.currentTemplate === this.settings.template
+      ) {
         this.draw({ keepData: true });
       } else {
         this.draw();
