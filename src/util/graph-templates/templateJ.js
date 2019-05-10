@@ -7,6 +7,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -273,13 +274,13 @@ function Template(svg) {
     // Show and hide tooltips
     bar
       .on('mouseenter', d => {
-        this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
+        return showTooltipOver(Math.round((d[1] - d[0]) * 100) + '%');
       })
-      .on('mousemove', d => {
-        this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
+      .on('mousemove', () => {
+        return showTooltipMove();
       })
       .on('mouseleave', () => {
-        this.hideTooltip();
+        return hideTooltip();
       });
   };
 

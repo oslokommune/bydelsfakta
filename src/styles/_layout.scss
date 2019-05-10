@@ -1,4 +1,5 @@
 @import './variables';
+@import './colors';
 
 .app {
   display: flex;
@@ -111,3 +112,28 @@
     }
   }
 }
+
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  border: 1px solid white;
+  border-radius: 4rem;
+  padding: 0.2rem 0.8rem;
+  transform: translate(0, 14);
+  font-size: 12px;
+  font-weight: bold;
+  text-anchor: middle;
+  fill: $color-purple;
+  background: $color-yellow;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s;
+  white-space: nowrap;
+}
+
+.showTooltip {
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+
+

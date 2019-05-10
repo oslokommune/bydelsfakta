@@ -6,6 +6,7 @@ import Base_Template from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import ageRanges from '../../config/ageRanges';
+import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -200,10 +201,13 @@ function Template(svg) {
       .attr('width', s[1] - s[0])
       .filter((d, i) => i === 1)
       .on('mouseover', () => {
-        this.showTooltip('Dra for å velge alderssegment', d3.event, 700);
+        return showTooltipOver('Dra for å velge alderssegment', 700);
+      })
+      .on('mousemove', () => {
+        return showTooltipMove();
       })
       .on('mouseleave', () => {
-        this.hideTooltip();
+        return hideTooltip();
       });
 
     // Move invisible handles
@@ -211,19 +215,25 @@ function Template(svg) {
       .attr('width', 21)
       .attr('x', s[1])
       .on('mouseover', () => {
-        this.showTooltip('Dra for å velge alderssegment', d3.event, 700);
+        return showTooltipOver('Dra for å velge alderssegment', 700);
+      })
+      .on('mousemove', () => {
+        return showTooltipMove();
       })
       .on('mouseleave', () => {
-        this.hideTooltip();
+        return hideTooltip();
       });
     d3.selectAll('.handle--w')
       .attr('width', 21)
       .attr('x', s[0] - 21)
       .on('mouseover', () => {
-        this.showTooltip('Dra for å velge alderssegment', d3.event, 700);
+        return showTooltipOver('Dra for å velge alderssegment', 700);
+      })
+      .on('mousemove', () => {
+        return showTooltipMove();
       })
       .on('mouseleave', () => {
-        this.hideTooltip();
+        return hideTooltip();
       });
 
     // Move visible handles
@@ -546,12 +556,15 @@ function Template(svg) {
 
     rows
       .select('rect.bar')
-      .on('mousemove', d => {
+      .on('mouseover', d => {
         const sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
-        this.showTooltip(sum, d3.event);
+        return showTooltipOver(sum);
+      })
+      .on('mousemove', () => {
+        return showTooltipMove();
       })
       .on('mouseleave', () => {
-        this.hideTooltip();
+        return hideTooltip();
       });
 
     this.lower.select('text.xAxis-title').text(() => {
@@ -601,12 +614,16 @@ function Template(svg) {
         .attr('opacity', 1)
         .attr('stroke', color.purple);
 
-      this.showTooltip(d.geography, d3.event);
+      showTooltipOver(d.geography);
+    });
+
+    lines.on('mousemove', () => {
+      showTooltipMove();
     });
 
     lines.on('mouseleave', () => {
       lines.attr('opacity', 1).attr('stroke', color.blue);
-      this.hideTooltip();
+      hideTooltip();
     });
   };
 
