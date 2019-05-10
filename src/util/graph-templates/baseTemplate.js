@@ -99,6 +99,7 @@ function Base_Template(svg) {
       switch (this.template) {
         case 'a':
         case 'i':
+        case 'j':
           if (!this.data.data[0].values.length) break;
           year = `(${this.data.data[0].values[0].date})`;
           break;
