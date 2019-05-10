@@ -159,7 +159,14 @@ function Template(svg) {
     // Value cells
     rows
       .selectAll('td')
-      .data(d => d.values.map(row => row).flat())
+      .data(
+        d =>
+          (vals = this.data.meta.series
+            .map((serie, serieIndex) =>
+              dates.map(date => d.values[serieIndex].find(obj => obj.date === date) || { ratio: 'N/A', value: 'N/A' })
+            )
+            .flat())
+      )
       .join('td')
       .attr('headers', (d, i, j) => {
         const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
