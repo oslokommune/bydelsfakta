@@ -7,31 +7,6 @@ export default {
   value: 'levekaar',
   production: true,
   cards: [
-    // {
-    //   size: 'small',
-    //   heading: '',
-    //   map: {
-    //     labels: ['', ''],
-    //     url: ``,
-    //   },
-    //   tabs: [
-    //     {
-    //       active: false,
-    //       label: 'Andel',
-    //       id: 'levekar_funksjonsevne_andel',
-    //       template: 'a',
-    //       method: 'ratio',
-    //       url: `${baseUrl}/mockDataAinnvandrer3.json`,
-    //     },
-    //     {
-    //       active: false,
-    //       label: 'Historisk',
-    //       id: 'levekar_funksjonsevne_historisk',
-    //       template: 'b',
-    //       url: `${baseUrl}/mockDataB.json`,
-    //     },
-    //   ],
-    // },
     {
       size: 'small',
       heading: 'Personer med lav utdanning',
@@ -83,6 +58,7 @@ export default {
           production: true,
         },
       ],
+      about: `Lav utdanning inkluderer grunnskolenivå og de med ingen/uoppgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; data for 2014 og 2015 er ikke direkte sammenlignbare med tidligere perioder. <a href='http://www.ssb.no/utdanning/statistikker/utniv/aar/2016-06-20?fane=om#content#content'>Mer informasjon hos SSB</a>`,
     },
     {
       size: 'small',
@@ -133,10 +109,11 @@ export default {
           production: true,
         },
       ],
+      about: `Statistikken viser andel husholdninger med barn under 18 år med lav inntekt, etter EU-skala. Inntekten er korrigert for formue, det vil si at den viser husholdninger som har brutto finanskapital per forbruks­enhet under 1G.`,
     },
     {
       size: 'small',
-      heading: 'Ikke-fullført vgs',
+      heading: 'Personer 21-29 år som ikke har fullført videregående skole',
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/Levekar-vgs-status-vFLio`,

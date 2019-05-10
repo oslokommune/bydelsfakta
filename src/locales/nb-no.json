@@ -20,6 +20,11 @@
       "graph": "Vis grafikk",
       "table": "Vis tabell"
     },
+    "about": {
+      "aria": "Om statistikken",
+      "label": "Om statistikken",
+      "updated": "Oppdatert"
+    },
     "options": {
       "label": "Valg"
     },
