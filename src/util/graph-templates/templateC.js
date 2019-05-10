@@ -96,7 +96,7 @@ function Template(svg) {
         dates.add(d.date);
       });
     });
-    dates = [...dates].sort((a, b) => a - b);
+    dates = [...dates];
 
     hRow1
       .selectAll('th')
@@ -159,13 +159,7 @@ function Template(svg) {
     // Value cells
     rows
       .selectAll('td')
-      .data(d =>
-        this.data.meta.series
-          .map((serie, serieIndex) =>
-            dates.map(date => d.values[serieIndex].find(obj => obj.date === date) || { ratio: 'N/A', value: 'N/A' })
-          )
-          .flat()
-      )
+      .data(d => d.values.map(row => row).flat())
       .join('td')
       .attr('headers', (d, i, j) => {
         const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;

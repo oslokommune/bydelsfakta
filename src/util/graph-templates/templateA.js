@@ -231,9 +231,7 @@ function Template(svg) {
     // Value Cells
     rows
       .selectAll('td')
-      .data(d => {
-        return d.values;
-      })
+      .data(d => d.values)
       .join('td')
       .text(d => this.format(d[this.method], this.method, false, true));
   };

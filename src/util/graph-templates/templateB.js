@@ -200,7 +200,7 @@ function Template(svg) {
     // Value cells
     rows
       .selectAll('td')
-      .data(d => dates.map(date => d.values.find(obj => obj.date === date) || { date, ratio: 'N/A', value: 'N/A' }))
+      .data(d => d.values)
       .join('td')
       .text(d => this.format(d[this.method], this.method, false, true));
   };
