@@ -18,6 +18,55 @@ exports[`GraphCard change an active tab 1`] = `
         >
           
         </h2>
+      </div>
+       
+      <nav
+        class="card__nav"
+      >
+        <div
+          class="tabs"
+          role="tablist"
+        >
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
+          <button
+            aria-label="Status"
+            class="tabs__tab"
+            id="tabButton--0"
+            role="tab"
+          >
+            Status
+          </button>
+          <button
+            aria-label="Matrise"
+            class="tabs__tab active"
+            id="tabButton--1"
+            role="tab"
+          >
+            Matrise
+          </button>
+          <button
+            aria-label="Historisk"
+            class="tabs__tab"
+            id="tabButton--2"
+            role="tab"
+          >
+            Historisk
+          </button>
+           
+          <!---->
+        </div>
          
         <div
           class="card__toggle-menu"
@@ -61,40 +110,6 @@ exports[`GraphCard change an active tab 1`] = `
             </i>
           </button>
         </div>
-      </div>
-       
-      <nav
-        class="card__nav"
-      >
-        <div
-          class="tabs"
-          role="tablist"
-        >
-          <button
-            aria-label="Status"
-            class="tabs__tab"
-            id="tabButton--0"
-            role="tab"
-          >
-            Status
-          </button>
-          <button
-            aria-label="Matrise"
-            class="tabs__tab active"
-            id="tabButton--1"
-            role="tab"
-          >
-            Matrise
-          </button>
-          <button
-            aria-label="Historisk"
-            class="tabs__tab"
-            id="tabButton--2"
-            role="tab"
-          >
-            Historisk
-          </button>
-        </div>
          
         <div
           class="context-menu"
@@ -112,6 +127,12 @@ exports[`GraphCard change an active tab 1`] = `
             >
               menu
             </i>
+             
+            <span
+              class="button-label"
+            >
+              Valg
+            </span>
           </button>
            
           <!---->
@@ -183,6 +204,8 @@ exports[`GraphCard change an active tab 1`] = `
     </div>
      
     <!---->
+     
+    <!---->
   </div>
 </section>
 `;
@@ -205,6 +228,47 @@ exports[`GraphCard renders correctly 1`] = `
         >
           Befolkningen etter alder
         </h2>
+      </div>
+       
+      <nav
+        class="card__nav"
+      >
+        <div
+          class="tabs"
+          role="tablist"
+        >
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
+          <button
+            aria-label="Antall"
+            class="tabs__tab active"
+            id="tabButton-Befolkningen etter alder-0"
+            role="tab"
+          >
+            Antall
+          </button>
+          <button
+            aria-label="Andel"
+            class="tabs__tab"
+            id="tabButton-Befolkningen etter alder-1"
+            role="tab"
+          >
+            Andel
+          </button>
+           
+          <!---->
+        </div>
          
         <div
           class="card__toggle-menu"
@@ -237,32 +301,6 @@ exports[`GraphCard renders correctly 1`] = `
            
           <!---->
         </div>
-      </div>
-       
-      <nav
-        class="card__nav"
-      >
-        <div
-          class="tabs"
-          role="tablist"
-        >
-          <button
-            aria-label="Antall"
-            class="tabs__tab active"
-            id="tabButton-Befolkningen etter alder-0"
-            role="tab"
-          >
-            Antall
-          </button>
-          <button
-            aria-label="Andel"
-            class="tabs__tab"
-            id="tabButton-Befolkningen etter alder-1"
-            role="tab"
-          >
-            Andel
-          </button>
-        </div>
          
         <div
           class="context-menu"
@@ -280,6 +318,12 @@ exports[`GraphCard renders correctly 1`] = `
             >
               menu
             </i>
+             
+            <span
+              class="button-label"
+            >
+              Valg
+            </span>
           </button>
            
           <!---->
@@ -365,6 +409,8 @@ exports[`GraphCard renders correctly 1`] = `
         <!---->
       </div>
     </div>
+     
+    <!---->
      
     <!---->
   </div>
