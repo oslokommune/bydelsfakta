@@ -30,7 +30,12 @@
               ></button>
             </template>
             <select v-if="!showAsTabs" v-model="active" class="select tabs__select" aria-hidden>
-              <option :value="index" v-for="(tab, index) in settings.tabs" v-text="tab.label"></option>
+              <option
+                :value="index"
+                v-for="(tab, index) in settings.tabs"
+                v-text="tab.label"
+                :key="'tab' + tab.label"
+              ></option>
             </select>
           </div>
 
@@ -166,9 +171,9 @@
         ></v-leaflet>
       </div>
       <div class="about-container" v-if="mode === 'about'">
-        Om statistikken
+        <h3>{{ $t('graphCard.about.label') }}</h3>
 
-        <p>Oppdatert {{ date }}</p>
+        <p>{{ $t('graphCard.about.updated') }} {{ date }}</p>
         <p v-if="settings.about" v-html="settings.about"></p>
       </div>
     </div>
@@ -183,7 +188,6 @@ import * as d3 from 'd3';
 import GraphInstance from './GraphInstance.vue';
 import downloadSvg from '../util/downloadSvg';
 import tableToCsv from '../util/tableToCsv';
-import debounce from '../util/debounce';
 import VLeaflet from './VLeaflet.vue';
 
 export default {

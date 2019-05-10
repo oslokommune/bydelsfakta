@@ -46,10 +46,6 @@ button:disabled > * {
   opacity: 0.35;
 }
 
-select {
-  -webkit-appearance: none;
-}
-
 .visually-hidden {
   height: 1px;
   left: -10000px;
@@ -167,12 +163,14 @@ body.using-mouse :focus {
 }
 
 select {
+  -webkit-appearance: none;
   border: 1px solid rgba(black, 0.1);
   border-radius: 1px;
   font-size: 1rem;
   padding: 0.5rem 1rem;
   position: relative;
   width: 100%;
+
   &::after {
     background: red;
     bottom: 0;

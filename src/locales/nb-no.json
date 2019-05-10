@@ -22,7 +22,8 @@
     },
     "about": {
       "aria": "Om statistikken",
-      "label": "Om statistikken"
+      "label": "Om statistikken",
+      "updated": "Oppdatert"
     },
     "options": {
       "label": "Valg"
