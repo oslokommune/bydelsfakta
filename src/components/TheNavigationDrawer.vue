@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg'; //
@@ -121,15 +121,14 @@ export default {
       set: function() {},
     },
     ...mapState(['compareDistricts', 'districts', 'navigationIsOpen']),
+    ...mapGetters(['getDistrict']),
   },
 
-  created() {
-    const route = this.$route;
-    if (route.params.district === undefined) {
-      return;
-    }
-
-    this.selected = this.districts[0] === 'alle' ? [] : this.districts;
+  mounted() {
+    console.log(this.selected)
+    console.log(this.$store.state.districts);
+    this.selected = this.districts[0] === 'alle' ? [] : this.$store.state.districts;
+    console.log(this.selected)
   },
 
   methods: {
