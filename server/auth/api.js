@@ -20,7 +20,6 @@ const request = params => {
       return Promise.resolve(response.data);
     })
     .catch(error => {
-      console.log(error);
       if (error.errno === 'ETIMEDOUT') {
         return Promise.reject(new Error('Timeout'));
       }
