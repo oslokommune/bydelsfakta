@@ -138,13 +138,7 @@ function Template(svg) {
 
     const rows = tbody
       .selectAll('tr')
-      .data(
-        JSON.parse(JSON.stringify(this.data.data)).sort((a, b) => {
-          if (a.avgRow && b.totalRow) return -1;
-          if (b.avgRow && a.totalRow) return 1;
-          return b.totalRow ? -1 : b.avgRow ? -1 : 1;
-        })
-      )
+      .data(this.data.data)
       .join('tr');
 
     // Geography cells
@@ -407,13 +401,17 @@ function Template(svg) {
     // simple collision detection algorithm. Passing in
     // the original y-position and the available height in pixels
     const labelPositions = positionLabels(
-      this.data.data
-        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
-        .map(row => {
-          row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
-          return row;
-        }),
-      this.height
+      JSON.parse(
+        JSON.stringify(
+          this.data.data
+            .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+            .map(row => {
+              row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
+              return row;
+            }),
+          this.height
+        )
+      )
     );
 
     const labels = this.canvas
