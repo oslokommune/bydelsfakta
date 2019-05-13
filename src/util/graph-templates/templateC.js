@@ -159,10 +159,14 @@ function Template(svg) {
     // Value cells
     rows
       .selectAll('td')
-      .data(d => this.data.meta.series.map((serie, serieIndex) => dates.map(date => {
+      .data(d =>
+        this.data.meta.series
+          .map((serie, serieIndex) =>
+            dates.map(date => {
               if (!d.values[serieIndex]) return { ratio: 'N/A', value: 'N/A' };
               return d.values[serieIndex].find(obj => obj.date === date) || { ratio: 'N/A', value: 'N/A' };
-            }))
+            })
+          )
           .flat()
       )
       .join('td')
