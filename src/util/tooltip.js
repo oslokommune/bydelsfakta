@@ -7,14 +7,14 @@ const tooltip = d3
   .attr('aria-hidden', true);
 
 // Creates DOM elements for generic tooltip
-export const showTooltipOver = (str, delay) => {
+export const showTooltipOver = (str, delay = 0) => {
   setTimeout(() => {
-    return tooltip.html(str).classed('showTooltip', true);
+    tooltip.html(str).classed('showTooltip', true);
   }, delay);
 };
 
 export const showTooltipMove = () => {
-  return tooltip
+  tooltip
     .style('top', `${d3.event.pageY - 30}px`)
     .style('left', `${d3.event.pageX}px`)
     .style('transform', function() {
@@ -27,5 +27,5 @@ export const showTooltipMove = () => {
 };
 
 export const hideTooltip = () => {
-  return tooltip.classed('showTooltip', false);
+  tooltip.classed('showTooltip', false);
 };

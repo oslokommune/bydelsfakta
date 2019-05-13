@@ -285,14 +285,10 @@ function Template(svg) {
     // Show and hide tooltips
     bar
       .on('mouseenter', d => {
-        return showTooltipOver(Math.round((d[1] - d[0]) * 100) + '%');
+        showTooltipOver(Math.round((d[1] - d[0]) * 100) + '%');
       })
-      .on('mousemove', () => {
-        return showTooltipMove();
-      })
-      .on('mouseleave', () => {
-        return hideTooltip();
-      });
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
   };
 
   // Updates the legends on each render

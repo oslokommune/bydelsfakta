@@ -357,15 +357,9 @@ function Template(svg) {
       .attr('x', (d, i) => this.x[i](0));
 
     bars
-      .on('mouseover', d => {
-        return showTooltipOver(this.format(d[this.method], this.method));
-      })
-      .on('mousemove', () => {
-        return showTooltipMove();
-      })
-      .on('mouseleave', () => {
-        return hideTooltip();
-      });
+      .on('mouseover', d => showTooltipOver(this.format(d[this.method], this.method)))
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
   };
 
   this.setScales = function() {
