@@ -417,9 +417,9 @@ export default {
 
   &__select {
     left: 0;
-    right: 1rem;
     margin-right: 1rem;
     position: absolute;
+    right: 1rem;
     top: 0;
   }
 
