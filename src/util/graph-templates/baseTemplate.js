@@ -62,6 +62,10 @@ function Base_Template(svg) {
     if (method === undefined) throw 'Cannot format number';
     if (num === undefined) throw 'Missing number';
 
+    if (num === 'N/A' || num === 'I/T' || num === 'Ikke tilgjengelig') {
+      return '–';
+    }
+
     if (tick) {
       return method === 'ratio' ? d3.format('~p')(num) : d3.format('~d')(num);
     }
@@ -95,6 +99,7 @@ function Base_Template(svg) {
       switch (this.template) {
         case 'a':
         case 'i':
+        case 'j':
           if (!this.data.data[0].values.length) break;
           year = `(${this.data.data[0].values[0].date})`;
           break;

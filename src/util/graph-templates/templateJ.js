@@ -8,6 +8,7 @@ import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
+import { state } from '@/store';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -47,7 +48,13 @@ function Template(svg) {
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawRows();
-    this.drawLegend();
+
+    if (state.ie11) {
+      this.drawIeLegend();
+    } else {
+      this.drawFlexLegend();
+    }
+
     this.drawSource(
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
@@ -71,7 +78,11 @@ function Template(svg) {
 
   this.created = function() {
     // Create container for legend box
-    this.legendBox = this.svg.append('g').attr('class', 'legend');
+    if (state.ie11) {
+      this.legendBox = this.svg.append('g').attr('class', 'legend');
+    } else {
+      this.legendBox = this.svg.append('foreignObject').attr('height', 40);
+    }
 
     // Add two labels above the xAxis
     this.canvas
@@ -285,7 +296,24 @@ function Template(svg) {
   };
 
   // Updates the legends on each render
-  this.drawLegend = function() {
+  this.drawFlexLegend = function() {
+    let legendHtml = `<div class="graphlegend">`;
+    this.data.meta.series.forEach((serie, i) => {
+      const colorIndex = i === 0 ? 1 : i === 1 ? 0 : i;
+      legendHtml += `<div class="graphlegend__item"><span class="graphlegend__swatch" style="background:${this.colors(
+        colorIndex
+      )};"></span><span class="graphlegend__label">${serie.heading}</span></div>`;
+    });
+    legendHtml += '</div>';
+
+    // Resize and re-position the legend box based on the height of the svg
+    this.legendBox
+      .attr('width', this.width + this.padding.left + this.padding.right)
+      .html(legendHtml)
+      .attr('transform', `translate(0, ${this.height + this.padding.top + this.padding.bottom / 2 - 8})`);
+  };
+
+  this.drawIeLegend = function() {
     // Re-position the legend box based on the height of the svg
     this.legendBox.attr('transform', `translate(0, ${this.height + this.padding.top + this.padding.bottom / 2 - 8})`);
 

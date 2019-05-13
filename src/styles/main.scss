@@ -46,10 +46,6 @@ button:disabled > * {
   opacity: 0.35;
 }
 
-select {
-  -webkit-appearance: none;
-}
-
 .visually-hidden {
   height: 1px;
   left: -10000px;
@@ -164,4 +160,53 @@ table {
 /* You could apply this selector only to buttons, if you wanted. */
 body.using-mouse :focus {
   outline: none;
+}
+
+.graphlegend {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  &__item {
+    align-items: center;
+    display: flex;
+    padding: 0 1rem;
+    white-space: nowrap;
+  }
+
+  &__name {
+    white-space: nowrap;
+  }
+
+  &__swatch {
+    display: inline-block;
+    height: 1rem;
+    margin-right: 0.4rem;
+    width: 1rem;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  border: 1px solid rgba(black, 0.1);
+  border-radius: 1px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  width: 100%;
+
+  &::after {
+    background: red;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    z-index: 2;
+  }
 }

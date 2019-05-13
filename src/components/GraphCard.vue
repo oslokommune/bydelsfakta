@@ -4,6 +4,40 @@
       <header class="card__header">
         <div class="card__headertext">
           <h2 class="card__title">{{ settings.heading }}</h2>
+        </div>
+        <nav class="card__nav">
+          <div class="tabs" ref="tabsRef" role="tablist">
+            <resize-observer @notify="showTabsOrSelect"></resize-observer>
+            <template v-for="(tab, index) in settings.tabs">
+              <button
+                :disabled="mode === 'map' || mode === 'about'"
+                ref="tabRef"
+                role="tab"
+                :aria-label="tab.label"
+                :id="`tabButton-${settings.heading}-${index}`"
+                :key="index"
+                @click="activeTab(index)"
+                :class="{ active: active === index, 'tabs__tab--hidden': !showAsTabs }"
+                class="tabs__tab"
+                v-text="tab.label"
+                v-if="
+                  tab.production === productionMode && tab.production !== null
+                    ? true
+                    : tab.production === true && productionMode === false
+                    ? true
+                    : productionMode === null
+                "
+              ></button>
+            </template>
+            <select v-if="!showAsTabs" v-model="active" class="select tabs__select" aria-hidden>
+              <option
+                :value="index"
+                v-for="(tab, index) in settings.tabs"
+                v-text="tab.label"
+                :key="'tab' + tab.label"
+              ></option>
+            </select>
+          </div>
 
           <div class="card__toggle-menu">
             <button
@@ -36,31 +70,6 @@
               <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">place</i>
             </button>
           </div>
-        </div>
-        <nav class="card__nav">
-          <div class="tabs" role="tablist">
-            <template v-for="(tab, index) in settings.tabs">
-              <button
-                :disabled="mode === 'map'"
-                role="tab"
-                :aria-label="tab.label"
-                :id="`tabButton-${settings.heading}-${index}`"
-                :key="index"
-                @click="activeTab(index)"
-                :class="{ active: active === index }"
-                class="tabs__tab"
-                v-text="tab.label"
-                v-if="
-                  tab.production === productionMode && tab.production !== null
-                    ? true
-                    : tab.production === true && productionMode === false
-                    ? true
-                    : productionMode === null
-                "
-              ></button>
-            </template>
-          </div>
-
           <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
             <button
               class="context-menu__button"
@@ -72,8 +81,29 @@
               :title="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
             >
               <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
+              <span class="button-label">Valg</span>
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown" role="menu">
+              <button
+                role="menuitem"
+                @click="
+                  mode === 'about' ? (mode = 'graph') : (mode = 'about');
+                  showDropdown = false;
+                "
+                @keyup.enter="
+                  mode === 'about' ? (mode = 'graph') : (mode = 'about');
+                  showDropdown = false;
+                "
+                class="context-menu__dropdown-item"
+                tabindex="0"
+                :title="$t('graphCard.about.aria')"
+                :aria-label="$t('graphCard.about.aria')"
+                id="context-menu-button-png"
+              >
+                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">help</i>
+                <span>{{ $t('graphCard.about.label') }}</span>
+              </button>
+
               <button
                 role="menuitem"
                 :disabled="mode !== 'graph'"
@@ -127,7 +157,7 @@
       </header>
       <graph-instance
         @updateDate="setDate"
-        v-if="settings.tabs[active] !== undefined && mode !== 'map'"
+        v-if="settings.tabs[active] !== undefined && (mode === 'graph' || mode === 'table')"
         :settings="settings.tabs[active]"
         :mode="mode"
         ref="graph"
@@ -139,6 +169,12 @@
           :settings="settings.map"
           :data-url="`${settings.map.url}?geography=${district}`"
         ></v-leaflet>
+      </div>
+      <div class="about-container" v-if="mode === 'about'">
+        <h3>{{ $t('graphCard.about.label') }}</h3>
+
+        <p>{{ $t('graphCard.about.updated') }} {{ date }}</p>
+        <p v-if="settings.about" v-html="settings.about"></p>
       </div>
     </div>
   </section>
@@ -163,6 +199,7 @@ export default {
       showDropdown: false,
       mode: 'graph',
       date: '',
+      showAsTabs: true,
     };
   },
   computed: {
@@ -180,6 +217,7 @@ export default {
       required: true,
     },
   },
+
   methods: {
     setDate(dateStr) {
       const parseTime = d3.timeParse('%Y-%m-%d');
@@ -228,12 +266,24 @@ export default {
       tableToCsv(this.$refs.graph.$refs.tableContainer.querySelector('table'));
       this.closeMenu();
     },
+
+    // Sets 'showAsTabs' true/false by comparing the accumulated width
+    // of all the tabs with the available space
+    showTabsOrSelect() {
+      let tabsWidth = 0;
+      const tabs = this.$refs.tabRef;
+      tabs.forEach(tab => {
+        tabsWidth += tab.offsetWidth;
+      });
+      this.showAsTabs = this.$refs.tabsRef.offsetWidth > tabsWidth;
+    },
   },
 
   watch: {
     '$route.params.topic'() {
       this.active = 0;
       this.mode = 'graph';
+      this.showTabsOrSelect();
     },
   },
 };
@@ -243,8 +293,13 @@ export default {
 @import './../styles/colors';
 @import './../styles/variables';
 
-.map-container {
+.map-container,
+.about-container {
   height: 560px;
+}
+
+.about-container {
+  padding: 1rem;
 }
 
 .card-container {
@@ -298,20 +353,21 @@ export default {
   }
 
   &__nav {
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     padding-left: 1rem;
     padding-right: 0;
+    position: relative;
   }
 
   &__toggle-menu {
     display: flex;
     margin-left: auto;
-    padding: 0;
+    padding-left: 1rem;
   }
 
   &__toggle-button {
-    align-items: center;
+    align-items: flex-end;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -354,8 +410,18 @@ export default {
 .tabs {
   display: flex;
   flex-grow: 1;
-  overflow-x: auto;
+  height: 3rem;
+  overflow-x: hidden;
   padding: 4px 0;
+  position: relative;
+
+  &__select {
+    left: 0;
+    margin-right: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 0;
+  }
 
   &__tab {
     color: $color-purple;
@@ -364,6 +430,11 @@ export default {
     padding: 0.75em;
     transition: background-color 0.2s;
     white-space: nowrap;
+
+    &--hidden {
+      height: 0;
+      opacity: 0;
+    }
 
     &[disabled],
     &.active[disabled] {
@@ -406,7 +477,6 @@ export default {
 
   &__button {
     align-items: center;
-    background-color: rgba($color-border, 1);
     border-radius: 0 !important;
     cursor: pointer;
     display: flex;
@@ -430,15 +500,11 @@ export default {
       }
     }
 
-    span {
-      display: none;
+    .button-label {
+      display: inline-block;
       font-weight: 700;
       margin-left: 0.25rem;
       text-transform: uppercase;
-
-      @media screen and (min-width: $break-md) {
-        display: inline-block;
-      }
     }
   }
 
