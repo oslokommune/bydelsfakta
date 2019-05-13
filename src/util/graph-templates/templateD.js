@@ -209,7 +209,6 @@ function Template(svg) {
       .attr('width', 21)
       .attr('x', s[1])
       .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
-
       .on('mousemove', showTooltipMove)
       .on('mouseleave', hideTooltip);
     d3.selectAll('.handle--w')
