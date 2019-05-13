@@ -96,7 +96,6 @@ export default {
     },
     ...mapState(['districts', 'compareDistricts', 'isTouchDevice']),
     filteredData() {
-      console.log('filtered data');
       this.sortData(this.data);
 
       if (!this.compareDistricts || this.districts.includes('alle') || this.settings.noFilter) return this.data;

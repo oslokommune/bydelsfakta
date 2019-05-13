@@ -172,7 +172,7 @@ export default {
 
       if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
-      } else if (this.compareDistricts && to.params.district !== 'alle') {
+      } else if (this.compareDistricts && this.districts[0] !== 'alle') {
         this.selected = routes[2].split('-');
       } else if (district !== undefined) {
         this.selected = [district.key];
