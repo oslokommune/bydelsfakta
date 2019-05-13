@@ -34,7 +34,7 @@ export const getters = {
       ...state.districtsGeo.oslo,
       features,
     };
-  },
+  }
 };
 
 export const mutations = {

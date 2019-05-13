@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
 import osloIcon from '../assets/oslo-logo.svg'; //
@@ -121,15 +121,7 @@ export default {
       set: function() {},
     },
     ...mapState(['compareDistricts', 'districts', 'navigationIsOpen']),
-  },
-
-  created() {
-    const route = this.$route;
-    if (route.params.district === undefined) {
-      return;
-    }
-
-    this.selected = this.districts[0] === 'alle' ? [] : this.districts;
+    ...mapGetters(['getDistrict']),
   },
 
   methods: {
@@ -168,25 +160,22 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      const params = to.params.district !== undefined ? to.params.district.split('-') : [];
       const district = allDistricts.find(district => district.uri === routes[2]);
 
       if (to.name === 'NotFound') {
         this.$store.dispatch('cleanState');
         this.selected = [];
+      } else if (to.name === 'Home') {
+        this.addDistrict({ district: 'alle', pushRoute: false });
+        this.selected = [];
       }
 
       if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
-      } else if (params.length > 1) {
+      } else if (this.compareDistricts && to.params.district !== 'alle') {
         this.selected = routes[2].split('-');
       } else if (district !== undefined) {
         this.selected = [district.key];
-      }
-
-      if (to.name === 'Home') {
-        this.addDistrict({ district: 'alle', pushRoute: false });
-        this.selected = [];
       }
 
       // Hide navigation when a selection is made,
