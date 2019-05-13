@@ -231,7 +231,7 @@ function Base_Template(svg) {
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.isCompare = options.compareDistricts || false;
     this.method = options.method || 'value';
-    this.highlight = options.highlight === undefined || options.highlight == null ? -1 : options.highlight;
+    this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
 

@@ -96,6 +96,7 @@ export default {
     },
     ...mapState(['districts', 'compareDistricts', 'isTouchDevice']),
     filteredData() {
+      console.log('filtered data');
       this.sortData(this.data);
 
       if (!this.compareDistricts || this.districts.includes('alle') || this.settings.noFilter) return this.data;
@@ -168,19 +169,26 @@ export default {
           );
         }
 
-        if (b.totalRow) return -2;
-        if (b.avgRow) return -1;
-
-        if (template === 'a') {
-          if (a.values.length && b.values.length) {
-            return b.values[0][this.settings.method] - a.values[0][this.settings.method];
+        if (b.totalRow && a.avgRow) {
+          return -1;
+        } else if (a.totalRow && b.avgRow) {
+          return 1;
+        } else if (a.totalRow || a.avgRow) {
+          return 1;
+        } else if (b.totalRow || b.avgRow) {
+          return -1;
+        } else {
+          if (template === 'a') {
+            if (a.values.length && b.values.length) {
+              return b.values[0][this.settings.method] - a.values[0][this.settings.method];
+            }
           }
-        }
 
-        if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
-          const sumA = a.values[0][this.settings.method] + a.values[1][this.settings.method];
-          const sumB = b.values[0][this.settings.method] + b.values[1][this.settings.method];
-          return sumB - sumA;
+          if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
+            const sumA = a.values[0][this.settings.method] + a.values[1][this.settings.method];
+            const sumB = b.values[0][this.settings.method] + b.values[1][this.settings.method];
+            return sumB - sumA;
+          }
         }
       });
 
