@@ -7,6 +7,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 import { state } from '@/store';
 
 function Template(svg) {
@@ -284,14 +285,10 @@ function Template(svg) {
     // Show and hide tooltips
     bar
       .on('mouseenter', d => {
-        this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
+        showTooltipOver(Math.round((d[1] - d[0]) * 100) + '%');
       })
-      .on('mousemove', d => {
-        this.showTooltip(Math.round((d[1] - d[0]) * 100) + '%', d3.event);
-      })
-      .on('mouseleave', () => {
-        this.hideTooltip();
-      });
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
   };
 
   // Updates the legends on each render

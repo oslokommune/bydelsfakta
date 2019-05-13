@@ -6,6 +6,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -356,12 +357,9 @@ function Template(svg) {
       .attr('x', (d, i) => this.x[i](0));
 
     bars
-      .on('mousemove', d => {
-        this.showTooltip(this.format(d[this.method], this.method), d3.event);
-      })
-      .on('mouseleave', () => {
-        this.hideTooltip();
-      });
+      .on('mouseover', d => showTooltipOver(this.format(d[this.method], this.method)))
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
   };
 
   this.setScales = function() {

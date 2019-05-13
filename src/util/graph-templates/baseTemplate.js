@@ -169,62 +169,6 @@ function Base_Template(svg) {
     // once for each initialization.
     this.created();
     this.addSourceElement();
-    this.addTooltipElement();
-  };
-
-  // Creates DOM elements for generic tooltip
-  this.addTooltipElement = function() {
-    const group = this.svg
-      .append('g')
-      .attr('class', 'tooltip')
-      .attr('opacity', 0)
-      .style('pointer-events', 'none');
-
-    group
-      .append('rect')
-      .attr('transform', 'translate(0, -29)')
-      .attr('fill', color.yellow)
-      .attr('stroke', 'white')
-      .attr('rx', 11)
-      .attr('height', 21);
-    group
-      .append('text')
-      .attr('transform', 'translate(0, -14)')
-      .attr('font-size', 12)
-      .attr('font-weight', 'bold')
-      .attr('text-anchor', 'middle')
-      .attr('fill', color.purple);
-  };
-
-  // Displays generic tooltip,
-  // using the d3.event as an argument
-  // to position the tooltip
-  this.showTooltip = function(str, event, delay = 0) {
-    const group = this.svg.select('g.tooltip');
-    const rect = group.select('rect');
-    const text = group.select('text');
-
-    group.attr('transform', `translate(${event.offsetX}, ${event.offsetY})`);
-    text.text(str);
-    rect.attr('width', text.node().getBBox().width + 20).attr('x', -(text.node().getBBox().width / 2 + 10));
-
-    group
-      .transition()
-      .duration(0)
-      .delay(delay)
-      .attr('opacity', 1);
-  };
-
-  // Hides the generic tooltip
-  this.hideTooltip = function() {
-    const group = this.svg.select('g.tooltip');
-    group.select('rect');
-    group.select('text').text('');
-    group
-      .transition()
-      .duration(0)
-      .delay(1)
-      .attr('opacity', 0);
   };
 
   // Creates DOM elements for generic source reference
