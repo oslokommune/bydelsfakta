@@ -147,7 +147,7 @@ export default {
   margin-left: 0.5rem;
   padding: 0.5rem;
   position: relative;
-  width: 100%;
+  width: auto;
 
   @media screen and (min-width: $break-lg) {
     display: block;
@@ -209,7 +209,7 @@ export default {
     display: block;
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: auto;
   }
 
   & > .icon {

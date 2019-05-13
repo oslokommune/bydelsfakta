@@ -367,7 +367,7 @@ export default {
   }
 
   &__toggle-button {
-    align-items: flex-end;
+    align-items: center;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -410,17 +410,18 @@ export default {
 .tabs {
   display: flex;
   flex-grow: 1;
-  height: 3rem;
+  height: 4rem;
   overflow-x: hidden;
   padding: 4px 0;
   position: relative;
 
   &__select {
+    height: 3rem;
     left: 0;
     margin-right: 1rem;
     position: absolute;
     right: 1rem;
-    top: 0;
+    top: 0.5rem;
   }
 
   &__tab {
@@ -436,8 +437,8 @@ export default {
       opacity: 0;
     }
 
-    &[disabled],
-    &.active[disabled] {
+    &[disabled]:not(.tabs__tab--hidden),
+    &.active[disabled]:not(.tabs__tab--hidden) {
       color: rgba($color-purple, 0.35);
       cursor: default;
       opacity: 0.8;
