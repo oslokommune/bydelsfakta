@@ -31,6 +31,20 @@ export default {
         },
       ],
     },
+    {
+      size: 'large',
+      heading: 'Nøkkeltall',
+      production: true,
+      tabs: [
+        {
+          active: true,
+          label: 'Status',
+          production: true,
+          url: `${API}/nokkeltall-om-befolkningen`,
+          template: 'g',
+        },
+      ],
+    },
   ],
   related: ['alder', 'innvandrerbefolkningen', 'befolkningsendringer'],
   options: {
