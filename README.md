@@ -1,41 +1,55 @@
 # Bydelsfakta
 
-Frontend applikasjon for nye designet til Bydelsfakta som visualiserer data om Oslo sine bydeler
+Frontend application for Bydelsfakta at Oslo Kommune which visualizes statistics and data on different topics about the districts in Oslo.
 
-## Installere prosjektet
+#### Install dependencies
+Need to install both the dependencies in root folder and the server folder for the backend
 ```
 npm install
+cd server && npm install
 ```
 
-### Kjører opp lokalt for testing
+#### Run it locally for local development
+To different runs, one for frontend and one for backend
+
+##### Frontend
 ```
 npm run serve
 ```
 
-### Kompilerer og bygger prosjektet til en dist-mappe
+##### Backend
+Need to build the frontend once before running the backend
+```
+npm run backend
+```
+
+The backend needs some local variables, these are mostly secret, so if you need them then send us a DM and we could give you access.
+
+#### Build the project
 ```
 npm run build
 ```
 
-### Kjør tester
+#### Run jest tests
 ```
-npm run test
+npm run test:unit:watch
 ```
 
-### Lints and fixes files
+#### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Run your end-to-end tests
+#### Stylelint
+```
+npm run lint:style:fix
+```
+
+#### Run your end-to-end tests
 ```
 npm run test:e2e
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
+#### CircleCI
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+You can check out the CicleCI builds that are run on each commit to the dev branch: [Press me](https://circleci.com/gh/oslokommune/bydelsfakta)
