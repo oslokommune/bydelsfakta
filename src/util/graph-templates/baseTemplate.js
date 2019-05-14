@@ -58,6 +58,15 @@ function Base_Template(svg) {
   this.isCompare = false;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
+  this.tableSort = function(a, b) {
+    if (a.totalRow && b.avgRow) return 1;
+    if (b.totalRow && a.avgRow) return -1;
+    if (a.totalRow || a.avgRow) return 1;
+    if (b.totalRow || b.avgRow) return -1;
+
+    return a.id - b.id;
+  };
+
   this.format = function(num, method, tick = false, table = false) {
     if (method === undefined) throw 'Cannot format number';
     if (num === undefined) throw 'Missing number';

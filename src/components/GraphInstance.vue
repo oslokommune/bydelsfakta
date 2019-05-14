@@ -183,6 +183,10 @@ export default {
             }
           }
 
+          if (template === 'g') {
+            return b.values[0] - a.values[0];
+          }
+
           if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
             const sumA = a.values[0][this.settings.method] + a.values[1][this.settings.method];
             const sumB = b.values[0][this.settings.method] + b.values[1][this.settings.method];

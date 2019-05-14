@@ -136,9 +136,11 @@ function Template(svg) {
       .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
       .text(d => this.formatYear(this.parseYear(d)));
 
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
     const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography cells

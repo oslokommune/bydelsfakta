@@ -197,9 +197,11 @@ function Template(svg) {
       .attr('scope', 'col')
       .text(d => d);
 
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
     const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography cells
