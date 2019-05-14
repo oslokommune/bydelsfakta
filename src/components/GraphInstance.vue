@@ -339,6 +339,10 @@ export default {
     overflow: auto;
     padding: 1em 1em 0 1em;
     position: relative;
+
+    /deep/ &.hidden ~ .graph__dropdown {
+      display: none;
+    }
   }
 
   &__tablecontainer {

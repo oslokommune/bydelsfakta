@@ -175,6 +175,10 @@ function Template(svg) {
       extent = s.map(val => Math.round(self.age.invert(val)));
     }
 
+    if (d3.event.sourceEvent) {
+      this.dropDownParent.select('select').node().value = '';
+    }
+
     // Brushes need to be called from their parent group ('g')
     gBrushLarge.call(brushLarge);
     gBrushSmall.call(brushSmall);

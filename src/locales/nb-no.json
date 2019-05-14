@@ -6,11 +6,11 @@
     },
     "savePNG": {
       "aria": "lagre graf som bilde (png-fil)",
-      "label": "Last ned som grafikk som bilde (.png)"
+      "label": "Last ned som bilde (.png)"
     },
     "saveSVG": {
       "aria": "lagre graf som bilde (svg-fil)",
-      "label": "Last ned som grafikk som bilde (.svg)"
+      "label": "Last ned som grafikk (.svg)"
     },
     "saveCSV": {
       "aria": "last ned data som som csv",
