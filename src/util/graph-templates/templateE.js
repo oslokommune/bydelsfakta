@@ -163,9 +163,11 @@ function Template(svg) {
       .attr('headers', (d, i) => `${uuid}_th_2_${Math.floor(i / 2) + 1}`)
       .text(d => d);
 
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
     const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography cells

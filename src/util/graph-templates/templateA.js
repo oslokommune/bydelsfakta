@@ -210,9 +210,11 @@ function Template(svg) {
       .join('th')
       .text(d => d);
 
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
     const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography Cells
@@ -226,9 +228,7 @@ function Template(svg) {
     // Value Cells
     rows
       .selectAll('td')
-      .data(d => {
-        return d.values;
-      })
+      .data(d => d.values)
       .join('td')
       .text(d => this.format(d[this.method], this.method, false, true));
   };
