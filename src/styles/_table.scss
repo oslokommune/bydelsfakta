@@ -9,6 +9,7 @@ table {
 
   td,
   th {
+    border-left: 1px solid lighten($color-purple, 65%);
     font-weight: 400;
     padding: 0.6em 1em;
     position: relative;
@@ -53,11 +54,6 @@ table {
 
   .border-cell:not(:first-child) {
     border-left: 1px solid $color-purple;
-  }
-
-  td,
-  th {
-    border-left: 1px solid lighten($color-purple, 65%);
   }
 
   tbody tr:hover td {
