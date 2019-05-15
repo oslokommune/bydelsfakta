@@ -120,6 +120,7 @@ function Template(svg) {
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i > 0 ? dates.length : 1))
       .attr('scope', 'col')
+      .classed('border-cell', (d, i) => i > 0)
       .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`)
       .text(d => d);
 
@@ -133,6 +134,10 @@ function Template(svg) {
         return out;
       })
       .join('th')
+      .classed('border-cell', (d, i, j) => {
+        const groupSize = j.length / this.data.meta.series.length;
+        return i % groupSize === 0;
+      })
       .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
       .text(d => this.formatYear(this.parseYear(d)));
 
@@ -169,6 +174,10 @@ function Template(svg) {
       .attr('headers', (d, i, j) => {
         const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
         return `${this.data.meta.heading}_th_1_${first} th_2_${i}`;
+      })
+      .classed('border-cell', (d, i, j) => {
+        const groupSize = j.length / this.data.meta.series.length;
+        return i % groupSize === 0;
       })
       .text(d => this.format(d[this.method], this.method, false, true));
   };

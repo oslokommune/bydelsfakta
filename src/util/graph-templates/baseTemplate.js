@@ -53,6 +53,7 @@ function Base_Template(svg) {
   this.formatYear = d3.timeFormat('%Y');
   this.formatPercent = locale.norwegianLocale.format('.3~p'); // 0.0124 -> '12,4%'
   this.formatDecimal = locale.norwegianLocale.format(',.0f');
+  this.formatChange = locale.norwegianLocale.format('+,');
   this.sourceHeight = 30;
   this.duration = 250;
   this.isCompare = false;
@@ -83,7 +84,16 @@ function Base_Template(svg) {
       return method === 'ratio' ? locale.tableLocale.format('.3~p')(num) : locale.tableLocale.format(',.0f')(num);
     }
 
-    return method === 'ratio' ? this.formatPercent(num) : this.formatDecimal(num);
+    switch (method) {
+      case 'ratio':
+        return this.formatPercent(num);
+      case 'value':
+        return this.formatDecimal(num);
+      case 'change':
+        return this.formatChange(num);
+      default:
+        return this.formatDecimal(num);
+    }
   };
 
   // Resize is called from the parent vue component

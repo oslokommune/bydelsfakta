@@ -1,0 +1,70 @@
+@import 'colors';
+@import 'variables';
+
+table {
+  border-collapse: collapse;
+  overflow-x: scroll;
+  position: relative;
+  width: 100%;
+
+  td,
+  th {
+    font-weight: 400;
+    padding: 0.6em 1em;
+    position: relative;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  thead th:not([colspan='1']) {
+    text-align: center;
+  }
+
+  thead tr:first-child th:first-child {
+    background-color: lighten($color-yellow, 25%) !important;
+  }
+
+  thead tr:first-child th:first-child,
+  th[scope='row'] {
+    background: lighten($color-yellow, 10%);
+    border-left: none;
+    font-weight: 500;
+    left: 0;
+    max-width: 25em;
+    position: sticky;
+    text-align: left;
+    z-index: 1;
+  }
+
+  thead {
+    background: lighten($color-yellow, 25%);
+  }
+
+  caption {
+    color: $color-purple;
+    font-size: $font-medium;
+    font-weight: 400;
+    left: 1rem;
+    margin: 1rem;
+    max-width: 80vw;
+    position: sticky;
+    text-align: left;
+  }
+
+  .border-cell:not(:first-child) {
+    border-left: 1px solid $color-purple;
+  }
+
+  td,
+  th {
+    border-left: 1px solid lighten($color-purple, 65%);
+  }
+
+  tbody tr:hover td {
+    background: lighten($color-purple, 72%);
+  }
+
+  tbody tr:hover th {
+    background: lighten($color-yellow, 5%);
+  }
+}

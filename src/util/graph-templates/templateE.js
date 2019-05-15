@@ -152,7 +152,8 @@ function Template(svg) {
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i === 0 ? 1 : 2))
       .attr('scope', 'col')
-      .text(d => d);
+      .text(d => d)
+      .classed('border-cell', (d, i) => i > 0);
 
     hRow2
       .selectAll('th')
@@ -161,6 +162,10 @@ function Template(svg) {
       .attr('id', (d, i) => `${uuid}_th_1_${i}`)
       .attr('scope', 'col')
       .attr('headers', (d, i) => `${uuid}_th_2_${Math.floor(i / 2) + 1}`)
+      .classed('border-cell', (d, i, j) => {
+        const groupSize = j.length / ageRanges.length;
+        return i % groupSize === 0;
+      })
       .text(d => d);
 
     const tableData = JSON.parse(JSON.stringify(this.data.data));
@@ -199,6 +204,10 @@ function Template(svg) {
       .join('td')
       .attr('headers', (d, i) => {
         return `${uuid}_th_2_${Math.floor(i / 2) + 1} ${uuid}_th_1_${i}`;
+      })
+      .classed('border-cell', (d, i, j) => {
+        const groupSize = j.length / ageRanges.length;
+        return i % groupSize === 0;
       })
       .text(d => this.format(d, this.method));
   };
