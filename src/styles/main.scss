@@ -4,6 +4,7 @@
 @import 'animations';
 @import 'variables';
 @import 'typography';
+@import 'table';
 @import 'print';
 
 *,
@@ -91,60 +92,6 @@ button:disabled > * {
       top: 15px;
       width: 15px;
     }
-  }
-}
-
-table {
-  border-collapse: collapse;
-  overflow-x: scroll;
-  position: relative;
-  width: 100%;
-
-  td,
-  th {
-    font-weight: 400;
-    padding: 0.6em 1em;
-    position: relative;
-    text-align: right;
-    white-space: nowrap;
-  }
-
-  td {
-    text-align: right;
-  }
-
-  thead th:not([colspan='1']) {
-    text-align: center;
-  }
-
-  thead tr:first-child th:first-child {
-    background-color: lighten($color-yellow, 25%) !important;
-  }
-
-  thead tr:first-child th:first-child,
-  th[scope='row'] {
-    background: lighten($color-yellow, 10%);
-    font-weight: 500;
-    left: 0;
-    max-width: 25em;
-    position: sticky;
-    text-align: left;
-    z-index: 1;
-  }
-
-  thead {
-    background: lighten($color-yellow, 25%);
-  }
-
-  caption {
-    color: $color-purple;
-    font-size: $font-medium;
-    font-weight: 400;
-    left: 1rem;
-    margin: 1rem;
-    max-width: 80vw;
-    position: sticky;
-    text-align: left;
   }
 }
 

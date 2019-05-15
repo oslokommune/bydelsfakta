@@ -80,9 +80,9 @@ function Template(svg) {
     // Value cells
     rows
       .selectAll('td')
-      .data(d => [d.values[0], d.values[1], d.values[3][d.values[3].length - 1] - d.values[3][0]])
+      .data(d => [d.values[0], d.values[1], d.values[2]])
       .join('td')
-      .text(d => d);
+      .text(d => this.format(d, this.method));
   };
 
   this.initRowElements = function(rowsE) {
@@ -168,12 +168,14 @@ function Template(svg) {
     rows
       .select('text.population__value')
       .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
-      .text(d => d.values[0])
+      .text(d => this.format(d.values[0], 'value'))
       .attr('x', this.x(0) + this.x.bandwidth() / 2 - 8);
 
     rows
       .select('rect.population__bar')
       .attr('x', this.x(0) + this.x.bandwidth() / 2)
+      .transition()
+      .duration(this.duration)
       .attr('width', d => (d.avgRow || d.totalRow ? 0 : x(d.values[0])));
   };
 
@@ -190,11 +192,13 @@ function Template(svg) {
       .select('text.progress-year__value')
       .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
       .attr('x', this.x(1) + this.x.bandwidth() / 2 - 30)
-      .text(d => d3.format('+')(d.values[1]));
+      .text(d => this.format(d.values[1], 'change'));
     rows
       .select('rect.progress-year__bar')
       .attr('fill', d => (d.values[1] > 0 ? color.positive : color.red))
       .attr('x', this.x(1) + this.x.bandwidth() / 2)
+      .transition()
+      .duration(this.duration)
       .attr('width', d => (d.avgRow || d.totalRow ? 0 : x(Math.abs(d.values[1]))));
     rows
       .select('g.progress-year__arrow path')
@@ -203,7 +207,9 @@ function Template(svg) {
         'transform',
         `translate(${this.x(1) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr('d', d => (d.values[1] > 0 ? arrowPaths.up : arrowPaths.down));
+      .transition()
+      .duration(100)
+      .attr('d', d => (d.values[1] === 0 ? '' : d.values[1] > 0 ? arrowPaths.up : arrowPaths.down));
   };
 
   /**
@@ -234,21 +240,25 @@ function Template(svg) {
       .select('text.progress-period__value')
       .attr('x', this.x(2) + this.x.bandwidth() / 2 - 30)
       .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
-      .text(d => d3.format('+')(d.values[3][d.values[3].length - 1] - d.values[3][0]));
+      .text(d => this.format(d.values[2], 'change'));
 
     row
       .select('g.progress-period__arrow path')
-      .attr('fill', d => (d.values[3][d.values[3].length - 1] - d.values[3][0] > 0 ? color.positive : color.red))
+      .attr('fill', d => (d.values[2] > 0 ? color.positive : color.red))
       .attr(
         'transform',
         `translate(${this.x(2) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
-      .attr('d', d => (d.values[3][d.values[3].length - 1] - d.values[3][0] > 0 ? arrowPaths.up : arrowPaths.down));
+      .transition()
+      .duration(100)
+      .attr('d', d => (d.values[2] === 0 ? '' : d.values[2] > 0 ? arrowPaths.up : arrowPaths.down));
 
     row
       .select('path.progress-year__line')
-      .attr('d', d => line(d.values[3]))
-      .attr('transform', `translate(${this.x(2) + this.x.bandwidth() / 2}, 0)`);
+      .attr('transform', `translate(${this.x(2) + this.x.bandwidth() / 2}, 0)`)
+      .transition()
+      .duration(this.duration)
+      .attr('d', d => line(d.values[3]));
   };
 
   this.drawRows = function() {
