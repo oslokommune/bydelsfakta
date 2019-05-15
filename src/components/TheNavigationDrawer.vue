@@ -58,7 +58,7 @@
           :key="link.key"
           class="navigation-link"
           :class="{
-            'navigation-link--active': $route.params.district === link.uri && !compareDistricts,
+            'navigation-link--active': !compareDistricts && districts[0] === link.key,
             'navigation-link--compare': compareDistricts && selected.includes(link.key),
           }"
         >
@@ -151,7 +151,7 @@ export default {
     },
 
     onClickTab(compare) {
-      const name = !compare ? (this.$route.params.topic ? 'Topic' : 'District') : 'District';
+      const name = this.$route.params.topic ? 'Topic' : 'District';
 
       return { name, params: { district: compare ? 'alle' : allDistricts[0].uri } };
     },
@@ -166,8 +166,8 @@ export default {
         this.$store.dispatch('cleanState');
         this.selected = [];
       } else if (to.name === 'Home') {
-        this.addDistrict({ district: 'alle', pushRoute: false });
-        this.selected = [];
+        this.addDistrict({ district: 'gamleoslo', pushRoute: false });
+        this.selected = ['01'];
       }
 
       if (to.params.district === 'alle' && this.selected.length !== this.links.length) {

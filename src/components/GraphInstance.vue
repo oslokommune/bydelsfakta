@@ -168,15 +168,11 @@ export default {
           );
         }
 
-        if (b.totalRow && a.avgRow) {
-          return -1;
-        } else if (a.totalRow && b.avgRow) {
-          return 1;
-        } else if (a.totalRow || a.avgRow) {
-          return 1;
-        } else if (b.totalRow || b.avgRow) {
-          return -1;
-        } else {
+        if (b.totalRow && a.avgRow) return -1;
+        else if (a.totalRow && b.avgRow) return 1;
+        else if (a.totalRow || a.avgRow) return 1;
+        else if (b.totalRow || b.avgRow) return -1;
+        else {
           if (template === 'a') {
             if (a.values.length && b.values.length) {
               return b.values[0][this.settings.method] - a.values[0][this.settings.method];
