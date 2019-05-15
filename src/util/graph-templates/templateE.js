@@ -295,7 +295,7 @@ function Template(svg) {
       .attr('fill', color.purple)
       .transition()
       .duration(this.duration)
-      .attr('transform', `translate(${this.width / 2}, 23)`)
+      .attr('transform', `translate(${this.width / 2}, 5)`)
       .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
     // Style the path
@@ -309,10 +309,7 @@ function Template(svg) {
 
   this.drawAxis = function() {
     const max = d3.max(this.data.data[this.selected].values.map(d => d.value)) / 1.75;
-    this.y
-      .range([this.height, 0])
-      .domain([0, 120])
-      .nice();
+    this.y.range([this.height, 0]).domain([0, 105]);
 
     this.x
       .range([0, this.width])

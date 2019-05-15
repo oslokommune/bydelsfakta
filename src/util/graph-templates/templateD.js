@@ -24,9 +24,10 @@ function Template(svg) {
   this.dropDownParent;
 
   this.minWidth = 600;
+  this.ageCap = 119; // caps the graphs on this age (set to 119 to disable capping)
   let gBrushSmall, gBrushLarge;
 
-  this.age = d3.scaleLinear().domain([0, 119]);
+  this.age = d3.scaleLinear().domain([0, this.ageCap]);
 
   let extent = [];
 
@@ -70,7 +71,7 @@ function Template(svg) {
     brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 18]]);
 
     // Set size for age (scale for brushes)
-    this.age.range([0, this.width - this.paddingUpperLeft]).nice();
+    this.age.range([0, this.width - this.paddingUpperLeft]);
 
     // Resize SVG DOM element
     this.svg
@@ -108,6 +109,7 @@ function Template(svg) {
       .domain([0, maxAccumulated])
       .range([0, this.width - this.paddingLowerLeft])
       .nice();
+
     this.upperYAxis
       .transition()
       .duration(this.duration)
@@ -232,7 +234,7 @@ function Template(svg) {
   this.line = d3
     .line()
     .curve(d3.curveBasis)
-    .x((d, i) => this.age(i))
+    .x((d, i) => (i > this.ageCap ? this.age(this.ageCap) : this.age(i)))
     .y(d => this.y(d[this.method]));
 
   const brushLarge = d3.brushX().on('brush end', () => {
@@ -353,6 +355,8 @@ function Template(svg) {
 
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
     brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+
+    this.upper.append('g').attr('class', 'lines');
 
     gBrushLarge = this.upper
       .append('g')
@@ -568,6 +572,7 @@ function Template(svg) {
   this.drawLines = function() {
     // Select lines
     let lines = this.upper
+      .select('.lines')
       .selectAll('path.line')
       .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)));
     const linesE = lines
