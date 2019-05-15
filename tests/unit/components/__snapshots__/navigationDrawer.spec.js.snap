@@ -18,7 +18,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
   <button
     class="selectedTopic"
   >
-    Sammenlign bydeler (1)
+    Bydel Gamle Oslo
   </button>
    
   <div
@@ -38,7 +38,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         class="state-toggle__element"
       >
         <a
-          class="state-toggle__link router-link-exact-active router-link-active"
+          class="state-toggle__link router-link-exact-active router-link-active state-toggle__link--active"
           href="/bydel/gamleoslo"
         >
           Utforsk
@@ -51,7 +51,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         class="state-toggle__element"
       >
         <a
-          class="state-toggle__link state-toggle__link--active"
+          class="state-toggle__link"
           href="/bydel/alle"
         >
           Sammenlign bydeler
@@ -62,417 +62,240 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     <header
       class="navigation-header"
     >
-      <select
-        aria-label="Velg byområde"
-        class="navigation-header__select"
-        id="navigation-drawer-select"
-      >
-        <option
-          disabled="disabled"
-          value=""
-        >
-          - Velg byområde -
-        </option>
-        <option
-          value="04,05,06,07,08"
-        >
-          Vest
-        </option>
-        <option
-          value="01,02,03,09,10,11,12,13,14,15"
-        >
-          Øst
-        </option>
-        <option
-          value="01,02,03,04,05"
-        >
-          Indre by
-        </option>
-        <option
-          value="01,02,03"
-        >
-          Indre by øst
-        </option>
-        <option
-          value="04,05"
-        >
-          Indre by vest
-        </option>
-        <option
-          value="06,07,08,09,10,11,12,13,14,15"
-        >
-          Ytre by
-        </option>
-        <option
-          value="06,07,08"
-        >
-          Ytre by vest
-        </option>
-        <option
-          value="09,10,11,12"
-        >
-          Ytre by øst
-        </option>
-        <option
-          value="13,14,15"
-        >
-          Ytre by sør
-        </option>
-        <option
-          value="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15"
-        >
-          Velg alle
-        </option>
-      </select>
+      <span>
+        
+        Velg en bydel
+      
+      </span>
     </header>
      
     <ul
       class="navigation-list"
     >
       <li
-        class="navigation-link navigation-link--compare"
+        class="navigation-link navigation-link--active"
       >
-        <input
-          id="checkbox-gamleoslo"
-          tabindex="1"
-          type="checkbox"
-          value="01"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-gamleoslo"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Gamle Oslo
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label router-link-exact-active router-link-active"
+          href="/bydel/gamleoslo"
+          id="a-gamleoslo"
+        >
+          Bydel Gamle Oslo
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-grunerlokka"
-          tabindex="1"
-          type="checkbox"
-          value="02"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-grunerlokka"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Grünerløkka
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/grunerlokka"
+          id="a-grunerlokka"
+        >
+          Bydel Grünerløkka
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-sagene"
-          tabindex="1"
-          type="checkbox"
-          value="03"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-sagene"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Sagene
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/sagene"
+          id="a-sagene"
+        >
+          Bydel Sagene
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-sthanshaugen"
-          tabindex="1"
-          type="checkbox"
-          value="04"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-sthanshaugen"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel St. Hanshaugen
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/sthanshaugen"
+          id="a-sthanshaugen"
+        >
+          Bydel St. Hanshaugen
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-frogner"
-          tabindex="1"
-          type="checkbox"
-          value="05"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-frogner"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Frogner
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/frogner"
+          id="a-frogner"
+        >
+          Bydel Frogner
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-ullern"
-          tabindex="1"
-          type="checkbox"
-          value="06"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-ullern"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Ullern
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/ullern"
+          id="a-ullern"
+        >
+          Bydel Ullern
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-vestreaker"
-          tabindex="1"
-          type="checkbox"
-          value="07"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-vestreaker"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Vestre Aker
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/vestreaker"
+          id="a-vestreaker"
+        >
+          Bydel Vestre Aker
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-nordreaker"
-          tabindex="1"
-          type="checkbox"
-          value="08"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-nordreaker"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Nordre Aker
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/nordreaker"
+          id="a-nordreaker"
+        >
+          Bydel Nordre Aker
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-bjerke"
-          tabindex="1"
-          type="checkbox"
-          value="09"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-bjerke"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Bjerke
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/bjerke"
+          id="a-bjerke"
+        >
+          Bydel Bjerke
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-grorud"
-          tabindex="1"
-          type="checkbox"
-          value="10"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-grorud"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Grorud
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/grorud"
+          id="a-grorud"
+        >
+          Bydel Grorud
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-stovner"
-          tabindex="1"
-          type="checkbox"
-          value="11"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-stovner"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Stovner
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/stovner"
+          id="a-stovner"
+        >
+          Bydel Stovner
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-alna"
-          tabindex="1"
-          type="checkbox"
-          value="12"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-alna"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Alna
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/alna"
+          id="a-alna"
+        >
+          Bydel Alna
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-ostensjo"
-          tabindex="1"
-          type="checkbox"
-          value="13"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-ostensjo"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Østensjø
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/ostensjo"
+          id="a-ostensjo"
+        >
+          Bydel Østensjø
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-nordstrand"
-          tabindex="1"
-          type="checkbox"
-          value="14"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-nordstrand"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Nordstrand
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/nordstrand"
+          id="a-nordstrand"
+        >
+          Bydel Nordstrand
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-sondrenordstrand"
-          tabindex="1"
-          type="checkbox"
-          value="15"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-sondrenordstrand"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Søndre Nordstrand
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/sondrenordstrand"
+          id="a-sondrenordstrand"
+        >
+          Bydel Søndre Nordstrand
+        </a>
       </li>
     </ul>
   </nav>
@@ -497,7 +320,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   <button
     class="selectedTopic"
   >
-    Sammenlign bydeler (15)
+    - Velg byområde -
   </button>
    
   <div
@@ -517,7 +340,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         class="state-toggle__element"
       >
         <a
-          class="state-toggle__link"
+          class="state-toggle__link state-toggle__link--active"
           href="/bydel/gamleoslo"
         >
           Utforsk
@@ -530,7 +353,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         class="state-toggle__element"
       >
         <a
-          class="state-toggle__link state-toggle__link--active"
+          class="state-toggle__link"
           href="/bydel/alle"
         >
           Sammenlign bydeler
@@ -541,417 +364,240 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
     <header
       class="navigation-header"
     >
-      <select
-        aria-label="Velg byområde"
-        class="navigation-header__select"
-        id="navigation-drawer-select"
-      >
-        <option
-          disabled="disabled"
-          value=""
-        >
-          - Velg byområde -
-        </option>
-        <option
-          value="04,05,06,07,08"
-        >
-          Vest
-        </option>
-        <option
-          value="01,02,03,09,10,11,12,13,14,15"
-        >
-          Øst
-        </option>
-        <option
-          value="01,02,03,04,05"
-        >
-          Indre by
-        </option>
-        <option
-          value="01,02,03"
-        >
-          Indre by øst
-        </option>
-        <option
-          value="04,05"
-        >
-          Indre by vest
-        </option>
-        <option
-          value="06,07,08,09,10,11,12,13,14,15"
-        >
-          Ytre by
-        </option>
-        <option
-          value="06,07,08"
-        >
-          Ytre by vest
-        </option>
-        <option
-          value="09,10,11,12"
-        >
-          Ytre by øst
-        </option>
-        <option
-          value="13,14,15"
-        >
-          Ytre by sør
-        </option>
-        <option
-          value="01,02,03,04,05,06,07,08,09,10,11,12,13,14,15"
-        >
-          Velg alle
-        </option>
-      </select>
+      <span>
+        
+        Velg en bydel
+      
+      </span>
     </header>
      
     <ul
       class="navigation-list"
     >
       <li
-        class="navigation-link"
+        class="navigation-link navigation-link--active"
       >
-        <input
-          id="checkbox-gamleoslo"
-          tabindex="1"
-          type="checkbox"
-          value="01"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-gamleoslo"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Gamle Oslo
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/gamleoslo"
+          id="a-gamleoslo"
+        >
+          Bydel Gamle Oslo
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-grunerlokka"
-          tabindex="1"
-          type="checkbox"
-          value="02"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-grunerlokka"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Grünerløkka
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/grunerlokka"
+          id="a-grunerlokka"
+        >
+          Bydel Grünerløkka
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-sagene"
-          tabindex="1"
-          type="checkbox"
-          value="03"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-sagene"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Sagene
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label router-link-exact-active router-link-active"
+          href="/bydel/sagene"
+          id="a-sagene"
+        >
+          Bydel Sagene
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-sthanshaugen"
-          tabindex="1"
-          type="checkbox"
-          value="04"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-sthanshaugen"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel St. Hanshaugen
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/sthanshaugen"
+          id="a-sthanshaugen"
+        >
+          Bydel St. Hanshaugen
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-frogner"
-          tabindex="1"
-          type="checkbox"
-          value="05"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-frogner"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Frogner
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/frogner"
+          id="a-frogner"
+        >
+          Bydel Frogner
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-ullern"
-          tabindex="1"
-          type="checkbox"
-          value="06"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-ullern"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Ullern
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/ullern"
+          id="a-ullern"
+        >
+          Bydel Ullern
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-vestreaker"
-          tabindex="1"
-          type="checkbox"
-          value="07"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-vestreaker"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Vestre Aker
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/vestreaker"
+          id="a-vestreaker"
+        >
+          Bydel Vestre Aker
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-nordreaker"
-          tabindex="1"
-          type="checkbox"
-          value="08"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-nordreaker"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Nordre Aker
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/nordreaker"
+          id="a-nordreaker"
+        >
+          Bydel Nordre Aker
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-bjerke"
-          tabindex="1"
-          type="checkbox"
-          value="09"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-bjerke"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Bjerke
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/bjerke"
+          id="a-bjerke"
+        >
+          Bydel Bjerke
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-grorud"
-          tabindex="1"
-          type="checkbox"
-          value="10"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-grorud"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Grorud
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/grorud"
+          id="a-grorud"
+        >
+          Bydel Grorud
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-stovner"
-          tabindex="1"
-          type="checkbox"
-          value="11"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-stovner"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Stovner
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/stovner"
+          id="a-stovner"
+        >
+          Bydel Stovner
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-alna"
-          tabindex="1"
-          type="checkbox"
-          value="12"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-alna"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Alna
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/alna"
+          id="a-alna"
+        >
+          Bydel Alna
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-ostensjo"
-          tabindex="1"
-          type="checkbox"
-          value="13"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-ostensjo"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Østensjø
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/ostensjo"
+          id="a-ostensjo"
+        >
+          Bydel Østensjø
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-nordstrand"
-          tabindex="1"
-          type="checkbox"
-          value="14"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-nordstrand"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Nordstrand
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/nordstrand"
+          id="a-nordstrand"
+        >
+          Bydel Nordstrand
+        </a>
       </li>
       <li
         class="navigation-link"
       >
-        <input
-          id="checkbox-sondrenordstrand"
-          tabindex="1"
-          type="checkbox"
-          value="15"
-        />
-         
-        <label
-          class="compare"
-          for="checkbox-sondrenordstrand"
-        >
-          <span
-            class="navigation-link__label navigation-link__label--span"
-          >
-            Bydel Søndre Nordstrand
-          </span>
-        </label>
+        <!---->
          
         <!---->
+         
+        <a
+          class="navigation-link__label"
+          href="/bydel/sondrenordstrand"
+          id="a-sondrenordstrand"
+        >
+          Bydel Søndre Nordstrand
+        </a>
       </li>
     </ul>
   </nav>
