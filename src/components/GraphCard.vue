@@ -181,11 +181,11 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
 import canvg from 'canvg';
 import * as d3 from 'd3';
-import GraphInstance from './GraphInstance.vue';
+import GraphInstance from './GraphInstance';
 import downloadSvg from '../util/downloadSvg';
 import tableToCsv from '../util/tableToCsv';
-import VLeaflet from './VLeaflet.vue';
-import OkIcon from './OkIcon.vue';
+import VLeaflet from './VLeaflet';
+import OkIcon from './OkIcon';
 
 export default {
   name: 'GraphCard',

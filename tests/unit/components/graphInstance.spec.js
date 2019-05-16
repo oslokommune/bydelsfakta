@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import vueResize from 'vue-resize';
-import GraphInstance from '../../../src/components/GraphInstance.vue';
+import GraphInstance from '../../../src/components/GraphInstance';
 import { topics } from '../../../src/config/topics';
 import store from '../../../src/store';
 import setupI18n from '../../../src/i18n';

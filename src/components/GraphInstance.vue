@@ -70,7 +70,7 @@ import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
 import districtNames from '../config/districtNames';
-import OkIcon from './OkIcon.vue';
+import OkIcon from './OkIcon';
 
 export default {
   data: () => ({

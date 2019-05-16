@@ -29,7 +29,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import VCategory from '../components/VCategory.vue';
+import VCategory from '../components/VCategory';
 import { topics, topicNames, disabledTopics } from '../config/topics';
 import districts from '../config/geoData/districts';
 import { getDistrictName } from '../util';

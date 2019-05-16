@@ -5,7 +5,7 @@ import VueMeta from 'vue-meta';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
 import './util/polyfills';
-import App from './App.vue';
+import App from './App';
 import router from './router';
 import store from './store';
 import clickOutside from './directives/clickOutside';

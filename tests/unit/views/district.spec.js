@@ -2,7 +2,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 
-import Bydel from '../../../src/views/District.vue';
+import Bydel from '../../../src/views/District';
 import setupI18n from '../../../src/i18n';
 import store from '../../../src/store';
 
