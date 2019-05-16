@@ -65,7 +65,7 @@ export default {
       selectedTopic: null,
       dropdown: categories,
       allDistricts: allDistricts,
-      showDropdown: true,
+      showDropdown: false,
       topics: topics,
       disabledTopics: disabledTopics,
     };
