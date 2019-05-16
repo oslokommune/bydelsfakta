@@ -4,10 +4,10 @@
 
 <script>
 // Import all icons (note the '?inline' suffix)
-import hamburger from '@/assets/menu.svg?inline';
-import help from '@/assets/help.svg?inline';
-import photo from '@/assets/photo.svg?inline';
-import download from '@/assets/download.svg?inline';
+import hamburger from '../assets/menu.svg?inline';
+import help from '../assets/help.svg?inline';
+import photo from '../assets/photo.svg?inline';
+import download from '../assets/download.svg?inline';
 
 /* 
   available options:
