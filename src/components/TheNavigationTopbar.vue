@@ -98,7 +98,7 @@ export default {
       } else if (this.$route.name === 'NotFound') {
         return this.$t('navigationTopbar.header.notFound');
       } else if (this.$route.name === 'Home') {
-        return this.$t('navigationTopbar.header.compareDistrict');
+        return this.$t('navigationTopbar.header.home');
       } else {
         return id !== undefined
           ? this.allDistricts.find(district => district.uri === id).value

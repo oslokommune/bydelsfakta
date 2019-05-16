@@ -69,6 +69,7 @@
       "label": "Velg tema"
     },
     "header": {
+      "home": "Bydelsfakta",
       "compareDistrict": "Bydelsfakta",
       "chooseDistrict": "Velg bydel",
       "notFound": "Oops! Noe gikk galt."
