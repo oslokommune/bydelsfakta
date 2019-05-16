@@ -76,12 +76,7 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-button card__toggle-button--active"
             title="Graf"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons context-menu__dropdown-item-icon"
-            >
-              bar_chart
-            </i>
+            <!---->
           </button>
            
           <button
@@ -89,12 +84,7 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-button"
             title="Tabell"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons context-menu__dropdown-item-icon"
-            >
-              table_chart
-            </i>
+            <!---->
           </button>
            
           <button
@@ -102,12 +92,7 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-button"
             title="Kart"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons context-menu__dropdown-item-icon"
-            >
-              place
-            </i>
+            <!---->
           </button>
         </div>
          
@@ -121,12 +106,7 @@ exports[`GraphCard change an active tab 1`] = `
             id="context-menu-button"
             title="Åpne meny"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons"
-            >
-              menu
-            </i>
+            <!---->
              
             <span
               class="button-label"
@@ -278,12 +258,7 @@ exports[`GraphCard renders correctly 1`] = `
             class="card__toggle-button card__toggle-button--active"
             title="Graf"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons context-menu__dropdown-item-icon"
-            >
-              bar_chart
-            </i>
+            <!---->
           </button>
            
           <button
@@ -291,12 +266,7 @@ exports[`GraphCard renders correctly 1`] = `
             class="card__toggle-button"
             title="Tabell"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons context-menu__dropdown-item-icon"
-            >
-              table_chart
-            </i>
+            <!---->
           </button>
            
           <!---->
@@ -312,12 +282,7 @@ exports[`GraphCard renders correctly 1`] = `
             id="context-menu-button"
             title="Åpne meny"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons"
-            >
-              menu
-            </i>
+            <!---->
              
             <span
               class="button-label"
@@ -398,12 +363,7 @@ exports[`GraphCard renders correctly 1`] = `
           aria-label="Vis hjelpetekst"
           class="help__button"
         >
-          <i
-            aria-hidden="true"
-            class="material-icons"
-          >
-            help_outline
-          </i>
+          <!---->
         </button>
          
         <!---->

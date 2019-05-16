@@ -19,7 +19,7 @@
         }}</label>
         <div class="topic">
           <h1 class="header">{{ getHumanReadableTopic(selectedTopic) }}</h1>
-          <ok-icon icon-ref="arrow-down" :options="{rotation: showDropdown ? '180deg' : false}"></ok-icon>
+          <ok-icon icon-ref="arrow-down" :options="{ rotation: showDropdown ? '180deg' : false }"></ok-icon>
         </div>
       </button>
       <transition name="fade">
@@ -56,7 +56,7 @@
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import { categories, topics, disabledTopics } from '../config/topics';
-import OkIcon from './OkIcon'
+import OkIcon from './OkIcon';
 
 export default {
   name: 'TheNavigationTopbar',
