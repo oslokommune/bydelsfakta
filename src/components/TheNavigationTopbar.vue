@@ -1,6 +1,6 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
-    <h1 v-if="selectedTopic === null" class="header">{{ getDistrict(this.$route.params.district) }}</h1>
+    <h1 v-if="selectedTopic === null" class="header">{{ getDistrict($route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
       <button
         v-if="selectedTopic"
@@ -71,7 +71,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['compareDistricts', 'menuIsOpen']),
+    ...mapState(['compareDistricts', 'menuIsOpen', 'districts']),
   },
 
   methods: {
@@ -97,6 +97,8 @@ export default {
         return this.$t('navigationTopbar.header.compareDistrict');
       } else if (this.$route.name === 'NotFound') {
         return this.$t('navigationTopbar.header.notFound');
+      } else if (this.$route.name === 'Home') {
+        return this.$t('navigationTopbar.header.home');
       } else {
         return id !== undefined
           ? this.allDistricts.find(district => district.uri === id).value

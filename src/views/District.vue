@@ -44,7 +44,7 @@ export default {
     district: {
       type: String,
       required: false,
-      default: 'alle',
+      default: 'gamleoslo',
     },
   },
 
