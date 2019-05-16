@@ -11,7 +11,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     <img
       alt="oslo-logo"
       class="oslo__logo"
-      src=""
+      src="[object Object]"
     />
   </a>
    
@@ -313,7 +313,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
     <img
       alt="oslo-logo"
       class="oslo__logo"
-      src=""
+      src="[object Object]"
     />
   </a>
    

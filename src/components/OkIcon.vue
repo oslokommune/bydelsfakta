@@ -24,7 +24,7 @@ export default {
     help,
     photo,
     download,
-    arrowDown
+    arrowDown,
   },
 
   computed: {
@@ -36,19 +36,16 @@ export default {
     },
 
     transform() {
-
       let str = '';
 
-      if(!this.options.rotation) {
-        str += `rotate(0)`
+      if (!this.options.rotation) {
+        str += `rotate(0)`;
       } else {
-        str += ` rotate(${this.options.rotation})`
+        str += ` rotate(${this.options.rotation})`;
       }
-      
-      return str
-    }
 
-    
+      return str;
+    },
   },
 
   props: {
@@ -68,9 +65,8 @@ export default {
 <style lang="scss" scoped>
 .icon {
   height: 2rem;
-  width: 2rem;
-  
   transition: transform 0.2s ease-in-out;
+  width: 2rem;
 
   &.small {
     height: 1.5rem;

@@ -15,7 +15,153 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
   >
     <!---->
      
-    <!---->
+    <div
+      class="navigation-topbar__dropdown"
+      id="dropdown"
+      name="fade"
+    >
+      <div
+        class="navigation-topbar__dropdown-column"
+      >
+        <div
+          class="navigation-topbar__dropdown-column--heading"
+          style="color: rgb(182, 63, 50); border-top-color: rgb(182, 63, 50);"
+        >
+          <span>
+            Befolkning
+          </span>
+        </div>
+         
+        <div
+          class="navigation-topbar__dropdown-items"
+        >
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-folkemengde"
+            tag="a"
+            to="[object Object]"
+          >
+            Folkemengde
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item navigation-topbar__dropdown-item--disabled"
+            event="click"
+            id="dropdown-href-befolkningsendringer"
+            tag="a"
+            to=""
+          >
+            Befolkningsendringer
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-alder"
+            tag="a"
+            to="[object Object]"
+          >
+            Alder
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-innvandrerbefolkningen"
+            tag="a"
+            to="[object Object]"
+          >
+            Personer med innvandrerbakgrunn
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-husholdninger"
+            tag="a"
+            to="[object Object]"
+          >
+            Husholdninger
+          </router-link-stub>
+        </div>
+      </div>
+      <div
+        class="navigation-topbar__dropdown-column"
+      >
+        <div
+          class="navigation-topbar__dropdown-column--heading"
+          style="color: rgb(27, 173, 120); border-top-color: rgb(27, 173, 120);"
+        >
+          <span>
+            Bomiljø
+          </span>
+        </div>
+         
+        <div
+          class="navigation-topbar__dropdown-items"
+        >
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-trangboddhet"
+            tag="a"
+            to="[object Object]"
+          >
+            Trangboddhet
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item navigation-topbar__dropdown-item--disabled"
+            event="click"
+            id="dropdown-href-eierform"
+            tag="a"
+            to=""
+          >
+            Eierform
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item navigation-topbar__dropdown-item--disabled"
+            event="click"
+            id="dropdown-href-bygningstyper"
+            tag="a"
+            to=""
+          >
+            Bygningstyper
+          </router-link-stub>
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-boligpriser"
+            tag="a"
+            to="[object Object]"
+          >
+            Boligpriser
+          </router-link-stub>
+        </div>
+      </div>
+      <div
+        class="navigation-topbar__dropdown-column"
+      >
+        <div
+          class="navigation-topbar__dropdown-column--heading"
+          style="color: rgb(219, 160, 52); border-top-color: rgb(219, 160, 52);"
+        >
+          <span>
+            Levekår
+          </span>
+        </div>
+         
+        <div
+          class="navigation-topbar__dropdown-items"
+        >
+          <router-link-stub
+            class="navigation-topbar__dropdown-item"
+            event="click"
+            id="dropdown-href-levekaar"
+            tag="a"
+            to="[object Object]"
+          >
+            Levekårsindikatorer
+          </router-link-stub>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 `;

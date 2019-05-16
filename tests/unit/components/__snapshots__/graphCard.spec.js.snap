@@ -121,12 +121,7 @@ exports[`GraphCard change an active tab 1`] = `
             id="context-menu-button"
             title="Åpne meny"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons"
-            >
-              menu
-            </i>
+            <!---->
              
             <span
               class="button-label"
@@ -312,12 +307,7 @@ exports[`GraphCard renders correctly 1`] = `
             id="context-menu-button"
             title="Åpne meny"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons"
-            >
-              menu
-            </i>
+            <!---->
              
             <span
               class="button-label"
@@ -398,12 +388,7 @@ exports[`GraphCard renders correctly 1`] = `
           aria-label="Vis hjelpetekst"
           class="help__button"
         >
-          <i
-            aria-hidden="true"
-            class="material-icons"
-          >
-            help_outline
-          </i>
+          <!---->
         </button>
          
         <!---->
