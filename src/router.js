@@ -4,9 +4,9 @@ import Router from 'vue-router';
 import { topicNames, disabledTopics } from './config/topics';
 import allDistricts from './config/allDistricts';
 
-const District = () => import('./views/District.vue');
-const Topic = () => import('./views/Topic.vue');
-const NotFound = () => import('./views/NotFound.vue');
+const District = () => import('./views/District');
+const Topic = () => import('./views/Topic');
+const NotFound = () => import('./views/NotFound');
 
 Vue.use(Router);
 

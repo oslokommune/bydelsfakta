@@ -1,5 +1,5 @@
 <template>
-  <component :is="iconRef" class="icon" :class="{ small }" :style="{ marginRight }"></component>
+  <component :is="iconRef" class="icon" :class="{ small }" :style="{ marginRight, transform }"></component>
 </template>
 
 <script>
@@ -8,11 +8,13 @@ import hamburger from '../assets/icons/menu.svg?inline';
 import help from '../assets/icons/help.svg?inline';
 import photo from '../assets/icons/photo.svg?inline';
 import download from '../assets/icons/download.svg?inline';
+import arrowDown from '../assets/icons/arrow-down.svg?inline';
 
 /* 
-  available options:
-    - 'size' : 'small'
-    - 'margin: <Number> 
+  available options (optional):
+    - 'size' : <String> 'small'
+    - 'margin: <Number> px|em|rem
+    - 'rotation' <Number> deg
 */
 
 export default {
@@ -22,6 +24,7 @@ export default {
     help,
     photo,
     download,
+    arrowDown
   },
 
   computed: {
@@ -31,6 +34,21 @@ export default {
     marginRight() {
       return this.options.margin || '0.15rem';
     },
+
+    transform() {
+
+      let str = '';
+
+      if(!this.options.rotation) {
+        str += `rotate(0)`
+      } else {
+        str += ` rotate(${this.options.rotation})`
+      }
+      
+      return str
+    }
+
+    
   },
 
   props: {
@@ -51,6 +69,8 @@ export default {
 .icon {
   height: 2rem;
   width: 2rem;
+  
+  transition: transform 0.2s ease-in-out;
 
   &.small {
     height: 1.5rem;

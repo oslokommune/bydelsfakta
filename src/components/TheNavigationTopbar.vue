@@ -19,7 +19,7 @@
         }}</label>
         <div class="topic">
           <h1 class="header">{{ getHumanReadableTopic(selectedTopic) }}</h1>
-          <i class="icon icon__arrow" :class="{ rotate: showDropdown }"></i>
+          <ok-icon icon-ref="arrow-down" :options="{rotation: showDropdown ? '180deg' : false}"></ok-icon>
         </div>
       </button>
       <transition name="fade">
@@ -56,6 +56,7 @@
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import { categories, topics, disabledTopics } from '../config/topics';
+import OkIcon from './OkIcon'
 
 export default {
   name: 'TheNavigationTopbar',
@@ -64,11 +65,13 @@ export default {
       selectedTopic: null,
       dropdown: categories,
       allDistricts: allDistricts,
-      showDropdown: false,
+      showDropdown: true,
       topics: topics,
       disabledTopics: disabledTopics,
     };
   },
+
+  components: { OkIcon },
 
   computed: {
     ...mapState(['compareDistricts', 'menuIsOpen', 'districts']),
