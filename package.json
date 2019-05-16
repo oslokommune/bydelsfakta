@@ -59,6 +59,7 @@
     "stylelint-order": "^3.0.0",
     "stylelint-scss": "^3.6.0",
     "vue-cli-plugin-i18n": "^0.6.0",
+    "vue-cli-plugin-svg": "^0.1.2",
     "vue-template-compiler": "^2.6.10"
   },
   "optionalDependencies": {
