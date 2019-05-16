@@ -47,7 +47,12 @@
               :aria-label="$t('graphCard.mode.graph')"
               :title="$t('graphCard.mode.graph')"
             >
-              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="graph" stroke-width="2.5" :options="{ size: 'tiny' }"></ok-icon>
+              <ok-icon
+                class="context-menu__dropdown-item-icon"
+                icon-ref="graph"
+                stroke-width="2.5"
+                :options="{ size: 'tiny' }"
+              ></ok-icon>
             </button>
             <button
               class="card__toggle-button"
@@ -56,8 +61,12 @@
               :aria-label="$t('graphCard.mode.table')"
               :title="$t('graphCard.mode.table')"
             >
-              <!-- <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i> -->
-              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="data-table" stroke-width="2.5" :options="{ size: 'tiny' }"></ok-icon>
+              <ok-icon
+                class="context-menu__dropdown-item-icon"
+                icon-ref="data-table"
+                stroke-width="2.5"
+                :options="{ size: 'tiny' }"
+              ></ok-icon>
             </button>
 
             <button
@@ -68,7 +77,12 @@
               :aria-label="$t('graphCard.mode.map')"
               :title="$t('graphCard.mode.map')"
             >
-              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="map-pin" stroke-width="2.5" :options="{ size: 'tiny' }"></ok-icon>
+              <ok-icon
+                class="context-menu__dropdown-item-icon"
+                icon-ref="map-pin"
+                stroke-width="2.5"
+                :options="{ size: 'tiny' }"
+              ></ok-icon>
             </button>
           </div>
           <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
