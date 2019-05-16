@@ -1,5 +1,5 @@
 <template>
-  <component :is="iconRef" class="icon" :class="{ small }" :style="{ marginRight, transform }"></component>
+  <component :is="iconRef" class="icon" :class="{ small, tiny }" :style="{ marginRight, transform }"></component>
 </template>
 
 <script>
@@ -9,6 +9,9 @@ import help from '../assets/icons/help.svg?inline';
 import photo from '../assets/icons/photo.svg?inline';
 import download from '../assets/icons/download.svg?inline';
 import arrowDown from '../assets/icons/arrow-down.svg?inline';
+import mapPin from '../assets/icons/map-pin.svg?inline';
+import graph from '../assets/icons/graph.svg?inline';
+import dataTable from '../assets/icons/data-table.svg?inline';
 
 /* 
   available options (optional):
@@ -24,15 +27,21 @@ export default {
     help,
     photo,
     download,
-    arrowDown
+    arrowDown,
+    mapPin,
+    graph,
+    dataTable,
   },
 
   computed: {
     small() {
       return this.options.size && this.options.size === 'small';
     },
+    tiny() {
+      return this.options.size && this.options.size === 'tiny';
+    },
     marginRight() {
-      return this.options.margin || '0.15rem';
+      return this.options.margin || '0';
     },
 
     transform() {
@@ -76,5 +85,11 @@ export default {
     height: 1.5rem;
     width: 1.5rem;
   }
+
+  &.tiny {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
 }
 </style>

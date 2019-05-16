@@ -47,7 +47,7 @@
               :aria-label="$t('graphCard.mode.graph')"
               :title="$t('graphCard.mode.graph')"
             >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
+              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="graph" stroke-width="2.5" :options="{ size: 'tiny' }"></ok-icon>
             </button>
             <button
               class="card__toggle-button"
@@ -56,7 +56,8 @@
               :aria-label="$t('graphCard.mode.table')"
               :title="$t('graphCard.mode.table')"
             >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
+              <!-- <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i> -->
+              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="data-table" stroke-width="2.5" :options="{ size: 'tiny' }"></ok-icon>
             </button>
 
             <button
@@ -67,7 +68,7 @@
               :aria-label="$t('graphCard.mode.map')"
               :title="$t('graphCard.mode.map')"
             >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">place</i>
+              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="map-pin" stroke-width="2.5" :options="{ size: 'tiny' }"></ok-icon>
             </button>
           </div>
           <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
@@ -553,7 +554,8 @@ export default {
       }
 
       &-icon {
-        font-size: $font-medium;
+        color: $color-purple;
+        z-index: 1;
       }
 
       span {
