@@ -42,8 +42,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import VCategory from '../components/VCategory.vue';
-import GraphCard from '../components/GraphCard.vue';
+import VCategory from '../components/VCategory';
+import GraphCard from '../components/GraphCard';
 
 import { topics, disabledTopics } from '../config/topics';
 import { getDistrictName, getHumanReadableTopic } from '../util';

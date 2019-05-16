@@ -434,24 +434,6 @@ input[type='checkbox'] {
       opacity: 0.35;
     }
   }
-
-  &:checked:not(&-compare) + label {
-    opacity: 1;
-    position: relative;
-
-    // checked inside border
-    &::after {
-      transform: scale(1);
-      transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
-    }
-
-    // checked border
-    &::before {
-      border: 1px solid $color-purple;
-      opacity: 1;
-      transition: transform 0.3s ease-in-out;
-    }
-  }
 }
 
 .navigation-link {

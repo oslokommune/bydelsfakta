@@ -48,7 +48,7 @@
         @click="showHelp = !showHelp"
         :aria-label="showHelp ? $t('graphCard.help.ariaHide') : $t('graphCard.help.ariaShow')"
       >
-        <i aria-hidden="true" class="material-icons">help_outline</i>
+        <ok-icon icon-ref="help" :options="{ size: 'small', margin: '0' }"></ok-icon>
       </button>
       <div v-if="showHelp" class="help__text">{{ settings.help }}</div>
     </div>
@@ -70,6 +70,7 @@ import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
 import districtNames from '../config/districtNames';
+import OkIcon from './OkIcon';
 
 export default {
   data: () => ({
@@ -86,6 +87,8 @@ export default {
     errorMessage: '',
     showHelp: false,
   }),
+
+  components: { OkIcon },
 
   computed: {
     shadowClass() {

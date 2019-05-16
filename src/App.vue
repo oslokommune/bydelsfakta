@@ -13,9 +13,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
-import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
-import TheFooter from './components/TheFooter.vue';
+import TheNavigationDrawer from './components/TheNavigationDrawer';
+import TheNavigationTopbar from './components/TheNavigationTopbar';
+import TheFooter from './components/TheFooter';
 
 export default {
   name: 'App',

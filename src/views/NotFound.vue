@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import VCategory from '../components/VCategory.vue';
+import VCategory from '../components/VCategory';
 import { topics } from '../config/topics';
 
 export default {

@@ -47,7 +47,12 @@
               :aria-label="$t('graphCard.mode.graph')"
               :title="$t('graphCard.mode.graph')"
             >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">bar_chart</i>
+              <ok-icon
+                class="context-menu__dropdown-item-icon"
+                icon-ref="graph"
+                stroke-width="2.5"
+                :options="{ size: 'tiny' }"
+              ></ok-icon>
             </button>
             <button
               class="card__toggle-button"
@@ -56,7 +61,12 @@
               :aria-label="$t('graphCard.mode.table')"
               :title="$t('graphCard.mode.table')"
             >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">table_chart</i>
+              <ok-icon
+                class="context-menu__dropdown-item-icon"
+                icon-ref="data-table"
+                stroke-width="2.5"
+                :options="{ size: 'tiny' }"
+              ></ok-icon>
             </button>
 
             <button
@@ -67,7 +77,12 @@
               :aria-label="$t('graphCard.mode.map')"
               :title="$t('graphCard.mode.map')"
             >
-              <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">place</i>
+              <ok-icon
+                class="context-menu__dropdown-item-icon"
+                icon-ref="map-pin"
+                stroke-width="2.5"
+                :options="{ size: 'tiny' }"
+              ></ok-icon>
             </button>
           </div>
           <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
@@ -80,7 +95,7 @@
               id="context-menu-button"
               :title="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
             >
-              <i aria-hidden="true" class="material-icons">{{ showDropdown ? 'close' : 'menu' }}</i>
+              <ok-icon icon-ref="hamburger"></ok-icon>
               <span class="button-label">Valg</span>
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown" role="menu">
@@ -100,7 +115,7 @@
                 :aria-label="$t('graphCard.about.aria')"
                 id="context-menu-button-png"
               >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">help</i>
+                <ok-icon icon-ref="help" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.about.label') }}</span>
               </button>
 
@@ -115,9 +130,7 @@
                 :aria-label="$t('graphCard.savePNG.aria')"
                 id="context-menu-button-png"
               >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon"
-                  >photo_size_select_actual</i
-                >
+                <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
               </button>
               <button
@@ -131,9 +144,7 @@
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
                 id="context-menu-button-svg"
               >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon"
-                  >photo_size_select_actual</i
-                >
+                <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
               </button>
 
@@ -148,7 +159,7 @@
                 @keyup.enter="saveCsv()"
                 id="context-menu-button-csv"
               >
-                <i aria-hidden="true" class="material-icons context-menu__dropdown-item-icon">cloud_download</i>
+                <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveCSV.label') }}</span>
               </button>
             </div>
@@ -185,14 +196,15 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
 import canvg from 'canvg';
 import * as d3 from 'd3';
-import GraphInstance from './GraphInstance.vue';
+import GraphInstance from './GraphInstance';
 import downloadSvg from '../util/downloadSvg';
 import tableToCsv from '../util/tableToCsv';
-import VLeaflet from './VLeaflet.vue';
+import VLeaflet from './VLeaflet';
+import OkIcon from './OkIcon';
 
 export default {
   name: 'GraphCard',
-  components: { GraphInstance, VLeaflet },
+  components: { GraphInstance, VLeaflet, OkIcon },
   data() {
     return {
       active: 0,
@@ -385,7 +397,21 @@ export default {
       position: absolute;
       right: 0;
       top: 0;
-      transform: scale(0);
+      transform: scale(1);
+      transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
+      z-index: 0;
+    }
+
+    &::after {
+      background: white;
+      border-radius: 50%;
+      bottom: 0;
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: scale(1);
       transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
       z-index: 0;
     }
@@ -395,12 +421,19 @@ export default {
       z-index: 1;
     }
 
-    &:hover:not(&--active) {
-      background-color: rgba($color-border, 0.35);
+    &:hover:not(&--active)::after {
+      // background-color: rgba($color-border, 0.35);
+      transform: scale(0.8);
+      transition: all 0.1s cubic-bezier(0.3, 0, 0.5, 1);
     }
 
     &--active::before {
       transform: scale(1);
+      transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
+    }
+
+    &--active::after {
+      transform: scale(0);
       transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
     }
   }
@@ -482,7 +515,6 @@ export default {
     cursor: pointer;
     display: flex;
     height: 3rem;
-    margin-top: 4px;
     padding-left: 0.65rem;
     padding-right: 0.65rem;
 
@@ -503,7 +535,7 @@ export default {
 
     .button-label {
       display: inline-block;
-      font-weight: 700;
+      font-weight: 500;
       margin-left: 0.25rem;
       text-transform: uppercase;
     }
@@ -524,15 +556,11 @@ export default {
       display: flex;
       flex-direction: row;
       font-weight: 500;
-      padding: 1.5rem 0.75rem;
+      padding: 1.25rem 0.75rem;
       width: 100%;
 
       &:disabled {
         text-decoration: line-through;
-      }
-
-      & + & {
-        border-top: 1px solid rgba(white, 0.1);
       }
 
       &:hover:not(:disabled) {
@@ -540,7 +568,8 @@ export default {
       }
 
       &-icon {
-        font-size: $font-medium;
+        color: $color-purple;
+        z-index: 1;
       }
 
       span {

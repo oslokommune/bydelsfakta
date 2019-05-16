@@ -1,6 +1,6 @@
 import { mount, RouterLinkStub, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import VCategory from '../../../src/components/VCategory.vue';
+import VCategory from '../../../src/components/VCategory';
 import store from '../../../src/store';
 import setupI18n from '../../../src/i18n';
 
