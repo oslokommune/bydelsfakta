@@ -70,5 +70,5 @@ export default table => {
     type: 'text/csv;charset=UTF-8',
   });
 
-  downloadFile(CSVBlob, caption);
+  downloadFile(CSVBlob, caption, '.csv');
 };
