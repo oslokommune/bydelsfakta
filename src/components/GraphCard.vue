@@ -253,7 +253,7 @@ export default {
     },
 
     saveSvg(id) {
-      const filename = `${this.$route.params.district}_${id}.svg`;
+      const filename = `${this.$route.params.district}_${id}`;
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
       this.closeMenu();

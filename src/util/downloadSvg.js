@@ -8,7 +8,7 @@ export default function(svgData, filename) {
   const preface = '<?xml version="1.0" standalone="no"?>\r\n';
   const svgBlob = new Blob([preface, svgData], { type: 'image/svg+xml;charset=utf-8' });
 
-  downloadFile(svgBlob, filename);
+  downloadFile(svgBlob, filename, '.svg');
 }
 
 // Parses the svgData str and strips away
