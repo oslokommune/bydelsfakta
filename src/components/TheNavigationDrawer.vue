@@ -39,6 +39,7 @@
             v-model="selectedAll"
             :indeterminate.prop="indeterminate"
             @change="toggleCheckbox"
+            class="navigation-header__input"
           />
           <select
             id="navigation-drawer-select"
@@ -369,6 +370,11 @@ $rowHeight: 2.5em;
     & > span {
       padding: 1rem 0;
     }
+
+    &__input {
+      margin-left: -24px;
+      margin-right: 10px;
+    }
   }
 }
 
@@ -483,7 +489,6 @@ input[type='checkbox'].custom {
   margin-bottom: 1px;
   position: relative;
   transition: all 0.3s ease-in-out;
-  width: 100%;
 
   &--compare {
     background-color: lighten($color-yellow, 15%);
