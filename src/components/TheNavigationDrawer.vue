@@ -39,8 +39,16 @@
             v-model="selectedAll"
             :indeterminate.prop="indeterminate"
             @change="toggleCheckbox"
-            class="navigation-header__input"
+            class="navigation-header__input custom"
           />
+          <label
+            for="allDistricts"
+            class="navigation-header__input--label"
+            :class="{
+              'navigation-header__input--checked': selectedAll,
+              'navigation-header__input--indeterminate': indeterminate,
+            }"
+          ></label>
           <select
             id="navigation-drawer-select"
             class="navigation-header__select"
@@ -372,8 +380,30 @@ $rowHeight: 2.5em;
     }
 
     &__input {
-      margin-left: -24px;
-      margin-right: 10px;
+      &--label {
+        margin-left: -3.3rem;
+        padding-right: 2.2rem;
+
+        &::before {
+          opacity: 0.35 !important;
+        }
+      }
+
+      &--checked {
+        &::before {
+          opacity: 1 !important;
+        }
+
+        &::after {
+          transform: scale(1) !important;
+        }
+      }
+
+      &--indeterminate {
+        &::after {
+          transform: scale(1, 0.25) !important;
+        }
+      }
     }
   }
 }
@@ -435,7 +465,6 @@ input[type='checkbox'].custom {
     padding-left: 1rem;
     position: relative;
     vertical-align: middle;
-    width: 100%;
 
     // unchecked border
     &::before {
