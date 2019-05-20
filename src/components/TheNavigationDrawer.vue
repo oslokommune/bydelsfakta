@@ -32,22 +32,30 @@
       </ul>
 
       <header class="navigation-header">
-        <select
-          id="navigation-drawer-select"
-          class="navigation-header__select"
-          v-model="selectedPredefinedOption"
-          v-if="compareDistricts"
-          :aria-label="$t('navigationDrawer.select.label')"
-        >
-          <option
-            v-for="(element, index) in options"
-            :key="index"
-            :value="element.option"
-            :selected="element.selected"
-            :disabled="element.disabled"
-            >{{ element.label }}</option
+        <template v-if="compareDistricts">
+          <input
+            type="checkbox"
+            id="allDistricts"
+            v-model="selectedAll"
+            :indeterminate.prop="indeterminate"
+            @change="toggleCheckbox"
+          />
+          <select
+            id="navigation-drawer-select"
+            class="navigation-header__select"
+            v-model="selectedPredefinedOption"
+            :aria-label="$t('navigationDrawer.select.label')"
           >
-        </select>
+            <option
+              v-for="(element, index) in options"
+              :key="index"
+              :value="element.option"
+              :selected="element.selected"
+              :disabled="element.disabled"
+              >{{ element.label }}</option
+            >
+          </select>
+        </template>
         <span v-else>
           {{ $t('navigationDrawer.selectOne.label') }}
         </span>
@@ -70,6 +78,7 @@
             @change="onChangeCheckbox"
             v-if="compareDistricts"
             tabindex="1"
+            class="custom"
           />
           <label v-if="compareDistricts" :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }">
             <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
@@ -101,6 +110,8 @@ export default {
       osloIcon: osloIcon,
       showNavigation: false,
       selected: [],
+      selectedAll: false,
+      indeterminate: false,
       options: predefinedOptions,
       selectedPredefinedOption: [],
     };
@@ -126,6 +137,18 @@ export default {
 
   methods: {
     ...mapActions(['setNavigationIsOpen', 'addDistrict']),
+
+    toggleCheckbox(event) {
+      this.selected = [];
+      this.selected = event.target.checked ? allDistricts.map(district => district.key) : [];
+      this.selectedPredefinedOption = [];
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
+        : this.$router.push({
+            name: 'Topic',
+            params: { district: 'alle', topic: this.$route.params.topic },
+          });
+    },
 
     onChangeCheckbox() {
       // Reset selector
@@ -195,6 +218,19 @@ export default {
               name: 'Topic',
               params: { district: this.selected.join('-'), topic: this.$route.params.topic },
             });
+      }
+    },
+
+    selected(newVal) {
+      if (newVal.length === 0) {
+        this.indeterminate = false;
+        this.selectedAll = false;
+      } else if (newVal.length === this.links.length) {
+        this.indeterminate = false;
+        this.selectedAll = true;
+      } else {
+        this.indeterminate = true;
+        this.selectedAll = false;
       }
     },
 
@@ -381,7 +417,7 @@ $rowHeight: 2.5em;
   }
 }
 
-input[type='checkbox'] {
+input[type='checkbox'].custom {
   display: none;
 
   & + label {
