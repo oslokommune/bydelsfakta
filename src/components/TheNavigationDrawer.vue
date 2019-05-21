@@ -37,13 +37,17 @@
             type="checkbox"
             id="allDistricts"
             v-model="selectedAll"
-            :indeterminate.prop="indeterminate"
+            :indeterminate.sync="indeterminate"
             @change="toggleCheckbox"
             class="navigation-header__input custom"
+            :value="selectedAll"
+            tabindex="0"
           />
           <label
             for="allDistricts"
+            tabindex="0"
             class="navigation-header__input--label"
+            @keypress="toggleCheckbox"
             :class="{
               'navigation-header__input--checked': selectedAll,
               'navigation-header__input--indeterminate': indeterminate,
@@ -85,11 +89,19 @@
             :value="link.key"
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
+            @keydown.space="onChangeCheckbox"
             v-if="compareDistricts"
-            tabindex="1"
+            tabindex="0"
             class="custom"
           />
-          <label v-if="compareDistricts" :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }">
+          <label
+            tabindex="0"
+            v-if="compareDistricts"
+            @keypress="onChangeCheckbox"
+            @keydown.space="onChangeCheckbox"
+            :for="`checkbox-${link.uri}`"
+            :class="{ compare: compareDistricts }"
+          >
             <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
           </label>
           <router-link
@@ -148,6 +160,7 @@ export default {
     ...mapActions(['setNavigationIsOpen', 'addDistrict']),
 
     toggleCheckbox(event) {
+      console.log(event);
       this.selected = [];
       this.selected = event.target.checked ? allDistricts.map(district => district.key) : [];
       this.selectedPredefinedOption = [];
@@ -383,6 +396,7 @@ $rowHeight: 2.5em;
       &--label {
         margin-left: -3.3rem;
         padding-right: 2.2rem;
+        width: 0 !important;
 
         &::before {
           opacity: 0.35 !important;
@@ -465,6 +479,7 @@ input[type='checkbox'].custom {
     padding-left: 1rem;
     position: relative;
     vertical-align: middle;
+    width: 100%;
 
     // unchecked border
     &::before {
