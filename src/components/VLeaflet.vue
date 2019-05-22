@@ -112,7 +112,7 @@ export default {
       // Map layers in the map with the data returned
       for (let key in layers) {
         const layer = layers[key];
-        let layerId = layer.feature.properties.id;
+        const layerId = layer.feature.properties.id;
         const dataObj = data.find(
           geo => geo.id === layerId.substring(6, 10) || geo.id === layerId || geo.geography === layerId
         );
