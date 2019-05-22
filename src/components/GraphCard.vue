@@ -113,7 +113,7 @@
                 tabindex="0"
                 :title="$t('graphCard.about.aria')"
                 :aria-label="$t('graphCard.about.aria')"
-                id="context-menu-button-png"
+                id="context-menu-button-about"
               >
                 <ok-icon icon-ref="help" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.about.label') }}</span>
@@ -128,7 +128,7 @@
                 tabindex="0"
                 :title="$t('graphCard.savePNG.aria')"
                 :aria-label="$t('graphCard.savePNG.aria')"
-                id="context-menu-button-png"
+                id="context-menu-button-svg"
               >
                 <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
@@ -142,7 +142,7 @@
                 tabindex="0"
                 @click="saveSvg(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
-                id="context-menu-button-svg"
+                id="context-menu-button-png"
               >
                 <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
