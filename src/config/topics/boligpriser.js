@@ -14,7 +14,7 @@ export default {
         labels: ['Lavere boligpriser', 'Høyere boligpriser'],
         scale: [40000, 95000],
         method: 'value',
-        url: `${API}/boligpriser_status-pD7ZV`,
+        url: `${API}/boligpriser-blokkleiligheter-status`,
       },
       production: true,
       tabs: [
@@ -25,7 +25,7 @@ export default {
           heading: 'Gj.snitt kvadratmeterpris på blokkleiligheter',
           method: 'value',
           template: 'a',
-          url: `${API}/boligpriser_status-pD7ZV`,
+          url: `${API}/boligpriser-blokkleiligheter-status`,
           production: true,
         },
         {
@@ -35,7 +35,7 @@ export default {
           heading: 'Gj.snitt kvadratmeterpris på blokkleiligheter',
           method: 'value',
           template: 'c',
-          url: `${API}/boligpriser_historic-4owcY`,
+          url: `${API}/boligpriser-blokkleiligheter-historisk`,
           production: true,
         },
       ],
