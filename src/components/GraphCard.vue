@@ -113,7 +113,7 @@
                 tabindex="0"
                 :title="$t('graphCard.about.aria')"
                 :aria-label="$t('graphCard.about.aria')"
-                id="context-menu-button-png"
+                id="context-menu-button-about"
               >
                 <ok-icon icon-ref="help" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.about.label') }}</span>
