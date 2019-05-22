@@ -38,7 +38,7 @@
             id="allDistricts"
             v-model="selectedAll"
             :indeterminate.sync="indeterminate"
-            @change="toggleCheckbox"
+            @change="toggleCheckbox(selectedAll)"
             class="navigation-header__input custom"
             :value="selectedAll"
             tabindex="0"
@@ -46,11 +46,11 @@
           <label
             for="allDistricts"
             tabindex="0"
-            class="navigation-header__input--label"
-            @keypress="toggleCheckbox"
+            class="custom-label custom-label__selectedAll"
+            @keypress="toggleCheckbox(!selectedAll)"
             :class="{
-              'navigation-header__input--checked': selectedAll,
-              'navigation-header__input--indeterminate': indeterminate,
+              'custom-label__selectedAll--checked': selectedAll,
+              'custom-label__selectedAll--indeterminate': indeterminate,
             }"
           ></label>
           <select
@@ -89,17 +89,14 @@
             :value="link.key"
             :id="`checkbox-${link.uri}`"
             @change="onChangeCheckbox"
-            @keydown.space="onChangeCheckbox"
             v-if="compareDistricts"
-            tabindex="0"
             class="custom"
+            tabindex="0"
           />
           <label
-            tabindex="0"
             v-if="compareDistricts"
-            @keypress="onChangeCheckbox"
-            @keydown.space="onChangeCheckbox"
             :for="`checkbox-${link.uri}`"
+            class="custom-label"
             :class="{ compare: compareDistricts }"
           >
             <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
@@ -160,9 +157,8 @@ export default {
     ...mapActions(['setNavigationIsOpen', 'addDistrict']),
 
     toggleCheckbox(event) {
-      console.log(event);
       this.selected = [];
-      this.selected = event.target.checked ? allDistricts.map(district => district.key) : [];
+      this.selected = event ? allDistricts.map(district => district.key) : [];
       this.selectedPredefinedOption = [];
       this.$route.params.topic === undefined
         ? this.$router.push({ name: 'District', params: { district: 'alle' } })
@@ -172,9 +168,13 @@ export default {
           });
     },
 
-    onChangeCheckbox() {
+    onChangeCheckbox(key) {
       // Reset selector
       this.selectedPredefinedOption = [];
+
+      if (key) {
+        console.log(key);
+      }
 
       const district =
         this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
@@ -391,34 +391,6 @@ $rowHeight: 2.5em;
     & > span {
       padding: 1rem 0;
     }
-
-    &__input {
-      &--label {
-        margin-left: -3.3rem;
-        padding-right: 2.2rem;
-        width: 0 !important;
-
-        &::before {
-          opacity: 0.35 !important;
-        }
-      }
-
-      &--checked {
-        &::before {
-          opacity: 1 !important;
-        }
-
-        &::after {
-          transform: scale(1) !important;
-        }
-      }
-
-      &--indeterminate {
-        &::after {
-          transform: scale(1, 0.25) !important;
-        }
-      }
-    }
   }
 }
 
@@ -468,56 +440,88 @@ $rowHeight: 2.5em;
 }
 
 input[type='checkbox'].custom {
-  display: none;
+  opacity: 0;
+  position: absolute;
+}
 
-  & + label {
-    border-bottom-left-radius: $rowHeight / 2;
-    border-top-left-radius: $rowHeight / 2;
-    cursor: pointer;
-    display: inline-block;
-    height: $rowHeight;
-    padding-left: 1rem;
-    position: relative;
-    vertical-align: middle;
-    width: 100%;
+.custom-label {
+  border-bottom-left-radius: $rowHeight / 2;
+  border-top-left-radius: $rowHeight / 2;
+  cursor: pointer;
+  display: inline-block;
+  height: $rowHeight;
+  padding-left: 1rem;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
 
-    // unchecked border
-    &::before {
-      border: 1px solid $color-purple;
-      -moz-border-radius: 1px;
-      -webkit-border-radius: 1px;
-      border-radius: 1px;
-      content: '';
-      height: 16px;
-      left: 20px;
-      opacity: 0;
-      position: absolute;
-      top: calc((#{$rowHeight} / 2) - 9px);
-      width: 16px;
-    }
+  // unchecked border
+  &::before {
+    border: 1px solid $color-purple;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    content: '';
+    height: 16px;
+    left: 20px;
+    opacity: 0;
+    position: absolute;
+    top: calc((#{$rowHeight} / 2) - 9px);
+    width: 16px;
+  }
 
-    // checked inside border
+  // checked inside border
+  &::after {
+    background-color: $color-purple;
+    border-radius: 1px;
+    content: '';
+    height: 10px;
+    left: 23px;
+    position: absolute;
+    top: calc((#{$rowHeight} / 2) - 6px);
+    transform: scale(0);
+    width: 10px;
+  }
+
+  &:not(.compare):not(.custom-label--checked) {
+    &::before,
     &::after {
-      background-color: $color-purple;
-      border-radius: 1px;
-      content: '';
-      height: 10px;
-      left: 23px;
-      position: absolute;
-      top: calc((#{$rowHeight} / 2) - 6px);
-      transform: scale(0);
-      width: 10px;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &.compare::before {
+    opacity: 0.35;
+  }
+
+  &__selectedAll {
+    margin-left: -3.3rem;
+    padding-right: 2.2rem;
+    width: 0;
+
+    &::before {
+      opacity: 0.35;
     }
 
-    &:not(.compare) {
-      &::before,
+    &::after {
+      transition: transform 0.1s ease-in-out !important;
+    }
+
+    &--indeterminate {
       &::after {
-        transition: all 0.3s ease-in-out;
+        transform: scale(1, 0.25);
       }
     }
 
-    &.compare::before {
-      opacity: 0.35;
+    &--checked {
+      &::before {
+        opacity: 1 !important;
+      }
+
+      &::after {
+        transform: scale(1) !important;
+        transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9) !important;
+      }
     }
   }
 }
@@ -538,11 +542,11 @@ input[type='checkbox'].custom {
     background-color: lighten($color-yellow, 15%);
     transition: background-color 0.3s ease-in-out;
 
-    label::before {
+    .custom-label::before {
       opacity: 1 !important;
     }
 
-    label::after {
+    .custom-label::after {
       transform: scale(1) !important;
       transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
