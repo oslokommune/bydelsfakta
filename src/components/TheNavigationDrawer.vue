@@ -41,13 +41,12 @@
             @change="toggleCheckbox(selectedAll)"
             class="navigation-header__input custom"
             :value="selectedAll"
-            tabindex="0"
           />
           <label
             for="allDistricts"
-            tabindex="0"
             class="custom-label custom-label__selectedAll"
             @keypress="toggleCheckbox(!selectedAll)"
+            tabindex="0"
             :class="{
               'custom-label__selectedAll--checked': selectedAll,
               'custom-label__selectedAll--indeterminate': indeterminate,
