@@ -88,14 +88,15 @@
             v-model="selected"
             :value="link.key"
             :id="`checkbox-${link.uri}`"
-            @change="onChangeCheckbox"
+            @change="onChangeCheckbox()"
             v-if="compareDistricts"
             class="custom"
-            tabindex="0"
           />
           <label
             v-if="compareDistricts"
             :for="`checkbox-${link.uri}`"
+            @keypress="onChangeCheckbox(link.key)"
+            tabindex="0"
             class="custom-label"
             :class="{ compare: compareDistricts }"
           >
@@ -173,7 +174,8 @@ export default {
       this.selectedPredefinedOption = [];
 
       if (key) {
-        console.log(key);
+        if (!this.selected.includes(key)) this.selected.push(key);
+        else this.selected = this.selected.filter(k => k !== key);
       }
 
       const district =
@@ -440,8 +442,7 @@ $rowHeight: 2.5em;
 }
 
 input[type='checkbox'].custom {
-  opacity: 0;
-  position: absolute;
+  display: none;
 }
 
 .custom-label {
