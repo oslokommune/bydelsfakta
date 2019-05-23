@@ -20,6 +20,7 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'h';
 
   this.padding = { top: 40, left: 80, right: 20, bottom: 20 };
   this.height1 = 400;
@@ -91,7 +92,7 @@ function Template(svg) {
   this.createSidebarElements = function() {
     this.sidebar = this.svg.append('g').attr('class', 'sidebar');
 
-    let section_year = this.sidebar.append('g').attr('class', 'section-year');
+    const section_year = this.sidebar.append('g').attr('class', 'section-year');
     section_year
       .append('rect')
       .attr('class', 'section-year__bg')
@@ -109,7 +110,7 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .attr('x', 44);
 
-    let section_population = this.sidebar
+    const section_population = this.sidebar
       .append('g')
       .attr('class', 'section-population')
       .attr('transform', 'translate(0, 70)');
@@ -120,7 +121,7 @@ function Template(svg) {
       .text('Befolkning');
     section_population.append('text').attr('class', 'value');
 
-    let section_change = this.sidebar
+    const section_change = this.sidebar
       .append('g')
       .attr('class', 'section-change')
       .attr('transform', 'translate(0, 140)');
@@ -210,7 +211,7 @@ function Template(svg) {
       .attr('stroke-width', 2)
       .attr('stroke', color.yellow);
 
-    let highlightContainer = this.upper.append('g').attr('class', 'highlightContainer');
+    const highlightContainer = this.upper.append('g').attr('class', 'highlightContainer');
 
     highlightContainer
       .append('rect')
@@ -313,7 +314,7 @@ function Template(svg) {
       .select('g.bars')
       .selectAll('rect.bar')
       .data(this.data.data.actual);
-    let barE = bar
+    const barE = bar
       .enter()
       .append('rect')
       .attr('class', 'bar');
@@ -340,23 +341,23 @@ function Template(svg) {
   // called from this.drawUpper()
   this.drawProjection = function() {
     // Draw projection
-    let lastDate = this.data.data.actual[this.data.data.actual.length - 1];
-    let startPos = { x: this.x(this.parseDate(lastDate.date)), y: this.y(lastDate.population) };
-    let lowPos = {
+    const lastDate = this.data.data.actual[this.data.data.actual.length - 1];
+    const startPos = { x: this.x(this.parseDate(lastDate.date)), y: this.y(lastDate.population) };
+    const lowPos = {
       x: this.x(this.parseDate(this.data.data.projection.date)),
       y: this.y(this.data.data.projection.low),
     };
-    let expPos = {
+    const expPos = {
       x: this.x(this.parseDate(this.data.data.projection.date)),
       y: this.y(this.data.data.projection.expected),
     };
-    let highPos = {
+    const highPos = {
       x: this.x(this.parseDate(this.data.data.projection.date)),
       y: this.y(this.data.data.projection.high),
     };
 
-    let projectionPathData = `M${startPos.x},${startPos.y} L${lowPos.x},${lowPos.y} L${highPos.x},${highPos.y}z`;
-    let expectedPathData = `M${startPos.x},${startPos.y} L${expPos.x},${expPos.y}`;
+    const projectionPathData = `M${startPos.x},${startPos.y} L${lowPos.x},${lowPos.y} L${highPos.x},${highPos.y}z`;
+    const expectedPathData = `M${startPos.x},${startPos.y} L${expPos.x},${expPos.y}`;
     this.upper.select('path.projection').attr('d', projectionPathData);
     this.upper.select('path.expected').attr('d', expectedPathData);
   };
@@ -366,7 +367,7 @@ function Template(svg) {
     this.triggersContainer.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
     let trigger = this.triggersContainer.selectAll('rect').data(this.data.data.actual);
-    let triggerE = trigger.enter().append('rect');
+    const triggerE = trigger.enter().append('rect');
     trigger.exit().remove();
     trigger = trigger.merge(triggerE);
 
@@ -403,10 +404,11 @@ function Template(svg) {
   // Sets and draws all the scales and axis
   // for the whole template on each render.
   this.resetScales = function() {
-    let dates = d3.extent(this.data.data.actual.concat(this.data.data.projection).map(d => this.parseDate(d.date)));
+    const dates = d3.extent(this.data.data.actual.concat(this.data.data.projection).map(d => this.parseDate(d.date)));
     dates[0] = d3.timeYear.offset(dates[0], -2);
-    let minPop = d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.2;
-    let maxPop =
+    const minPop =
+      d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.2;
+    const maxPop =
       d3.max(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.high)) * 1.05;
 
     this.y2

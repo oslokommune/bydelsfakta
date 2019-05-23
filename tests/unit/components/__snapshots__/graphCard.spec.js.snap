@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GraphCard change an active tab 1`] = `
-<div
+<section
   class="card-container large"
 >
   <div
@@ -18,12 +18,6 @@ exports[`GraphCard change an active tab 1`] = `
         >
           
         </h2>
-         
-        <span
-          class="card__published"
-        >
-          Oppdatert 01.09.2018
-        </span>
       </div>
        
       <nav
@@ -33,90 +27,90 @@ exports[`GraphCard change an active tab 1`] = `
           class="tabs"
           role="tablist"
         >
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
           <button
             aria-label="Status"
-            aria-selected="[object Object]"
             class="tabs__tab"
-            id="tabButton-0"
+            id="tabButton--0"
             role="tab"
           >
             Status
           </button>
           <button
             aria-label="Matrise"
-            aria-selected="[object Object]"
             class="tabs__tab active"
-            id="tabButton-1"
+            id="tabButton--1"
             role="tab"
           >
             Matrise
           </button>
           <button
             aria-label="Historisk"
-            aria-selected="[object Object]"
             class="tabs__tab"
-            id="tabButton-2"
+            id="tabButton--2"
             role="tab"
           >
             Historisk
           </button>
            
-          <div
-            class="card__toggle-menu"
+          <!---->
+        </div>
+         
+        <div
+          class="card__toggle-menu"
+        >
+          <button
+            aria-label="Graf"
+            class="card__toggle-button card__toggle-button--active"
+            title="Graf"
           >
-            <button
-              class="card__toggle-button card__toggle-button--active"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                bar_chart
-              </i>
-            </button>
-             
-            <button
-              class="card__toggle-button"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                table_chart
-              </i>
-            </button>
-             
-            <button
-              class="card__toggle-button"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                map
-              </i>
-            </button>
-          </div>
+            <!---->
+          </button>
+           
+          <button
+            aria-label="Tabell"
+            class="card__toggle-button"
+            title="Tabell"
+          >
+            <!---->
+          </button>
+           
+          <button
+            aria-label="Kart"
+            class="card__toggle-button"
+            title="Kart"
+          >
+            <!---->
+          </button>
         </div>
          
         <div
           class="context-menu"
-          role="menu"
         >
           <button
             aria-haspopup="true"
             aria-label="Åpne meny"
             class="context-menu__button"
             id="context-menu-button"
+            title="Åpne meny"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons"
-            >
-              menu
-            </i>
+            <!---->
              
-            <span>
+            <span
+              class="button-label"
+            >
               Valg
             </span>
           </button>
@@ -141,6 +135,12 @@ exports[`GraphCard change an active tab 1`] = `
             alt=""
             src="../assets/spinner.svg"
           />
+           
+          <span
+            class="spinner__text"
+          >
+            Henter data
+          </span>
         </div>
          
         <!---->
@@ -154,13 +154,17 @@ exports[`GraphCard change an active tab 1`] = `
       <div
         class="graph__tablecontainer visually-hidden"
       >
-        <table>
+        <table
+          class=""
+        >
           <caption />
            
           <thead />
            
           <tbody />
         </table>
+         
+        <!---->
       </div>
        
       <div
@@ -175,15 +179,19 @@ exports[`GraphCard change an active tab 1`] = `
           type="text/html"
         />
       </div>
+       
+      <!---->
     </div>
      
     <!---->
+     
+    <!---->
   </div>
-</div>
+</section>
 `;
 
 exports[`GraphCard renders correctly 1`] = `
-<div
+<section
   class="card-container large"
 >
   <div
@@ -198,14 +206,8 @@ exports[`GraphCard renders correctly 1`] = `
         <h2
           class="card__title"
         >
-          
+          Befolkningen etter alder
         </h2>
-         
-        <span
-          class="card__published"
-        >
-          Oppdatert 01.09.2018
-        </span>
       </div>
        
       <nav
@@ -215,81 +217,76 @@ exports[`GraphCard renders correctly 1`] = `
           class="tabs"
           role="tablist"
         >
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
           <button
             aria-label="Antall"
-            aria-selected="[object Object]"
             class="tabs__tab active"
-            id="tabButton-0"
+            id="tabButton-Befolkningen etter alder-0"
             role="tab"
           >
             Antall
           </button>
           <button
             aria-label="Andel"
-            aria-selected="[object Object]"
             class="tabs__tab"
-            id="tabButton-1"
+            id="tabButton-Befolkningen etter alder-1"
             role="tab"
           >
             Andel
           </button>
            
-          <div
-            class="card__toggle-menu"
+          <!---->
+        </div>
+         
+        <div
+          class="card__toggle-menu"
+        >
+          <button
+            aria-label="Graf"
+            class="card__toggle-button card__toggle-button--active"
+            title="Graf"
           >
-            <button
-              class="card__toggle-button card__toggle-button--active"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                bar_chart
-              </i>
-            </button>
-             
-            <button
-              class="card__toggle-button"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                table_chart
-              </i>
-            </button>
-             
-            <button
-              class="card__toggle-button"
-            >
-              <i
-                aria-hidden="true"
-                class="material-icons context-menu__dropdown-item-icon"
-              >
-                map
-              </i>
-            </button>
-          </div>
+            <!---->
+          </button>
+           
+          <button
+            aria-label="Tabell"
+            class="card__toggle-button"
+            title="Tabell"
+          >
+            <!---->
+          </button>
+           
+          <!---->
         </div>
          
         <div
           class="context-menu"
-          role="menu"
         >
           <button
             aria-haspopup="true"
             aria-label="Åpne meny"
             class="context-menu__button"
             id="context-menu-button"
+            title="Åpne meny"
           >
-            <i
-              aria-hidden="true"
-              class="material-icons"
-            >
-              menu
-            </i>
+            <!---->
              
-            <span>
+            <span
+              class="button-label"
+            >
               Valg
             </span>
           </button>
@@ -314,6 +311,12 @@ exports[`GraphCard renders correctly 1`] = `
             alt=""
             src="../assets/spinner.svg"
           />
+           
+          <span
+            class="spinner__text"
+          >
+            Henter data
+          </span>
         </div>
          
         <!---->
@@ -327,13 +330,17 @@ exports[`GraphCard renders correctly 1`] = `
       <div
         class="graph__tablecontainer visually-hidden"
       >
-        <table>
+        <table
+          class=""
+        >
           <caption />
            
           <thead />
            
           <tbody />
         </table>
+         
+        <!---->
       </div>
        
       <div
@@ -348,9 +355,24 @@ exports[`GraphCard renders correctly 1`] = `
           type="text/html"
         />
       </div>
+       
+      <div
+        class="help"
+      >
+        <button
+          aria-label="Vis hjelpetekst"
+          class="help__button"
+        >
+          <!---->
+        </button>
+         
+        <!---->
+      </div>
     </div>
      
     <!---->
+     
+    <!---->
   </div>
-</div>
+</section>
 `;

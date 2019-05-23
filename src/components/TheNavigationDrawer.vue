@@ -12,13 +12,73 @@
     ></button>
     <div class="version-tag">Alpha</div>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
+      <ul class="state-toggle">
+        <li class="state-toggle__element">
+          <router-link
+            class="state-toggle__link"
+            :class="{ 'state-toggle__link--active': !compareDistricts }"
+            :to="onClickTab(false)"
+            v-html="$t('navigationDrawer.selectOne.tab')"
+          ></router-link>
+        </li>
+        <li class="state-toggle__element">
+          <router-link
+            class="state-toggle__link"
+            :class="{ 'state-toggle__link--active': compareDistricts }"
+            :to="onClickTab(true)"
+            v-html="$t('navigationDrawer.linkCompare')"
+          ></router-link>
+        </li>
+      </ul>
+
+      <header class="navigation-header">
+        <template v-if="compareDistricts">
+          <input
+            type="checkbox"
+            id="allDistricts"
+            v-model="selectedAll"
+            :indeterminate.sync="indeterminate"
+            @change="toggleCheckbox(selectedAll)"
+            class="navigation-header__input custom"
+            :value="selectedAll"
+          />
+          <label
+            for="allDistricts"
+            class="custom-label custom-label__selectedAll"
+            @keypress="toggleCheckbox(!selectedAll)"
+            tabindex="0"
+            :class="{
+              'custom-label__selectedAll--checked': selectedAll,
+              'custom-label__selectedAll--indeterminate': indeterminate,
+            }"
+          ></label>
+          <select
+            id="navigation-drawer-select"
+            class="navigation-header__select"
+            v-model="selectedPredefinedOption"
+            :aria-label="$t('navigationDrawer.select.label')"
+          >
+            <option
+              v-for="(element, index) in options"
+              :key="index"
+              :value="element.option"
+              :selected="element.selected"
+              :disabled="element.disabled"
+              >{{ element.label }}</option
+            >
+          </select>
+        </template>
+        <span v-else>
+          {{ $t('navigationDrawer.selectOne.label') }}
+        </span>
+      </header>
       <ul class="navigation-list">
         <li
           v-for="link in links"
           :key="link.key"
           class="navigation-link"
           :class="{
-            'navigation-link--active': $route.params.district === link.uri && !compareDistricts,
+            'navigation-link--active': !compareDistricts && districts[0] === link.key,
             'navigation-link--compare': compareDistricts && selected.includes(link.key),
           }"
         >
@@ -27,69 +87,38 @@
             v-model="selected"
             :value="link.key"
             :id="`checkbox-${link.uri}`"
-            @change="onChangeCheckbox"
-            :disabled="!compareDistricts && districts.length === 1 && districts[0] === link.key"
+            @change="onChangeCheckbox()"
+            v-if="compareDistricts"
+            class="custom"
           />
-          <label :for="`checkbox-${link.uri}`" :class="{ compare: compareDistricts }"></label>
-          <router-link :id="`a-${link.uri}`" class="navigation-link__label" :to="onClickDistrict(link.uri)">{{
-            link.value
-          }}</router-link>
-        </li>
-        <li
-          class="navigation-link navigation-link__label-compare"
-          id="sammenlign"
-          :class="{ 'navigation-link--active': compareDistricts }"
-        >
-          <router-link id="sammenlign-href" :to="onClickSammenlign()" class="navigation-link__label">{{
-            $t('navigationDrawer.linkCompare')
-          }}</router-link>
+          <label
+            v-if="compareDistricts"
+            :for="`checkbox-${link.uri}`"
+            @keypress="onChangeCheckbox(link.key)"
+            tabindex="0"
+            class="custom-label"
+            :class="{ compare: compareDistricts }"
+          >
+            <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
+          </label>
+          <router-link
+            v-if="!compareDistricts"
+            :id="`a-${link.uri}`"
+            class="navigation-link__label"
+            :to="onClickDistrict(link.uri)"
+            >{{ link.value }}</router-link
+          >
         </li>
       </ul>
-      <transition name="fade">
-        <div class="navigation-drawer__buttons" v-if="compareDistricts">
-          <div class="navigation-drawer__button-container">
-            <button
-              class="navigation-drawer__button"
-              @click="selectAll"
-              :aria-label="$t('navigationDrawer.selectAll.aria')"
-            >
-              {{ $t('navigationDrawer.selectAll.label') }}
-            </button>
-            <button
-              class="navigation-drawer__button"
-              :disabled="selected.length === 0"
-              @click="unselectAll"
-              :aria-label="$t('navigationDrawer.unselectAll.aria')"
-            >
-              {{ $t('navigationDrawer.unselectAll.label') }}
-            </button>
-          </div>
-          <div class="navigation-drawer__select-container">
-            <label for="navigation-drawer-select" class="visually-hidden">{{
-              $t('navigationDrawer.select.label')
-            }}</label>
-            <select id="navigation-drawer-select" class="navigation-drawer__select" v-model="selectedPredefinedOption">
-              <option
-                v-for="(element, index) in options"
-                :key="index"
-                :value="element.option"
-                :selected="element.selected"
-                :disabled="element.disabled"
-                >{{ element.label }}</option
-              >
-            </select>
-          </div>
-        </div>
-      </transition>
     </nav>
   </aside>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import osloIcon from '../assets/Oslo_komm.svg'; // ../assets/oslo-logo.svg
+import osloIcon from '../assets/oslo-logo.svg'; //
 
 export default {
   name: 'TheNavigationDrawer',
@@ -99,6 +128,8 @@ export default {
       osloIcon: osloIcon,
       showNavigation: false,
       selected: [],
+      selectedAll: false,
+      indeterminate: false,
       options: predefinedOptions,
       selectedPredefinedOption: [],
     };
@@ -119,23 +150,32 @@ export default {
       set: function() {},
     },
     ...mapState(['compareDistricts', 'districts', 'navigationIsOpen']),
-  },
-
-  created() {
-    const route = this.$route;
-    if (route.params.district === undefined) {
-      return;
-    }
-
-    this.selected = this.districts[0] === 'alle' ? [] : this.districts;
+    ...mapGetters(['getDistrict']),
   },
 
   methods: {
-    ...mapActions(['setNavigationIsOpen']),
+    ...mapActions(['setNavigationIsOpen', 'addDistrict']),
 
-    onChangeCheckbox() {
+    toggleCheckbox(event) {
+      this.selected = [];
+      this.selected = event ? allDistricts.map(district => district.key) : [];
+      this.selectedPredefinedOption = [];
+      this.$route.params.topic === undefined
+        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
+        : this.$router.push({
+            name: 'Topic',
+            params: { district: 'alle', topic: this.$route.params.topic },
+          });
+    },
+
+    onChangeCheckbox(key) {
       // Reset selector
       this.selectedPredefinedOption = [];
+
+      if (key) {
+        if (!this.selected.includes(key)) this.selected.push(key);
+        else this.selected = this.selected.filter(k => k !== key);
+      }
 
       const district =
         this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
@@ -156,69 +196,32 @@ export default {
         : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
     },
 
-    onClickSammenlign() {
-      const routes = this.$route.path.split('/');
-      const selectedDistricts = this.selected.join('-');
-      const district = allDistricts.find(district => district.uri === routes[2]);
+    onClickTab(compare) {
+      const name = this.$route.params.topic ? 'Topic' : 'District';
 
-      if (district !== undefined && selectedDistricts === district.key) {
-        return this.$route.params.topic === undefined
-          ? { name: 'District', params: { district: 'alle' } }
-          : { name: 'Topic', params: { district: 'alle', topic: this.$route.params.topic } };
-      } else if (district === undefined && !this.compareDistricts) {
-        return { name: 'District', params: { district: 'alle' } };
-      } else {
-        return { name: 'District', params: { district: this.$route.params.district } };
-      }
-    },
-
-    selectAll() {
-      this.selected = [];
-      this.selected = allDistricts.map(district => district.key);
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
-    },
-
-    unselectAll() {
-      this.selected = [];
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
+      return { name, params: { district: compare ? 'alle' : allDistricts[0].uri } };
     },
   },
 
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      const params = to.params.district !== undefined ? to.params.district.split('-') : [];
       const district = allDistricts.find(district => district.uri === routes[2]);
 
       if (to.name === 'NotFound') {
         this.$store.dispatch('cleanState');
         this.selected = [];
+      } else if (to.name === 'Home') {
+        this.addDistrict({ district: 'gamleoslo', pushRoute: false });
+        this.selected = ['01'];
       }
 
       if (to.params.district === 'alle' && this.selected.length !== this.links.length) {
         this.selected = [];
-      } else if (params.length > 1) {
-        const paramDistrict = routes[2].split('-');
-        this.selected = paramDistrict;
+      } else if (this.compareDistricts && this.districts[0] !== 'alle') {
+        this.selected = routes[2].split('-');
       } else if (district !== undefined) {
         this.selected = [district.key];
-      }
-
-      if (to.name === 'Home') {
-        this.$store.dispatch('addDistrict', { district: 'alle', pushRoute: false });
-        this.selected = [];
       }
 
       // Hide navigation when a selection is made,
@@ -238,6 +241,19 @@ export default {
               name: 'Topic',
               params: { district: this.selected.join('-'), topic: this.$route.params.topic },
             });
+      }
+    },
+
+    selected(newVal) {
+      if (newVal.length === 0) {
+        this.indeterminate = false;
+        this.selectedAll = false;
+      } else if (newVal.length === this.links.length) {
+        this.indeterminate = false;
+        this.selectedAll = true;
+      } else {
+        this.indeterminate = true;
+        this.selectedAll = false;
       }
     },
 
@@ -264,8 +280,17 @@ $rowHeight: 2.5em;
   padding: 0.25rem 0.5rem;
 
   @media screen and (min-width: $break-lg) {
+    background: white;
     padding: 0.25rem 0.75rem;
     transform: translateY(-1rem);
+  }
+
+  @media screen and (min-width: 1200px) {
+    position: fixed;
+    right: 1.5rem;
+    top: 1.5rem;
+    transform: scale(1.45);
+    transform-origin: 100% 0;
   }
 }
 
@@ -311,13 +336,13 @@ $rowHeight: 2.5em;
 
   @media screen and (min-width: $break-sm) {
     border-top: none;
-    width: calc(100% - 5.5em);
+    width: calc(100% - 8rem);
   }
 
   @media screen and (min-width: $break-lg) {
-    background: initial;
+    background: none;
     box-shadow: none;
-    display: initial;
+    display: block;
     padding: 0;
     position: relative;
     top: 0;
@@ -328,7 +353,44 @@ $rowHeight: 2.5em;
     padding: 0 1em;
 
     @media screen and (min-width: $break-lg) {
+      margin: 0;
       padding: 0;
+    }
+  }
+
+  &-header {
+    align-items: center;
+    border-bottom: 1px solid darken($color-border, 20%);
+    display: flex;
+    font-weight: 500;
+    height: 4rem;
+    margin-bottom: 0.5rem;
+    padding: 1em 0 0.5rem 46px;
+
+    & > select {
+      border: 1px solid rgba(black, 0.1);
+      border-radius: 1px;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      position: relative;
+      width: 100%;
+
+      &::after {
+        background: red;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        z-index: 2;
+      }
+    }
+
+    & > span {
+      padding: 1rem 0;
     }
   }
 }
@@ -355,12 +417,12 @@ $rowHeight: 2.5em;
   background: $color-bg;
   display: flex;
   flex-basis: auto;
-  height: 8.5em;
+  height: 5rem;
   justify-content: center;
-  min-height: 8.5em;
 
   @media screen and (min-width: $break-lg) {
     background: none;
+    height: 8em;
     padding: 0.5rem 0;
   }
 }
@@ -369,94 +431,97 @@ $rowHeight: 2.5em;
   cursor: pointer;
   height: 100%;
   object-fit: contain;
-  padding: 1.25rem;
-  width: 5.5em;
+  width: 8em;
 
   @media screen and (min-width: $break-lg) {
     align-self: center;
-    padding-bottom: 0.75rem;
-    width: 6.5em;
+    padding: 0;
+    width: 10em;
   }
 }
 
-input[type='checkbox'] {
+input[type='checkbox'].custom {
   display: none;
+}
 
-  & + label {
-    border-bottom-left-radius: $rowHeight / 2;
-    border-top-left-radius: $rowHeight / 2;
-    cursor: pointer;
-    display: inline-block;
-    height: $rowHeight;
-    padding-left: 1rem;
-    position: relative;
-    vertical-align: middle;
-    width: 46px;
+.custom-label {
+  border-bottom-left-radius: $rowHeight / 2;
+  border-top-left-radius: $rowHeight / 2;
+  cursor: pointer;
+  display: inline-block;
+  height: $rowHeight;
+  padding-left: 1rem;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
 
-    // unchecked border
-    &::before {
-      border: 1px solid $color-purple;
-      -moz-border-radius: 1px;
-      -webkit-border-radius: 1px;
-      border-radius: 1px;
-      content: '';
-      height: 16px;
-      left: 20px;
-      opacity: 0;
-      position: absolute;
-      top: calc((#{$rowHeight} / 2) - 9px);
-      width: 16px;
-    }
+  // unchecked border
+  &::before {
+    border: 1px solid $color-purple;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    content: '';
+    height: 16px;
+    left: 20px;
+    opacity: 0;
+    position: absolute;
+    top: calc((#{$rowHeight} / 2) - 9px);
+    width: 16px;
+  }
 
-    &:hover {
-      background: darken($color-bg, 10%);
+  // checked inside border
+  &::after {
+    background-color: $color-purple;
+    border-radius: 1px;
+    content: '';
+    height: 10px;
+    left: 23px;
+    position: absolute;
+    top: calc((#{$rowHeight} / 2) - 6px);
+    transform: scale(0);
+    width: 10px;
+  }
 
-      &::before {
-        background: rgba(white, 0.15);
-        opacity: 0.8 !important;
-      }
-    }
-
-    // checked inside border
+  &:not(.compare):not(.custom-label--checked) {
+    &::before,
     &::after {
-      background-color: $color-purple;
-      border-radius: 1px;
-      content: '';
-      height: 10px;
-      left: 23px;
-      position: absolute;
-      top: calc((#{$rowHeight} / 2) - 6px);
-      transform: scale(0);
-      width: 10px;
-    }
-
-    &:not(.compare) {
-      &::before,
-      &::after {
-        transition: all 0.3s ease-in-out;
-      }
-    }
-
-    &.compare::before {
-      opacity: 0.35;
+      transition: all 0.3s ease-in-out;
     }
   }
 
-  &:checked:not(&-compare) + label {
-    opacity: 1;
-    position: relative;
+  &.compare::before {
+    opacity: 0.35;
+  }
 
-    // checked inside border
-    &::after {
-      transform: scale(1);
-      transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
+  &__selectedAll {
+    margin-left: -3.3rem;
+    padding-right: 2.2rem;
+    width: 0;
+
+    &::before {
+      opacity: 0.35;
     }
 
-    // checked border
-    &::before {
-      border: 1px solid $color-purple;
-      opacity: 1;
-      transition: transform 0.3s ease-in-out;
+    &::after {
+      transition: transform 0.1s ease-in-out !important;
+    }
+
+    &--indeterminate {
+      &::after {
+        transform: scale(1, 0.25);
+      }
+    }
+
+    &--checked {
+      &::before {
+        opacity: 1 !important;
+      }
+
+      &::after {
+        transform: scale(1) !important;
+        transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9) !important;
+      }
     }
   }
 }
@@ -472,20 +537,24 @@ input[type='checkbox'] {
   margin-bottom: 1px;
   position: relative;
   transition: all 0.3s ease-in-out;
-  width: 100%;
 
   &--compare {
     background-color: lighten($color-yellow, 15%);
     transition: background-color 0.3s ease-in-out;
 
-    label::before {
+    .custom-label::before {
       opacity: 1 !important;
     }
 
-    label::after {
+    .custom-label::after {
       transform: scale(1) !important;
       transition: transform 0.3s cubic-bezier(0.29, -0.01, 0.41, 1.9);
     }
+  }
+
+  &:not(&--compare):not(&--active):hover {
+    background-color: rgba($color-purple, 0.05);
+    transition-duration: 0.05s;
   }
 
   &--active {
@@ -495,10 +564,6 @@ input[type='checkbox'] {
     #{$p}__label {
       color: $color-purple;
       font-weight: 500;
-    }
-
-    label:hover {
-      background: none !important;
     }
 
     input[type='checkbox']:checked + label {
@@ -517,9 +582,10 @@ input[type='checkbox'] {
     flex-grow: 1;
     height: $rowHeight;
     letter-spacing: 0.1px;
+    margin-left: 46px;
     position: relative;
 
-    &-compare {
+    &--compare {
       margin-bottom: 1rem;
       margin-top: 0;
       padding-left: 4rem;
@@ -528,6 +594,10 @@ input[type='checkbox'] {
         margin-top: 1rem;
         padding-left: 3.5rem;
       }
+    }
+
+    &--span {
+      margin-left: 32px;
     }
 
     // Add visual border on the left side of text on hover
@@ -547,108 +617,74 @@ input[type='checkbox'] {
   &--compare &__label {
     color: $color-purple;
   }
-
-  &:hover:not(&--active) label:not(.compare)::before {
-    opacity: 0.15;
-    transition: all 0s;
-  }
-
-  &:not(&--active):not(&--compare) &__label:hover {
-    background-color: darken($color-bg, 5%);
-    color: $color-purple;
-
-    // Show the visual border on hover
-    &::before {
-      background-color: darken($color-bg, 5%);
-      display: block;
-    }
-  }
 }
 
-.navigation-drawer__buttons {
+.state-toggle {
   display: flex;
-  flex-direction: column;
-  padding: 0 1rem;
-
-  .navigation-drawer__button-container {
-    display: flex;
-
-    @media screen and (min-width: $break-lg) {
-      align-self: flex-end;
-    }
-
-    .navigation-drawer__button {
-      border: 1px solid $color-purple;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px;
-      color: $color-purple;
-      font-weight: bold;
-      height: 42px;
-      margin: 0.5rem;
-      padding: 0.3rem 1rem 0.3rem 1rem;
-      transition: all 0.3s ease-in-out;
-      width: 50%;
-
-      &:not([disabled]) {
-        cursor: pointer;
-      }
-
-      @media screen and (min-width: $break-md) {
-        width: auto;
-      }
-
-      @media screen and (min-width: $break-md) {
-        height: auto;
-      }
-
-      &:disabled {
-        opacity: 0.2;
-        transition: opacity 0.3s ease-in-out;
-      }
-
-      &:hover:not([disabled]) {
-        box-shadow: 0 0 0 1px $color-grey-50;
-      }
-    }
-  }
-}
-
-.navigation-drawer__select-container {
-  display: flex;
+  height: 4.5em;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   position: relative;
+  width: 100%;
 
-  @media screen and (min-width: $break-lg) {
-    align-self: flex-end;
+  &::after {
+    background: darken($color-border, 20%);
+    bottom: -5px;
+    content: '';
+    display: block;
+    height: 1px;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    right: 0;
   }
 
-  .navigation-drawer__select {
-    border: 1px solid $color-purple;
-    color: $color-purple;
-    cursor: pointer;
-    font-weight: bold;
-    height: 42px;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+  &__element {
+    align-items: center;
+    display: flex;
+    flex: 50% 0 0;
+    height: 100%;
+    justify-content: center;
+    margin: 0;
     position: relative;
+    text-align: center;
+  }
+
+  &__link {
+    align-items: center;
+    border-radius: 3px;
+    color: rgba($color-purple, 0.75);
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    justify-content: center;
     width: 100%;
 
-    @media screen and (min-width: $break-lg) {
-      height: auto;
-      width: 205px;
+    &::after {
+      background: $color-blue;
+      bottom: -5px;
+      content: '';
+      display: block;
+      height: 5px;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      right: 0;
     }
-  }
 
-  &::before {
-    border-bottom: 2px solid $color-purple;
-    border-left: 2px solid $color-purple;
-    content: '';
-    height: 0.5rem;
-    position: absolute;
-    right: 1.5rem;
-    top: calc(50% - 0.35rem);
-    transform: rotate(-45deg);
-    width: 0.5rem;
+    &:hover:not(&--active) {
+      background: rgba($color-purple, 0.04);
+    }
+
+    &--active {
+      color: $color-purple;
+
+      &::after {
+        opacity: 1;
+      }
+    }
   }
 }
 </style>

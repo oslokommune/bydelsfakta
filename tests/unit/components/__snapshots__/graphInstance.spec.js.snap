@@ -16,6 +16,12 @@ exports[`GraphInstance renders correctly 1`] = `
         alt=""
         src="../assets/spinner.svg"
       />
+       
+      <span
+        class="spinner__text"
+      >
+        Henter data
+      </span>
     </div>
      
     <!---->
@@ -29,13 +35,17 @@ exports[`GraphInstance renders correctly 1`] = `
   <div
     class="graph__tablecontainer visually-hidden"
   >
-    <table>
+    <table
+      class=""
+    >
       <caption />
        
       <thead />
        
       <tbody />
     </table>
+     
+    <!---->
   </div>
    
   <div
@@ -50,5 +60,7 @@ exports[`GraphInstance renders correctly 1`] = `
       type="text/html"
     />
   </div>
+   
+  <!---->
 </div>
 `;

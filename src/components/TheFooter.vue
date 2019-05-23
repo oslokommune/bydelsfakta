@@ -17,8 +17,7 @@ export default {};
 @import '../styles/_colors';
 
 .footer {
-  color: $color-grey-500;
-  font-size: 0.9em;
+  color: $color-grey-800;
   margin-bottom: 3rem;
   padding: 1rem;
 
@@ -27,7 +26,7 @@ export default {};
   }
 
   a {
-    color: $color-grey-500;
+    color: $color-grey-900;
     font-weight: 500;
     text-decoration: underline;
   }
@@ -50,6 +49,7 @@ export default {};
   }
 
   .column {
+    flex: 1;
     padding: 1rem 1rem 0 0;
 
     @media screen and (min-width: $break-lg) {

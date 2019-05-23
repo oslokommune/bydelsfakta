@@ -10,8 +10,9 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'f';
 
-  this.padding = { top: 90, left: 200, right: 20, bottom: 1 };
+  this.padding = { top: 90, left: 250, right: 20, bottom: 1 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
 
   // Define withs of both charts.
@@ -30,20 +31,20 @@ function Template(svg) {
     this.width = d3.max([this.width, 360]);
 
     // Find quartiles, mean and median for each geography
-    data.data = data.data.map(bydel => {
-      if (bydel.low) return bydel;
+    data.data = JSON.parse(JSON.stringify(data.data)).map(district => {
+      if (district.low) return district;
       let ages = [];
-      bydel.values.forEach((val, age) => {
+      district.values.forEach((val, age) => {
         for (let i = 0; i < val.value; i++) {
           ages.push(age);
         }
       });
-      bydel.low = d3.quantile(ages, 0.25);
-      bydel.median = d3.quantile(ages, 0.5);
-      bydel.high = d3.quantile(ages, 0.75);
-      bydel.mean = Math.round(d3.mean(ages) * 100) / 100;
+      district.low = d3.quantile(ages, 0.25);
+      district.median = d3.quantile(ages, 0.5);
+      district.high = d3.quantile(ages, 0.75);
+      district.mean = Math.round(d3.mean(ages) * 100) / 100;
 
-      return bydel;
+      return district;
     });
 
     this.svg
@@ -81,14 +82,13 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
-    this.table.select('caption').text(this.data.meta.heading);
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hrow = thead.append('tr');
+    const hrow = thead.append('tr');
 
     hrow
       .selectAll('th')
@@ -97,9 +97,11 @@ function Template(svg) {
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
+    const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography cells
@@ -242,7 +244,7 @@ function Template(svg) {
 
     this.x
       .range([0, this.width1])
-      .domain([d3.min(this.data.data.map(d => d.mean)) / 1.05, d3.max(this.data.data.map(d => d.mean)) * 1.05])
+      .domain([d3.min(this.data.data.map(d => d.mean)), d3.max(this.data.data.map(d => d.mean))])
       .nice();
     this.xAxis
       .transition()
@@ -259,7 +261,7 @@ function Template(svg) {
   // render
   this.drawRows = function() {
     let rows = this.canvas.selectAll('g.row').data(this.data.data);
-    let rowsE = rows
+    const rowsE = rows
       .enter()
       .append('g')
       .attr('class', 'row');

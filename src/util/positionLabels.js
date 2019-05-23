@@ -11,11 +11,14 @@ function avoidCollisions(data, height) {
   let spacing = 15;
   let walk = 2;
 
-  data = data.map(d => {
-    d.start = d.y;
-    d.end = d.y + spacing;
-    return d;
-  });
+  data = data
+    .map(d => {
+      d.start = d.y;
+      d.end = d.y + spacing;
+      return d;
+    })
+    .sort((a, b) => a.start - b.start);
+
   let collision = true;
   while (collision) {
     collision = false;

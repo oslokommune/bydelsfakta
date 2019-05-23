@@ -2,6 +2,8 @@
  * Norwegian date and number formatting.
  */
 
+import * as d3 from 'd3';
+
 const timeFormat = {
   dateTime: '%A %e %B %Y %H:%M:%S',
   date: '%d.%m.%Y',
@@ -26,12 +28,20 @@ const timeFormat = {
   shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
 };
 
-const format = {
+const norwegianLocale = d3.formatLocale({
   decimal: ',',
   thousands: ' ',
   grouping: [3],
   currency: ['', ' kr'],
   percent: '%',
-};
+});
 
-export { timeFormat, format };
+const tableLocale = d3.formatLocale({
+  decimal: ',',
+  thousands: ' ',
+  grouping: [3],
+  currency: ['', ' kr'],
+  percent: ' ',
+});
+
+export { timeFormat, norwegianLocale, tableLocale };

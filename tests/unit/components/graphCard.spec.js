@@ -1,8 +1,9 @@
+import 'whatwg-fetch';
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import vueResize from 'vue-resize';
 import router from '../../../src/router';
-import GraphCard from '../../../src/components/GraphCard.vue';
+import GraphCard from '../../../src/components/GraphCard';
 import clickOutside from '../../../src/directives/clickOutside';
 import { topics } from '../../../src/config/topics';
 import store from '../../../src/store';

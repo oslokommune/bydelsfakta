@@ -11,96 +11,70 @@ exports[`Bydel renders component correctly 1`] = `
       class="topics-grid"
     >
       <v-category-stub
-        bgcolor="rgb(255, 129, 116)"
         bgimage="/img/folkemengde"
         category="Befolkning"
-        disabled="true"
         district="bydel"
         id="folkemengde"
         topic="Folkemengde"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgcolor="rgb(255, 129, 116)"
+        bgimage="/img/folkemengde"
+        category="Befolkning"
+        district="bydel"
+        id="befolkningsendringer"
+        topic="Befolknings&shy;endringer"
+        txtcolor="rgb(245, 173, 165)"
+      />
+      <v-category-stub
         bgimage="/img/alder"
         category="Befolkning"
-        disabled="true"
         district="bydel"
         id="alder"
         topic="Alder"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgcolor="rgb(255, 129, 116)"
         bgimage="/img/innvandring"
         category="Befolkning"
-        disabled="true"
         district="bydel"
         id="innvandrerbefolkningen"
-        topic="Innvandrer&shy;befolkningen"
+        topic="Personer med innvandrer&shy;bakgrunn"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
         bgimage="/img/husholdninger"
-        category="Bomiljø"
+        category="Befolkning"
         district="bydel"
         id="husholdninger"
         topic="Husholdninger"
-        txtcolor="rgb(199, 247, 201)"
+        txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/trangboddhet"
-        category="Bomiljø"
-        disabled="true"
+        bgimage="/img/levekaar"
+        category="Levekår"
         district="bydel"
-        id="trangboddhet"
-        topic="Trangboddhet"
-        txtcolor="rgb(199, 247, 201)"
+        id="levekaar"
+        topic="Levekårs&shy;indikatorer"
+        txtcolor="rgb(244, 206, 138)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
         bgimage="/img/eierform"
         category="Bomiljø"
-        disabled="true"
         district="bydel"
         id="eierform"
         topic="Eierform"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/kommunale-boliger"
-        category="Bomiljø"
-        disabled="true"
-        district="bydel"
-        id="kommunaleboliger"
-        topic="Kommunale boliger"
-        txtcolor="rgb(199, 247, 201)"
-      />
-      <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
-        bgimage="/img/flytting"
-        category="Bomiljø"
-        disabled="true"
-        district="bydel"
-        id="flytting"
-        topic="Flytting"
-        txtcolor="rgb(199, 247, 201)"
-      />
-      <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
         bgimage="/img/bygningstyper"
         category="Bomiljø"
-        disabled="true"
         district="bydel"
         id="bygningstyper"
         topic="Bygningstyper"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
-        bgcolor="rgb(66, 248, 182)"
         bgimage="/img/boligpriser"
         category="Bomiljø"
         district="bydel"
@@ -109,26 +83,18 @@ exports[`Bydel renders component correctly 1`] = `
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
-        bgcolor="rgb(248, 198, 107)"
-        bgimage="/img/levekaar"
-        category="Levekår"
-        disabled="true"
+        bgimage="/img/trangboddhet"
+        category="Bomiljø"
         district="bydel"
-        id="levekaar"
-        topic="Levekår"
-        txtcolor="rgb(244, 206, 138)"
+        id="trangboddhet"
+        topic="Trangboddhet"
+        txtcolor="rgb(199, 247, 201)"
       />
     </div>
   </div>
    
   <div
-    class="main-container__map"
-  >
-    <v-leaflet-stub
-      dataurl=""
-      district="[object Object]"
-      scale=""
-    />
-  </div>
+    class="main-container__description"
+  />
 </div>
 `;

@@ -25,9 +25,9 @@ import d3 from '@/assets/d3';
 import debounce from '../debounce';
 import { color } from './colors';
 import * as locale from './locale';
+import allDistricts from '../../config/allDistricts';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
-d3.formatDefaultLocale(locale.format);
 
 function Base_Template(svg) {
   // Declaring local variables here to prevent templates to be
@@ -51,25 +51,48 @@ function Base_Template(svg) {
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.parseYear = d3.timeParse('%Y');
   this.formatYear = d3.timeFormat('%Y');
-  this.formatPercent = d3.format('.3p'); // 0.0124 -> '12,4%'
-  this.formatDecimal = d3.format(',.4r');
+  this.formatPercent = locale.norwegianLocale.format('.3~p'); // 0.0124 -> '12,4%'
+  this.formatDecimal = locale.norwegianLocale.format(',.0f');
+  this.formatChange = locale.norwegianLocale.format('+,');
   this.sourceHeight = 30;
   this.duration = 250;
-  this.isCompare;
+  this.isCompare = false;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
-  this.format = function(num, method, tick = false) {
+  this.tableSort = function(a, b) {
+    if (a.totalRow && b.avgRow) return 1;
+    if (b.totalRow && a.avgRow) return -1;
+    if (a.totalRow || a.avgRow) return 1;
+    if (b.totalRow || b.avgRow) return -1;
+
+    return a.id - b.id;
+  };
+
+  this.format = function(num, method, tick = false, table = false) {
     if (method === undefined) throw 'Cannot format number';
     if (num === undefined) throw 'Missing number';
 
-    if (method === 'ratio' && !tick) {
-      return this.formatPercent(num);
-    } else if (method === 'value' && !tick) {
-      return this.formatDecimal(num);
-    } else if (method === 'ratio' && tick) {
-      return d3.format('~p')(num);
-    } else if (method === 'value' && tick) {
-      return d3.format('~d')(num);
+    if (num === 'N/A' || num === 'I/T' || num === 'Ikke tilgjengelig') {
+      return '–';
+    }
+
+    if (tick) {
+      return method === 'ratio' ? d3.format('~p')(num) : d3.format('~d')(num);
+    }
+
+    if (table) {
+      return method === 'ratio' ? locale.tableLocale.format('.3~p')(num) : locale.tableLocale.format(',.0f')(num);
+    }
+
+    switch (method) {
+      case 'ratio':
+        return this.formatPercent(num);
+      case 'value':
+        return this.formatDecimal(num);
+      case 'change':
+        return this.formatChange(num);
+      default:
+        return this.formatDecimal(num);
     }
   };
 
@@ -84,6 +107,40 @@ function Base_Template(svg) {
     });
   }, 250);
 
+  // Sets the heading for the graph on load. Accepts a custom heading from `topics.js`
+  this.setHeading = function(str = false) {
+    if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
+      const heading = str || this.data.meta.heading;
+      const district = allDistricts.find(d => d.key === this.data.district);
+      const geo = district ? ` i ${district.value}` : '';
+      let year = '';
+
+      switch (this.template) {
+        case 'a':
+        case 'i':
+        case 'j':
+          if (!this.data.data[0].values.length) break;
+          year = `(${this.data.data[0].values[0].date})`;
+          break;
+
+        case 'd':
+        case 'e':
+        case 'f':
+          year = `(${this.data.data[0].aargang})`;
+          break;
+
+        default:
+          break;
+      }
+
+      const text = `${heading} ${geo} ${year}`;
+      d3.select(this.svg.node().parentNode.parentNode)
+        .select('caption')
+        .html(text);
+      this.heading.text(text);
+    }
+  };
+
   // Common operations to be run once a template is initialized
   this.init = function() {
     this.svg = d3.select(svg).style('font-family', 'OsloSans');
@@ -93,13 +150,25 @@ function Base_Template(svg) {
     // Clear the contents of the svg
     this.svg.selectAll('*').remove();
 
+    // Remove dropdown element
+    d3.select(svg.parentNode.parentNode)
+      .select('.graph__dropdown')
+      .remove();
+
+    this.background = this.svg
+      .append('rect')
+      .attr('class', 'background')
+      .attr('width', '100%')
+      .attr('height', '100%')
+      .attr('fill', 'white');
+
     // Append heading element
     this.heading = this.svg
       .append('text')
       .attr('class', 'heading')
       .attr('fill', color.purple)
-      .attr('font-weight', 400)
-      .attr('font-size', '1.15em')
+      .attr('font-weight', 500)
+      .attr('font-size', '1em')
       .attr('y', '1em');
 
     // Append canvas element
@@ -119,58 +188,11 @@ function Base_Template(svg) {
     // once for each initialization.
     this.created();
     this.addSourceElement();
-    this.addTooltipElement();
-  };
-
-  // Creates DOM elements for generic tooltip
-  this.addTooltipElement = function() {
-    let group = this.svg
-      .append('g')
-      .attr('class', 'tooltip')
-      .attr('opacity', 0)
-      .style('pointer-events', 'none');
-
-    group
-      .append('rect')
-      .attr('transform', 'translate(0, -29)')
-      .attr('fill', color.yellow)
-      .attr('stroke', 'white')
-      .attr('rx', 11)
-      .attr('height', 21);
-    group
-      .append('text')
-      .attr('transform', 'translate(0, -14)')
-      .attr('font-size', 12)
-      .attr('font-weight', 'bold')
-      .attr('text-anchor', 'middle')
-      .attr('fill', color.purple);
-  };
-
-  // Displays generic tooltip,
-  // using the d3.event as an argument
-  // to position the tooltip
-  this.showTooltip = function(str, event) {
-    let group = this.svg.select('g.tooltip');
-    let rect = group.select('rect');
-    let text = group.select('text');
-
-    group.attr('transform', `translate(${event.offsetX}, ${event.offsetY})`);
-    text.text(str);
-    rect.attr('width', text.node().getBBox().width + 20).attr('x', -(text.node().getBBox().width / 2 + 10));
-
-    group.attr('opacity', 1);
-  };
-
-  // Hides the generic tooltip
-  this.hideTooltip = function() {
-    let group = this.svg.select('g.tooltip').attr('opacity', 0);
-    group.select('rect');
-    group.select('text').text('');
   };
 
   // Creates DOM elements for generic source reference
   this.addSourceElement = function() {
-    let group = this.svg
+    const group = this.svg
       .append('g')
       .attr('class', 'sourceGroup')
       .attr('fill', color.purple)
@@ -187,7 +209,7 @@ function Base_Template(svg) {
       .attr('class', 'source')
       .attr('font-size', 10)
       .attr('transform', () => {
-        let labelWidth = group
+        const labelWidth = group
           .select('.source-label')
           .node()
           .getBBox().width;
@@ -223,16 +245,12 @@ function Base_Template(svg) {
   // All templates share these common operations when rendered
   this.commonRender = function(data, options = {}) {
     if (data === undefined || data.data === undefined) return;
-
-    data.data = Array.isArray(data.data) ? data.data.sort((a, b) => a.totalRow - b.totalRow) : data.data;
     this.data = data;
 
-    this.heading.text(this.data.meta.heading);
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-
     this.isCompare = options.compareDistricts || false;
     this.method = options.method || 'value';
-    this.highlight = options.highlight === undefined || options.highlight == null ? -1 : options.highlight;
+    this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
 

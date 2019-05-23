@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import vuex from 'vuex';
-import TheNavigationDrawer from '../../../src/components/TheNavigationDrawer.vue';
+import TheNavigationDrawer from '../../../src/components/TheNavigationDrawer';
 import router from '../../../src/router';
 import store from '../../../src/store';
 import setupI18n from '../../../src/i18n';

@@ -6,51 +6,72 @@ import Base_Template from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import ageRanges from '../../config/ageRanges';
+import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'd';
 
   this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
   this.height = 0; // calculated on render. Height of the lower part
-  this.height2 = 100; // height of the upper chart
+  this.height2 = 140; // height of the upper chart
   this.width = 1000;
-  this.paddingUpperLeft = 160; // padding left of the upper chart
+  this.paddingUpperLeft = 190; // padding left of the upper chart
   this.paddingLowerLeft = 300; // padding left of the lower chart
   this.yGutter = 130; // space between upper and lower charts
   this.y = d3.scaleLinear();
   this.handle;
+  this.dropDownParent;
 
-  let extent = [0, 119];
+  this.minWidth = 600;
+  this.ageCap = 119; // caps the graphs on this age (set to 119 to disable capping)
   let gBrushSmall, gBrushLarge;
 
-  this.age = d3.scaleLinear().domain(extent);
+  this.age = d3.scaleLinear().domain([0, this.ageCap]);
 
-  this.sortData = function(data) {
-    data = data.sort((a, b) => {
-      let totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-      let totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+  let extent = [];
+
+  function sortData(input, method) {
+    input.sort((a, b) => {
+      const totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
+      const totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
       return totB - totA;
     });
 
-    data = data.sort((a, b) => a.avgRow - b.avgRow);
-    data = data.sort((a, b) => a.totalRow - b.totalRow);
-    return data;
-  };
+    input.sort((a, b) => a.avgRow - b.avgRow);
+    input.sort((a, b) => a.totalRow - b.totalRow);
+    return input;
+  }
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
 
-    this.data.data = this.sortData(this.data.data);
     if (!data.data) return;
 
-    this.width = d3.max([this.width, 600]);
+    sortData(data.data, this.method);
+
+    this.width = d3.max([this.width, this.minWidth]);
+
+    if (this.parentWidth() < this.minWidth) {
+      this.upper.attr('opacity', 0);
+      this.middle.attr('opacity', 0);
+      this.yGutter = 0;
+      this.dropDownParent.style('top', '32px');
+    } else {
+      this.upper.attr('opacity', 1);
+      this.middle.attr('opacity', 1);
+      this.yGutter = 130;
+      this.dropDownParent.style('top', 'none');
+    }
+
+    this.lower.attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
 
     // Set sizes for brush objects
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 18]]);
 
     // Set size for age (scale for brushes)
-    this.age.range([0, this.width - this.paddingUpperLeft]).nice();
+    this.age.range([0, this.width - this.paddingUpperLeft]);
 
     // Resize SVG DOM element
     this.svg
@@ -61,7 +82,7 @@ function Template(svg) {
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     // Move the brushes if a range was selected and save the new extent
-    if (options.range) {
+    if (options.range && typeof options.range === 'string') {
       extent = JSON.parse(options.range);
       gBrushLarge
         .transition()
@@ -74,10 +95,10 @@ function Template(svg) {
     }
 
     // Find the larges accumulated number within the selected range
-    let maxAccumulated = this.getMaxAccumulated();
+    const maxAccumulated = this.getMaxAccumulated();
 
     // Find the largest single age to scale y axis behind brush within the selected range
-    let max = this.getMax();
+    const max = this.getMax();
 
     // Set axis and scales based on these max values (for the bars()
     this.y
@@ -88,6 +109,7 @@ function Template(svg) {
       .domain([0, maxAccumulated])
       .range([0, this.width - this.paddingLowerLeft])
       .nice();
+
     this.upperYAxis
       .transition()
       .duration(this.duration)
@@ -149,10 +171,14 @@ function Template(svg) {
     // If there's brush event, we get the selection here
     // and saves the extent (years) to the global variable.
     if (!d3.event) {
-      s = extent.map(self.age);
+      return;
     } else {
       s = d3.event.selection || self.age.range();
       extent = s.map(val => Math.round(self.age.invert(val)));
+    }
+
+    if (d3.event.sourceEvent) {
+      this.dropDownParent.select('select').node().value = '';
     }
 
     // Brushes need to be called from their parent group ('g')
@@ -178,15 +204,25 @@ function Template(svg) {
     d3.selectAll('rect.selection')
       .attr('x', s[0])
       .attr('opacity', 1)
-      .attr('width', s[1] - s[0]);
+      .attr('width', s[1] - s[0])
+      .filter((d, i) => i === 1)
+      .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
 
     // Move invisible handles
     d3.selectAll('.handle--e')
       .attr('width', 21)
-      .attr('x', s[1]);
+      .attr('x', s[1])
+      .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
     d3.selectAll('.handle--w')
       .attr('width', 21)
-      .attr('x', s[0] - 21);
+      .attr('x', s[0] - 21)
+      .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
 
     // Move visible handles
     self.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
@@ -198,7 +234,7 @@ function Template(svg) {
   this.line = d3
     .line()
     .curve(d3.curveBasis)
-    .x((d, i) => this.age(i))
+    .x((d, i) => (i > this.ageCap ? this.age(this.ageCap) : this.age(i)))
     .y(d => this.y(d[this.method]));
 
   const brushLarge = d3.brushX().on('brush end', () => {
@@ -222,11 +258,11 @@ function Template(svg) {
       .append('path')
       .attr('fill', color.purple)
       .style('pointer-events', 'none')
-      .attr('d', d => {
-        return d.type === 'e'
+      .attr('d', d =>
+        d.type === 'e'
           ? 'M0 0h11c6 0 10 4 10 10v17c0 6-4 10-10 10H0V0z'
-          : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z';
-      });
+          : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z'
+      );
 
     this.handle
       .append('rect')
@@ -262,34 +298,37 @@ function Template(svg) {
   // Creates the styled age selector as normal HTML
   // as sibling element to the SVG.
   this.createAgeSelector = function() {
-    let parent = d3.select(this.svg.node().parentNode);
-    let div = parent
+    const parent = d3.select(this.svg.node().parentNode.parentNode);
+    this.dropDownParent = parent
       .insert('div')
       .attr('class', 'graph__dropdown')
       .attr('aria-hidden', true);
 
-    div
+    this.dropDownParent
       .insert('label')
       .attr('for', 'age_selector')
       .attr('class', 'graph__dropdown__label')
-      .html('Velg segment');
-    let select = div
-      .append('select')
+      .html('Velg aldersgruppe');
+
+    const selectElement = this.dropDownParent
+      .insert('select')
       .attr('aria-hidden', true)
       .attr('id', 'age_selector')
       .attr('aria-hidden', true)
-      .attr('class', 'graph__dropdown__select');
+      .attr('class', 'child graph__dropdown__select')
+      .attr('data-no-dragscroll', true);
 
-    select
+    selectElement
       .selectAll('option')
       .data(ageRanges)
       .join('option')
+      .attr('disabled', d => d.disabled)
       .attr('value', d => d.range)
       .text(d => d.label);
 
     // Add eventlistener to the selector, and capture the value
     // and pass it on when re-rendering the chart
-    select.on('input', (d, i, j) => {
+    selectElement.on('input', (d, i, j) => {
       this.render(this.data, { method: this.method, range: j[i].value });
     });
   };
@@ -304,21 +343,20 @@ function Template(svg) {
       .append('g')
       .attr('class', 'middle')
       .attr('transform', `translate(0, ${this.height2 + 40})`);
-    this.lower = this.canvas
-      .append('g')
-      .attr('class', 'lower')
-      .attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
+    this.lower = this.canvas.append('g').attr('class', 'lower');
 
     this.lower
       .append('text')
       .attr('class', 'xAxis-title')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
+      .attr('font-size', '1em')
+      .attr('font-weight', 500)
       .attr('fill', color.purple)
-      .attr('transform', `translate(${this.paddingLowerLeft}, ${-28})`);
+      .attr('transform', `translate(${this.paddingLowerLeft}, ${-32})`);
 
     brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
     brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+
+    this.upper.append('g').attr('class', 'lines');
 
     gBrushLarge = this.upper
       .append('g')
@@ -347,7 +385,7 @@ function Template(svg) {
     gBrushSmall
       .select('.overlay')
       .attr('stroke', color.purple)
-      .attr('rx', 6);
+      .attr('rx', 2);
 
     this.upperXAxis = this.upper
       .append('g')
@@ -377,25 +415,37 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
-    this.table.select('caption').text(this.data.meta.heading);
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hrow = thead.append('tr');
+    const hrow = thead.append('tr');
 
     hrow
       .selectAll('th')
-      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .data(() => [
+        'Geografi',
+        ...ageRanges
+          .filter(d => !d.disabled)
+          .map(d => {
+            let str = '';
+            str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+            str += d.label;
+            str += this.method === 'ratio' ? ' (%)' : '';
+            return str;
+          }),
+      ])
       .join('th')
       .attr('scope', 'col')
       .text(d => d);
 
-    let rows = tbody
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
+    const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography cells
@@ -410,26 +460,28 @@ function Template(svg) {
     rows
       .selectAll('td')
       .data(d => {
-        return ageRanges.map(age => {
-          const range = JSON.parse(age.range);
-          let sum = 0;
-          for (let i = range[0]; i <= range[1]; i++) {
-            sum += d.values[i][this.method];
-          }
-          return sum;
-        });
+        return ageRanges
+          .filter(d => !d.disabled)
+          .map(age => {
+            const range = JSON.parse(age.range);
+            let sum = 0;
+            for (let i = range[0]; i <= range[1]; i++) {
+              sum += d.values[i][this.method];
+            }
+            return sum;
+          });
       })
       .join('td')
-      .text(d => this.format(d, this.method));
+      .text(d => this.format(d, this.method, false, true));
   };
 
   // Draws/updates rows content. Triggered each render
   this.drawRows = function() {
-    let rows = this.lower
+    const rows = this.lower
       .selectAll('g.row')
       .data(this.data.data, d => d.geography)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'row');
+        const g = enter.append('g').attr('class', 'row');
         g.append('rect')
           .attr('class', 'rowFill')
           .attr('fill', color.purple)
@@ -455,6 +507,7 @@ function Template(svg) {
           .attr('width', this.width)
           .attr('height', 1)
           .attr('y', this.rowHeight);
+        return g;
       });
 
     rows.select('rect.rowFill').attr('width', this.width);
@@ -467,13 +520,9 @@ function Template(svg) {
       .delay(this.duration)
       .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
     rows.select('text.geography').text(d => d.geography);
-    rows.select('text.value').text(bydel => {
-      let sum = d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-      if (this.method === 'ratio') {
-        return this.format(sum, this.method);
-      } else {
-        return d3.format(',d')(sum);
-      }
+    rows.select('text.value').text(district => {
+      const sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
+      return this.format(sum, this.method);
     });
 
     rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);
@@ -483,12 +532,12 @@ function Template(svg) {
       .select('rect.bar')
       .transition()
       .duration(this.duration)
-      .attr('width', bydel => {
-        if (this.method == 'value' && (bydel.avgRow || bydel.totalRow)) {
+      .attr('width', district => {
+        if (this.method === 'value' && (district.avgRow || district.totalRow)) {
           return 0;
         }
         return this.x(
-          d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]))
+          d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]))
         );
       })
       .attr('x', this.paddingLowerLeft)
@@ -499,13 +548,12 @@ function Template(svg) {
 
     rows
       .select('rect.bar')
-      .on('mousemove', d => {
-        let sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
-        this.showTooltip(sum, d3.event);
+      .on('mouseover', d => {
+        const sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
+        showTooltipOver(sum);
       })
-      .on('mouseleave', () => {
-        this.hideTooltip();
-      });
+      .on('mousemove', showTooltipMove)
+      .on('mouseleave', hideTooltip);
 
     this.lower.select('text.xAxis-title').text(() => {
       if (this.method === 'ratio' && extent[1] - extent[0] >= 1) {
@@ -523,13 +571,11 @@ function Template(svg) {
   // Draws/updates lines in the line chart. Triggered each render
   this.drawLines = function() {
     // Select lines
-    let lines = this.upper.selectAll('path.line').data(
-      this.data.data.filter(d => {
-        if (this.method == 'ratio') return d;
-        return !d.avgRow && !d.totalRow;
-      })
-    );
-    let linesE = lines
+    let lines = this.upper
+      .select('.lines')
+      .selectAll('path.line')
+      .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)));
+    const linesE = lines
       .enter()
       .append('path')
       .attr('class', 'line')
@@ -549,9 +595,23 @@ function Template(svg) {
       .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
       .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
       .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
-      .style('stroke-dasharray', d => {
-        if (d.totalRow && this.method === 'ratio') return '4,3';
-      });
+      .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
+
+    lines.on('mouseover', (d, i, j) => {
+      lines.attr('opacity', 0.1).attr('stroke', color.blue);
+      d3.select(j[i])
+        .attr('opacity', 1)
+        .attr('stroke', color.purple);
+
+      showTooltipOver(d.geography);
+    });
+
+    lines.on('mousemove', showTooltipMove);
+
+    lines.on('mouseleave', () => {
+      lines.attr('opacity', 1).attr('stroke', color.blue);
+      hideTooltip();
+    });
   };
 
   // Finds the larges accumulated number within the selected range
@@ -559,15 +619,9 @@ function Template(svg) {
     return (
       d3.max(
         this.data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel =>
-            d3.sum(bydel.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
+          .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
+          .map(district =>
+            d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
           )
       ) * 1.05
     );
@@ -578,14 +632,8 @@ function Template(svg) {
     return (
       d3.max(
         this.data.data
-          .filter(bydel => {
-            if (this.method == 'ratio') {
-              return bydel;
-            } else {
-              return !bydel.totalRow && !bydel.avgRow;
-            }
-          })
-          .map(bydel => d3.max(bydel.values.map(val => val[this.method])))
+          .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
+          .map(district => d3.max(district.values.map(val => val[this.method])))
       ) * 1.05
     );
   };

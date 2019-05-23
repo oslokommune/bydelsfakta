@@ -1,6 +1,6 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
-    <h1 v-if="selectedTopic === null" class="header">{{ getDistrict(this.$route.params.district) }}</h1>
+    <h1 v-if="selectedTopic === null" class="header">{{ getDistrict($route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
       <button
         v-if="selectedTopic"
@@ -12,13 +12,14 @@
         v-click-outside="closeMenu"
         ref="select"
         :aria-label="$t('navigationTopbar.selectTopic.aria')"
+        :title="$t('navigationTopbar.selectTopic.aria')"
       >
         <label class="label" :class="{ 'label--active': selectedTopic !== null }">{{
           $t('navigationTopbar.selectTopic.label')
         }}</label>
         <div class="topic">
-          <span>{{ getHumanReadableTopic(selectedTopic) }}</span>
-          <i class="material-icons">{{ showDropdown ? 'arrow_drop_up' : 'arrow_drop_down' }}</i>
+          <h1 class="header">{{ getHumanReadableTopic(selectedTopic) }}</h1>
+          <ok-icon icon-ref="arrow-down" :options="{ rotation: showDropdown ? '180deg' : false }"></ok-icon>
         </div>
       </button>
       <transition name="fade">
@@ -26,7 +27,7 @@
           <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
             <div
               class="navigation-topbar__dropdown-column--heading"
-              :style="{ color: kategori.color, 'border-top': `3px solid ${kategori.color}` }"
+              :style="{ color: kategori.color, 'border-top-color': kategori.color }"
             >
               <span>{{ kategori.kategori }}</span>
             </div>
@@ -55,6 +56,7 @@
 import { mapState, mapActions } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import { categories, topics, disabledTopics } from '../config/topics';
+import OkIcon from './OkIcon';
 
 export default {
   name: 'TheNavigationTopbar',
@@ -69,15 +71,10 @@ export default {
     };
   },
 
-  computed: {
-    ...mapState(['compareDistricts', 'menuIsOpen']),
-  },
+  components: { OkIcon },
 
-  created() {
-    if (this.$route.name !== 'Home') {
-      const routes = this.$route.path.split('/');
-      if (routes.length > 3) this.selectedTopic = routes[3];
-    }
+  computed: {
+    ...mapState(['compareDistricts', 'menuIsOpen', 'districts']),
   },
 
   methods: {
@@ -103,6 +100,8 @@ export default {
         return this.$t('navigationTopbar.header.compareDistrict');
       } else if (this.$route.name === 'NotFound') {
         return this.$t('navigationTopbar.header.notFound');
+      } else if (this.$route.name === 'Home') {
+        return this.$t('navigationTopbar.header.home');
       } else {
         return id !== undefined
           ? this.allDistricts.find(district => district.uri === id).value
@@ -124,16 +123,14 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      if (to.name === 'NotFound') {
+
+      if (to.name !== 'Topic') {
         this.selectedTopic = null;
         this.showDropdown = false;
-      } else if (to.name === 'District') {
-        this.selectedTopic = null;
-      } else if (to.name === 'Home') {
-        this.selectedTopic = null;
       } else {
         if (routes.length > 3) this.selectedTopic = routes[3];
       }
+      this.closeMenu();
     },
 
     showDropdown() {
@@ -155,7 +152,7 @@ export default {
   margin-left: 0.5rem;
   padding: 0.5rem;
   position: relative;
-  width: 100%;
+  width: auto;
 
   @media screen and (min-width: $break-lg) {
     display: block;
@@ -175,7 +172,7 @@ export default {
 
   @media screen and (min-width: $break-lg) {
     margin: 0;
-    padding: 2.5rem 1rem 1rem;
+    padding: 0.75rem 1rem 0.5rem;
     width: 100%;
   }
 
@@ -203,13 +200,42 @@ export default {
 }
 
 .label {
-  font-size: $font-body;
+  font-size: $font-medium;
   margin-bottom: 0.25rem;
 }
 
 .topic {
   align-items: center;
   display: flex;
+  text-align: left;
+  width: 100%;
+
+  .header {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: auto;
+  }
+
+  & > .icon {
+    margin-left: 0.5rem;
+  }
+}
+
+.icon {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  height: 2rem;
+  transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
+  width: 2rem;
+
+  &.rotate {
+    transform: rotateX(180deg);
+  }
+
+  &__arrow {
+    background-image: url('/icons/arrow.svg');
+  }
 }
 
 .navigation-topbar {
@@ -224,6 +250,7 @@ export default {
   }
 
   &__select {
+    align-items: flex-start;
     color: $color-purple;
     display: flex;
     flex-direction: column;
@@ -248,10 +275,7 @@ export default {
 
   &__dropdown {
     background-color: white;
-    border: 1px solid $color-grey-100;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.65);
+    border: 3px solid $color-border;
     display: flex;
     flex-flow: row wrap;
     max-height: calc(100vh - 17rem);
@@ -270,9 +294,14 @@ export default {
       padding: 0.5rem;
 
       &--heading {
-        font-weight: bold;
+        font-weight: 700;
         margin-bottom: 1rem;
         margin-top: 1rem;
+        padding-top: 0.5rem;
+
+        & > span {
+          padding-left: 0.5rem;
+        }
 
         @media screen and (min-width: $break-lg) {
           margin-top: 0;

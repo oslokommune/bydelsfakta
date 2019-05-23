@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import VueResize from 'vue-resize';
 
-import Topic from '../../../src/views/Topic.vue';
+import Topic from '../../../src/views/Topic';
 import clickOutside from '../../../src/directives/clickOutside';
 import store from '../../../src/store';
 import setupI18n from '../../../src/i18n';

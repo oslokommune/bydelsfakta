@@ -20,5 +20,11 @@ module.exports = {
         ignores: [],
       },
     ],
+    'import/extensions': [
+      'error',
+      {
+        svg: 'ignorePackages',
+      },
+    ],
   },
 };

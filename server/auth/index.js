@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 'use strict';
 
-const { getToken } = require('./api');
-const { isTokenExpired, refreshToken, parseToken } = require('./accessToken');
+const { request } = require('./api');
+const { isTokenExpired, parseToken } = require('./accessToken');
 
 const data = {
   client_id: process.env.KEYCLOAK_CLIENT_ID,
@@ -11,28 +11,54 @@ const data = {
 
 let accessToken = null;
 
+const logErrors = (error, refresh) => {
+  if (refresh) {
+    console.log('Status: ', error.status);
+    console.log('StatusText: ', error.statusText);
+    console.log('Error refreshing access token: ', error.data);
+  } else {
+    console.log('Status: ', error.status);
+    console.log('StatusText: ', error.statusText);
+    console.log('Error refreshing access token: ', error.data);
+  }
+};
+
 module.exports = () => {
-  return async (req, res, next) => {
-    if (accessToken === null) {
-      try {
-        const result = await getToken(data);
-        accessToken = parseToken(result.data);
-      } catch (error) {
-        console.log('Access token error: ', error.message);
-        return Promise.reject(error.response);
-      }
-    } else if (isTokenExpired(accessToken)) {
-      try {
-        const result = await refreshToken(accessToken, data);
-        accessToken = parseToken(result.data);
-      } catch (error) {
-        console.log('Error refreshing access token: ', error.message);
-        return Promise.reject(error.response);
-      }
+  return (req, res, next) => {
+    if (accessToken === null || isTokenExpired(accessToken.refresh_expires_at)) {
+      const params = Object.assign({}, data, {
+        grant_type: process.env.KEYCLOAK_GRANT_TYPE_CLIENT,
+      });
+
+      return request(params)
+        .then(response => {
+          accessToken = parseToken(response);
+          req.headers.authorization = `Bearer ${accessToken.access_token}`;
+          next();
+        })
+        .catch(error => {
+          logErrors(error);
+          return res.status(error.status);
+        });
+    } else if (isTokenExpired(accessToken.expires_at)) {
+      const params = Object.assign({}, data, {
+        grant_type: process.env.KEYCLOAK_GRANT_TYPE_REFRESH,
+        refresh_token: accessToken.refresh_token,
+      });
+
+      return request(params)
+        .then(response => {
+          accessToken = parseToken(response);
+          req.headers.authorization = `Bearer ${accessToken.access_token}`;
+          next();
+        })
+        .catch(error => {
+          logErrors(error, true);
+          return res.status(error.status);
+        });
+    } else {
+      req.headers.authorization = `Bearer ${accessToken.access_token}`;
+      next();
     }
-
-    req.headers.authorization = `Bearer ${accessToken.access_token}`;
-
-    next();
   };
 };

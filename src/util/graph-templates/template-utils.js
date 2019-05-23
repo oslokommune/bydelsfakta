@@ -11,10 +11,24 @@ const util = {
     if (!str) return;
 
     width = width.length === 2 ? width[1] - width[0] : width;
+
+    const computedWidth = this.getTextWidth(str, size, weight);
+
+    const overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
+
+    if (overflowingCharacters) {
+      str = str.substring(0, str.length - overflowingCharacters - 1);
+      str += '...';
+    }
+
+    return str;
+  },
+
+  getTextWidth: function(str, size = 14, weight = 400) {
     let computedWidth;
 
     // create placeholder svg
-    let svg = d3.select('body').append('svg');
+    const svg = d3.select('body').append('svg');
 
     svg
       .append('text')
@@ -26,14 +40,13 @@ const util = {
       });
     svg.remove();
 
-    let overflowingCharacters = Math.max(str.length - Math.floor((width / computedWidth) * str.length), 0);
+    return computedWidth;
+  },
 
-    if (overflowingCharacters) {
-      str = str.substring(0, str.length - overflowingCharacters - 1);
-      str += '...';
-    }
-
-    return str;
+  capitalize: function(str) {
+    let arr = str.split('');
+    arr[0] = arr[0].toUpperCase();
+    return arr.join('');
   },
 
   goto: function(geo) {
@@ -56,6 +69,8 @@ const util = {
       },
     });
   },
+
+  allDistricts: allDistricts,
 };
 
 export default util;

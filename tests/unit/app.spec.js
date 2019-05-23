@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
-import App from '../../src/App.vue';
+import App from '../../src/App';
 import router from '../../src/router';
 import clickOutside from '../../src/directives/clickOutside';
 import store from '../../src/store';

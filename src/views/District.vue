@@ -9,43 +9,56 @@
           :category="topics[`${topicName}`].options.kategori"
           :topic="topics[`${topicName}`].options.tema"
           :bg-image="topics[`${topicName}`].options.bgImage"
-          :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
-          :disabled="disabledTopics.includes(topicName)"
+          :disabled="
+            topics[`${topicName}`].production === productionMode && topics[`${topicName}`].production !== null
+              ? false
+              : topics[`${topicName}`].production === true && productionMode === false
+              ? false
+              : productionMode !== null
+          "
         />
       </div>
     </div>
-    <div class="main-container__map">
-      <v-leaflet :district="geoDistricts" />
+    <div class="main-container__description">
+      <!-- TODO: Add text description of the application -->
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import VCategory from '../components/VCategory.vue';
-import VLeaflet from '../components/VLeaflet.vue';
+import { mapState } from 'vuex';
+import VCategory from '../components/VCategory';
 import { topics, topicNames, disabledTopics } from '../config/topics';
 import districts from '../config/geoData/districts';
+import { getDistrictName } from '../util';
 
 export default {
   name: 'District',
   components: {
     VCategory,
-    VLeaflet,
   },
 
   props: {
     district: {
       type: String,
       required: false,
-      default: 'alle',
+      default: 'gamleoslo',
     },
   },
 
+  metaInfo() {
+    return {
+      title:
+        this.compareDistricts || this.district === 'alle'
+          ? 'Bydelsfakta'
+          : `${getDistrictName(this.district)} | Bydelsfakta`,
+    };
+  },
+
   computed: {
-    ...mapGetters(['geoDistricts']),
+    ...mapState(['productionMode', 'compareDistricts']),
   },
 
   data() {

@@ -12,8 +12,8 @@ export default function setupI18n() {
   Vue.use(VueI18n);
 
   return new VueI18n({
-    locale: process.env.VUE_APP_I18N_LOCALE || 'en',
-    fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+    locale: process.env.VUE_APP_I18N_LOCALE || 'nb-no',
+    fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'nb-no',
     messages: loadLocaleMessages(),
   });
 }

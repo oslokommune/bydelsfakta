@@ -1,11 +1,5 @@
 <template>
-  <router-link
-    class="main-container__item"
-    :class="{ disabled }"
-    :to="getLink()"
-    :id="id"
-    :style="{ backgroundColor: bgColor }"
-  >
+  <router-link class="main-container__item" :class="{ disabled }" :to="getLink()" :id="id">
     <picture>
       <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
       <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />
@@ -29,10 +23,6 @@ export default {
       required: true,
     },
     bgImage: {
-      type: String,
-      required: true,
-    },
-    bgColor: {
       type: String,
       required: true,
     },
@@ -86,8 +76,8 @@ export default {
   display: flex;
   flex: 17.5em 1 0;
   flex-direction: column;
-  height: 6em;
   margin: 0;
+  min-height: 6em;
   overflow: hidden;
   padding: 1em;
   position: relative;
@@ -95,21 +85,22 @@ export default {
   transition: all 0.15s ease-in-out;
 
   &.disabled {
-    background-color: $color-grey-100 !important;
-    opacity: 0.45;
+    filter: grayscale(1);
+    opacity: 0.95;
+    text-decoration: line-through;
 
     .oslo__category {
-      background: $color-grey-200 !important;
-      color: $color-grey-600 !important;
+      background: #555555 !important;
+      color: white;
     }
   }
 
   @media screen and (min-width: $break-sm) {
-    height: 8em;
+    height: 9em;
   }
 
   @media screen and (min-width: $break-md) {
-    height: 9em;
+    height: 9.5em;
   }
 
   // Fallback to flexbox
@@ -127,7 +118,6 @@ export default {
 .oslo__img {
   height: 100%;
   left: 0;
-  mix-blend-mode: multiply;
   object-fit: cover;
   position: absolute;
   top: 0;

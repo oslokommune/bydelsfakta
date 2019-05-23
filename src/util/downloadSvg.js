@@ -1,4 +1,15 @@
 import d3 from '../assets/d3';
+import downloadFile from './downloadFile';
+
+// Generates the svg blob and calls download function
+export default function(svgData, filename) {
+  svgData = cleanSvgData(svgData);
+
+  const preface = '<?xml version="1.0" standalone="no"?>\r\n';
+  const svgBlob = new Blob([preface, svgData], { type: 'image/svg+xml;charset=utf-8' });
+
+  downloadFile(svgBlob, filename, '.svg');
+}
 
 // Parses the svgData str and strips away
 // mouse interactions using d3 and returns
@@ -25,22 +36,3 @@ function cleanSvgData(str) {
 
   return svg.node().outerHTML;
 }
-
-// Generates a download link with a Blob containing
-// the (cleaned) SVG string and clicks it triggering
-// the file download before removing the link from DOM.
-const downloadSvg = function(svgData, filename) {
-  svgData = cleanSvgData(svgData);
-
-  const preface = '<?xml version="1.0" standalone="no"?>\r\n';
-  const svgBlob = new Blob([preface, svgData], { type: 'image/svg+xml;charset=utf-8' });
-  const svgUrl = URL.createObjectURL(svgBlob);
-  const downloadLink = document.createElement('a');
-  downloadLink.href = svgUrl;
-  downloadLink.download = filename;
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-};
-
-export default downloadSvg;

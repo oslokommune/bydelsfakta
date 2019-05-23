@@ -28,7 +28,7 @@
       <p>
         {{ $t('notFound.seeMore.subheader') }}
       </p>
-      <div class="notFound__topics-grid">
+      <div class="topics-grid">
         <v-category
           v-for="topicName in seeMoreTopics"
           :key="topics[`${topicName}`].value"
@@ -36,7 +36,6 @@
           :category="topics[`${topicName}`].options.kategori"
           :topic="topics[`${topicName}`].options.tema"
           :bg-image="topics[`${topicName}`].options.bgImage"
-          :bg-color="topics[`${topicName}`].options.bgColor"
           :txt-color="topics[`${topicName}`].options.txtColor"
           district="alle"
         />
@@ -46,7 +45,7 @@
 </template>
 
 <script>
-import VCategory from '../components/VCategory.vue';
+import VCategory from '../components/VCategory';
 import { topics } from '../config/topics';
 
 export default {
@@ -54,8 +53,13 @@ export default {
   components: { VCategory },
   data() {
     return {
-      seeMoreTopics: ['folkemengde', 'alder', 'innvandrerbefolkningen'],
+      seeMoreTopics: ['husholdninger', 'boligpriser'],
       topics: topics,
+    };
+  },
+  metaInfo() {
+    return {
+      title: 'Page not found | Bydelsfakta',
     };
   },
 };
@@ -65,6 +69,10 @@ export default {
 @import '../styles/colors';
 @import '../styles/variables';
 @import '../styles/layout';
+
+.topics-grid {
+  padding: 0;
+}
 
 .notFound {
   &-container {

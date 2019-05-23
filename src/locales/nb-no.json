@@ -5,46 +5,72 @@
       "open": "Åpne meny"
     },
     "savePNG": {
-      "aria": "lagre graf som png",
-      "label": "Last ned som PNG"
+      "aria": "lagre graf som bilde (png-fil)",
+      "label": "Last ned som bilde (.png)"
     },
     "saveSVG": {
-      "aria": "lagre graf som svg",
-      "label": "Last ned som SVG"
+      "aria": "lagre graf som bilde (svg-fil)",
+      "label": "Last ned som grafikk (.svg)"
+    },
+    "saveCSV": {
+      "aria": "last ned data som som csv",
+      "label": "Last ned datasett (.csv)"
     },
     "showTable": {
       "graph": "Vis grafikk",
       "table": "Vis tabell"
     },
+    "about": {
+      "aria": "Om statistikken",
+      "label": "Om statistikken",
+      "updated": "Oppdatert"
+    },
     "options": {
       "label": "Valg"
+    },
+    "help": {
+      "ariaShow": "Vis hjelpetekst",
+      "ariaHide": "Skjul hjelpetext"
+    },
+    "mode": {
+      "map": "Kart",
+      "table": "Tabell",
+      "graph": "Graf"
+    },
+    "table": {
+      "footnote": "Inkluderer befolkningen i Sentrum, Marka og uten registrert adresse."
     }
   },
   "navigationDrawer": {
     "linkCompare": "Sammenlign bydeler",
     "selectAll": {
-      "aria": "velg alle checkboxes",
+      "aria": "velg alle sjekkbokser",
       "label": "Velg alle"
     },
+    "selectOne": {
+      "tab": "Utforsk<br/>en bydel",
+      "label": "Velg en bydel"
+    },
     "unselectAll": {
-      "aria": "fjern alle checkboxes",
+      "aria": "fjern alle sjekkbokser",
       "label": "Fjern alle"
     },
     "select": {
-      "label": "Velg region"
+      "label": "Velg byområde"
     },
     "navigationDistrict": {
       "compareDistrict": "Sammenlign bydeler",
-      "chooseDistrict": "- Velg bydel -"
+      "chooseDistrict": "- Velg byområde -"
     }
   },
   "navigationTopbar": {
     "selectTopic": {
-      "aria": "velg temaknapp",
+      "aria": "Åpne temameny",
       "label": "Velg tema"
     },
     "header": {
-      "compareDistrict": "Sammenligne bydeler",
+      "home": "Bydelsfakta",
+      "compareDistrict": "Bydelsfakta",
       "chooseDistrict": "Velg bydel",
       "notFound": "Oops! Noe gikk galt."
     }
@@ -83,5 +109,11 @@
   },
   "error": {
     "connectionLost": "Mistet kontakten med datatjener"
+  },
+  "loading": {
+    "loadingData": "Henter data"
+  },
+  "ie11": {
+    "disabled": "Utilgjengelig i Internet Explorer"
   }
 }

@@ -12,26 +12,28 @@
 import Base_Template from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
+  this.template = 'e';
 
-  this.padding = { top: 70, right: 55, bottom: 50, left: 300 };
+  this.padding = { top: 70, right: 85, bottom: 50, left: 360 };
   this.y = d3.scaleLinear();
-  this.gutter = 100;
+  this.gutter = 140;
   this.yAxis = []; // three yAxis (left, right and gridlines)
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
 
     this.selected =
-      options.selected == null || options.selected == undefined
+      options.selected === null || options.selected === undefined
         ? this.data.data.findIndex(el => el.avgRow || el.totalRow)
         : options.selected;
 
     this.width = d3.max([this.width, 360]);
 
-    this.height = 400;
+    this.height = 500;
     this.svg
       .transition()
       .duration(this.duration)
@@ -63,14 +65,14 @@ function Template(svg) {
     // Create heading (label) for the list
     this.list
       .append('text')
-      .text('Velg delbydel')
+      .text('Velg geografi')
       .attr('font-size', 12)
       .style('text-transform', 'uppercase')
       .attr('font-weight', 700)
       .attr('fill', color.purple)
       .attr('transform', 'translate(10, -16)');
 
-    // Holds the pyradmid elements
+    // Holds the pyramid elements
     this.pyramid = this.canvas.append('g').attr('class', 'pyramid');
 
     // Append three yAxis groups
@@ -95,24 +97,21 @@ function Template(svg) {
     this.canvas
       .append('g')
       .attr('class', 'yAxis-title')
-      .attr('transform', `translate(-50, ${this.height / 2})`)
       .append('text')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
+      .attr('font-size', '1em')
       .attr('fill', color.purple)
       .text('Alder')
       .attr('text-anchor', 'middle')
-      .attr('transform', `rotate(-90)`);
+      .attr('transform', `rotate(-90) translate(0, -20)`);
 
     // Label for the x axis
     this.canvas
       .append('text')
       .attr('class', 'xAxis-title')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
+      .attr('font-size', '1em')
       .attr('fill', color.purple)
       .attr('text-anchor', 'middle')
-      .attr('transform', `translate(${this.width / 2}, ${this.height + 36})`)
+      .attr('transform', `translate(${this.width / 2}, ${this.height + 40})`)
       .text('Folkemengde');
   };
 
@@ -125,40 +124,55 @@ function Template(svg) {
       });
     }
 
-    let thead = this.table.select('thead');
-    let tbody = this.table.select('tbody');
+    const uuid = Math.floor(Math.random() * 100000);
 
-    this.table.select('caption').text(this.data.meta.heading);
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
-    let hRow1 = thead.append('tr');
-    let hRow2 = thead.append('tr');
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
 
     hRow1
       .selectAll('th')
-      .data(() => ['Geografi', ...ageRanges.map(d => d.label)])
+      .data(() => [
+        'Geografi',
+        ...ageRanges.map(d => {
+          let str = '';
+          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+          str += d.label;
+          str += this.method === 'ratio' ? ' (%)' : '';
+          return str;
+        }),
+      ])
       .join('th')
-      .attr('id', (d, i) => `th_2_${i}`)
+      .attr('id', (d, i) => `${uuid}_th_2_${i}`)
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
       .attr('colspan', (d, i) => (i === 0 ? 1 : 2))
       .attr('scope', 'col')
-      .attr('role', 'colgroup')
-      .text(d => d);
+      .text(d => d)
+      .classed('border-cell', (d, i) => i > 0);
 
     hRow2
       .selectAll('th')
-      .data(() => ageRanges.map(() => ['Menn', 'Kvinner']).flat())
+      .data(() => ageRanges.map(() => ['mann', 'kvinne']).flat())
       .join('th')
-      .attr('id', (d, i) => `th_1_${i}`)
+      .attr('id', (d, i) => `${uuid}_th_1_${i}`)
       .attr('scope', 'col')
-      .attr('headers', (d, i) => `th_1_${Math.floor(i / 2) + 1}`)
+      .attr('headers', (d, i) => `${uuid}_th_2_${Math.floor(i / 2) + 1}`)
+      .classed('border-cell', (d, i, j) => {
+        const groupSize = j.length / ageRanges.length;
+        return i % groupSize === 0;
+      })
       .text(d => d);
 
-    let rows = tbody
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
+    const rows = tbody
       .selectAll('tr')
-      .data(this.data.data)
+      .data(tableData.sort(this.tableSort))
       .join('tr');
 
     // Geography cells
@@ -167,6 +181,7 @@ function Template(svg) {
       .data(d => [d.geography])
       .join('th')
       .attr('scope', 'row')
+      .attr('headers', `${uuid}_th_2_0`)
       .text(d => d);
 
     // Value cells
@@ -179,8 +194,8 @@ function Template(svg) {
             let menn = 0;
             let kvinner = 0;
             for (let i = range[0]; i < range[1]; i++) {
-              menn += d.values[i]['Mann'];
-              kvinner += d.values[i]['Kvinne'];
+              menn += d.values[i]['mann'];
+              kvinner += d.values[i]['kvinne'];
             }
             return [menn, kvinner];
           })
@@ -188,19 +203,23 @@ function Template(svg) {
       })
       .join('td')
       .attr('headers', (d, i) => {
-        return `th_1_${Math.floor(i / 2) + 1} th_2_${i}`;
+        return `${uuid}_th_2_${Math.floor(i / 2) + 1} ${uuid}_th_1_${i}`;
+      })
+      .classed('border-cell', (d, i, j) => {
+        const groupSize = j.length / ageRanges.length;
+        return i % groupSize === 0;
       })
       .text(d => this.format(d, this.method));
   };
 
   this.drawList = function() {
-    let active = this.selected;
+    const active = this.selected;
 
-    let row = this.list
+    const row = this.list
       .selectAll('g.row')
       .data(this.data.data)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'row');
+        const g = enter.append('g').attr('class', 'row');
 
         // Create background fill for row
         g.append('rect')
@@ -225,13 +244,13 @@ function Template(svg) {
 
     row
       .select('rect.fill')
-      .attr('fill-opacity', (d, i) => (i == this.selected ? 1 : 0))
+      .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : 0))
       .on('mouseenter', function(d, i) {
-        if (i == active) return;
+        if (i === active) return;
         d3.select(this).attr('fill-opacity', 0.15);
       })
       .on('mouseleave', function(d, i) {
-        if (i == active) return;
+        if (i === active) return;
         d3.select(this).attr('fill-opacity', 0);
       });
 
@@ -249,27 +268,19 @@ function Template(svg) {
     .area()
     .curve(d3.curveStep)
     .x0(() => this.x(0))
-    .x1(d => {
-      if (d.gender == 'Kvinne') {
-        return this.x(d.value);
-      } else {
-        return this.x(-d.value);
-      }
-    })
+    .x1(d => (d.gender === 'kvinne' ? this.x(d.value) : this.x(-d.value)))
     .y((d, i) => this.y(i));
 
   this.drawPyramid = function() {
-    let genderData = ['Mann', 'Kvinne'].map(gender => {
-      return this.data.data[this.selected].values.map(d => {
-        return { gender, value: d[gender] };
-      });
-    });
+    const genderData = ['mann', 'kvinne'].map(gender =>
+      this.data.data[this.selected].values.map(d => ({ gender, value: d[gender] }))
+    );
 
-    let genderGroup = this.pyramid
+    const genderGroup = this.pyramid
       .selectAll('g.gender')
       .data(genderData)
       .join(enter => {
-        let g = enter.append('g').attr('class', 'gender');
+        const g = enter.append('g').attr('class', 'gender');
 
         // create labels
         g.append('text')
@@ -286,35 +297,34 @@ function Template(svg) {
     // Style the text
     genderGroup
       .select('text')
-      .text(d => d[0].gender)
+      .text(d => util.capitalize(d[0].gender))
       .attr('text-anchor', (d, i) => (i === 0 ? 'end' : 'start'))
       .attr('font-size', 16)
       .attr('font-weight', 700)
       .attr('fill', color.purple)
       .transition()
       .duration(this.duration)
-      .attr('transform', `translate(${this.width / 2}, 23)`)
+      .attr('transform', `translate(${this.width / 2}, 5)`)
       .attr('x', (d, i) => (i === 0 ? -20 : 20));
 
     // Style the path
     genderGroup
       .select('path')
-      .attr('fill', d => (d[0].gender == 'Kvinne' ? color.red : color.positive))
+      .attr('fill', d => (d[0].gender === 'kvinne' ? color.red : color.positive))
       .transition()
       .duration(this.duration)
       .attr('d', this.area);
   };
 
   this.drawAxis = function() {
-    let max = d3.max(this.data.data[this.selected].values.map(d => d.value));
-    this.y
-      .range([this.height, 0])
-      .domain([0, 120])
-      .nice();
+    const max = d3.max(this.data.data[this.selected].values.map(d => d.value)) / 1.75;
+    this.y.range([this.height, 0]).domain([0, 105]);
+
     this.x
       .range([0, this.width])
       .domain([-max, max])
       .nice();
+
     this.xAxis
       .attr('transform', `translate(0, ${this.height})`)
       .transition()
@@ -326,16 +336,16 @@ function Template(svg) {
           .tickFormat(d => Math.abs(d))
       );
     this.yAxis.each((d, i, j) => {
-      if (d.type == 'left') {
+      if (d.type === 'left') {
         d3.select(j[i])
           .call(d3.axisLeft(this.y).tickFormat(d => d + ' år'))
           .selectAll('text');
-      } else if (d.type == 'right') {
+      } else if (d.type === 'right') {
         d3.select(j[i])
           .call(d3.axisRight(this.y).tickFormat(d => d + ' år'))
           .attr('transform', `translate(${this.width}, 0)`)
           .selectAll('text');
-      } else if (d.type == 'lines') {
+      } else if (d.type === 'lines') {
         let axis = d3.select(j[i]);
 
         axis.call(d3.axisLeft(this.y).tickSize(-this.width));

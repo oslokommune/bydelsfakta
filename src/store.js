@@ -13,6 +13,9 @@ export const state = {
   districtsGeo: districts,
   menuIsOpen: false,
   navigationIsOpen: false,
+  isTouchDevice: false,
+  ie11: false,
+  productionMode: null, // null: development, false: test, true: prod
 };
 
 export const getters = {
@@ -24,7 +27,7 @@ export const getters = {
     }
 
     const features = state.districts.map(id =>
-      state.districtsGeo.oslo.features.find(district => district.properties.id === parseInt(id))
+      state.districtsGeo.oslo.features.find(district => district.properties.id === id)
     );
 
     return {
@@ -54,6 +57,15 @@ export const mutations = {
   SET_NAVIGATION_IS_OPEN(state, payload) {
     state.navigationIsOpen = payload;
   },
+  SET_TOUCH_DEVICE(state, payload) {
+    state.isTouchDevice = payload;
+  },
+  SET_IE11_COMPATIBILITY(state, payload) {
+    state.ie11 = payload;
+  },
+  SET_PRODUCTION_MODE(state, payload) {
+    state.productionMode = payload === 'prod' ? true : payload === 'dev' ? false : null;
+  },
 };
 
 export const actions = {
@@ -82,6 +94,10 @@ export const actions = {
           });
     }
   },
+
+  setTouchDevice({ commit }, payload) {
+    commit('SET_TOUCH_DEVICE', payload);
+  },
   cleanState({ commit }) {
     commit('CLEAN_STATE');
   },
@@ -90,6 +106,12 @@ export const actions = {
   },
   setNavigationIsOpen({ commit }, payload) {
     commit('SET_NAVIGATION_IS_OPEN', payload);
+  },
+  setIE11Compatibility({ commit }, payload) {
+    commit('SET_IE11_COMPATIBILITY', payload);
+  },
+  setProductionMode({ commit }, payload) {
+    commit('SET_PRODUCTION_MODE', payload);
   },
 };
 
