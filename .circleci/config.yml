@@ -54,7 +54,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: docs
-  deploy-test:
+  deploy:
     <<: *defaults
     steps:
       - checkout
@@ -65,52 +65,13 @@ jobs:
           name: docker build and docker push
           command: |
             export CIRCLE_SHA1_SHORT="$(echo $CIRCLE_SHA1 | cut -c -7)"
-            docker build -t $DOCKER_IMAGE:develop-$CIRCLE_SHA1_SHORT .
+            docker build -t $DOCKER_IMAGE:$CIRCLE_SHA1_SHORT .
             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker push $DOCKER_IMAGE:develop-$CIRCLE_SHA1_SHORT
-  deploy-prod:
-    <<: *defaults
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: docker build and docker push
-          command: |
-            export CIRCLE_SHA1_SHORT="$(echo $CIRCLE_SHA1 | cut -c -7)"
-            docker build -t $DOCKER_IMAGE:prod-$CIRCLE_SHA1_SHORT .
-            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker push $DOCKER_IMAGE:prod-$CIRCLE_SHA1_SHORT
+            docker push $DOCKER_IMAGE:$CIRCLE_SHA1_SHORT
 
 
 workflows:
   version: 2
-  develop:
-    jobs:
-      - install:
-          filters:
-            branches:
-              only: dev
-      - test:
-          filters:
-            branches:
-              only: dev
-          requires:
-            - install
-      - build:
-          filters:
-            branches:
-              only: dev
-          requires:
-            - install
-            - test
-      - deploy-test:
-          filters:
-            branches:
-              only: dev
-          requires:
-            - install
-            - test
-            - build
   master:
     jobs:
       - install:
@@ -129,7 +90,7 @@ workflows:
               only: master
           requires:
             - test
-      - deploy-prod:
+      - deploy:
           filters:
             branches:
               only: master
