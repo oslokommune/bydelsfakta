@@ -3,16 +3,16 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Eierform',
   value: 'eierform',
-  production: null,
+  production: true,
   cards: [
     {
       size: 'large',
-      heading: '',
+      heading: 'Eieform',
       map: {
         labels: ['', ''],
         url: ``,
       },
-      production: null,
+      production: true,
       tabs: [
         {
           active: false,
@@ -20,25 +20,17 @@ export default {
           id: 'eierform_status',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/mockDataAinnvandrer3.json`,
-          production: null,
-        },
-        {
-          active: false,
-          label: 'Matrise',
-          id: 'eierform_matrise',
-          template: 'i',
-          method: 'ratio',
-          url: `${baseUrl}/mockDataI.json`,
-          production: null,
+          url: `${baseUrl}/eieform_status_00.json`,
+          production: true,
         },
         {
           active: false,
           label: 'Historisk',
           id: 'eierform_historisk',
-          template: 'b',
-          url: `${baseUrl}/mockDataB.json`,
-          production: null,
+          template: 'c',
+          method: 'ratio',
+          url: `${baseUrl}/eieform_historic_00.json`,
+          production: true,
         },
       ],
     },
