@@ -529,12 +529,16 @@ function Template(svg) {
     // Create dots (groups)
     let dot = this.dotContainer.selectAll('g').data(this.data.data);
     dot.exit().remove();
-    const dotE = dot.enter().append('g');
+    const dotE = dot
+      .enter()
+      .append('g')
+      .attr('transform', () => `translate(${x(0)}, ${y(0.5)})`);
     dotE.append('circle');
     dot = dot.merge(dotE);
 
     // Update position of the dot (group)
     dot
+      .transition()
       .attr('transform', d => {
         const pos_y = y(d.values[1].ratio);
         const pos_x = x(d.values[2].ratio - d.values[0].ratio);
