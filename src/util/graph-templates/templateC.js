@@ -17,11 +17,15 @@ import positionLabels from '../positionLabels';
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'c';
+  this.isMobileView = false;
+  this.mobileWidth = 420;
 
   this.padding = { top: 140, left: 60, right: 190, bottom: 32 };
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
+
+    this.isMobileView = this.parentWidth() < this.mobileWidth;
 
     this.data.data = this.data.data
       .map((geo, i, j) => {
@@ -63,7 +67,7 @@ function Template(svg) {
     this.tabs = this.svg
       .insert('g')
       .attr('class', 'tabs')
-      .attr('transform', 'translate(3, 65)');
+      .attr('transform', 'translate(3, 50)');
 
     this.canvas.append('g').attr('class', 'lines');
     this.canvas.append('g').attr('class', 'dots');
@@ -288,78 +292,72 @@ function Template(svg) {
 
   // Updates the tabs. Highlights the active series
   this.drawTabs = function() {
+    let g = this.tabs
+      .selectAll('g.tab')
+      .data(this.data.meta.series)
+      .join(enter => enterTab(enter));
 
-    let tab = this.tabs.selectAll('g.tab').data(this.data.meta.series)
-    .join(enter => enterTab(enter), update => updateTab(update), exit => exit.remove())
+    g.exit().remove();
+
+    const rowCount = this.isMobileView ? 3 : 2;
+    const gapX = 36;
+    const gapY = 24;
+    const radio = g.select('g.radio');
+    const inner = radio.select('.inner');
+    const label = g.select('.label');
+    const bg = g.select('.bg');
+    const maxWidth = d3.max(g.nodes(), d => util.getTextWidth(d.__data__.heading)) + gapX;
+
+    g.attr('transform', (d, i) => {
+      const col = Math.floor(i / rowCount);
+      const row = i % rowCount;
+      return `translate(${col * maxWidth}, ${row * gapY})`;
+    });
+
+    bg.attr('fill', 'white')
+      .attr('height', gapX)
+      .attr('width', maxWidth)
+      .attr('y', -gapX / 2);
+
+    radio.attr('transform', 'translate(5, 0)');
+    label.attr('transform', 'translate(16, 5)').text(d => d.heading);
+
+    inner.attr('transform', (d, i) => {
+      return `scale(${i === this.series ? 1 : 0})`;
+    });
+
+    g.on('click keyup', (d, i) => {
+      if (i === this.series) return;
+      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+      this.render(this.data, { method: this.method, series: i });
+    })
+      .attr('tabindex', 0)
+      .style('cursor', 'pointer');
 
     function enterTab(enter) {
-      const g = enter.append('g')
-      .attr('class', 'tab')
+      const g = enter.append('g').attr('class', 'tab');
 
-      g.append('rect').classed('bg', true)
-      g.append('text').classed('text', true)
-      const radio = g.append('g').classed('radio', true)
+      g.append('rect')
+        .classed('bg', true)
+        .attr('height', 20);
+      g.append('text').classed('label', true);
+      const radio = g.append('g').classed('radio', true);
 
-      radio.append('circle').classed('outer', true)
-      radio.append('circle').classed('inner', true)
+      radio
+        .append('circle')
+        .classed('outer', true)
+        .attr('r', 6)
+        .attr('stroke', color.purple)
+        .attr('stroke-width', 1)
+        .attr('fill', 'none');
+      radio
+        .append('circle')
+        .classed('inner', true)
+        .attr('r', 4)
+        .attr('fill', color.purple);
 
-      return g
+      return g;
     }
-
-    function updateTab(update) {
-      update.attr('class', 'tab')
-    }
-
-    // const tabE = tab
-    //   .enter()
-    //   .append('g')
-    //   .attr('class', 'tab');
-
-    // tabE
-    //   .append('text')
-    //   .attr('class', 'heading')
-    //   .attr('y', 5);
-
-    // tabE
-    //   .append('rect')
-    //   .attr('class', 'tabOverlay')
-    //   .attr('width', d => util.getTextWidth(d.heading))
-    //   .attr('height', 36)
-    //   .attr('opacity', 0.1)
-    //   .attr('y', -18);
-
-    // tab.exit().remove();
-    // tab = tab.merge(tabE);
-
-    // tab.attr('transform', (d, i, j) => {
-    //   let dist = 0;
-
-    //   for (let x = 0; x < i; x++) {
-    //     dist += util.getTextWidth(j[x].__data__.heading);
-    //     dist += this.tabGap;
-    //   }
-
-    //   return `translate(${dist}, 0)`;
-    // });
-
-    // tab
-    //   .select('text.heading')
-    //   // .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
-    //   .text(d => d.heading);
-    // tab
-    //   .select('text.subHeading')
-    //   // .attr('font-weight', (d, i) => (this.series === i ? '500' : '400'))
-    //   .text(d => d.subheading);
-
-    // tab
-    //   .select('rect.tabOverlay')
-    //   .on('click keyup', (d, i) => {
-    //     if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-    //     this.render(this.data, { method: this.method, series: i });
-    //   })
-    //   .attr('tabindex', 0);
-
-    
   };
 
   this.handleMouseover = function(geo) {
