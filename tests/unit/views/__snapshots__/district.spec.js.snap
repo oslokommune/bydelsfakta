@@ -59,11 +59,11 @@ exports[`Bydel renders component correctly 1`] = `
         txtcolor="rgb(244, 206, 138)"
       />
       <v-category-stub
-        bgimage="/img/eierform"
+        bgimage="/img/eieform"
         category="Bomiljø"
         district="bydel"
-        id="eierform"
-        topic="Eierform"
+        id="eieform"
+        topic="Eieform"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub

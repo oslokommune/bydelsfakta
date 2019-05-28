@@ -2,7 +2,7 @@ import alder from './topics/alder';
 import befolkningsendringer from './topics/befolkningsendringer';
 import boligpriser from './topics/boligpriser';
 import bygningstyper from './topics/bygningstyper';
-import eierform from './topics/eierform';
+import eieform from './topics/eieform';
 import folkemengde from './topics/folkemengde';
 import husholdninger from './topics/husholdninger';
 import innvandrerbefolkningen from './topics/innvandrerbefolkningen';
@@ -16,7 +16,7 @@ export const topicNames = [
   'innvandrerbefolkningen',
   'husholdninger',
   'levekaar',
-  'eierform',
+  'eieform',
   'bygningstyper',
   'boligpriser',
   'trangboddhet',
@@ -33,7 +33,7 @@ export const categories = [
   {
     kategori: 'Bomiljø',
     color: 'rgb(27, 173, 120)',
-    links: ['trangboddhet', 'eierform', 'bygningstyper', 'boligpriser'],
+    links: ['trangboddhet', 'eieform', 'bygningstyper', 'boligpriser'],
   },
   {
     kategori: 'Levekår',
@@ -47,7 +47,7 @@ export const topics = {
   befolkningsendringer,
   boligpriser,
   bygningstyper,
-  eierform,
+  eieform,
   folkemengde,
   husholdninger,
   innvandrerbefolkningen,

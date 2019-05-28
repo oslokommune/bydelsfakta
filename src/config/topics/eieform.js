@@ -1,8 +1,10 @@
-import { baseUrl } from '../../util/config';
+import { baseUrl, apiUrl } from '../../util/config';
+
+const API = `${apiUrl}/api/dataset`;
 
 export default {
-  text: 'Eierform',
-  value: 'eierform',
+  text: 'Eieform',
+  value: 'eieform',
   production: true,
   cards: [
     {
@@ -17,19 +19,19 @@ export default {
         {
           active: false,
           label: 'Status',
-          id: 'eierform_status',
+          id: 'eieform_status',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/eieform_status_00.json`,
+          url: `${API}/eieform-status`,
           production: true,
         },
         {
           active: false,
           label: 'Historisk',
-          id: 'eierform_historisk',
+          id: 'eieform_historisk',
           template: 'c',
           method: 'ratio',
-          url: `${baseUrl}/eieform_historic_00.json`,
+          url: `${API}/eieform-historisk`,
           production: true,
         },
       ],
@@ -37,8 +39,8 @@ export default {
   ],
   options: {
     kategori: 'Bomiljø',
-    tema: 'Eierform',
-    bgImage: `${baseUrl}/img/eierform`,
+    tema: 'Eieform',
+    bgImage: `${baseUrl}/img/eieform`,
     txtColor: 'rgb(199, 247, 201)',
   },
   related: ['boligpriser', 'trangboddhet', 'bygningstyper'],

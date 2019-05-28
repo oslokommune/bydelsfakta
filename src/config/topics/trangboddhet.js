@@ -253,5 +253,5 @@ export default {
     bgImage: `${baseUrl}/img/trangboddhet`,
     txtColor: 'rgb(199, 247, 201)',
   },
-  related: ['boligpriser', 'levekaar', 'eierform'],
+  related: ['boligpriser', 'levekaar', 'eieform'],
 };
