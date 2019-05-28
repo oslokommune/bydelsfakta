@@ -17,7 +17,7 @@ export default {
         {
           active: false,
           label: 'Status',
-          id: 'eierform_totalt_status',
+          id: 'eieform_totalt_status',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
@@ -26,7 +26,7 @@ export default {
         {
           active: false,
           label: 'Historisk',
-          id: 'eierform_totalt_historisk',
+          id: 'eieform_totalt_historisk',
           template: 'b',
           url: `${baseUrl}/mockDataB.json`,
           production: null,
@@ -34,7 +34,7 @@ export default {
         {
           active: false,
           label: 'Matrise',
-          id: 'eierform_totalt_matrise',
+          id: 'eieform_totalt_matrise',
           method: 'ratio',
           template: 'i',
           url: `${baseUrl}/mockDataI.json`,
@@ -84,7 +84,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eierform_blokk_andel',
+          id: 'eieform_blokk_andel',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
@@ -93,7 +93,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eierform_blokk_antall',
+          id: 'eieform_blokk_antall',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
@@ -113,7 +113,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eierform_rekkehus_andel',
+          id: 'eieform_rekkehus_andel',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
@@ -122,7 +122,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eierform_rekkehus_antall',
+          id: 'eieform_rekkehus_antall',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
@@ -142,7 +142,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eierform_enebolig_andel',
+          id: 'eieform_enebolig_andel',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
@@ -151,7 +151,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eierform_enebolig_antall',
+          id: 'eieform_enebolig_antall',
           template: 'a',
           method: 'ratio',
           url: `${baseUrl}/mockDataAinnvandrer3.json`,
