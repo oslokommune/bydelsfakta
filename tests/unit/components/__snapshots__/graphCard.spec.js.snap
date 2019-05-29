@@ -41,17 +41,25 @@ exports[`GraphCard change an active tab 1`] = `
           </div>
            
           <button
-            aria-label="Status"
+            aria-label="Andel"
             class="tabs__tab"
             id="tabButton-Eieform-0"
             role="tab"
           >
-            Status
+            Andel
+          </button>
+          <button
+            aria-label="Matrise"
+            class="tabs__tab active"
+            id="tabButton-Eieform-1"
+            role="tab"
+          >
+            Matrise
           </button>
           <button
             aria-label="Historisk"
-            class="tabs__tab active"
-            id="tabButton-Eieform-1"
+            class="tabs__tab"
+            id="tabButton-Eieform-2"
             role="tab"
           >
             Historisk
