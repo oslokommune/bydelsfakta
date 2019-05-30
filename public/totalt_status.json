@@ -1,0 +1,193 @@
+{
+  "district": "Oslo i alt",
+  "id": "00",
+  "data": [
+    {
+      "id": "01",
+      "geography": "Bydel Gamle Oslo",
+      "values": [
+        { "value": 27111, "ratio": 0.9281092739036664, "date": 2018 },
+        { "value": 1305, "ratio": 0.04467495121700729, "date": 2018 },
+        { "value": 310.0, "ratio": 0.010612440518982575, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "02",
+      "geography": "Bydel Grünerløkka",
+      "values": [
+        { "value": 31922, "ratio": 0.9127351747012066, "date": 2018 },
+        { "value": 1214, "ratio": 0.03471149997140733, "date": 2018 },
+        { "value": 256.0, "ratio": 0.007319723222965631, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "03",
+      "geography": "Bydel Sagene",
+      "values": [
+        { "value": 25244, "ratio": 0.923031920728363, "date": 2018 },
+        { "value": 314, "ratio": 0.011481224176386706, "date": 2018 },
+        { "value": 53.0, "ratio": 0.0019379136348678196, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "04",
+      "geography": "Bydel St. Hanshaugen",
+      "values": [
+        { "value": 22538, "ratio": 0.9312453516238327, "date": 2018 },
+        { "value": 578, "ratio": 0.02388232377489464, "date": 2018 },
+        { "value": 132.0, "ratio": 0.005454094702917114, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "05",
+      "geography": "Bydel Frogner",
+      "values": [
+        { "value": 33815, "ratio": 0.9043620122489369, "date": 2018 },
+        { "value": 1853, "ratio": 0.049557380118210266, "date": 2018 },
+        { "value": 757.0, "ratio": 0.020245513626273703, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "06",
+      "geography": "Bydel Ullern",
+      "values": [
+        { "value": 8367, "ratio": 0.5560576859174586, "date": 2018 },
+        { "value": 4143, "ratio": 0.2753372765335283, "date": 2018 },
+        { "value": 2344.0, "ratio": 0.15577856051040073, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "07",
+      "geography": "Bydel Vestre Aker",
+      "values": [
+        { "value": 7600, "ratio": 0.3810096756404472, "date": 2018 },
+        { "value": 6451, "ratio": 0.3234070286258585, "date": 2018 },
+        { "value": 5425.0, "ratio": 0.2719707224143982, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "08",
+      "geography": "Bydel Nordre Aker",
+      "values": [
+        { "value": 10262, "ratio": 0.394889752568592, "date": 2018 },
+        { "value": 8015, "ratio": 0.308423442490476, "date": 2018 },
+        { "value": 3482.0, "ratio": 0.13399007195905646, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "09",
+      "geography": "Bydel Bjerke",
+      "values": [
+        { "value": 10227, "ratio": 0.7179865206402696, "date": 2018 },
+        { "value": 2469, "ratio": 0.17333614153327717, "date": 2018 },
+        { "value": 955.0, "ratio": 0.06704577365908453, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "10",
+      "geography": "Bydel Grorud",
+      "values": [
+        { "value": 8935, "ratio": 0.7505880376344086, "date": 2018 },
+        { "value": 1934, "ratio": 0.16246639784946237, "date": 2018 },
+        { "value": 783.0, "ratio": 0.06577620967741936, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "11",
+      "geography": "Bydel Stovner",
+      "values": [
+        { "value": 7486, "ratio": 0.6240413471157052, "date": 2018 },
+        { "value": 2975, "ratio": 0.247999333111037, "date": 2018 },
+        { "value": 1481.0, "ratio": 0.12345781927309103, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "12",
+      "geography": "Bydel Alna",
+      "values": [
+        { "value": 15995, "ratio": 0.7691013126893302, "date": 2018 },
+        { "value": 3391, "ratio": 0.16305236332163292, "date": 2018 },
+        { "value": 972.0, "ratio": 0.046737510217819876, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "13",
+      "geography": "Bydel Østensjø",
+      "values": [
+        { "value": 13332, "ratio": 0.6003512405998108, "date": 2018 },
+        { "value": 6233, "ratio": 0.2806772639257892, "date": 2018 },
+        { "value": 2141.0, "ratio": 0.09641104156347098, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "14",
+      "geography": "Bydel Nordstrand",
+      "values": [
+        { "value": 8211, "ratio": 0.3757206918641896, "date": 2018 },
+        { "value": 7765, "ratio": 0.3553125285988835, "date": 2018 },
+        { "value": 5385.0, "ratio": 0.24640798023245172, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "15",
+      "geography": "Bydel Søndre Nordstrand",
+      "values": [
+        { "value": 5883, "ratio": 0.43817965142261284, "date": 2018 },
+        { "value": 5180, "ratio": 0.3858185610010427, "date": 2018 },
+        { "value": 2267.0, "ratio": 0.1688514821987189, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "00",
+      "geography": "Oslo i alt",
+      "values": [
+        { "value": 237825, "ratio": 0.715710880791593, "date": 2018 },
+        { "value": 53924, "ratio": 0.16227895946938234, "date": 2018 },
+        { "value": 27319.0, "ratio": 0.08221383602373816, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": true
+    }
+  ],
+  "meta": {
+    "heading": "Boliger etter bygningstype",
+    "series": [
+      { "heading": "Blokk, leiegård o.l", "subheading": "" },
+      { "heading": "Rekkehus, tomannsboliger o.l", "subheading": "" },
+      { "heading": "Enebolig", "subheading": "" }
+    ],
+    "publishedDate": "2019-05-29",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "scope": "oslo i alt"
+  }
+}

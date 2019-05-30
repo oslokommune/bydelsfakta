@@ -1,0 +1,125 @@
+{
+  "district": "Oslo i alt",
+  "id": "00",
+  "data": [
+    {
+      "id": "01",
+      "geography": "Bydel Gamle Oslo",
+      "values": [{ "value": 310.0, "ratio": 0.010612440518982575, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "02",
+      "geography": "Bydel Grünerløkka",
+      "values": [{ "value": 256.0, "ratio": 0.007319723222965631, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "03",
+      "geography": "Bydel Sagene",
+      "values": [{ "value": 53.0, "ratio": 0.0019379136348678196, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "04",
+      "geography": "Bydel St. Hanshaugen",
+      "values": [{ "value": 132.0, "ratio": 0.005454094702917114, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "05",
+      "geography": "Bydel Frogner",
+      "values": [{ "value": 757.0, "ratio": 0.020245513626273703, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "06",
+      "geography": "Bydel Ullern",
+      "values": [{ "value": 2344.0, "ratio": 0.15577856051040073, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "07",
+      "geography": "Bydel Vestre Aker",
+      "values": [{ "value": 5425.0, "ratio": 0.2719707224143982, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "08",
+      "geography": "Bydel Nordre Aker",
+      "values": [{ "value": 3482.0, "ratio": 0.13399007195905646, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "09",
+      "geography": "Bydel Bjerke",
+      "values": [{ "value": 955.0, "ratio": 0.06704577365908453, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "10",
+      "geography": "Bydel Grorud",
+      "values": [{ "value": 783.0, "ratio": 0.06577620967741936, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "11",
+      "geography": "Bydel Stovner",
+      "values": [{ "value": 1481.0, "ratio": 0.12345781927309103, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "12",
+      "geography": "Bydel Alna",
+      "values": [{ "value": 972.0, "ratio": 0.046737510217819876, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "13",
+      "geography": "Bydel Østensjø",
+      "values": [{ "value": 2141.0, "ratio": 0.09641104156347098, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "14",
+      "geography": "Bydel Nordstrand",
+      "values": [{ "value": 5385.0, "ratio": 0.24640798023245172, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "15",
+      "geography": "Bydel Søndre Nordstrand",
+      "values": [{ "value": 2267.0, "ratio": 0.1688514821987189, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "00",
+      "geography": "Oslo i alt",
+      "values": [{ "value": 27319.0, "ratio": 0.08221383602373816, "date": 2018 }],
+      "avgRow": false,
+      "totalRow": true
+    }
+  ],
+  "meta": {
+    "heading": "Eneboliger",
+    "series": [],
+    "publishedDate": "2019-05-29",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "scope": "oslo i alt"
+  }
+}

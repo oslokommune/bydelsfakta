@@ -1,0 +1,253 @@
+{
+  "district": "Oslo i alt",
+  "id": "00",
+  "data": [
+    {
+      "id": "01",
+      "geography": "Bydel Gamle Oslo",
+      "values": [
+        { "value": 23159, "ratio": 0.9205787653535795, "date": 2012 },
+        { "value": 24457, "ratio": 0.9207483298197497, "date": 2013 },
+        { "value": 24704, "ratio": 0.9200059585878146, "date": 2014 },
+        { "value": 25433, "ratio": 0.9217526819367933, "date": 2015 },
+        { "value": 25969, "ratio": 0.9262733628192324, "date": 2016 },
+        { "value": 26723, "ratio": 0.9268842565294301, "date": 2017 },
+        { "value": 27111, "ratio": 0.9281092739036664, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "02",
+      "geography": "Bydel Grünerløkka",
+      "values": [
+        { "value": 28342, "ratio": 0.9225611145470525, "date": 2012 },
+        { "value": 29051, "ratio": 0.9188388046844448, "date": 2013 },
+        { "value": 29386, "ratio": 0.9031008943114417, "date": 2014 },
+        { "value": 29923, "ratio": 0.8960055096418733, "date": 2015 },
+        { "value": 30646, "ratio": 0.9087296880559839, "date": 2016 },
+        { "value": 31054, "ratio": 0.9091814029745872, "date": 2017 },
+        { "value": 31922, "ratio": 0.9127351747012066, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "03",
+      "geography": "Bydel Sagene",
+      "values": [
+        { "value": 22604, "ratio": 0.9274577383883145, "date": 2012 },
+        { "value": 23139, "ratio": 0.9243745820201577, "date": 2013 },
+        { "value": 23712, "ratio": 0.9248771355019892, "date": 2014 },
+        { "value": 24299, "ratio": 0.926417324335659, "date": 2015 },
+        { "value": 24871, "ratio": 0.9268119992547047, "date": 2016 },
+        { "value": 25045, "ratio": 0.922501749604037, "date": 2017 },
+        { "value": 25244, "ratio": 0.923031920728363, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "04",
+      "geography": "Bydel St. Hanshaugen",
+      "values": [
+        { "value": 22198, "ratio": 0.940832415020768, "date": 2012 },
+        { "value": 22403, "ratio": 0.9405891751218779, "date": 2013 },
+        { "value": 22438, "ratio": 0.9419419839637295, "date": 2014 },
+        { "value": 22549, "ratio": 0.9425263333890653, "date": 2015 },
+        { "value": 22623, "ratio": 0.9429000125036469, "date": 2016 },
+        { "value": 22468, "ratio": 0.9245329602501852, "date": 2017 },
+        { "value": 22538, "ratio": 0.9312453516238327, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "05",
+      "geography": "Bydel Frogner",
+      "values": [
+        { "value": 32469, "ratio": 0.9056398527278813, "date": 2012 },
+        { "value": 32948, "ratio": 0.905560893394285, "date": 2013 },
+        { "value": 33232, "ratio": 0.9064179145187246, "date": 2014 },
+        { "value": 33380, "ratio": 0.9069173504319947, "date": 2015 },
+        { "value": 33446, "ratio": 0.9016795621815437, "date": 2016 },
+        { "value": 33584, "ratio": 0.904156795175533, "date": 2017 },
+        { "value": 33815, "ratio": 0.9043620122489369, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "06",
+      "geography": "Bydel Ullern",
+      "values": [
+        { "value": 8163, "ratio": 0.5569352527802415, "date": 2012 },
+        { "value": 8169, "ratio": 0.5552213832542934, "date": 2013 },
+        { "value": 8180, "ratio": 0.5546890893062996, "date": 2014 },
+        { "value": 8164, "ratio": 0.55154708823132, "date": 2015 },
+        { "value": 8204, "ratio": 0.5521232922807726, "date": 2016 },
+        { "value": 8336, "ratio": 0.5545134038448746, "date": 2017 },
+        { "value": 8367, "ratio": 0.5560576859174586, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "07",
+      "geography": "Bydel Vestre Aker",
+      "values": [
+        { "value": 7374, "ratio": 0.38710693474723085, "date": 2012 },
+        { "value": 7413, "ratio": 0.3853697756109556, "date": 2013 },
+        { "value": 7437, "ratio": 0.38467904619045157, "date": 2014 },
+        { "value": 7497, "ratio": 0.3829493793737549, "date": 2015 },
+        { "value": 7573, "ratio": 0.38424070221726114, "date": 2016 },
+        { "value": 7597, "ratio": 0.38272040302267, "date": 2017 },
+        { "value": 7600, "ratio": 0.3810096756404472, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "08",
+      "geography": "Bydel Nordre Aker",
+      "values": [
+        { "value": 11670, "ratio": 0.4626546146527117, "date": 2012 },
+        { "value": 11823, "ratio": 0.4658561291706945, "date": 2013 },
+        { "value": 11830, "ratio": 0.4649426190850495, "date": 2014 },
+        { "value": 11824, "ratio": 0.46439652802325126, "date": 2015 },
+        { "value": 11813, "ratio": 0.46352756523445166, "date": 2016 },
+        { "value": 11848, "ratio": 0.4642815157333751, "date": 2017 },
+        { "value": 10262, "ratio": 0.394889752568592, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "09",
+      "geography": "Bydel Bjerke",
+      "values": [
+        { "value": 9389, "ratio": 0.7104805145667802, "date": 2012 },
+        { "value": 9584, "ratio": 0.7135704201099109, "date": 2013 },
+        { "value": 9716, "ratio": 0.7138868479059515, "date": 2014 },
+        { "value": 9716, "ratio": 0.7124211761255316, "date": 2015 },
+        { "value": 9728, "ratio": 0.7083667079298042, "date": 2016 },
+        { "value": 9900, "ratio": 0.7115647236397614, "date": 2017 },
+        { "value": 10227, "ratio": 0.7179865206402696, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "10",
+      "geography": "Bydel Grorud",
+      "values": [
+        { "value": 8666, "ratio": 0.7508881379429859, "date": 2012 },
+        { "value": 8917, "ratio": 0.7549070652914565, "date": 2013 },
+        { "value": 8925, "ratio": 0.7555235757216626, "date": 2014 },
+        { "value": 8925, "ratio": 0.7538643466508995, "date": 2015 },
+        { "value": 8925, "ratio": 0.753482482059941, "date": 2016 },
+        { "value": 8870, "ratio": 0.7507405840033855, "date": 2017 },
+        { "value": 8935, "ratio": 0.7505880376344086, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "11",
+      "geography": "Bydel Stovner",
+      "values": [
+        { "value": 7353, "ratio": 0.6254678462061926, "date": 2012 },
+        { "value": 7379, "ratio": 0.6248063080268981, "date": 2013 },
+        { "value": 7490, "ratio": 0.6278290025146689, "date": 2014 },
+        { "value": 7490, "ratio": 0.6268831603615668, "date": 2015 },
+        { "value": 7490, "ratio": 0.6264637002341921, "date": 2016 },
+        { "value": 7486, "ratio": 0.6246662216288384, "date": 2017 },
+        { "value": 7486, "ratio": 0.6240413471157052, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "12",
+      "geography": "Bydel Alna",
+      "values": [
+        { "value": 15782, "ratio": 0.7754901479042798, "date": 2012 },
+        { "value": 15818, "ratio": 0.7752754846448082, "date": 2013 },
+        { "value": 15878, "ratio": 0.7757475083056479, "date": 2014 },
+        { "value": 15942, "ratio": 0.7766356506065183, "date": 2015 },
+        { "value": 15917, "ratio": 0.7740602052229733, "date": 2016 },
+        { "value": 15984, "ratio": 0.7741560517266431, "date": 2017 },
+        { "value": 15995, "ratio": 0.7691013126893302, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "13",
+      "geography": "Bydel Østensjø",
+      "values": [
+        { "value": 12738, "ratio": 0.5940954246537008, "date": 2012 },
+        { "value": 12927, "ratio": 0.5967570982777369, "date": 2013 },
+        { "value": 13117, "ratio": 0.5997713763145862, "date": 2014 },
+        { "value": 13128, "ratio": 0.598987087648857, "date": 2015 },
+        { "value": 13286, "ratio": 0.6013397302435051, "date": 2016 },
+        { "value": 13285, "ratio": 0.6006148560061486, "date": 2017 },
+        { "value": 13332, "ratio": 0.6003512405998108, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "14",
+      "geography": "Bydel Nordstrand",
+      "values": [
+        { "value": 8016, "ratio": 0.3789354259241751, "date": 2012 },
+        { "value": 8073, "ratio": 0.37970807590049543, "date": 2013 },
+        { "value": 8085, "ratio": 0.3796844181459566, "date": 2014 },
+        { "value": 8103, "ratio": 0.37815008400224004, "date": 2015 },
+        { "value": 8133, "ratio": 0.3771563717306622, "date": 2016 },
+        { "value": 8220, "ratio": 0.37744512811093767, "date": 2017 },
+        { "value": 8211, "ratio": 0.3757206918641896, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "15",
+      "geography": "Bydel Søndre Nordstrand",
+      "values": [
+        { "value": 5268, "ratio": 0.42140628749700026, "date": 2012 },
+        { "value": 5374, "ratio": 0.4237147807623349, "date": 2013 },
+        { "value": 5628, "ratio": 0.4350985697719366, "date": 2014 },
+        { "value": 5772, "ratio": 0.43634714242515876, "date": 2015 },
+        { "value": 5808, "ratio": 0.43577430972388953, "date": 2016 },
+        { "value": 5878, "ratio": 0.43839498806682575, "date": 2017 },
+        { "value": 5883, "ratio": 0.43817965142261284, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": false
+    },
+    {
+      "id": "00",
+      "geography": "Oslo i alt",
+      "values": [
+        { "value": 223934, "ratio": 0.7176290751072755, "date": 2012 },
+        { "value": 228220, "ratio": 0.7192222232823123, "date": 2013 },
+        { "value": 230487, "ratio": 0.719246948098959, "date": 2014 },
+        { "value": 232908, "ratio": 0.7191714836223507, "date": 2015 },
+        { "value": 235249, "ratio": 0.7205043705169277, "date": 2016 },
+        { "value": 237095, "ratio": 0.7198701716673043, "date": 2017 },
+        { "value": 237825, "ratio": 0.715710880791593, "date": 2018 }
+      ],
+      "avgRow": false,
+      "totalRow": true
+    }
+  ],
+  "meta": {
+    "heading": "Blokker og leiegårder",
+    "series": [],
+    "publishedDate": "2019-05-29",
+    "help": "Dette er en beskrivelse for hvordan dataene leses",
+    "scope": "oslo i alt"
+  }
+}
