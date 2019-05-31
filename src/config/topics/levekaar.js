@@ -68,7 +68,7 @@ export default {
         reverse: true,
         scale: [0, 0.3],
         method: 'ratio',
-        url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+        url: `${API}/fattige-barnehusholdninger-status`,
       },
       production: true,
       tabs: [
@@ -78,7 +78,7 @@ export default {
           id: 'levekar_fattige_andel',
           template: 'a',
           method: 'ratio',
-          url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+          url: `${API}/fattige-barnehusholdninger-status`,
           production: true,
         },
         {
@@ -87,7 +87,7 @@ export default {
           id: 'levekar_fattige_andel',
           template: 'a',
           method: 'value',
-          url: `${API}/Fattige_barnehusholdninger_sta-EmecB`,
+          url: `${API}/fattige-barnehusholdninger-status`,
           production: true,
         },
         {
@@ -96,7 +96,7 @@ export default {
           id: 'levekar_fattige_historisk',
           method: 'ratio',
           template: 'b',
-          url: `${API}/Fattige_barnehusholdninger_his-GoaU8`,
+          url: `${API}/fattige-barnehusholdninger-historisk`,
           production: true,
         },
         {
@@ -105,7 +105,7 @@ export default {
           id: 'levekar_fattige_historisk',
           method: 'value',
           template: 'b',
-          url: `${API}/Fattige_barnehusholdninger_his-GoaU8`,
+          url: `${API}/fattige-barnehusholdninger-historisk`,
           production: true,
         },
       ],
@@ -116,7 +116,7 @@ export default {
       heading: 'Personer 21-29 år som ikke har fullført videregående skole',
       map: {
         labels: ['Færre', 'Flere'],
-        url: `${API}/Levekar-vgs-status-vFLio`,
+        url: `${API}/ikke-fullfort-vgs-status`,
         method: 'ratio',
         scale: [0.1, 0.5],
         reverse: true,
@@ -129,7 +129,7 @@ export default {
           id: 'levekar_vgs_andel',
           template: 'a',
           method: 'ratio',
-          url: `${API}/Levekar-vgs-status-vFLio`,
+          url: `${API}/ikke-fullfort-vgs-status`,
           production: true,
         },
         {
@@ -138,7 +138,7 @@ export default {
           id: 'levekar_vgs_andel',
           template: 'a',
           method: 'value',
-          url: `${API}/Levekar-vgs-status-vFLio`,
+          url: `${API}/ikke-fullfort-vgs-status`,
           production: true,
         },
         {
@@ -147,7 +147,7 @@ export default {
           id: 'levekar_vgs-historisk',
           template: 'b',
           method: 'ratio',
-          url: `${API}/Levekar-vgs-historisk-t2ZTn`,
+          url: `${API}/ikke-fullfort-vgs-historisk`,
           production: true,
         },
 
@@ -157,7 +157,7 @@ export default {
           id: 'levekar_vgs-historisk',
           template: 'b',
           method: 'value',
-          url: `${API}/Levekar-vgs-historisk-t2ZTn`,
+          url: `${API}/ikke-fullfort-vgs-historisk`,
           production: true,
         },
       ],
