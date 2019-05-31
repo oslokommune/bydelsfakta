@@ -1,4 +1,6 @@
-import { baseUrl } from '../../util/config';
+import { baseUrl, apiUrl } from '../../util/config';
+
+const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Bygningstyper',
@@ -20,7 +22,7 @@ export default {
           id: 'eieform_totalt_status',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/totalt_status.json`,
+          url: `${API}/bygningstyper-totalt-status`,
           production: true,
         },
         {
@@ -29,7 +31,7 @@ export default {
           id: 'eieform_totalt_historisk',
           template: 'c',
           method: 'ratio',
-          url: `${baseUrl}/bygningstyper_totalt_historisk.json`,
+          url: `${API}/bygningstyper-totalt-historisk`,
           production: true,
         },
         {
@@ -38,7 +40,7 @@ export default {
           id: 'eieform_totalt_matrise',
           method: 'ratio',
           template: 'i',
-          url: `${baseUrl}/totalt_status.json`,
+          url: `${API}/bygningstyper-totalt-status`,
           production: true,
         },
       ],
@@ -56,10 +58,19 @@ export default {
         {
           active: false,
           label: 'Status',
+          id: 'blokkleilighet_status_antall',
+          template: 'a',
+          method: 'value',
+          url: `${API}/bygningstyper-blokk-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Status',
           id: 'blokkleilighet_status',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/blokk_status.json`,
+          url: `${API}/bygningstyper-blokk-status`,
           production: true,
         },
         {
@@ -67,7 +78,8 @@ export default {
           label: 'Historisk',
           id: 'blokkleilighet_historisk',
           template: 'b',
-          url: `${baseUrl}/blokk_historisk.json`,
+          method: 'value',
+          url: `${API}/bygningstyper-blokk-status`,
           production: true,
         },
       ],
@@ -88,7 +100,7 @@ export default {
           id: 'eieform_blokk_andel',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/blokk_status.json`,
+          url: `${API}/bygningstyper-blokk-status`,
           production: true,
         },
         {
@@ -97,7 +109,16 @@ export default {
           id: 'eieform_blokk_antall',
           template: 'a',
           method: 'value',
-          url: `${baseUrl}/blokk_status.json`,
+          url: `${API}/bygningstyper-blokk-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Antall',
+          id: 'eieform_blokk_historisk',
+          template: 'b',
+          method: 'value',
+          url: `${API}/bygningstyper-blokk-historisk`,
           production: true,
         },
       ],
@@ -117,7 +138,7 @@ export default {
           id: 'eieform_rekkehus_andel',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/rekkehus_status.json`,
+          url: `${API}/bygningstyper-rekkehus-status`,
           production: true,
         },
         {
@@ -126,7 +147,15 @@ export default {
           id: 'eieform_rekkehus_antall',
           template: 'a',
           method: 'value',
-          url: `${baseUrl}/rekkehus_status.json`,
+          url: `${API}/bygningstyper-rekkehus-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Antall',
+          id: 'eieform_rekkehus_historisk',
+          template: 'b',
+          url: `${API}/bygningstyper-rekkehus-historisk`,
           production: true,
         },
       ],
@@ -146,7 +175,7 @@ export default {
           id: 'eieform_enebolig_andel',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/enebolig_status.json`,
+          url: `${API}/bygningstyper-enebolig-status`,
           production: true,
         },
         {
@@ -155,7 +184,15 @@ export default {
           id: 'eieform_enebolig_antall',
           template: 'a',
           method: 'value',
-          url: `${baseUrl}/enebolig_status.json`,
+          url: `${API}/bygningstyper-enebolig-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Antall',
+          id: 'eieform_enebolig_historisk',
+          template: 'b',
+          url: `${API}/bygningstyper-enebolig-historisk`,
           production: true,
         },
       ],
