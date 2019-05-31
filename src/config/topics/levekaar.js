@@ -162,6 +162,43 @@ export default {
         },
       ],
     },
+    {
+      size: 'small',
+      heading: 'Dødsrater',
+      map: {
+        labels: ['', ''],
+        url: ``,
+      },
+      production: true,
+      tabs: [
+        {
+          active: false,
+          label: 'Antall',
+          id: 'levekar_dodsrater_status_antall',
+          template: 'a',
+          method: 'value',
+          url: `${API}/dodsrater-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Andel',
+          id: 'levekar_dodsrater_status_andel',
+          template: 'a',
+          method: 'ratio',
+          url: `${API}/dodsrater-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Historisk',
+          id: 'levekar_dodsrater_historisk',
+          template: 'b',
+          url: `${API}/dodsrater-historisk`,
+          production: true,
+        },
+      ],
+    },
     // {
     //   size: 'small',
     //   heading: '',
