@@ -9,6 +9,20 @@ export default {
   cards: [
     {
       size: 'large',
+      heading: '',
+      production: true,
+      tabs: [
+        {
+          label: '',
+          method: 'value',
+          template: 'h',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: true,
+        },
+      ],
+    },
+    {
+      size: 'large',
       heading: 'Befolkningsutvikling',
       production: true,
       tabs: [

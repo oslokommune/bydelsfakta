@@ -273,6 +273,7 @@ export default {
 
       this.svg.render(this.filteredData, {
         method: this.settings.method,
+        hidePercentSymbol: this.settings.hidePercentSymbol,
         initialRender: true,
         compareDistricts: this.compareDistricts,
         range: '[0, 40]', // default range
