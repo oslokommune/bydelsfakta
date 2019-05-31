@@ -116,7 +116,7 @@ function Base_Template(svg) {
   this.setHeading = function(str = false) {
     if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
       const heading = str || this.data.meta.heading;
-      const district = allDistricts.find(d => d.key === this.data.district);
+      const district = allDistricts.find(d => d.key === this.data.district || d.value === this.data.district);
       const geo = district ? ` i ${district.value}` : '';
       let year = '';
 
