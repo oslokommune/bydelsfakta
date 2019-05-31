@@ -200,7 +200,7 @@ function Template(svg) {
 
     dot
       .append('text')
-      .text(d => (d && d[this.method] ? this.format(d[this.method], this.method) : false))
+      .text(d => (d && d[this.method] !== undefined ? this.format(d[this.method], this.method) : false))
       .attr('x', d => this.x(this.parseYear(d.date)))
       .attr('y', d => this.y(d[this.method]))
       .attr('font-size', 11)

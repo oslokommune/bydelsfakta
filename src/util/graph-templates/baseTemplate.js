@@ -51,7 +51,7 @@ function Base_Template(svg) {
   this.parseDate = d3.timeParse('%Y-%m-%d');
   this.parseYear = d3.timeParse('%Y');
   this.formatYear = d3.timeFormat('%Y');
-  this.formatPercent = locale.norwegianLocale.format('.3~p'); // 0.0124 -> '12,4%'
+  this.formatPercent = locale.norwegianLocale.format('.2~p'); // 0.0124 -> '12,4%'
   this.formatDecimal = locale.norwegianLocale.format(',.0f');
   this.formatChange = locale.norwegianLocale.format('+,');
   this.sourceHeight = 30;
@@ -81,12 +81,16 @@ function Base_Template(svg) {
     }
 
     if (table) {
-      return method === 'ratio' ? locale.tableLocale.format('.3~p')(num) : locale.tableLocale.format(',.0f')(num);
+      return method === 'ratio' ? locale.tableLocale.format('.2~p')(num) : locale.tableLocale.format(',.0f')(num);
     }
 
     switch (method) {
       case 'ratio':
-        return this.formatPercent(num);
+        if (this.hidePercentSymbol) {
+          return locale.norwegianLocale.format(',.1f')(num * 100);
+        } else {
+          return this.formatPercent(num);
+        }
       case 'value':
         return this.formatDecimal(num);
       case 'change':
@@ -103,6 +107,7 @@ function Base_Template(svg) {
       method: this.method,
       series: this.series,
       highlight: this.highlight,
+      hidePercentSymbol: this.hidePercentSymbol,
       event: 'resize',
     });
   }, 250);
@@ -253,6 +258,7 @@ function Base_Template(svg) {
     this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
+    this.hidePercentSymbol = options.hidePercentSymbol || false;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;

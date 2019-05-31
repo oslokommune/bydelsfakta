@@ -64,7 +64,7 @@ export default {
           id: 'innvandring_landbakgrunn_status',
           template: 'a',
           method: 'ratio',
-          url: `${API}/Landbakgrunn-innvandringsgrupp-cLcKm`,
+          url: `${API}/landbakgrunn-innvandringsgrupper-status`,
           production: true,
         },
         {
@@ -74,7 +74,7 @@ export default {
           id: 'innvandring_landbakgrunn_status',
           template: 'a',
           method: 'value',
-          url: `${API}/Landbakgrunn-innvandringsgrupp-cLcKm`,
+          url: `${API}/landbakgrunn-innvandringsgrupper-status`,
           production: true,
         },
         {
@@ -84,8 +84,8 @@ export default {
           id: 'innvandring_landbakgrunn_historisk',
           template: 'c',
           method: 'ratio',
-          url: `${API}/Landbakgrunn-innvandringsgrupp-87zEq`,
-          production: false,
+          url: `${API}/landbakgrunn-innvandringsgrupper-historisk`,
+          production: true,
         },
 
         {
@@ -95,7 +95,7 @@ export default {
           id: 'innvandring_landbakgrunn_historisk',
           template: 'c',
           method: 'value',
-          url: `${API}/Landbakgrunn-innvandringsgrupp-87zEq`,
+          url: `${API}/landbakgrunn-innvandringsgrupper-historisk`,
           production: true,
         },
       ],
