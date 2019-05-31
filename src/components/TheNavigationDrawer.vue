@@ -10,7 +10,7 @@
       @keydown.esc="showNavigation = false"
       v-text="selectedTopic"
     ></button>
-    <div class="version-tag">Alpha</div>
+    <div class="version-tag">Beta</div>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
       <ul class="state-toggle">
         <li class="state-toggle__element">
