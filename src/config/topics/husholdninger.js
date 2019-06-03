@@ -58,16 +58,6 @@ export default {
           method: 'value',
           production: true,
         },
-
-        {
-          active: false,
-          label: 'Matrise',
-          id: 'husholdning_totalt_matrise',
-          method: 'ratio',
-          template: 'i',
-          url: `${API}/husholdning-totalt-status`,
-          production: true,
-        },
       ],
     },
   ],
