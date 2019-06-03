@@ -1,5 +1,8 @@
 import downloadFile from './downloadFile';
 
+const cellSeparator = ';';
+const decimalSeparator = ',';
+
 // Handle multi-level column headers and
 // extract column names from thead.
 const getColumnNames = thead => {
@@ -35,7 +38,19 @@ const getRows = tbody => {
   rows.forEach(row => {
     let cells = [];
     cells.push(row.querySelector('th').innerHTML);
-    row.querySelectorAll('td').forEach(cell => cells.push(numberify(cell.innerHTML)));
+    row.querySelectorAll('td').forEach(cell => {
+      /**
+       * If we want to introduce custom number formats
+       * on the CSVs we need to extract the actual number
+       * from the cell's data binding:
+       * ! `cell.__data__`
+       *
+       * In order to get this to work we also need the
+       * `method` used in the template, so then we need
+       * to pass down its `this` into this script somehow.
+       * */
+      return cells.push(numberify(cell.innerHTML));
+    });
     data.push(cells);
   });
 
@@ -44,17 +59,28 @@ const getRows = tbody => {
 
 // Create a csv string from columns and row arrays
 const mergeColsAndRows = (columns, rows) => {
-  return [...[columns], ...rows]
-    .map(line => JSON.stringify(line))
-    .join('\n')
-    .replace(/(^\[)|(\]$)/gm, '');
+  let output = '';
+  const lines = [...[columns], ...rows];
+
+  lines.forEach((line, lineidx) => {
+    line.forEach((cell, cellidx) => {
+      output += cell;
+      output += cellidx < line.length - 1 ? cellSeparator : '';
+    });
+    output += lineidx < lines.length - 1 ? '\n' : '';
+  });
+
+  // Remove excess word spaces
+  output = output.replace(/\s{2,}/gm, ' ');
+
+  return output;
 };
 
 // Remove spaces and convert commas to periods from cell values
 const numberify = str => {
   if (typeof str === 'number') return str;
   str = str.replace(/\s/g, '');
-  str = str.replace(',', '.');
+  str = str.replace(',', decimalSeparator);
   return str;
 };
 
@@ -66,8 +92,8 @@ export default table => {
   const csvString = mergeColsAndRows(columns, rows);
 
   const CSVBlob = new Blob([csvString], {
-    encoding: 'UTF-8',
-    type: 'text/csv;charset=UTF-8',
+    encoding: 'ISO-8859-1',
+    type: 'text/csv;charset=ISO-8859-1',
   });
 
   downloadFile(CSVBlob, caption, '.csv');
