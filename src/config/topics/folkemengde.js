@@ -5,12 +5,12 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Folkemengde',
   value: 'folkemengde',
-  production: true,
+  production: null,
   cards: [
     {
       size: 'large',
       heading: '',
-      production: true,
+      production: null,
       tabs: [
         {
           label: '',
@@ -24,7 +24,7 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningsutvikling',
-      production: true,
+      production: null,
       tabs: [
         {
           active: false,
@@ -48,7 +48,7 @@ export default {
     {
       size: 'large',
       heading: 'Nøkkeltall',
-      production: true,
+      production: null,
       tabs: [
         {
           active: true,

@@ -24,7 +24,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
   <div
     class="version-tag"
   >
-    Alpha
+    Beta
   </div>
    
   <nav
@@ -326,7 +326,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   <div
     class="version-tag"
   >
-    Alpha
+    Beta
   </div>
    
   <nav

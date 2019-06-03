@@ -5,7 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Personer med innvandrerbakgrunn',
   value: 'innvandrerbefolkningen',
-  production: true,
+  production: null,
 
   cards: [
     {

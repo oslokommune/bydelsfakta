@@ -17,7 +17,7 @@ export default {
         reverse: true,
         method: 'ratio',
       },
-      production: true,
+      production: null,
       tabs: [
         {
           active: false,
