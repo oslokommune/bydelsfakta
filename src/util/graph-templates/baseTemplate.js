@@ -112,38 +112,52 @@ function Base_Template(svg) {
     });
   }, 250);
 
-  // Sets the heading for the graph on load. Accepts a custom heading from `topics.js`
+  // Sets the heading for the graph on load.
   this.setHeading = function(str = false) {
     if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
-      const heading = str || this.data.meta.heading;
-      const district = allDistricts.find(d => d.key === this.data.district || d.value === this.data.district);
-      const geo = district ? ` i ${district.value}` : '';
-      let year = '';
+      this.customHeading = str;
+      const text = this.getHeading(str);
 
-      switch (this.template) {
-        case 'a':
-        case 'i':
-        case 'j':
-          if (!this.data.data[0].values.length) break;
-          year = `(${this.data.data[0].values[0].date})`;
-          break;
-
-        case 'd':
-        case 'e':
-        case 'f':
-          year = `(${this.data.data[0].aargang})`;
-          break;
-
-        default:
-          break;
-      }
-
-      const text = `${heading} ${geo} ${year}`;
       d3.select(this.svg.node().parentNode.parentNode)
         .select('caption')
         .html(text);
+
       this.heading.text(text);
     }
+  };
+
+  this.getHeading = function() {
+    /**
+     * @Returns a string with heading for the graph.
+     *
+     * Checks if a custom heading override exists,
+     * and adds district and year for the data, depending
+     * on which template is in use.
+     */
+    const heading = this.customHeading || this.data.meta.heading;
+    const district = allDistricts.find(d => d.key === this.data.district || d.value === this.data.district);
+    const geo = district ? ` i ${district.value}` : '';
+    let year = '';
+
+    switch (this.template) {
+      case 'a':
+      case 'i':
+      case 'j':
+        if (!this.data.data[0].values.length) break;
+        year = `(${this.data.data[0].values[0].date})`;
+        break;
+
+      case 'd':
+      case 'e':
+      case 'f':
+        year = `(${this.data.data[0].aargang})`;
+        break;
+
+      default:
+        break;
+    }
+
+    return `${heading} ${geo} ${year}`;
   };
 
   // Common operations to be run once a template is initialized
@@ -262,6 +276,18 @@ function Base_Template(svg) {
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
+
+    const wrap = d3
+      .textwrap()
+      .bounds({ width: this.parentWidth(), height: 60 })
+      .method('tspans');
+
+    const headingText = this.getHeading();
+    this.heading
+      .html('')
+      .text(headingText)
+      .call(wrap)
+      .attr('y', '1em');
 
     return true;
   };

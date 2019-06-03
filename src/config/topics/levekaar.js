@@ -113,7 +113,7 @@ export default {
     },
     {
       size: 'small',
-      heading: 'Personer 21-29 år som ikke har fullført videregående skole',
+      heading: 'Unge voksne uten fullført vgs',
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/ikke-fullfort-vgs-status`,
