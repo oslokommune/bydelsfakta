@@ -7,6 +7,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import * as locale from './locale';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -30,21 +31,14 @@ function Template(svg) {
 
     this.width = d3.max([this.width, 360]);
 
-    // Find quartiles, mean and median for each geography
-    data.data = JSON.parse(JSON.stringify(data.data)).map(district => {
+    // Bind quartiles, mean and median to each geography
+    data.data.forEach(district => {
       if (district.low) return district;
-      let ages = [];
-      district.values.forEach((val, age) => {
-        for (let i = 0; i < val.value; i++) {
-          ages.push(age);
-        }
-      });
+      const ages = district.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age));
       district.low = d3.quantile(ages, 0.25);
       district.median = d3.quantile(ages, 0.5);
       district.high = d3.quantile(ages, 0.75);
-      district.mean = Math.round(d3.mean(ages) * 100) / 100;
-
-      return district;
+      district.mean = d3.mean(ages);
     });
 
     this.svg
@@ -117,7 +111,7 @@ function Template(svg) {
       .selectAll('td')
       .data(d => [d.mean, d.median])
       .join('td')
-      .text(d => d);
+      .text(d => locale.norwegianLocale.format(',')(d.toFixed(2)));
   };
 
   this.initRowElements = function(rowsE) {
@@ -283,14 +277,14 @@ function Template(svg) {
 
     rows
       .select('text.median-value')
-      .text(d => d.median)
+      .text(d => d.median + ' år')
       .transition()
       .duration(this.duration)
       .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
 
     rows
       .select('text.mean-value')
-      .text(d => d.mean)
+      .text(d => locale.norwegianLocale.format(',.2f')(d.mean) + ' år')
       .transition()
       .duration(this.duration)
       .attr('x', d => this.x(d.mean) + 6);

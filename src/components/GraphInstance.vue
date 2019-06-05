@@ -182,6 +182,12 @@ export default {
             }
           }
 
+          if (template === 'f') {
+            const meanA = d3.mean(a.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
+            const meanB = d3.mean(b.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
+            return meanA - meanB;
+          }
+
           if (template === 'g') {
             return b.values[0] - a.values[0];
           }
