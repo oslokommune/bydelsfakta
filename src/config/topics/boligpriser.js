@@ -36,7 +36,7 @@ export default {
           method: 'value',
           template: 'c',
           url: `${API}/boligpriser-blokkleiligheter-historisk`,
-          production: null,
+          production: true,
         },
       ],
     },

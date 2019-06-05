@@ -54,6 +54,7 @@ function Base_Template(svg) {
   this.formatPercent = locale.norwegianLocale.format('.2~p'); // 0.0124 -> '12,4%'
   this.formatDecimal = locale.norwegianLocale.format(',.0f');
   this.formatChange = locale.norwegianLocale.format('+,');
+  this.formatChangePercent = locale.norwegianLocale.format('+,.3p');
   this.sourceHeight = 30;
   this.duration = 250;
   this.isCompare = false;
@@ -183,12 +184,13 @@ function Base_Template(svg) {
 
     // Append heading element
     this.heading = this.svg
+      .append('g')
+      .attr('transform', `translate(0, 14)`)
       .append('text')
       .attr('class', 'heading')
       .attr('fill', color.purple)
       .attr('font-weight', 500)
-      .attr('font-size', '1em')
-      .attr('y', '1em');
+      .attr('font-size', '1em');
 
     // Append canvas element
     this.canvas = this.svg
@@ -286,10 +288,21 @@ function Base_Template(svg) {
     this.heading
       .html('')
       .text(headingText)
-      .call(wrap)
-      .attr('y', '1em');
+      .call(wrap);
 
     return true;
+  };
+
+  this.showMessage = function(msg) {
+    this.svg
+      .append('text')
+      .attr('class', 'error-message')
+      .attr('y', 100)
+      .text(msg);
+  };
+
+  this.hideMessage = function() {
+    this.svg.select('.error-message').remove();
   };
 
   // Placeholder for the render method

@@ -30,15 +30,6 @@ export default {
           url: `${API}/bygningstyper-totalt-historisk`,
           production: true,
         },
-        {
-          active: false,
-          label: 'Matrise',
-          id: 'eieform_totalt_matrise',
-          method: 'ratio',
-          template: 'i',
-          url: `${API}/bygningstyper-totalt-status`,
-          production: true,
-        },
       ],
     },
 

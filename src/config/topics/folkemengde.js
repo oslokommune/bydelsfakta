@@ -7,20 +7,20 @@ export default {
   value: 'folkemengde',
   production: true,
   cards: [
-    // {
-    //   size: 'large',
-    //   heading: '',
-    //   production: true,
-    //   tabs: [
-    //     {
-    //       label: '',
-    //       method: 'value',
-    //       template: 'h',
-    //       url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
-    //       production: true,
-    //     },
-    //   ],
-    // },
+    {
+      size: 'large',
+      heading: 'Nøkkeltall',
+      production: true,
+      tabs: [
+        {
+          active: true,
+          label: 'Status',
+          production: true,
+          url: `${API}/nokkeltall-om-befolkningen`,
+          template: 'g',
+        },
+      ],
+    },
     {
       size: 'large',
       heading: 'Befolkningsutvikling',
@@ -42,20 +42,6 @@ export default {
           template: 'b',
           url: `${API}/folkemengde-utvikling-historisk-prosent`,
           production: true,
-        },
-      ],
-    },
-    {
-      size: 'large',
-      heading: 'Nøkkeltall',
-      production: true,
-      tabs: [
-        {
-          active: true,
-          label: 'Status',
-          production: true,
-          url: `${API}/nokkeltall-om-befolkningen`,
-          template: 'g',
         },
       ],
     },
