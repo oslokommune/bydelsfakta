@@ -11,7 +11,7 @@ export default {
     {
       size: 'large',
       heading: 'Innvandrere',
-      production: true,
+      production: null,
       tabs: [
         {
           active: false,
@@ -105,12 +105,12 @@ export default {
       heading: 'Under 16 år',
       map: {
         labels: ['Færre innvandrere', 'Flere innvandrere'],
-        url: `${API}/Andel-innvandrere-under-16-sta-imHqA`,
+        url: `${API}/innvandring-under-16-innvandrer-status`,
         scale: [0.03, 0.15],
         reverse: true,
         method: 'ratio',
       },
-      production: true,
+      production: null,
       tabs: [
         {
           active: false,
@@ -118,7 +118,7 @@ export default {
           id: 'innvandring_under16-totalt_status',
           template: 'a',
           method: 'ratio',
-          url: `${API}/Andel-innvandrere-under-16-sta-imHqA`,
+          url: `${API}/innvandring-under-16-innvandrer-status`,
           production: true,
         },
         {
@@ -127,7 +127,7 @@ export default {
           id: 'innvandring_under16-totalt_status',
           template: 'a',
           method: 'value',
-          url: `${API}/Andel-innvandrere-under-16-sta-imHqA`,
+          url: `${API}/innvandring-under-16-innvandrer-status`,
           production: true,
         },
         {
@@ -136,7 +136,7 @@ export default {
           id: 'innvandring_under16-totalt_historisk',
           template: 'b',
           method: 'ratio',
-          url: `${API}/Andel-innvandrere-under-16-his-5EUaC`,
+          url: `${API}/innvandring-under-16-innvandrer-historisk`,
           production: true,
         },
         {
@@ -145,7 +145,7 @@ export default {
           id: 'innvandring_under16-totalt_historisk',
           template: 'b',
           method: 'value',
-          url: `${API}/Andel-innvandrere-under-16-his-5EUaC`,
+          url: `${API}/innvandring-under-16-innvandrer-historisk`,
           production: true,
         },
       ],
@@ -155,12 +155,12 @@ export default {
       heading: 'Under 16 år med én innvandrerforelder',
       map: {
         labels: ['Færre innvandrere', 'Flere innvandrere'],
-        url: `${API}/Andel-under-16-med-en-innvandr-rRuib`,
+        url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
         scale: [0.15, 0.3],
         reverse: true,
         method: 'ratio',
       },
-      production: true,
+      production: null,
       tabs: [
         {
           active: false,
@@ -168,7 +168,7 @@ export default {
           id: 'innvandring_under16-en-innvandrerforelder_status',
           template: 'a',
           method: 'ratio',
-          url: `${API}/Andel-under-16-med-en-innvandr-rRuib`,
+          url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
           production: true,
         },
         {
@@ -177,7 +177,7 @@ export default {
           id: 'innvandring_under16-en-innvandrerforelder_status',
           template: 'a',
           method: 'value',
-          url: `${API}/Andel-under-16-med-en-innvandr-rRuib`,
+          url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
           production: true,
         },
         {
@@ -186,7 +186,7 @@ export default {
           id: 'innvandring_under16-en-innvandrerforelder_historisk',
           template: 'b',
           method: 'ratio',
-          url: `${API}/Andel-under-16-med-en-innvandr-JnGas`,
+          url: `${API}/innvandring-under-16-en-innvandrerforelder-historisk`,
           production: true,
         },
         {
@@ -195,7 +195,7 @@ export default {
           id: 'innvandring_under16-en-innvandrerforelder_historisk',
           template: 'b',
           method: 'value',
-          url: `${API}/Andel-under-16-med-en-innvandr-JnGas`,
+          url: `${API}/innvandring-under-16-en-innvandrerforelder-historisk`,
           production: true,
         },
       ],
@@ -208,9 +208,9 @@ export default {
         scale: [0.05, 0.75],
         reverse: true,
         method: 'ratio',
-        url: `${API}/Andel-under-16-med-to-innvandr-jVhZm`,
+        url: `${API}/innvandring-under-16-to-innvandrerforeldere-status`,
       },
-      production: true,
+      production: null,
       tabs: [
         {
           active: false,
@@ -218,7 +218,7 @@ export default {
           id: 'innvandring_under16-to-innvandrerforeldre_status',
           template: 'a',
           method: 'ratio',
-          url: `${API}/Andel-under-16-med-to-innvandr-jVhZm`,
+          url: `${API}/innvandring-under-16-to-innvandrerforeldere-status`,
           production: true,
         },
         {
@@ -227,7 +227,7 @@ export default {
           id: 'innvandring_under16-to-innvandrerforeldre_status',
           template: 'a',
           method: 'value',
-          url: `${API}/Andel-under-16-med-to-innvandr-jVhZm`,
+          url: `${API}/innvandring-under-16-to-innvandrerforeldere-status`,
           production: true,
         },
         {
@@ -236,7 +236,7 @@ export default {
           id: 'innvandring_under16-to-innvandrerforeldre_historisk',
           template: 'b',
           method: 'ratio',
-          url: `${API}/Andel-under-16-med-to-innvandr-Zgj32`,
+          url: `${API}/innvandring-under-16-to-innvandrerforeldere-historisk`,
           production: true,
         },
         {
@@ -245,7 +245,7 @@ export default {
           id: 'innvandring_under16-to-innvandrerforeldre_historisk',
           template: 'b',
           method: 'value',
-          url: `${API}/Andel-under-16-med-to-innvandr-Zgj32`,
+          url: `${API}/innvandring-under-16-to-innvandrerforeldere-historisk`,
           production: true,
         },
       ],
