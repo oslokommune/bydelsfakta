@@ -151,7 +151,7 @@ function Base_Template(svg) {
       case 'd':
       case 'e':
       case 'f':
-        year = `(${this.data.data[0].aargang})`;
+        year = this.data.data[0].aargang ? `(${this.data.data[0].aargang})` : '';
         break;
 
       default:
