@@ -5,26 +5,26 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Folkemengde',
   value: 'folkemengde',
-  production: null,
+  production: true,
   cards: [
-    {
-      size: 'large',
-      heading: '',
-      production: null,
-      tabs: [
-        {
-          label: '',
-          method: 'value',
-          template: 'h',
-          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
-          production: true,
-        },
-      ],
-    },
+    // {
+    //   size: 'large',
+    //   heading: '',
+    //   production: true,
+    //   tabs: [
+    //     {
+    //       label: '',
+    //       method: 'value',
+    //       template: 'h',
+    //       url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+    //       production: true,
+    //     },
+    //   ],
+    // },
     {
       size: 'large',
       heading: 'Befolkningsutvikling',
-      production: null,
+      production: true,
       tabs: [
         {
           active: false,
@@ -48,7 +48,7 @@ export default {
     {
       size: 'large',
       heading: 'Nøkkeltall',
-      production: null,
+      production: true,
       tabs: [
         {
           active: true,
