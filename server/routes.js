@@ -24,7 +24,6 @@ module.exports = app => {
     })
       .then(response => res.send(response.data[0]))
       .catch(error => {
-        console.log(error);
         if (error.response) {
           return Promise.reject(error.response);
         } else if (error.request) {
