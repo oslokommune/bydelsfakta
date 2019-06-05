@@ -1,10 +1,27 @@
-import { baseUrl } from '../../util/config';
+import { apiUrl, baseUrl } from '../../util/config';
+
+const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
-  production: null,
-  cards: [],
+  production: true,
+  cards: [
+    {
+      size: 'large',
+      heading: 'Forventet utvikling',
+      production: true,
+      tabs: [
+        {
+          label: 'Historisk',
+          method: 'value',
+          template: 'h',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: true,
+        },
+      ],
+    },
+  ],
   options: {
     kategori: 'Befolkning',
     tema: 'Befolknings&shy;endringer',

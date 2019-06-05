@@ -44,14 +44,16 @@ function Template(svg) {
 
   this.line = d3
     .line()
-    .x(d => this.x(this.parseDate(d.date)))
+    .x(d => this.x(this.parseYear(d.date)))
     .y(d => this.y(d.population));
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
-    this.highlight = options.highlight || this.data.data.actual[this.data.data.actual.length - 1].date;
-    this.selected = this.data.data.actual.filter(d => d.date === this.highlight)[0];
+    this.filtered = this.data.data.filter(d => d.avgRow)[0] || this.data.data.filter(d => d.totalRow)[0];
+
+    this.highlight = options.highlight || this.filtered.values[0][this.filtered.values[0].length - 1].date;
+    this.selected = this.filtered.values[0].filter(d => d.date === this.highlight)[0];
     this.width1 = this.parentWidth() - this.padding.left - this.padding.right - this.gapX - this.sidebarWidth;
     this.width1 = d3.max([this.width1, 300]);
     this.width = this.width1 + this.gapX + this.sidebarWidth;
@@ -110,52 +112,36 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .attr('x', 44);
 
-    const section_population = this.sidebar
-      .append('g')
-      .attr('class', 'section-population')
-      .attr('transform', 'translate(0, 70)');
-    section_population.append('rect').attr('class', 'divider');
-    section_population
-      .append('text')
-      .attr('class', 'label')
-      .text('Befolkning');
-    section_population.append('text').attr('class', 'value');
+    const rowOptions = [
+      [{ label: 'Befolkning', class: 'row-population' }],
+      [
+        { label: 'Befolkningsvekst', class: 'row-change' },
+        { label: 'Befolkningsvekst (%)', class: 'row-change-percent' },
+      ],
+      [
+        { label: 'Fødte', class: 'row-births' },
+        { label: 'Døde', class: 'row-deaths' },
+        { label: 'Naturlig tilvekst', class: 'row-growth-natural' },
+      ],
+      [
+        { label: 'Innvandrere', class: 'row-immigration' },
+        { label: 'Utvandrere', class: 'row-emigration' },
+        { label: 'Tilvekst flytting', class: 'row-growth-migration' },
+      ],
+    ];
 
-    const section_change = this.sidebar
-      .append('g')
-      .attr('class', 'section-change')
-      .attr('transform', 'translate(0, 140)');
-    section_change.append('rect').attr('class', 'divider');
-    section_change
-      .append('text')
-      .attr('class', 'label')
-      .text('Befolkningsvekst');
-    section_change.append('text').attr('class', 'value');
+    const rowHeight = 30;
+    const rowStartHeight = 90;
+    let rowIterator = 0;
 
-    section_change.append('rect').attr('class', 'bar');
-
-    this.sidebar
-      .selectAll('rect.divider')
-      .attr('height', 2)
-      .attr('width', this.sidebarWidth)
-      .attr('fill', color.purple);
-
-    this.sidebar
-      .selectAll('text.value')
-      .attr('font-size', 16)
-      .attr('y', 26)
-      .attr('font-weight', '700')
-      .attr('fill', color.purple)
-      .attr('text-anchor', 'end')
-      .attr('x', this.sidebarWidth)
-      .text('70');
-
-    this.sidebar
-      .selectAll('text.label')
-      .attr('font-size', 16)
-      .attr('font-weight', '400')
-      .attr('y', 26)
-      .attr('fill', color.purple);
+    rowOptions.forEach(group => {
+      group.forEach(row => {
+        row.y = rowHeight * rowIterator + rowStartHeight;
+        createSidebarRow(this, row, rowHeight);
+        rowIterator++;
+      });
+      rowIterator++;
+    });
   };
 
   // Creates the DOM elements for the upper graph
@@ -168,13 +154,9 @@ function Template(svg) {
     this.upper
       .append('path')
       .attr('class', 'projection')
-      .attr('fill', color.blue);
-
-    this.upper
-      .append('path')
-      .attr('class', 'expected')
       .attr('fill', 'none')
-      .attr('stroke', color.purple);
+      .attr('stroke', color.blue)
+      .attr('stroke-width', 3);
 
     this.upper
       .append('path')
@@ -255,9 +237,20 @@ function Template(svg) {
   this.drawSidebar = function() {
     this.sidebar.attr('transform', `translate(${this.padding.left + this.width1 + this.gapX}, ${this.padding.top})`);
 
-    this.sidebar.select('text.section-year__text').text(this.formatYear(this.parseDate(this.selected.date)));
-    this.sidebar.select('g.section-population text.value').text(this.selected.population);
-    this.sidebar.select('g.section-change text.value').text(this.selected.change);
+    const naturalGrowth = this.selected.births - this.selected.deaths;
+    const migration = this.selected.immigration - this.selected.emigration;
+    const change = naturalGrowth + migration;
+
+    this.sidebar.select('text.section-year__text').text(this.formatYear(this.parseYear(this.selected.date)));
+    this.sidebar.select('g.row-population text.row-value').text(this.formatDecimal(this.selected.population));
+    this.sidebar.select('g.row-change text.row-value').text(this.formatChange(change));
+    this.sidebar.select('g.row-change-percent text.row-value').text(this.formatChangePercent(this.selected.change));
+    this.sidebar.select('g.row-births text.row-value').text(this.formatDecimal(this.selected.births));
+    this.sidebar.select('g.row-deaths text.row-value').text(this.formatDecimal(this.selected.deaths));
+    this.sidebar.select('g.row-immigration text.row-value').text(this.formatDecimal(this.selected.immigration));
+    this.sidebar.select('g.row-emigration text.row-value').text(this.formatDecimal(this.selected.emigration));
+    this.sidebar.select('g.row-growth-natural text.row-value').text(this.formatChange(naturalGrowth));
+    this.sidebar.select('g.row-growth-migration text.row-value').text(this.formatChange(migration));
   };
 
   // Updates the upper line graph on each render.
@@ -292,8 +285,8 @@ function Template(svg) {
 
     this.upper
       .select('path.valueLine')
-      .datum(this.data.data)
-      .attr('d', d => this.line(d.actual));
+      .datum(this.filtered)
+      .attr('d', d => this.line(d.values[0]));
 
     this.drawProjection();
   };
@@ -313,7 +306,8 @@ function Template(svg) {
     let bar = this.lower
       .select('g.bars')
       .selectAll('rect.bar')
-      .data(this.data.data.actual);
+      .data(this.filtered.values[0]);
+
     const barE = bar
       .enter()
       .append('rect')
@@ -323,8 +317,8 @@ function Template(svg) {
 
     bar
       .attr('width', this.barWidth)
-      .attr('x', d => this.x(this.parseDate(d.date)) - this.barWidth / 2)
-      .attr('height', d => Math.abs(this.y2(0) - this.y2(d.change)))
+      .attr('x', d => this.x(this.parseYear(d.date)) - this.barWidth / 2)
+      .attr('height', d => Math.abs(this.y2(0) - this.y2(d.change) || 0))
       .attr('y', d => (d.change > 0 ? this.y2(d.change) : this.y2(0)))
       .attr('fill', d => {
         if (d.date === this.highlight) return color.purple;
@@ -341,32 +335,16 @@ function Template(svg) {
   // called from this.drawUpper()
   this.drawProjection = function() {
     // Draw projection
-    const lastDate = this.data.data.actual[this.data.data.actual.length - 1];
-    const startPos = { x: this.x(this.parseDate(lastDate.date)), y: this.y(lastDate.population) };
-    const lowPos = {
-      x: this.x(this.parseDate(this.data.data.projection.date)),
-      y: this.y(this.data.data.projection.low),
-    };
-    const expPos = {
-      x: this.x(this.parseDate(this.data.data.projection.date)),
-      y: this.y(this.data.data.projection.expected),
-    };
-    const highPos = {
-      x: this.x(this.parseDate(this.data.data.projection.date)),
-      y: this.y(this.data.data.projection.high),
-    };
-
-    const projectionPathData = `M${startPos.x},${startPos.y} L${lowPos.x},${lowPos.y} L${highPos.x},${highPos.y}z`;
-    const expectedPathData = `M${startPos.x},${startPos.y} L${expPos.x},${expPos.y}`;
-    this.upper.select('path.projection').attr('d', projectionPathData);
-    this.upper.select('path.expected').attr('d', expectedPathData);
+    const lastDate = this.filtered.values[0][this.filtered.values[0].length - 1];
+    const projection = [lastDate, ...this.filtered.values[1].map(d => ({ date: d.date, population: d.projection }))];
+    this.upper.select('path.projection').attr('d', this.line(projection));
   };
 
   // Draws the transparent triggers on each render
   this.drawTriggers = function() {
     this.triggersContainer.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
 
-    let trigger = this.triggersContainer.selectAll('rect').data(this.data.data.actual);
+    let trigger = this.triggersContainer.selectAll('rect').data(this.filtered.values[0]);
     const triggerE = trigger.enter().append('rect');
     trigger.exit().remove();
     trigger = trigger.merge(triggerE);
@@ -374,11 +352,8 @@ function Template(svg) {
     trigger
       .attr('width', this.barWidth + 1)
       .attr('height', this.height1 + this.gapY + this.height2)
-      .attr('x', d => this.x(this.parseDate(d.date)) - this.barWidth / 2)
+      .attr('x', d => this.x(this.parseYear(d.date)) - this.barWidth / 2)
       .style('cursor', 'pointer')
-      .on('mouseover', d => {
-        this.render(this.data, { highlight: d.date });
-      })
       .on('click keyup', (d, i, j) => {
         if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
         if (d3.event && d3.event.type === 'click') j[i].blur();
@@ -397,31 +372,37 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .duration(1000)
-      .attr('fill-opacity', 0)
+      .attr('fill-opacity', d => (d.date === this.highlight ? 0.03 : 0))
       .attr('tabindex', 0);
   };
 
   // Sets and draws all the scales and axis
   // for the whole template on each render.
   this.resetScales = function() {
-    const dates = d3.extent(this.data.data.actual.concat(this.data.data.projection).map(d => this.parseDate(d.date)));
-    dates[0] = d3.timeYear.offset(dates[0], -2);
-    const minPop =
-      d3.min(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.low)) / 1.2;
-    const maxPop =
-      d3.max(this.data.data.actual.concat(this.data.data.projection).map(d => d.population || d.high)) * 1.05;
+    const dateExtent = d3.extent(this.filtered.values.flatMap(serie => serie.map(d => this.parseYear(d.date))));
+    const populationExtent = d3.extent(
+      this.filtered.values.flatMap(serie => serie.map(d => d.population || d.projection))
+    );
+    const changeExtent = d3.extent(this.filtered.values.flatMap(serie => serie.map(d => d.change))).map((d, i) => {
+      if (i === 0) {
+        return d3.min([d, 0]);
+      } else {
+        return d;
+      }
+    });
 
     this.y2
       .range([this.height2, 0])
-      .domain(d3.extent(this.data.data.actual.map(d => d.change).map((d, i) => (i == 1 ? d * 1.3 : d))))
+      .domain(changeExtent)
       .nice();
+
     this.x
       .range([0, this.width1])
-      .domain(dates)
+      .domain(dateExtent)
       .nice();
     this.y
       .range([this.height1, 0])
-      .domain([minPop, maxPop])
+      .domain([0, populationExtent[1]])
       .nice();
     this.xAxis.call(d3.axisBottom(this.x).ticks(this.width1 / 60));
     this.yAxis.call(
@@ -433,8 +414,8 @@ function Template(svg) {
     this.y2Axis.call(
       d3
         .axisLeft(this.y2)
-        .ticks(this.height2 / 20)
-        .tickFormat(d => this.format(d, this.method, true))
+        .ticks(this.height2 / 30)
+        .tickFormat(d => d3.format('+.2p')(d))
     );
   };
 
@@ -442,3 +423,32 @@ function Template(svg) {
 }
 
 export default Template;
+
+function createSidebarRow(self, options, rowHeight) {
+  const row = self.sidebar
+    .append('g')
+    .attr('class', `row ${options.class}`)
+    .attr('transform', `translate(0, ${options.y})`);
+
+  row
+    .append('rect')
+    .attr('height', 1)
+    .attr('width', self.sidebarWidth)
+    .attr('y', (rowHeight - 12) / 2)
+    .attr('fill', color.purple)
+    .attr('fill-opacity', 0.1);
+
+  row
+    .append('text')
+    .attr('class', 'row-label')
+    .text(options.label);
+
+  row
+    .append('text')
+    .attr('class', 'row-value')
+    .attr('x', self.sidebarWidth)
+    .attr('font-weight', 600)
+    .attr('text-anchor', 'end');
+
+  return row;
+}
