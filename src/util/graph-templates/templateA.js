@@ -277,6 +277,7 @@ function Template(svg) {
       .attr('x', (d, i) => this.x[i](0))
       .text(d => (d[this.method] ? this.format(d[this.method], this.method) : 'Ikke tilgjengelig'))
       .attr('opacity', (d, i, j) => {
+        if (this.isMobileView && this.method === 'value') return 0;
         const parent = d3.select(j[i].parentNode);
         const avgOrTotal = JSON.parse(parent.attr('data-avgRow')) || JSON.parse(parent.attr('data-totalRow'));
         return avgOrTotal && this.method === 'value' && d.value > this.x[i].domain()[1] ? 1 : 0;
