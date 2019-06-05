@@ -177,8 +177,7 @@ function Template(svg) {
       .append('text')
       .attr('class', 'populationTooltip')
       .attr('font-size', 12)
-      .attr('text-anchor', 'end')
-      .attr('transform', 'translate(-10, -3)');
+      .attr('text-anchor', 'end');
 
     this.upper
       .append('line')
@@ -265,9 +264,17 @@ function Template(svg) {
 
     this.upper
       .select('text.populationTooltip')
-      .text(this.selected.population)
+      .text(this.formatDecimal(this.selected.population))
       .attr('y', this.y(this.selected.population))
-      .attr('x', this.x(this.parseYear(this.selected.date)));
+      .attr('x', this.x(this.parseYear(this.selected.date)))
+      .attr('transform', () => {
+        const left = this.x(this.parseYear(this.highlight));
+        return left < 100 ? `translate(8, 16)` : `translate(-8, -5)`;
+      })
+      .attr('text-anchor', () => {
+        const left = this.x(this.parseYear(this.highlight));
+        return left < 100 ? 'start' : 'end';
+      });
 
     this.upper
       .selectAll('line.highlightLine')
@@ -372,7 +379,7 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .duration(1000)
-      .attr('fill-opacity', d => (d.date === this.highlight ? 0.03 : 0))
+      .attr('fill-opacity', 0)
       .attr('tabindex', 0);
   };
 
