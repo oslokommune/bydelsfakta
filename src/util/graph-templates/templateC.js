@@ -48,6 +48,15 @@ function Template(svg) {
       .attr('width', this.padding.left + this.width + this.padding.right);
 
     this.setScales();
+    this.drawTable();
+    const yearCount = d3.timeYear.count(...this.x.domain());
+    if (!yearCount) {
+      this.showMessage('Mangelfull data: Tidsserien inneholder for få datapunkter.');
+      return;
+    } else {
+      this.hideMessage();
+    }
+
     this.drawAxis();
     this.drawLines();
     this.drawTabs();
@@ -58,7 +67,6 @@ function Template(svg) {
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
     );
-    this.drawTable();
   };
 
   // Creates elements for this template. Runs from base template along with init()

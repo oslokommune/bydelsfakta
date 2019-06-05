@@ -293,6 +293,18 @@ function Base_Template(svg) {
     return true;
   };
 
+  this.showMessage = function(msg) {
+    this.svg
+      .append('text')
+      .attr('class', 'error-message')
+      .attr('y', 100)
+      .text(msg);
+  };
+
+  this.hideMessage = function() {
+    this.svg.select('.error-message').remove();
+  };
+
   // Placeholder for the render method
   this.render = function() {};
 }
