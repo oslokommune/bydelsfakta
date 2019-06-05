@@ -26,6 +26,7 @@ import debounce from '../debounce';
 import { color } from './colors';
 import * as locale from './locale';
 import allDistricts from '../../config/allDistricts';
+import { textwrap } from 'd3-textwrap';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
 
@@ -279,8 +280,7 @@ function Base_Template(svg) {
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
-    const wrap = d3
-      .textwrap()
+    const wrap = textwrap()
       .bounds({ width: this.parentWidth(), height: 60 })
       .method('tspans');
 
