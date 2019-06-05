@@ -1,6 +1,6 @@
 # Bydelsfakta
 
-Frontend application for Bydelsfakta at Oslo Kommune which visualizes statistics and data on different topics about the districts in Oslo.
+Frontend application for Bydelsfakta at Oslo kommune which visualizes statistics and data on different topics about the districts in Oslo.
 
 #### Install dependencies
 Need to install both the dependencies in root folder and the server folder for the backend
