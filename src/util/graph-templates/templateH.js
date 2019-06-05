@@ -257,22 +257,22 @@ function Template(svg) {
   this.drawUpper = function() {
     this.upper.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.xAxis.attr('transform', `translate(0, ${this.height1})`);
-    this.upper.select('text.highlightText').text(this.formatYear(this.parseDate(this.highlight)));
+    this.upper.select('text.highlightText').text(this.formatYear(this.parseYear(this.highlight)));
 
     this.upper
       .select('g.highlightContainer')
-      .attr('transform', `translate(${this.x(this.parseDate(this.highlight))}, ${this.height1})`);
+      .attr('transform', `translate(${this.x(this.parseYear(this.highlight))}, ${this.height1})`);
 
     this.upper
       .select('text.populationTooltip')
       .text(this.selected.population)
       .attr('y', this.y(this.selected.population))
-      .attr('x', this.x(this.parseDate(this.selected.date)));
+      .attr('x', this.x(this.parseYear(this.selected.date)));
 
     this.upper
       .selectAll('line.highlightLine')
-      .attr('x1', this.x(this.parseDate(this.highlight)))
-      .attr('x2', this.x(this.parseDate(this.highlight)))
+      .attr('x1', this.x(this.parseYear(this.highlight)))
+      .attr('x2', this.x(this.parseYear(this.highlight)))
       .attr('y1', 0)
       .attr('y2', this.height1);
 
