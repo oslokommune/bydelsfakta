@@ -192,12 +192,11 @@
 </template>
 
 <script>
-import { saveSvgAsPng } from 'save-svg-as-png';
 import { mapGetters, mapState } from 'vuex';
-import canvg from 'canvg';
 import * as d3 from 'd3';
 import GraphInstance from './GraphInstance';
 import downloadSvg from '../util/downloadSvg';
+import downloadPng from '../util/downloadPng';
 import tableToCsv from '../util/tableToCsv';
 import VLeaflet from './VLeaflet';
 import OkIcon from './OkIcon';
@@ -260,17 +259,9 @@ export default {
     },
 
     savePng(id) {
-      const file = this.$refs.graph.$refs.svg;
       const filename = `${this.$route.params.district}_${id}.png`;
-      saveSvgAsPng(file, filename, {
-        backgroundColor: 'white',
-        encoderOptions: 1,
-        width: file.width.baseVal.value + 40,
-        height: file.height.baseVal.value + 40,
-        top: -20,
-        left: -20,
-        canvg,
-      });
+      downloadPng(this.$refs.graph.$refs.svg, filename);
+
       this.closeMenu();
     },
 
