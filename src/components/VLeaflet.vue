@@ -190,7 +190,7 @@ export default {
       mapOptions: {
         zoomControl: true,
         attributionControl: false,
-        doubleClickZoom: false,
+        doubleClickZoom: true,
         dragging: true,
         scrollWheelZoom: false,
         touchZoom: true,
