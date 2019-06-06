@@ -237,6 +237,53 @@ export default {
     },
     {
       size: 'small',
+      heading: 'Ikke-vestlige innvandrere',
+      map: {
+        labels: ['', ''],
+        url: ``,
+      },
+      production: true,
+      tabs: [
+        {
+          active: false,
+          label: 'Antall',
+          id: 'levekaar_innvandrere_ikke_vestlige_kort_status_antall',
+          template: 'a',
+          method: 'value',
+          url: `${API}/levekar-innvandrere-ikke-vestlige-kort-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Andel',
+          id: 'levekaar_innvandrere_ikke_vestlige_kort_status_andel',
+          template: 'a',
+          method: 'ratio',
+          url: `${API}/levekar-innvandrere-ikke-vestlige-kort-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Historisk (antall)',
+          id: 'levekar_innvandrere_ikke_vestlige_kort_historisk_antall',
+          template: 'b',
+          method: 'value',
+          url: `${API}/levekar-innvandrere-ikke-vestlige-kort-historisk`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Historisk (andel)',
+          id: 'levekar_innvandrere_ikke_vestlige_kort_historisk_andel',
+          template: 'b',
+          method: 'ratio',
+          url: `${API}/levekar-innvandrere-ikke-vestlige-kort-historisk`,
+          production: true,
+        },
+      ],
+    },
+    {
+      size: 'small',
       heading: 'Trangbodde',
       production: true,
       map: {

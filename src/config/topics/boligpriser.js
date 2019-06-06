@@ -34,7 +34,7 @@ export default {
           id: 'boligpriser_historisk',
           heading: 'Gj.snitt kvadratmeterpris på blokkleiligheter',
           method: 'value',
-          template: 'c',
+          template: 'b',
           url: `${API}/boligpriser-blokkleiligheter-historisk`,
           production: true,
         },
