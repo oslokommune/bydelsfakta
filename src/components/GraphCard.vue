@@ -307,12 +307,12 @@ export default {
 
 .card-container {
   flex: 50% 1 10;
-  min-width: 300px;
   padding: 1em;
+  width: 100%;
 
-  @media screen and (min-width: 950px) {
+  @media screen and (min-width: $break-md) {
     max-width: 50%;
-    min-width: 400px;
+    width: 50%;
   }
 
   &.large {
