@@ -192,8 +192,10 @@ export default {
       size: 'small',
       heading: 'Ikke-sysselsatte',
       map: {
-        labels: ['', ''],
-        url: ``,
+        labels: ['Færre ikke-sysselsatte', 'Flere ikke-sysselsatte'],
+        url: `${API}/levekar-ikke-sysselsatte-status`,
+        scale: [0.09, 0.352],
+        method: 'ratio',
       },
       production: true,
       tabs: [
@@ -239,8 +241,10 @@ export default {
       size: 'small',
       heading: 'Ikke-vestlige innvandrere',
       map: {
-        labels: ['', ''],
-        url: ``,
+        labels: ['Færre ikke-vestlige innvandrere', 'Flere ikke-vestlige innvandrere'],
+        url: `${API}/levekar-innvandrere-ikke-vestlige-kort-status`,
+        scale: [0.076, 0.58],
+        method: 'ratio',
       },
       production: true,
       tabs: [
@@ -287,8 +291,10 @@ export default {
       heading: 'Trangbodde',
       production: true,
       map: {
-        labels: ['', ''],
-        url: ``,
+        labels: ['Færre trangbodde', 'Flere trangbodde'],
+        url: `${API}/levekar-trangbodde-status`,
+        scale: [0.051, 0.465],
+        method: 'ratio',
       },
       tabs: [
         {
@@ -338,8 +344,10 @@ export default {
       heading: 'Redusert funksjonsevne',
       production: true,
       map: {
-        labels: ['', ''],
-        url: ``,
+        labels: ['Færre med redusert funksjonsevne', 'Flere med redusert funksjonsevne'],
+        url: `${API}/levekar-redusert-funksjonsevne-status`,
+        scale: [0.065, 0.239],
+        method: 'ratio',
       },
       tabs: [
         {
