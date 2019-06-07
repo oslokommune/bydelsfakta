@@ -5,7 +5,8 @@ const path = require('path');
 const axios = require('axios');
 const auth = require('./auth');
 
-const API_URL = process.env.BYDELSFAKTA_API_URL;
+const api = process.env.BYDELSFAKTA_API_URL;
+const API_URL = api.slice(-1) === '/' ? api : `${api}/`;
 
 module.exports = app => {
   app.use('/', express.static(path.join(__dirname, '../docs/')));
@@ -24,13 +25,9 @@ module.exports = app => {
     })
       .then(response => res.send(response.data[0]))
       .catch(error => {
-        if (error.response) {
-          return Promise.reject(error.response);
-        } else if (error.request) {
-          return Promise.reject(error.request);
-        } else {
-          return Promise.reject(error.message);
-        }
+        console.log('Error code: ', error.response.status);
+        console.log('Error message: ', error.response.data);
+        return res.status(error.response.status).send(error.response.data);
       });
   });
 
