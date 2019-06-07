@@ -109,6 +109,7 @@ function Base_Template(svg) {
       method: this.method,
       series: this.series,
       highlight: this.highlight,
+      mode: this.mode,
       hidePercentSymbol: this.hidePercentSymbol,
       event: 'resize',
     });
@@ -269,6 +270,7 @@ function Base_Template(svg) {
     if (data === undefined || data.data === undefined) return;
     this.data = data;
 
+    this.mode = options.mode || 'osloRatio';
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
     this.isCompare = options.compareDistricts || false;
     this.method = options.method || 'value';

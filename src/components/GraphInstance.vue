@@ -69,6 +69,7 @@ import TemplateG from '../util/graph-templates/templateG';
 import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
+import TemplateK from '../util/graph-templates/templateK';
 import districtNames from '../config/districtNames';
 import OkIcon from './OkIcon';
 
@@ -268,6 +269,9 @@ export default {
           case 'j':
             this.svg = new TemplateJ(this.$refs['svg']);
             break;
+          case 'k':
+            this.svg = new TemplateK(this.$refs['svg']);
+            break;
           default:
             break;
         }
@@ -280,6 +284,7 @@ export default {
       this.svg.render(this.filteredData, {
         method: this.settings.method,
         hidePercentSymbol: this.settings.hidePercentSymbol,
+        mode: this.settings.mode,
         initialRender: true,
         compareDistricts: this.compareDistricts,
         range: '[0, 40]', // default range
