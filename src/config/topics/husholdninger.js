@@ -87,7 +87,7 @@ export default {
           id: 'husholdning_med_1_barn_antall',
           template: 'a',
           method: 'value',
-          url: `${API}/husholdning-totalt-status`,
+          url: `${API}/husholdninger-med-1-barn`,
           production: true,
         },
       ],
