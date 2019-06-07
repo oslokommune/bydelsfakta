@@ -7,31 +7,31 @@ export default {
   value: 'levekaar',
   production: true,
   cards: [
-    {
-      size: 'large',
-      heading: 'Levekår',
-      production: true,
-      tabs: [
-        {
-          production: true,
-          active: true,
-          label: 'Sammenlignet med Oslo',
-          template: 'k',
-          method: 'ratio',
-          mode: 'osloRatio',
-          url: `${API}/levekar-totalt-status`,
-        },
-        {
-          production: true,
-          active: true,
-          label: 'Sammenlignet med bydelen',
-          template: 'k',
-          method: 'ratio',
-          mode: 'districtRatio',
-          url: `${API}/levekar-totalt-status`,
-        },
-      ],
-    },
+    // {
+    //   size: 'large',
+    //   heading: 'Levekår',
+    //   production: true,
+    //   tabs: [
+    //     {
+    //       production: true,
+    //       active: true,
+    //       label: 'Sammenlignet med Oslo',
+    //       template: 'k',
+    //       method: 'ratio',
+    //       mode: 'osloRatio',
+    //       url: `${API}/levekar-totalt-status`,
+    //     },
+    //     {
+    //       production: true,
+    //       active: true,
+    //       label: 'Sammenlignet med bydelen',
+    //       template: 'k',
+    //       method: 'ratio',
+    //       mode: 'districtRatio',
+    //       url: `${API}/levekar-totalt-status`,
+    //     },
+    //   ],
+    // },
     {
       size: 'small',
       heading: 'Personer med lav utdanning',
