@@ -67,6 +67,7 @@ function Template(svg) {
 
     this.resetScales();
     this.drawSidebar();
+    this.drawTable();
     this.drawUpper();
     this.drawLower();
     this.drawTriggers();
@@ -74,6 +75,97 @@ function Template(svg) {
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
     );
+  };
+
+  this.drawTable = function() {
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
+
+    const years = this.data.data[0].values[0].map(d => d.date);
+    const yearsProjected = this.data.data[0].values[1].map(d => d.date);
+
+    const columnNames = [
+      { key: 'population', label: 'Befolkning', method: 'value' },
+      { key: 'change', label: 'Endring (%)', method: 'ratio' },
+      { key: 'births', label: 'Fødsler', method: 'value' },
+      { key: 'deaths', label: 'Døde', method: 'value' },
+      { key: 'immigration', label: 'Innflyttere', method: 'value' },
+      { key: 'emigration', label: 'Utflyttere', method: 'value' },
+    ];
+
+    hRow1
+      .selectAll('th')
+      .data(['Geografi', ...columnNames, { label: 'Fremskriving', method: 'value' }])
+      .join('th')
+      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('colspan', (d, i, j) => {
+        if (i === 0) return 1;
+        if (i === j.length - 1) return yearsProjected.length;
+        return years.length;
+      })
+      .attr('scope', 'col')
+      .classed('border-cell', (d, i) => i > 0)
+      .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`)
+      .text(d => d.label);
+
+    hRow2
+      .selectAll('th')
+      .data(() => {
+        let columns = [];
+        columnNames.forEach(() => {
+          years.forEach(year => {
+            columns.push(year);
+          });
+        });
+        columns = [...columns, ...yearsProjected];
+
+        return columns;
+      })
+      .join('th')
+      .classed('border-cell', (d, i) => i % years.length === 0)
+      .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
+      .text(d => d);
+
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
+
+    const rows = tbody
+      .selectAll('tr')
+      .data(tableData.sort(this.tableSort))
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .attr('headers', `${this.data.meta.heading}_th_1_0`)
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(geo => {
+        return [
+          ...columnNames.flatMap(col =>
+            geo.values[0].map(year => this.format(year[col.key] || 'N/A', col.method, false, true))
+          ),
+          ...geo.values[1].map(year => this.format(year.projection, 'value', false, true)),
+        ];
+      })
+      .join('td')
+      .attr('headers', (d, i, j) => {
+        const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
+        return `${this.data.meta.heading}_th_1_${first} th_2_${i}`;
+      })
+      .classed('border-cell', (d, i) => i % years.length === 0)
+      .text(d => d);
   };
 
   // Empties canvas and creates the neccessary DOM elements
