@@ -138,7 +138,7 @@ function Base_Template(svg) {
      */
     const heading = this.customHeading || this.data.meta.heading;
     const district = allDistricts.find(d => d.key === this.data.district || d.value === this.data.district);
-    const geo = district ? ` i ${district.value}` : '';
+    const geo = district ? ` i ${district.value}` : ' i Oslo';
     let year = '';
 
     switch (this.template) {
