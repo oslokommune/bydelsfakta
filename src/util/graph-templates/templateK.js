@@ -7,20 +7,22 @@ import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
+import { state } from '@/store';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'k';
 
-  this.padding = { top: 140, left: 200, right: 20, bottom: 10 };
+  this.padding = { top: 140, left: 200, right: 20, bottom: 50 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
+  this.legendBox;
 
   // Scales for the two charts
   this.colPos = d3.scaleBand().paddingInner(0.25);
   this.x = [];
 
   this.render = function(data, options = {}) {
-    data.data = data.data.filter(d => !d.avgRow && !d.totalRow);
+    data.data = data.data.filter(d => !d.totalRow);
     if (!this.commonRender(data, options)) return;
 
     this.width = d3.max([this.width, 360]);
@@ -29,17 +31,28 @@ function Template(svg) {
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawScales();
-    // this.drawAxisLabels();
-    this.drawColumns();
-    this.drawRows();
+    drawColumns(this);
+    drawRows(this);
     this.drawSource(
       'Statistisk sentralbyrå (test)',
       this.padding.top + this.height + this.padding.bottom + this.sourceHeight
     );
-    // this.drawTable();
+    this.drawTable();
+
+    if (state.ie11) {
+      this.drawIeLegend();
+    } else {
+      this.drawFlexLegend();
+    }
   };
 
   this.created = function() {
+    // Create container for legend box
+    if (state.ie11) {
+      this.legendBox = this.svg.append('g').attr('class', 'legend');
+    } else {
+      this.legendBox = this.svg.append('foreignObject').attr('height', 40);
+    }
     this.canvas.append('g').classed('rows', true);
     this.canvas.append('g').classed('columns', true);
   };
@@ -61,48 +74,43 @@ function Template(svg) {
     });
   };
 
-  this.drawColumns = function() {
-    let columns = this.canvas
-      .select('.columns')
-      .selectAll('g.column')
-      .data(this.data.meta.series)
-      .join(
-        enter => enterColumns(this, enter),
-        update => update.attr('transform', d => `translate(${this.colPos(d.heading)}, 0)`)
-      );
+  this.drawTable = function() {
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
 
-    columns.select('.heading').text(d => d.heading);
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
 
-    columns
-      .select('line')
-      .attr('stroke', 'black')
-      .attr('y1', -10)
-      .attr('y2', this.height)
-      .attr('x1', (d, i) => this.x[i](0))
-      .attr('x2', (d, i) => this.x[i](0));
+    const hrow = thead.append('tr');
 
-    columns.each((d, i, j) => {
-      d3.select(j[i])
-        .select('.axis')
-        .call(
-          d3
-            .axisTop(this.x[i])
-            .ticks(2)
-            .tickFormat(d3.format(',.0p'))
-        );
-    });
-  };
+    hrow
+      .selectAll('th')
+      .data(() => ['Geografi', ...this.data.meta.series.map(d => d.heading)])
+      .join('th')
+      .attr('scope', 'col')
+      .text(d => d);
 
-  // Update the contents for each row on each
-  // render
-  this.drawRows = function() {
-    let rows = this.canvas
-      .select('.rows')
-      .selectAll('g.row')
-      .data(this.data.data)
-      .join(g => this.initRowElements(g));
+    const tableData = JSON.parse(JSON.stringify(this.data.data));
 
-    updateRows(this, rows);
+    const rows = tbody
+      .selectAll('tr')
+      .data(tableData.sort(this.tableSort))
+      .join('tr');
+
+    // Geography cells
+    rows
+      .selectAll('th')
+      .data(d => [d.geography])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => d.values.map(value => this.format(value[this.mode], this.method, false, true)))
+      .join('td')
+      .text(d => d);
   };
 
   this.initRowElements = function(el) {
@@ -139,6 +147,73 @@ function Template(svg) {
       .attr('fill', color.purple);
 
     return g;
+  };
+
+  // Updates the legends on each render
+  this.drawFlexLegend = function() {
+    const districtGeo = this.data.data.filter(geo => geo.avgRow)[0]
+      ? this.data.data.filter(geo => geo.avgRow)[0].geography
+      : 'bydelen';
+    const compareWith = this.mode === 'osloRatio' ? 'Oslo' : districtGeo;
+
+    let legendHtml = `<div class="graphlegend">`;
+
+    legendHtml += `<div class="graphlegend__item"><span class="graphlegend__swatch" style="background:${fill(
+      0.7
+    )};"></span><span class="graphlegend__label">${'Lavere forekomst enn i '}${compareWith}</span></div>`;
+    legendHtml += `<div class="graphlegend__item"><span class="graphlegend__swatch" style="background:${fill(
+      1.5
+    )};"></span><span class="graphlegend__label">${'Høyere forekomst enn i '}${compareWith}</span></div>`;
+    legendHtml += '</div>';
+
+    // Resize and re-position the legend box based on the height of the svg
+    this.legendBox
+      .attr('width', this.width + this.padding.left + this.padding.right)
+      .html(legendHtml)
+      .attr('transform', `translate(0, ${this.height + this.padding.top + this.padding.bottom / 2 - 8})`);
+  };
+
+  this.drawIeLegend = function() {
+    const districtGeo = this.data.data.filter(geo => geo.avgRow)[0]
+      ? this.data.data.filter(geo => geo.avgRow)[0].geography
+      : 'bydelen';
+    const compareWith = this.mode === 'osloRatio' ? 'Oslo' : districtGeo;
+
+    // Re-position the legend box based on the height of the svg
+    this.legendBox.attr('transform', `translate(0, ${this.height + this.padding.top + this.padding.bottom / 2 - 8})`);
+
+    // Standard select/enter/update/exit pattern for each series
+    let group = this.legendBox
+      .selectAll('g.group')
+      .data([`Lavere forekomst enn i ${compareWith}`, `Høyere forekomst enn i ${compareWith}`]);
+    const groupE = group
+      .enter()
+      .append('g')
+      .attr('class', 'group');
+    group.exit().remove();
+    group = group.merge(groupE);
+
+    // Create DOM elements for newly created legend groups (series)
+    groupE
+      .append('rect')
+      .attr('height', 16)
+      .attr('width', 16)
+      .attr('rx', 3)
+      // Cheap trick to ensure correct colors on the legend
+      .attr('fill', (d, i) => (i === 0 ? fill(0.7) : fill(1.5)));
+    groupE.append('text').attr('y', 8);
+
+    // Update the label for each series in the legend
+    group
+      .select('text')
+      .text(d => d)
+      .attr('y', 12)
+      .attr('x', 20)
+      .attr('font-size', 12);
+    group.attr(
+      'transform',
+      (d, i) => `translate(${i * ((this.width + this.padding.left + this.padding.right) / 4)}, 0)`
+    );
   };
 
   this.init(svg);
@@ -208,4 +283,48 @@ function enterColumns(self, g) {
     .classed('axis', true)
     .attr('transform', `translate(0, -10)`);
   return group;
+}
+
+function drawColumns(self) {
+  let columns = self.canvas
+    .select('.columns')
+    .selectAll('g.column')
+    .data(self.data.meta.series)
+    .join(
+      enter => enterColumns(self, enter),
+      update => update.attr('transform', d => `translate(${self.colPos(d.heading)}, 0)`)
+    );
+
+  columns.select('.heading').text(d => d.heading);
+
+  columns
+    .select('line')
+    .attr('stroke', 'black')
+    .attr('y1', -10)
+    .attr('y2', self.height)
+    .attr('x1', (d, i) => self.x[i](0))
+    .attr('x2', (d, i) => self.x[i](0));
+
+  columns.each((d, i, j) => {
+    d3.select(j[i])
+      .select('.axis')
+      .call(
+        d3
+          .axisTop(self.x[i])
+          .ticks(2)
+          .tickFormat(d3.format(',.0p'))
+      );
+  });
+}
+
+// Update the contents for each row on each
+// render
+function drawRows(self) {
+  let rows = self.canvas
+    .select('.rows')
+    .selectAll('g.row')
+    .data(self.data.data)
+    .join(g => self.initRowElements(g));
+
+  updateRows(self, rows);
 }
