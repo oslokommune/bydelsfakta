@@ -104,9 +104,14 @@ function Template(svg) {
     // the selected geography will be affected by hover.
     voronoiCells.on('mouseover', (d, i, j) => {
       const geography = j[i].__data__.data.geography;
-      const date = j[i]['__data__']['data']['date'];
+      const date = j[i]['__data__'].data.date;
 
-      if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
+      const offset = this.method === 'value' ? 2 : 0;
+
+      if (
+        this.highlight === -1 ||
+        this.data.data.findIndex(d => d.geography === geography) - offset === this.highlight
+      ) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
         this.canvas
           .selectAll('g.dotgroup')
@@ -117,7 +122,7 @@ function Template(svg) {
             }
           })
           .selectAll('g.dot')
-          .filter(dot => dot['date'] === date)
+          .filter(dot => dot.date === date)
           .attr('opacity', 1);
       }
     });
@@ -303,17 +308,13 @@ function Template(svg) {
   // Updates labels on the right hand side
   this.drawLabels = function() {
     const labelPositions = positionLabels(
-      JSON.parse(
-        JSON.stringify(
-          this.data.data
-            .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
-            .map(row => {
-              row.y = this.y(row.values[row.values.length - 1][this.method]);
-              return row;
-            }),
-          this.height
-        )
-      )
+      this.data.data
+        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+        .map(row => {
+          row.y = this.y(row.values[row.values.length - 1][this.method]);
+          return row;
+        }),
+      this.height
     );
 
     const labels = this.canvas
@@ -411,7 +412,7 @@ function Template(svg) {
     // Subtract 1 from highlight when method id 'value'
     // because we're removing 'Oslo' i alt with filter
     if (this.highlight >= 0 && this.method === 'value') {
-      this.highlight--;
+      this.highlight -= 2;
     }
 
     // Each line is a path element
