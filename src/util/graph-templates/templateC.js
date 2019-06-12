@@ -319,7 +319,7 @@ function Template(svg) {
     const inner = radio.select('.inner');
     const label = g.select('.label');
     const bg = g.select('.bg');
-    const maxWidth = d3.max(g.nodes(), d => util.getTextWidth(d.__data__.heading)) + gapX;
+    const maxWidth = d3.max(g.nodes(), d => util.getTextWidth(d.__data__.heading + d.__data__.subheading)) + gapX;
 
     g.attr('transform', (d, i) => {
       const col = Math.floor(i / rowCount);
@@ -333,7 +333,7 @@ function Template(svg) {
       .attr('y', -gapX / 2);
 
     radio.attr('transform', 'translate(5, 0)');
-    label.attr('transform', 'translate(16, 5)').text(d => d.heading);
+    label.attr('transform', 'translate(16, 5)').text(d => `${d.heading} ${d.subheading}`);
 
     inner.attr('transform', (d, i) => {
       return `scale(${i === this.series ? 1 : 0})`;
