@@ -324,7 +324,7 @@ function Template(svg) {
     g.attr('transform', (d, i) => {
       const col = Math.floor(i / rowCount);
       const row = i % rowCount;
-      return `translate(${col * maxWidth}, ${row * gapY})`;
+      return `translate(${col * maxWidth}, ${row * (gapY + 3)})`;
     });
 
     bg.attr('fill', 'white')
