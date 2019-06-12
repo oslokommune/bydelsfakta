@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "geography": "Bydel Alna",
+      "values": [
+        { "alder": [0, 4], "totalt": 100, "Innvandrer": 25, "Norskfødt": 25, "Øvrige": 50 },
+        { "alder": [5, 9], "totalt": 100, "Innvandrer": 25, "Norskfødt": 25, "Øvrige": 50 }
+      ]
+    }
+  ]
+}
