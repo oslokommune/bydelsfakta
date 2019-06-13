@@ -256,7 +256,12 @@ function Template(svg) {
       const geography = j[i].__data__.data.geography;
       const date = j[i].__data__.data.date;
 
-      if (this.highlight === -1 || this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
+      const offset = this.method === 'value' ? 2 : 0;
+
+      if (
+        this.highlight === -1 ||
+        this.data.data.findIndex(d => d.geography === geography) - offset === this.highlight
+      ) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
         this.canvas
           .selectAll('g.dotgroup')
@@ -314,12 +319,12 @@ function Template(svg) {
     const inner = radio.select('.inner');
     const label = g.select('.label');
     const bg = g.select('.bg');
-    const maxWidth = d3.max(g.nodes(), d => util.getTextWidth(d.__data__.heading)) + gapX;
+    const maxWidth = d3.max(g.nodes(), d => util.getTextWidth(d.__data__.heading + d.__data__.subheading)) + gapX;
 
     g.attr('transform', (d, i) => {
       const col = Math.floor(i / rowCount);
       const row = i % rowCount;
-      return `translate(${col * maxWidth}, ${row * gapY})`;
+      return `translate(${col * maxWidth}, ${row * (gapY + 3)})`;
     });
 
     bg.attr('fill', 'white')
@@ -328,7 +333,7 @@ function Template(svg) {
       .attr('y', -gapX / 2);
 
     radio.attr('transform', 'translate(5, 0)');
-    label.attr('transform', 'translate(16, 5)').text(d => d.heading);
+    label.attr('transform', 'translate(16, 5)').text(d => `${d.heading} ${d.subheading}`);
 
     inner.attr('transform', (d, i) => {
       return `scale(${i === this.series ? 1 : 0})`;
@@ -423,17 +428,13 @@ function Template(svg) {
     // simple collision detection algorithm. Passing in
     // the original y-position and the available height in pixels
     const labelPositions = positionLabels(
-      JSON.parse(
-        JSON.stringify(
-          this.data.data
-            .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
-            .map(row => {
-              row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
-              return row;
-            }),
-          this.height
-        )
-      )
+      this.data.data
+        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+        .map(row => {
+          row.y = this.y(row.values[this.series][row.values[this.series].length - 1][this.method]);
+          return row;
+        }),
+      this.height
     );
 
     const labels = this.canvas
@@ -532,6 +533,10 @@ function Template(svg) {
 
   // Updates the shape and style of the lines in the line chart
   this.drawLines = function() {
+    if (this.highlight >= 0 && this.method === 'value') {
+      this.highlight -= 2;
+    }
+
     // Each line is a path element
     this.canvas
       .select('g.lines')
