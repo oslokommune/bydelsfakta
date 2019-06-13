@@ -104,7 +104,7 @@ function Template(svg) {
     // the selected geography will be affected by hover.
     voronoiCells.on('mouseover', (d, i, j) => {
       const geography = j[i].__data__.data.geography;
-      const date = j[i]['__data__'].data.date;
+      const date = j[i].__data__.data.date;
 
       const offset = this.method === 'value' ? 2 : 0;
 
