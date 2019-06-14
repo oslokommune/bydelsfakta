@@ -3,18 +3,19 @@ import { apiUrl, baseUrl } from '../../util/config';
 const API = `${apiUrl}/api/dataset`;
 
 export default {
-  text: 'Folkemengde',
-  value: 'folkemengde',
+  text: 'Befolkningsutvikling',
+  value: 'befolkningsutvikling',
   production: true,
   cards: [
     {
       size: 'large',
-      heading: 'Nøkkeltall',
+      heading: 'Befolkningsvekst',
       production: true,
       tabs: [
         {
           active: true,
           label: 'Status',
+          heading: 'Befolkningsvekst',
           production: true,
           url: `${API}/nokkeltall-om-befolkningen`,
           template: 'g',
@@ -29,6 +30,7 @@ export default {
         {
           active: false,
           label: 'Folkemengde',
+          heading: 'Befolkningsutvikling',
           method: 'value',
           template: 'b',
           url: `${API}/folkemengde-utvikling-historisk`,
@@ -45,11 +47,25 @@ export default {
         },
       ],
     },
+    {
+      size: 'large',
+      heading: 'Forventet utvikling',
+      production: true,
+      tabs: [
+        {
+          label: 'Historisk',
+          method: 'value',
+          template: 'h',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: true,
+        },
+      ],
+    },
   ],
   related: ['alder', 'innvandrerbefolkningen', 'befolkningsendringer'],
   options: {
     kategori: 'Befolkning',
-    tema: 'Folkemengde',
+    tema: 'Befolkningsutvikling',
     bgImage: `${baseUrl}/img/folkemengde`,
     txtColor: 'rgb(245, 173, 165)',
   },
