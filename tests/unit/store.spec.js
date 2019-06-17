@@ -123,7 +123,7 @@ describe('getters', () => {
     const state = {
       districtsGeo: districts,
       compareDistricts: true,
-      districts: ['01'],
+      districts: ['15'],
     };
 
     const result = geoDistricts(state);
