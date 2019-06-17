@@ -157,7 +157,7 @@ function Template(svg) {
 
     hRow2
       .selectAll('th')
-      .data(() => ageRanges.map(() => ['mann', 'kvinne']).flat())
+      .data(() => ageRanges.map(() => ['mann', 'kvinne']).reduce((acc, val) => acc.concat(val), []))
       .join('th')
       .attr('id', (d, i) => `${uuid}_th_1_${i}`)
       .attr('scope', 'col')
@@ -199,7 +199,7 @@ function Template(svg) {
             }
             return [menn, kvinner];
           })
-          .flat();
+          .reduce((acc, val) => acc.concat(val), []);
       })
       .join('td')
       .attr('headers', (d, i) => {

@@ -328,7 +328,7 @@ function Template(svg) {
 
     // Add eventlistener to the selector, and capture the value
     // and pass it on when re-rendering the chart
-    selectElement.on('input', (d, i, j) => {
+    selectElement.on('change', (d, i, j) => {
       this.render(this.data, { method: this.method, range: j[i].value });
     });
   };
