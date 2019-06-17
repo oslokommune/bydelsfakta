@@ -6,7 +6,6 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
-// import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -47,7 +46,9 @@ function Template(svg) {
     this.setScales();
     this.drawUpper();
     this.drawLower();
+    this.drawVoronoi();
     this.drawTabs();
+    this.drawHeadings();
   };
 
   this.created = function() {
@@ -80,10 +81,49 @@ function Template(svg) {
       .attr('stroke', color.red)
       .attr('stroke-width', 4);
 
+    this.upper
+      .append('g')
+      .attr('class', 'heading')
+      .attr('transform', `translate(20, 4)`);
+
+    this.lower
+      .append('text')
+      .attr('class', 'heading')
+      .attr('transform', `translate(20, 4)`);
+
     this.lower.append('g').attr('class', 'axis axisX');
     this.lower.append('g').attr('class', 'axis axisY');
     this.lower.append('g').attr('class', 'bars');
     this.lower.append('rect').attr('class', 'zero');
+    this.canvas.append('g').attr('class', 'voronoi');
+  };
+
+  this.drawHeadings = function() {
+    this.lower.select('.heading').text('Netto flytting');
+
+    const g = this.upper
+      .select('.heading')
+      .selectAll('g')
+      .data(['Innflytting', 'Utflytting'])
+      .join(enter => {
+        const g = enter.append('g');
+        g.append('rect')
+          .attr('height', 5)
+          .attr('rx', 3)
+          .attr('width', 23);
+        g.append('text');
+        return g;
+      });
+
+    g.attr('transform', (d, i) => `translate(${i * 125}, 0)`);
+    g.select('text')
+      .text(d => d)
+      .attr('x', 30);
+
+    g.select('rect')
+      .text(d => d)
+      .attr('y', -7)
+      .attr('fill', (d, i) => (i === 0 ? color.purple : color.red));
   };
 
   this.drawUpper = function() {
@@ -210,6 +250,96 @@ function Template(svg) {
       return g;
     }
   };
+
+  this.drawVoronoi = function() {
+    const flattenData = [...new Array(this.filteredData.immigration.length)].flatMap((d, i) => {
+      return [
+        {
+          x: this.x(this.filteredData.immigration[i].alder.join('–')),
+          y: this.y1(this.filteredData.immigration[i][tabData[this.series].value]),
+          value: this.filteredData.immigration[i][tabData[this.series].value],
+          age: this.filteredData.immigration[i].alder,
+        },
+        {
+          x: this.x(this.filteredData.emigration[i].alder.join('–')),
+          y: this.y1(this.filteredData.emigration[i][tabData[this.series].value]),
+          value: this.filteredData.emigration[i][tabData[this.series].value],
+          age: this.filteredData.emigration[i].alder,
+        },
+      ];
+    });
+
+    const voronoiData = d3
+      .voronoi()
+      .extent([[1, 1], [this.width, this.height1]])
+      .x(d => d.x + this.x.bandwidth() / 2)
+      .y(d => d.y)
+      .polygons(flattenData)
+      .filter(Boolean);
+
+    const voronoiCells = this.canvas
+      .select('g.voronoi')
+      .selectAll('g')
+      .data(voronoiData)
+      .join(enter => {
+        const g = enter.append('g');
+        g.append('path');
+        g.append('rect');
+        g.append('circle');
+        g.append('text');
+        return g;
+      });
+
+    const circle = voronoiCells
+      .select('circle')
+      .attr('r', 6)
+      .attr('cx', d => d.data.x + this.x.bandwidth() / 2)
+      .attr('cy', d => d.data.y)
+      .attr('opacity', 0)
+      .style('pointer-events', 'none')
+      .attr('stroke', 'white')
+      .attr('stroke-width', 2);
+
+    const rect = voronoiCells
+      .select('rect')
+      .attr('height', 25)
+      .attr('width', d => util.getTextWidth(d.data.value) + 12)
+      .attr('x', d => d.data.x + this.x.bandwidth() / 2 - 2)
+      .attr('y', d => d.data.y - 26)
+      .attr('fill', color.yellow)
+      .attr('rx', 12.5)
+      .attr('opacity', 0)
+      .style('pointer-events', 'none');
+
+    const text = voronoiCells
+      .select('text')
+      .attr('x', d => d.data.x + this.x.bandwidth() / 2 + 4)
+      .attr('y', d => d.data.y - 8)
+      .text(d => d.data.value)
+      .attr('opacity', 0)
+      .style('pointer-events', 'none')
+      .style('cursor', 'auto');
+
+    const path = voronoiCells
+      .select('path')
+      .attr('d', d => 'M' + d.join('L') + 'Z')
+      .attr('fill-opacity', 0);
+
+    path.on('mouseenter', (d, i, j) => {
+      const parent = d3.select(j[i].parentNode);
+
+      parent.select('rect').attr('opacity', 1);
+      parent.select('text').attr('opacity', 1);
+      parent.select('circle').attr('opacity', 1);
+    });
+
+    path.on('mouseleave', () => {
+      circle.attr('opacity', 0);
+      text.attr('opacity', 0);
+      rect.attr('opacity', 0);
+    });
+  };
+
   this.setScales = function() {
     const ages = this.filteredData.immigration.map(d => d.alder.join('–'));
 
@@ -245,7 +375,12 @@ function Template(svg) {
     this.lower
       .select('g.axisY')
       .transition()
-      .call(d3.axisLeft(this.y2));
+      .call(
+        d3
+          .axisLeft(this.y2)
+          .tickFormat(d3.format('+'))
+          .ticks(5)
+      );
   };
 
   this.init(svg);
