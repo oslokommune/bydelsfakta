@@ -1,6 +1,6 @@
-import { apiUrl, baseUrl } from '../../util/config';
+import { baseUrl } from '../../util/config';
 
-const API = `${apiUrl}/api/dataset`;
+// const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Befolkningsendringer',
@@ -9,14 +9,14 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Forventet utvikling',
+      heading: 'Flytting',
       production: true,
       tabs: [
         {
           label: 'Historisk',
           method: 'value',
-          template: 'h',
-          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          template: 'm',
+          url: `${baseUrl}/mockDataFlytting.json`,
           production: true,
         },
       ],
