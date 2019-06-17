@@ -6,6 +6,7 @@ import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -36,7 +37,7 @@ function Template(svg) {
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
-    this.filteredData = this.data.data[0];
+    this.filteredData = this.data.data.filter(d => d.avgRow)[0].values[0];
 
     this.width = d3.max([this.width, 360]);
     this.svg
@@ -156,7 +157,7 @@ function Template(svg) {
       };
     });
 
-    this.lower
+    const bars = this.lower
       .select('.bars')
       .selectAll('rect')
       .data(barData)
@@ -164,11 +165,21 @@ function Template(svg) {
       .attr('x', d => this.x(d.age))
       .attr('stroke', d => (d.diff <= 0 ? color.red : color.purple))
       .attr('fill-opacity', 0.6)
-      .attr('width', this.x.bandwidth())
+      .attr('width', this.x.bandwidth());
+
+    bars
       .transition()
       .attr('fill', d => (d.diff <= 0 ? color.red : color.purple))
       .attr('height', d => this.y2(0) - this.y2(Math.abs(d.diff)))
       .attr('y', d => (d.diff <= 0 ? this.y2(0) + 1 : this.y2(d.diff)));
+
+    bars.on('mouseenter', d => {
+      showTooltipOver(`${d.age} år: ${this.formatChange(d.diff)}`);
+      showTooltipMove();
+    });
+
+    bars.on('mousemove', showTooltipMove);
+    bars.on('mouseleave', hideTooltip);
 
     this.lower
       .select('.zero')
@@ -307,6 +318,7 @@ function Template(svg) {
       .attr('x', d => d.data.x + this.x.bandwidth() / 2 - 2)
       .attr('y', d => d.data.y - 26)
       .attr('fill', color.yellow)
+      .attr('stroke', 'white')
       .attr('rx', 12.5)
       .attr('opacity', 0)
       .style('pointer-events', 'none');
