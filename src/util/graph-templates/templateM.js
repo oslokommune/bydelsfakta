@@ -2,11 +2,11 @@
  * Template for comparing 8 different variables
  */
 
-import Base_Template from './baseTemplate';
-import util from './template-utils';
-import { color } from './colors';
 import d3 from '@/assets/d3';
-import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
+import { hideTooltip, showTooltipMove, showTooltipOver } from '../tooltip';
+import Base_Template from './baseTemplate';
+import { color } from './colors';
+import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -50,6 +50,7 @@ function Template(svg) {
     this.drawVoronoi();
     this.drawTabs();
     this.drawHeadings();
+    this.drawTable();
   };
 
   this.created = function() {
@@ -350,6 +351,83 @@ function Template(svg) {
       text.attr('opacity', 0);
       rect.attr('opacity', 0);
     });
+  };
+
+  this.drawTable = function() {
+    const thead = this.table.select('thead');
+    const tbody = this.table.select('tbody');
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
+
+    const headers1 = ['Alder', ...tabData.map(d => d.label)];
+    const headers2 = ['Innflytting', 'Utflytting', 'Netto flytting'];
+
+    hRow1
+      .selectAll('th')
+      .data(headers1)
+      .join('th')
+      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('colspan', (d, i) => (i > 0 ? headers2.length : 1))
+      .attr('scope', 'col')
+      .classed('border-cell', (d, i) => i > 0)
+      .text(d => d);
+    // .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`)
+
+    hRow2
+      .selectAll('th')
+      .data(headers1.flatMap((d, i) => (i > 0 ? headers2 : [])))
+      .join('th')
+      .classed('border-cell', (d, i) => i % headers2.length === 0)
+      .text(d => d);
+    // .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
+
+    const tableData = this.filteredData.immigration.map((d, i) => {
+      return {
+        key: d.alder.join('–'),
+        values: [
+          this.filteredData.immigration[i]['totalt'],
+          this.filteredData.emigration[i]['totalt'],
+          this.filteredData.immigration[i]['totalt'] - this.filteredData.emigration[i]['totalt'],
+
+          this.filteredData.immigration[i]['Innvandrer'],
+          this.filteredData.emigration[i]['Innvandrer'],
+          this.filteredData.immigration[i]['Innvandrer'] - this.filteredData.emigration[i]['Innvandrer'],
+
+          this.filteredData.immigration[i]['Norskfødt'],
+          this.filteredData.emigration[i]['Norskfødt'],
+          this.filteredData.immigration[i]['Norskfødt'] - this.filteredData.emigration[i]['Norskfødt'],
+
+          this.filteredData.immigration[i]['Øvrige'],
+          this.filteredData.emigration[i]['Øvrige'],
+          this.filteredData.immigration[i]['Øvrige'] - this.filteredData.emigration[i]['Øvrige'],
+        ],
+      };
+    });
+
+    const rows = tbody
+      .selectAll('tr')
+      .data(tableData)
+      .join('tr');
+
+    // Age column
+    rows
+      .selectAll('th')
+      .data(d => [d.key])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => d.values)
+      .join('td')
+      .classed('border-cell', (d, i) => i % headers2.length === 0)
+      .text(d => this.format(d, this.method, false, true));
   };
 
   this.setScales = function() {
