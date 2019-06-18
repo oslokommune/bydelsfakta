@@ -11,8 +11,9 @@ export default {
       size: 'large',
       heading: 'Husholdninger',
       map: {
-        labels: ['Færre aleneboende', 'Flere aleneboende'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/husholdning-totalt-status`,
+        heading: 'Aleneboende',
         method: 'ratio',
         series: 0,
         scale: [0.25, 0.6],
@@ -65,7 +66,8 @@ export default {
       size: 'small',
       heading: 'Husholdninger med ett barn',
       map: {
-        labels: ['Færre husholdninger med ett barn', 'Flere husholdninger med ett barn'],
+        labels: ['Færre', 'Flere'],
+        heading: 'Husholdninger med ett barn',
         url: `${API}/husholdninger-med-1-barn`,
         method: 'ratio',
         series: 0,
@@ -97,7 +99,8 @@ export default {
       size: 'small',
       heading: 'Husholdninger med to barn',
       map: {
-        labels: ['Færre husholdninger med to barn', 'Flere husholdninger med to barn'],
+        labels: ['Færre', 'Flere'],
+        heading: 'Husholdninger med to barn',
         url: `${API}/husholdninger-med-2-barn`,
         method: 'ratio',
         series: 0,
@@ -129,7 +132,8 @@ export default {
       size: 'small',
       heading: 'Husholdninger med tre eller flere barn',
       map: {
-        labels: ['Færre husholdninger med tre+ barn', 'Flere husholdninger med tre+ barn'],
+        labels: ['Færre', 'Flere'],
+        heading: 'Husholdninger med tre+ barn',
         url: `${API}/husholdninger-med-3-barn`,
         method: 'ratio',
         series: 0,

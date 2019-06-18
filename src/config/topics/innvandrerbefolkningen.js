@@ -108,8 +108,9 @@ export default {
       size: 'small',
       heading: 'Under 16 år',
       map: {
-        labels: ['Færre innvandrere', 'Flere innvandrere'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-innvandrer-status`,
+        heading: 'Innvandrere under 16 år',
         scale: [0.03, 0.15],
         reverse: true,
         method: 'ratio',
@@ -158,8 +159,9 @@ export default {
       size: 'small',
       heading: 'Under 16 år med én innvandrerforelder',
       map: {
-        labels: ['Færre innvandrere', 'Flere innvandrere'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
+        heading: 'Innvandrere under 16 år med én innvandrerforelder',
         scale: [0.15, 0.3],
         reverse: true,
         method: 'ratio',
@@ -208,8 +210,9 @@ export default {
       size: 'small',
       heading: 'Under 16 år med to innvandrerforeldre',
       map: {
-        labels: ['Færre innvandrere', 'Flere innvandrere'],
+        labels: ['Færre', 'Flere'],
         scale: [0.05, 0.75],
+        heading: 'Innvandrere under 16 år med to innvandrerforeldre',
         reverse: true,
         method: 'ratio',
         url: `${API}/innvandring-under-16-to-innvandrerforeldre-status`,
