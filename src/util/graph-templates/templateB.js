@@ -289,11 +289,11 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-opacity', 0.2)
-      .attr('stroke-width', 2)
+      .attr('stroke-opacity', 0.1)
+      .attr('stroke-width', 3)
       .filter(d => d.geography === geo)
       .attr('stroke-opacity', 1)
-      .attr('stroke-width', 4);
+      .attr('stroke-width', 5);
   };
 
   this.handleMouseleave = function() {
@@ -313,7 +313,7 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .attr('stroke-width', d => (d.avgRow ? 5 : 2))
+      .attr('stroke-width', d => (d.avgRow ? 5 : 3))
       .attr('stroke-opacity', d => (d.totalRow || d.avgRow ? 1 : 0.4));
   };
 
@@ -447,9 +447,9 @@ function Template(svg) {
       .attr('stroke-width', d => (this.highlight === d.geography ? 5 : d.avgRow ? 5 : 3))
       .attr('stroke-opacity', d => {
         if (this.highlight) {
-          return this.highlight === d.geography ? 1 : 0.1;
+          return this.highlight === d.geography ? 1 : 0.15;
         } else {
-          return d.totalRow || d.avgRow ? 1 : 0.2;
+          return d.totalRow || d.avgRow ? 1 : 0.4;
         }
       })
       .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false))
