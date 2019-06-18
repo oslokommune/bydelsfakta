@@ -32,8 +32,8 @@ exports[`Topic renders component correctly 1`] = `
         <v-category-stub
           bgimage="/img/folkemengde"
           category="Befolkning"
-          id="folkemengde"
-          topic="Folkemengde"
+          id="befolkningsutvikling"
+          topic="Befolkningsutvikling"
           txtcolor="rgb(245, 173, 165)"
         />
         <v-category-stub
