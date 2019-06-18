@@ -25,6 +25,11 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
+    // temp fix until highlight is id-based in all templates
+    if (this.highlight === -1) {
+      this.highlight = false;
+    }
+
     this.isMobileView = this.parentWidth() < this.mobileWidth;
 
     this.data.data = this.data.data
@@ -222,7 +227,16 @@ function Template(svg) {
       .attr('y', d => this.y(d[this.method]))
       .attr('font-size', 11)
       .attr('transform', `translate(0, -7)`)
-      .attr('text-anchor', 'middle')
+      .attr('text-anchor', d => {
+        const pos = this.x(this.parseYear(d.date));
+        if (pos < 50) {
+          return 'start';
+        } else if (pos > this.width - 50) {
+          return 'end';
+        } else {
+          return 'middle';
+        }
+      })
       .style('pointer-events', 'none');
 
     dot
@@ -265,12 +279,7 @@ function Template(svg) {
       const geography = j[i].__data__.data.geography;
       const date = j[i].__data__.data.date;
 
-      const offset = this.method === 'value' ? 2 : 0;
-
-      if (
-        this.highlight === -1 ||
-        this.data.data.findIndex(d => d.geography === geography) - offset === this.highlight
-      ) {
+      if (!this.highlight || this.highlight === d.data.geography) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
         this.canvas
           .selectAll('g.dotgroup')
@@ -288,7 +297,7 @@ function Template(svg) {
 
     // Remove highlight on mouse leave
     voronoiCells.on('mouseleave', () => {
-      if (this.highlight === -1) {
+      if (!this.highlight) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
         this.handleMouseleave();
       }
@@ -297,16 +306,14 @@ function Template(svg) {
     // When clicking a voronoi cell, the graph should re-render
     // with the selected geography highlighted. If the geography
     // is alredady selected, then we re-render with no highlight.
-    voronoiCells.on('click', (d, i, j) => {
-      const geography = j[i].__data__.data.geography;
-
-      if (this.highlight >= 0 && this.data.data.findIndex(d => d.geography === geography) === this.highlight) {
-        this.render(this.data, { method: this.method, series: this.series, highlight: -1 });
+    voronoiCells.on('click', d => {
+      if (this.highlight === d.data.geography) {
+        this.render(this.data, { method: this.method, series: this.series, highlight: false });
       } else {
         this.render(this.data, {
           method: this.method,
           series: this.series,
-          highlight: this.data.data.findIndex(d => d.geography === geography),
+          highlight: d.data.geography,
         });
       }
     });
@@ -475,23 +482,23 @@ function Template(svg) {
     labels.on('click keyup', (d, i, j) => {
       if (d3.event && d3.event.type === 'click') j[i].blur();
       if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-      if (i === this.highlight) {
-        this.render(this.data, { series: this.series, method: this.method, highlight: -1 });
+      if (this.highlight === d.geography) {
+        this.render(this.data, { series: this.series, method: this.method, highlight: false });
       } else {
-        this.render(this.data, { series: this.series, method: this.method, highlight: i });
+        this.render(this.data, { series: this.series, method: this.method, highlight: d.geography });
       }
     });
 
     // Hover label to highlight itself and its corresponding line
     labels.on('mouseover', d => {
-      if (this.highlight === -1) {
+      if (!this.highlight) {
         this.handleMouseover(d.geography);
       }
     });
 
     //
     labels.on('mouseleave', () => {
-      if (this.highlight === -1) {
+      if (!this.highlight) {
         this.handleMouseleave();
       }
     });
@@ -514,9 +521,9 @@ function Template(svg) {
       .text(d => util.truncate(d.geography, this.padding.right - 40))
       .attr('x', this.width + 35)
       .attr('y', 5)
-      .attr('font-weight', (d, i) => {
-        if (this.highlight >= 0) {
-          return this.highlight === i ? 700 : 400;
+      .attr('font-weight', d => {
+        if (this.highlight) {
+          return this.highlight === d.geography ? 700 : 400;
         }
 
         if (d.avgRow || d.totalRow) return 700;
@@ -528,9 +535,9 @@ function Template(svg) {
       .transition()
       .duration(this.duration)
       .attr('transform', (d, i) => `translate(0, ${labelPositions[i].start})`)
-      .attr('opacity', (d, i) => {
-        if (this.highlight >= 0) {
-          return this.highlight === i ? 1 : 0.6;
+      .attr('opacity', d => {
+        if (this.highlight) {
+          return this.highlight === d.geography ? 1 : 0.6;
         }
         if (d.avgRow || d.totalRow) return 1;
         return 0.6;
@@ -542,10 +549,6 @@ function Template(svg) {
 
   // Updates the shape and style of the lines in the line chart
   this.drawLines = function() {
-    if (this.highlight >= 0 && this.method === 'value') {
-      this.highlight -= 2;
-    }
-
     // Each line is a path element
     const rows = this.canvas
       .select('g.lines')
@@ -571,12 +574,13 @@ function Template(svg) {
         }
       })
       .attr('stroke', d => (d.avgRow ? color.yellow : d.totalRow ? 'black' : d.color))
-      .attr('stroke-width', (d, i) => (this.highlight === i ? 6 : d.avgRow ? 6 : 3))
-      .attr('stroke-opacity', (d, i) => {
-        if (this.highlight >= 0 && this.highlight !== i) return 0.2;
-        else if (this.highlight >= 0 && this.highlight === i) return 1;
-        else if (d.totalRow || d.avgRow) return 1;
-        return 0.3;
+      .attr('stroke-width', d => (this.highlight === d.geography ? 6 : d.avgRow ? 6 : 3))
+      .attr('stroke-opacity', d => {
+        if (this.highlight) {
+          return this.highlight === d.geography ? 1 : 0.1;
+        } else {
+          return d.totalRow || d.avgRow ? 1 : 0.2;
+        }
       })
       .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false));
   };
