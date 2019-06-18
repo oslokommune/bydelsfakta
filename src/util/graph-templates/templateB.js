@@ -224,13 +224,18 @@ function Template(svg) {
     const dot = dotgroup
       .selectAll('g.dot')
       .data(d => d.values, d => d.geography)
-      .join('g')
+      .join(enter => {
+        const g = enter.append('g');
+        g.append('text');
+        g.append('circle');
+        return g;
+      })
       .attr('class', 'dot')
       .attr('opacity', 0)
       .style('pointer-events', 'none');
 
     dot
-      .append('text')
+      .select('text')
       .text(d => {
         if (d && d[this.method]) {
           return this.format(d[this.method], this.method);
@@ -244,7 +249,7 @@ function Template(svg) {
       .style('pointer-events', 'none');
 
     dot
-      .append('circle')
+      .select('circle')
       .attr('r', 4)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
@@ -427,7 +432,14 @@ function Template(svg) {
       .transition()
       .duration(250)
       .delay((d, i) => i * 30)
-      .attr('d', d => this.line(d.values))
+      .attr('d', d => {
+        if (d.values.length > 1) {
+          return this.line(d.values);
+        } else {
+          const path = this.line(d.values).split('Z')[0];
+          return `${path} h-15 Z`;
+        }
+      })
       .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
       .attr('stroke-width', (d, i) => (this.highlight === i ? 5 : d.avgRow ? 5 : 3))
       .attr('stroke-opacity', (d, i) => {

@@ -199,15 +199,24 @@ function Template(svg) {
       .join('g')
       .attr('class', 'dotgroup');
 
+    dotgroup.exit().remove();
+
     const dot = dotgroup
       .selectAll('g.dot')
       .data(d => d.values[this.series], d => d.geography)
-      .join('g')
+      .join(enter => {
+        const g = enter.append('g');
+        g.append('text');
+        g.append('circle');
+        return g;
+      })
       .attr('class', 'dot')
       .attr('opacity', 0);
 
+    dot.exit().remove();
+
     dot
-      .append('text')
+      .select('text')
       .text(d => (d && d[this.method] !== undefined ? this.format(d[this.method], this.method) : false))
       .attr('x', d => this.x(this.parseYear(d.date)))
       .attr('y', d => this.y(d[this.method]))
@@ -217,7 +226,7 @@ function Template(svg) {
       .style('pointer-events', 'none');
 
     dot
-      .append('circle')
+      .select('circle')
       .attr('r', 4)
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
@@ -538,18 +547,29 @@ function Template(svg) {
     }
 
     // Each line is a path element
-    this.canvas
+    const rows = this.canvas
       .select('g.lines')
       .selectAll('path.row')
       .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
       .join(enter => enter.append('path'))
       .attr('class', 'row')
       .style('pointer-events', 'none')
-      .attr('fill', 'none')
+      .attr('fill', 'none');
+
+    rows.exit().remove();
+
+    rows
       .transition()
       .duration(100)
       .delay((d, i) => i * 30)
-      .attr('d', d => this.line(d.values[this.series]))
+      .attr('d', d => {
+        if (d.values[this.series].length > 1) {
+          return this.line(d.values[this.series]);
+        } else {
+          const path = this.line(d.values[this.series]).split('Z')[0];
+          return `${path} h-15 Z`;
+        }
+      })
       .attr('stroke', d => (d.avgRow ? color.yellow : d.totalRow ? 'black' : d.color))
       .attr('stroke-width', (d, i) => (this.highlight === i ? 6 : d.avgRow ? 6 : 3))
       .attr('stroke-opacity', (d, i) => {
