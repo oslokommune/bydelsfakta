@@ -354,40 +354,11 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const table_head = [['Alder', ...tabData.map(d => d.label)], ['Innflytting', 'Utflytting', 'Netto flytting']];
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hRow1 = thead.append('tr');
-    const hRow2 = thead.append('tr');
-
-    const headers1 = ['Alder', ...tabData.map(d => d.label)];
-    const headers2 = ['Innflytting', 'Utflytting', 'Netto flytting'];
-
-    hRow1
-      .selectAll('th')
-      .data(headers1)
-      .join('th')
-      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
-      .attr('colspan', (d, i) => (i > 0 ? headers2.length : 1))
-      .attr('scope', 'col')
-      .classed('border-cell', (d, i) => i > 0)
-      .text(d => d);
-    // .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`)
-
-    hRow2
-      .selectAll('th')
-      .data(headers1.flatMap((d, i) => (i > 0 ? headers2 : [])))
-      .join('th')
-      .classed('border-cell', (d, i) => i % headers2.length === 0)
-      .text(d => d);
-    // .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
-
-    const tableData = this.filteredData.immigration.map((d, i) => {
+    const table_body = this.filteredData.immigration.map((d, i) => {
       return {
-        key: d.alder.join('–'),
+        key: d.alder.join('–') + ' år',
         values: [
           this.filteredData.immigration[i]['totalt'],
           this.filteredData.emigration[i]['totalt'],
@@ -408,26 +379,7 @@ function Template(svg) {
       };
     });
 
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData)
-      .join('tr');
-
-    // Age column
-    rows
-      .selectAll('th')
-      .data(d => [d.key])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => d.values)
-      .join('td')
-      .classed('border-cell', (d, i) => i % headers2.length === 0)
-      .text(d => this.format(d, this.method, false, true));
+    util.drawTable(this, table_head, table_body, { hideFootnote: true });
   };
 
   this.setScales = function() {

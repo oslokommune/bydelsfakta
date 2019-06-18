@@ -71,6 +71,67 @@ const util = {
   },
 
   allDistricts: allDistricts,
+
+  drawTable: function(self, head, body, options = {}) {
+    const method = options.method || 'value';
+    const hideFootnote = options.hideFootnote || false;
+
+    const thead = self.table.select('thead');
+    const tbody = self.table.select('tbody');
+
+    if (hideFootnote) {
+      self.table.classed('hide-footnote', true);
+      d3.select(self.table.node().parentNode)
+        .select('.table-footnote')
+        .classed('hide-footnote', true);
+    }
+
+    thead.selectAll('*').remove();
+    tbody.selectAll('*').remove();
+
+    const hRow1 = thead.append('tr');
+    const hRow2 = thead.append('tr');
+
+    hRow1
+      .selectAll('th')
+      .data(head[0])
+      .join('th')
+      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('colspan', (d, i) => (i > 0 ? head[1].length : 1))
+      .attr('scope', 'col')
+      .classed('border-cell', (d, i) => i > 0)
+      .text(d => d)
+      .attr('id', (d, i) => `${self.data.meta.heading}_th_1_${i}`);
+
+    hRow2
+      .selectAll('th')
+      .data(head[0].flatMap((d, i) => (i > 0 ? head[1] : [])))
+      .join('th')
+      .classed('border-cell', (d, i) => i % head[1].length === 0)
+      .text(d => d)
+      .attr('id', (d, i) => `${self.data.meta.heading}_th_2_${i}`);
+
+    const rows = tbody
+      .selectAll('tr')
+      .data(body)
+      .join('tr');
+
+    // key cell
+    rows
+      .selectAll('th')
+      .data(d => [d.key])
+      .join('th')
+      .attr('scope', 'row')
+      .text(d => d);
+
+    // Value cells
+    rows
+      .selectAll('td')
+      .data(d => d.values)
+      .join('td')
+      .classed('border-cell', (d, i) => i % head[1].length === 0)
+      .text(d => self.format(d, method, false, true));
+  },
 };
 
 export default util;

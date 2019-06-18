@@ -383,6 +383,10 @@ export default {
 }
 
 .table-footnote {
+  &.hide-footnote {
+    display: none;
+  }
+
   left: 0;
   padding: 0 1rem;
   position: sticky;

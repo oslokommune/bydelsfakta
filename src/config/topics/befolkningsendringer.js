@@ -5,16 +5,17 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
-  production: true,
+  production: false,
   cards: [
     {
       size: 'large',
-      heading: 'Flytting',
-      production: true,
+      heading: 'Flytting etter alder',
+      production: false,
       tabs: [
         {
-          label: 'Historisk',
+          label: 'Status',
           method: 'value',
+          heading: 'Flytting etter alder og innvandringskategori',
           template: 'm',
           url: `${baseUrl}/mockDataFlytting.json`,
           production: true,
