@@ -32,17 +32,13 @@ function Template(svg) {
 
     this.isMobileView = this.parentWidth() < this.mobileWidth;
 
-    this.data.data = this.data.data
-      .map((geo, i, j) => {
+    // Add colors to geographies if they don't already exist
+    if (!this.data.data[0].color) {
+      this.data.data = this.data.data.map((geo, i, j) => {
         geo.color = d3.interpolateRainbow(i / j.length);
         return geo;
-      })
-      .sort((a, b) => {
-        return (
-          b.values[this.series][b.values[this.series].length - 1][this.method] -
-          a.values[this.series][a.values[this.series].length - 1][this.method]
-        );
       });
+    }
 
     this.width = d3.max([this.width, 300]);
     this.height = 500;
@@ -510,8 +506,8 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.yellow : d.color))
-      .style('stroke-dasharray', d => (d.totalRow ? '2,1' : false));
+      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.purple : d.color))
+      .style('stroke-dasharray', d => (d.totalRow ? '2,1' : ''));
 
     // Style the text label element
     labels
@@ -573,8 +569,8 @@ function Template(svg) {
           return `${path} h-15 Z`;
         }
       })
-      .attr('stroke', d => (d.avgRow ? color.yellow : d.totalRow ? 'black' : d.color))
-      .attr('stroke-width', d => (this.highlight === d.geography ? 5 : d.avgRow ? 5 : 3))
+      .attr('stroke', d => (d.avgRow ? color.purple : d.totalRow ? 'black' : d.color))
+      .attr('stroke-width', d => (this.highlight === d.geography ? 5 : d.avgRow || d.totalRow ? 5 : 3))
       .attr('stroke-opacity', d => {
         if (this.highlight) {
           return this.highlight === d.geography ? 1 : 0.15;
@@ -582,7 +578,7 @@ function Template(svg) {
           return d.totalRow || d.avgRow ? 1 : 0.4;
         }
       })
-      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : false));
+      .style('stroke-dasharray', d => (d.totalRow ? '4,3' : ''));
   };
 
   this.setScales = function() {
