@@ -1,6 +1,4 @@
-import { apiUrl, baseUrl } from '../../util/config';
-
-const API = `${apiUrl}/api/dataset`;
+import { baseUrl } from '../../util/config';
 
 export default {
   text: 'Befolkningsendringer',
