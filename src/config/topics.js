@@ -2,21 +2,21 @@ import alder from './topics/alder';
 import befolkningsendringer from './topics/befolkningsendringer';
 import boligpriser from './topics/boligpriser';
 import bygningstyper from './topics/bygningstyper';
-import eieform from './topics/eieform';
-import folkemengde from './topics/folkemengde';
+import eierform from './topics/eierform';
+import befolkningsutvikling from './topics/befolkningsutvikling';
 import husholdninger from './topics/husholdninger';
 import innvandrerbefolkningen from './topics/innvandrerbefolkningen';
 import levekaar from './topics/levekaar';
 import trangboddhet from './topics/trangboddhet';
 
 export const topicNames = [
-  'folkemengde',
+  'befolkningsutvikling',
   'befolkningsendringer',
   'alder',
   'innvandrerbefolkningen',
   'husholdninger',
   'levekaar',
-  'eieform',
+  'eierform',
   'bygningstyper',
   'boligpriser',
   'trangboddhet',
@@ -28,12 +28,12 @@ export const categories = [
   {
     kategori: 'Befolkning',
     color: 'rgb(182, 63, 50)',
-    links: ['folkemengde', 'befolkningsendringer', 'alder', 'innvandrerbefolkningen', 'husholdninger'],
+    links: ['befolkningsutvikling', 'befolkningsendringer', 'alder', 'innvandrerbefolkningen', 'husholdninger'],
   },
   {
-    kategori: 'Bomiljø',
+    kategori: 'Boforhold',
     color: 'rgb(27, 173, 120)',
-    links: ['trangboddhet', 'eieform', 'bygningstyper', 'boligpriser'],
+    links: ['trangboddhet', 'eierform', 'bygningstyper', 'boligpriser'],
   },
   {
     kategori: 'Levekår',
@@ -47,8 +47,8 @@ export const topics = {
   befolkningsendringer,
   boligpriser,
   bygningstyper,
-  eieform,
-  folkemengde,
+  eierform,
+  befolkningsutvikling,
   husholdninger,
   innvandrerbefolkningen,
   levekaar,

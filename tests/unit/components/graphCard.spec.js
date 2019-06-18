@@ -44,7 +44,7 @@ describe('GraphCard', () => {
   });
 
   test('change an active tab', () => {
-    wrapper.setProps({ settings: topics['eieform'].cards[0] });
+    wrapper.setProps({ settings: topics['eierform'].cards[0] });
     wrapper.vm.activeTab(1);
     expect(wrapper.vm.active).toEqual(1);
     expect(wrapper.element).toMatchSnapshot();

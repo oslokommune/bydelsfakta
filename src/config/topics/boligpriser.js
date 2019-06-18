@@ -9,7 +9,7 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Blokkleiligheter',
+      heading: 'Boligpris for blokkleiligheter',
       map: {
         labels: ['Lavere boligpriser', 'Høyere boligpriser'],
         scale: [40000, 95000],
@@ -22,7 +22,7 @@ export default {
           active: false,
           label: 'Status',
           id: 'boligpriser_status',
-          heading: 'Gj.snitt kvadratmeterpris på blokkleiligheter',
+          heading: 'Gjennomsnittlig kvadratmeterpris for blokkleiligheter',
           method: 'value',
           template: 'a',
           url: `${API}/boligpriser-blokkleiligheter-status`,
@@ -32,7 +32,7 @@ export default {
           active: false,
           label: 'Historisk',
           id: 'boligpriser_historisk',
-          heading: 'Gj.snitt kvadratmeterpris på blokkleiligheter',
+          heading: 'Gjennomsnittlig kvadratmeterpris for blokkleiligheter',
           method: 'value',
           template: 'b',
           url: `${API}/boligpriser-blokkleiligheter-historisk`,
@@ -42,10 +42,10 @@ export default {
     },
   ],
   options: {
-    kategori: 'Bomiljø',
+    kategori: 'Boforhold',
     tema: 'Boligpriser',
     bgImage: `${baseUrl}/img/boligpriser`,
     txtColor: 'rgb(199, 247, 201)',
   },
-  related: ['trangboddhet', 'eieform', 'befolkningsendringer'],
+  related: ['trangboddhet', 'eierform', 'befolkningsendringer'],
 };

@@ -9,7 +9,7 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Trangbodde husstander',
+      heading: 'Trangbodde husholdninger',
       production: true,
       tabs: [
         {
@@ -248,10 +248,10 @@ export default {
     },
   ],
   options: {
-    kategori: 'Bomiljø',
+    kategori: 'Boforhold',
     tema: 'Trangboddhet',
     bgImage: `${baseUrl}/img/trangboddhet`,
     txtColor: 'rgb(199, 247, 201)',
   },
-  related: ['boligpriser', 'levekaar', 'eieform'],
+  related: ['boligpriser', 'levekaar', 'eierform'],
 };

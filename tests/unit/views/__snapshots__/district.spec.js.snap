@@ -14,8 +14,8 @@ exports[`Bydel renders component correctly 1`] = `
         bgimage="/img/folkemengde"
         category="Befolkning"
         district="bydel"
-        id="folkemengde"
-        topic="Folkemengde"
+        id="befolkningsutvikling"
+        topic="Befolkningsutvikling"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
@@ -31,7 +31,7 @@ exports[`Bydel renders component correctly 1`] = `
         category="Befolkning"
         district="bydel"
         id="alder"
-        topic="Alder"
+        topic="Kjønn og alder"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
@@ -60,15 +60,15 @@ exports[`Bydel renders component correctly 1`] = `
       />
       <v-category-stub
         bgimage="/img/eieform"
-        category="Bomiljø"
+        category="Boforhold"
         district="bydel"
-        id="eieform"
-        topic="Eieform"
+        id="eierform"
+        topic="Eierform"
         txtcolor="rgb(199, 247, 201)"
       />
       <v-category-stub
         bgimage="/img/bygningstyper"
-        category="Bomiljø"
+        category="Boforhold"
         district="bydel"
         id="bygningstyper"
         topic="Bygningstyper"
@@ -76,7 +76,7 @@ exports[`Bydel renders component correctly 1`] = `
       />
       <v-category-stub
         bgimage="/img/boligpriser"
-        category="Bomiljø"
+        category="Boforhold"
         district="bydel"
         id="boligpriser"
         topic="Boligpriser"
@@ -84,7 +84,7 @@ exports[`Bydel renders component correctly 1`] = `
       />
       <v-category-stub
         bgimage="/img/trangboddhet"
-        category="Bomiljø"
+        category="Boforhold"
         district="bydel"
         id="trangboddhet"
         topic="Trangboddhet"
