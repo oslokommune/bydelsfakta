@@ -177,7 +177,7 @@ function Template(svg) {
               return d.values[serieIndex].find(obj => obj.date === date) || { ratio: 'N/A', value: 'N/A' };
             })
           )
-          .flat()
+          .reduce((acc, val) => acc.concat(val), [])
       )
       .join('td')
       .attr('headers', (d, i, j) => {
@@ -231,7 +231,7 @@ function Template(svg) {
       .map(geo =>
         geo.values[this.series].map(val => ({ date: val.date, value: val[this.method], geography: geo.geography }))
       )
-      .flat();
+      .reduce((acc, val) => acc.concat(val), []);
 
     const voronoiData = d3
       .voronoi()

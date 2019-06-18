@@ -73,7 +73,7 @@ function Template(svg) {
     const flattenData = this.data.data
       .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
       .map(geo => geo.values.map(val => ({ date: val['date'], value: val[this.method], geography: geo.geography })))
-      .flat();
+      .reduce((acc, val) => acc.concat(val), []);
 
     const voronoiData = d3
       .voronoi()
