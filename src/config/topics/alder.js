@@ -3,7 +3,7 @@ import { apiUrl, baseUrl } from '../../util/config';
 const API = `${apiUrl}/api/dataset`;
 
 export default {
-  text: 'Alder',
+  text: 'Kjønn og alder',
   value: 'alder',
   production: true,
   cards: [
@@ -47,7 +47,7 @@ export default {
           label: 'Status',
           id: 'alder_distribusjon_status',
           template: 'e',
-          heading: 'Aldersdistribusjon fordelt på kjønn',
+          heading: 'Befolkningen etter alder og kjønn',
           method: 'value',
           url: `${API}/alder-distribusjon-status`,
           production: true,
@@ -72,7 +72,7 @@ export default {
           label: 'Status',
           id: 'alder_medianalder_status',
           method: 'total',
-          heading: 'Gjennomsnittsaldre',
+          heading: 'Gjennomsnitts- og medianalder',
           template: 'f',
           help:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vestibulum malesuada arcu id pulvinar. Donec congue quam nec elit molestie, vel feugiat lorem euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer feugiat urna risus, nec interdum risus laoreet id.',
@@ -84,9 +84,9 @@ export default {
   ],
   options: {
     kategori: 'Befolkning',
-    tema: 'Alder',
+    tema: 'Kjønn og alder',
     bgImage: `${baseUrl}/img/alder`,
     txtColor: 'rgb(245, 173, 165)',
   },
-  related: ['folkemengde', 'husholdninger', 'levekaar'],
+  related: ['befolkningsutvikling', 'husholdninger', 'levekaar'],
 };

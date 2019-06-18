@@ -1,7 +1,5 @@
 import { baseUrl } from '../../util/config';
 
-// const API = `${apiUrl}/api/dataset`;
-
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
@@ -29,5 +27,5 @@ export default {
     bgImage: `${baseUrl}/img/folkemengde`,
     txtColor: 'rgb(245, 173, 165)',
   },
-  related: ['alder', 'folkemengde', 'innvandrerbefolkningen'],
+  related: ['alder', 'befolkningsutvikling', 'innvandrerbefolkningen'],
 };

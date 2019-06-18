@@ -9,7 +9,7 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Husholdningstyper',
+      heading: 'Husholdninger',
       map: {
         labels: ['Færre aleneboende', 'Flere aleneboende'],
         url: `${API}/husholdning-totalt-status`,
@@ -23,6 +23,7 @@ export default {
           active: false,
           label: 'Andel',
           id: 'husholdning_totalt_status',
+          heading: 'Husholdninger etter husholdningstype',
           template: 'a',
           method: 'ratio',
           url: `${API}/husholdning-totalt-status`,
@@ -163,5 +164,5 @@ export default {
     bgImage: `${baseUrl}/img/husholdninger`,
     txtColor: 'rgb(245, 173, 165)',
   },
-  related: ['trangboddhet', 'eieform', 'bygningstyper'],
+  related: ['trangboddhet', 'eierform', 'bygningstyper'],
 };

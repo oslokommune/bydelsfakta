@@ -35,7 +35,7 @@ export default {
 
     {
       size: 'small',
-      heading: 'Blokker og leiegårder',
+      heading: 'Blokkbebyggelse',
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/bygningstyper-blokk-status`,
@@ -49,6 +49,7 @@ export default {
           active: false,
           label: 'Andel',
           id: 'eieform_blokk_andel',
+          heading: 'Blokkbebyggelse',
           template: 'a',
           method: 'ratio',
           url: `${API}/bygningstyper-blokk-status`,
@@ -58,6 +59,7 @@ export default {
           active: false,
           label: 'Antall',
           id: 'eieform_blokk_antall',
+          heading: 'Blokkbebyggelse',
           template: 'a',
           method: 'value',
           url: `${API}/bygningstyper-blokk-status`,
@@ -67,6 +69,7 @@ export default {
           active: false,
           label: 'Historisk (andel)',
           id: 'eieform_blokk_historisk',
+          heading: 'Blokkbebyggelse',
           template: 'b',
           method: 'ratio',
           url: `${API}/bygningstyper-blokk-historisk`,
@@ -76,6 +79,7 @@ export default {
           active: false,
           label: 'Historisk (antall)',
           id: 'eieform_blokk_historisk',
+          heading: 'Blokkbebyggelse',
           template: 'b',
           method: 'value',
           url: `${API}/bygningstyper-blokk-historisk`,
@@ -239,7 +243,7 @@ export default {
     },
   ],
   options: {
-    kategori: 'Bomiljø',
+    kategori: 'Boforhold',
     tema: 'Bygningstyper',
     bgImage: `${baseUrl}/img/bygningstyper`,
     txtColor: 'rgb(199, 247, 201)',
