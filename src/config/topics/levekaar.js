@@ -235,6 +235,7 @@ export default {
         url: `${API}/levekar-ikke-sysselsatte-status`,
         scale: [0.09, 0.352],
         method: 'ratio',
+        reverse: true,
       },
       production: true,
       tabs: [
@@ -286,8 +287,9 @@ export default {
       map: {
         labels: ['Færre ikke-vestlige innvandrere', 'Flere ikke-vestlige innvandrere'],
         url: `${API}/levekar-innvandrere-ikke-vestlige-kort-status`,
-        scale: [0.076, 0.58],
+        scale: [0, 0.058],
         method: 'ratio',
+        reverse: true,
       },
       production: true,
       tabs: [
@@ -342,6 +344,7 @@ export default {
         url: `${API}/levekar-trangbodde-status`,
         scale: [0.051, 0.465],
         method: 'ratio',
+        reverse: true,
       },
       tabs: [
         {
@@ -394,6 +397,7 @@ export default {
         labels: ['Færre med redusert funksjonsevne', 'Flere med redusert funksjonsevne'],
         url: `${API}/levekar-redusert-funksjonsevne-status`,
         scale: [0.065, 0.239],
+        reverse: true,
         method: 'ratio',
       },
       tabs: [
