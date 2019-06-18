@@ -100,6 +100,7 @@ export default {
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
+        heading: 'Husholdninger med 0,5–0,9 rom per person',
         reverse: true,
         scale: [0.035, 0.21],
         url: `${API}/trangboddhet-0-5-0-9-status`,
@@ -151,6 +152,7 @@ export default {
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
+        heading: 'Husholdninger med 1–1,9 rom per person',
         reverse: true,
         scale: [0.268, 0.475],
         url: `${API}/trangboddhet-1-0-1-9-status`,
@@ -202,6 +204,7 @@ export default {
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
+        heading: 'Husholdninger med 2 rom eller flere per person',
         reverse: true,
         scale: [0.34, 0.6],
         url: `${API}/trangboddhet-over-2-status`,

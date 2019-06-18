@@ -40,6 +40,7 @@ export default {
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/levekar-lav-utdanning-status`,
+        heading: 'Personer 30–59 år med lav utdanning',
         scale: [0, 0.5],
         reverse: true,
         method: 'ratio',
@@ -96,6 +97,7 @@ export default {
       heading: 'Lavinntekt',
       map: {
         labels: ['Færre', 'Flere'],
+        heading: 'Barnehusholdninger med lav inntekt',
         reverse: true,
         scale: [0, 0.3],
         method: 'ratio',
@@ -152,6 +154,7 @@ export default {
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/ikke-fullfort-vgs-status`,
+        heading: 'Personer 21–29 uten fullført VGS',
         method: 'ratio',
         scale: [0.1, 0.5],
         reverse: true,
@@ -209,6 +212,7 @@ export default {
         url: `${API}/dodsrater-status`,
         scale: [0.09, 0.203],
         reverse: true,
+        heading: 'Dødelighet for personer 50–74 år',
         method: 'ratio',
         hidePercentSymbol: true,
       },
@@ -231,9 +235,10 @@ export default {
       size: 'small',
       heading: 'Ikke sysselsatte',
       map: {
-        labels: ['Færre ikke-sysselsatte', 'Flere ikke-sysselsatte'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/levekar-ikke-sysselsatte-status`,
         scale: [0.09, 0.352],
+        heading: 'Ikke-sysselsatte 30–59 år',
         method: 'ratio',
         reverse: true,
       },
@@ -285,9 +290,10 @@ export default {
       size: 'small',
       heading: 'Kort botid',
       map: {
-        labels: ['Færre ikke-vestlige innvandrere', 'Flere ikke-vestlige innvandrere'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/levekar-innvandrere-ikke-vestlige-kort-status`,
-        scale: [0, 0.058],
+        heading: 'Ikke-vestlige innvandrere med kort botid',
+        scale: [0, 0.082],
         method: 'ratio',
         reverse: true,
       },
@@ -340,7 +346,8 @@ export default {
       heading: 'Trangboddhet',
       production: true,
       map: {
-        labels: ['Færre trangbodde', 'Flere trangbodde'],
+        labels: ['Færre', 'Flere'],
+        heading: 'Trangbodde husholdninger',
         url: `${API}/levekar-trangbodde-status`,
         scale: [0.051, 0.465],
         method: 'ratio',
@@ -394,8 +401,9 @@ export default {
       heading: 'Redusert funksjonsevne',
       production: true,
       map: {
-        labels: ['Færre med redusert funksjonsevne', 'Flere med redusert funksjonsevne'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/levekar-redusert-funksjonsevne-status`,
+        heading: 'Personer 16–66 år med redusert funksjonsevne',
         scale: [0.065, 0.239],
         reverse: true,
         method: 'ratio',

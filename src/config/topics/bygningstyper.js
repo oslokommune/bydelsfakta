@@ -37,9 +37,10 @@ export default {
       size: 'small',
       heading: 'Blokkbebyggelse',
       map: {
-        labels: ['Færre', 'Flere'],
+        labels: ['Mindre', 'Mer'],
         url: `${API}/bygningstyper-blokk-status`,
         method: 'ratio',
+        heading: 'Blokkbebyggelse',
         scale: [0.12, 1],
         reverse: true,
       },
@@ -92,6 +93,7 @@ export default {
       heading: 'Rekkehus og tomannsboliger',
       map: {
         labels: ['Færre', 'Flere'],
+        heading: 'Rekkehus og tomannsboliger',
         url: `${API}/bygningstyper-rekkehus-status`,
         method: 'ratio',
         scale: [0, 0.5],
@@ -142,6 +144,7 @@ export default {
       heading: 'Eneboliger',
       map: {
         labels: ['Færre', 'Flere'],
+        heading: 'Eneboliger',
         url: `${API}/bygningstyper-enebolig-status`,
         method: 'ratio',
         scale: [0, 0.4],
@@ -192,9 +195,10 @@ export default {
       heading: 'Kommunale boliger',
       map: {
         labels: ['Færre', 'Flere'],
-        url: `${API}/kommunale-boliger-status`,
+        url: `${API}/kommunale-boliger-av-boligmassen-i-alt-status`,
         method: 'ratio',
-        scale: [0.12, 1],
+        heading: 'Kommunale boliger',
+        scale: [0, 0.14],
         reverse: true,
       },
       production: true,
