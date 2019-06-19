@@ -232,6 +232,8 @@ function Template(svg) {
 
         // Create geography label
         g.append('text').attr('class', 'label');
+
+        return g;
       })
       .attr('tabindex', 0)
       .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);

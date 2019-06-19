@@ -1,7 +1,9 @@
 <template>
   <div style="height: 100%; width: 100%;">
     <div class="legend" v-if="settings.labels">
-      <h2 class="legend__heading" v-if="settings.heading">{{ settings.heading }}</h2>
+      <h2 class="legend__heading" v-if="settings.heading || year">
+        {{ settings.heading }} {{ year ? `(${year})` : '' }}
+      </h2>
       <div class="legend__labels">
         <span v-for="(label, i) in settings.labels" :key="i" v-text="label"></span>
       </div>
@@ -94,6 +96,11 @@ export default {
       if (!url) return;
       this.data = await fetch(url).then(d => d.json().then(d => d.data));
       this.createChoropleth(this.data);
+
+      this.year =
+        this.data && this.data[0] && this.data[0].values && this.data[0].values[0] && this.data[0].values[0].date
+          ? this.data[0].values[0].date
+          : false;
     },
 
     createChoropleth(data) {
@@ -176,6 +183,7 @@ export default {
   data() {
     return {
       data: [],
+      year: false,
       zoom: 10,
       url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
       attribution:

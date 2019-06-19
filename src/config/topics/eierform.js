@@ -11,8 +11,9 @@ export default {
       size: 'large',
       heading: 'Eierform',
       map: {
-        labels: ['Færre andels-/aksjeeiere', 'Flere andels-/aksjeeiere'],
+        labels: ['Færre', 'Flere'],
         url: `${API}/eieform-status`,
+        heading: 'Andels-/aksjeeiere',
         method: 'ratio',
         scale: [0.1, 0.85],
       },
