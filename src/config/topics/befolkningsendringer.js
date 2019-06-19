@@ -3,7 +3,7 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
-  production: false,
+  production: null,
   cards: [
     {
       size: 'large',
