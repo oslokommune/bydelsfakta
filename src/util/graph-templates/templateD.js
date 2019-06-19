@@ -431,7 +431,6 @@ function Template(svg) {
           .filter(d => !d.disabled)
           .map(d => {
             let str = '';
-            str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
             str += d.label;
             str += this.method === 'ratio' ? ' (%)' : '';
             return str;
