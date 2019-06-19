@@ -280,7 +280,8 @@ function Base_Template(svg) {
     this.hidePercentSymbol = options.hidePercentSymbol || false;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
+    this.height =
+      this.height > 0 ? this.height : Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     const wrap = textwrap()
       .bounds({ width: this.parentWidth(), height: 60 })

@@ -70,6 +70,7 @@ import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
 import TemplateK from '../util/graph-templates/templateK';
+import TemplateM from '../util/graph-templates/templateM';
 import districtNames from '../config/districtNames';
 import OkIcon from './OkIcon';
 
@@ -266,6 +267,9 @@ export default {
           case 'k':
             this.svg = new TemplateK(this.$refs['svg']);
             break;
+          case 'm':
+            this.svg = new TemplateM(this.$refs['svg']);
+            break;
           default:
             break;
         }
@@ -373,6 +377,10 @@ export default {
 }
 
 .table-footnote {
+  &.hide-footnote {
+    display: none;
+  }
+
   left: 0;
   padding: 0 1rem;
   position: sticky;

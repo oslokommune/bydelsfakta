@@ -444,7 +444,8 @@ function Template(svg) {
           .style('pointer-events', 'none');
         g.append('text')
           .attr('class', 'colSubheading')
-          .attr('transform', 'translate(0, -20)');
+          .attr('transform', 'translate(0, -20)')
+          .style('pointer-events', 'none');
         return g;
       });
 
