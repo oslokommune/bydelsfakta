@@ -166,12 +166,6 @@ export default {
       const template = this.settings.template;
 
       data.data.sort((a, b) => {
-        if (template === 'b' && a.values && a.values.length && b.values && b.values.length) {
-          return (
-            b.values[b.values.length - 1][this.settings.method] - a.values[a.values.length - 1][this.settings.method]
-          );
-        }
-
         if (b.totalRow && a.avgRow) return -1;
         else if (a.totalRow && b.avgRow) return 1;
         else if (a.totalRow || a.avgRow) return 1;
