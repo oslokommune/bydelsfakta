@@ -324,7 +324,13 @@ function Template(svg) {
   this.drawLabels = function() {
     const labelPositions = positionLabels(
       this.data.data
-        .filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow)))
+        .filter(d => {
+          if (d.avgRow || d.totalRow) {
+            return this.y(d.values[d.values.length - 1][this.method]) > 0;
+          } else {
+            return true;
+          }
+        })
         .map(row => {
           row.y = this.y(row.values[row.values.length - 1][this.method]);
           return row;
@@ -430,7 +436,16 @@ function Template(svg) {
     this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
+      .data(
+        this.data.data.filter(d => {
+          if (d.avgRow || d.totalRow) {
+            return this.y(d.values[d.values.length - 1][this.method]) > 0;
+          } else {
+            return true;
+          }
+        }),
+        d => d.geography
+      )
       .join('path')
       .attr('class', 'row')
       .style('pointer-events', 'none')
