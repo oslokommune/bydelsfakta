@@ -1,5 +1,5 @@
 /**
- * Template for comparing 8 different variables
+ * Template for comparing immigration vs emigration
  */
 
 import d3 from '@/assets/d3';
@@ -10,7 +10,7 @@ import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
-  this.template = 'k';
+  this.template = 'm';
 
   this.padding = { top: 130, left: 60, right: 20, bottom: 50 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
@@ -51,25 +51,36 @@ function Template(svg) {
     this.drawTabs();
     this.drawHeadings();
     this.drawTable();
+    this.drawSource(
+      'Statistisk sentralbyrå (test)',
+      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
+    );
   };
 
   this.created = function() {
+    // Container for radio buttons
     this.radio = this.svg
       .append('g')
       .attr('class', 'radio')
       .attr('transform', 'translate(5, 50)');
+
+    // Container for upper chart
     this.upper = this.canvas.append('g').attr('class', 'upper');
+
+    // Container for lower chart
     this.lower = this.canvas
       .append('g')
       .attr('class', 'lower')
       .attr('transform', `translate(0, ${this.height1 + this.gapY})`);
 
+    // Containers for axis on upper chart
     this.upper
       .append('g')
       .attr('class', 'axis axisX')
       .attr('transform', `translate(0, ${this.height1})`);
     this.upper.append('g').attr('class', 'axis axisY');
 
+    // Path elements for lines
     this.upper
       .append('path')
       .attr('class', 'immigration')
@@ -88,16 +99,21 @@ function Template(svg) {
       .attr('class', 'heading')
       .attr('transform', `translate(20, 4)`);
 
+    // Container for voronoi needs to be last
+    this.canvas.append('g').attr('class', 'voronoi');
+
+    // Containers for elements on the lower chart
+    this.lower
+      .append('g')
+      .attr('class', 'axis axisX')
+      .attr('transform', `translate(0, ${this.height2})`);
+    this.lower.append('g').attr('class', 'axis axisY');
+    this.lower.append('g').attr('class', 'bars');
+    this.lower.append('rect').attr('class', 'zero');
     this.lower
       .append('text')
       .attr('class', 'heading')
       .attr('transform', `translate(20, 4)`);
-
-    this.lower.append('g').attr('class', 'axis axisX');
-    this.lower.append('g').attr('class', 'axis axisY');
-    this.lower.append('g').attr('class', 'bars');
-    this.lower.append('rect').attr('class', 'zero');
-    this.canvas.append('g').attr('class', 'voronoi');
   };
 
   this.drawHeadings = function() {
@@ -129,26 +145,27 @@ function Template(svg) {
   };
 
   this.drawUpper = function() {
+    // Line constructor
     const line = d3
       .line()
       .y(d => this.y1(d[tabData[this.series].value]))
       .x(d => this.x.bandwidth() / 2 + this.x(d.alder.join('–')));
-    // .curve(d3.curveMonotoneX);
 
     this.upper
       .select('path.immigration')
       .data([this.filteredData.immigration])
       .transition()
-      .attr('d', line);
+      .attr('d', line); // Use line constructor to generate line
 
     this.upper
       .select('path.emigration')
       .data([this.filteredData.emigration])
       .transition()
-      .attr('d', line);
+      .attr('d', line); // Use line constructor to generate line
   };
 
   this.drawLower = function() {
+    // Prepare data for bar chart
     const barData = [...new Array(this.filteredData.immigration.length)].map((d, i) => {
       return {
         age: this.filteredData.immigration[i].alder.join('–'),
@@ -182,14 +199,13 @@ function Template(svg) {
     bars.on('mousemove', showTooltipMove);
     bars.on('mouseleave', hideTooltip);
 
+    // Reposition line at zero
     this.lower
       .select('.zero')
       .attr('height', 1)
       .attr('width', this.width)
       .transition()
       .attr('y', this.y2(0));
-
-    this.lower.select('.axisX').attr('transform', `translate(0, ${this.height2})`);
   };
 
   // Updates the tabs. Highlights the active series
@@ -264,6 +280,7 @@ function Template(svg) {
   };
 
   this.drawVoronoi = function() {
+    // Prepare data for voronoi generator
     const flattenData = [...new Array(this.filteredData.immigration.length)].flatMap((d, i) => {
       return [
         {
@@ -281,6 +298,7 @@ function Template(svg) {
       ];
     });
 
+    // Generate voronoi cells
     const voronoiData = d3
       .voronoi()
       .extent([[1, 1], [this.width, this.height1]])
@@ -289,6 +307,7 @@ function Template(svg) {
       .polygons(flattenData)
       .filter(Boolean);
 
+    // Draw DOM elements for each voronoi cell
     const voronoiCells = this.canvas
       .select('g.voronoi')
       .selectAll('g')
@@ -333,19 +352,19 @@ function Template(svg) {
       .style('pointer-events', 'none')
       .style('cursor', 'auto');
 
+    // Draw path for the voronoi cell
     const path = voronoiCells
       .select('path')
       .attr('d', d => 'M' + d.join('L') + 'Z')
       .attr('fill-opacity', 0);
 
+    // Handle mouse interactions
     path.on('mouseenter', (d, i, j) => {
       const parent = d3.select(j[i].parentNode);
-
       parent.select('rect').attr('opacity', 1);
       parent.select('text').attr('opacity', 1);
       parent.select('circle').attr('opacity', 1);
     });
-
     path.on('mouseleave', () => {
       circle.attr('opacity', 0);
       text.attr('opacity', 0);
@@ -354,8 +373,10 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
+    // Prepare data for table head
     const table_head = [['Alder', ...tabData.map(d => d.label)], ['Innflytting', 'Utflytting', 'Netto flytting']];
 
+    // Prepare data for table body
     const table_body = this.filteredData.immigration.map((d, i) => {
       return {
         key: d.alder.join('–') + ' år',
@@ -385,10 +406,13 @@ function Template(svg) {
   this.setScales = function() {
     const ages = this.filteredData.immigration.map(d => d.alder.join('–'));
 
-    const max1 = d3.max([
-      d3.max(this.filteredData.immigration.map(d => d[tabData[this.series].value])),
-      d3.max(this.filteredData.emigration.map(d => d[tabData[this.series].value])),
-    ]);
+    const extent1 = [
+      0,
+      d3.max([
+        d3.max(this.filteredData.immigration.map(d => d[tabData[this.series].value])),
+        d3.max(this.filteredData.emigration.map(d => d[tabData[this.series].value])),
+      ]),
+    ];
 
     const extent2 = d3.extent(
       [...new Array(this.filteredData.immigration.length)].map((d, i) => {
@@ -400,7 +424,7 @@ function Template(svg) {
     );
 
     this.x.domain(ages).range([0, this.width]);
-    this.y1.domain([0, max1]).nice();
+    this.y1.domain(extent1).nice();
     this.y2.domain(extent2).nice();
     this.upper
       .select('g.axisX')
