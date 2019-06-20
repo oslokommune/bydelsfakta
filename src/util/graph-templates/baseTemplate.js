@@ -83,7 +83,11 @@ function Base_Template(svg) {
     }
 
     if (table) {
-      return method === 'ratio' ? locale.tableLocale.format('.2~p')(num) : locale.tableLocale.format(',.0f')(num);
+      return method === 'ratio'
+        ? num * 100 < 1
+          ? locale.tableLocale.format('.2f')(num * 100)
+          : locale.tableLocale.format('.1f')(num * 100)
+        : locale.tableLocale.format(',.0f')(num);
     }
 
     switch (method) {
@@ -121,9 +125,12 @@ function Base_Template(svg) {
       this.customHeading = str;
       const text = this.getHeading(str);
 
-      d3.select(this.svg.node().parentNode.parentNode)
-        .select('caption')
-        .html(text);
+      d3.select(this.svg.node().parentNode.parentNode.parentNode)
+        .data([text])
+        .select('.table-heading')
+        .join('h3')
+        .attr('class', 'table-heading')
+        .html(d => d);
 
       this.heading.text(text);
     }

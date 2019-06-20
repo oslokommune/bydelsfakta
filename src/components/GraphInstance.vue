@@ -31,8 +31,8 @@
       v-dragscroll.x="!isTouchDevice"
       @scroll="drawShadows"
     >
-      <table :class="{ compareDistrictsTable: compareDistricts }">
-        <caption></caption>
+      <h3 class="table-heading"></h3>
+      <table :class="{ compareDistrictsTable: compareDistricts }" ref="table">
         <thead></thead>
         <tbody></tbody>
       </table>
