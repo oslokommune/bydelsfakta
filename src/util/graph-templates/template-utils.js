@@ -85,7 +85,7 @@ const util = {
     const caption = table.select('caption');
     const headingText = this.getHeading();
 
-    const isMultiLevel = typeof head[0] === 'object';
+    const isMultiLevel = typeof head[1] === 'object';
 
     if (hideFootnote) {
       table.classed('hide-footnote', true);

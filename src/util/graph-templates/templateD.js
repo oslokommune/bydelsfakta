@@ -7,6 +7,7 @@ import { color } from './colors';
 import d3 from '@/assets/d3';
 import ageRanges from '../../config/ageRanges';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
+import util from './template-utils';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -415,51 +416,17 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const table_head = [
+      ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
+      [...ageRanges.filter(d => !d.disabled).map(d => d.label)],
+    ];
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
+    const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
 
-    const hrow = thead.append('tr');
-
-    hrow
-      .selectAll('th')
-      .data(() => [
-        'Geografi',
-        ...ageRanges
-          .filter(d => !d.disabled)
-          .map(d => {
-            let str = '';
-            str += d.label;
-            str += this.method === 'ratio' ? ' (%)' : '';
-            return str;
-          }),
-      ])
-      .join('th')
-      .attr('scope', 'col')
-      .text(d => d);
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => {
-        return ageRanges
+    const table_body = tableData.map(d => {
+      return {
+        key: d.geography,
+        values: ageRanges
           .filter(d => !d.disabled)
           .map(age => {
             const range = JSON.parse(age.range);
@@ -468,10 +435,12 @@ function Template(svg) {
               sum += d.values[i][this.method];
             }
             return sum;
-          });
-      })
-      .join('td')
-      .text(d => this.format(d, this.method, false, true));
+          }),
+      };
+    });
+
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   // Draws/updates rows content. Triggered each render
