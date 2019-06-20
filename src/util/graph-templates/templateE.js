@@ -22,6 +22,7 @@ function Template(svg) {
   this.y = d3.scaleLinear();
   this.gutter = 140;
   this.yAxis = []; // three yAxis (left, right and gridlines)
+  this.tooltips = null;
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
@@ -75,6 +76,16 @@ function Template(svg) {
     // Holds the pyramid elements
     this.pyramid = this.canvas.append('g').attr('class', 'pyramid');
 
+    this.pyramid.append('rect').attr('class', 'pyramidbg');
+
+    this.pyramid.on('mousemove', () => {
+      moveTooltip(this);
+    });
+
+    this.pyramid.on('mouseleave', () => {
+      hideTooltip(this);
+    });
+
     // Append three yAxis groups
     // - One on the left side
     // - One on the right side
@@ -113,6 +124,8 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .attr('transform', `translate(${this.width / 2}, ${this.height + 40})`)
       .text('Folkemengde');
+
+    this.tooltips = createTooltipElements(this);
   };
 
   this.drawTable = function() {
@@ -225,6 +238,12 @@ function Template(svg) {
       this.data.data[this.selected].values.map(d => ({ gender, value: d[gender] }))
     );
 
+    this.pyramid
+      .select('.pyramidbg')
+      .attr('height', this.height)
+      .attr('width', this.width)
+      .attr('fill', 'white');
+
     const genderGroup = this.pyramid
       .selectAll('g.gender')
       .data(genderData)
@@ -299,7 +318,10 @@ function Template(svg) {
 
         axis.call(d3.axisLeft(this.y).tickSize(-this.width));
         axis.selectAll('text').remove();
-        axis.selectAll('.tick').attr('opacity', 0.15);
+        axis
+          .selectAll('.tick')
+          .attr('opacity', 0.15)
+          .style('pointer-events', 'none');
         axis.selectAll('.domain').remove();
       }
     });
@@ -323,3 +345,73 @@ function Template(svg) {
 }
 
 export default Template;
+
+function createTooltipElements(self) {
+  const g = self.canvas
+    .append('g')
+    .attr('class', 'tooltips')
+    .attr('opacity', 0);
+
+  const yearG = g.append('g').attr('class', 'year');
+  yearG
+    .append('rect')
+    .attr('width', 60)
+    .attr('height', 30)
+    .attr('x', -60)
+    .attr('y', -15)
+    .attr('fill', color.yellow);
+  yearG
+    .append('text')
+    .attr('fill', color.purple)
+    .attr('text-anchor', 'end')
+    .attr('x', -10)
+    .attr('y', 5)
+    .attr('font-weight', 600)
+    .attr('font-size', 12);
+
+  g.append('line')
+    .attr('class', 'yearline')
+    .attr('stroke', color.yellow)
+    .attr('stroke-width', 2)
+    .attr('x1', 0)
+    .attr('y1', 0)
+    .attr('y2', 0)
+    .style('pointer-events', 'none');
+
+  g.append('text')
+    .attr('class', 'value men')
+    .attr('y', -4)
+    .attr('x', 10);
+  g.append('text')
+    .attr('class', 'value women')
+    .attr('y', -4)
+    .attr('x', -10)
+    .attr('text-anchor', 'end');
+
+  return g;
+}
+
+function moveTooltip(self) {
+  const g = self.tooltips;
+  const container = self.pyramid.select('.pyramidbg').node();
+  const yearline = g.select('.yearline');
+  const pos = d3.mouse(container);
+  const age = Math.round(self.y.invert(pos[1]));
+  const labelYear = g.select('text');
+  const labelMen = g.select('.men');
+  const labelWomen = g.select('.women');
+  const valueMen = self.data.data[self.selected].values[age].mann;
+  const valueWomen = self.data.data[self.selected].values[age].kvinne;
+
+  labelMen.text(self.formatDecimal(valueMen));
+  labelWomen.text(self.formatDecimal(valueWomen));
+  labelYear.text(age + ' år');
+
+  g.attr('opacity', 1).attr('transform', `translate(0, ${pos[1]})`);
+  labelWomen.attr('transform', `translate(${self.width}, 0)`);
+  yearline.attr('x2', self.width);
+}
+
+function hideTooltip(self) {
+  self.tooltips.attr('opacity', 0);
+}
