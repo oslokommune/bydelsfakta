@@ -91,15 +91,6 @@ function Template(svg) {
     .y(d => this.y(d[this.method]));
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
-
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hRow1 = thead.append('tr');
-    const hRow2 = thead.append('tr');
-
     let dates = new Set();
     this.data.data.forEach(row => {
       row.values[0].forEach(d => {
@@ -108,88 +99,42 @@ function Template(svg) {
     });
     dates = [...dates].sort((a, b) => a - b);
 
-    hRow1
-      .selectAll('th')
-      .data(() => [
-        'Geografi',
-        ...this.data.meta.series.map(d => {
-          let str = '';
-          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
+    const table_head = [];
+    table_head[0] = [
+      'Geografi',
+      ...this.data.meta.series.map(d => {
+        let str = '';
 
-          if (typeof d === 'string') {
-            str += d;
-          } else if (d.heading) {
-            str += `${d.heading} ${d.subheading}`;
-          }
-
-          str += this.method === 'ratio' ? ' (%)' : '';
-          return str;
-        }),
-      ])
-      .join('th')
-      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
-      .attr('colspan', (d, i) => (i > 0 ? dates.length : 1))
-      .attr('scope', 'col')
-      .classed('border-cell', (d, i) => i > 0)
-      .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`)
-      .text(d => d);
-
-    hRow2
-      .selectAll('th')
-      .data(() => {
-        let out = [];
-        for (let i = 0; i < this.data.meta.series.length; i++) {
-          out = out.concat(dates);
+        if (typeof d === 'string') {
+          str += d;
+        } else if (d.heading) {
+          str += `${d.heading} ${d.subheading}`;
         }
-        return out;
-      })
-      .join('th')
-      .classed('border-cell', (d, i, j) => {
-        const groupSize = j.length / this.data.meta.series.length;
-        return i % groupSize === 0;
-      })
-      .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`)
-      .text(d => this.formatYear(this.parseYear(d)));
 
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
+        str += this.method === 'ratio' ? ' (prosentandel)' : '(antall)';
+        return str;
+      }),
+    ];
 
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
+    table_head[1] = [];
+    for (let i = 0; i < this.data.meta.series.length; i++) {
+      table_head[1] = table_head[1].concat(dates);
+    }
 
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .attr('headers', `${this.data.meta.heading}_th_1_0`)
-      .text(d => d);
+    const table_body = this.data.data.map(row => {
+      return {
+        key: row.geography,
+        values: this.data.meta.series.flatMap((serie, serieIndex) =>
+          dates.map(date => {
+            if (!row.values[serieIndex]) return 'N/A';
+            return row.values[serieIndex].find(obj => obj.date === date)[this.method] || 'N/A';
+          })
+        ),
+      };
+    });
 
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d =>
-        this.data.meta.series
-          .map((serie, serieIndex) =>
-            dates.map(date => {
-              if (!d.values[serieIndex]) return { ratio: 'N/A', value: 'N/A' };
-              return d.values[serieIndex].find(obj => obj.date === date) || { ratio: 'N/A', value: 'N/A' };
-            })
-          )
-          .reduce((acc, val) => acc.concat(val), [])
-      )
-      .join('td')
-      .attr('headers', (d, i, j) => {
-        const first = Math.floor(i / (j.length / this.data.meta.series.length)) + 1;
-        return `${this.data.meta.heading}_th_1_${first} th_2_${i}`;
-      })
-      .classed('border-cell', (d, i, j) => {
-        const groupSize = j.length / this.data.meta.series.length;
-        return i % groupSize === 0;
-      })
-      .text(d => this.format(d[this.method], this.method, false, true));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   this.drawDots = function() {
