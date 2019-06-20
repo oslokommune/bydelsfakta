@@ -78,6 +78,7 @@ const util = {
 
   drawTable: function(head, body, options = {}) {
     const hideFootnote = options.hideFootnote || false;
+    const formatter = options.formatter || this.format;
 
     const table = this.table;
     const thead = table.select('thead');
@@ -147,7 +148,7 @@ const util = {
         const l = head[1].length / (head[0].length - 1);
         return i % l === 0;
       })
-      .text(d => this.format(d, this.method, false, true));
+      .text(d => formatter(d, this.method, false, true));
 
     const exportSettings = {
       formats: ['xlsx', 'csv'],
