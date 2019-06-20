@@ -27,6 +27,7 @@
     "leaflet-gesture-handling": "^1.1.8",
     "nodemon": "^1.19.1",
     "save-svg-as-png": "^1.4.14",
+    "tableexport": "^5.2.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.0",
     "vue-dragscroll": "^1.8.3",
