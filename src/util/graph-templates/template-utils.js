@@ -5,6 +5,10 @@
 import d3 from '@/assets/d3';
 import router from '../../router';
 import allDistricts from '../../config/allDistricts';
+import TableExport from 'tableexport';
+
+TableExport.prototype.formatConfig.xlsx.buttonContent = 'Excel (.xlsx)';
+TableExport.prototype.formatConfig.csv.buttonContent = 'CSV (.csv)';
 
 const util = {
   truncate: function(str, width, size = 14, weight = 400) {
@@ -72,16 +76,20 @@ const util = {
 
   allDistricts: allDistricts,
 
-  drawTable: function(self, head, body, options = {}) {
-    const method = options.method || 'value';
+  drawTable: function(head, body, options = {}) {
     const hideFootnote = options.hideFootnote || false;
 
-    const thead = self.table.select('thead');
-    const tbody = self.table.select('tbody');
+    const table = this.table;
+    const thead = table.select('thead');
+    const tbody = table.select('tbody');
+    const caption = table.select('caption');
+    const headingText = this.getHeading();
+
+    const isMultiLevel = typeof head[0] === 'object';
 
     if (hideFootnote) {
-      self.table.classed('hide-footnote', true);
-      d3.select(self.table.node().parentNode)
+      table.classed('hide-footnote', true);
+      d3.select(table.node().parentNode)
         .select('.table-footnote')
         .classed('hide-footnote', true);
     }
@@ -90,26 +98,31 @@ const util = {
     tbody.selectAll('*').remove();
 
     const hRow1 = thead.append('tr');
-    const hRow2 = thead.append('tr');
-
     hRow1
       .selectAll('th')
-      .data(head[0])
+      .data(() => (isMultiLevel ? head[0] : head))
       .join('th')
       .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
-      .attr('colspan', (d, i) => (i > 0 ? head[1].length : 1))
+      .attr('colspan', (d, i) => (isMultiLevel ? (i > 0 ? head[1].length / (head[0].length - 1) : 1) : 0))
       .attr('scope', 'col')
       .classed('border-cell', (d, i) => i > 0)
       .text(d => d)
-      .attr('id', (d, i) => `${self.data.meta.heading}_th_1_${i}`);
+      .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`);
 
-    hRow2
-      .selectAll('th')
-      .data(head[0].flatMap((d, i) => (i > 0 ? head[1] : [])))
-      .join('th')
-      .classed('border-cell', (d, i) => i % head[1].length === 0)
-      .text(d => d)
-      .attr('id', (d, i) => `${self.data.meta.heading}_th_2_${i}`);
+    if (isMultiLevel) {
+      const hRow2 = thead.append('tr');
+      hRow2
+        .selectAll('th')
+        .data(head[1])
+        .join('th')
+        .classed('border-cell', (d, i) => {
+          if (!isMultiLevel) return true;
+          const l = head[1].length / (head[0].length - 1);
+          return i % l === 0;
+        })
+        .text(d => d)
+        .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`);
+    }
 
     const rows = tbody
       .selectAll('tr')
@@ -129,8 +142,21 @@ const util = {
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .classed('border-cell', (d, i) => i % head[1].length === 0)
-      .text(d => self.format(d, method, false, true));
+      .classed('border-cell', (d, i) => {
+        if (!isMultiLevel) return true;
+        const l = head[1].length / (head[0].length - 1);
+        return i % l === 0;
+      })
+      .text(d => this.format(d, this.method, false, true));
+
+    const exportSettings = {
+      formats: ['xlsx', 'csv'],
+      filename: headingText,
+      sheetname: 'data',
+    };
+
+    caption.html('Last ned');
+    TableExport(table.node(), exportSettings);
   },
 };
 
