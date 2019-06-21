@@ -14,7 +14,7 @@ export default {
       tabs: [
         {
           active: false,
-          label: 'Status',
+          label: 'Andel',
           id: 'eieform_totalt_status',
           template: 'a',
           method: 'ratio',
@@ -23,10 +23,28 @@ export default {
         },
         {
           active: false,
-          label: 'Historisk',
+          label: 'Antall',
+          id: 'eieform_totalt_status',
+          template: 'a',
+          method: 'value',
+          url: `${API}/bygningstyper-totalt-status`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Historisk (andel)',
           id: 'eieform_totalt_historisk',
           template: 'c',
           method: 'ratio',
+          url: `${API}/bygningstyper-totalt-historisk`,
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Historisk (antall)',
+          id: 'eieform_totalt_historisk',
+          template: 'c',
+          method: 'value',
           url: `${API}/bygningstyper-totalt-historisk`,
           production: true,
         },

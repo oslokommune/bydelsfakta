@@ -12,4 +12,5 @@ export default [
   { range: '[60, 66]', label: '60–66 år' },
   { range: '[67, 79]', label: '67–79 år' },
   { range: '[80, 89]', label: '80–89 år' },
+  { range: '[90, 119]', label: '90+ år' },
 ];
