@@ -86,7 +86,7 @@ const numberify = str => {
 
 // Generates and downloads csv file from HTML <table> element
 export default table => {
-  const caption = table.querySelector('caption').innerHTML || 'title';
+  const caption = table.parentNode.querySelector('h3').innerHTML || 'title';
   const columns = getColumnNames(table.querySelector('thead'));
   const rows = getRows(table.querySelector('tbody'));
   const csvString = mergeColsAndRows(columns, rows);
