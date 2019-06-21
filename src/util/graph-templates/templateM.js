@@ -374,7 +374,10 @@ function Template(svg) {
 
   this.drawTable = function() {
     // Prepare data for table head
-    const table_head = [['Alder', ...tabData.map(d => d.label)], ['Innflytting', 'Utflytting', 'Netto flytting']];
+    const table_head = [
+      ['Alder', ...tabData.map(d => d.label)],
+      tabData.flatMap(() => ['Innflytting', 'Utflytting', 'Netto flytting']),
+    ];
 
     // Prepare data for table body
     const table_body = this.filteredData.immigration.map((d, i) => {
@@ -400,7 +403,8 @@ function Template(svg) {
       };
     });
 
-    util.drawTable(this, table_head, table_body, { hideFootnote: true });
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body, { hideFootnote: true });
   };
 
   this.setScales = function() {

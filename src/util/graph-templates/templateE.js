@@ -144,7 +144,6 @@ function Template(svg) {
       'Geografi',
       ...ageRanges.map(d => {
         let str = '';
-        str += this.method === 'ratio' ? 'Prosentandel ' : 'Antall ';
         str += d.label;
         return str;
       }),
