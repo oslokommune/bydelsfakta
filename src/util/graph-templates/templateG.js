@@ -47,42 +47,17 @@ function Template(svg) {
   this.created = function() {};
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
-
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hrow = thead.append('tr');
-
-    hrow
-      .selectAll('th')
-      .data(() => ['Geografi', ...this.data.meta.series.map(d => d.heading)])
-      .join('th')
-      .attr('scope', 'col')
-      .text(d => d);
-
     const tableData = JSON.parse(JSON.stringify(this.data.data));
+    const table_head = ['Geografi', ...this.data.meta.series.map(d => d.heading)];
+    const table_body = tableData.map(d => {
+      return {
+        key: d.geography,
+        values: [d.values[0], d.values[1], d.values[2]],
+      };
+    });
 
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => [d.values[0], d.values[1], d.values[2]])
-      .join('td')
-      .text(d => this.format(d, this.method));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   this.initRowElements = function(rowsE) {
