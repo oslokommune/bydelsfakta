@@ -126,12 +126,18 @@ function Base_Template(svg) {
       this.customHeading = str;
       const text = this.getHeading(str);
 
+<<<<<<< HEAD
       d3.select(this.svg.node().parentNode.parentNode.parentNode)
         .data([text])
         .select('.table-heading')
         .join('h3')
         .attr('class', 'table-heading')
         .html(d => d);
+=======
+      d3.select(this.svg.node().parentNode.parentNode)
+        .select('caption')
+        .html(text);
+>>>>>>> master
     }
   };
 
@@ -152,6 +158,7 @@ function Base_Template(svg) {
       case 'a':
       case 'i':
       case 'j':
+      case 'k':
         if (!this.data.data[0].values.length) break;
         year = `(${this.data.data[0].values[0].date})`;
         break;
