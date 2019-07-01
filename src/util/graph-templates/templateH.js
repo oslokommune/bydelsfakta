@@ -14,7 +14,6 @@
  *
  */
 
-import TableExport from 'tableexport';
 import Base_Template from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
@@ -81,7 +80,6 @@ function Template(svg) {
   this.drawTable = function() {
     const thead = this.table.select('thead');
     const tbody = this.table.select('tbody');
-    const caption = this.table.select('caption');
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
@@ -148,7 +146,10 @@ function Template(svg) {
       .join('th')
       .attr('scope', 'row')
       .attr('headers', `${this.data.meta.heading}_th_1_0`)
-      .text(d => d);
+      .text(d => d)
+      .attr('data-footnote', d => {
+        return d === 'Oslo i alt' && this.isCompare;
+      });
 
     // Value cells
     rows
@@ -168,15 +169,6 @@ function Template(svg) {
       })
       .classed('border-cell', (d, i) => i % years.length === 0)
       .text(d => d);
-
-    const exportSettings = {
-      formats: ['xlsx', 'csv'],
-      filename: this.getHeading(),
-      sheetname: 'data',
-    };
-
-    caption.html('Last ned');
-    TableExport(this.table.node(), exportSettings);
   };
 
   // Empties canvas and creates the neccessary DOM elements
