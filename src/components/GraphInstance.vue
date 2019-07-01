@@ -210,9 +210,7 @@ export default {
             this.$emit('updateDate', data.meta.publishedDate);
 
             data.data.map(district => {
-              district.id = district.id || district.geography;
               district.noLink = !districtNames[district.id]; // add noLink flag if geography is not a district
-              district.geography = districtNames[district.geography] || district.geography;
 
               return district;
             });
