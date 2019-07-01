@@ -195,7 +195,7 @@ function Template(svg) {
             }
             return str;
           }),
-        ]
+        ],
       ];
     } else {
       table_head = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];

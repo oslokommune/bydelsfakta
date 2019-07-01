@@ -177,7 +177,6 @@
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveExcel.label') }}</span>
               </button>
-
             </div>
           </div>
         </nav>
