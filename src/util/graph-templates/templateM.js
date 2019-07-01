@@ -404,7 +404,7 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body, { hideFootnote: true });
+    tableGenerator(table_head, table_body);
   };
 
   this.setScales = function() {

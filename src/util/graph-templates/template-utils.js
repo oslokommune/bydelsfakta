@@ -5,10 +5,6 @@
 import d3 from '@/assets/d3';
 import router from '../../router';
 import allDistricts from '../../config/allDistricts';
-import TableExport from 'tableexport';
-
-TableExport.prototype.formatConfig.xlsx.buttonContent = 'Excel (.xlsx)';
-TableExport.prototype.formatConfig.csv.buttonContent = 'CSV (.csv)';
 
 const util = {
   truncate: function(str, width, size = 14, weight = 400) {
@@ -77,23 +73,23 @@ const util = {
   allDistricts: allDistricts,
 
   drawTable: function(head, body, options = {}) {
-    const hideFootnote = options.hideFootnote || false;
     const formatter = options.formatter || this.format;
-
-    const table = this.table;
-    const thead = table.select('thead');
-    const tbody = table.select('tbody');
-    const caption = table.select('caption');
-    const headingText = this.getHeading();
+    const tableElement = this.table;
+    const thead = tableElement.select('thead');
+    const tbody = tableElement.select('tbody');
 
     const isMultiLevel = typeof head[1] === 'object';
 
-    if (hideFootnote) {
-      table.classed('hide-footnote', true);
-      d3.select(table.node().parentNode)
-        .select('.table-footnote')
-        .classed('hide-footnote', true);
-    }
+    let hideFootnote =
+      tableElement
+        .node()
+        .querySelector('tbody')
+        .querySelectorAll('th[data-footnote=true]').length === 0;
+
+    tableElement.classed('hide-footnote', hideFootnote);
+    d3.select(tableElement.node().parentNode)
+      .select('.table-footnote')
+      .classed('hide-footnote', hideFootnote);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
@@ -103,7 +99,7 @@ const util = {
       .selectAll('th')
       .data(() => (isMultiLevel ? head[0] : head))
       .join('th')
-      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
+      .attr('rowspan', (d, i) => (i === 0 && isMultiLevel ? 2 : 1))
       .attr('colspan', (d, i) => (isMultiLevel ? (i > 0 ? head[1].length / (head[0].length - 1) : 1) : 0))
       .attr('scope', 'col')
       .classed('border-cell', (d, i) => i > 0)
@@ -136,7 +132,10 @@ const util = {
       .data(d => [d.key])
       .join('th')
       .attr('scope', 'row')
-      .text(d => d);
+      .text(d => d)
+      .attr('data-footnote', d => {
+        return d === 'Oslo i alt' && this.isCompare;
+      });
 
     // Value cells
     rows
@@ -149,15 +148,6 @@ const util = {
         return i % l === 0;
       })
       .text(d => formatter(d, this.method, false, true));
-
-    const exportSettings = {
-      formats: ['xlsx', 'csv'],
-      filename: headingText,
-      sheetname: 'data',
-    };
-
-    caption.html('Last ned');
-    TableExport(table.node(), exportSettings);
   },
 };
 

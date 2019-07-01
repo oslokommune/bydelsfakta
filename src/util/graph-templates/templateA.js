@@ -179,22 +179,27 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const table_head = [
-      ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
-      [
-        ...this.data.meta.series.map(d => {
-          let str = '';
+    const isMultiLevel = this.data.meta.series[1] !== undefined;
+    let table_head;
 
-          if (typeof d === 'string') {
-            str += d;
-          } else if (d.heading) {
-            str += `${d.heading} ${d.subheading}`;
-          }
-
-          return str;
-        }),
-      ],
-    ];
+    if (isMultiLevel) {
+      table_head = [
+        ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
+        [
+          ...this.data.meta.series.map(d => {
+            let str = '';
+            if (typeof d === 'string') {
+              str += d;
+            } else if (d.heading) {
+              str += `${d.heading} ${d.subheading}`;
+            }
+            return str;
+          }),
+        ]
+      ];
+    } else {
+      table_head = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];
+    }
 
     const table_body = JSON.parse(JSON.stringify(this.data.data))
       .sort(this.tableSort)

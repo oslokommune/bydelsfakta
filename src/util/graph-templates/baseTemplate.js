@@ -114,6 +114,7 @@ function Base_Template(svg) {
       series: this.series,
       highlight: this.highlight,
       mode: this.mode,
+      compareDistricts: this.isCompare,
       hidePercentSymbol: this.hidePercentSymbol,
       event: 'resize',
     });
@@ -131,8 +132,6 @@ function Base_Template(svg) {
         .join('h3')
         .attr('class', 'table-heading')
         .html(d => d);
-
-      this.heading.text(text);
     }
   };
 
@@ -279,7 +278,7 @@ function Base_Template(svg) {
 
     this.mode = options.mode || 'osloRatio';
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.isCompare = options.compareDistricts || false;
+    this.isCompare = options.compareDistricts || options.isCompare || false;
     this.method = options.method || 'value';
     this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;
@@ -287,8 +286,7 @@ function Base_Template(svg) {
     this.hidePercentSymbol = options.hidePercentSymbol || false;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
-    this.height =
-      this.height > 0 ? this.height : Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
+    this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     const wrap = textwrap()
       .bounds({ width: this.parentWidth(), height: 60 })
