@@ -75,42 +75,17 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
+    const table_head = [['Geografi', 'Prosentandel'], [...this.data.meta.series.map(d => `${d.heading}`)]];
+    const table_body = tableData.map(row => {
+      return {
+        key: row.geography,
+        values: row.values.map(value => value[this.mode]),
+      };
+    });
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hrow = thead.append('tr');
-
-    hrow
-      .selectAll('th')
-      .data(() => ['Geografi', ...this.data.meta.series.map(d => d.heading)])
-      .join('th')
-      .attr('scope', 'col')
-      .text(d => d);
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => d.values.map(value => this.format(value[this.mode], this.method, false, true)))
-      .join('td')
-      .text(d => d);
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   this.initRowElements = function(el) {
