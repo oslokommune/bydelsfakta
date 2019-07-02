@@ -1,4 +1,5 @@
 import { baseUrl, apiUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
@@ -10,6 +11,9 @@ export default {
     {
       size: 'large',
       heading: 'Eierform',
+      about:
+        'Statistikken er basert på SSB sin husholdningsstatistikk per 1.1. Eierstatus viser husholdningens eierforhold til boligen. Som eiere av boliger regnes både selveiere og eiere gjennom borettslag eller boligaksjeselskap. Husholdningen eier boligen dersom minst en av personene i husholdningen står som eier av boligen. Når ingen av de bosatte står som eier, regnes husholdningen å ha et leieforhold til boligen.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/eieform-status`,

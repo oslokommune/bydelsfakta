@@ -148,10 +148,6 @@ function Template(svg) {
     // this.setBrushes();
     this.drawRows();
     this.drawLines();
-    this.drawSource(
-      'Statistisk sentralbyrå (test)',
-      this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom + this.sourceHeight
-    );
     this.drawTable();
   };
 

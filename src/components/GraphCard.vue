@@ -170,6 +170,7 @@
         @updateDate="setDate"
         v-if="settings.tabs[active] !== undefined && (mode === 'graph' || mode === 'table')"
         :settings="settings.tabs[active]"
+        :sources="settings.sources"
         :mode="mode"
         ref="graph"
       />
@@ -184,8 +185,15 @@
       <div class="about-container" v-if="mode === 'about'">
         <h3>{{ $t('graphCard.about.label') }}</h3>
 
-        <p>{{ $t('graphCard.about.updated') }} {{ date }}</p>
+        <p v-if="date">{{ $t('graphCard.about.updated') }}: {{ date }}</p>
         <p v-if="settings.about" v-html="settings.about"></p>
+        <p v-if="settings.sources">
+          {{ settings.sources.length > 1 ? $t('graphCard.sources.plural') : $t('graphCard.sources.singular') }}:
+          <span v-for="(source, i) in settings.sources" :key="'source_' + i">
+            <a :href="source.url">{{ source.name }}</a>
+            <span v-if="i < settings.sources.length - 1">, </span>
+          </span>
+        </p>
       </div>
     </div>
   </section>
@@ -231,6 +239,10 @@ export default {
 
   methods: {
     setDate(dateStr) {
+      if (!dateStr) {
+        this.date = 'Ikke tilgjengelig';
+        return;
+      }
       const parseTime = d3.timeParse('%Y-%m-%d');
       const formatTime = d3.timeFormat('%x');
       this.date = formatTime(parseTime(dateStr));
