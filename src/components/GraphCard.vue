@@ -170,6 +170,7 @@
         @updateDate="setDate"
         v-if="settings.tabs[active] !== undefined && (mode === 'graph' || mode === 'table')"
         :settings="settings.tabs[active]"
+        :sources="settings.sources"
         :mode="mode"
         ref="graph"
       />
@@ -188,12 +189,10 @@
         <p v-if="settings.about" v-html="settings.about"></p>
         <p v-if="settings.sources">
           {{ settings.sources.length > 1 ? $t('graphCard.sources.plural') : $t('graphCard.sources.singular') }}:
-          <template v-for="(source, i) in settings.sources" v-key="'source_' + i">
-            <span>
-              <a :href="source.url">{{ source.name }}</a>
-              <span v-if="i < settings.sources.length - 1">, </span>
-            </span>
-          </template>
+          <span v-for="(source, i) in settings.sources" :key="'source_' + i">
+            <a :href="source.url">{{ source.name }}</a>
+            <span v-if="i < settings.sources.length - 1">, </span>
+          </span>
         </p>
       </div>
     </div>
@@ -217,7 +216,7 @@ export default {
     return {
       active: 0,
       showDropdown: false,
-      mode: 'about',
+      mode: 'graph',
       date: '',
       showAsTabs: true,
     };
@@ -239,7 +238,7 @@ export default {
   },
 
   methods: {
-    setDate(dateStr) {;
+    setDate(dateStr) {
       if (!dateStr) {
         this.date = 'Ikke tilgjengelig';
         return;

@@ -281,6 +281,7 @@ export default {
         method: this.settings.method,
         hidePercentSymbol: this.settings.hidePercentSymbol,
         mode: this.settings.mode,
+        sources: this.sources,
         initialRender: true,
         compareDistricts: this.compareDistricts,
         range: '[0, 40]', // default range
@@ -293,6 +294,11 @@ export default {
     settings: {
       type: Object,
       required: true,
+    },
+    sources: {
+      type: Array,
+      required: false,
+      default: () => [],
     },
     mode: {
       type: String,
