@@ -19,7 +19,6 @@ function Template(svg) {
   this.height1 = 260;
   this.height2 = 160;
   this.gapY = 50;
-  this.height = this.height1 + this.gapY + this.height2;
 
   this.upper = null;
   this.lower = null;
@@ -39,6 +38,7 @@ function Template(svg) {
     if (!this.commonRender(data, options)) return;
     this.filteredData = this.data.data.filter(d => d.avgRow)[0].values[0];
 
+    this.height = this.height1 + this.gapY + this.height2;
     this.width = d3.max([this.width, 360]);
     this.svg
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)

@@ -4,6 +4,16 @@
       "close": "Lukk meny",
       "open": "Åpne meny"
     },
+    "fullscreen": {
+      "open": {
+        "aria": "Åpne fullskjerm",
+        "label": "Åpne fullskjerm"
+      },
+      "exit": {
+        "aria": "Lukk fullskjerm",
+        "label": "Lukk fullskjerm"
+      }
+    },
     "savePNG": {
       "aria": "lagre graf som bilde (png-fil)",
       "label": "Last ned som bilde (.png)"

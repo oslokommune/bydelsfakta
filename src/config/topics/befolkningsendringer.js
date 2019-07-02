@@ -3,12 +3,12 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
-  production: null,
+  production: true,
   cards: [
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: false,
+      production: true,
       tabs: [
         {
           label: 'Status',
