@@ -184,8 +184,17 @@
       <div class="about-container" v-if="mode === 'about'">
         <h3>{{ $t('graphCard.about.label') }}</h3>
 
-        <p>{{ $t('graphCard.about.updated') }} {{ date }}</p>
+        <p v-if="date">{{ $t('graphCard.about.updated') }}: {{ date }}</p>
         <p v-if="settings.about" v-html="settings.about"></p>
+        <p v-if="settings.sources">
+          {{ settings.sources.length > 1 ? $t('graphCard.sources.plural') : $t('graphCard.sources.singular') }}:
+          <template v-for="(source, i) in settings.sources" v-key="'source_' + i">
+            <span>
+              <a :href="source.url">{{ source.name }}</a>
+              <span v-if="i < settings.sources.length - 1">, </span>
+            </span>
+          </template>
+        </p>
       </div>
     </div>
   </section>
@@ -208,7 +217,7 @@ export default {
     return {
       active: 0,
       showDropdown: false,
-      mode: 'graph',
+      mode: 'about',
       date: '',
       showAsTabs: true,
     };
@@ -230,7 +239,11 @@ export default {
   },
 
   methods: {
-    setDate(dateStr) {
+    setDate(dateStr) {;
+      if (!dateStr) {
+        this.date = 'Ikke tilgjengelig';
+        return;
+      }
       const parseTime = d3.timeParse('%Y-%m-%d');
       const formatTime = d3.timeFormat('%x');
       this.date = formatTime(parseTime(dateStr));
