@@ -3,12 +3,12 @@ import { baseUrl } from '../../util/config';
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
-  production: true,
+  production: false,
   cards: [
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: true,
+      production: false,
       tabs: [
         {
           label: 'Status',
@@ -16,7 +16,7 @@ export default {
           heading: 'Flytting etter alder og innvandringskategori',
           template: 'm',
           url: `${baseUrl}/mockDataFlytting.json`,
-          production: true,
+          production: false,
         },
       ],
     },
