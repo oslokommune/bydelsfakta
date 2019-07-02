@@ -232,12 +232,14 @@ function Base_Template(svg) {
       .append('text')
       .attr('class', 'source-label')
       .attr('font-size', 10)
+      .attr('y', '100%')
       .text('Kilde: ');
 
     group
       .append('text')
       .attr('class', 'source')
       .attr('font-size', 10)
+      .attr('y', '100%')
       .attr('transform', () => {
         const labelWidth = group
           .select('.source-label')
@@ -248,16 +250,14 @@ function Base_Template(svg) {
   };
 
   // Updates and repositions the source reference text
-  this.drawSource = function(str, height) {
+  this.drawSource = function(str) {
     // Update source text
     this.svg.select('text.source').text(str);
-
-    if (!height) height = this.svg.attr('height');
 
     this.svg
       .select('g.sourceGroup')
       .attr('opacity', 1)
-      .attr('transform', `translate(${0}, ${height - 9})`);
+      .attr('transform', `translate(0, -5)`);
   };
 
   // The parent container width is needed for each render of a template.
@@ -275,6 +275,7 @@ function Base_Template(svg) {
   // All templates share these common operations when rendered
   this.commonRender = function(data, options = {}) {
     if (data === undefined || data.data === undefined) return;
+    this.sources = options.sources || null;
     this.data = data;
 
     this.mode = options.mode || 'osloRatio';
@@ -298,6 +299,11 @@ function Base_Template(svg) {
       .html('')
       .text(headingText)
       .call(wrap);
+
+    if (this.sources && this.sources.length) {
+      let str = this.sources.map(source => source.name).join(', ');
+      this.drawSource(str);
+    }
 
     return true;
   };

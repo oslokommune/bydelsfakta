@@ -1,4 +1,5 @@
 import { apiUrl, baseUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
@@ -10,6 +11,7 @@ export default {
     {
       size: 'large',
       heading: 'Levekår',
+      sources: [source.ssb],
       production: true,
       tabs: [
         {
@@ -37,6 +39,9 @@ export default {
     {
       size: 'small',
       heading: 'Lav utdanning',
+      sources: [source.ssb],
+      about:
+        'Statistikken omfatter personer 30–59 år, per 1.1, med utdanningsnivå per 1.10 året før. Lav utdanning omfatter personer med kun grunnskole, ingen eller uopgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; utdanningsnivå fra og med 2015  er ikke direkte sammenlignbart tidligere år.',
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/levekar-lav-utdanning-status`,
@@ -90,11 +95,13 @@ export default {
           production: true,
         },
       ],
-      about: `Lav utdanning inkluderer grunnskolenivå og de med ingen/uoppgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; data for 2014 og 2015 er ikke direkte sammenlignbare med tidligere perioder. <a href='http://www.ssb.no/utdanning/statistikker/utniv/aar/2016-06-20?fane=om#content#content'>Mer informasjon hos SSB</a>`,
     },
     {
       size: 'small',
       heading: 'Lavinntekt',
+      about:
+        'Statistikken viser husholdninger med barn under 18 år med lav inntekt, i henhold til EU-skala. Det vil si, husholdningens inntekt etter skatt per forbruksenhet er under 60 prosent av medianinntekten for Oslo. I henhold til EU-skalaen er husholdningsinntekten skalert med forbruksvekter ved å gi første voksne i husholdningen vekten 1, andre voksne vekten 0,5 hver, mens hvert barn får vekten 0,3. Inntekten er videre korrigert for formue, det vil si at husholdninger som har brutto finanskapital per forbruksenhet over 1G, uansett ikke regnes som lavinntektshusholdninger.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Barnehusholdninger med lav inntekt',
@@ -146,11 +153,13 @@ export default {
           production: true,
         },
       ],
-      about: `Statistikken viser andel husholdninger med barn under 18 år med lav inntekt, etter EU-skala. Inntekten er korrigert for formue, det vil si at den viser husholdninger som har brutto finanskapital per forbruks­enhet under 1G.`,
     },
     {
       size: 'small',
       heading: 'Ikke fullført videregående skole',
+      about:
+        'Statistikken omfatter bosatte personer 21–29 år, per 1.1, som har startet i videregående utdanning uten å fullføre i løpet av 5 år. Fullføring er oppdatert per 1.oktober året før. Årstallet i overskriften relateres til året for fullføring.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/ikke-fullfort-vgs-status`,
@@ -207,6 +216,9 @@ export default {
     {
       size: 'small',
       heading: 'Dødelighet',
+      about:
+        'For hver 5 års gruppe og kjønn for alderen 55–79 år beregnes det en dødsrate. Det lages deretter et gjennomsnitt av disse 10 dødsratene. Deretter igjen lages det et gjennomsnitt for de 7 siste årene for å sikre at tilfeldige årsvariasjoner ikke skal påvirke hovedmønsteret.',
+      sources: [source.ssb],
       map: {
         labels: ['Lavere dødsrate', 'Høyere dødsrate'],
         url: `${API}/dodsrater-status`,
@@ -234,6 +246,9 @@ export default {
     {
       size: 'small',
       heading: 'Ikke sysselsatte',
+      about:
+        'Statistikken omfatter bosatte i Oslo, 30–59 år, som ikke er registrert sysselsatt per 4. kvartal. En sysselsatt er her definert som enten lønnstaker eller selvstendig næringsdrivende. En lønnstaker er en som har utført inntektsgivende arbeid av minst én times varighet i løpet av referanseuken.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/levekar-ikke-sysselsatte-status`,
@@ -289,6 +304,9 @@ export default {
     {
       size: 'small',
       heading: 'Kort botid',
+      about:
+        'Statistikken omfatter personer som har innvandret til Norge fra Asia, Afrika, Latin-Amerika og Øst-Europa for mindre enn fem år siden.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/levekar-innvandrere-ikke-vestlige-kort-status`,
@@ -344,7 +362,10 @@ export default {
     {
       size: 'small',
       heading: 'Trangboddhet',
+      about:
+        'Statistikken viser trangbodde husholdninger per 1.1. Husholdninger regnes som trangbodd dersom: (1) Antall rom i boligen er mindre enn antall personer eller én person bor på ett rom, og (2) antall kvadratmeter (p-areal) er under 25 kvm per person. I tilfeller hvor det mangler opplysninger om antall rom eller p-areal, vil husholdninger regnes som trangbodde dersom en av de to betingelsene er oppfylt. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student:  Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
       production: true,
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Trangbodde husholdninger',
@@ -399,6 +420,9 @@ export default {
     {
       size: 'small',
       heading: 'Redusert funksjonsevne',
+      about:
+        'Statistikken omfatter personer i alderen 16 til 66 år med redusert funksjonsevne per 30. november. F.o.m. 2010 er redusert funksjonsevne definert som mottakere av sykepenger, uførepensjon  eller personer med nedsatt arbeidsevne. Nedsatt arbeidsevne omfatter personer som på grunn av sykdom, skade eller andre hindringer har behov for ekstra oppfølging fra NAV for å få eller beholde arbeid. For perioden 2000–2009 er redusert funksjonsevne definert som personer som er registrert i FD-trygd basen på ett eller flere av disse områdene per 30.11: Uførepensjon, sykepenger, medisinsk rehabilitering, foreløpig uførestønad eller arbeidssøkerstatus=yrkeshemmet.',
+      sources: [source.ssb],
       production: true,
       map: {
         labels: ['Færre', 'Flere'],

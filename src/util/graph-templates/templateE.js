@@ -44,10 +44,6 @@ function Template(svg) {
     this.drawAxis();
     this.drawPyramid();
     this.drawList();
-    this.drawSource(
-      'Statistisk sentralbyrå (test)',
-      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
-    );
     this.drawTable();
   };
 

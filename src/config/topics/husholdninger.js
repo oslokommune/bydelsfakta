@@ -1,4 +1,5 @@
 import { apiUrl, baseUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
@@ -10,6 +11,8 @@ export default {
     {
       size: 'large',
       heading: 'Husholdninger',
+      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/husholdning-totalt-status`,
@@ -65,6 +68,8 @@ export default {
     {
       size: 'small',
       heading: 'Husholdninger med ett barn',
+      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Husholdninger med ett barn',
@@ -98,6 +103,8 @@ export default {
     {
       size: 'small',
       heading: 'Husholdninger med to barn',
+      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Husholdninger med to barn',
@@ -131,6 +138,8 @@ export default {
     {
       size: 'small',
       heading: 'Husholdninger med tre eller flere barn',
+      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Husholdninger med tre+ barn',

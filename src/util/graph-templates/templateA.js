@@ -24,7 +24,7 @@ function Template(svg) {
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
-    if (data.data[0].values.length === 1 && data.meta.series.length > 1) {
+    if (data.data && data.data[0].values && data.data[0].values.length === 1 && data.meta.series.length > 1) {
       data.meta.series = [data.meta.series[0]];
     }
 
@@ -83,10 +83,6 @@ function Template(svg) {
     this.drawColumns();
     this.drawRows();
     this.drawAxis();
-    this.drawSource(
-      'Statistisk sentralbyrå (test)',
-      this.padding.top + this.height + this.padding.bottom + this.sourceHeight
-    );
     this.drawTable();
   };
 

@@ -1,4 +1,5 @@
 import { apiUrl, baseUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
@@ -10,6 +11,9 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningen etter alder',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+      sources: [source.ssb, source.oslo],
       map: false,
       production: true,
       tabs: [
@@ -39,6 +43,9 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningspyramide',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+      sources: [source.ssb, source.oslo],
       map: false,
       production: true,
       tabs: [
@@ -57,6 +64,9 @@ export default {
     {
       size: 'large',
       heading: 'Gjennomsnitt- og medianalder',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+      sources: [source.ssb, source.oslo],
       production: true,
       map: {
         labels: ['Lavere gjennomsnittsalder', 'Høyere gjennomsnittsalder'],

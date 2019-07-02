@@ -36,6 +36,10 @@
       "ariaShow": "Vis hjelpetekst",
       "ariaHide": "Skjul hjelpetext"
     },
+    "sources": {
+      "singular": "Kilde",
+      "plural": "Kilder"
+    },
     "mode": {
       "map": "Kart",
       "table": "Tabell",
