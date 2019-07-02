@@ -8,8 +8,8 @@
         @keyup.enter="toggleFullscreen"
         class="close-fullscreen"
         tabindex="0"
-        :title="$t('graphCard.fullscreen.aria')"
-        :aria-label="$t('graphCard.fullscreen.aria')"
+        :title="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+        :aria-label="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
       >
         <ok-icon icon-ref="fullscreenExit" :options="{ size: 'small' }"></ok-icon>
       </button>
