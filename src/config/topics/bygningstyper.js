@@ -1,4 +1,5 @@
 import { baseUrl, apiUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
@@ -10,6 +11,9 @@ export default {
     {
       size: 'large',
       heading: 'Boliger etter bygningstype',
+      about:
+        '<p>Statistikken viser boliger i Oslo per 1.1. Fordelingen av boliger etter bygningstype fordeles her i tre kategorier: </p><ul><li>Eneboliger (frittliggende enebolig eller våningshus)</li><li>Rekkehus, tomannsboliger o.l. (Dette inkluderer horisontaldelt tomannsbolig eller annet boligbygg med mindre enn tre etasjer, hus i kjede, rekke-/terassehus, vertikaldelttomannsbolig)</li><li>Blokk, leiegård e.l. (inkluderer også boliger i forretningsgård og bygg for felleshusholdninger)</li></ul>',
+      sources: [source.ssb, source.oslo],
       production: true,
       tabs: [
         {
@@ -50,10 +54,12 @@ export default {
         },
       ],
     },
-
     {
       size: 'small',
       heading: 'Blokkbebyggelse',
+      about:
+        '<p>Statistikken viser boliger i Oslo per 1.1. Fordelingen av boliger etter bygningstype fordeles her i tre kategorier: </p><ul><li>Eneboliger (frittliggende enebolig eller våningshus)</li><li>Rekkehus, tomannsboliger o.l. (Dette inkluderer horisontaldelt tomannsbolig eller annet boligbygg med mindre enn tre etasjer, hus i kjede, rekke-/terassehus, vertikaldelttomannsbolig)</li><li>Blokk, leiegård e.l. (inkluderer også boliger i forretningsgård og bygg for felleshusholdninger)</li></ul>',
+      sources: [source.ssb, source.oslo],
       map: {
         labels: ['Mindre', 'Mer'],
         url: `${API}/bygningstyper-blokk-status`,
@@ -109,6 +115,9 @@ export default {
     {
       size: 'small',
       heading: 'Rekkehus og tomannsboliger',
+      about:
+        '<p>Statistikken viser boliger i Oslo per 1.1. Fordelingen av boliger etter bygningstype fordeles her i tre kategorier: </p><ul><li>Eneboliger (frittliggende enebolig eller våningshus)</li><li>Rekkehus, tomannsboliger o.l. (Dette inkluderer horisontaldelt tomannsbolig eller annet boligbygg med mindre enn tre etasjer, hus i kjede, rekke-/terassehus, vertikaldelttomannsbolig)</li><li>Blokk, leiegård e.l. (inkluderer også boliger i forretningsgård og bygg for felleshusholdninger)</li></ul>',
+      sources: [source.ssb, source.oslo],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Rekkehus og tomannsboliger',
@@ -160,6 +169,9 @@ export default {
     {
       size: 'small',
       heading: 'Eneboliger',
+      about:
+        '<p>Statistikken viser boliger i Oslo per 1.1. Fordelingen av boliger etter bygningstype fordeles her i tre kategorier: </p><ul><li>Eneboliger (frittliggende enebolig eller våningshus)</li><li>Rekkehus, tomannsboliger o.l. (Dette inkluderer horisontaldelt tomannsbolig eller annet boligbygg med mindre enn tre etasjer, hus i kjede, rekke-/terassehus, vertikaldelttomannsbolig)</li><li>Blokk, leiegård e.l. (inkluderer også boliger i forretningsgård og bygg for felleshusholdninger)</li></ul>',
+      sources: [source.ssb, source.oslo],
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Eneboliger',
@@ -211,6 +223,9 @@ export default {
     {
       size: 'large',
       heading: 'Kommunale boliger',
+      about:
+        '<p>Statistikken viser boliger i Oslo per 1.1. Fordelingen av boliger etter bygningstype fordeles her i tre kategorier: </p><ul><li>Eneboliger (frittliggende enebolig eller våningshus)</li><li>Rekkehus, tomannsboliger o.l. (Dette inkluderer horisontaldelt tomannsbolig eller annet boligbygg med mindre enn tre etasjer, hus i kjede, rekke-/terassehus, vertikaldelttomannsbolig)</li><li>Blokk, leiegård e.l. (inkluderer også boliger i forretningsgård og bygg for felleshusholdninger)</li></ul>',
+      sources: [source.ssb, source.oslo],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/kommunale-boliger-av-boligmassen-i-alt-status`,

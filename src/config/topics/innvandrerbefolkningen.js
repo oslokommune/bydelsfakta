@@ -1,4 +1,5 @@
 import { apiUrl, baseUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
@@ -11,6 +12,9 @@ export default {
     {
       size: 'large',
       heading: 'Innvandringskategori',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
+      sources: [source.ssb],
       production: true,
       tabs: [
         {
@@ -55,6 +59,9 @@ export default {
     {
       size: 'large',
       heading: 'Landbakgrunn',
+      about:
+        '«Landbakgrunn» for innvandrere er vanligvis fødeland. For norskfødte er dette foreldrenes eventuelle utenlandske fødeland. I tilfeller der foreldrene har ulikt fødeland, er det mors fødeland som gjelder.',
+      sources: [source.ssb],
       production: true,
       tabs: [
         {
@@ -107,6 +114,9 @@ export default {
     {
       size: 'small',
       heading: 'Under 16 år',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-innvandrer-status`,
@@ -158,6 +168,9 @@ export default {
     {
       size: 'small',
       heading: 'Under 16 år med én innvandrerforelder',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
@@ -209,6 +222,9 @@ export default {
     {
       size: 'small',
       heading: 'Under 16 år med to innvandrerforeldre',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
+      sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
         scale: [0.05, 0.75],
