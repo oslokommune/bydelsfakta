@@ -1,6 +1,6 @@
 <template>
   <section class="card-container" :class="{ large: settings.size === 'large' }">
-    <div class="card" :class="{ fullscreen }" @keydown.escape="fullscreen = false" :tabindex="fullscreen ? 0 : false">
+    <div class="card" :class="{ fullscreen }" @keydown.escape="toggleFullscreen" :tabindex="fullscreen ? 0 : false">
       <button
         v-if="fullscreen"
         role="menuitem"
