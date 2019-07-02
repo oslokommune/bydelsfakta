@@ -7,7 +7,7 @@
       <div class="legend__labels">
         <span v-for="(label, i) in settings.labels" :key="i" v-text="label"></span>
       </div>
-      <div class="colorstrip" ref="colorstrip" :style="gradient"></div>
+      <div class="legend__colorstrip" ref="colorstrip" :style="gradient"></div>
     </div>
     <div class="container">
       <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
@@ -164,10 +164,10 @@ export default {
       // For each layer add an interactive dot on the legend.
       // Clicking the dot triggers the popop on the respective layer.
       d3.select(this.$refs.colorstrip)
-        .selectAll('.legend-dot')
+        .selectAll('.legend__dot')
         .data(allLayerData)
         .join('div')
-        .attr('class', 'legend-dot')
+        .attr('class', 'legend__dot')
         .transition()
         .style('left', d => colorStrength(d.dataValue) * 100 + '%')
         .each((d, i, j) => {
@@ -251,35 +251,35 @@ export default {
     max-width: 500px;
     width: 100%;
   }
-}
 
-.colorstrip {
-  height: 0.5em;
-  margin: 0.25em auto 0;
-  max-width: 500px;
-  position: relative;
-  width: 100%;
-}
+  &__colorstrip {
+    height: 0.5em;
+    margin: 0.25em auto 0;
+    max-width: 500px;
+    position: relative;
+    width: 100%;
+  }
 
-.legend-dot {
-  background: rgba(black, 0.4);
-  border: 2px solid rgba(black, 0.5);
-  border-radius: 50%;
-  height: 0.8em;
-  mix-blend-mode: multiply;
-  position: absolute;
-  transform: translate(-0.15em, -0.15em);
-  transform-origin: 50%;
-  transition: all 0.1s;
-  width: 0.8em;
+  &__dot {
+    background: rgba(black, 0.4);
+    border: 2px solid rgba(black, 0.5);
+    border-radius: 50%;
+    height: 0.8em;
+    mix-blend-mode: multiply;
+    position: absolute;
+    transform: translate(-0.15em, -0.15em);
+    transform-origin: 50%;
+    transition: all 0.1s;
+    width: 0.8em;
 
-  &:hover {
-    background-color: white;
-    border: 2px solid $color-purple;
-    mix-blend-mode: none;
-    opacity: 1;
-    transform: translate(-0.15em, -0.15em) scale(1.6);
-    z-index: 2;
+    &:hover {
+      background-color: white;
+      border: 2px solid $color-purple;
+      mix-blend-mode: unset;
+      opacity: 1;
+      transform: translate(-0.15em, -0.15em) scale(1.6);
+      z-index: 2;
+    }
   }
 }
 
