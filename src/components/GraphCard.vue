@@ -172,7 +172,8 @@
                 tabindex="0"
                 @click="saveExcel()"
                 @keyup.enter="saveExcel()"
-                id="context-menu-button-csv"
+                id="context-menu-button-excel"
+                v-if="productionMode === false"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveExcel.label') }}</span>
