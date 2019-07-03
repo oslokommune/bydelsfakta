@@ -1,6 +1,18 @@
 <template>
   <section class="card-container" :class="{ large: settings.size === 'large' }">
-    <div class="card">
+    <div class="card" :class="{ fullscreen }" @keydown.escape="toggleFullscreen" :tabindex="fullscreen ? 0 : false">
+      <button
+        v-if="fullscreen"
+        role="menuitem"
+        @click="toggleFullscreen"
+        @keyup.enter="toggleFullscreen"
+        class="close-fullscreen"
+        tabindex="0"
+        :title="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+        :aria-label="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+      >
+        <ok-icon icon-ref="fullscreenExit" :options="{ size: 'small' }"></ok-icon>
+      </button>
       <header class="card__header">
         <div class="card__headertext">
           <h2 class="card__title">{{ settings.heading }}</h2>
@@ -99,6 +111,24 @@
               <span class="button-label">Valg</span>
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown" role="menu">
+              <button
+                role="menuitem"
+                @click="toggleFullscreen"
+                @keyup.enter="toggleFullscreen"
+                class="context-menu__dropdown-item"
+                tabindex="0"
+                :title="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+                :aria-label="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+              >
+                <ok-icon
+                  :icon-ref="fullscreen ? 'fullscreenExit' : 'fullscreen'"
+                  :options="{ size: 'small' }"
+                ></ok-icon>
+                <span>{{
+                  fullscreen ? $t('graphCard.fullscreen.exit.label') : $t('graphCard.fullscreen.open.label')
+                }}</span>
+              </button>
+
               <button
                 role="menuitem"
                 @click="
@@ -218,6 +248,7 @@ export default {
       showDropdown: false,
       mode: 'graph',
       date: '',
+      fullscreen: false,
       showAsTabs: true,
     };
   },
@@ -246,6 +277,21 @@ export default {
       const parseTime = d3.timeParse('%Y-%m-%d');
       const formatTime = d3.timeFormat('%x');
       this.date = formatTime(parseTime(dateStr));
+    },
+
+    toggleFullscreen() {
+      const body = document.querySelector('body');
+      this.showDropdown = false;
+
+      if (this.fullscreen) {
+        this.fullscreen = false;
+        body.style.height = 'auto';
+        body.style.overflow = 'auto';
+      } else {
+        this.fullscreen = true;
+        body.style.height = '100vh';
+        body.style.overflow = 'hidden';
+      }
     },
 
     closeMenu() {
@@ -333,11 +379,39 @@ export default {
   }
 }
 
+.close-fullscreen {
+  align-items: center;
+  background: rgba(black, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+
+  &:hover {
+    background: rgba(black, 0.2);
+  }
+}
+
 .card {
   background: white;
   border: 1px solid $color-border;
   min-height: 18em;
   width: 100%;
+
+  &.fullscreen {
+    bottom: 1rem;
+    height: calc(100vh - 2rem);
+    left: 1rem;
+    outline: 2rem solid rgba(black, 0.9);
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    width: calc(100vw - 2rem);
+    z-index: 5;
+  }
 
   &__header {
     border-bottom: 1px solid $color-border;

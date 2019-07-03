@@ -12,6 +12,8 @@ import arrowDown from '../assets/icons/arrow-down.svg?inline';
 import mapPin from '../assets/icons/map-pin.svg?inline';
 import graph from '../assets/icons/graph.svg?inline';
 import dataTable from '../assets/icons/data-table.svg?inline';
+import fullscreen from '../assets/icons/fullscreen.svg?inline';
+import fullscreenExit from '../assets/icons/fullscreen-exit.svg?inline';
 
 /* 
   available options (optional):
@@ -31,6 +33,8 @@ export default {
     mapPin,
     graph,
     dataTable,
+    fullscreen,
+    fullscreenExit,
   },
 
   computed: {
