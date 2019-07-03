@@ -175,58 +175,39 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const isMultiLevel = this.data.meta.series[1] !== undefined;
+    let table_head;
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
+    if (isMultiLevel) {
+      table_head = [
+        ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
+        [
+          ...this.data.meta.series.map(d => {
+            let str = '';
+            if (typeof d === 'string') {
+              str += d;
+            } else if (d.heading) {
+              str += `${d.heading} ${d.subheading}`;
+            }
+            return str;
+          }),
+        ],
+      ];
+    } else {
+      table_head = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];
+    }
 
-    const hRow = thead.append('tr');
+    const table_body = JSON.parse(JSON.stringify(this.data.data))
+      .sort(this.tableSort)
+      .map(row => {
+        return {
+          key: row.geography,
+          values: row.values.map(d => d[this.method]),
+        };
+      });
 
-    // Header columns
-    hRow
-      .selectAll('th')
-      .data(() => [
-        'Geografi',
-        ...this.data.meta.series.map(d => {
-          let str = '';
-          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
-
-          if (typeof d === 'string') {
-            str += d;
-          } else if (d.heading) {
-            str += `${d.heading} ${d.subheading}`;
-          }
-
-          str += this.method === 'ratio' ? ' (%)' : '';
-          return str;
-        }),
-      ])
-      .attr('scope', 'col')
-      .join('th')
-      .text(d => d);
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography Cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value Cells
-    rows
-      .selectAll('td')
-      .data(d => d.values)
-      .join('td')
-      .text(d => this.format(d[this.method], this.method, false, true));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   /**

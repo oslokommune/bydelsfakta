@@ -26,6 +26,10 @@
       "aria": "last ned data som som csv",
       "label": "Last ned datasett (.csv)"
     },
+    "saveExcel": {
+      "aria": "last ned data som som Excel",
+      "label": "Last ned datasett (.xlsx)"
+    },
     "showTable": {
       "graph": "Vis grafikk",
       "table": "Vis tabell"

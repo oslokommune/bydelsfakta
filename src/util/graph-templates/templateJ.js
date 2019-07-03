@@ -111,42 +111,17 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
+    const table_head = ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)];
+    const table_body = tableData.map(row => {
+      return {
+        key: row.geography,
+        values: row.values.map(d => Math.abs(d[this.method])),
+      };
+    });
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const headRow = thead.append('tr');
-
-    headRow
-      .selectAll('th')
-      .data(() => ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)])
-      .join('th')
-      .attr('scope', 'col')
-      .text(d => d);
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => d.values)
-      .join('td')
-      .text(d => this.format(Math.abs(d[this.method]), this.method));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   // Creates and set default styles for the DOM elements on each row

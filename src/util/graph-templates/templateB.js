@@ -150,64 +150,31 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
-
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hRow1 = thead.append('tr');
-    const hRow2 = thead.append('tr');
-
     let dates = new Set();
     this.data.data.forEach(row => {
       row.values.forEach(d => {
         dates.add(d['date']);
       });
     });
-    dates = [...dates];
+    dates = [...dates].map(d => this.formatYear(this.parseYear(d)));
 
-    hRow1
-      .selectAll('th')
-      .data(() => [
-        'Geografi',
-        (() => {
-          return this.method === 'ratio' ? 'Andel (%)' : 'Antall';
-        })(),
-      ])
-      .join('th')
-      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
-      .attr('colspan', (d, i) => (i === 1 ? dates.length : 1))
-      .attr('scope', 'col')
-      .text(d => d);
+    const table_head = [['Geografi', this.method === 'ratio' ? 'Prosentandel' : 'Antall'], dates];
 
-    hRow2
-      .selectAll('th')
-      .data(dates)
-      .join('th')
-      .text(d => this.formatYear(this.parseYear(d)));
+    const table_body = JSON.parse(JSON.stringify(this.data.data))
+      .sort(this.tableSort)
+      .map(d => {
+        d.values = dates.map(date => d.values.find(obj => +obj.date === +date) || { date, ratio: 'N/A', value: 'N/A' });
+        return d;
+      })
+      .map(row => {
+        return {
+          key: row.geography,
+          values: row.values.map(d => d[this.method]),
+        };
+      });
 
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => dates.map(date => d.values.find(obj => obj.date === date) || { date, ratio: 'N/A', value: 'N/A' }))
-      .join('td')
-      .text(d => this.format(d[this.method], this.method, false, true));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   this.drawDots = function() {

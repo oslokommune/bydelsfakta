@@ -125,100 +125,46 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
+    const ageInterval = 5; // must be 2 or more
+
     let ageRanges = [];
-    for (let i = 0; i < 120; i += 5) {
+    for (let i = 0; i < 120; i += ageInterval) {
       ageRanges.push({
-        label: `${i}–${i + 4} år`,
-        range: [i, i + 4],
+        label: `${i}–${i + ageInterval - 1} år`,
+        range: [i, i + ageInterval - 1],
       });
     }
 
-    const uuid = Math.floor(Math.random() * 100000);
-
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
-
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hRow1 = thead.append('tr');
-    const hRow2 = thead.append('tr');
-
-    hRow1
-      .selectAll('th')
-      .data(() => [
-        'Geografi',
-        ...ageRanges.map(d => {
-          let str = '';
-          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
-          str += d.label;
-          str += this.method === 'ratio' ? ' (%)' : '';
-          return str;
-        }),
-      ])
-      .join('th')
-      .attr('id', (d, i) => `${uuid}_th_2_${i}`)
-      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
-      .attr('colspan', (d, i) => (i === 0 ? 1 : 2))
-      .attr('scope', 'col')
-      .text(d => d)
-      .classed('border-cell', (d, i) => i > 0);
-
-    hRow2
-      .selectAll('th')
-      .data(() => ageRanges.map(() => ['mann', 'kvinne']).reduce((acc, val) => acc.concat(val), []))
-      .join('th')
-      .attr('id', (d, i) => `${uuid}_th_1_${i}`)
-      .attr('scope', 'col')
-      .attr('headers', (d, i) => `${uuid}_th_2_${Math.floor(i / 2) + 1}`)
-      .classed('border-cell', (d, i, j) => {
-        const groupSize = j.length / ageRanges.length;
-        return i % groupSize === 0;
-      })
-      .text(d => d);
+    const table_head = [];
+    table_head[0] = [
+      'Geografi',
+      ...ageRanges.map(d => {
+        let str = '';
+        str += d.label;
+        return str;
+      }),
+    ];
+    table_head[1] = ageRanges.map(() => ['mann', 'kvinne']).reduce((acc, val) => acc.concat(val), []);
 
     const tableData = JSON.parse(JSON.stringify(this.data.data));
+    const table_body = tableData.map(d => {
+      return {
+        key: d.geography,
+        values: ageRanges.flatMap(age => {
+          const range = age.range;
+          let menn = 0;
+          let kvinner = 0;
+          for (let i = range[0]; i < range[1]; i++) {
+            menn += d.values[i]['mann'];
+            kvinner += d.values[i]['kvinne'];
+          }
+          return [menn, kvinner];
+        }),
+      };
+    });
 
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .attr('headers', `${uuid}_th_2_0`)
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => {
-        return ageRanges
-          .map(age => {
-            const range = age.range;
-            let menn = 0;
-            let kvinner = 0;
-            for (let i = range[0]; i < range[1]; i++) {
-              menn += d.values[i]['mann'];
-              kvinner += d.values[i]['kvinne'];
-            }
-            return [menn, kvinner];
-          })
-          .reduce((acc, val) => acc.concat(val), []);
-      })
-      .join('td')
-      .attr('headers', (d, i) => {
-        return `${uuid}_th_2_${Math.floor(i / 2) + 1} ${uuid}_th_1_${i}`;
-      })
-      .classed('border-cell', (d, i, j) => {
-        const groupSize = j.length / ageRanges.length;
-        return i % groupSize === 0;
-      })
-      .text(d => this.format(d, this.method));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   this.drawList = function() {

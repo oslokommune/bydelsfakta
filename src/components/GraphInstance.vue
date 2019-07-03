@@ -31,8 +31,8 @@
       v-dragscroll.x="!isTouchDevice"
       @scroll="drawShadows"
     >
-      <table :class="{ compareDistrictsTable: compareDistricts }">
-        <caption></caption>
+      <h3 class="table-heading"></h3>
+      <table :class="{ compareDistrictsTable: compareDistricts }" ref="table">
         <thead></thead>
         <tbody></tbody>
       </table>
@@ -159,7 +159,7 @@ export default {
     handleResize() {
       if (this.loading) return;
       if (!this.svg.resize) return;
-      this.svg.resize(this.data, { method: this.settings.method });
+      this.svg.resize(this.data, { method: this.settings.method, compareDistricts: this.compareDistricts });
       this.drawShadows();
     },
 
@@ -514,7 +514,7 @@ export default {
 </style>
 
 <style lang="scss">
-.compareDistrictsTable tbody tr:last-child th::after {
+th[data-footnote='true']::after {
   content: ' *';
 }
 </style>

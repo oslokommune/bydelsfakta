@@ -192,6 +192,22 @@
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveCSV.label') }}</span>
               </button>
+
+              <button
+                role="menuitem"
+                :disabled="mode === 'map'"
+                class="context-menu__dropdown-item"
+                :title="$t('graphCard.saveExcel.aria')"
+                :aria-label="$t('graphCard.saveExcel.aria')"
+                tabindex="0"
+                @click="saveExcel()"
+                @keyup.enter="saveExcel()"
+                id="context-menu-button-excel"
+                v-if="productionMode === false"
+              >
+                <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
+                <span>{{ $t('graphCard.saveExcel.label') }}</span>
+              </button>
             </div>
           </div>
         </nav>
@@ -236,6 +252,7 @@ import GraphInstance from './GraphInstance';
 import downloadSvg from '../util/downloadSvg';
 import downloadPng from '../util/downloadPng';
 import tableToCsv from '../util/tableToCsv';
+import tableToExcel from '../util/tableToExcel';
 import VLeaflet from './VLeaflet';
 import OkIcon from './OkIcon';
 
@@ -325,6 +342,11 @@ export default {
 
     saveCsv() {
       tableToCsv(this.$refs.graph.$refs.tableContainer.querySelector('table'));
+      this.closeMenu();
+    },
+
+    saveExcel() {
+      tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
       this.closeMenu();
     },
 

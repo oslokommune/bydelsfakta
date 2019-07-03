@@ -41,17 +41,6 @@ table {
     background: lighten($color-yellow, 25%);
   }
 
-  caption {
-    color: $color-purple;
-    font-size: $font-medium;
-    font-weight: 400;
-    left: 1rem;
-    margin: 1rem;
-    max-width: 80vw;
-    position: sticky;
-    text-align: left;
-  }
-
   .border-cell:not(:first-child) {
     border-left: 1px solid $color-purple;
   }
@@ -62,5 +51,31 @@ table {
 
   tbody tr:hover th {
     background: lighten($color-yellow, 5%);
+  }
+}
+
+.table-heading {
+  color: $color-purple;
+  font-size: 14px;
+  font-weight: 500;
+  left: 1rem;
+  margin: 1rem;
+  max-width: 80vw;
+  position: sticky;
+  text-align: left;
+}
+
+.tableexport-caption {
+  left: 0;
+  padding: 1rem 1rem 2rem;
+  position: sticky;
+  text-align: left;
+  width: 30rem;
+
+  button {
+    border: 1px solid $color-purple;
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.45rem 0.75rem;
   }
 }

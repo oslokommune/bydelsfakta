@@ -72,44 +72,54 @@ const util = {
 
   allDistricts: allDistricts,
 
-  drawTable: function(self, head, body, options = {}) {
-    const method = options.method || 'value';
-    const hideFootnote = options.hideFootnote || false;
+  drawTable: function(head, body, options = {}) {
+    const formatter = options.formatter || this.format;
+    const tableElement = this.table;
+    const thead = tableElement.select('thead');
+    const tbody = tableElement.select('tbody');
 
-    const thead = self.table.select('thead');
-    const tbody = self.table.select('tbody');
+    const isMultiLevel = typeof head[1] === 'object';
 
-    if (hideFootnote) {
-      self.table.classed('hide-footnote', true);
-      d3.select(self.table.node().parentNode)
-        .select('.table-footnote')
-        .classed('hide-footnote', true);
-    }
+    let hideFootnote =
+      tableElement
+        .node()
+        .querySelector('tbody')
+        .querySelectorAll('th[data-footnote=true]').length === 0;
+
+    tableElement.classed('hide-footnote', hideFootnote);
+    d3.select(tableElement.node().parentNode)
+      .select('.table-footnote')
+      .classed('hide-footnote', hideFootnote);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
 
     const hRow1 = thead.append('tr');
-    const hRow2 = thead.append('tr');
-
     hRow1
       .selectAll('th')
-      .data(head[0])
+      .data(() => (isMultiLevel ? head[0] : head))
       .join('th')
-      .attr('rowspan', (d, i) => (i === 0 ? 2 : 1))
-      .attr('colspan', (d, i) => (i > 0 ? head[1].length : 1))
+      .attr('rowspan', (d, i) => (i === 0 && isMultiLevel ? 2 : 1))
+      .attr('colspan', (d, i) => (isMultiLevel ? (i > 0 ? head[1].length / (head[0].length - 1) : 1) : 0))
       .attr('scope', 'col')
       .classed('border-cell', (d, i) => i > 0)
       .text(d => d)
-      .attr('id', (d, i) => `${self.data.meta.heading}_th_1_${i}`);
+      .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`);
 
-    hRow2
-      .selectAll('th')
-      .data(head[0].flatMap((d, i) => (i > 0 ? head[1] : [])))
-      .join('th')
-      .classed('border-cell', (d, i) => i % head[1].length === 0)
-      .text(d => d)
-      .attr('id', (d, i) => `${self.data.meta.heading}_th_2_${i}`);
+    if (isMultiLevel) {
+      const hRow2 = thead.append('tr');
+      hRow2
+        .selectAll('th')
+        .data(head[1])
+        .join('th')
+        .classed('border-cell', (d, i) => {
+          if (!isMultiLevel) return true;
+          const l = head[1].length / (head[0].length - 1);
+          return i % l === 0;
+        })
+        .text(d => d)
+        .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`);
+    }
 
     const rows = tbody
       .selectAll('tr')
@@ -122,15 +132,22 @@ const util = {
       .data(d => [d.key])
       .join('th')
       .attr('scope', 'row')
-      .text(d => d);
+      .text(d => d)
+      .attr('data-footnote', d => {
+        return d === 'Oslo i alt' && this.isCompare;
+      });
 
     // Value cells
     rows
       .selectAll('td')
       .data(d => d.values)
       .join('td')
-      .classed('border-cell', (d, i) => i % head[1].length === 0)
-      .text(d => self.format(d, method, false, true));
+      .classed('border-cell', (d, i) => {
+        if (!isMultiLevel) return true;
+        const l = head[1].length / (head[0].length - 1);
+        return i % l === 0;
+      })
+      .text(d => formatter(d, this.method, false, true));
   },
 };
 

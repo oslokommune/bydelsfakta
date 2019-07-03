@@ -142,7 +142,10 @@ function Template(svg) {
       .join('th')
       .attr('scope', 'row')
       .attr('headers', `${this.data.meta.heading}_th_1_0`)
-      .text(d => d);
+      .text(d => d)
+      .attr('data-footnote', d => {
+        return d === 'Oslo i alt' && this.isCompare;
+      });
 
     // Value cells
     rows

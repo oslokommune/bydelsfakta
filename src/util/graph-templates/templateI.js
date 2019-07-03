@@ -9,6 +9,7 @@
 import Base_Template from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
+import util from './template-utils';
 
 // Coordinates for the three corners of the triangle.
 // First corner duplicated to complete the path
@@ -163,60 +164,31 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const table_head = [];
+    table_head[0] = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];
+    table_head[1] = [
+      ...this.data.meta.series.map(d => {
+        let str = '';
+        if (typeof d === 'string') {
+          str += d;
+        } else if (d.heading) {
+          str += `${d.heading} ${d.subheading}`;
+        }
+        return str;
+      }),
+    ];
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
+    const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
 
-    const headRow = thead
-      .selectAll('tr')
-      .data([0])
-      .join('tr');
+    const table_body = tableData.map(row => {
+      return {
+        key: row.geography,
+        values: row.values.map(d => d[this.method]),
+      };
+    });
 
-    headRow
-      .selectAll('th')
-      .data(() => [
-        'Geografi',
-        ...this.data.meta.series.map(d => {
-          let str = '';
-          str += this.method === 'ratio' ? 'Andel ' : 'Antall ';
-
-          if (typeof d === 'string') {
-            str += d;
-          } else if (d.heading) {
-            str += `${d.heading} ${d.subheading}`;
-          }
-
-          str += this.method === 'ratio' ? ' (%)' : '';
-          return str;
-        }),
-      ])
-      .join('th')
-      .attr('scope', 'col')
-      .text(d => d);
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => d.values)
-      .join('td')
-      .text(d => this.format(d[this.method], this.method, false, true));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body);
   };
 
   this.drawList = function() {

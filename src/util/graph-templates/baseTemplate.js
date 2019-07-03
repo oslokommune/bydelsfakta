@@ -83,7 +83,11 @@ function Base_Template(svg) {
     }
 
     if (table) {
-      return method === 'ratio' ? locale.tableLocale.format('.2~p')(num) : locale.tableLocale.format(',.0f')(num);
+      return method === 'ratio'
+        ? num * 100 < 1
+          ? locale.tableLocale.format('.2f')(num * 100)
+          : locale.tableLocale.format('.1f')(num * 100)
+        : locale.tableLocale.format(',.0f')(num);
     }
 
     switch (method) {
@@ -110,6 +114,7 @@ function Base_Template(svg) {
       series: this.series,
       highlight: this.highlight,
       mode: this.mode,
+      compareDistricts: this.isCompare,
       hidePercentSymbol: this.hidePercentSymbol,
       event: 'resize',
     });
@@ -121,9 +126,12 @@ function Base_Template(svg) {
       this.customHeading = str;
       const text = this.getHeading(str);
 
-      d3.select(this.svg.node().parentNode.parentNode)
-        .select('caption')
-        .html(text);
+      d3.select(this.svg.node().parentNode.parentNode.parentNode)
+        .data([text])
+        .select('.table-heading')
+        .join('h3')
+        .attr('class', 'table-heading')
+        .html(d => d);
     }
   };
 
@@ -272,7 +280,7 @@ function Base_Template(svg) {
 
     this.mode = options.mode || 'osloRatio';
     this.canvas.attr('transform', `translate(${this.padding.left}, ${this.padding.top})`);
-    this.isCompare = options.compareDistricts || false;
+    this.isCompare = options.compareDistricts || options.isCompare || false;
     this.method = options.method || 'value';
     this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;

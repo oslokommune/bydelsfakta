@@ -72,42 +72,17 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const thead = this.table.select('thead');
-    const tbody = this.table.select('tbody');
+    const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
+    const table_head = ['Geografi', 'Gjennomsnittsalder', 'Medianalder'];
+    const table_body = tableData.map(d => {
+      return {
+        key: d.geography,
+        values: [d.mean, d.median],
+      };
+    });
 
-    thead.selectAll('*').remove();
-    tbody.selectAll('*').remove();
-
-    const hrow = thead.append('tr');
-
-    hrow
-      .selectAll('th')
-      .data(() => ['Geografi', 'Gjennomsnittsalder', 'Medianalder'])
-      .join('th')
-      .attr('scope', 'col')
-      .text(d => d);
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data));
-
-    const rows = tbody
-      .selectAll('tr')
-      .data(tableData.sort(this.tableSort))
-      .join('tr');
-
-    // Geography cells
-    rows
-      .selectAll('th')
-      .data(d => [d.geography])
-      .join('th')
-      .attr('scope', 'row')
-      .text(d => d);
-
-    // Value cells
-    rows
-      .selectAll('td')
-      .data(d => [d.mean, d.median])
-      .join('td')
-      .text(d => locale.norwegianLocale.format(',')(d.toFixed(2)));
+    const tableGenerator = util.drawTable.bind(this);
+    tableGenerator(table_head, table_body, { formatter: locale.norwegianLocale.format(',.1f') });
   };
 
   this.initRowElements = function(rowsE) {
