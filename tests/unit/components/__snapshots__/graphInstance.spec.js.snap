@@ -35,11 +35,13 @@ exports[`GraphInstance renders correctly 1`] = `
   <div
     class="graph__tablecontainer visually-hidden"
   >
+    <h3
+      class="table-heading"
+    />
+     
     <table
       class=""
     >
-      <caption />
-       
       <thead />
        
       <tbody />

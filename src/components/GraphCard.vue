@@ -341,7 +341,7 @@ export default {
     },
 
     saveCsv() {
-      tableToCsv(this.$refs.graph.$refs.tableContainer.querySelector('table'));
+      tableToCsv(this.$refs.graph.$refs.tableContainer);
       this.closeMenu();
     },
 
