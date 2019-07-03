@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
 
+const https = require('https');
+const http = require('http');
 const express = require('express');
 const path = require('path');
-const axios = require('axios');
 const auth = require('./auth');
 
 const api = process.env.BYDELSFAKTA_API_URL;
 const API_URL = api.slice(-1) === '/' ? api : `${api}/`;
+const get = API_URL[4] === 's' ? https.get : http.get;
 
 module.exports = app => {
   app.use('/', express.static(path.join(__dirname, '../docs/')));
@@ -16,19 +18,33 @@ module.exports = app => {
   });
 
   app.get('/api/dataset/:dataset', auth(), (req, res) => {
-    axios({
-      method: 'get',
-      url: `${API_URL}${req.params.dataset}?geography=${req.query.geography}`,
-      headers: {
-        Authorization: req.headers.authorization,
+    const headers = {};
+    for (const k in req.headers) {
+      if (['host', 'connection', 'content-length'].indexOf(k) === -1) {
+        headers[k] = req.headers[k];
+      }
+    }
+
+    get(
+      `${API_URL}${req.params.dataset}?geography=${req.query.geography}`,
+      {
+        headers,
       },
-    })
-      .then(response => res.send(response.data[0]))
-      .catch(error => {
-        console.log('Error code: ', error.response.status);
-        console.log('Error message: ', error.response.data);
-        return res.status(error.response.status).send(error.response.data);
-      });
+      proxyRes => {
+        const { statusCode, headers } = proxyRes;
+        const contentType = headers['content-type'];
+
+        if (statusCode !== 200) {
+          console.error('Unexpected status:', statusCode);
+        }
+        if (!/^application\/json/.test(contentType)) {
+          console.error('Unexpected content-type:', contentType);
+        }
+
+        res.writeHead(statusCode, headers);
+        proxyRes.pipe(res);
+      }
+    );
   });
 
   app.use('*', express.static(path.join(__dirname, '../docs/')));

@@ -206,7 +206,8 @@ export default {
       if (!options.keepData) {
         this.data = await d3
           .json(`${this.settings.url}?geography=${geoParam}`)
-          .then(data => {
+          .then(rawData => {
+            const data = rawData[0];
             this.$emit('updateDate', data.meta.publishedDate);
 
             data.data.map(district => {
