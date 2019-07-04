@@ -17,9 +17,9 @@ export default {
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/eieform-status`,
-        heading: 'Andels-/aksjeeiere',
+        heading: 'Leietakere',
         method: 'ratio',
-        scale: [0.1, 0.85],
+        scale: [0.08, 0.6],
       },
       production: true,
       tabs: [

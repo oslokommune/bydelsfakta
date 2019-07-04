@@ -10,24 +10,6 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Befolkningsvekst',
-      about:
-        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
-      sources: [source.ssb],
-      production: true,
-      tabs: [
-        {
-          active: true,
-          label: 'Status',
-          heading: 'Befolkningsvekst',
-          production: true,
-          url: `${API}/nokkeltall-om-befolkningen`,
-          template: 'g',
-        },
-      ],
-    },
-    {
-      size: 'large',
       heading: 'Befolkningsutvikling',
       about:
         'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
@@ -51,6 +33,24 @@ export default {
           template: 'b',
           url: `${API}/folkemengde-utvikling-historisk-prosent`,
           production: true,
+        },
+      ],
+    },
+    {
+      size: 'large',
+      heading: 'Befolkningsvekst',
+      about:
+        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+      sources: [source.ssb],
+      production: true,
+      tabs: [
+        {
+          active: true,
+          label: 'Status',
+          heading: 'Befolkningsvekst',
+          production: true,
+          url: `${API}/nokkeltall-om-befolkningen`,
+          template: 'g',
         },
       ],
     },
