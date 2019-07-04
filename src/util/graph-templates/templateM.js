@@ -12,31 +12,54 @@ function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'm';
 
-  this.padding = { top: 130, left: 60, right: 20, bottom: 50 };
+  this.padding = { top: 110, left: 60, right: 20, bottom: 50 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
   this.mobileWidth = 520;
 
   this.height1 = 260;
   this.height2 = 160;
-  this.gapY = 50;
+  this.gapY = 65;
 
   this.upper = null;
   this.lower = null;
   this.radio = null;
   this.x = d3.scaleBand().paddingOuter(0.15);
-  this.y1 = d3.scaleLinear().range([this.height1, 0]);
-  this.y2 = d3.scaleLinear().range([this.height2, 0]);
+  this.y1 = d3.scaleLinear().rangeRound([this.height1, 0]);
+  this.y2 = d3.scaleLinear().rangeRound([this.height2, 0]);
 
   const tabData = [
     { label: 'Totalt', value: 'totalt' },
-    { label: 'Innvandrer', value: 'Innvandrer' },
-    { label: 'Norskfødt', value: 'Norskfødt' },
-    { label: 'Øvrige', value: 'Øvrige' },
+    { label: 'Mellom delbydeler', value: 'mellomDelbydeler' },
+    { label: 'Innenfor delbydelen', value: 'innenforDelbydelen' },
+    { label: 'Til/fra Oslo', value: 'tilFraOslo' },
   ];
 
   this.render = function(data, options = {}) {
     if (!this.commonRender(data, options)) return;
-    this.filteredData = this.data.data.filter(d => d.avgRow)[0].values[0];
+    this.filteredData = JSON.parse(JSON.stringify(this.data.data.find(d => d.avgRow || d.totalRow).values));
+
+    const keys = ['emigration', 'immigration'];
+
+    keys.map(key => {
+      this.filteredData[key].forEach(row => {
+        const str = row.alder;
+        let arr = [];
+
+        if (str === 'Under 10 år') {
+          arr = [0, 9];
+        } else if (str === '90 år og eldre') {
+          arr = [90, 119];
+        } else {
+          arr = str
+            .split(' år')[0]
+            .split(' - ')
+            .map(d => +d);
+        }
+        row.totalt = row['mellomDelbydeler'] + row['innenforDelbydelen'] + row['tilFraOslo'];
+        row.alder = arr;
+      });
+      this.filteredData[key].sort((a, b) => a.alder[0] - b.alder[0]);
+    });
 
     this.height = this.height1 + this.gapY + this.height2;
     this.width = d3.max([this.width, 360]);
@@ -113,7 +136,10 @@ function Template(svg) {
   };
 
   this.drawHeadings = function() {
-    this.lower.select('.heading').text('Netto flytting');
+    this.lower
+      .select('.heading')
+      .text('Netto flytting')
+      .attr('y', -12);
 
     const g = this.upper
       .select('.heading')
@@ -129,7 +155,7 @@ function Template(svg) {
         return g;
       });
 
-    g.attr('transform', (d, i) => `translate(${i * 125}, 0)`);
+    g.attr('transform', (d, i) => `translate(${this.width - 250 + i * 125}, 10)`);
     g.select('text')
       .text(d => d)
       .attr('x', 30);
@@ -384,17 +410,18 @@ function Template(svg) {
           this.filteredData.emigration[i]['totalt'],
           this.filteredData.immigration[i]['totalt'] - this.filteredData.emigration[i]['totalt'],
 
-          this.filteredData.immigration[i]['Innvandrer'],
-          this.filteredData.emigration[i]['Innvandrer'],
-          this.filteredData.immigration[i]['Innvandrer'] - this.filteredData.emigration[i]['Innvandrer'],
+          this.filteredData.immigration[i]['tilFraOslo'],
+          this.filteredData.emigration[i]['tilFraOslo'],
+          this.filteredData.immigration[i]['tilFraOslo'] - this.filteredData.emigration[i]['tilFraOslo'],
 
-          this.filteredData.immigration[i]['Norskfødt'],
-          this.filteredData.emigration[i]['Norskfødt'],
-          this.filteredData.immigration[i]['Norskfødt'] - this.filteredData.emigration[i]['Norskfødt'],
+          this.filteredData.immigration[i]['mellomDelbydeler'],
+          this.filteredData.emigration[i]['mellomDelbydeler'],
+          this.filteredData.immigration[i]['mellomDelbydeler'] - this.filteredData.emigration[i]['mellomDelbydeler'],
 
-          this.filteredData.immigration[i]['Øvrige'],
-          this.filteredData.emigration[i]['Øvrige'],
-          this.filteredData.immigration[i]['Øvrige'] - this.filteredData.emigration[i]['Øvrige'],
+          this.filteredData.immigration[i]['innenforDelbydelen'],
+          this.filteredData.emigration[i]['innenforDelbydelen'],
+          this.filteredData.immigration[i]['innenforDelbydelen'] -
+            this.filteredData.emigration[i]['innenforDelbydelen'],
         ],
       };
     });
@@ -423,7 +450,7 @@ function Template(svg) {
       })
     );
 
-    this.x.domain(ages).range([0, this.width]);
+    this.x.domain(ages).rangeRound([0, this.width]);
     this.y1.domain(extent1).nice();
     this.y2.domain(extent2).nice();
     this.upper

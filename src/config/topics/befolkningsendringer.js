@@ -1,22 +1,24 @@
-import { baseUrl } from '../../util/config';
+import { baseUrl, apiUrl } from '../../util/config';
+
+const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Befolkningsendringer',
   value: 'befolkningsendringer',
-  production: null,
+  production: true,
   cards: [
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: null,
+      production: true,
       tabs: [
         {
           label: 'Status',
           method: 'value',
           heading: 'Flytting etter alder og innvandringskategori',
           template: 'm',
-          url: `${baseUrl}/mockDataFlytting.json`,
-          production: null,
+          url: `${API}/flyttehyppighet-totalt-status`,
+          production: true,
         },
       ],
     },
