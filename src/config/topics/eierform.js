@@ -17,7 +17,7 @@ export default {
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/eieform-status`,
-        heading: 'Andels-/aksjeeiere',
+        heading: 'Leier',
         method: 'ratio',
         scale: [0.1, 0.85],
       },
