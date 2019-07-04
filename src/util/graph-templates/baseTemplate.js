@@ -160,9 +160,12 @@ function Base_Template(svg) {
       case 'd':
       case 'e':
       case 'f':
-        year = this.data.data[0].aargang ? `(${this.data.data[0].aargang})` : '';
+        year = this.data.data[0].values[0].date ? `(${this.data.data[0].values[0].date})` : '';
         break;
 
+      case 'g':
+        year = `(${this.data.data[0].values[4]})`;
+        break;
       default:
         break;
     }
