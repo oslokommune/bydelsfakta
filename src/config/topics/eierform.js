@@ -17,7 +17,7 @@ export default {
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/eieform-status`,
-        heading: 'Leier',
+        heading: 'Leietakere',
         method: 'ratio',
         scale: [0.08, 0.6],
       },
