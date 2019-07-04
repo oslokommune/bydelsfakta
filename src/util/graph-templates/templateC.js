@@ -123,7 +123,8 @@ function Template(svg) {
         values: this.data.meta.series.flatMap((serie, serieIndex) =>
           dates.map(date => {
             if (!row.values[serieIndex]) return 'N/A';
-            return row.values[serieIndex].find(obj => obj.date === date)[this.method] || 'N/A';
+            const cell = row.values[serieIndex].find(obj => obj.date === date);
+            return cell && cell[this.method] ? cell[this.method] : 'N/A';
           })
         ),
       };
