@@ -24,6 +24,12 @@ function Template(svg) {
     .range(['#C57066', '#834B44', '#838296', '#4F4E6A']);
 
   this.render = function(data, options = {}) {
+    if (options.method === 'value') {
+      data.data = data.data.filter(row => {
+        return !row.avgRow && !row.totalRow ? row : false;
+      });
+    }
+
     if (!this.commonRender(data, options)) return;
 
     // Convert first two values into negative numbers
@@ -85,17 +91,17 @@ function Template(svg) {
       .append('text')
       .attr('class', 'label-min')
       .attr('font-size', 13)
-      .attr('y', -40)
+      .attr('y', -34)
       .attr('text-anchor', 'end')
-      .text('Trangbodde husstander');
+      .text('Under 1 rom per person');
 
     this.canvas
       .append('text')
       .attr('class', 'label-max')
       .attr('font-size', 13)
-      .attr('y', -40)
+      .attr('y', -34)
       .attr('text-anchor', 'start')
-      .text('Ikke-trangbodde husstander');
+      .text('1 rom eller mer per person');
 
     // Containers for rows and bars need to be in this order
     // to allow pointer events on bars
@@ -252,7 +258,8 @@ function Template(svg) {
     // Show and hide tooltips
     bar
       .on('mouseenter', d => {
-        showTooltipOver(Math.round((d[1] - d[0]) * 100) + '%');
+        const value = this.method === 'ratio' ? Math.round((d[1] - d[0]) * 100) + '%' : d[1] - d[0];
+        showTooltipOver(value);
       })
       .on('mousemove', showTooltipMove)
       .on('mouseleave', hideTooltip);

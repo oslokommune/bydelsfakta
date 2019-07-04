@@ -1,7 +1,7 @@
 import { baseUrl } from '../../util/config';
 
 export default {
-  text: 'Befolkningsendringer',
+  text: 'Fødte, døde og flytting',
   value: 'befolkningsendringer',
   production: null,
   cards: [
@@ -23,8 +23,8 @@ export default {
   ],
   options: {
     kategori: 'Befolkning',
-    tema: 'Befolknings&shy;endringer',
-    bgImage: `${baseUrl}/img/folkemengde`,
+    tema: 'Fødte, døde og flytting',
+    bgImage: `${baseUrl}/img/flytting`,
     txtColor: 'rgb(245, 173, 165)',
   },
   related: ['alder', 'befolkningsutvikling', 'innvandrerbefolkningen'],

@@ -231,14 +231,14 @@ function Base_Template(svg) {
     group
       .append('text')
       .attr('class', 'source-label')
-      .attr('font-size', 10)
+      .attr('font-size', 12)
       .attr('y', '100%')
       .text('Kilde: ');
 
     group
       .append('text')
       .attr('class', 'source')
-      .attr('font-size', 10)
+      .attr('font-size', 12)
       .attr('y', '100%')
       .attr('transform', () => {
         const labelWidth = group

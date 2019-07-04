@@ -455,7 +455,9 @@ function Template(svg) {
 
         this.render(this.data, { selected: target, method: this.method });
       })
-      .attr('tabindex', this.filteredData.meta.series.length > 1 ? 0 : false);
+      .attr('tabindex', this.filteredData.meta.series.length > 1 ? 0 : false)
+      .append('title')
+      .html(d => d.heading + ' ' + d.subheading);
 
     columns
       .select('text.colHeading')
@@ -463,16 +465,12 @@ function Template(svg) {
       .text((d, i) => {
         const colWidth = this.x[i].range()[1] - this.x[i].range()[0];
         return util.truncate(d.heading, colWidth);
-      })
-      .append('title')
-      .html(d => d.heading);
+      });
 
     columns
       .select('text.colSubheading')
       .text((d, i) => util.truncate(d.subheading, this.x[i].range()))
-      .style('display', () => (this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none'))
-      .append('title')
-      .html(d => d.subheading);
+      .style('display', () => (this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none'));
 
     columns
       .select('text.colHeading')
