@@ -18,11 +18,20 @@ export default {
       tabs: [
         {
           active: false,
-          label: 'Status',
+          label: 'Andel',
           template: 'j',
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-status`,
           method: 'ratio',
+          production: true,
+        },
+        {
+          active: false,
+          label: 'Antall',
+          template: 'j',
+          heading: 'Husholdninger fordelt etter antall rom per person',
+          url: `${API}/trangboddhet-alle-status`,
+          method: 'value',
           production: true,
         },
 
