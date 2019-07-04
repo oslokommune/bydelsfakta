@@ -19,11 +19,11 @@ exports[`Bydel renders component correctly 1`] = `
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
-        bgimage="/img/folkemengde"
+        bgimage="/img/flytting"
         category="Befolkning"
         district="bydel"
         id="befolkningsendringer"
-        topic="Befolknings&shy;endringer"
+        topic="Fødte, døde og flytting"
         txtcolor="rgb(245, 173, 165)"
       />
       <v-category-stub
