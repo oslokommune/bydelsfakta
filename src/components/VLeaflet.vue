@@ -94,7 +94,7 @@ export default {
 
     async getData(url) {
       if (!url) return;
-      this.data = await fetch(url).then(d => d.json().then(d => d.data));
+      this.data = await fetch(url).then(d => d.json().then(d => d[0].data));
       this.createChoropleth(this.data);
 
       this.year =
