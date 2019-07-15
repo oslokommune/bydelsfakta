@@ -56,6 +56,7 @@
     "env-cmd": "^9.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
+    "lodash": "^4.17.14",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "sinon": "^7.3.2",
