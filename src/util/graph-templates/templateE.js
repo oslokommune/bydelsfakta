@@ -136,29 +136,23 @@ function Template(svg) {
     }
 
     const table_head = [];
-    table_head[0] = [
-      'Geografi',
-      ...ageRanges.map(d => {
-        let str = '';
-        str += d.label;
-        return str;
-      }),
-    ];
-    table_head[1] = ageRanges.map(() => ['mann', 'kvinne']).reduce((acc, val) => acc.concat(val), []);
+    const cols = ['mann', 'kvinne', 'value'];
+    table_head[0] = ['Geografi', 'Menn', 'Kvinner', 'Totalt'];
+    table_head[1] = cols.flatMap(() => ageRanges.map(age => age.label));
 
     const tableData = JSON.parse(JSON.stringify(this.data.data));
     const table_body = tableData.map(d => {
       return {
         key: d.geography,
-        values: ageRanges.flatMap(age => {
-          const range = age.range;
-          let menn = 0;
-          let kvinner = 0;
-          for (let i = range[0]; i < range[1]; i++) {
-            menn += d.values[i]['mann'];
-            kvinner += d.values[i]['kvinne'];
-          }
-          return [menn, kvinner];
+        values: cols.flatMap(col => {
+          return ageRanges.map(age => {
+            const range = age.range;
+            let agg = 0;
+            for (let i = range[0]; i < range[1]; i++) {
+              agg += d.values[i][col];
+            }
+            return agg;
+          });
         }),
       };
     });

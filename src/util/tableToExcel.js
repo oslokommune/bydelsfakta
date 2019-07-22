@@ -7,7 +7,8 @@ export default table => {
 
   // Replace commas (Norwegian decimal delimiter) with periods in data cells
   td.forEach(d => {
-    d.innerHTML = d.innerHTML.replace(',', '.');
+    d.setAttribute('data-pretty', d.innerHTML);
+    d.innerHTML = d.innerHTML.replace(',', '.').replace(' ', '');
   });
 
   const wb = XLSX.utils.table_to_book(table);
@@ -16,6 +17,6 @@ export default table => {
 
   // Replace periods back to commas
   td.forEach(d => {
-    d.innerHTML = d.innerHTML.replace('.', ',');
+    d.innerHTML = d.getAttribute('data-pretty');
   });
 };

@@ -11,12 +11,14 @@ export default {
     {
       size: 'large',
       heading: 'Levekår',
+      about: 'Se detaljert forklaring av levekårsindikatorene i de respektive boksene under.',
       sources: [source.ssb],
       production: true,
       tabs: [
         {
           production: true,
           active: true,
+          help: 'Verdier under 100% betyr en lavere forekomst enn i Oslo, mens over 100% betyr en større forekomst.',
           label: 'Sammenlignet med Oslo',
           template: 'k',
           heading: 'Ulike levekårsindikatorer (%) sammenlignet med Oslo',
@@ -28,6 +30,7 @@ export default {
           production: true,
           active: true,
           label: 'Sammenlignet med bydelen',
+          help: 'Verdier under 100% betyr en lavere forekomst enn i bydelen, mens over 100% betyr en større forekomst.',
           template: 'k',
           heading: 'Ulike levekårsindikatorer (%) sammenlignet med bydelen',
           method: 'ratio',

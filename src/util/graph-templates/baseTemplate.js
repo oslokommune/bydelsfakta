@@ -160,9 +160,12 @@ function Base_Template(svg) {
       case 'd':
       case 'e':
       case 'f':
-        year = this.data.data[0].aargang ? `(${this.data.data[0].aargang})` : '';
+        year = this.data.data[0].values[0].date ? `(${this.data.data[0].values[0].date})` : '';
         break;
 
+      case 'g':
+        year = `(${this.data.data[0].values[4]})`;
+        break;
       default:
         break;
     }
@@ -231,14 +234,14 @@ function Base_Template(svg) {
     group
       .append('text')
       .attr('class', 'source-label')
-      .attr('font-size', 10)
+      .attr('font-size', 12)
       .attr('y', '100%')
       .text('Kilde: ');
 
     group
       .append('text')
       .attr('class', 'source')
-      .attr('font-size', 10)
+      .attr('font-size', 12)
       .attr('y', '100%')
       .attr('transform', () => {
         const labelWidth = group
