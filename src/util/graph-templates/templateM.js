@@ -12,7 +12,7 @@ function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'm';
 
-  this.padding = { top: 110, left: 60, right: 20, bottom: 50 };
+  this.padding = { top: 110, left: 60, right: 20, bottom: 30 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
   this.mobileWidth = 520;
 
@@ -460,7 +460,7 @@ function Template(svg) {
     this.upper
       .select('g.axisY')
       .transition()
-      .call(d3.axisLeft(this.y1));
+      .call(d3.axisLeft(this.y1).tickFormat(d => this.format(d, 'value', true)));
     this.lower
       .select('g.axisX')
       .transition()
