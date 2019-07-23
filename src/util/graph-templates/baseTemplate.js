@@ -21,12 +21,12 @@
  *
  */
 
+import { textwrap } from 'd3-textwrap';
 import d3 from '@/assets/d3';
 import debounce from '../debounce';
 import { color } from './colors';
 import * as locale from './locale';
 import allDistricts from '../../config/allDistricts';
-import { textwrap } from 'd3-textwrap';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
 

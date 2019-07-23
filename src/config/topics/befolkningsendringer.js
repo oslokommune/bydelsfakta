@@ -1,16 +1,18 @@
 import { baseUrl, apiUrl } from '../../util/config';
+import source from './dataSources';
 
 const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Fødte, døde og flytting',
   value: 'befolkningsendringer',
-  production: true,
+  production: false,
   cards: [
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: true,
+      production: false,
+      sources: [source.ssb],
       tabs: [
         {
           label: 'Status',
@@ -18,7 +20,24 @@ export default {
           heading: 'Flytting etter alder og innvandringskategori',
           template: 'm',
           url: `${API}/flyttehyppighet-totalt-status`,
-          production: true,
+          production: false,
+        },
+      ],
+    },
+
+    {
+      size: 'large',
+      heading: 'Netto befolkningsvekst',
+      production: false,
+      sources: [source.ssb],
+      tabs: [
+        {
+          label: 'Historisk',
+          method: 'value',
+          heading: 'Befolkningsvekst etter flytting og fødselsoverskudd',
+          template: 'n',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: false,
         },
       ],
     },

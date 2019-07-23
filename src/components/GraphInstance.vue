@@ -71,6 +71,7 @@ import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
 import TemplateK from '../util/graph-templates/templateK';
 import TemplateM from '../util/graph-templates/templateM';
+import TemplateN from '../util/graph-templates/templateN';
 import districtNames from '../config/districtNames';
 import OkIcon from './OkIcon';
 
@@ -268,6 +269,9 @@ export default {
             break;
           case 'm':
             this.svg = new TemplateM(this.$refs['svg']);
+            break;
+          case 'n':
+            this.svg = new TemplateN(this.$refs['svg']);
             break;
           default:
             break;
