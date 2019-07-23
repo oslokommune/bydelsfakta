@@ -157,3 +157,17 @@ select {
     z-index: 2;
   }
 }
+
+svg {
+  rect {
+    shape-rendering: crispEdges;
+  }
+
+  .tick > * {
+    shape-rendering: crispEdges;
+  }
+
+  .domain {
+    shape-rendering: crispEdges;
+  }
+}

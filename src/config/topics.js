@@ -22,7 +22,7 @@ export const topicNames = [
   'trangboddhet',
 ];
 
-export const disabledTopics = ['befolkningsendringer'];
+export const disabledTopics = [];
 
 export const categories = [
   {
