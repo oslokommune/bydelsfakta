@@ -19,7 +19,7 @@ const logErrors = (error, refresh) => {
   } else {
     console.log('Status: ', error.status);
     console.log('StatusText: ', error.statusText);
-    console.log('Error refreshing access token: ', error.data);
+    console.log('Error getting access token: ', error.data);
   }
 };
 
