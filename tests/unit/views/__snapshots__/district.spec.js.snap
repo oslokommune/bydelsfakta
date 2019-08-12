@@ -87,7 +87,7 @@ exports[`Bydel renders component correctly 1`] = `
         category="Boforhold"
         district="bydel"
         id="trangboddhet"
-        topic="Trangboddhet"
+        topic="Rom per person"
         txtcolor="rgb(199, 247, 201)"
       />
     </div>

@@ -4,7 +4,7 @@ import source from './dataSources';
 const API = `${apiUrl}/api/dataset`;
 
 export default {
-  text: 'Trangboddhet',
+  text: 'Rom per person',
   value: 'trangboddhet',
   production: true,
   cards: [
@@ -277,7 +277,7 @@ export default {
   ],
   options: {
     kategori: 'Boforhold',
-    tema: 'Trangboddhet',
+    tema: 'Rom per person',
     bgImage: `${baseUrl}/img/trangboddhet`,
     txtColor: 'rgb(199, 247, 201)',
   },
