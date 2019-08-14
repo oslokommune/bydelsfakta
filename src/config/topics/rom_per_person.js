@@ -5,7 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Rom per person',
-  value: 'trangboddhet',
+  value: 'rom_per_person',
   production: true,
   cards: [
     {

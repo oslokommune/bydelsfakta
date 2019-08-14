@@ -485,5 +485,5 @@ export default {
     bgImage: `${baseUrl}/img/levekaar`,
     txtColor: 'rgb(244, 206, 138)',
   },
-  related: ['husholdninger', 'innvandrerbefolkningen', 'trangboddhet'],
+  related: ['husholdninger', 'innvandrerbefolkningen', 'rom_per_person'],
 };

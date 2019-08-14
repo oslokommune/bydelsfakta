@@ -52,5 +52,5 @@ export default {
     bgImage: `${baseUrl}/img/boligpriser`,
     txtColor: 'rgb(199, 247, 201)',
   },
-  related: ['trangboddhet', 'eierform', 'befolkningsendringer'],
+  related: ['rom_per_person', 'eierform', 'befolkningsendringer'],
 };

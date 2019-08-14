@@ -7,7 +7,7 @@ import befolkningsutvikling from './topics/befolkningsutvikling';
 import husholdninger from './topics/husholdninger';
 import innvandrerbefolkningen from './topics/innvandrerbefolkningen';
 import levekaar from './topics/levekaar';
-import trangboddhet from './topics/trangboddhet';
+import rom_per_person from './topics/rom_per_person';
 
 export const topicNames = [
   'befolkningsutvikling',
@@ -19,7 +19,7 @@ export const topicNames = [
   'eierform',
   'bygningstyper',
   'boligpriser',
-  'trangboddhet',
+  'rom_per_person',
 ];
 
 export const disabledTopics = [];
@@ -33,7 +33,7 @@ export const categories = [
   {
     kategori: 'Boforhold',
     color: 'rgb(27, 173, 120)',
-    links: ['trangboddhet', 'eierform', 'bygningstyper', 'boligpriser'],
+    links: ['rom_per_person', 'eierform', 'bygningstyper', 'boligpriser'],
   },
   {
     kategori: 'Levekår',
@@ -52,5 +52,5 @@ export const topics = {
   husholdninger,
   innvandrerbefolkningen,
   levekaar,
-  trangboddhet,
+  rom_per_person,
 };
