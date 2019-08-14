@@ -148,7 +148,7 @@ function Template(svg) {
           return ageRanges.map(age => {
             const range = age.range;
             let agg = 0;
-            for (let i = range[0]; i < range[1]; i++) {
+            for (let i = range[0]; i <= range[1]; i++) {
               agg += d.values[i][col];
             }
             return agg;
