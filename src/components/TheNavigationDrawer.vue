@@ -6,11 +6,11 @@
 
     <button
       class="selectedTopic"
+      :class="{ active: showNavigation }"
       @click="showNavigation = !showNavigation"
       @keydown.esc="showNavigation = false"
       v-text="selectedTopic"
     ></button>
-    <div class="version-tag">Beta</div>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
       <ul class="state-toggle">
         <li class="state-toggle__element">
@@ -270,30 +270,6 @@ export default {
 
 $rowHeight: 2.5em;
 
-.version-tag {
-  align-self: center;
-  border: 1px solid $color-purple;
-  border-radius: 1px;
-  font-size: $font-small;
-  font-weight: 500;
-  margin: 0 0.5rem;
-  padding: 0.25rem 0.5rem;
-
-  @media screen and (min-width: $break-lg) {
-    background: white;
-    padding: 0.25rem 0.75rem;
-    transform: translateY(-1rem);
-  }
-
-  @media screen and (min-width: 1200px) {
-    position: fixed;
-    right: 1.5rem;
-    top: 1.5rem;
-    transform: scale(1.45);
-    transform-origin: 100% 0;
-  }
-}
-
 .navbar {
   background-color: $color-yellow;
   display: flex;
@@ -405,6 +381,55 @@ $rowHeight: 2.5em;
   height: auto;
   padding-left: 1rem;
   text-align: left;
+
+  &::before {
+    opacity: 0;
+  }
+
+  &::before,
+  &::after {
+    background: $color-purple;
+    bottom: 1.75rem;
+    box-shadow: 0 0.6rem 0 $color-purple, 0 -0.6rem 0 $color-purple;
+    content: '';
+    display: none;
+    height: 0.2rem;
+    position: absolute;
+    right: 1.5rem;
+    top: calc(50% - 0.1rem);
+    transform: rotate(0);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s 0.4s ease-in-out, opacity 0.2s ease-in-out;
+    width: 1.5rem;
+
+    @media screen and (min-width: $break-xs) {
+      display: block;
+      width: 2rem;
+    }
+
+    @media screen and (min-width: $break-xs) {
+      display: block;
+      right: 2rem;
+    }
+
+    @media screen and (min-width: $break-lg) {
+      display: none;
+    }
+  }
+
+  &.active {
+    &::after {
+      box-shadow: none;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &::before {
+      box-shadow: none;
+      opacity: 1;
+      transform: rotate(-45deg);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
 
   @media screen and (min-width: $break-lg) {
     display: none;
