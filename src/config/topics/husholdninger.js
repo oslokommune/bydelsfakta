@@ -177,5 +177,5 @@ export default {
     bgImage: `${baseUrl}/img/husholdninger`,
     txtColor: 'rgb(245, 173, 165)',
   },
-  related: ['rom_per_person', 'eierform', 'bygningstyper'],
+  related: ['rom-per-person', 'eierform', 'bygningstyper'],
 };

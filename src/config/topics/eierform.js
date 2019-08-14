@@ -62,5 +62,5 @@ export default {
     bgImage: `${baseUrl}/img/eieform`,
     txtColor: 'rgb(199, 247, 201)',
   },
-  related: ['boligpriser', 'rom_per_person', 'bygningstyper'],
+  related: ['boligpriser', 'rom-per-person', 'bygningstyper'],
 };

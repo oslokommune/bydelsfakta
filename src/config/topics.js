@@ -19,7 +19,7 @@ export const topicNames = [
   'eierform',
   'bygningstyper',
   'boligpriser',
-  'rom_per_person',
+  'rom-per-person',
 ];
 
 export const disabledTopics = [];
@@ -33,7 +33,7 @@ export const categories = [
   {
     kategori: 'Boforhold',
     color: 'rgb(27, 173, 120)',
-    links: ['rom_per_person', 'eierform', 'bygningstyper', 'boligpriser'],
+    links: ['rom-per-person', 'eierform', 'bygningstyper', 'boligpriser'],
   },
   {
     kategori: 'Levekår',
@@ -52,5 +52,5 @@ export const topics = {
   husholdninger,
   innvandrerbefolkningen,
   levekaar,
-  rom_per_person,
+  'rom-per-person': rom_per_person,
 };
