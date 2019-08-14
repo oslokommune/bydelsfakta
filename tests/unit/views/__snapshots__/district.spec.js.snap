@@ -86,7 +86,7 @@ exports[`Bydel renders component correctly 1`] = `
         bgimage="/img/trangboddhet"
         category="Boforhold"
         district="bydel"
-        id="rom_per_person"
+        id="rom-per-person"
         topic="Rom per person"
         txtcolor="rgb(199, 247, 201)"
       />
