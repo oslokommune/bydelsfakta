@@ -21,12 +21,6 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     Bydel Gamle Oslo
   </button>
    
-  <div
-    class="version-tag"
-  >
-    Beta
-  </div>
-   
   <nav
     class="navigation"
     role="navigation"
@@ -322,12 +316,6 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   >
     - Velg byområde -
   </button>
-   
-  <div
-    class="version-tag"
-  >
-    Beta
-  </div>
    
   <nav
     class="navigation"
