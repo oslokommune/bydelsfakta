@@ -132,6 +132,15 @@ function Base_Template(svg) {
         .join('h3')
         .attr('class', 'table-heading')
         .html(d => d);
+
+      const wrap = textwrap()
+        .bounds({ width: this.parentWidth(), height: 60 })
+        .method('tspans');
+
+      this.heading
+        .html('')
+        .text(text)
+        .call(wrap);
     }
   };
 
@@ -292,16 +301,6 @@ function Base_Template(svg) {
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
-
-    const wrap = textwrap()
-      .bounds({ width: this.parentWidth(), height: 60 })
-      .method('tspans');
-
-    const headingText = this.getHeading();
-    this.heading
-      .html('')
-      .text(headingText)
-      .call(wrap);
 
     if (this.sources && this.sources.length) {
       let str = this.sources.map(source => source.name).join(', ');
