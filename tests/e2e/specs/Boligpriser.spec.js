@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-import templateA from './template.a.spec';
+import templateA from './util/template.a.spec';
 
 const base = 'localhost:5000';
 
@@ -25,13 +25,4 @@ templateA(
   'boligpriser-blokkleiligheter-status?geography=05',
   'Bydel Frogner',
   'Boligpriser'
-);
-
-templateA(
-  'Husholdning etter eie-/leieforhold  i Bydel Frogner (2018)',
-  '/bydel/frogner/eierform',
-  'eieform-status?geography=05',
-  'Bydel Frogner',
-  'Eierform',
-  'ratio'
 );
