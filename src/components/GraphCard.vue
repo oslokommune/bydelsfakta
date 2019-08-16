@@ -151,7 +151,7 @@
 
               <button
                 role="menuitem"
-                :disabled="mode !== 'graph'"
+                v-if="mode === 'graph'"
                 @click="savePng(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
                 class="context-menu__dropdown-item"
@@ -165,7 +165,7 @@
               </button>
               <button
                 role="menuitem"
-                :disabled="mode !== 'graph' || ie11"
+                v-if="mode === 'graph' || ie11"
                 :title="ie11 ? $t('ie11.disabled') : $t('graphCard.saveSVG.aria')"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
@@ -180,7 +180,7 @@
 
               <button
                 role="menuitem"
-                :disabled="mode === 'map'"
+                v-if="mode !== 'map'"
                 class="context-menu__dropdown-item"
                 :title="$t('graphCard.saveCSV.aria')"
                 :aria-label="$t('graphCard.saveCSV.aria')"
@@ -195,7 +195,7 @@
 
               <button
                 role="menuitem"
-                :disabled="mode === 'map'"
+                v-if="mode !== 'map' && productionMode === false"
                 class="context-menu__dropdown-item"
                 :title="$t('graphCard.saveExcel.aria')"
                 :aria-label="$t('graphCard.saveExcel.aria')"
@@ -203,7 +203,6 @@
                 @click="saveExcel()"
                 @keyup.enter="saveExcel()"
                 id="context-menu-button-excel"
-                v-if="productionMode === false"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveExcel.label') }}</span>
@@ -230,7 +229,7 @@
       </div>
       <div class="about-container" v-if="mode === 'about'">
         <h3>{{ $t('graphCard.about.label') }}</h3>
-
+        <button class="close" @click="mode = 'graph'"></button>
         <p v-if="date">{{ $t('graphCard.about.updated') }}: {{ date }}</p>
         <p v-if="settings.about" v-html="settings.about"></p>
         <p v-if="settings.sources">
@@ -383,6 +382,34 @@ export default {
 
 .about-container {
   padding: 1rem;
+  position: relative;
+}
+
+.close {
+  cursor: pointer;
+  display: block;
+  height: 3rem;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+
+  &::after,
+  &::before {
+    background: $color-purple;
+    content: "";
+    height: 0.2rem;
+    left: 0.5rem;
+    position: absolute;
+    top: calc(50% - 0.1rem);
+    transform: rotate(45deg);
+    width: 2rem;
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
 }
 
 .card-container {
