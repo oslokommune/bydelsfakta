@@ -21,7 +21,7 @@ export default {
   name: 'App',
   metaInfo() {
     return {
-      title: 'Bydelsfakta',
+      title: 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold',
     };
   },
 
