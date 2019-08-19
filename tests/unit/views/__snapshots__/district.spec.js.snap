@@ -22,7 +22,7 @@ exports[`Bydel renders component correctly 1`] = `
         bgimage="/img/flytting"
         category="Befolkning"
         district="bydel"
-        id="befolkningsendringer"
+        id="fodte-dode-flytting"
         topic="Fødte, døde og flytting"
         txtcolor="rgb(245, 173, 165)"
       />
