@@ -27,7 +27,7 @@ export default {
 
     {
       size: 'large',
-      heading: 'Netto befolkningsvekst',
+      heading: 'Befolkningsvekst',
       production: false,
       sources: [source.ssb],
       tabs: [

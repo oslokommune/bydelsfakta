@@ -63,11 +63,11 @@ function Template(svg) {
     this.graph1
       .append('text')
       .attr('class', 'group-heading')
-      .text('Netto befolkningsvekst');
+      .text('Befolkningsvekst');
     this.graph2
       .append('text')
       .attr('class', 'group-heading')
-      .text('Nettoflytting');
+      .text('Netto innflytting');
     this.graph3
       .append('text')
       .attr('class', 'group-heading')
@@ -381,7 +381,7 @@ function Template(svg) {
     // Prepare data for table head
     const table_head = [
       ['Geografi', ...this.filteredData.map(d => d.date)],
-      this.filteredData.flatMap(() => ['Netto befolkningsvekst', 'Netto flytting', 'Fødselsoverskudd']),
+      this.filteredData.flatMap(() => ['Befolkningsvekst', 'Netto flytting', 'Fødselsoverskudd']),
     ];
 
     // Find all years in dataset

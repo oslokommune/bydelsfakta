@@ -138,7 +138,7 @@ function Template(svg) {
   this.drawHeadings = function() {
     this.lower
       .select('.heading')
-      .text('Netto flytting')
+      .text('Netto innflytting')
       .attr('y', -12);
 
     const g = this.upper
