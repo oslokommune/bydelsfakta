@@ -280,5 +280,5 @@ export default {
     bgImage: `${baseUrl}/img/innvandring`,
     txtColor: 'rgb(245, 173, 165)',
   },
-  related: ['befolkningsutvikling', 'befolkningsendringer', 'boligpriser'],
+  related: ['befolkningsutvikling', 'fodte-dode-flytting', 'boligpriser'],
 };

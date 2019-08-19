@@ -72,7 +72,7 @@ export default {
       ],
     },
   ],
-  related: ['alder', 'innvandrerbefolkningen', 'befolkningsendringer'],
+  related: ['alder', 'innvandrerbefolkningen', 'fodte-dode-flytting'],
   options: {
     kategori: 'Befolkning',
     tema: 'Befolkningsutvikling',
