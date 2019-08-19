@@ -398,7 +398,7 @@ export default {
   &::after,
   &::before {
     background: $color-purple;
-    content: "";
+    content: '';
     height: 0.2rem;
     left: 0.5rem;
     position: absolute;
