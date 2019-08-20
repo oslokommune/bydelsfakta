@@ -5,7 +5,7 @@ const API = `${apiUrl}/api/dataset`;
 
 export default {
   text: 'Fødte, døde og flytting',
-  value: 'befolkningsendringer',
+  value: 'fodte-dode-flytting',
   production: false,
   cards: [
     {
@@ -27,7 +27,7 @@ export default {
 
     {
       size: 'large',
-      heading: 'Netto befolkningsvekst',
+      heading: 'Befolkningsvekst',
       production: false,
       sources: [source.ssb],
       tabs: [

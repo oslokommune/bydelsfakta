@@ -1,5 +1,5 @@
 import alder from './topics/alder';
-import befolkningsendringer from './topics/befolkningsendringer';
+import fodte_dode_flytting from './topics/fodte-dode-flytting';
 import boligpriser from './topics/boligpriser';
 import bygningstyper from './topics/bygningstyper';
 import eierform from './topics/eierform';
@@ -11,7 +11,7 @@ import rom_per_person from './topics/rom_per_person';
 
 export const topicNames = [
   'befolkningsutvikling',
-  'befolkningsendringer',
+  'fodte-dode-flytting',
   'alder',
   'innvandrerbefolkningen',
   'husholdninger',
@@ -28,7 +28,7 @@ export const categories = [
   {
     kategori: 'Befolkning',
     color: 'rgb(182, 63, 50)',
-    links: ['befolkningsutvikling', 'befolkningsendringer', 'alder', 'innvandrerbefolkningen', 'husholdninger'],
+    links: ['befolkningsutvikling', 'fodte-dode-flytting', 'alder', 'innvandrerbefolkningen', 'husholdninger'],
   },
   {
     kategori: 'Boforhold',
@@ -44,7 +44,7 @@ export const categories = [
 
 export const topics = {
   alder,
-  befolkningsendringer,
+  'fodte-dode-flytting': fodte_dode_flytting,
   boligpriser,
   bygningstyper,
   eierform,

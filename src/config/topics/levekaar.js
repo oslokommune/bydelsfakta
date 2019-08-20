@@ -44,7 +44,7 @@ export default {
       heading: 'Lav utdanning',
       sources: [source.ssb],
       about:
-        'Statistikken omfatter personer 30–59 år, per 1.1, med utdanningsnivå per 1.10 året før. Lav utdanning omfatter personer med kun grunnskole, ingen eller uopgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; utdanningsnivå fra og med 2015  er ikke direkte sammenlignbart tidligere år.',
+        'Statistikken omfatter personer 30–59 år, per 1.1, med utdanningsnivå per 1.10 året før. Lav utdanning omfatter personer med kun grunnskole, ingen eller uoppgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; utdanningsnivå fra og med 2015  er ikke direkte sammenlignbart tidligere år.',
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/levekar-lav-utdanning-status`,
@@ -396,7 +396,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/levekar-trangbodde-status`,
-          production: true,
+          production: null,
         },
         {
           active: false,

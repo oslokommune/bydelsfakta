@@ -7,7 +7,7 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
   <h1
     class="header"
   >
-    Bydelsfakta
+    Bydelsfakta – statistikk om befolkning, levekår og boforhold
   </h1>
    
   <div
