@@ -396,7 +396,7 @@ export default {
           template: 'a',
           method: 'value',
           url: `${API}/levekar-trangbodde-status`,
-          production: null,
+          production: true,
         },
         {
           active: false,
