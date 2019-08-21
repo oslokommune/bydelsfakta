@@ -23,7 +23,13 @@ function Template(svg) {
 
   this.render = function(data, options = {}) {
     data.data = data.data.filter(d => !d.totalRow);
+
+    options.highlight = options.highlight || 0;
     if (!this.commonRender(data, options)) return;
+
+    this.data.data.sort((a, b) => {
+      return b.values[this.highlight][this.mode] - a.values[this.highlight][this.mode];
+    });
 
     this.width = d3.max([this.width, 360]);
     this.svg
@@ -235,7 +241,7 @@ function updateRows(self, g) {
     .attr('fill', d => fill(d[self.mode]));
 
   bars
-    .on('mouseover', d => showTooltipOver(self.format(d[self.mode], 'ratio')))
+    .on('mouseover', d => showTooltipOver(d3.format('.0%')(d[self.mode])))
     .on('mousemove', showTooltipMove)
     .on('mouseleave', hideTooltip);
 }
@@ -253,6 +259,13 @@ function enterColumns(self, g) {
     .append('g')
     .classed('axis', true)
     .attr('transform', `translate(0, -10)`);
+
+  group
+    .append('rect')
+    .attr('class', 'clicky')
+    .append('title')
+    .text(d => `Sorter etter ${d.heading}`);
+
   return group;
 }
 
@@ -266,7 +279,18 @@ function drawColumns(self) {
       update => update.attr('transform', d => `translate(${self.colPos(d.heading)}, 0)`)
     );
 
-  columns.select('.heading').text(d => d.heading);
+  columns
+    .select('rect.clicky')
+    .attr('fill', 'transparent')
+    .attr('height', 110)
+    .attr('width', self.colPos.bandwidth())
+    .attr('y', -120)
+    .attr('cursor', 'pointer');
+
+  columns
+    .select('.heading')
+    .text(d => d.heading)
+    .style('cursor', 'normal');
 
   columns
     .select('line')
@@ -275,6 +299,10 @@ function drawColumns(self) {
     .attr('y2', self.height)
     .attr('x1', (d, i) => self.x[i](0))
     .attr('x2', (d, i) => self.x[i](0));
+
+  columns.on('click', (d, i) => {
+    self.render(self.data, { highlight: i });
+  });
 
   columns.each((d, i, j) => {
     d3.select(j[i])
