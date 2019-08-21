@@ -26,12 +26,9 @@ function Template(svg) {
     }
 
     // Add colors to geographies if they don't already exist
-    if (!this.data.data[0].color) {
-      this.data.data = this.data.data.map((geo, i, j) => {
-        geo.color = d3.interpolateRainbow(i / j.length);
-        return geo;
-      });
-    }
+    this.data.data.forEach((geo, i, j) => {
+      geo.color = d3.interpolateRainbow(i / j.length);
+    });
 
     this.width = d3.max([this.width, 300]);
     this.height = d3.max([480, this.width * 0.5]);
