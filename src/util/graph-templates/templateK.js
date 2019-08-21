@@ -235,7 +235,7 @@ function updateRows(self, g) {
     .attr('fill', d => fill(d[self.mode]));
 
   bars
-    .on('mouseover', d => showTooltipOver(self.format(d[self.mode], 'ratio')))
+    .on('mouseover', d => showTooltipOver(d3.format('.0%')(d[self.mode])))
     .on('mousemove', showTooltipMove)
     .on('mouseleave', hideTooltip);
 }
