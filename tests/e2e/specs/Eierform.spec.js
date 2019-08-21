@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-import templateA from './util/template.a.spec';
+import templateA from '../util/template.a.spec';
 
 const base = 'localhost:5000';
 
