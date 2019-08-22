@@ -1,5 +1,5 @@
 <template>
-  <section class="card-container" :class="{ large: settings.size === 'large' }">
+  <section class="card-container" :class="{ large: settings.size === 'large' }" :id="settings.heading | slugify">
     <div class="card" :class="{ fullscreen }" @keydown.escape="toggleFullscreen" :tabindex="fullscreen ? 0 : false">
       <button
         v-if="fullscreen"
@@ -282,6 +282,12 @@ export default {
       type: Object,
       required: true,
     },
+  },
+
+  filters: {
+    slugify(str) {
+      return str.split(' ').join('_').toLowerCase()
+    }
   },
 
   methods: {
