@@ -52,6 +52,11 @@ export default {
       required: false,
       default: '',
     },
+    fullscreen: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 
   computed: {
@@ -67,6 +72,13 @@ export default {
         }
       }
       return `background-image: linear-gradient(to right, ${steps})`;
+    },
+  },
+
+  watch: {
+    fullscreen() {
+      this.$refs.leafletMap.mapObject.invalidateSize();
+      this.fitMap();
     },
   },
 
