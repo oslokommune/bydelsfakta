@@ -11,7 +11,8 @@ export default {
     {
       size: 'large',
       heading: 'Husholdninger med barn',
-      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.2019',
+      about:
+        'Statistikken omfatter privathusholdninger i Oslo per 1.1. Husholdninger med barn regnes her som husholdninger med barn under 18 år.',
       sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
@@ -67,7 +68,7 @@ export default {
     {
       size: 'large',
       heading: 'Husholdningstyper',
-      about: 'Statistikken omfatter husholdninger etter husholdningstyper i Oslo per 1.1.2019',
+      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
       sources: [source.ssb],
       map: {
         labels: ['Færre', 'Flere'],
