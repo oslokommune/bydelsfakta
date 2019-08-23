@@ -9,7 +9,7 @@
       v-dragscroll.x="!isTouchDevice"
     >
       <div class="spinner" v-if="loading">
-        <img src="../assets/spinner.svg" alt="" />
+        <spinner></spinner>
         <span class="spinner__text">{{ $t('loading.loadingData') }}</span>
       </div>
       <div class="error" v-if="error">
@@ -73,6 +73,7 @@ import TemplateK from '../util/graph-templates/templateK';
 import TemplateM from '../util/graph-templates/templateM';
 import TemplateN from '../util/graph-templates/templateN';
 import districtNames from '../config/districtNames';
+import Spinner from '../assets/spinner.svg'
 import OkIcon from './OkIcon';
 
 export default {
@@ -91,7 +92,7 @@ export default {
     showHelp: false,
   }),
 
-  components: { OkIcon },
+  components: { OkIcon, Spinner },
 
   computed: {
     shadowClass() {

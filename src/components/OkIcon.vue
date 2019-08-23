@@ -1,19 +1,20 @@
 <template>
-  <component :is="iconRef" class="icon" :class="{ small, tiny }" :style="{ marginRight, transform }"></component>
+  <component :is="iconRef" class="logo icon" :class="{ small, tiny }" :style="{ marginRight, transform }"></component>
 </template>
 
 <script>
 // Import all icons (note the '?inline' suffix)
-import hamburger from '../assets/icons/menu.svg?inline';
-import help from '../assets/icons/help.svg?inline';
-import photo from '../assets/icons/photo.svg?inline';
-import download from '../assets/icons/download.svg?inline';
-import arrowDown from '../assets/icons/arrow-down.svg?inline';
-import mapPin from '../assets/icons/map-pin.svg?inline';
-import graph from '../assets/icons/graph.svg?inline';
-import dataTable from '../assets/icons/data-table.svg?inline';
-import fullscreen from '../assets/icons/fullscreen.svg?inline';
-import fullscreenExit from '../assets/icons/fullscreen-exit.svg?inline';
+import hamburger from '../assets/icons/menu.svg';
+import help from '../assets/icons/help.svg';
+import photo from '../assets/icons/photo.svg';
+import download from '../assets/icons/download.svg';
+import arrowDown from '../assets/icons/arrow-down.svg';
+import mapPin from '../assets/icons/map-pin.svg';
+import graph from '../assets/icons/graph.svg';
+import dataTable from '../assets/icons/data-table.svg';
+import fullscreen from '../assets/icons/fullscreen.svg';
+import fullscreenExit from '../assets/icons/fullscreen-exit.svg';
+import oslologo from '../assets/oslo-logo.svg';
 
 /* 
   available options (optional):
@@ -35,6 +36,7 @@ export default {
     dataTable,
     fullscreen,
     fullscreenExit,
+    oslologo
   },
 
   computed: {
