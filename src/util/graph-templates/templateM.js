@@ -29,8 +29,8 @@ function Template(svg) {
 
   const tabData = [
     { label: 'Totalt', value: 'totalt' },
-    { label: 'Mellom delbydeler', value: 'mellomDelbydeler' },
-    { label: 'Innenfor delbydelen', value: 'innenforDelbydelen' },
+    { label: 'Mellom bydeler', value: 'mellomDelbydeler' },
+    { label: 'Innenfor bydelen', value: 'innenforDelbydelen' },
     { label: 'Til/fra Oslo', value: 'tilFraOslo' },
   ];
 
