@@ -225,6 +225,7 @@
           :district="geoDistricts"
           :settings="settings.map"
           :data-url="`${settings.map.url}?geography=${district}`"
+          :fullscreen="fullscreen"
         ></v-leaflet>
       </div>
       <div class="about-container" v-if="mode === 'about'">
@@ -380,6 +381,10 @@ export default {
   height: 560px;
 }
 
+.map-container {
+  flex-grow: 1;
+}
+
 .about-container {
   padding: 1rem;
   position: relative;
@@ -438,6 +443,7 @@ export default {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
+  z-index: 2;
 
   &:hover {
     background: rgba(black, 0.2);
@@ -452,6 +458,8 @@ export default {
 
   &.fullscreen {
     bottom: 1rem;
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - 2rem);
     left: 1rem;
     outline: 2rem solid rgba(black, 0.9);
