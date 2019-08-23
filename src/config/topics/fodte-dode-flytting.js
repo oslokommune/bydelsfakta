@@ -17,7 +17,6 @@ export default {
         {
           label: 'Status',
           method: 'value',
-          heading: 'Flytting etter alder og innvandringskategori',
           template: 'm',
           url: `${API}/flyttehyppighet-totalt-status`,
           production: false,
