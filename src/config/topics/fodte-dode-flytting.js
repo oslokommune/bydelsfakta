@@ -6,12 +6,12 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Fødte, døde og flytting',
   value: 'fodte-dode-flytting',
-  production: false,
+  production: true,
   cards: [
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: false,
+      production: true,
       sources: [source.ssb],
       tabs: [
         {
@@ -19,7 +19,7 @@ export default {
           method: 'value',
           template: 'm',
           url: `${API}/flyttehyppighet-totalt-status`,
-          production: false,
+          production: true,
         },
       ],
     },
@@ -27,7 +27,7 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningsvekst',
-      production: false,
+      production: true,
       sources: [source.ssb],
       tabs: [
         {
@@ -36,7 +36,7 @@ export default {
           heading: 'Befolkningsvekst etter flytting og fødselsoverskudd',
           template: 'n',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
-          production: false,
+          production: true,
         },
       ],
     },
