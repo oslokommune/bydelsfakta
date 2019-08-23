@@ -227,7 +227,7 @@ export default {
         url: `${API}/dodsrater-status`,
         scale: [0.09, 0.203],
         reverse: true,
-        heading: 'Dødelighet for personer 50–74 år',
+        heading: 'Dødelighet for personer 55–79 år',
         method: 'ratio',
         hidePercentSymbol: true,
       },
@@ -236,7 +236,6 @@ export default {
         {
           active: false,
           label: 'Dødsrate',
-          heading: 'Dødelighet for personer 55–79 år',
           id: 'levekar_dodsrater_status_andel',
           template: 'a',
           method: 'ratio',
