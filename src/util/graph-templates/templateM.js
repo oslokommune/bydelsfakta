@@ -426,6 +426,31 @@ function Template(svg) {
       };
     });
 
+    table_body.push({
+      key: 'Totalt',
+      values: [
+        d3.sum(this.filteredData.immigration.map(d => d.totalt)),
+        d3.sum(this.filteredData.emigration.map(d => d.totalt)),
+        d3.sum(this.filteredData.immigration.map(d => d.totalt)) -
+          d3.sum(this.filteredData.emigration.map(d => d.totalt)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
+          d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.mellomDelbydeler)),
+        d3.sum(this.filteredData.emigration.map(d => d.mellomDelbydeler)),
+        d3.sum(this.filteredData.immigration.map(d => d.mellomDelbydeler)) -
+          d3.sum(this.filteredData.emigration.map(d => d.mellomDelbydeler)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.innenforDelbydelen)),
+        d3.sum(this.filteredData.emigration.map(d => d.innenforDelbydelen)),
+        d3.sum(this.filteredData.immigration.map(d => d.innenforDelbydelen)) -
+          d3.sum(this.filteredData.emigration.map(d => d.innenforDelbydelen)),
+      ],
+    });
+
     const tableGenerator = util.drawTable.bind(this);
     tableGenerator(table_head, table_body);
   };
