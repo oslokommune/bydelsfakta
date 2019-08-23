@@ -36,7 +36,7 @@ export default {
     dataTable,
     fullscreen,
     fullscreenExit,
-    oslologo
+    oslologo,
   },
 
   computed: {

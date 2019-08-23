@@ -73,7 +73,7 @@ import TemplateK from '../util/graph-templates/templateK';
 import TemplateM from '../util/graph-templates/templateM';
 import TemplateN from '../util/graph-templates/templateN';
 import districtNames from '../config/districtNames';
-import Spinner from '../assets/spinner.svg'
+import Spinner from '../assets/spinner.svg';
 import OkIcon from './OkIcon';
 
 export default {
