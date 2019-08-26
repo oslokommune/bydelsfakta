@@ -23,6 +23,9 @@ const request = params => {
       if (error.errno === 'ETIMEDOUT') {
         return Promise.reject(new Error('Timeout'));
       }
+      if (error.response === undefined) {
+        return Promise.reject(new Error('Keycloak is most likely down'));
+      }
       return Promise.reject(error.response);
     });
 };
