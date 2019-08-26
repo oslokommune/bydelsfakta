@@ -33,7 +33,7 @@ export default {
         {
           label: 'Historisk',
           method: 'value',
-          heading: 'Befolkningsvekst etter flytting og fødselsoverskudd',
+          heading: 'Befolkningsvekst etter netto innflytting og fødselsoverskudd',
           template: 'n',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
           production: true,
