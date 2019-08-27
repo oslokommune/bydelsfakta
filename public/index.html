@@ -16,12 +16,38 @@
     <meta name="msapplication-TileColor" content="#b3f5ff" />
     <meta name="theme-color" content="#B3F5FF" />
 
-    <meta property="og:description" content="«Bydelsfakta» er et verktøy som visualiserer innbyggerdata om befolkning, levekår og bomiljø for bydeler og delbydeler i Oslo" />
-    <meta property="og:image" content="<%= BASE_URL %>Oslo-logo-morkeblaa-RGB.png" />
-    <meta property="og:site_name" content="Oslo kommune: Bydelsfakta" />
-    <meta name="twitter:card" content="summary_large_image">
-
+    <!-- SEO tags -->
     <title>Bydelsfakta</title>
+    <meta
+      name="description"
+      content="«Bydelsfakta» er et verktøy som visualiserer innbyggerdata om befolkning, levekår og bomiljø for bydeler og delbydeler i Oslo"
+    />
+    <meta
+      itemprop="description"
+      content="«Bydelsfakta» er et verktøy som visualiserer innbyggerdata om befolkning, levekår og bomiljø for bydeler og delbydeler i Oslo"
+    />
+    <meta itemprop="image" content="https://bydelsfakta.oslo.kommune.no/og-image.png" />
+
+    <!-- OpenGraph tags -->
+    <meta
+      property="og:description"
+      content="«Bydelsfakta» er et verktøy som visualiserer innbyggerdata om befolkning, levekår og bomiljø for bydeler og delbydeler i Oslo"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bydelsfakta" />
+    <meta property="og:url" content="https://bydelsfakta.oslo.kommune.no" />
+    <meta property="og:image" content="https://bydelsfakta.oslo.kommune.no/og-image.png" />
+    <meta property="og:site_name" content="Oslo kommune: Bydelsfakta" />
+
+    <!-- Twitter tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bydelsfakta" />
+    <meta
+      name="twitter:description"
+      content="«Bydelsfakta» er et verktøy som visualiserer innbyggerdata om befolkning, levekår og bomiljø for bydeler og delbydeler i Oslo"
+    />
+    <meta name="twitter:image" content="https://bydelsfakta.oslo.kommune.no/og-image.png" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" />
     <script type="text/javascript">
       if (!!window.MSInputMethodContext && !!document.documentMode) {
@@ -31,7 +57,7 @@
         document.write(
           '<script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js"><\/script>'
         );
-      document.querySelector('body').classList.add('ie11');
+        document.querySelector('body').classList.add('ie11');
       }
     </script>
     <!-- Hotjar Tracking Code for bydelsfakta -->

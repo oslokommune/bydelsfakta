@@ -308,6 +308,12 @@ export default {
         this.fullscreen = true;
         body.style.height = '100vh';
         body.style.overflow = 'hidden';
+
+        this.$ga.event({
+          eventCategory: 'Card',
+          eventAction: 'Open fullscreen',
+          eventLabel: this.mode,
+        });
       }
     },
 
@@ -324,6 +330,12 @@ export default {
 
     activeTab(index) {
       this.active = index;
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Change tab',
+        eventLabel: this.settings.tabs[index].label,
+      });
     },
 
     saveSvg(id) {
@@ -331,6 +343,12 @@ export default {
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save SVG',
+        eventLabel: filename,
+      });
     },
 
     savePng(id) {
@@ -338,16 +356,36 @@ export default {
       downloadPng(this.$refs.graph.$refs.svg, filename);
 
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save PNG',
+        eventLabel: filename,
+      });
     },
 
     saveCsv() {
       tableToCsv(this.$refs.graph.$refs.tableContainer);
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save CSV',
+        eventLabel: null,
+        eventValue: null,
+      });
     },
 
     saveExcel() {
       tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save Excel',
+        eventLabel: filename,
+        eventValue: null,
+      });
     },
 
     // Sets 'showAsTabs' true/false by comparing the accumulated width
@@ -363,6 +401,14 @@ export default {
   },
 
   watch: {
+    mode(to, from) {
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Change view',
+        eventLabel: `${from} -> ${to}`,
+      });
+    },
+
     '$route.params.topic'() {
       this.active = 0;
       this.mode = 'graph';
