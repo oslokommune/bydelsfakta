@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import vueResize from 'vue-resize';
+import VueAnalytics from 'vue-analytics';
 import router from '../../../src/router';
 import GraphCard from '../../../src/components/GraphCard';
 import clickOutside from '../../../src/directives/clickOutside';
@@ -19,6 +20,9 @@ describe('GraphCard', () => {
     localVue.use(vueResize);
     localVue.use(router);
     localVue.use(Vuex);
+    localVue.use(VueAnalytics, {
+      id: 'UA-1234-5',
+    });
     localVue.directive('click-outside', clickOutside);
     wrapper = mount(GraphCard, {
       propsData: {
