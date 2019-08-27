@@ -185,8 +185,8 @@
                 :title="$t('graphCard.saveCSV.aria')"
                 :aria-label="$t('graphCard.saveCSV.aria')"
                 tabindex="0"
-                @click="saveCsv()"
-                @keyup.enter="saveCsv()"
+                @click="saveCsv(settings.tabs[active].id)"
+                @keyup.enter="saveCsv(settings.tabs[active].id)"
                 id="context-menu-button-csv"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
@@ -195,13 +195,13 @@
 
               <button
                 role="menuitem"
-                v-if="mode !== 'map' && productionMode === false"
+                v-if="mode !== 'map'"
                 class="context-menu__dropdown-item"
                 :title="$t('graphCard.saveExcel.aria')"
                 :aria-label="$t('graphCard.saveExcel.aria')"
                 tabindex="0"
-                @click="saveExcel()"
-                @keyup.enter="saveExcel()"
+                @click="saveExcel(settings.tabs[active].id)"
+                @keyup.enter="saveExcel(settings.tabs[active].id)"
                 id="context-menu-button-excel"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
@@ -364,26 +364,26 @@ export default {
       });
     },
 
-    saveCsv() {
+    saveCsv(id) {
       tableToCsv(this.$refs.graph.$refs.tableContainer);
       this.closeMenu();
 
       this.$ga.event({
         eventCategory: 'Card',
         eventAction: 'Save CSV',
-        eventLabel: null,
+        eventLabel: `${this.$route.params.district}_${id}`,
         eventValue: null,
       });
     },
 
-    saveExcel() {
+    saveExcel(id) {
       tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
       this.closeMenu();
 
       this.$ga.event({
         eventCategory: 'Card',
         eventAction: 'Save Excel',
-        eventLabel: filename,
+        eventLabel: `${this.$route.params.district}_${id}`,
         eventValue: null,
       });
     },
