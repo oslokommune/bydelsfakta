@@ -171,7 +171,7 @@ export default {
           id: 'husholdning_med_1_barn_antall-historisk',
           template: 'b',
           method: 'value',
-          url: `${API}/husholdninger-med-1-barn-status`,
+          url: `${API}/husholdninger-med-1-barn-historisk`,
           production: true,
         },
       ],
