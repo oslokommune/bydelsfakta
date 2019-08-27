@@ -29,7 +29,7 @@ export default {
           id: 'husholdningstyper_status',
           template: 'a',
           method: 'ratio',
-          url: `${baseUrl}/test.json`,
+          url: `${API}/husholdningstyper-status`,
           production: true,
         },
         {
@@ -38,7 +38,7 @@ export default {
           id: 'husholdningstyper_status',
           template: 'a',
           method: 'value',
-          url: `${baseUrl}/test.json`,
+          url: `${API}/husholdningstyper-status`,
           production: true,
         },
         {
