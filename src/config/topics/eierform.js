@@ -59,7 +59,7 @@ export default {
       size: 'large',
       heading: 'Kommunale boliger',
       about:
-        '<p>Statistikken viser boliger i Oslo per 1.1. Fordelingen av boliger etter bygningstype fordeles her i tre kategorier: </p><ul><li>Eneboliger (frittliggende enebolig eller våningshus)</li><li>Rekkehus, tomannsboliger o.l. (Dette inkluderer horisontaldelt tomannsbolig eller annet boligbygg med mindre enn tre etasjer, hus i kjede, rekke-/terassehus, vertikaldelttomannsbolig)</li><li>Blokk, leiegård e.l. (inkluderer også boliger i forretningsgård og bygg for felleshusholdninger)</li></ul>',
+        '<p>Tabellen omfatter kommunale boliger i Oslo per 1.1. Omsorg pluss boliger er med, men ikke presteboliger. Oslo kommune er selv eier av de fleste kommunale boliger.</p></p>I sameier, borettslag og aksjeselskap eier Oslo kommune en eller flere boliger, mens i kommunale eiendommer eier Oslo kommune både bygning og alle boligene.</p>',
       sources: [source.ssb, source.oslo],
       map: {
         labels: ['Færre', 'Flere'],
