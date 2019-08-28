@@ -1,6 +1,6 @@
 # Bydelsfakta
 
-👉**http://bydelsfakta.oslo.kommune.no/**
+👉**https://bydelsfakta.oslo.kommune.no/**
 
 Frontend application for Bydelsfakta at Oslo kommune which visualizes statistics and data on different topics about the districts in Oslo.
 
