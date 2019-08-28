@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueMeta from 'vue-meta';
@@ -9,6 +10,7 @@ import App from './App';
 import router from './router';
 import store from './store';
 import clickOutside from './directives/clickOutside';
+import sitemap from './config/sitemapGenerator';
 
 import 'vue-resize/dist/vue-resize.css';
 import 'leaflet/dist/leaflet.css';
