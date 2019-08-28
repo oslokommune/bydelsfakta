@@ -33,4 +33,5 @@ xml += `</urlset>`;
 
 const xmlString = xml;
 
+// eslint-disable-next-line
 console.log(xmlString);

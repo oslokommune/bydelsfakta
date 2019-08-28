@@ -1,10 +1,10 @@
 import 'whatwg-fetch';
-
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueMeta from 'vue-meta';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
+
 import './util/polyfills';
 import App from './App';
 import router from './router';
