@@ -4,6 +4,7 @@ const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const routes = require('./routes');
+const compression = require('compression');
 const path = require('path');
 const cheerio = require('cheerio');
 const fs = require('fs');
@@ -31,6 +32,7 @@ fs.writeFileSync(path.join(__dirname, '../docs/index.html'), $.html(), { encodin
 
 app.use(morgan('combined'));
 app.use(cors());
+app.use(compression());
 
 app.use(function(req, res, next) {
   res.set({
