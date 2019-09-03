@@ -167,7 +167,7 @@ export default {
     },
     {
       size: 'small',
-      heading: 'Under 16 år med én innvandrerforelder',
+      heading: 'Norskfødte Under 16 år med én innvandrerforelder',
       about:
         'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
       sources: [source.ssb],
