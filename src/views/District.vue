@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <div class="main-container__cards">
+    <div class="main-container__cards main-container__cards--district">
       <div class="topics-grid">
         <v-category
           v-for="topicName in names"
@@ -20,9 +20,6 @@
           "
         />
       </div>
-    </div>
-    <div class="main-container__description">
-      <!-- TODO: Add text description of the application -->
     </div>
   </div>
 </template>
@@ -51,8 +48,10 @@ export default {
   metaInfo() {
     return {
       title:
-        this.compareDistricts || this.district === 'alle'
-          ? 'Bydelsfakta'
+        this.$route.fullPath === '/'
+          ? 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold'
+          : this.compareDistricts || this.district === 'alle'
+          ? 'Sammenlign bydeler | Bydelsfakta'
           : `${getDistrictName(this.district)} | Bydelsfakta`,
     };
   },

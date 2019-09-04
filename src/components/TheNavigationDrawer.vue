@@ -1,7 +1,7 @@
 <template>
   <aside class="navbar">
     <router-link :to="{ name: 'Home' }" class="logo-link">
-      <oslo-logo class="oslo__logo"></oslo-logo>
+      <oslo-logo class="oslo__logo" aria-label="Oslo kommune logo"></oslo-logo>
     </router-link>
 
     <button

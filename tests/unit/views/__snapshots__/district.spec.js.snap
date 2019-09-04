@@ -5,7 +5,7 @@ exports[`Bydel renders component correctly 1`] = `
   class="main-container"
 >
   <div
-    class="main-container__cards"
+    class="main-container__cards main-container__cards--district"
   >
     <div
       class="topics-grid"
@@ -92,9 +92,5 @@ exports[`Bydel renders component correctly 1`] = `
       />
     </div>
   </div>
-   
-  <div
-    class="main-container__description"
-  />
 </div>
 `;
