@@ -11,6 +11,8 @@ import router from './router';
 import store from './store';
 import clickOutside from './directives/clickOutside';
 
+import './config/sitemapGenerator';
+
 import 'vue-resize/dist/vue-resize.css';
 import 'leaflet/dist/leaflet.css';
 

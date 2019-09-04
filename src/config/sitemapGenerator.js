@@ -10,7 +10,12 @@ const base = 'https://bydelsfakta.oslo.kommune.no';
 let routes = [];
 
 routes.push(base);
-allDistricts.forEach(district => {
+
+let districts = JSON.parse(JSON.stringify(allDistricts));
+
+districts.push({ uri: 'alle' });
+
+districts.forEach(district => {
   routes.push(`${base}/bydel/${district.uri}`);
   topics.forEach(topic => {
     routes.push(`${base}/bydel/${district.uri}/${topic}`);
