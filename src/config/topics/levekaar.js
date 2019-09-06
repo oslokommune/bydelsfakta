@@ -235,7 +235,7 @@ export default {
       tabs: [
         {
           active: false,
-          label: 'Dødsrate',
+          label: 'Døde per 1000 personer',
           id: 'levekar_dodsrater_status_andel',
           template: 'a',
           method: 'ratio',
