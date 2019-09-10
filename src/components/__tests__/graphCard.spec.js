@@ -1,29 +1,33 @@
 import 'whatwg-fetch';
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
+import VueRouter from 'vue-router';
 import vueResize from 'vue-resize';
 import VueAnalytics from 'vue-analytics';
-import router from '../../router';
 import GraphCard from '../GraphCard';
 import clickOutside from '../../directives/clickOutside';
 import { topics } from '../../config/topics';
-import store from '../../store';
+import mockStore from '../../../tests/MockStore';
 import setupI18n from '../../i18n';
+import { routes } from '../../router';
 
 const i18n = setupI18n();
 
 describe('GraphCard', () => {
   let wrapper = null;
+  let router = null;
+  let store = null;
 
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(vueResize);
-    localVue.use(router);
     localVue.use(Vuex);
     localVue.use(VueAnalytics, {
       id: 'UA-1234-5',
     });
     localVue.directive('click-outside', clickOutside);
+    store = new Vuex.Store(mockStore);
+    router = new VueRouter({ routes });
     wrapper = mount(GraphCard, {
       propsData: {
         settings: topics['alder'].cards[0],

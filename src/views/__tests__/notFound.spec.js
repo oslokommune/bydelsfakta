@@ -1,12 +1,10 @@
 import 'whatwg-fetch';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
-import VueResize from 'vue-resize';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
 
-import Topic from '../Topic';
-import clickOutside from '../../directives/clickOutside';
+import NotFound from '../NotFound';
 import setupI18n from '../../i18n';
 import { routes } from '../../router';
 import mockStore from '../../../tests/MockStore';
@@ -21,36 +19,23 @@ describe('Topic', () => {
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(VueRouter);
-    localVue.use(VueResize);
     localVue.use(Vuex);
     localVue.use(VueMeta);
     router = new VueRouter({ routes });
     store = new Vuex.Store(mockStore);
-    localVue.directive('click-outside', clickOutside);
-    wrapper = mount(Topic, {
-      propsData: {
-        district: 'gamleoslo',
-        topic: 'alder',
-      },
+    wrapper = mount(NotFound, {
       localVue,
       router,
       store,
       i18n,
       stubs: {
-        'ok-icon': true,
-        spinner: true,
         'v-category': true,
       },
     });
-    router.push('/bydel/gamleoslo/alder');
   });
 
   afterEach(() => {
     wrapper.destroy();
-  });
-
-  test('renders topic-component and finds main-container class', () => {
-    expect(wrapper.classes('main-container')).toBe(true);
   });
 
   test('renders component correctly', () => {

@@ -50,7 +50,7 @@ exports[`Topic renders component correctly 1`] = `
                
               <button
                 aria-label="Antall"
-                class="tabs__tab active"
+                class="tabs__tab active tabs__tab--hidden"
                 id="tabButton-Befolkningen etter alder-0"
                 role="tab"
               >
@@ -58,14 +58,28 @@ exports[`Topic renders component correctly 1`] = `
               </button>
               <button
                 aria-label="Andel"
-                class="tabs__tab"
+                class="tabs__tab tabs__tab--hidden"
                 id="tabButton-Befolkningen etter alder-1"
                 role="tab"
               >
                 Andel
               </button>
                
-              <!---->
+              <select
+                aria-hidden=""
+                class="select tabs__select"
+              >
+                <option
+                  value="0"
+                >
+                  Antall
+                </option>
+                <option
+                  value="1"
+                >
+                  Andel
+                </option>
+              </select>
             </div>
              
             <div
@@ -250,14 +264,23 @@ exports[`Topic renders component correctly 1`] = `
                
               <button
                 aria-label="Status"
-                class="tabs__tab active"
+                class="tabs__tab active tabs__tab--hidden"
                 id="tabButton-Befolkningspyramide-0"
                 role="tab"
               >
                 Status
               </button>
                
-              <!---->
+              <select
+                aria-hidden=""
+                class="select tabs__select"
+              >
+                <option
+                  value="0"
+                >
+                  Status
+                </option>
+              </select>
             </div>
              
             <div
@@ -428,14 +451,23 @@ exports[`Topic renders component correctly 1`] = `
                
               <button
                 aria-label="Status"
-                class="tabs__tab active"
+                class="tabs__tab active tabs__tab--hidden"
                 id="tabButton-Gjennomsnitt- og medianalder-0"
                 role="tab"
               >
                 Status
               </button>
                
-              <!---->
+              <select
+                aria-hidden=""
+                class="select tabs__select"
+              >
+                <option
+                  value="0"
+                >
+                  Status
+                </option>
+              </select>
             </div>
              
             <div
@@ -590,7 +622,7 @@ exports[`Topic renders component correctly 1`] = `
         <v-category-stub
           bgimage="/img/folkemengde"
           category="Befolkning"
-          district="bydel"
+          district="gamleoslo"
           id="befolkningsutvikling"
           topic="Befolkningsutvikling"
           txtcolor="rgb(245, 173, 165)"
@@ -598,7 +630,7 @@ exports[`Topic renders component correctly 1`] = `
         <v-category-stub
           bgimage="/img/husholdninger"
           category="Befolkning"
-          district="bydel"
+          district="gamleoslo"
           id="husholdninger"
           topic="Husholdninger"
           txtcolor="rgb(245, 173, 165)"
@@ -606,7 +638,7 @@ exports[`Topic renders component correctly 1`] = `
         <v-category-stub
           bgimage="/img/levekaar"
           category="Levekår"
-          district="bydel"
+          district="gamleoslo"
           id="levekaar"
           topic="Levekårs&shy;indikatorer"
           txtcolor="rgb(244, 206, 138)"

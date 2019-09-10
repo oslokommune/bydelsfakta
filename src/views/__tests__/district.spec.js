@@ -1,25 +1,30 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
+import VueMeta from 'vue-meta';
 
 import Bydel from '../District';
 import setupI18n from '../../i18n';
-import store from '../../store';
 import { routes } from '../../router';
+import mockStore from '../../../tests/MockStore';
 
 const i18n = setupI18n();
 
 describe('Bydel', () => {
   let wrapper = null;
+  let router = null;
+  let store = null;
 
   beforeEach(() => {
     const localVue = createLocalVue();
     localVue.use(VueRouter);
     localVue.use(Vuex);
-    const router = new VueRouter({ routes });
+    localVue.use(VueMeta);
+    router = new VueRouter({ routes });
+    store = new Vuex.Store(mockStore);
     wrapper = mount(Bydel, {
       propsData: {
-        district: 'bydel',
+        district: 'gamleoslo',
       },
       localVue,
       router,

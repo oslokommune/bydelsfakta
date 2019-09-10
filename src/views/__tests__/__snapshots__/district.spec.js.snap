@@ -12,7 +12,7 @@ exports[`Bydel renders component correctly 1`] = `
     >
       <a
         class="main-container__item"
-        href="#/bydel/bydel/befolkningsutvikling"
+        href="#/bydel/gamleoslo/befolkningsutvikling"
         id="befolkningsutvikling"
       >
         <picture>
@@ -51,7 +51,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/fodte-dode-flytting"
+        href="#/bydel/gamleoslo/fodte-dode-flytting"
         id="fodte-dode-flytting"
       >
         <picture>
@@ -90,7 +90,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/alder"
+        href="#/bydel/gamleoslo/alder"
         id="alder"
       >
         <picture>
@@ -129,7 +129,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/innvandrerbefolkningen"
+        href="#/bydel/gamleoslo/innvandrerbefolkningen"
         id="innvandrerbefolkningen"
       >
         <picture>
@@ -168,7 +168,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/husholdninger"
+        href="#/bydel/gamleoslo/husholdninger"
         id="husholdninger"
       >
         <picture>
@@ -207,7 +207,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/levekaar"
+        href="#/bydel/gamleoslo/levekaar"
         id="levekaar"
       >
         <picture>
@@ -246,7 +246,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/eierform"
+        href="#/bydel/gamleoslo/eierform"
         id="eierform"
       >
         <picture>
@@ -285,7 +285,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/bygningstyper"
+        href="#/bydel/gamleoslo/bygningstyper"
         id="bygningstyper"
       >
         <picture>
@@ -324,7 +324,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/boligpriser"
+        href="#/bydel/gamleoslo/boligpriser"
         id="boligpriser"
       >
         <picture>
@@ -363,7 +363,7 @@ exports[`Bydel renders component correctly 1`] = `
       </a>
       <a
         class="main-container__item"
-        href="#/bydel/bydel/rom-per-person"
+        href="#/bydel/gamleoslo/rom-per-person"
         id="rom-per-person"
       >
         <picture>

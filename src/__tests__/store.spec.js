@@ -3,8 +3,25 @@ import { mutations, actions, getters } from '../store';
 import districts from '../config/geoData/districts';
 import { allDistricts, oneDistrict, oneDistrictCompare } from '../../tests/config/expectedDistrictResults';
 
-const { ADD_DISTRICT, SELECT_DISTRICT, CLEAN_STATE } = mutations;
-const { addDistrict, cleanState } = actions;
+const {
+  ADD_DISTRICT,
+  SELECT_DISTRICT,
+  CLEAN_STATE,
+  SET_IE11_COMPATIBILITY,
+  SET_MENU_IS_OPEN,
+  SET_NAVIGATION_IS_OPEN,
+  SET_PRODUCTION_MODE,
+  SET_TOUCH_DEVICE,
+} = mutations;
+const {
+  addDistrict,
+  cleanState,
+  setIE11Compatibility,
+  setMenuIsOpen,
+  setNavigationIsOpen,
+  setProductionMode,
+  setTouchDevice,
+} = actions;
 const { geoDistricts } = getters;
 
 describe('mutations', () => {
@@ -93,6 +110,31 @@ describe('actions', () => {
   it('cleanState', () => {
     cleanState({ commit, state });
     expect(commit.args).toEqual([['CLEAN_STATE']]);
+  });
+
+  it('Change navigation to open', () => {
+    setNavigationIsOpen({ commit, state }, true);
+    expect(commit.args).toEqual([['SET_NAVIGATION_IS_OPEN', true]]);
+  });
+
+  it('Change menu to open', () => {
+    setMenuIsOpen({ commit, state }, true);
+    expect(commit.args).toEqual([['SET_MENU_IS_OPEN', true]]);
+  });
+
+  it('set compabiliity to ie11', () => {
+    setIE11Compatibility({ commit, state }, true);
+    expect(commit.args).toEqual([['SET_IE11_COMPATIBILITY', true]]);
+  });
+
+  it('set production mode to prod', () => {
+    setProductionMode({ commit, state }, 'prod');
+    expect(commit.args).toEqual([['SET_PRODUCTION_MODE', 'prod']]);
+  });
+
+  it('set touch device', () => {
+    setTouchDevice({ commit, state }, true);
+    expect(commit.args).toEqual([['SET_TOUCH_DEVICE', true]]);
   });
 });
 
