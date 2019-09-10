@@ -3,12 +3,12 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import vueResize from 'vue-resize';
 import VueAnalytics from 'vue-analytics';
-import router from '../../../src/router';
-import GraphCard from '../../../src/components/GraphCard';
-import clickOutside from '../../../src/directives/clickOutside';
-import { topics } from '../../../src/config/topics';
-import store from '../../../src/store';
-import setupI18n from '../../../src/i18n';
+import router from '../../router';
+import GraphCard from '../GraphCard';
+import clickOutside from '../../directives/clickOutside';
+import { topics } from '../../config/topics';
+import store from '../../store';
+import setupI18n from '../../i18n';
 
 const i18n = setupI18n();
 
@@ -32,6 +32,10 @@ describe('GraphCard', () => {
       router,
       i18n,
       store,
+      stubs: {
+        'ok-icon': true,
+        spinner: true,
+      },
     });
   });
 

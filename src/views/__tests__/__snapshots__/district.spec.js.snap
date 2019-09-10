@@ -1,0 +1,406 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bydel renders component correctly 1`] = `
+<div
+  class="main-container"
+>
+  <div
+    class="main-container__cards main-container__cards--district"
+  >
+    <div
+      class="topics-grid"
+    >
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/befolkningsutvikling"
+        id="befolkningsutvikling"
+      >
+        <picture>
+          <source
+            alt="Befolkningsutvikling"
+            srcset="/img/folkemengde.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Befolkningsutvikling"
+            srcset="/img/folkemengde.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Befolkningsutvikling"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/folkemengde.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          Befolkning
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Befolkningsutvikling
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/fodte-dode-flytting"
+        id="fodte-dode-flytting"
+      >
+        <picture>
+          <source
+            alt="Fødte, døde og flytting"
+            srcset="/img/flytting.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Fødte, døde og flytting"
+            srcset="/img/flytting.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Fødte, døde og flytting"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/flytting.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          Befolkning
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Fødte, døde og flytting
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/alder"
+        id="alder"
+      >
+        <picture>
+          <source
+            alt="Kjønn og alder"
+            srcset="/img/alder.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Kjønn og alder"
+            srcset="/img/alder.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Kjønn og alder"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/alder.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          Befolkning
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Kjønn og alder
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/innvandrerbefolkningen"
+        id="innvandrerbefolkningen"
+      >
+        <picture>
+          <source
+            alt="Personer med innvandrer&shy;bakgrunn"
+            srcset="/img/innvandring.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Personer med innvandrer&shy;bakgrunn"
+            srcset="/img/innvandring.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Personer med innvandrer&shy;bakgrunn"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/innvandring.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          Befolkning
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Personer med innvandrer­bakgrunn
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/husholdninger"
+        id="husholdninger"
+      >
+        <picture>
+          <source
+            alt="Husholdninger"
+            srcset="/img/husholdninger.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Husholdninger"
+            srcset="/img/husholdninger.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Husholdninger"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/husholdninger.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(245, 173, 165);"
+        >
+          Befolkning
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Husholdninger
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/levekaar"
+        id="levekaar"
+      >
+        <picture>
+          <source
+            alt="Levekårs&shy;indikatorer"
+            srcset="/img/levekaar.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Levekårs&shy;indikatorer"
+            srcset="/img/levekaar.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Levekårs&shy;indikatorer"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/levekaar.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(244, 206, 138);"
+        >
+          Levekår
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Levekårs­indikatorer
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/eierform"
+        id="eierform"
+      >
+        <picture>
+          <source
+            alt="Eierform"
+            srcset="/img/eieform.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Eierform"
+            srcset="/img/eieform.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Eierform"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/eieform.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          Boforhold
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Eierform
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/bygningstyper"
+        id="bygningstyper"
+      >
+        <picture>
+          <source
+            alt="Bygningstyper"
+            srcset="/img/bygningstyper.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Bygningstyper"
+            srcset="/img/bygningstyper.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Bygningstyper"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/bygningstyper.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          Boforhold
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Bygningstyper
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/boligpriser"
+        id="boligpriser"
+      >
+        <picture>
+          <source
+            alt="Boligpriser"
+            srcset="/img/boligpriser.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Boligpriser"
+            srcset="/img/boligpriser.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Boligpriser"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/boligpriser.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          Boforhold
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Boligpriser
+        </span>
+      </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/bydel/rom-per-person"
+        id="rom-per-person"
+      >
+        <picture>
+          <source
+            alt="Rom per person"
+            srcset="/img/trangboddhet.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Rom per person"
+            srcset="/img/trangboddhet.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Rom per person"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/trangboddhet.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(199, 247, 201);"
+        >
+          Boforhold
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Rom per person
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;

@@ -1,7 +1,7 @@
 import sinon from 'sinon';
-import { mutations, actions, getters } from '../../src/store';
-import districts from '../../src/config/geoData/districts';
-import { allDistricts, oneDistrict, oneDistrictCompare } from '../config/expectedDistrictResults';
+import { mutations, actions, getters } from '../store';
+import districts from '../config/geoData/districts';
+import { allDistricts, oneDistrict, oneDistrictCompare } from '../../tests/config/expectedDistrictResults';
 
 const { ADD_DISTRICT, SELECT_DISTRICT, CLEAN_STATE } = mutations;
 const { addDistrict, cleanState } = actions;

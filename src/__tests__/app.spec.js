@@ -1,10 +1,10 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
-import App from '../../src/App';
-import router from '../../src/router';
-import clickOutside from '../../src/directives/clickOutside';
-import store from '../../src/store';
-import setupI18n from '../../src/i18n';
+import App from '../App';
+import router from '../router';
+import clickOutside from '../directives/clickOutside';
+import store from '../store';
+import setupI18n from '../i18n';
 
 global.scroll = jest.fn();
 window.scroll = jest.fn();

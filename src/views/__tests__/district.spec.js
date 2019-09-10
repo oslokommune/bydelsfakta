@@ -1,10 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 
-import Bydel from '../../../src/views/District';
-import setupI18n from '../../../src/i18n';
-import store from '../../../src/store';
+import Bydel from '../District';
+import setupI18n from '../../i18n';
+import store from '../../store';
+import { routes } from '../../router';
 
 const i18n = setupI18n();
 
@@ -15,8 +16,8 @@ describe('Bydel', () => {
     const localVue = createLocalVue();
     localVue.use(VueRouter);
     localVue.use(Vuex);
-    const router = new VueRouter();
-    wrapper = shallowMount(Bydel, {
+    const router = new VueRouter({ routes });
+    wrapper = mount(Bydel, {
       propsData: {
         district: 'bydel',
       },

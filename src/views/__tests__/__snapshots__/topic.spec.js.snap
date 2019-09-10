@@ -1,0 +1,618 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Topic renders component correctly 1`] = `
+<div
+  class="main-container"
+>
+  <div
+    class="main-container__cards"
+  >
+    <section
+      class="card-container large"
+    >
+      <div
+        class="card"
+      >
+        <!---->
+         
+        <header
+          class="card__header"
+        >
+          <div
+            class="card__headertext"
+          >
+            <h2
+              class="card__title"
+            >
+              Befolkningen etter alder
+            </h2>
+          </div>
+           
+          <nav
+            class="card__nav"
+          >
+            <div
+              class="tabs"
+              role="tablist"
+            >
+              <div
+                class="resize-observer"
+                data-v-b329ee4c=""
+                tabindex="-1"
+              >
+                <object
+                  aria-hidden="true"
+                  data="about:blank"
+                  tabindex="-1"
+                  type="text/html"
+                />
+              </div>
+               
+              <button
+                aria-label="Antall"
+                class="tabs__tab active"
+                id="tabButton-Befolkningen etter alder-0"
+                role="tab"
+              >
+                Antall
+              </button>
+              <button
+                aria-label="Andel"
+                class="tabs__tab"
+                id="tabButton-Befolkningen etter alder-1"
+                role="tab"
+              >
+                Andel
+              </button>
+               
+              <!---->
+            </div>
+             
+            <div
+              class="card__toggle-menu"
+            >
+              <button
+                aria-label="Graf"
+                class="card__toggle-button card__toggle-button--active"
+                title="Graf"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="graph"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+               
+              <button
+                aria-label="Tabell"
+                class="card__toggle-button"
+                title="Tabell"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="data-table"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+               
+              <!---->
+            </div>
+             
+            <div
+              class="context-menu"
+            >
+              <button
+                aria-haspopup="true"
+                aria-label="Åpne meny"
+                class="context-menu__button"
+                id="context-menu-button"
+                title="Åpne meny"
+              >
+                <ok-icon-stub
+                  icon-ref="hamburger"
+                />
+                 
+                <span
+                  class="button-label"
+                >
+                  Valg
+                </span>
+              </button>
+               
+              <!---->
+            </div>
+          </nav>
+        </header>
+         
+        <div
+          class="graph__shadow"
+          role="tabpanel"
+        >
+          <div
+            aria-hidden="true"
+            class="graph__container"
+          >
+            <div
+              class="spinner"
+            >
+              <spinner-stub />
+               
+              <span
+                class="spinner__text"
+              >
+                Henter data
+              </span>
+            </div>
+             
+            <!---->
+             
+            <svg
+              aria-hidden="true"
+              class="graph__svg loading"
+            />
+          </div>
+           
+          <div
+            class="graph__tablecontainer visually-hidden"
+          >
+            <h3
+              class="table-heading"
+            />
+             
+            <table
+              class=""
+            >
+              <thead />
+               
+              <tbody />
+            </table>
+             
+            <!---->
+          </div>
+           
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
+          <div
+            class="help"
+          >
+            <button
+              aria-label="Vis hjelpetekst"
+              class="help__button"
+            >
+              <ok-icon-stub
+                icon-ref="help"
+                options="[object Object]"
+              />
+            </button>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <!---->
+         
+        <!---->
+      </div>
+    </section>
+    <section
+      class="card-container large"
+    >
+      <div
+        class="card"
+      >
+        <!---->
+         
+        <header
+          class="card__header"
+        >
+          <div
+            class="card__headertext"
+          >
+            <h2
+              class="card__title"
+            >
+              Befolkningspyramide
+            </h2>
+          </div>
+           
+          <nav
+            class="card__nav"
+          >
+            <div
+              class="tabs"
+              role="tablist"
+            >
+              <div
+                class="resize-observer"
+                data-v-b329ee4c=""
+                tabindex="-1"
+              >
+                <object
+                  aria-hidden="true"
+                  data="about:blank"
+                  tabindex="-1"
+                  type="text/html"
+                />
+              </div>
+               
+              <button
+                aria-label="Status"
+                class="tabs__tab active"
+                id="tabButton-Befolkningspyramide-0"
+                role="tab"
+              >
+                Status
+              </button>
+               
+              <!---->
+            </div>
+             
+            <div
+              class="card__toggle-menu"
+            >
+              <button
+                aria-label="Graf"
+                class="card__toggle-button card__toggle-button--active"
+                title="Graf"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="graph"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+               
+              <button
+                aria-label="Tabell"
+                class="card__toggle-button"
+                title="Tabell"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="data-table"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+               
+              <!---->
+            </div>
+             
+            <div
+              class="context-menu"
+            >
+              <button
+                aria-haspopup="true"
+                aria-label="Åpne meny"
+                class="context-menu__button"
+                id="context-menu-button"
+                title="Åpne meny"
+              >
+                <ok-icon-stub
+                  icon-ref="hamburger"
+                />
+                 
+                <span
+                  class="button-label"
+                >
+                  Valg
+                </span>
+              </button>
+               
+              <!---->
+            </div>
+          </nav>
+        </header>
+         
+        <div
+          class="graph__shadow"
+          role="tabpanel"
+        >
+          <div
+            aria-hidden="true"
+            class="graph__container"
+          >
+            <div
+              class="spinner"
+            >
+              <spinner-stub />
+               
+              <span
+                class="spinner__text"
+              >
+                Henter data
+              </span>
+            </div>
+             
+            <!---->
+             
+            <svg
+              aria-hidden="true"
+              class="graph__svg loading"
+            />
+          </div>
+           
+          <div
+            class="graph__tablecontainer visually-hidden"
+          >
+            <h3
+              class="table-heading"
+            />
+             
+            <table
+              class=""
+            >
+              <thead />
+               
+              <tbody />
+            </table>
+             
+            <!---->
+          </div>
+           
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
+          <!---->
+        </div>
+         
+        <!---->
+         
+        <!---->
+      </div>
+    </section>
+    <section
+      class="card-container large"
+    >
+      <div
+        class="card"
+      >
+        <!---->
+         
+        <header
+          class="card__header"
+        >
+          <div
+            class="card__headertext"
+          >
+            <h2
+              class="card__title"
+            >
+              Gjennomsnitt- og medianalder
+            </h2>
+          </div>
+           
+          <nav
+            class="card__nav"
+          >
+            <div
+              class="tabs"
+              role="tablist"
+            >
+              <div
+                class="resize-observer"
+                data-v-b329ee4c=""
+                tabindex="-1"
+              >
+                <object
+                  aria-hidden="true"
+                  data="about:blank"
+                  tabindex="-1"
+                  type="text/html"
+                />
+              </div>
+               
+              <button
+                aria-label="Status"
+                class="tabs__tab active"
+                id="tabButton-Gjennomsnitt- og medianalder-0"
+                role="tab"
+              >
+                Status
+              </button>
+               
+              <!---->
+            </div>
+             
+            <div
+              class="card__toggle-menu"
+            >
+              <button
+                aria-label="Graf"
+                class="card__toggle-button card__toggle-button--active"
+                title="Graf"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="graph"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+               
+              <button
+                aria-label="Tabell"
+                class="card__toggle-button"
+                title="Tabell"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="data-table"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+               
+              <button
+                aria-label="Kart"
+                class="card__toggle-button"
+                title="Kart"
+              >
+                <ok-icon-stub
+                  class="context-menu__dropdown-item-icon"
+                  icon-ref="map-pin"
+                  options="[object Object]"
+                  stroke-width="2.5"
+                />
+              </button>
+            </div>
+             
+            <div
+              class="context-menu"
+            >
+              <button
+                aria-haspopup="true"
+                aria-label="Åpne meny"
+                class="context-menu__button"
+                id="context-menu-button"
+                title="Åpne meny"
+              >
+                <ok-icon-stub
+                  icon-ref="hamburger"
+                />
+                 
+                <span
+                  class="button-label"
+                >
+                  Valg
+                </span>
+              </button>
+               
+              <!---->
+            </div>
+          </nav>
+        </header>
+         
+        <div
+          class="graph__shadow"
+          role="tabpanel"
+        >
+          <div
+            aria-hidden="true"
+            class="graph__container"
+          >
+            <div
+              class="spinner"
+            >
+              <spinner-stub />
+               
+              <span
+                class="spinner__text"
+              >
+                Henter data
+              </span>
+            </div>
+             
+            <!---->
+             
+            <svg
+              aria-hidden="true"
+              class="graph__svg loading"
+            />
+          </div>
+           
+          <div
+            class="graph__tablecontainer visually-hidden"
+          >
+            <h3
+              class="table-heading"
+            />
+             
+            <table
+              class=""
+            >
+              <thead />
+               
+              <tbody />
+            </table>
+             
+            <!---->
+          </div>
+           
+          <div
+            class="resize-observer"
+            data-v-b329ee4c=""
+            tabindex="-1"
+          >
+            <object
+              aria-hidden="true"
+              data="about:blank"
+              tabindex="-1"
+              type="text/html"
+            />
+          </div>
+           
+          <!---->
+        </div>
+         
+        <!---->
+         
+        <!---->
+      </div>
+    </section>
+     
+    <div
+      class="related"
+    >
+      <h2
+        class="section-heading"
+      >
+        Se også
+      </h2>
+       
+      <div
+        class="topics-grid"
+      >
+        <v-category-stub
+          bgimage="/img/folkemengde"
+          category="Befolkning"
+          district="bydel"
+          id="befolkningsutvikling"
+          topic="Befolkningsutvikling"
+          txtcolor="rgb(245, 173, 165)"
+        />
+        <v-category-stub
+          bgimage="/img/husholdninger"
+          category="Befolkning"
+          district="bydel"
+          id="husholdninger"
+          topic="Husholdninger"
+          txtcolor="rgb(245, 173, 165)"
+        />
+        <v-category-stub
+          bgimage="/img/levekaar"
+          category="Levekår"
+          district="bydel"
+          id="levekaar"
+          topic="Levekårs&shy;indikatorer"
+          txtcolor="rgb(244, 206, 138)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
