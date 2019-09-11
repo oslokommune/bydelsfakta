@@ -36,7 +36,6 @@ describe('App', () => {
   });
 
   afterEach(() => {
-    delete process.env.NODE_ENV;
     wrapper.destroy();
   });
 
