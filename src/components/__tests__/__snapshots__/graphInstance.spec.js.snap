@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GraphInstance renders correctly 1`] = `
+<div
+  class="graph__shadow"
+  role="tabpanel"
+>
+  <div
+    aria-hidden="true"
+    class="graph__container"
+  >
+    <div
+      class="spinner"
+    >
+      <spinner-stub />
+       
+      <span
+        class="spinner__text"
+      >
+        Henter data
+      </span>
+    </div>
+     
+    <!---->
+     
+    <svg
+      aria-hidden="true"
+      class="graph__svg loading"
+    />
+  </div>
+   
+  <div
+    class="graph__tablecontainer visually-hidden"
+  >
+    <h3
+      class="table-heading"
+    />
+     
+    <table
+      class=""
+    >
+      <thead />
+       
+      <tbody />
+    </table>
+     
+    <!---->
+  </div>
+   
+  <div
+    class="resize-observer"
+    data-v-b329ee4c=""
+    tabindex="-1"
+  >
+    <object
+      aria-hidden="true"
+      data="about:blank"
+      tabindex="-1"
+      type="text/html"
+    />
+  </div>
+   
+  <!---->
+</div>
+`;

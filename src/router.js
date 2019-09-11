@@ -10,32 +10,34 @@ const NotFound = () => import('./views/NotFound');
 
 Vue.use(Router);
 
+export const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: District,
+  },
+  {
+    path: '/bydel/:district?',
+    name: 'District',
+    component: District,
+    props: true,
+  },
+  {
+    path: '/bydel/:district/:topic',
+    name: 'Topic',
+    component: Topic,
+    props: true,
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound,
+  },
+];
+
 const router = new Router({
   mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'Home',
-      component: District,
-    },
-    {
-      path: '/bydel/:district?',
-      name: 'District',
-      component: District,
-      props: true,
-    },
-    {
-      path: '/bydel/:district/:topic',
-      name: 'Topic',
-      component: Topic,
-      props: true,
-    },
-    {
-      path: '*',
-      name: 'NotFound',
-      component: NotFound,
-    },
-  ],
+  routes,
 });
 
 // Temp while we find out what our homepage should look like

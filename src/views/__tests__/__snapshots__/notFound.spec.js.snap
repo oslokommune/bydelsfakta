@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Topic renders component correctly 1`] = `
+<div
+  class="notFound-container"
+>
+  <div
+    class="notFound-container--row"
+  >
+    <div
+      class="notFound__square--outer"
+    >
+      <div
+        class="notFound__square--inner"
+      >
+        <label
+          class="notFound__square--label"
+        >
+          404
+        </label>
+      </div>
+    </div>
+     
+    <div
+      class="notFound__information"
+    >
+      <h2
+        class="notFound__information--header"
+      >
+        Siden ble ikke funnet.
+      </h2>
+       
+      <p>
+        Du har ved en feiltakelse blitt sendt til en side som ikke eksiterer.
+      </p>
+       
+      <a
+        class="notFound__information--frontpage-link router-link-exact-active router-link-active"
+        href="#/"
+      >
+        
+        Gå til forsiden
+      
+      </a>
+    </div>
+  </div>
+   
+  <div
+    class="notFound-container--column"
+  >
+    <h2
+      class="notFound__information--header"
+    >
+      Pssst...
+    </h2>
+     
+    <p>
+      
+      Vi vil gjerne høre fra deg om hva som gikk galt slik at vi kan forbedre tjenesten. Du kan sende en e-post til 
+      
+      <a
+        href="mailto:bydelsfakta@byr.oslo.kommune.no?Subject=404%20Bydelsfakta"
+        target="_top"
+      >
+        bydelsfakta@byr.oslo.kommune.no
+      </a>
+    </p>
+  </div>
+   
+  <div
+    class="notFound-container--column"
+  >
+    <h2
+      class="notFound__information--header"
+    >
+      Eller sjekk ut en av disse sidene
+    </h2>
+     
+    <p>
+      
+      (de fungerer, vi lover)
+    
+    </p>
+     
+    <div
+      class="topics-grid"
+    >
+      <v-category-stub
+        bgimage="/img/husholdninger"
+        category="Befolkning"
+        district="alle"
+        id="husholdninger"
+        topic="Husholdninger"
+        txtcolor="rgb(245, 173, 165)"
+      />
+      <v-category-stub
+        bgimage="/img/boligpriser"
+        category="Boforhold"
+        district="alle"
+        id="boligpriser"
+        topic="Boligpriser"
+        txtcolor="rgb(199, 247, 201)"
+      />
+    </div>
+  </div>
+</div>
+`;

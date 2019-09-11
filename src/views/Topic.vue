@@ -25,7 +25,7 @@
             :topic="topics[`${item}`].options.tema"
             :bg-image="topics[`${item}`].options.bgImage"
             :txt-color="topics[`${item}`].options.txtColor"
-            :district="$route.params.district"
+            :district="district"
             :disabled="
               topics[`${item}`].production === productionMode && topics[`${item}`].production !== null
                 ? false
