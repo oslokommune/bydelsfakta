@@ -28,7 +28,7 @@ jobs:
         npm run build
       env:
         CI: true
-      uses: elgohr/Publish-Docker-Github-Action@master
+    - uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: oslokommune/bydelsfakta-frontend
         username: ${{ secrets.DOCKER_USERNAME }}
