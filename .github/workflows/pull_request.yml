@@ -21,10 +21,14 @@ jobs:
     - name: npm install, test, and build
       run: |
         npm install
+      env:
+        CI: true
     - name: npm lint
       run: |
         npm run lint
         npm run lint:style
+      env:
+        CI: true
     - name: npm test
       run: |
         npm run test:unit
