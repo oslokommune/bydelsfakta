@@ -8,10 +8,9 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     class="logo-link router-link-active"
     href="/"
   >
-    <img
-      alt="oslo-logo"
+    <oslo-logo-stub
+      aria-label="Oslo kommune logo"
       class="oslo__logo"
-      src="[object Object]"
     />
   </a>
    
@@ -304,10 +303,9 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
     class="logo-link router-link-active"
     href="/"
   >
-    <img
-      alt="oslo-logo"
+    <oslo-logo-stub
+      aria-label="Oslo kommune logo"
       class="oslo__logo"
-      src="[object Object]"
     />
   </a>
    

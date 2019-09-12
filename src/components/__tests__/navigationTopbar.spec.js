@@ -1,10 +1,11 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import 'whatwg-fetch';
+import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
-import TheNavigationTopbar from '../../../src/components/TheNavigationTopbar';
-import router from '../../../src/router';
-import clickOutside from '../../../src/directives/clickOutside';
-import store from '../../../src/store';
-import setupI18n from '../../../src/i18n';
+import TheNavigationTopbar from '../TheNavigationTopbar';
+import router from '../../router';
+import clickOutside from '../../directives/clickOutside';
+import store from '../../store';
+import setupI18n from '../../i18n';
 
 const i18n = setupI18n();
 
@@ -19,11 +20,14 @@ describe('TheNavigationTopbar', () => {
     localVue.use(router);
     localVue.use(Vuex);
     localVue.directive('click-outside', clickOutside);
-    wrapper = shallowMount(TheNavigationTopbar, {
+    wrapper = mount(TheNavigationTopbar, {
       localVue,
       router,
       store,
       i18n,
+      stubs: {
+        'ok-icon': true,
+      },
     });
   });
 

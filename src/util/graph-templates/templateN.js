@@ -381,7 +381,7 @@ function Template(svg) {
     // Prepare data for table head
     const table_head = [
       ['Geografi', ...this.filteredData.map(d => d.date)],
-      this.filteredData.flatMap(() => ['Befolkningsvekst', 'Netto flytting', 'Fødselsoverskudd']),
+      this.filteredData.flatMap(() => ['Befolkningsvekst', 'Netto innflytting', 'Fødselsoverskudd']),
     ];
 
     // Find all years in dataset

@@ -12,10 +12,7 @@ exports[`GraphInstance renders correctly 1`] = `
     <div
       class="spinner"
     >
-      <img
-        alt=""
-        src="../assets/spinner.svg"
-      />
+      <spinner-stub />
        
       <span
         class="spinner__text"

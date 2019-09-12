@@ -37,7 +37,6 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   min-width: 300px;
-  padding: 0;
 
   @media screen and (min-width: $break-md) {
     padding: 0 0.5em;
@@ -61,7 +60,7 @@
   display: grid;
   flex: 2 1 800px;
   gap: 0.5em;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   padding: 0 1em;
 
   @media screen and (min-width: $break-md) {
@@ -69,7 +68,7 @@
   }
 
   @media screen and (min-width: $break-lg) {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   }
 
   // Fallback to flexbox

@@ -1,7 +1,7 @@
 <template>
   <aside class="navbar">
     <router-link :to="{ name: 'Home' }" class="logo-link">
-      <img :src="osloIcon" alt="oslo-logo" class="oslo__logo" />
+      <oslo-logo class="oslo__logo" aria-label="Oslo kommune logo"></oslo-logo>
     </router-link>
 
     <button
@@ -118,14 +118,14 @@
 import { mapState, mapActions, mapGetters } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import osloIcon from '../assets/oslo-logo.svg'; //
+import OsloLogo from '../assets/oslo-logo.svg'; //
 
 export default {
   name: 'TheNavigationDrawer',
+  components: { OsloLogo },
   data() {
     return {
       links: allDistricts,
-      osloIcon: osloIcon,
       showNavigation: false,
       selected: [],
       selectedAll: false,

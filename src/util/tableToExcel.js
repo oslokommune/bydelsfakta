@@ -1,4 +1,4 @@
-import XLSX from 'xlsx';
+import XLSX from 'xlsx/dist/xlsx.mini.min';
 import downloadFile from './downloadFile';
 
 export default table => {

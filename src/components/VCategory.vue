@@ -100,7 +100,11 @@ export default {
   }
 
   @media screen and (min-width: $break-md) {
-    height: 9.5em;
+    height: 10em;
+  }
+
+  @media screen and (min-width: $break-lg) {
+    height: 11em;
   }
 
   // Fallback to flexbox
@@ -128,7 +132,7 @@ export default {
 
 .oslo__topic {
   font-size: $font-large;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 1.15em;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
 }

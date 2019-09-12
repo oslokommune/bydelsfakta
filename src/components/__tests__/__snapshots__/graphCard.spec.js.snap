@@ -78,7 +78,12 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-button card__toggle-button--active"
             title="Graf"
           >
-            <!---->
+            <ok-icon-stub
+              class="context-menu__dropdown-item-icon"
+              iconref="graph"
+              options="[object Object]"
+              stroke-width="2.5"
+            />
           </button>
            
           <button
@@ -86,7 +91,12 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-button"
             title="Tabell"
           >
-            <!---->
+            <ok-icon-stub
+              class="context-menu__dropdown-item-icon"
+              iconref="data-table"
+              options="[object Object]"
+              stroke-width="2.5"
+            />
           </button>
            
           <button
@@ -94,7 +104,12 @@ exports[`GraphCard change an active tab 1`] = `
             class="card__toggle-button"
             title="Kart"
           >
-            <!---->
+            <ok-icon-stub
+              class="context-menu__dropdown-item-icon"
+              iconref="map-pin"
+              options="[object Object]"
+              stroke-width="2.5"
+            />
           </button>
         </div>
          
@@ -108,7 +123,10 @@ exports[`GraphCard change an active tab 1`] = `
             id="context-menu-button"
             title="Åpne meny"
           >
-            <!---->
+            <ok-icon-stub
+              iconref="hamburger"
+              options="[object Object]"
+            />
              
             <span
               class="button-label"
@@ -133,10 +151,7 @@ exports[`GraphCard change an active tab 1`] = `
         <div
           class="spinner"
         >
-          <img
-            alt=""
-            src="../assets/spinner.svg"
-          />
+          <spinner-stub />
            
           <span
             class="spinner__text"
@@ -264,7 +279,12 @@ exports[`GraphCard renders correctly 1`] = `
             class="card__toggle-button card__toggle-button--active"
             title="Graf"
           >
-            <!---->
+            <ok-icon-stub
+              class="context-menu__dropdown-item-icon"
+              iconref="graph"
+              options="[object Object]"
+              stroke-width="2.5"
+            />
           </button>
            
           <button
@@ -272,7 +292,12 @@ exports[`GraphCard renders correctly 1`] = `
             class="card__toggle-button"
             title="Tabell"
           >
-            <!---->
+            <ok-icon-stub
+              class="context-menu__dropdown-item-icon"
+              iconref="data-table"
+              options="[object Object]"
+              stroke-width="2.5"
+            />
           </button>
            
           <!---->
@@ -288,7 +313,10 @@ exports[`GraphCard renders correctly 1`] = `
             id="context-menu-button"
             title="Åpne meny"
           >
-            <!---->
+            <ok-icon-stub
+              iconref="hamburger"
+              options="[object Object]"
+            />
              
             <span
               class="button-label"
@@ -313,10 +341,7 @@ exports[`GraphCard renders correctly 1`] = `
         <div
           class="spinner"
         >
-          <img
-            alt=""
-            src="../assets/spinner.svg"
-          />
+          <spinner-stub />
            
           <span
             class="spinner__text"
@@ -371,7 +396,10 @@ exports[`GraphCard renders correctly 1`] = `
           aria-label="Vis hjelpetekst"
           class="help__button"
         >
-          <!---->
+          <ok-icon-stub
+            iconref="help"
+            options="[object Object]"
+          />
         </button>
          
         <!---->

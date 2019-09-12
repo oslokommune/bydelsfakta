@@ -225,9 +225,9 @@ export default {
       map: {
         labels: ['Lavere dødsrate', 'Høyere dødsrate'],
         url: `${API}/dodsrater-status`,
-        scale: [0.09, 0.203],
+        scale: [0.09, 0.5],
         reverse: true,
-        heading: 'Dødelighet for personer 50–74 år',
+        heading: 'Dødelighet for personer 55–79 år',
         method: 'ratio',
         hidePercentSymbol: true,
       },
@@ -235,8 +235,7 @@ export default {
       tabs: [
         {
           active: false,
-          label: 'Dødsrate',
-          heading: 'Dødelighet for personer 55–79 år',
+          label: 'Døde per 1000 personer',
           id: 'levekar_dodsrater_status_andel',
           template: 'a',
           method: 'ratio',

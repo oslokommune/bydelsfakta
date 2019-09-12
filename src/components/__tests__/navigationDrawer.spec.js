@@ -1,9 +1,9 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import vuex from 'vuex';
-import TheNavigationDrawer from '../../../src/components/TheNavigationDrawer';
-import router from '../../../src/router';
-import store from '../../../src/store';
-import setupI18n from '../../../src/i18n';
+import TheNavigationDrawer from '../TheNavigationDrawer';
+import router from '../../router';
+import store from '../../store';
+import setupI18n from '../../i18n';
 
 const i18n = setupI18n();
 
@@ -23,6 +23,9 @@ describe('TheNavigationDrawer', () => {
       router,
       store,
       i18n,
+      stubs: {
+        'oslo-logo': true,
+      },
     });
   });
 

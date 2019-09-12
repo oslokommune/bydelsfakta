@@ -27,4 +27,24 @@ module.exports = {
       },
     ],
   },
+
+  overrides: [
+    {
+      files: ['*.spec.js'],
+      rules: {
+        quotes: [2, 'single'],
+      },
+      globals: {
+        jest: true,
+        expect: true,
+        afterEach: true,
+        beforeEach: true,
+        afterAll: true,
+        beforeAll: true,
+        describe: true,
+        it: true,
+        test: true,
+      },
+    },
+  ],
 };

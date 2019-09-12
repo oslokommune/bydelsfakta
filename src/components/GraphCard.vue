@@ -185,8 +185,8 @@
                 :title="$t('graphCard.saveCSV.aria')"
                 :aria-label="$t('graphCard.saveCSV.aria')"
                 tabindex="0"
-                @click="saveCsv()"
-                @keyup.enter="saveCsv()"
+                @click="saveCsv(settings.tabs[active].id)"
+                @keyup.enter="saveCsv(settings.tabs[active].id)"
                 id="context-menu-button-csv"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
@@ -195,13 +195,13 @@
 
               <button
                 role="menuitem"
-                v-if="mode !== 'map' && productionMode === false"
+                v-if="mode !== 'map'"
                 class="context-menu__dropdown-item"
                 :title="$t('graphCard.saveExcel.aria')"
                 :aria-label="$t('graphCard.saveExcel.aria')"
                 tabindex="0"
-                @click="saveExcel()"
-                @keyup.enter="saveExcel()"
+                @click="saveExcel(settings.tabs[active].id)"
+                @keyup.enter="saveExcel(settings.tabs[active].id)"
                 id="context-menu-button-excel"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
@@ -225,6 +225,7 @@
           :district="geoDistricts"
           :settings="settings.map"
           :data-url="`${settings.map.url}?geography=${district}`"
+          :fullscreen="fullscreen"
         ></v-leaflet>
       </div>
       <div class="about-container" v-if="mode === 'about'">
@@ -313,6 +314,12 @@ export default {
         this.fullscreen = true;
         body.style.height = '100vh';
         body.style.overflow = 'hidden';
+
+        this.$ga.event({
+          eventCategory: 'Card',
+          eventAction: 'Open fullscreen',
+          eventLabel: this.mode,
+        });
       }
     },
 
@@ -329,6 +336,12 @@ export default {
 
     activeTab(index) {
       this.active = index;
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Change tab',
+        eventLabel: this.settings.tabs[index].label,
+      });
     },
 
     saveSvg(id) {
@@ -336,6 +349,12 @@ export default {
       const svgData = this.$refs.graph.$refs.svg.outerHTML;
       downloadSvg(svgData, filename);
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save SVG',
+        eventLabel: filename,
+      });
     },
 
     savePng(id) {
@@ -343,16 +362,36 @@ export default {
       downloadPng(this.$refs.graph.$refs.svg, filename);
 
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save PNG',
+        eventLabel: filename,
+      });
     },
 
-    saveCsv() {
+    saveCsv(id) {
       tableToCsv(this.$refs.graph.$refs.tableContainer);
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save CSV',
+        eventLabel: `${this.$route.params.district}_${id}`,
+        eventValue: null,
+      });
     },
 
-    saveExcel() {
+    saveExcel(id) {
       tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
       this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save Excel',
+        eventLabel: `${this.$route.params.district}_${id}`,
+        eventValue: null,
+      });
     },
 
     // Sets 'showAsTabs' true/false by comparing the accumulated width
@@ -368,6 +407,14 @@ export default {
   },
 
   watch: {
+    mode(to, from) {
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Change view',
+        eventLabel: `${from} -> ${to}`,
+      });
+    },
+
     '$route.params.topic'() {
       this.active = 0;
       this.mode = 'graph';
@@ -384,6 +431,10 @@ export default {
 .map-container,
 .about-container {
   height: 560px;
+}
+
+.map-container {
+  flex-grow: 1;
 }
 
 .about-container {
@@ -444,6 +495,7 @@ export default {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
+  z-index: 2;
 
   &:hover {
     background: rgba(black, 0.2);
@@ -458,6 +510,8 @@ export default {
 
   &.fullscreen {
     bottom: 1rem;
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - 2rem);
     left: 1rem;
     outline: 2rem solid rgba(black, 0.9);

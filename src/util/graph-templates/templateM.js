@@ -29,8 +29,8 @@ function Template(svg) {
 
   const tabData = [
     { label: 'Totalt', value: 'totalt' },
-    { label: 'Mellom delbydeler', value: 'mellomDelbydeler' },
-    { label: 'Innenfor delbydelen', value: 'innenforDelbydelen' },
+    { label: 'Mellom bydeler', value: 'mellomBydeler' },
+    { label: 'Innenfor bydelen', value: 'innenforBydelen' },
     { label: 'Til/fra Oslo', value: 'tilFraOslo' },
   ];
 
@@ -55,7 +55,7 @@ function Template(svg) {
             .split(' - ')
             .map(d => +d);
         }
-        row.totalt = row['mellomDelbydeler'] + row['innenforDelbydelen'] + row['tilFraOslo'];
+        row.totalt = row['mellomBydeler'] + row['innenforBydelen'] + row['tilFraOslo'];
         row.alder = arr;
       });
       this.filteredData[key].sort((a, b) => a.alder[0] - b.alder[0]);
@@ -414,16 +414,40 @@ function Template(svg) {
           this.filteredData.emigration[i]['tilFraOslo'],
           this.filteredData.immigration[i]['tilFraOslo'] - this.filteredData.emigration[i]['tilFraOslo'],
 
-          this.filteredData.immigration[i]['mellomDelbydeler'],
-          this.filteredData.emigration[i]['mellomDelbydeler'],
-          this.filteredData.immigration[i]['mellomDelbydeler'] - this.filteredData.emigration[i]['mellomDelbydeler'],
+          this.filteredData.immigration[i]['mellomBydeler'],
+          this.filteredData.emigration[i]['mellomBydeler'],
+          this.filteredData.immigration[i]['mellomBydeler'] - this.filteredData.emigration[i]['mellomBydeler'],
 
-          this.filteredData.immigration[i]['innenforDelbydelen'],
-          this.filteredData.emigration[i]['innenforDelbydelen'],
-          this.filteredData.immigration[i]['innenforDelbydelen'] -
-            this.filteredData.emigration[i]['innenforDelbydelen'],
+          this.filteredData.immigration[i]['innenforBydelen'],
+          this.filteredData.emigration[i]['innenforBydelen'],
+          this.filteredData.immigration[i]['innenforBydelen'] - this.filteredData.emigration[i]['innenforBydelen'],
         ],
       };
+    });
+
+    table_body.push({
+      key: 'Totalt',
+      values: [
+        d3.sum(this.filteredData.immigration.map(d => d.totalt)),
+        d3.sum(this.filteredData.emigration.map(d => d.totalt)),
+        d3.sum(this.filteredData.immigration.map(d => d.totalt)) -
+          d3.sum(this.filteredData.emigration.map(d => d.totalt)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
+          d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)),
+        d3.sum(this.filteredData.emigration.map(d => d.mellomBydeler)),
+        d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)) -
+          d3.sum(this.filteredData.emigration.map(d => d.mellomBydeler)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.innenforBydelen)),
+        d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
+        d3.sum(this.filteredData.immigration.map(d => d.innenforBydelen)) -
+          d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
+      ],
     });
 
     const tableGenerator = util.drawTable.bind(this);

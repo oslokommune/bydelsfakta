@@ -175,6 +175,15 @@ function Base_Template(svg) {
       case 'g':
         year = `(${this.data.data[0].values[4]})`;
         break;
+
+      case 'm':
+        year = `(${this.data.data[0].values.year})`;
+        break;
+
+      case 'n':
+        year = `(${this.data.data[0].values[0][this.data.data[0].values[0].length - 1].date})`;
+        break;
+
       default:
         break;
     }
