@@ -1,0 +1,37 @@
+name: Build and deploy bydelsfakta-frontend
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, test, and build
+      run: |
+        npm install
+        npm run test:unit
+        npm run test:style
+        npm run build
+      env:
+        CI: true
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: oslokommune/bydelsfakta-frontend
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        snapshot: true
+        dockerfile: Dockerfile
