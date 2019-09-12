@@ -55,3 +55,7 @@ npm run test:e2e
 #### CircleCI
 
 You can check out the CicleCI builds that are run on each commit to the dev branch: [Press me](https://circleci.com/gh/oslokommune/bydelsfakta)
+
+#### Github Actions
+
+We now use github actions to build the bydelsfakta-frontend, so you can check out when the last successfull build was built in the actions-tab
