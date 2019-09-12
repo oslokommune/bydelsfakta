@@ -2,7 +2,6 @@ name: Test pull request
 
 on:
   pull_request
-    types: [pull_request, push, pull_request_review]
 
 jobs:
   build-and-deploy:
