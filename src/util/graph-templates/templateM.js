@@ -433,11 +433,6 @@ function Template(svg) {
         d3.sum(this.filteredData.immigration.map(d => d.totalt)) -
           d3.sum(this.filteredData.emigration.map(d => d.totalt)),
 
-        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
-        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
-        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
-          d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
-
         d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)),
         d3.sum(this.filteredData.emigration.map(d => d.mellomBydeler)),
         d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)) -
@@ -447,6 +442,11 @@ function Template(svg) {
         d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
         d3.sum(this.filteredData.immigration.map(d => d.innenforBydelen)) -
           d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
+          d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
       ],
     });
 
