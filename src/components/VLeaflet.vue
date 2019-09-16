@@ -133,7 +133,7 @@ export default {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
         const dataObj = data.find(geo => geo.id === layerId.substring(6, 10) || geo.id === layerId);
-        if (!dataObj || !dataObj.values || !dataObj.values.length) return;
+        if (!dataObj || !dataObj.values || !dataObj.values.length) continue;
 
         const geography = dataObj.geography;
 

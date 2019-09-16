@@ -11,7 +11,7 @@ export default {
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: false,
+      production: true,
       sources: [source.ssb],
       tabs: [
         {

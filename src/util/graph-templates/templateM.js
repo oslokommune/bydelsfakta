@@ -410,10 +410,6 @@ function Template(svg) {
           this.filteredData.emigration[i]['totalt'],
           this.filteredData.immigration[i]['totalt'] - this.filteredData.emigration[i]['totalt'],
 
-          this.filteredData.immigration[i]['tilFraOslo'],
-          this.filteredData.emigration[i]['tilFraOslo'],
-          this.filteredData.immigration[i]['tilFraOslo'] - this.filteredData.emigration[i]['tilFraOslo'],
-
           this.filteredData.immigration[i]['mellomBydeler'],
           this.filteredData.emigration[i]['mellomBydeler'],
           this.filteredData.immigration[i]['mellomBydeler'] - this.filteredData.emigration[i]['mellomBydeler'],
@@ -421,6 +417,10 @@ function Template(svg) {
           this.filteredData.immigration[i]['innenforBydelen'],
           this.filteredData.emigration[i]['innenforBydelen'],
           this.filteredData.immigration[i]['innenforBydelen'] - this.filteredData.emigration[i]['innenforBydelen'],
+
+          this.filteredData.immigration[i]['tilFraOslo'],
+          this.filteredData.emigration[i]['tilFraOslo'],
+          this.filteredData.immigration[i]['tilFraOslo'] - this.filteredData.emigration[i]['tilFraOslo'],
         ],
       };
     });
@@ -433,11 +433,6 @@ function Template(svg) {
         d3.sum(this.filteredData.immigration.map(d => d.totalt)) -
           d3.sum(this.filteredData.emigration.map(d => d.totalt)),
 
-        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
-        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
-        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
-          d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
-
         d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)),
         d3.sum(this.filteredData.emigration.map(d => d.mellomBydeler)),
         d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)) -
@@ -447,6 +442,11 @@ function Template(svg) {
         d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
         d3.sum(this.filteredData.immigration.map(d => d.innenforBydelen)) -
           d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
+
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+        d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
+          d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
       ],
     });
 
