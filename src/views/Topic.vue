@@ -45,7 +45,7 @@ import { mapGetters, mapState } from 'vuex';
 import VCategory from '../components/VCategory';
 import GraphCard from '../components/GraphCard';
 
-import { topics, disabledTopics } from '../config/topics';
+import { topics } from '../config/topics';
 import { getDistrictName, getHumanReadableTopic } from '../util';
 
 export default {
@@ -76,7 +76,6 @@ export default {
   data() {
     return {
       topics: topics,
-      disabledTopics: disabledTopics,
     };
   },
 

@@ -285,7 +285,7 @@ export default {
 
       this.svg.render(this.filteredData, {
         method: this.settings.method,
-        hidePercentSymbol: this.settings.hidePercentSymbol,
+        showPermille: this.settings.showPermille,
         mode: this.settings.mode,
         sources: this.sources,
         initialRender: true,

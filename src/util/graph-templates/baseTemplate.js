@@ -79,7 +79,7 @@ function Base_Template(svg) {
     }
 
     if (tick) {
-      return method === 'ratio' ? d3.format('~p')(num) : d3.format('~d')(num);
+      return this.showPermille ? `${num * 100}‰` : method === 'ratio' ? d3.format('~p')(num) : d3.format('~d')(num);
     }
 
     if (table) {
@@ -92,7 +92,7 @@ function Base_Template(svg) {
 
     switch (method) {
       case 'ratio':
-        if (this.hidePercentSymbol) {
+        if (this.showPermille) {
           return locale.norwegianLocale.format(',.1f')(num * 100);
         } else {
           return this.formatPercent(num);
@@ -115,7 +115,7 @@ function Base_Template(svg) {
       highlight: this.highlight,
       mode: this.mode,
       compareDistricts: this.isCompare,
-      hidePercentSymbol: this.hidePercentSymbol,
+      showPermille: this.showPermille,
       event: 'resize',
     });
   }, 250);
@@ -306,7 +306,7 @@ function Base_Template(svg) {
     this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
-    this.hidePercentSymbol = options.hidePercentSymbol || false;
+    this.showPermille = options.showPermille || false;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;

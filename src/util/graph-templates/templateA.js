@@ -180,7 +180,7 @@ function Template(svg) {
 
     if (isMultiLevel) {
       table_head = [
-        ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
+        ['Geografi', this.method === 'value' ? 'Antall' : this.showPermille ? 'Promilleandel' : 'Prosentandel'],
         [
           ...this.data.meta.series.map(d => {
             let str = '';
@@ -194,7 +194,10 @@ function Template(svg) {
         ],
       ];
     } else {
-      table_head = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];
+      table_head = [
+        'Geografi',
+        this.method === 'value' ? 'Antall' : this.showPermille ? 'Promilleandel' : 'Prosentandel',
+      ];
     }
 
     const table_body = JSON.parse(JSON.stringify(this.data.data))

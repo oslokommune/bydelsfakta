@@ -27,7 +27,7 @@
 <script>
 import { mapState } from 'vuex';
 import VCategory from '../components/VCategory';
-import { topics, topicNames, disabledTopics } from '../config/topics';
+import { topics, topicNames } from '../config/topics';
 import districts from '../config/geoData/districts';
 import { getDistrictName } from '../util';
 
@@ -66,7 +66,6 @@ export default {
       topics: topics,
       chosenDistrict: {},
       districts: districts,
-      disabledTopics: disabledTopics,
     };
   },
 };

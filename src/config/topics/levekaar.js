@@ -229,7 +229,7 @@ export default {
         reverse: true,
         heading: 'Dødelighet for personer 55–79 år',
         method: 'ratio',
-        hidePercentSymbol: true,
+        showPermille: true,
       },
       production: true,
       tabs: [
@@ -241,7 +241,7 @@ export default {
           method: 'ratio',
           url: `${API}/dodsrater-status`,
           production: true,
-          hidePercentSymbol: true,
+          showPermille: true,
         },
       ],
     },
