@@ -220,7 +220,7 @@ export default {
       size: 'small',
       heading: 'Dødelighet',
       about:
-        'For hver 5 års gruppe og kjønn for alderen 55–79 år beregnes det en dødsrate. Det lages deretter et gjennomsnitt av disse 10 dødsratene. Deretter igjen lages det et gjennomsnitt for de 7 siste årene for å sikre at tilfeldige årsvariasjoner ikke skal påvirke hovedmønsteret.',
+        'For hver 5 års gruppe og kjønn for alderen 55–79 år beregnes det en dødsrate, dvs. antall døde per 1000 personer. Det lages deretter et gjennomsnitt av disse 10 dødsratene. Deretter igjen lages det et gjennomsnitt for de 7 siste årene for å sikre at tilfeldige årsvariasjoner ikke skal påvirke hovedmønsteret.',
       sources: [source.ssb],
       map: {
         labels: ['Lavere dødsrate', 'Høyere dødsrate'],
