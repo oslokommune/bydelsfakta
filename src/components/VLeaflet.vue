@@ -156,14 +156,15 @@ export default {
           : interpolator(colorStrength(dataValue));
 
         // Set number formatting for popup
+
         const format =
-          this.settings.method === 'ratio'
+          this.settings.method === 'ratio' && !this.settings.showPermille
             ? locale.norwegianLocale.format('.3~p')
             : locale.norwegianLocale.format(',.0f');
 
         const popupContent = `
           <h4>${layer.feature.properties.name}</h4>
-          <p>${format(dataValue)}</p>
+          <p>${this.settings.showPermille ? `${format(dataValue * 100)}‰` : format(dataValue)}</p>
         `;
 
         // Bind colors and popup content to the layer
