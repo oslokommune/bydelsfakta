@@ -362,8 +362,8 @@ exports[`Bydel renders component correctly 1`] = `
         </span>
       </a>
       <a
-        class="main-container__item"
-        href="#/bydel/gamleoslo/rom-per-person"
+        class="main-container__item router-link-exact-active router-link-active disabled"
+        href="#/"
         id="rom-per-person"
       >
         <picture>
