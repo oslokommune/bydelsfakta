@@ -361,45 +361,6 @@ exports[`Bydel renders component correctly 1`] = `
           Boligpriser
         </span>
       </a>
-      <a
-        class="main-container__item router-link-exact-active router-link-active disabled"
-        href="#/"
-        id="rom-per-person"
-      >
-        <picture>
-          <source
-            alt="Rom per person"
-            srcset="/img/trangboddhet.webp"
-            type="image/webp"
-          />
-           
-          <source
-            alt="Rom per person"
-            srcset="/img/trangboddhet.png"
-            type="image/png"
-          />
-           
-          <img
-            alt="Rom per person"
-            aria-hidden="true"
-            class="oslo__img"
-            src="/img/trangboddhet.png"
-          />
-        </picture>
-         
-        <span
-          class="oslo__category"
-          style="background-color: rgb(199, 247, 201);"
-        >
-          Boforhold
-        </span>
-         
-        <span
-          class="oslo__topic"
-        >
-          Rom per person
-        </span>
-      </a>
     </div>
   </div>
 </div>
