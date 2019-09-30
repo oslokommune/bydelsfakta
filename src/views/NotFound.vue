@@ -71,6 +71,7 @@ export default {
 @import '../styles/layout';
 
 .topics-grid {
+  flex-basis: auto;
   padding: 0;
 }
 
