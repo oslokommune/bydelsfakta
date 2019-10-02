@@ -4,6 +4,8 @@ import VueAnalytics from 'vue-analytics';
 import VueMeta from 'vue-meta';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
+import * as Sentry from '@sentry/browser';
+import * as Integrations from '@sentry/integrations';
 import './util/polyfills';
 import App from './App';
 import router from './router';
@@ -46,6 +48,13 @@ Vue.use(VueAnalytics, {
     sendHitTask: production,
   },
 });
+
+if (production) {
+  Sentry.init({
+    dsn: production ? envs.VUE_APP_SENTRY_DSN : process.env.VUE_APP_SENTRY_DSN,
+    integrations: [new Integrations.Vue({ Vue, attachProps: true, logErrors: true })],
+  });
+}
 
 new Vue({
   router,
