@@ -264,12 +264,9 @@ export default {
       padding: 1rem;
     }
 
-    &:focus {
-      outline: none;
-    }
-
     &:hover {
       background-color: darken($color-bg, 5%);
+      cursor: pointer;
     }
   }
 
