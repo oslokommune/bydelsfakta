@@ -1,5 +1,5 @@
 <template>
-  <div class="app" :class="{ menuIsOpen, navigationIsOpen }">
+  <div class="app" id="oslo-logo" tabindex="-1" :class="{ menuIsOpen, navigationIsOpen }">
     <the-navigation-drawer />
     <div class="app__content">
       <the-navigation-topbar />
@@ -67,6 +67,7 @@ export default {
       if (to.params.district !== undefined) {
         this.addDistrict({ district: to.params.district, pushRoute: false });
       }
+      document.getElementById('oslo-logo').focus();
     },
   },
 };
