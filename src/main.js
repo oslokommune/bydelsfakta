@@ -6,6 +6,7 @@ import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+import VueSkipTo from 'vue-skip-to';
 import './util/polyfills';
 import App from './App';
 import router from './router';
@@ -33,6 +34,7 @@ Icon.Default.mergeOptions({
 
 Vue.use(VueMeta);
 Vue.use(VueResize);
+Vue.use(VueSkipTo);
 
 Vue.config.productionTip = false;
 Vue.config.devtools = !production;

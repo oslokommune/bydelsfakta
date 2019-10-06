@@ -1,5 +1,5 @@
 <template>
-  <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
+  <header class="oslo__navigation-topbar" id="main" @keydown.esc="showDropdown = false">
     <h1 v-if="selectedTopic === null" class="header">{{ getDistrict($route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
       <button
