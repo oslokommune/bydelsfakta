@@ -20,6 +20,13 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     Bydel Gamle Oslo
   </button>
    
+  <a
+    class="vue-skip-to"
+    href="#main"
+  >
+    Skip to main content
+  </a>
+   
   <nav
     class="navigation"
     role="navigation"
@@ -314,6 +321,13 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   >
     - Velg byområde -
   </button>
+   
+  <a
+    class="vue-skip-to"
+    href="#main"
+  >
+    Skip to main content
+  </a>
    
   <nav
     class="navigation"

@@ -1,5 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import vuex from 'vuex';
+import VueSkipTo from 'vue-skip-to';
 import TheNavigationDrawer from '../TheNavigationDrawer';
 import router from '../../router';
 import store from '../../store';
@@ -17,6 +18,7 @@ describe('TheNavigationDrawer', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     localVue.use(vuex);
+    localVue.use(VueSkipTo)
     router.push('/bydel/sagene');
     wrapper = mount(TheNavigationDrawer, {
       localVue,

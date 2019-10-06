@@ -3,6 +3,7 @@
 exports[`TheNavigationTopbar renders correctly 1`] = `
 <header
   class="oslo__navigation-topbar"
+  id="main"
 >
   <h1
     class="header"

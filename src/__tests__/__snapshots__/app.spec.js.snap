@@ -3,6 +3,8 @@
 exports[`App shallowmounts app 1`] = `
 <div
   class="app menuIsOpen"
+  id="app"
+  tabindex="-1"
 >
   <the-navigation-drawer-stub />
    
