@@ -5,6 +5,13 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
   class="navbar"
 >
   <a
+    class="vue-skip-to"
+    href="#main"
+  >
+    Hopp til hovedinnhold
+  </a>
+   
+  <a
     class="logo-link router-link-active"
     href="/"
   >
@@ -299,6 +306,13 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
 <aside
   class="navbar"
 >
+  <a
+    class="vue-skip-to"
+    href="#main"
+  >
+    Hopp til hovedinnhold
+  </a>
+   
   <a
     class="logo-link router-link-active"
     href="/"

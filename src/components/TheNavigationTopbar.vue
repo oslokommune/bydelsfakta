@@ -1,6 +1,6 @@
 <template>
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
-    <h1 v-if="selectedTopic === null" class="header">{{ getDistrict($route.params.district) }}</h1>
+    <h1 v-if="selectedTopic === null" id="select" class="header">{{ getDistrict($route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
       <button
         v-if="selectedTopic"
@@ -264,12 +264,9 @@ export default {
       padding: 1rem;
     }
 
-    &:focus {
-      outline: none;
-    }
-
     &:hover {
       background-color: darken($color-bg, 5%);
+      cursor: pointer;
     }
   }
 

@@ -79,7 +79,8 @@
     "navigationDistrict": {
       "compareDistrict": "Sammenlign bydeler",
       "chooseDistrict": "- Velg byområde -"
-    }
+    },
+    "skipToContent": "Hopp til hovedinnhold"
   },
   "navigationTopbar": {
     "selectTopic": {
