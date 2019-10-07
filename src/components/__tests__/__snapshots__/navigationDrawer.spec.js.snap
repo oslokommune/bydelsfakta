@@ -8,7 +8,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
     class="vue-skip-to"
     href="#main"
   >
-    Skip to main content
+    Hopp til hovedinnhold
   </a>
    
   <a
@@ -310,7 +310,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
     class="vue-skip-to"
     href="#main"
   >
-    Skip to main content
+    Hopp til hovedinnhold
   </a>
    
   <a
