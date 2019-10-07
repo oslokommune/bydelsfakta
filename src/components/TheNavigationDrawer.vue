@@ -1,6 +1,6 @@
 <template>
   <aside class="navbar">
-    <vue-skip-to to="#main" :text="$t(`navigationDrawer.skipToContent`)"></vue-skip-to>
+    <vue-skip-to to="#select" :text="$t(`navigationDrawer.skipToContent`)"></vue-skip-to>
     <router-link :to="{ name: 'Home' }" class="logo-link">
       <oslo-logo class="oslo__logo" aria-label="Oslo kommune logo"></oslo-logo>
     </router-link>
