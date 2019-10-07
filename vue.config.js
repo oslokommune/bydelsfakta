@@ -9,10 +9,10 @@ module.exports = {
   },
   publicPath: '/',
   outputDir: 'docs',
-  assetsDir: undefined,
+  assetsDir: '',
   runtimeCompiler: false,
-  productionSourceMap: undefined,
-  parallel: undefined,
+  productionSourceMap: true,
+  parallel: true,
 
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
