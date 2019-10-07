@@ -18,7 +18,7 @@ describe('TheNavigationDrawer', () => {
     const localVue = createLocalVue();
     localVue.use(router);
     localVue.use(vuex);
-    localVue.use(VueSkipTo)
+    localVue.use(VueSkipTo);
     router.push('/bydel/sagene');
     wrapper = mount(TheNavigationDrawer, {
       localVue,

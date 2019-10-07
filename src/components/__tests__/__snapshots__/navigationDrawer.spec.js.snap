@@ -5,6 +5,13 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
   class="navbar"
 >
   <a
+    class="vue-skip-to"
+    href="#main"
+  >
+    Skip to main content
+  </a>
+   
+  <a
     class="logo-link router-link-active"
     href="/"
   >
@@ -19,13 +26,6 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
   >
     Bydel Gamle Oslo
   </button>
-   
-  <a
-    class="vue-skip-to"
-    href="#main"
-  >
-    Skip to main content
-  </a>
    
   <nav
     class="navigation"
@@ -307,6 +307,13 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   class="navbar"
 >
   <a
+    class="vue-skip-to"
+    href="#main"
+  >
+    Skip to main content
+  </a>
+   
+  <a
     class="logo-link router-link-active"
     href="/"
   >
@@ -321,13 +328,6 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   >
     - Velg byområde -
   </button>
-   
-  <a
-    class="vue-skip-to"
-    href="#main"
-  >
-    Skip to main content
-  </a>
    
   <nav
     class="navigation"

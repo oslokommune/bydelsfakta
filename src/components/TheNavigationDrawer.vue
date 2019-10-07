@@ -1,5 +1,6 @@
 <template>
   <aside class="navbar">
+    <vue-skip-to to="#main" text="Skip to main content"></vue-skip-to>
     <router-link :to="{ name: 'Home' }" class="logo-link">
       <oslo-logo class="oslo__logo" aria-label="Oslo kommune logo"></oslo-logo>
     </router-link>
@@ -11,7 +12,6 @@
       @keydown.esc="showNavigation = false"
       v-text="selectedTopic"
     ></button>
-    <vue-skip-to to="#main" text="Skip to main content"></vue-skip-to>
     <nav role="navigation" class="navigation" :class="{ 'navigation--show': showNavigation }">
       <ul class="state-toggle">
         <li class="state-toggle__element">
