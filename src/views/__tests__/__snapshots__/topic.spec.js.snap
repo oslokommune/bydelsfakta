@@ -51,7 +51,7 @@ exports[`Topic renders component correctly 1`] = `
               <button
                 aria-label="Antall"
                 class="tabs__tab active tabs__tab--hidden"
-                id="tabButton-Befolkningen etter alder-0"
+                data-id="tabButton-Befolkningen etter alder-0"
                 role="tab"
               >
                 Antall
@@ -59,7 +59,7 @@ exports[`Topic renders component correctly 1`] = `
               <button
                 aria-label="Andel"
                 class="tabs__tab tabs__tab--hidden"
-                id="tabButton-Befolkningen etter alder-1"
+                data-id="tabButton-Befolkningen etter alder-1"
                 role="tab"
               >
                 Andel
@@ -121,7 +121,7 @@ exports[`Topic renders component correctly 1`] = `
                 aria-haspopup="true"
                 aria-label="Åpne meny"
                 class="context-menu__button"
-                id="context-menu-button"
+                data-id="context-menu-button"
                 title="Åpne meny"
               >
                 <ok-icon-stub
@@ -265,7 +265,7 @@ exports[`Topic renders component correctly 1`] = `
               <button
                 aria-label="Status"
                 class="tabs__tab active tabs__tab--hidden"
-                id="tabButton-Befolkningspyramide-0"
+                data-id="tabButton-Befolkningspyramide-0"
                 role="tab"
               >
                 Status
@@ -322,7 +322,7 @@ exports[`Topic renders component correctly 1`] = `
                 aria-haspopup="true"
                 aria-label="Åpne meny"
                 class="context-menu__button"
-                id="context-menu-button"
+                data-id="context-menu-button"
                 title="Åpne meny"
               >
                 <ok-icon-stub
@@ -452,7 +452,7 @@ exports[`Topic renders component correctly 1`] = `
               <button
                 aria-label="Status"
                 class="tabs__tab active tabs__tab--hidden"
-                id="tabButton-Gjennomsnitt- og medianalder-0"
+                data-id="tabButton-Gjennomsnitt- og medianalder-0"
                 role="tab"
               >
                 Status
@@ -520,7 +520,7 @@ exports[`Topic renders component correctly 1`] = `
                 aria-haspopup="true"
                 aria-label="Åpne meny"
                 class="context-menu__button"
-                id="context-menu-button"
+                data-id="context-menu-button"
                 title="Åpne meny"
               >
                 <ok-icon-stub
