@@ -103,8 +103,7 @@ const util = {
       .attr('colspan', (d, i) => (isMultiLevel ? (i > 0 ? head[1].length / (head[0].length - 1) : 1) : 0))
       .attr('scope', 'col')
       .classed('border-cell', (d, i) => i > 0)
-      .text(d => d)
-      .attr('id', (d, i) => `${this.data.meta.heading}_th_1_${i}`);
+      .text(d => d);
 
     if (isMultiLevel) {
       const hRow2 = thead.append('tr');
@@ -118,7 +117,7 @@ const util = {
           return i % l === 0;
         })
         .text(d => d)
-        .attr('id', (d, i) => `${this.data.meta.heading}_th_2_${i}`);
+        .attr('scope', 'col');
     }
 
     const rows = tbody

@@ -45,7 +45,7 @@ exports[`GraphCard change an active tab 1`] = `
           <button
             aria-label="Andel"
             class="tabs__tab"
-            id="tabButton-Eierform-0"
+            data-id="tabButton-Eierform-0"
             role="tab"
           >
             Andel
@@ -53,7 +53,7 @@ exports[`GraphCard change an active tab 1`] = `
           <button
             aria-label="Matrise"
             class="tabs__tab active"
-            id="tabButton-Eierform-1"
+            data-id="tabButton-Eierform-1"
             role="tab"
           >
             Matrise
@@ -61,7 +61,7 @@ exports[`GraphCard change an active tab 1`] = `
           <button
             aria-label="Historisk"
             class="tabs__tab"
-            id="tabButton-Eierform-2"
+            data-id="tabButton-Eierform-2"
             role="tab"
           >
             Historisk
@@ -120,7 +120,7 @@ exports[`GraphCard change an active tab 1`] = `
             aria-haspopup="true"
             aria-label="Åpne meny"
             class="context-menu__button"
-            id="context-menu-button"
+            data-id="context-menu-button"
             title="Åpne meny"
           >
             <ok-icon-stub
@@ -254,7 +254,7 @@ exports[`GraphCard renders correctly 1`] = `
           <button
             aria-label="Antall"
             class="tabs__tab active"
-            id="tabButton-Befolkningen etter alder-0"
+            data-id="tabButton-Befolkningen etter alder-0"
             role="tab"
           >
             Antall
@@ -262,7 +262,7 @@ exports[`GraphCard renders correctly 1`] = `
           <button
             aria-label="Andel"
             class="tabs__tab"
-            id="tabButton-Befolkningen etter alder-1"
+            data-id="tabButton-Befolkningen etter alder-1"
             role="tab"
           >
             Andel
@@ -310,7 +310,7 @@ exports[`GraphCard renders correctly 1`] = `
             aria-haspopup="true"
             aria-label="Åpne meny"
             class="context-menu__button"
-            id="context-menu-button"
+            data-id="context-menu-button"
             title="Åpne meny"
           >
             <ok-icon-stub

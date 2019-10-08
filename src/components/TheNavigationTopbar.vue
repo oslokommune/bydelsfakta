@@ -2,7 +2,9 @@
   <header class="oslo__navigation-topbar" @keydown.esc="showDropdown = false">
     <h1 v-if="selectedTopic === null" id="select" class="header">{{ getDistrict($route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
-      <button
+      <div
+        tabindex="0"
+        role="button"
         v-if="selectedTopic"
         id="select"
         class="navigation-topbar__select"
@@ -14,14 +16,14 @@
         :aria-label="$t('navigationTopbar.selectTopic.aria')"
         :title="$t('navigationTopbar.selectTopic.aria')"
       >
-        <label class="label" :class="{ 'label--active': selectedTopic !== null }">{{
-          $t('navigationTopbar.selectTopic.label')
-        }}</label>
+        <div class="label" :class="{ 'label--active': selectedTopic !== null }">
+          {{ $t('navigationTopbar.selectTopic.label') }}
+        </div>
         <div class="topic">
           <h1 class="header">{{ getHumanReadableTopic(selectedTopic) }}</h1>
           <ok-icon icon-ref="arrow-down" :options="{ rotation: showDropdown ? '180deg' : false }"></ok-icon>
         </div>
-      </button>
+      </div>
       <transition name="fade">
         <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
           <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">

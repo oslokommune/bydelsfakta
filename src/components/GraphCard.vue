@@ -26,7 +26,7 @@
                 ref="tabRef"
                 role="tab"
                 :aria-label="tab.label"
-                :id="`tabButton-${settings.heading}-${index}`"
+                :data-id="`tabButton-${settings.heading}-${index}`"
                 :key="index"
                 @click="activeTab(index)"
                 :class="{ active: active === index, 'tabs__tab--hidden': !showAsTabs }"
@@ -104,7 +104,7 @@
               @click="showDropdown = !showDropdown"
               aria-haspopup="true"
               :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
-              id="context-menu-button"
+              data-id="context-menu-button"
               :title="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
             >
               <ok-icon icon-ref="hamburger"></ok-icon>
@@ -143,7 +143,7 @@
                 tabindex="0"
                 :title="$t('graphCard.about.aria')"
                 :aria-label="$t('graphCard.about.aria')"
-                id="context-menu-button-about"
+                data-id="context-menu-button-about"
               >
                 <ok-icon icon-ref="help" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.about.label') }}</span>
@@ -158,7 +158,7 @@
                 tabindex="0"
                 :title="$t('graphCard.savePNG.aria')"
                 :aria-label="$t('graphCard.savePNG.aria')"
-                id="context-menu-button-png"
+                data-id="context-menu-button-png"
               >
                 <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
@@ -172,7 +172,7 @@
                 tabindex="0"
                 @click="saveSvg(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
-                id="context-menu-button-svg"
+                data-id="context-menu-button-svg"
               >
                 <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
@@ -187,7 +187,7 @@
                 tabindex="0"
                 @click="saveCsv(settings.tabs[active].id)"
                 @keyup.enter="saveCsv(settings.tabs[active].id)"
-                id="context-menu-button-csv"
+                data-id="context-menu-button-csv"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveCSV.label') }}</span>
@@ -202,7 +202,7 @@
                 tabindex="0"
                 @click="saveExcel(settings.tabs[active].id)"
                 @keyup.enter="saveExcel(settings.tabs[active].id)"
-                id="context-menu-button-excel"
+                data-id="context-menu-button-excel"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveExcel.label') }}</span>
