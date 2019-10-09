@@ -42,6 +42,7 @@
             @change="toggleCheckbox(selectedAll)"
             class="navigation-header__input custom"
             :value="selectedAll"
+            :aria-label="$t('navigationDrawer.select.label')"
           />
           <label
             for="allDistricts"
