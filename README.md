@@ -1,18 +1,18 @@
 # Bydelsfakta
 
-👉**https://bydelsfakta.oslo.kommune.no/**
+👉 **https://bydelsfakta.oslo.kommune.no/**
 
-Frontend application for Bydelsfakta at Oslo kommune which visualizes statistics and data on different topics about the districts in Oslo.
+Bydelsfakta is a frontend application for Oslo municipality which visualises demographic statistics and data on various topics for the 15 districts in the City of Oslo.
 
 #### Install dependencies
-Need to install both the dependencies in root folder and the server folder for the backend
+Install dependencies in both the root folder and the server folder for the backend
 ```
 npm install
 cd server && npm install
 ```
 
 #### Run it locally for local development
-To different runs, one for frontend and one for backend
+In order to run this application, two different services is needed: one for frontend and one for backend
 
 ##### Frontend
 ```
