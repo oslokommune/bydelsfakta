@@ -1,36 +1,82 @@
-// import { select, selectAll, event, selection } from 'd3-selection';
-// import { scaleLinear, scaleTime, scaleBand, scaleOrdinal } from 'd3-scale';
-// import { axisTop, axisBottom, axisLeft } from 'd3-axis';
-// import { format } from 'd3-format';
-// import { max, min, sum } from 'd3-array';
-// import { timeFormat, timeParse } from 'd3-time-format';
-// import { line } from 'd3-shape';
-// import { brushX, move, extent, on } from 'd3-brush';
+// tried to tree-shake but we would only save about 100-120kb, not worth it.
+/*import {
+  line,
+  brushX,
+  move,
+  extent,
+  on,
+  timeFormat,
+  timeParse,
+  timeYear,
+  max,
+  min,
+  sum,
+  format,
+  select,
+  selectAll,
+  event,
+  selection,
+  scaleLinear,
+  scaleTime,
+  scaleBand,
+  scaleOrdinal,
+  axisTop,
+  axisBottom,
+  axisLeft,
+  timeFormatDefaultLocale,
+  scaleThreshold,
+  color,
+  interpolateRainbow,
+  voronoi,
+  area,
+  axisRight,
+  quantile,
+  curveBasis,
+  curveStep,
+  mean,
+  mouse,
+  Page
+} from 'd3';*/
+/*
 
-// export default {
-//   select,
-//   selectAll,
-//   event,
-//   selection,
-//   scaleLinear,
-//   scaleTime,
-//   scaleBand,
-//   scaleOrdinal,
-//   axisTop,
-//   axisBottom,
-//   axisLeft,
-//   format,
-//   max,
-//   min,
-//   sum,
-//   timeFormat,
-//   timeParse,
-//   line,
-//   brushX,
-//   move,
-//   extent,
-//   on,
-// };
+export default {
+  mouse,
+  curveBasis,
+  curveStep,
+  mean,
+  axisRight,
+  quantile,
+  area,
+  voronoi,
+  timeYear,
+  interpolateRainbow,
+  color,
+  scaleThreshold,
+  timeFormatDefaultLocale,
+  select,
+  selectAll,
+  event,
+  selection,
+  scaleLinear,
+  scaleTime,
+  scaleBand,
+  scaleOrdinal,
+  axisTop,
+  axisBottom,
+  axisLeft,
+  format,
+  max,
+  min,
+  sum,
+  timeFormat,
+  timeParse,
+  line,
+  brushX,
+  move,
+  extent,
+  on,
+};
+*/
 
 import * as d3 from 'd3';
 
