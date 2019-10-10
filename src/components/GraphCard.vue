@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 import * as d3 from 'd3';
 import GraphInstance from './GraphInstance';
 import downloadSvg from '../util/downloadSvg';
@@ -152,7 +152,6 @@ export default {
   data() {
     return {
       active: 0,
-      showDropdown: false,
       mode: 'graph',
       date: '',
       fullscreen: false,
@@ -176,6 +175,9 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      setShowDropdown: 'setContextShowDropdown',
+    }),
     setDate(dateStr) {
       if (!dateStr) {
         this.date = 'Ikke tilgjengelig';
@@ -188,7 +190,7 @@ export default {
 
     toggleFullscreen() {
       const body = document.querySelector('body');
-      this.showDropdown = false;
+      this.setShowDropdown(false);
 
       if (this.fullscreen) {
         this.fullscreen = false;
@@ -207,15 +209,9 @@ export default {
       }
     },
 
-    closeMenu() {
-      if (this.showDropdown) {
-        this.showDropdown = false;
-      }
-    },
-
     toggleShowTable() {
       this.showTable = !this.showTable;
-      this.showDropdown = false;
+      this.setShowDropdown(false);
     },
 
     activeTab(index) {

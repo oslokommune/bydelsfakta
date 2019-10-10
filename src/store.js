@@ -15,6 +15,7 @@ export const state = {
   navigationIsOpen: false,
   isTouchDevice: false,
   ie11: false,
+  contextShowDropdown: false,
   productionMode: null, // null: development, false: test, true: prod
 };
 
@@ -66,6 +67,9 @@ export const mutations = {
   SET_PRODUCTION_MODE(state, payload) {
     state.productionMode = payload === 'prod' ? true : payload === 'dev' ? false : null;
   },
+  SET_CONTEXT_DROPDOWN(state, payload) {
+    state.contextShowDropdown = payload;
+  },
 };
 
 export const actions = {
@@ -112,6 +116,9 @@ export const actions = {
   },
   setProductionMode({ commit }, payload) {
     commit('SET_PRODUCTION_MODE', payload);
+  },
+  setContextShowDropdown({ commit }, payload) {
+    commit('SET_CONTEXT_DROPWDOWN', payload);
   },
 };
 

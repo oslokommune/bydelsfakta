@@ -3,7 +3,7 @@
     <button
       class="context-menu__button"
       :class="{ 'card__toggle-button--active': showDropdown }"
-      @click="showDropdown = !showDropdown"
+      @click="setShowDropdown(!showDropdown)"
       aria-haspopup="true"
       :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
       data-id="context-menu-button"
@@ -30,11 +30,11 @@
         role="menuitem"
         @click="
           mode === 'about' ? (mode = 'graph') : (mode = 'about');
-          showDropdown = false;
+          setShowDropdown(false);
         "
         @keyup.enter="
           mode === 'about' ? (mode = 'graph') : (mode = 'about');
-          showDropdown = false;
+          setShowDropdown(false);
         "
         class="context-menu__dropdown-item"
         tabindex="0"
@@ -109,8 +109,27 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import OkIcon from './OkIcon';
+
 export default {
   name: 'VContextMenu',
+  components: { OkIcon },
+  computed: {
+    ...mapState({
+      showDropdown: 'contextShowDropdown',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setShowDropdown: 'setContextShowDropdown',
+    }),
+    closeMenu() {
+      if (this.showDropdown) {
+        this.setShowDropdown(false);
+      }
+    },
+  },
 };
 </script>
 
