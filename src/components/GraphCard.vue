@@ -22,7 +22,7 @@
             <resize-observer @notify="showTabsOrSelect"></resize-observer>
             <template v-for="(tab, index) in settings.tabs">
               <button
-                :disabled="mode === 'map' || mode === 'about'"
+                :disabled="graphMode === 'map' || graphMode === 'about'"
                 ref="tabRef"
                 role="tab"
                 :aria-label="tab.label"
@@ -54,8 +54,8 @@
           <div class="card__toggle-menu">
             <button
               class="card__toggle-button"
-              @click="mode = 'graph'"
-              :class="{ 'card__toggle-button--active': mode === 'graph' }"
+              @click="setGraphMode('graph')"
+              :class="{ 'card__toggle-button--active': graphMode === 'graph' }"
               :aria-label="$t('graphCard.mode.graph')"
               :title="$t('graphCard.mode.graph')"
             >
@@ -68,8 +68,8 @@
             </button>
             <button
               class="card__toggle-button"
-              @click="mode = 'table'"
-              :class="{ 'card__toggle-button--active': mode === 'table' }"
+              @click="setGraphMode('table')"
+              :class="{ 'card__toggle-button--active': graphMode === 'table' }"
               :aria-label="$t('graphCard.mode.table')"
               :title="$t('graphCard.mode.table')"
             >
@@ -84,8 +84,8 @@
             <button
               v-if="settings.map"
               class="card__toggle-button"
-              @click="mode = 'map'"
-              :class="{ 'card__toggle-button--active': mode === 'map' }"
+              @click="setGraphMode('map')"
+              :class="{ 'card__toggle-button--active': graphMode === 'map' }"
               :aria-label="$t('graphCard.mode.map')"
               :title="$t('graphCard.mode.map')"
             >
@@ -102,13 +102,13 @@
       </header>
       <graph-instance
         @updateDate="setDate"
-        v-if="settings.tabs[active] !== undefined && (mode === 'graph' || mode === 'table')"
+        v-if="settings.tabs[active] !== undefined && (graphMode === 'graph' || graphMode === 'table')"
         :settings="settings.tabs[active]"
         :sources="settings.sources"
-        :mode="mode"
+        :mode="graphMode"
         ref="graph"
       />
-      <div class="map-container" v-if="mode === 'map'">
+      <div class="map-container" v-if="graphMode === 'map'">
         <v-leaflet
           v-if="settings.map"
           :district="geoDistricts"
@@ -117,9 +117,9 @@
           :fullscreen="fullscreen"
         ></v-leaflet>
       </div>
-      <div class="about-container" v-if="mode === 'about'">
+      <div class="about-container" v-if="graphMode === 'about'">
         <h3>{{ $t('graphCard.about.label') }}</h3>
-        <button class="close" @click="mode = 'graph'"></button>
+        <button class="close" @click="setGraphMode('graph')"></button>
         <p v-if="date">{{ $t('graphCard.about.updated') }}: {{ date }}</p>
         <p v-if="settings.about" v-html="settings.about"></p>
         <p v-if="settings.sources">
@@ -152,14 +152,13 @@ export default {
   data() {
     return {
       active: 0,
-      mode: 'graph',
       date: '',
       fullscreen: false,
       showAsTabs: true,
     };
   },
   computed: {
-    ...mapState(['districts', 'ie11', 'productionMode']),
+    ...mapState(['districts', 'ie11', 'productionMode', 'graphMode']),
     ...mapGetters(['geoDistricts']),
     district() {
       if (this.districts[0] === 'alle') return '00';
@@ -177,6 +176,7 @@ export default {
   methods: {
     ...mapActions({
       setShowDropdown: 'setContextShowDropdown',
+      setGraphMode: 'setGraphMode',
     }),
     setDate(dateStr) {
       if (!dateStr) {
@@ -204,7 +204,7 @@ export default {
         this.$ga.event({
           eventCategory: 'Card',
           eventAction: 'Open fullscreen',
-          eventLabel: this.mode,
+          eventLabel: this.graphMode,
         });
       }
     },
@@ -287,7 +287,7 @@ export default {
   },
 
   watch: {
-    mode(to, from) {
+    graphMode(to, from) {
       this.$ga.event({
         eventCategory: 'Card',
         eventAction: 'Change view',
@@ -297,7 +297,7 @@ export default {
 
     '$route.params.topic'() {
       this.active = 0;
-      this.mode = 'graph';
+      this.setGraphMode('graph');
       this.showTabsOrSelect();
     },
   },

@@ -16,6 +16,7 @@ export const state = {
   isTouchDevice: false,
   ie11: false,
   contextShowDropdown: false,
+  graphMode: 'graph',
   productionMode: null, // null: development, false: test, true: prod
 };
 
@@ -70,6 +71,9 @@ export const mutations = {
   SET_CONTEXT_DROPDOWN(state, payload) {
     state.contextShowDropdown = payload;
   },
+  SET_GRAPH_MODE(state, payload) {
+    state.graphMode = payload;
+  },
 };
 
 export const actions = {
@@ -118,7 +122,10 @@ export const actions = {
     commit('SET_PRODUCTION_MODE', payload);
   },
   setContextShowDropdown({ commit }, payload) {
-    commit('SET_CONTEXT_DROPWDOWN', payload);
+    commit('SET_CONTEXT_DROPDOWN', payload);
+  },
+  setGraphMode({ commit }, payload) {
+    commit('SET_GRAPH_MODE', payload);
   },
 };
 

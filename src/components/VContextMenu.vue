@@ -28,14 +28,8 @@
 
       <button
         role="menuitem"
-        @click="
-          mode === 'about' ? (mode = 'graph') : (mode = 'about');
-          setShowDropdown(false);
-        "
-        @keyup.enter="
-          mode === 'about' ? (mode = 'graph') : (mode = 'about');
-          setShowDropdown(false);
-        "
+        @click="setMode"
+        @keyup.enter="setMode"
         class="context-menu__dropdown-item"
         tabindex="0"
         :title="$t('graphCard.about.aria')"
@@ -118,16 +112,23 @@ export default {
   computed: {
     ...mapState({
       showDropdown: 'contextShowDropdown',
+      ie11: 'ie11',
+      mode: 'graphMode',
     }),
   },
   methods: {
     ...mapActions({
       setShowDropdown: 'setContextShowDropdown',
+      setGraphMode: 'setGraphMode',
     }),
     closeMenu() {
       if (this.showDropdown) {
         this.setShowDropdown(false);
       }
+    },
+    setMode() {
+      this.setGraphMode(this.mode === 'about' ? 'graph' : 'about');
+      this.setShowDropdown(false);
     },
   },
 };
