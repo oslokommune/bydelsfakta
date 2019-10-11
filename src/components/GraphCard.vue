@@ -97,7 +97,7 @@
               ></ok-icon>
             </button>
           </div>
-          <v-context-menu></v-context-menu>
+          <v-context-menu :graph-id="settings.tabs[active].id"></v-context-menu>
         </nav>
       </header>
       <graph-instance
@@ -138,10 +138,6 @@
 import { mapGetters, mapState, mapActions } from 'vuex';
 import * as d3 from 'd3';
 import GraphInstance from './GraphInstance';
-import downloadSvg from '../util/downloadSvg';
-import downloadPng from '../util/downloadPng';
-import tableToCsv from '../util/tableToCsv';
-import tableToExcel from '../util/tableToExcel';
 import VLeaflet from './VLeaflet';
 import VContextMenu from './VContextMenu';
 import OkIcon from './OkIcon';
@@ -153,12 +149,12 @@ export default {
     return {
       active: 0,
       date: '',
-      fullscreen: false,
       showAsTabs: true,
     };
   },
+
   computed: {
-    ...mapState(['districts', 'ie11', 'productionMode', 'graphMode']),
+    ...mapState(['districts', 'ie11', 'productionMode', 'graphMode', 'fullscreen']),
     ...mapGetters(['geoDistricts']),
     district() {
       if (this.districts[0] === 'alle') return '00';
@@ -166,6 +162,7 @@ export default {
       return '00';
     },
   },
+
   props: {
     settings: {
       type: Object,
@@ -177,6 +174,7 @@ export default {
     ...mapActions({
       setShowDropdown: 'setContextShowDropdown',
       setGraphMode: 'setGraphMode',
+      toggleFullscreen: 'setFullscreen',
     }),
     setDate(dateStr) {
       if (!dateStr) {
@@ -186,27 +184,6 @@ export default {
       const parseTime = d3.timeParse('%Y-%m-%d');
       const formatTime = d3.timeFormat('%x');
       this.date = formatTime(parseTime(dateStr));
-    },
-
-    toggleFullscreen() {
-      const body = document.querySelector('body');
-      this.setShowDropdown(false);
-
-      if (this.fullscreen) {
-        this.fullscreen = false;
-        body.style.height = 'auto';
-        body.style.overflow = 'auto';
-      } else {
-        this.fullscreen = true;
-        body.style.height = '100vh';
-        body.style.overflow = 'hidden';
-
-        this.$ga.event({
-          eventCategory: 'Card',
-          eventAction: 'Open fullscreen',
-          eventLabel: this.graphMode,
-        });
-      }
     },
 
     toggleShowTable() {
@@ -221,56 +198,6 @@ export default {
         eventCategory: 'Card',
         eventAction: 'Change tab',
         eventLabel: this.settings.tabs[index].label,
-      });
-    },
-
-    saveSvg(id) {
-      const filename = `${this.$route.params.district}_${id}`;
-      const svgData = this.$refs.graph.$refs.svg.outerHTML;
-      downloadSvg(svgData, filename);
-      this.closeMenu();
-
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save SVG',
-        eventLabel: filename,
-      });
-    },
-
-    savePng(id) {
-      const filename = `${this.$route.params.district}_${id}.png`;
-      downloadPng(this.$refs.graph.$refs.svg, filename);
-
-      this.closeMenu();
-
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save PNG',
-        eventLabel: filename,
-      });
-    },
-
-    saveCsv(id) {
-      tableToCsv(this.$refs.graph.$refs.tableContainer);
-      this.closeMenu();
-
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save CSV',
-        eventLabel: `${this.$route.params.district}_${id}`,
-        eventValue: null,
-      });
-    },
-
-    saveExcel(id) {
-      tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
-      this.closeMenu();
-
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save Excel',
-        eventLabel: `${this.$route.params.district}_${id}`,
-        eventValue: null,
       });
     },
 

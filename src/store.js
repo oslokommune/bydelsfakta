@@ -17,6 +17,7 @@ export const state = {
   ie11: false,
   contextShowDropdown: false,
   graphMode: 'graph',
+  fullscreen: false,
   productionMode: null, // null: development, false: test, true: prod
 };
 
@@ -74,6 +75,9 @@ export const mutations = {
   SET_GRAPH_MODE(state, payload) {
     state.graphMode = payload;
   },
+  SET_FULLSCREEN(state, payload) {
+    state.fullscreen = payload;
+  },
 };
 
 export const actions = {
@@ -126,6 +130,26 @@ export const actions = {
   },
   setGraphMode({ commit }, payload) {
     commit('SET_GRAPH_MODE', payload);
+  },
+  setFullscreen({ commit, state, dispatch }) {
+    const body = document.querySelector('body');
+    dispatch('setContextShowDropdown', false);
+
+    if (state.fullscreen) {
+      commit('SET_FULLSCREEN', false);
+      body.style.height = 'auto';
+      body.style.overflow = 'auto';
+    } else {
+      commit('SET_FULLSCREEN', true);
+      body.style.height = '100vh';
+      body.style.overflow = 'hidden';
+
+      this._vm.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Open fullscreen',
+        eventLabel: this.graphMode,
+      });
+    }
   },
 };
 

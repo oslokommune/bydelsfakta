@@ -43,8 +43,8 @@
       <button
         role="menuitem"
         v-if="mode === 'graph'"
-        @click="savePng(settings.tabs[active].id)"
-        @keyup.enter="saveSvg(settings.tabs[active].id)"
+        @click="savePng(graphId)"
+        @keyup.enter="saveSvg(graphId)"
         class="context-menu__dropdown-item"
         tabindex="0"
         :title="$t('graphCard.savePNG.aria')"
@@ -61,8 +61,8 @@
         class="context-menu__dropdown-item"
         :aria-label="$t('graphCard.saveSVG.aria')"
         tabindex="0"
-        @click="saveSvg(settings.tabs[active].id)"
-        @keyup.enter="saveSvg(settings.tabs[active].id)"
+        @click="saveSvg(graphId)"
+        @keyup.enter="saveSvg(graphId)"
         data-id="context-menu-button-svg"
       >
         <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
@@ -76,8 +76,8 @@
         :title="$t('graphCard.saveCSV.aria')"
         :aria-label="$t('graphCard.saveCSV.aria')"
         tabindex="0"
-        @click="saveCsv(settings.tabs[active].id)"
-        @keyup.enter="saveCsv(settings.tabs[active].id)"
+        @click="saveCsv(graphId)"
+        @keyup.enter="saveCsv(graphId)"
         data-id="context-menu-button-csv"
       >
         <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
@@ -91,8 +91,8 @@
         :title="$t('graphCard.saveExcel.aria')"
         :aria-label="$t('graphCard.saveExcel.aria')"
         tabindex="0"
-        @click="saveExcel(settings.tabs[active].id)"
-        @keyup.enter="saveExcel(settings.tabs[active].id)"
+        @click="saveExcel(graphId)"
+        @keyup.enter="saveExcel(graphId)"
         data-id="context-menu-button-excel"
       >
         <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
@@ -104,6 +104,10 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import downloadSvg from '../util/downloadSvg';
+import downloadPng from '../util/downloadPng';
+import tableToCsv from '../util/tableToCsv';
+import tableToExcel from '../util/tableToExcel';
 import OkIcon from './OkIcon';
 
 export default {
@@ -114,21 +118,81 @@ export default {
       showDropdown: 'contextShowDropdown',
       ie11: 'ie11',
       mode: 'graphMode',
+      fullscreen: 'fullscreen',
     }),
+  },
+  props: {
+    graphId: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     ...mapActions({
       setShowDropdown: 'setContextShowDropdown',
       setGraphMode: 'setGraphMode',
+      toggleFullscreen: 'setFullscreen',
     }),
+
     closeMenu() {
       if (this.showDropdown) {
         this.setShowDropdown(false);
       }
     },
+
     setMode() {
       this.setGraphMode(this.mode === 'about' ? 'graph' : 'about');
       this.setShowDropdown(false);
+    },
+
+    saveSvg(id) {
+      const filename = `${this.$route.params.district}_${id}`;
+      const svgData = this.$refs.graph.$refs.svg.outerHTML;
+      downloadSvg(svgData, filename);
+      this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save SVG',
+        eventLabel: filename,
+      });
+    },
+
+    savePng(id) {
+      const filename = `${this.$route.params.district}_${id}.png`;
+      downloadPng(this.$refs.graph.$refs.svg, filename);
+
+      this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save PNG',
+        eventLabel: filename,
+      });
+    },
+
+    saveCsv(id) {
+      tableToCsv(this.$refs.graph.$refs.tableContainer);
+      this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save CSV',
+        eventLabel: `${this.$route.params.district}_${id}`,
+        eventValue: null,
+      });
+    },
+
+    saveExcel(id) {
+      tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
+      this.closeMenu();
+
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Save Excel',
+        eventLabel: `${this.$route.params.district}_${id}`,
+        eventValue: null,
+      });
     },
   },
 };
