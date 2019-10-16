@@ -55,6 +55,11 @@ export default {};
     @media screen and (min-width: $break-lg) {
       padding: 1rem 2.5rem 0 0;
     }
+
+    h2 {
+      color: $color-purple;
+      font-weight: 500;
+    }
   }
 
   ul {
@@ -63,7 +68,7 @@ export default {};
   }
 
   li {
-    margin: 0;
+    margin: 0 0 1em;
   }
 }
 </style>
