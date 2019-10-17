@@ -11,6 +11,9 @@ export const state = {
   navigationIsOpen: false,
   isTouchDevice: false,
   ie11: false,
+  contextShowDropdown: false,
+  graphMode: 'graph',
+  fullscreen: false,
   productionMode: true, // null: development, false: test, true: prod
 };
 
@@ -62,6 +65,15 @@ export const mutations = {
   SET_PRODUCTION_MODE(state, payload) {
     state.productionMode = payload === 'prod' ? true : payload === 'dev' ? false : null;
   },
+  SET_CONTEXT_DROPDOWN(state, payload) {
+    state.contextShowDropdown = payload;
+  },
+  SET_GRAPH_MODE(state, payload) {
+    state.graphMode = payload;
+  },
+  SET_FULLSCREEN(state, payload) {
+    state.fullscreen = payload;
+  },
 };
 
 export const actions = {
@@ -108,6 +120,21 @@ export const actions = {
   },
   setProductionMode({ commit }, payload) {
     commit('SET_PRODUCTION_MODE', payload);
+  },
+  setContextShowDropdown({ commit }, payload) {
+    commit('SET_CONTEXT_DROPDOWN', payload);
+  },
+  setGraphMode({ commit }, payload) {
+    commit('SET_GRAPH_MODE', payload);
+  },
+  setFullscreen({ commit, state, dispatch }) {
+    dispatch('setContextShowDropdown', false);
+
+    if (state.fullscreen) {
+      commit('SET_FULLSCREEN', false);
+    } else {
+      commit('SET_FULLSCREEN', true);
+    }
   },
 };
 

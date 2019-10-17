@@ -79,7 +79,7 @@ exports[`GraphCard change an active tab 1`] = `
             title="Graf"
           >
             <ok-icon-stub
-              class="context-menu__dropdown-item-icon"
+              class="card__toggle-button-icon"
               iconref="graph"
               options="[object Object]"
               stroke-width="2.5"
@@ -92,7 +92,7 @@ exports[`GraphCard change an active tab 1`] = `
             title="Tabell"
           >
             <ok-icon-stub
-              class="context-menu__dropdown-item-icon"
+              class="card__toggle-button-icon"
               iconref="data-table"
               options="[object Object]"
               stroke-width="2.5"
@@ -105,7 +105,7 @@ exports[`GraphCard change an active tab 1`] = `
             title="Kart"
           >
             <ok-icon-stub
-              class="context-menu__dropdown-item-icon"
+              class="card__toggle-button-icon"
               iconref="map-pin"
               options="[object Object]"
               stroke-width="2.5"
@@ -280,7 +280,7 @@ exports[`GraphCard renders correctly 1`] = `
             title="Graf"
           >
             <ok-icon-stub
-              class="context-menu__dropdown-item-icon"
+              class="card__toggle-button-icon"
               iconref="graph"
               options="[object Object]"
               stroke-width="2.5"
@@ -293,7 +293,7 @@ exports[`GraphCard renders correctly 1`] = `
             title="Tabell"
           >
             <ok-icon-stub
-              class="context-menu__dropdown-item-icon"
+              class="card__toggle-button-icon"
               iconref="data-table"
               options="[object Object]"
               stroke-width="2.5"

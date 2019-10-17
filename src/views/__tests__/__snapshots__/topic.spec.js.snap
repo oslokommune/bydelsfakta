@@ -91,7 +91,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Graf"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="graph"
                   options="[object Object]"
                   stroke-width="2.5"
@@ -104,7 +104,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Tabell"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="data-table"
                   options="[object Object]"
                   stroke-width="2.5"
@@ -292,7 +292,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Graf"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="graph"
                   options="[object Object]"
                   stroke-width="2.5"
@@ -305,7 +305,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Tabell"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="data-table"
                   options="[object Object]"
                   stroke-width="2.5"
@@ -479,7 +479,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Graf"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="graph"
                   options="[object Object]"
                   stroke-width="2.5"
@@ -492,7 +492,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Tabell"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="data-table"
                   options="[object Object]"
                   stroke-width="2.5"
@@ -505,7 +505,7 @@ exports[`Topic renders component correctly 1`] = `
                 title="Kart"
               >
                 <ok-icon-stub
-                  class="context-menu__dropdown-item-icon"
+                  class="card__toggle-button-icon"
                   icon-ref="map-pin"
                   options="[object Object]"
                   stroke-width="2.5"
