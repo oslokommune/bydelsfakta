@@ -71,22 +71,5 @@ describe('GraphCard', () => {
     expect(wrapper.vm.active).toEqual(2);
   });
 
-  test('if dropdown is false, stay false', () => {
-    expect(wrapper.vm.showDropdown).toEqual(false);
-    wrapper.vm.closeMenu();
-    expect(wrapper.vm.showDropdown).toEqual(false);
-  });
 
-  test('if dropdown is true, change to false', () => {
-    wrapper.setData({ showDropdown: true });
-    expect(wrapper.vm.showDropdown).toEqual(true);
-    wrapper.vm.closeMenu();
-    expect(wrapper.vm.showDropdown).toEqual(false);
-  });
-
-  test('saveSvg is called once', () => {
-    const spy = jest.spyOn(wrapper.vm, 'saveSvg');
-    spy(wrapper.vm.settings.tabs[wrapper.vm.active].id);
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
 });

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VCategory renders correctly 1`] = `
+<div
+  class="context-menu"
+>
+  <button
+    aria-haspopup="true"
+    aria-label="Åpne meny"
+    class="context-menu__button"
+    data-id="context-menu-button"
+    title="Åpne meny"
+  >
+    <ok-icon-stub
+      iconref="hamburger"
+      options="[object Object]"
+    />
+     
+    <span
+      class="button-label"
+    >
+      Valg
+    </span>
+  </button>
+   
+  <!---->
+</div>
+`;
