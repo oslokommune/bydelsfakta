@@ -1,4 +1,4 @@
-import { mount, RouterLinkStub, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VContextMenu from '../VContextMenu';
 import setupI18n from '../../i18n';

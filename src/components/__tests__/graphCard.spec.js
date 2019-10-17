@@ -70,6 +70,4 @@ describe('GraphCard', () => {
     wrapper.vm.activeTab(2);
     expect(wrapper.vm.active).toEqual(2);
   });
-
-
 });
