@@ -24,6 +24,7 @@ export default {
           heading: 'Ulike levekårsindikatorer (%) sammenlignet med Oslo',
           method: 'ratio',
           mode: 'osloRatio',
+          id: 'levekaar_totalt_andel',
           url: `${API}/levekar-totalt-status`,
         },
         {
@@ -35,6 +36,7 @@ export default {
           heading: 'Ulike levekårsindikatorer (%) sammenlignet med bydelen',
           method: 'ratio',
           mode: 'districtRatio',
+          id: 'levekaar_totalt_antall',
           url: `${API}/levekar-totalt-status`,
         },
       ],

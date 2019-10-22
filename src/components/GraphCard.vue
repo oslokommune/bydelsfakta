@@ -97,7 +97,11 @@
               ></ok-icon>
             </button>
           </div>
-          <v-context-menu :graph-id="settings.tabs[active].id"></v-context-menu>
+          <v-context-menu
+            @setShowDropdown="setShowDropdown"
+            :show-dropdown="showDropdown"
+            :graph-id="settings.tabs[active].id"
+          ></v-context-menu>
         </nav>
       </header>
       <graph-instance
@@ -150,6 +154,7 @@ export default {
       active: 0,
       date: '',
       showAsTabs: true,
+      showDropdown: false,
     };
   },
 
@@ -172,10 +177,12 @@ export default {
 
   methods: {
     ...mapActions({
-      setShowDropdown: 'setContextShowDropdown',
       setGraphMode: 'setGraphMode',
       toggleFullscreen: 'setFullscreen',
     }),
+    setShowDropdown(value) {
+      this.showDropdown = value;
+    },
     setDate(dateStr) {
       if (!dateStr) {
         this.date = 'Ikke tilgjengelig';

@@ -3,7 +3,7 @@
     <button
       class="context-menu__button"
       :class="{ 'card__toggle-button--active': showDropdown }"
-      @click="setShowDropdown(!showDropdown)"
+      @click="$emit('setShowDropdown', !showDropdown)"
       aria-haspopup="true"
       :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
       data-id="context-menu-button"
@@ -115,7 +115,6 @@ export default {
   components: { OkIcon },
   computed: {
     ...mapState({
-      showDropdown: 'contextShowDropdown',
       ie11: 'ie11',
       mode: 'graphMode',
       fullscreen: 'fullscreen',
@@ -126,23 +125,26 @@ export default {
       type: String,
       required: true,
     },
+    showDropdown: {
+      type: Boolean,
+      required: true,
+    },
   },
   methods: {
     ...mapActions({
-      setShowDropdown: 'setContextShowDropdown',
       setGraphMode: 'setGraphMode',
       toggleFullscreen: 'setFullscreen',
     }),
 
     closeMenu() {
       if (this.showDropdown) {
-        this.setShowDropdown(false);
+        this.$emit('setShowDropdown', false);
       }
     },
 
     setMode() {
       this.setGraphMode(this.mode === 'about' ? 'graph' : 'about');
-      this.setShowDropdown(false);
+      this.$emit('setShowDropdown', false);
     },
 
     saveSvg(id) {
@@ -160,6 +162,7 @@ export default {
 
     savePng(id) {
       const filename = `${this.$route.params.district}_${id}.png`;
+      console.log(this.$refs);
       downloadPng(this.$refs.graph.$refs.svg, filename);
 
       this.closeMenu();
