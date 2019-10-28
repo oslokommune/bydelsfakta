@@ -4,8 +4,8 @@
 .app {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   max-width: 1600px;
+  margin: 0 auto;
 
   @media screen and (min-width: $break-lg) {
     flex-direction: row;
@@ -59,8 +59,8 @@
 .topics-grid {
   display: grid;
   flex: 2 1 800px;
-  gap: 0.5em;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.5em;
   padding: 0 1em;
 
   @media screen and (min-width: $break-md) {
@@ -113,21 +113,21 @@
 }
 
 .tooltip {
+  position: absolute;
+  z-index: 10;
+  padding: 0.2rem 0.8rem;
+  font-weight: bold;
+  font-size: 12px;
+  white-space: nowrap;
   background: $color-yellow;
   border: 1px solid white;
   border-radius: 4rem;
-  fill: $color-purple;
-  font-size: 12px;
-  font-weight: bold;
-  opacity: 0;
-  padding: 0.2rem 0.8rem;
-  pointer-events: none;
-  position: absolute;
-  text-anchor: middle;
   transform: translate(0, 14);
+  opacity: 0;
   transition: opacity 0.1s;
-  white-space: nowrap;
-  z-index: 10;
+  pointer-events: none;
+  fill: $color-purple;
+  text-anchor: middle;
 }
 
 .showTooltip {

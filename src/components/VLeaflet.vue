@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%; width: 100%;">
+  <div style=" width: 100%; height: 100%;">
     <div class="legend" v-if="settings.labels">
       <h2 class="legend__heading" v-if="settings.heading || year">
         {{ settings.heading }} {{ year ? `(${year})` : '' }}
@@ -225,8 +225,8 @@ export default {
 @import '../styles/variables';
 
 .container {
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 
 .legend + .container {
@@ -238,21 +238,21 @@ export default {
 }
 
 .legend {
-  border-bottom: 1px solid $color-grey-100;
   display: flex;
   flex-direction: column;
-  font-size: $font-small;
-  font-weight: 500;
-  height: 90px;
   justify-content: center;
+  height: 90px;
   padding: 1em;
+  font-weight: 500;
+  font-size: $font-small;
+  border-bottom: 1px solid $color-grey-100;
 
   &__heading {
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0;
     margin: 0 0 0.5rem;
     padding: 0;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0;
     text-align: center;
     text-transform: none;
   }
@@ -260,47 +260,47 @@ export default {
   &__labels {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
-    max-width: 500px;
     width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   &__colorstrip {
-    height: 0.5em;
-    margin: 0.25em auto 0;
-    max-width: 500px;
     position: relative;
     width: 100%;
+    max-width: 500px;
+    height: 0.5em;
+    margin: 0.25em auto 0;
   }
 
   &__dot {
+    position: absolute;
+    width: 0.8em;
+    height: 0.8em;
     background: rgba(black, 0.4);
     border: 2px solid rgba(black, 0.5);
     border-radius: 50%;
-    height: 0.8em;
-    mix-blend-mode: multiply;
-    position: absolute;
     transform: translate(-0.15em, -0.15em);
     transform-origin: 50%;
+    mix-blend-mode: multiply;
     transition: all 0.1s;
-    width: 0.8em;
 
     &:hover {
+      z-index: 2;
       background-color: white;
       border: 2px solid $color-purple;
-      mix-blend-mode: unset;
-      opacity: 1;
       transform: translate(-0.15em, -0.15em) scale(1.6);
-      z-index: 2;
+      opacity: 1;
+      mix-blend-mode: unset;
     }
   }
 }
 
 .leaflet-popup-content {
-  font-family: 'OsloSans', serif !important;
-  font-size: 1rem !important;
   margin: 0 !important;
   padding: 1.5rem !important;
+  font-size: 1rem !important;
+  font-family: 'OsloSans', serif !important;
 
   & > p,
   & > h4 {
@@ -310,10 +310,10 @@ export default {
 }
 
 .leaflet-popup-content-wrapper {
+  color: $color-yellow !important;
   background: $color-purple !important;
   border: 0 !important;
   border-radius: 0 !important;
-  color: $color-yellow !important;
 }
 
 .leaflet-popup-tip {

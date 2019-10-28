@@ -432,30 +432,30 @@ export default {
 }
 
 .about-container {
-  padding: 1rem;
   position: relative;
+  padding: 1rem;
 }
 
 .close {
-  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   display: block;
+  width: 3rem;
   height: 3rem;
   padding: 0;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  width: 3rem;
+  cursor: pointer;
 
   &::after,
   &::before {
-    background: $color-purple;
-    content: '';
-    height: 0.2rem;
-    left: 0.5rem;
     position: absolute;
     top: calc(50% - 0.1rem);
-    transform: rotate(45deg);
+    left: 0.5rem;
     width: 2rem;
+    height: 0.2rem;
+    background: $color-purple;
+    transform: rotate(45deg);
+    content: '';
   }
 
   &::after {
@@ -465,12 +465,12 @@ export default {
 
 .card-container {
   flex: 50% 1 10;
-  padding: 1em;
   width: 100%;
+  padding: 1em;
 
   @media screen and (min-width: $break-md) {
-    max-width: 50%;
     width: 50%;
+    max-width: 50%;
   }
 
   &.large {
@@ -480,16 +480,16 @@ export default {
 }
 
 .close-fullscreen {
-  align-items: center;
-  background: rgba(black, 0.1);
-  border-radius: 50%;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
   display: flex;
+  align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-  z-index: 2;
+  background: rgba(black, 0.1);
+  border-radius: 50%;
 
   &:hover {
     background: rgba(black, 0.2);
@@ -497,45 +497,45 @@ export default {
 }
 
 .card {
+  width: 100%;
+  min-height: 18em;
   background: white;
   border: 1px solid $color-border;
-  min-height: 18em;
-  width: 100%;
 
   &.fullscreen {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
     bottom: 1rem;
+    left: 1rem;
+    z-index: 5;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 2rem);
-    left: 1rem;
-    outline: 2rem solid rgba(black, 0.9);
-    position: fixed;
-    right: 1rem;
-    top: 1rem;
     width: calc(100vw - 2rem);
-    z-index: 5;
+    height: calc(100vh - 2rem);
+    outline: 2rem solid rgba(black, 0.9);
   }
 
   &__header {
-    border-bottom: 1px solid $color-border;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     width: 100%;
-    z-index: 1;
+    border-bottom: 1px solid $color-border;
   }
 
   &__headertext {
-    align-items: baseline;
     display: flex;
+    align-items: baseline;
     padding: 0 1rem;
   }
 
   &__title {
-    color: $color-purple;
-    font-size: $font-large;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
     margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    color: $color-purple;
+    font-weight: 500;
+    font-size: $font-large;
   }
 
   &__published {
@@ -545,11 +545,11 @@ export default {
   }
 
   &__nav {
-    align-items: center;
-    display: flex;
-    padding-left: 1rem;
-    padding-right: 0;
     position: relative;
+    display: flex;
+    align-items: center;
+    padding-right: 0;
+    padding-left: 1rem;
   }
 
   &__toggle-menu {
@@ -559,46 +559,46 @@ export default {
   }
 
   &__toggle-button {
+    position: relative;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    width: 2.5em;
+    height: 2.5em;
     border-radius: 50%;
     cursor: pointer;
-    display: flex;
-    height: 2.5em;
-    justify-content: center;
-    position: relative;
-    width: 2.5em;
 
     &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
       background: $color-blue;
       border-radius: 50%;
-      bottom: 0;
-      content: '';
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
       transform: scale(1);
       transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
-      z-index: 0;
+      content: '';
     }
 
     &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
       background: white;
       border-radius: 50%;
-      bottom: 0;
-      content: '';
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
       transform: scale(1);
       transition: all 0.3s cubic-bezier(0.25, 0, 0, 1);
-      z-index: 0;
+      content: '';
     }
 
     & > i {
-      user-select: none;
       z-index: 1;
+      user-select: none;
     }
 
     &:hover:not(&--active)::after {
@@ -621,29 +621,29 @@ export default {
 
 /* Style the tabs */
 .tabs {
+  position: relative;
   display: flex;
   flex-grow: 1;
   height: 4rem;
-  overflow-x: hidden;
   padding: 4px 0;
-  position: relative;
+  overflow-x: hidden;
 
   &__select {
-    height: 3rem;
-    left: 0;
-    margin-right: 1rem;
     position: absolute;
-    right: 1rem;
     top: 0.5rem;
+    right: 1rem;
+    left: 0;
+    height: 3rem;
+    margin-right: 1rem;
   }
 
   &__tab {
-    color: $color-purple;
-    cursor: pointer;
-    font-weight: 500;
     padding: 0.75em;
-    transition: background-color 0.2s;
+    color: $color-purple;
+    font-weight: 500;
     white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s;
 
     &--hidden {
       height: 0;
@@ -662,51 +662,51 @@ export default {
     }
 
     &.active {
-      cursor: default;
       position: relative;
+      cursor: default;
 
       &::after {
-        background-color: $color-blue;
-        bottom: -4px;
-        content: '';
-        height: 5px;
-        left: 0;
         position: absolute;
         right: 0;
+        bottom: -4px;
+        left: 0;
+        height: 5px;
+        background-color: $color-blue;
+        content: '';
       }
     }
 
     /* Change background color of tabs on hover */
     &:hover:not(.active):not(:disabled) {
-      background-color: rgba($color-grey-100, 0.5);
       position: relative;
+      background-color: rgba($color-grey-100, 0.5);
     }
   }
 }
 
 .context-menu {
-  margin-left: auto;
   position: relative;
   z-index: 4;
+  margin-left: auto;
 
   &__button {
+    display: flex;
     align-items: center;
+    height: 3rem;
+    padding-right: 0.65rem;
+    padding-left: 0.65rem;
     border-radius: 0 !important;
     cursor: pointer;
-    display: flex;
-    height: 3rem;
-    padding-left: 0.65rem;
-    padding-right: 0.65rem;
 
     &.card__toggle-button--active {
-      background-color: $color-purple;
       color: $color-blue;
+      background-color: $color-purple;
     }
 
     @media screen and (min-width: $break-md) {
-      background-color: rgba($color-border, 0);
-      height: 3rem;
       width: auto;
+      height: 3rem;
+      background-color: rgba($color-border, 0);
 
       &:hover:not(.card__toggle-button--active) {
         background-color: rgba($color-border, 0.35);
@@ -715,29 +715,29 @@ export default {
 
     .button-label {
       display: inline-block;
-      font-weight: 500;
       margin-left: 0.25rem;
+      font-weight: 500;
       text-transform: uppercase;
     }
   }
 
   &__dropdown {
-    background-color: $color-purple;
-    box-shadow: 0 2px 2px 0 $color-grey-200;
     position: absolute;
     right: 0;
-    width: 310px;
     z-index: 1;
+    width: 310px;
+    background-color: $color-purple;
+    box-shadow: 0 2px 2px 0 $color-grey-200;
 
     &-item {
-      align-items: center;
-      color: $color-blue;
-      cursor: pointer;
       display: flex;
       flex-direction: row;
-      font-weight: 500;
-      padding: 1.25rem 0.75rem;
+      align-items: center;
       width: 100%;
+      padding: 1.25rem 0.75rem;
+      color: $color-blue;
+      font-weight: 500;
+      cursor: pointer;
 
       &:disabled {
         text-decoration: line-through;
@@ -748,8 +748,8 @@ export default {
       }
 
       &-icon {
-        color: $color-purple;
         z-index: 1;
+        color: $color-purple;
       }
 
       span {

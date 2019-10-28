@@ -327,26 +327,26 @@ export default {
 
     &::before,
     &::after {
-      bottom: 0;
-      content: '';
-      display: block;
-      opacity: 0;
-      pointer-events: none;
       position: absolute;
       top: 0;
-      transition: opacity 0.1s ease-in-out;
-      width: 2em;
+      bottom: 0;
       z-index: 1;
+      display: block;
+      width: 2em;
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+      content: '';
+      pointer-events: none;
     }
 
     &::before {
-      background: linear-gradient(to right, rgba(black, 0.3), rgba(black, 0.1) 60%, rgba(black, 0) 100%);
       left: 0;
+      background: linear-gradient(to right, rgba(black, 0.3), rgba(black, 0.1) 60%, rgba(black, 0) 100%);
     }
 
     &::after {
-      background: linear-gradient(to left, rgba(black, 0.3), rgba(black, 0.1) 60%, rgba(black, 0) 100%);
       right: 0;
+      background: linear-gradient(to left, rgba(black, 0.3), rgba(black, 0.1) 60%, rgba(black, 0) 100%);
     }
 
     &--left::before {
@@ -359,9 +359,9 @@ export default {
   }
 
   &__container {
-    overflow: auto;
-    padding: 1em 1em 0 1em;
     position: relative;
+    padding: 1em 1em 0 1em;
+    overflow: auto;
 
     /deep/ &.hidden ~ .graph__dropdown {
       display: none;
@@ -369,18 +369,18 @@ export default {
   }
 
   &__tablecontainer {
-    overflow-x: auto;
     position: relative;
     width: 100%;
+    overflow-x: auto;
   }
 
   &__svg {
     &.loading {
-      animation-delay: 0.5s;
-      animation-duration: 1s;
-      animation-fill-mode: forwards;
-      animation-iteration-count: 1;
       animation-name: fadeOut;
+      animation-duration: 1s;
+      animation-delay: 0.5s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
       pointer-events: none;
     }
   }
@@ -391,9 +391,9 @@ export default {
     display: none;
   }
 
+  position: sticky;
   left: 0;
   padding: 0 1rem;
-  position: sticky;
 
   &::before {
     content: '* ';
@@ -401,23 +401,23 @@ export default {
 }
 
 .spinner {
-  align-items: center;
-  animation-delay: 0.5s;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-  animation-name: fadeIn;
-  background-color: rgba($color-light-blue, 1);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  opacity: 0;
   position: absolute;
   top: 0;
-  width: 100%;
+  left: 0;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-light-blue, 1);
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 
   &__text {
     padding: 0.75em;
@@ -426,30 +426,30 @@ export default {
 
 .tick text {
   color: $color-grey-600;
-  font-family: monospace;
-  font-size: $font-small;
   font-weight: 500;
+  font-size: $font-small;
+  font-family: monospace;
   text-rendering: geometricPrecision;
 }
 
 .help {
   position: absolute;
-  right: 0.5em;
   top: 0.5em;
+  right: 0.5em;
   z-index: 1;
 
   &__button {
-    align-items: center;
-    border-radius: 50%;
-    color: $color-purple;
-    cursor: pointer;
-    display: flex;
-    height: 3em;
-    justify-content: center;
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 3em;
+    height: 3em;
+    color: $color-purple;
+    border-radius: 50%;
+    cursor: pointer;
 
     & > i {
       font-size: 1.5em;
@@ -461,39 +461,39 @@ export default {
     }
 
     &::before {
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      z-index: -1;
+      display: block;
+      width: 4rem;
+      height: 4rem;
       background: white;
       content: '';
-      display: block;
-      height: 4rem;
-      position: absolute;
-      right: -0.5rem;
-      top: -0.5rem;
-      width: 4rem;
-      z-index: -1;
     }
   }
 
   &__text {
+    position: absolute;
+    top: 3em;
+    right: 0;
+    width: 250px;
+    padding: 1em;
+    color: $color-yellow;
+    font-weight: 500;
     background: $color-purple;
     border-radius: 3px;
     box-shadow: 0 3px 4px rgba($color-purple, 0.5);
-    color: $color-yellow;
-    font-weight: 500;
-    padding: 1em;
-    position: absolute;
-    right: 0;
-    top: 3em;
-    width: 250px;
 
     &::before {
+      position: absolute;
+      top: -0.5em;
+      right: 0.75em;
+      display: block;
+      border-right: 0.75em solid transparent;
       border-bottom: 0.75em solid $color-purple;
       border-left: 0.75em solid transparent;
-      border-right: 0.75em solid transparent;
       content: '';
-      display: block;
-      position: absolute;
-      right: 0.75em;
-      top: -0.5em;
     }
   }
 }

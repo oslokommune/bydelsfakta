@@ -77,11 +77,11 @@ export default {
 
 .notFound {
   &-container {
-    color: $color-purple;
     display: flex;
     flex-direction: column;
     max-width: 1100px;
     padding: 0 2rem;
+    color: $color-purple;
 
     &--row {
       display: flex;
@@ -102,20 +102,20 @@ export default {
     }
 
     &--inner {
-      align-items: center;
-      background: $color-yellow;
-      display: flex;
-      justify-content: center;
-      padding-top: 100%;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
+      padding-top: 100%;
+      background: $color-yellow;
     }
 
     &--label {
-      color: $color-purple;
-      font-size: 3em;
       position: absolute;
       top: 50%;
+      color: $color-purple;
+      font-size: 3em;
       transform: translateY(-0.7em);
     }
   }
@@ -125,22 +125,22 @@ export default {
     flex: 350px 0 1;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 0 0 1rem;
     width: 100%;
+    margin: 0 0 0 1rem;
 
     &--header {
-      font-size: $font-large;
-      font-weight: 500;
       margin: 0;
+      font-weight: 500;
+      font-size: $font-large;
     }
 
     &--frontpage-link {
+      width: 160px;
+      padding: 0.3rem 1.5rem;
+      font-weight: normal;
+      font-size: 16px;
       background-color: rgb(255, 255, 255);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.33);
-      font-size: 16px;
-      font-weight: normal;
-      padding: 0.3rem 1.5rem;
-      width: 160px;
     }
   }
 

@@ -58,10 +58,10 @@ export default {
 
 .oslo__category {
   align-self: flex-start;
-  color: $color-purple;
-  font-weight: bold;
   margin-bottom: 0.5em;
   padding: 0.1rem 0.25rem;
+  color: $color-purple;
+  font-weight: bold;
   text-transform: uppercase;
 
   @media screen and (min-width: $break-md) {
@@ -70,28 +70,28 @@ export default {
 }
 
 .main-container__item {
-  background-blend-mode: multiply;
-  color: white;
-  cursor: pointer;
+  position: relative;
   display: flex;
   flex: 17.5em 1 0;
   flex-direction: column;
-  margin: 0;
   min-height: 6em;
-  overflow: hidden;
+  margin: 0;
   padding: 1em;
-  position: relative;
+  overflow: hidden;
+  color: white;
+  background-blend-mode: multiply;
   transform: scale(1);
+  cursor: pointer;
   transition: all 0.15s ease-in-out;
 
   &.disabled {
-    filter: grayscale(1);
-    opacity: 0.95;
     text-decoration: line-through;
+    opacity: 0.95;
+    filter: grayscale(1);
 
     .oslo__category {
-      background: #555555 !important;
       color: white;
+      background: #555555 !important;
     }
   }
 
@@ -120,19 +120,19 @@ export default {
 }
 
 .oslo__img {
-  height: 100%;
-  left: 0;
-  object-fit: cover;
   position: absolute;
   top: 0;
-  transition: transform 0.25s ease-in-out;
-  width: 100%;
+  left: 0;
   z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease-in-out;
 }
 
 .oslo__topic {
-  font-size: $font-large;
   font-weight: 500;
+  font-size: $font-large;
   line-height: 1.15em;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.78);
 }

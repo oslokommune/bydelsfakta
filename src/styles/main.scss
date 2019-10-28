@@ -14,11 +14,11 @@
 }
 
 html {
-  background-color: $color-bg;
   box-sizing: border-box;
-  font-size: 12.5px;
-  -webkit-font-smoothing: antialiased;
   overflow-y: scroll;
+  font-size: 12.5px;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
 
   @media screen and (min-width: 600px) {
     font-size: 13px;
@@ -30,17 +30,17 @@ html {
 }
 
 body {
-  font-family: 'OsloSans', sans-serif;
-  margin: 0;
   min-height: 100vh;
+  margin: 0;
+  font-family: 'OsloSans', sans-serif;
 }
 
 button,
 input,
 select {
+  font: inherit;
   background-color: transparent;
   border-style: none;
-  font: inherit;
 }
 
 button:disabled > * {
@@ -48,49 +48,49 @@ button:disabled > * {
 }
 
 .visually-hidden {
-  height: 1px;
-  left: -10000px;
-  overflow: hidden;
   position: absolute;
   top: auto;
+  left: -10000px;
   width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .hidden {
-  opacity: 0;
   position: fixed !important;
   visibility: hidden;
+  opacity: 0;
 }
 
 // Dropdown menu on template D
 .graph__dropdown {
-  left: 0;
-  padding: 1em;
   position: absolute;
   top: 9.75em;
+  left: 0;
+  padding: 1em;
 
   &__label {
     display: block;
   }
 
   &__select {
-    border: 1px solid black;
+    position: relative;
+    width: 7em;
     height: 3em;
     margin-top: 0.5em;
     padding-left: 0.5em;
-    position: relative;
-    width: 7em;
+    border: 1px solid black;
 
     &::before,
     &::after {
-      background: black;
-      content: '';
-      display: block;
-      height: 15px;
-      left: 15px;
       position: absolute;
       top: 15px;
+      left: 15px;
+      display: block;
       width: 15px;
+      height: 15px;
+      background: black;
+      content: '';
     }
   }
 }
@@ -117,8 +117,8 @@ body.using-mouse :focus {
   width: 100%;
 
   &__item {
-    align-items: center;
     display: flex;
+    align-items: center;
     padding: 0 1rem;
     white-space: nowrap;
   }
@@ -129,32 +129,32 @@ body.using-mouse :focus {
 
   &__swatch {
     display: inline-block;
+    width: 1rem;
     height: 1rem;
     margin-right: 0.4rem;
-    width: 1rem;
   }
 }
 
 select {
-  -webkit-appearance: none;
-  border: 1px solid rgba(black, 0.1);
-  border-radius: 1px;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
   position: relative;
   width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid rgba(black, 0.1);
+  border-radius: 1px;
+  -webkit-appearance: none;
 
   &::after {
-    background: red;
-    bottom: 0;
-    content: '';
-    display: block;
-    height: 20px;
     position: absolute;
-    right: 0;
     top: 0;
-    width: 20px;
+    right: 0;
+    bottom: 0;
     z-index: 2;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: red;
+    content: '';
   }
 }
 

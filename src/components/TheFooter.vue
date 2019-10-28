@@ -17,9 +17,9 @@ export default {};
 @import '../styles/_colors';
 
 .footer {
-  color: $color-grey-800;
   margin-bottom: 3rem;
   padding: 1rem;
+  color: $color-grey-800;
 
   @media screen and (min-width: $break-md) {
     padding: 2rem;
@@ -32,10 +32,10 @@ export default {};
   }
 
   .columns {
-    border-top: 1px solid $color-grey-100;
     display: grid;
-    gap: 1.5rem 0.5rem;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem 0.5rem;
+    border-top: 1px solid $color-grey-100;
 
     @media screen and (min-width: $break-lg) {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -63,8 +63,8 @@ export default {};
   }
 
   ul {
-    list-style-type: none;
     padding: 0;
+    list-style-type: none;
   }
 
   li {

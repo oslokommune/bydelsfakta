@@ -20,8 +20,8 @@
   }
 
   .card {
-    box-shadow: none !important;
     page-break-inside: avoid !important;
+    box-shadow: none !important;
 
     &__header {
       border-bottom: none !important;
@@ -33,11 +33,11 @@
   }
 
   .graph__tablecontainer {
-    clip: none !important;
+    position: relative !important;
     display: block !important;
     height: auto !important;
     overflow: auto !important;
-    position: relative !important;
+    clip: none !important;
   }
 
   *,
@@ -48,10 +48,10 @@
   div::first-line,
   blockquote::first-line,
   li::first-line {
-    background: transparent !important;
-    box-shadow: none !important;
     color: #000000 !important; /* Black prints faster: */
     text-shadow: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   thead {

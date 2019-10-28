@@ -273,58 +273,58 @@ export default {
 $rowHeight: 2.5em;
 
 .navbar {
-  background-color: $color-yellow;
+  position: relative;
+  z-index: 4;
   display: flex;
   flex: 5em 0 0;
-  padding-left: 0;
-  position: relative;
   width: 100%;
-  z-index: 4;
+  padding-left: 0;
+  background-color: $color-yellow;
 
   @media screen and (min-width: $break-lg) {
-    background-color: inherit;
-    flex-direction: column;
-    height: 100vh;
-    overflow-y: auto;
-    padding-bottom: 2em;
-    padding-left: 1rem;
     position: fixed;
     top: 0;
+    flex-direction: column;
     width: $sidebarWidth;
+    height: 100vh;
+    padding-bottom: 2em;
+    padding-left: 1rem;
+    overflow-y: auto;
+    background-color: inherit;
   }
 }
 
 .navigation {
+  position: absolute;
+  top: 5em;
+  right: 0;
+  z-index: 1;
+  display: none;
+  width: 100%;
+  max-height: calc(100vh - 5em);
+  padding: 0 0 2em;
+  overflow-y: auto;
   background: white;
   border-top: 2px solid $color-bg;
   box-shadow: 0 2px 3px rgba($color-grey-600, 0.5);
-  display: none;
-  max-height: calc(100vh - 5em);
-  overflow-y: auto;
-  padding: 0 0 2em;
-  position: absolute;
-  right: 0;
-  top: 5em;
-  width: 100%;
-  z-index: 1;
 
   &--show {
     display: block;
   }
 
   @media screen and (min-width: $break-sm) {
-    border-top: none;
     width: calc(100% - 8rem);
+    border-top: none;
   }
 
   @media screen and (min-width: $break-lg) {
-    background: none;
-    box-shadow: none;
-    display: block;
-    padding: 0;
     position: relative;
     top: 0;
+    display: block;
     width: 100%;
+    padding: 0;
+    background: none;
+    box-shadow: none;
   }
 
   &-list {
@@ -337,33 +337,33 @@ $rowHeight: 2.5em;
   }
 
   &-header {
-    align-items: center;
-    border-bottom: 1px solid darken($color-border, 20%);
     display: flex;
-    font-weight: 500;
+    align-items: center;
     height: 4rem;
     margin-bottom: 0.5rem;
     padding: 1em 0 0.5rem 46px;
+    font-weight: 500;
+    border-bottom: 1px solid darken($color-border, 20%);
 
     & > select {
-      border: 1px solid rgba(black, 0.1);
-      border-radius: 1px;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
       position: relative;
       width: 100%;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: 1px solid rgba(black, 0.1);
+      border-radius: 1px;
 
       &::after {
-        background: red;
-        bottom: 0;
-        content: '';
-        display: block;
-        height: 20px;
         position: absolute;
-        right: 0;
         top: 0;
-        width: 20px;
+        right: 0;
+        bottom: 0;
         z-index: 2;
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: red;
+        content: '';
       }
     }
 
@@ -374,15 +374,15 @@ $rowHeight: 2.5em;
 }
 
 .selectedTopic {
-  color: $color-purple;
-  cursor: pointer;
   display: block;
   flex: auto 1 0;
-  font-size: $font-medium;
-  font-weight: 500;
   height: auto;
   padding-left: 1rem;
+  color: $color-purple;
+  font-weight: 500;
+  font-size: $font-medium;
   text-align: left;
+  cursor: pointer;
 
   &::before {
     opacity: 0;
@@ -390,18 +390,18 @@ $rowHeight: 2.5em;
 
   &::before,
   &::after {
-    background: $color-purple;
-    bottom: 1.75rem;
-    box-shadow: 0 0.6rem 0 $color-purple, 0 -0.6rem 0 $color-purple;
-    content: '';
-    display: none;
-    height: 0.2rem;
     position: absolute;
-    right: 1.5rem;
     top: calc(50% - 0.1rem);
+    right: 1.5rem;
+    bottom: 1.75rem;
+    display: none;
+    width: 1.5rem;
+    height: 0.2rem;
+    background: $color-purple;
+    box-shadow: 0 0.6rem 0 $color-purple, 0 -0.6rem 0 $color-purple;
     transform: rotate(0);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s 0.4s ease-in-out, opacity 0.2s ease-in-out;
-    width: 1.5rem;
+    content: '';
 
     @media screen and (min-width: $break-xs) {
       display: block;
@@ -409,8 +409,8 @@ $rowHeight: 2.5em;
     }
 
     @media screen and (min-width: $break-xs) {
-      display: block;
       right: 2rem;
+      display: block;
     }
 
     @media screen and (min-width: $break-lg) {
@@ -427,8 +427,8 @@ $rowHeight: 2.5em;
 
     &::before {
       box-shadow: none;
-      opacity: 1;
       transform: rotate(-45deg);
+      opacity: 1;
       transition: transform 0.2s ease-in-out;
     }
   }
@@ -439,31 +439,31 @@ $rowHeight: 2.5em;
 }
 
 .logo-link {
-  align-items: center;
-  align-self: center;
-  background: $color-bg;
   display: flex;
   flex-basis: auto;
-  height: 5rem;
+  align-items: center;
+  align-self: center;
   justify-content: center;
+  height: 5rem;
+  background: $color-bg;
 
   @media screen and (min-width: $break-lg) {
-    background: none;
     height: 8em;
     padding: 0.5rem 0;
+    background: none;
   }
 }
 
 .oslo__logo {
-  cursor: pointer;
+  width: 8em;
   height: 100%;
   object-fit: contain;
-  width: 8em;
+  cursor: pointer;
 
   @media screen and (min-width: $break-lg) {
     align-self: center;
-    padding: 0;
     width: 10em;
+    padding: 0;
   }
 }
 
@@ -472,42 +472,42 @@ input[type='checkbox'].custom {
 }
 
 .custom-label {
-  border-bottom-left-radius: $rowHeight / 2;
-  border-top-left-radius: $rowHeight / 2;
-  cursor: pointer;
+  position: relative;
   display: inline-block;
+  width: 100%;
   height: $rowHeight;
   padding-left: 1rem;
-  position: relative;
   vertical-align: middle;
-  width: 100%;
+  border-top-left-radius: $rowHeight / 2;
+  border-bottom-left-radius: $rowHeight / 2;
+  cursor: pointer;
 
   // unchecked border
   &::before {
+    position: absolute;
+    top: calc((#{$rowHeight} / 2) - 9px);
+    left: 20px;
+    width: 16px;
+    height: 16px;
     border: 1px solid $color-purple;
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     border-radius: 1px;
-    content: '';
-    height: 16px;
-    left: 20px;
     opacity: 0;
-    position: absolute;
-    top: calc((#{$rowHeight} / 2) - 9px);
-    width: 16px;
+    content: '';
   }
 
   // checked inside border
   &::after {
-    background-color: $color-purple;
-    border-radius: 1px;
-    content: '';
-    height: 10px;
-    left: 23px;
     position: absolute;
     top: calc((#{$rowHeight} / 2) - 6px);
-    transform: scale(0);
+    left: 23px;
     width: 10px;
+    height: 10px;
+    background-color: $color-purple;
+    border-radius: 1px;
+    transform: scale(0);
+    content: '';
   }
 
   &:not(.compare):not(.custom-label--checked) {
@@ -522,9 +522,9 @@ input[type='checkbox'].custom {
   }
 
   &__selectedAll {
+    width: 0;
     margin-left: -3.3rem;
     padding-right: 2.2rem;
-    width: 0;
 
     &::before {
       opacity: 0.35;
@@ -556,13 +556,13 @@ input[type='checkbox'].custom {
 .navigation-link {
   $p: &;
 
+  position: relative;
+  display: flex;
   align-items: center;
+  margin-bottom: 1px;
   background-color: inherit;
   border-radius: $rowHeight / 2;
   cursor: pointer;
-  display: flex;
-  margin-bottom: 1px;
-  position: relative;
   transition: all 0.3s ease-in-out;
 
   &--compare {
@@ -601,20 +601,20 @@ input[type='checkbox'].custom {
   }
 
   &__label {
-    align-items: center;
-    border-bottom-right-radius: $rowHeight / 2;
-    border-top-right-radius: $rowHeight / 2;
-    color: rgba($color-purple, 0.85);
+    position: relative;
     display: flex;
     flex-grow: 1;
+    align-items: center;
     height: $rowHeight;
-    letter-spacing: 0.1px;
     margin-left: 46px;
-    position: relative;
+    color: rgba($color-purple, 0.85);
+    letter-spacing: 0.1px;
+    border-top-right-radius: $rowHeight / 2;
+    border-bottom-right-radius: $rowHeight / 2;
 
     &--compare {
-      margin-bottom: 1rem;
       margin-top: 0;
+      margin-bottom: 1rem;
       padding-left: 4rem;
 
       @media screen and (min-width: $break-md) {
@@ -629,15 +629,15 @@ input[type='checkbox'].custom {
 
     // Add visual border on the left side of text on hover
     &::before {
-      background: $color-purple;
-      bottom: 0;
-      content: '';
-      display: none;
-      left: -10px;
-      pointer-events: none;
       position: absolute;
       top: 0;
+      bottom: 0;
+      left: -10px;
+      display: none;
       width: 10px;
+      background: $color-purple;
+      content: '';
+      pointer-events: none;
     }
   }
 
@@ -647,58 +647,58 @@ input[type='checkbox'].custom {
 }
 
 .state-toggle {
+  position: relative;
   display: flex;
-  height: 4.5em;
   justify-content: center;
-  list-style-type: none;
+  width: 100%;
+  height: 4.5em;
   margin: 0;
   padding: 0;
-  position: relative;
-  width: 100%;
+  list-style-type: none;
 
   &::after {
-    background: darken($color-border, 20%);
-    bottom: -5px;
-    content: '';
-    display: block;
-    height: 1px;
-    left: 0;
-    opacity: 1;
     position: absolute;
     right: 0;
+    bottom: -5px;
+    left: 0;
+    display: block;
+    height: 1px;
+    background: darken($color-border, 20%);
+    opacity: 1;
+    content: '';
   }
 
   &__element {
-    align-items: center;
+    position: relative;
     display: flex;
     flex: 50% 0 0;
-    height: 100%;
+    align-items: center;
     justify-content: center;
+    height: 100%;
     margin: 0;
-    position: relative;
     text-align: center;
   }
 
   &__link {
-    align-items: center;
-    border-radius: 3px;
-    color: rgba($color-purple, 0.75);
     display: flex;
-    font-weight: 500;
-    height: 100%;
+    align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
+    color: rgba($color-purple, 0.75);
+    font-weight: 500;
+    border-radius: 3px;
 
     &::after {
-      background: $color-blue;
-      bottom: -5px;
-      content: '';
-      display: block;
-      height: 5px;
-      left: 0;
-      opacity: 0;
       position: absolute;
       right: 0;
+      bottom: -5px;
+      left: 0;
+      display: block;
+      height: 5px;
+      background: $color-blue;
+      opacity: 0;
+      content: '';
     }
 
     &:hover:not(&--active) {

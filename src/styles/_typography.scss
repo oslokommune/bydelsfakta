@@ -1,10 +1,10 @@
 h2.section-heading {
-  color: $color-purple;
-  font-size: $font-large;
-  font-weight: 500;
+  width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem 0;
-  width: 100%;
+  color: $color-purple;
+  font-weight: 500;
+  font-size: $font-large;
 
   @media screen and (min-width: $break-md) {
     padding: 1.5rem 1rem 0.5rem;
@@ -12,8 +12,8 @@ h2.section-heading {
 }
 
 h3 {
-  font-weight: 500;
   margin-bottom: 0.5em;
+  font-weight: 500;
 }
 
 a {
@@ -26,8 +26,8 @@ svg a:not([href$='#']) {
 
 .tick text {
   color: $color-grey-600;
-  font-family: monospace;
-  font-size: $font-small;
   font-weight: 500;
+  font-size: $font-small;
+  font-family: monospace;
   text-rendering: geometricPrecision;
 }

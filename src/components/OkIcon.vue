@@ -79,18 +79,18 @@ export default {
 
 <style lang="scss" scoped>
 .icon {
+  width: 2rem;
   height: 2rem;
   transition: transform 0.2s ease-in-out;
-  width: 2rem;
 
   &.small {
-    height: 1.5rem;
     width: 1.5rem;
+    height: 1.5rem;
   }
 
   &.tiny {
-    height: 1.25rem;
     width: 1.25rem;
+    height: 1.25rem;
   }
 }
 </style>

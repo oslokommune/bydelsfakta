@@ -146,15 +146,15 @@ export default {
 @import '../styles/variables';
 
 .header {
-  color: $color-purple;
+  position: relative;
   display: none;
   flex-direction: column;
-  font-size: $font-huge;
-  font-weight: 500;
+  width: auto;
   margin-left: 0.5rem;
   padding: 0.5rem;
-  position: relative;
-  width: auto;
+  color: $color-purple;
+  font-weight: 500;
+  font-size: $font-huge;
 
   @media screen and (min-width: $break-lg) {
     display: block;
@@ -162,20 +162,20 @@ export default {
 }
 
 .oslo__navigation-topbar {
-  background-color: $color-bg;
-  display: flex;
-  flex-direction: column;
-  margin: 1.5rem 0.5rem 0.5rem 0.5rem;
-  padding: 1rem 0;
   position: relative;
   top: 0;
-  width: calc(100% - 1rem);
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 1rem);
+  margin: 1.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 1rem 0;
+  background-color: $color-bg;
 
   @media screen and (min-width: $break-lg) {
+    width: 100%;
     margin: 0;
     padding: 0.75rem 1rem 0.5rem;
-    width: 100%;
   }
 
   &-button {
@@ -189,34 +189,34 @@ export default {
 }
 
 .oslo__topbar {
+  margin-bottom: 2rem;
   color: $color-purple;
   font-weight: bold;
-  margin-bottom: 2rem;
 
   &-text {
-    letter-spacing: 0.8px;
-    margin-left: 1rem;
     margin-top: 0.3rem;
+    margin-left: 1rem;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
   }
 }
 
 .label {
-  font-size: $font-medium;
   margin-bottom: 0.25rem;
+  font-size: $font-medium;
 }
 
 .topic {
-  align-items: center;
   display: flex;
-  text-align: left;
+  align-items: center;
   width: 100%;
+  text-align: left;
 
   .header {
     display: block;
+    width: auto;
     margin: 0;
     padding: 0;
-    width: auto;
   }
 
   & > .icon {
@@ -225,11 +225,11 @@ export default {
 }
 
 .icon {
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  height: 2rem;
-  transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
   width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
 
   &.rotate {
     transform: rotateX(180deg);
@@ -241,9 +241,9 @@ export default {
 }
 
 .navigation-topbar {
-  max-width: 768px;
   position: relative;
   width: 100%;
+  max-width: 768px;
 
   &--hidden {
     @media screen and (max-width: $break-lg) {
@@ -252,15 +252,15 @@ export default {
   }
 
   &__select {
-    align-items: flex-start;
-    color: $color-purple;
+    position: relative;
     display: flex;
     flex-direction: column;
-    font-size: $font-huge;
-    font-weight: 500;
-    padding: 0.5rem;
-    position: relative;
+    align-items: flex-start;
     width: 100%;
+    padding: 0.5rem;
+    color: $color-purple;
+    font-weight: 500;
+    font-size: $font-huge;
 
     @media screen and (min-width: $break-md) {
       padding: 1rem;
@@ -273,17 +273,17 @@ export default {
   }
 
   &__dropdown {
-    background-color: white;
-    border: 3px solid $color-border;
+    position: absolute;
+    z-index: 1;
     display: flex;
     flex-flow: row wrap;
-    max-height: calc(100vh - 17rem);
-    max-width: 768px;
-    overflow: auto;
-    padding: 1rem 0.5rem;
-    position: absolute;
     width: 100%;
-    z-index: 1;
+    max-width: 768px;
+    max-height: calc(100vh - 17rem);
+    padding: 1rem 0.5rem;
+    overflow: auto;
+    background-color: white;
+    border: 3px solid $color-border;
 
     &-column {
       display: flex;
@@ -293,10 +293,10 @@ export default {
       padding: 0.5rem;
 
       &--heading {
-        font-weight: 700;
-        margin-bottom: 1rem;
         margin-top: 1rem;
+        margin-bottom: 1rem;
         padding-top: 0.5rem;
+        font-weight: 700;
 
         & > span {
           padding-left: 0.5rem;
@@ -314,11 +314,11 @@ export default {
     }
 
     &-item {
-      background-color: $color-grey-50;
-      border-radius: 4px;
-      color: $color-purple;
       margin-bottom: 0.5rem;
       padding: 1rem 0.75rem;
+      color: $color-purple;
+      background-color: $color-grey-50;
+      border-radius: 4px;
 
       @media screen and (min-width: $break-lg) {
         margin-bottom: 0.1rem;
@@ -326,8 +326,8 @@ export default {
       }
 
       &:hover:not(&--active):not(&--disabled) {
-        background-color: $color-grey-100;
         color: black;
+        background-color: $color-grey-100;
       }
 
       &--active {
