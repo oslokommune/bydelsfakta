@@ -189,11 +189,11 @@ export default {
         labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
         heading: 'Innvandrere under 16 år med én innvandrerforelder',
-        scale: [0.15, 0.3],
+        scale: [0.11, 0.34],
         reverse: true,
         method: 'ratio',
       },
-      production: null,
+      production: true,
       tabs: [
         {
           active: false,
