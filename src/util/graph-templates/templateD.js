@@ -525,7 +525,7 @@ function Template(svg) {
       } else if (this.method === 'ratio' && extent[1] - extent[0] === 0) {
         return `Andel av befolkningen som er ${extent[0]} år`;
       } else if (this.method !== 'ratio' && extent[1] - extent[0] >= 1) {
-        return `Størrelse av befolkningen mellom ${extent[0]} og ${extent[1]} år`;
+        return `Antall personer mellom ${extent[0]} og ${extent[1]} år`;
       } else if (this.method !== 'ratio' && extent[1] - extent[0] === 0) {
         return `Størrelse av befolkningen på ${extent[0]} år`;
       }
