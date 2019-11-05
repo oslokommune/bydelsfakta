@@ -7,7 +7,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 ## 🚀 New features
 
 - Sort rows when expanding a series in multi-series bar charts (Template A)
-- Added links to external sources
+- Links to external data sources on 'About' view for cards
 
 ## 💅🏽 Improvements
 
