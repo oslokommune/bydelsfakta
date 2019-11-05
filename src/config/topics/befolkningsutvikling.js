@@ -11,9 +11,13 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningsutvikling',
-      about:
-        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+        sources: [source.ssb],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog48&submode=catalog&mode=documentation&top=yes',
+      },
       production: true,
       tabs: [
         {
@@ -39,9 +43,13 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningsvekst',
-      about:
-        'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+        sources: [source.ssb],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog48&submode=catalog&mode=documentation&top=yes',
+      },
       production: true,
       tabs: [
         {
@@ -57,9 +65,13 @@ export default {
     {
       size: 'large',
       heading: 'Forventet utvikling',
-      about:
-        'Tall for historisk befolkningsutvikling er statistikk fra SSB, mens påfølgende år viser framskrevet folkemengde per 1. januar hvert år. Framskrevne tall er hentet fra Oslo kommunes seneste befolkningsframskrivning. Befolkningsframskrivningen gir et anslag for hvor mange mennesker det vil bo i Oslo i årene framover fordelt på aldersgrupper. Framskrivningene legger til grunn en rekke forutsetninger for utvikling av fruktbarhet, dødelighet, flyttemønster og boligbygging, og viser beregnet befolkningsutvikling gitt disse forutsetningene.',
-      sources: [source.ssb, source.oslo],
+      about: {
+        info:
+          'Tall for historisk befolkningsutvikling er statistikk fra SSB, mens påfølgende år viser framskrevet folkemengde per 1. januar hvert år. Framskrevne tall er hentet fra Oslo kommunes seneste befolkningsframskrivning. Befolkningsframskrivningen gir et anslag for hvor mange mennesker det vil bo i Oslo i årene framover fordelt på aldersgrupper. Framskrivningene legger til grunn en rekke forutsetninger for utvikling av fruktbarhet, dødelighet, flyttemønster og boligbygging, og viser beregnet befolkningsutvikling gitt disse forutsetningene.',
+        sources: [source.ssb, source.oslo],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog52&submode=catalog&mode=documentation&top=yes',
+      },
       production: true,
       tabs: [
         {

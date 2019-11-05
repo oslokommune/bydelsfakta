@@ -232,14 +232,20 @@
         <h3>{{ $t('graphCard.about.label') }}</h3>
         <button class="close" @click="mode = 'graph'"></button>
         <p v-if="date">{{ $t('graphCard.about.updated') }}: {{ date }}</p>
-        <p v-if="settings.about" v-html="settings.about"></p>
-        <p v-if="settings.sources">
-          {{ settings.sources.length > 1 ? $t('graphCard.sources.plural') : $t('graphCard.sources.singular') }}:
-          <span v-for="(source, i) in settings.sources" :key="'source_' + i">
-            <a :href="source.url">{{ source.name }}</a>
-            <span v-if="i < settings.sources.length - 1">, </span>
-          </span>
-        </p>
+        <template v-if="settings.about">
+          <p v-if="settings.about.info" v-html="settings.about.info"></p>
+          <p v-if="settings.about.externalInfo">
+            <span>{{ $t('graphCard.about.externalLabel') }}</span>
+            <a :href="settings.about.externalInfo">{{ $t('graphCard.about.externalAnchor') }}</a>
+          </p>
+          <p v-if="settings.about.sources">
+            {{ settings.about.sources.length > 1 ? $t('graphCard.sources.plural') : $t('graphCard.sources.singular') }}:
+            <span v-for="(source, i) in settings.about.sources" :key="'source_' + i">
+              <a :href="source.url">{{ source.name }}</a>
+              <span v-if="i < settings.about.sources.length - 1">, </span>
+            </span>
+          </p>
+        </template>
       </div>
     </div>
   </section>

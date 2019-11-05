@@ -11,9 +11,11 @@ export default {
     {
       size: 'large',
       heading: 'Trangbodde husholdninger',
-      about:
-        'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
+        sources: [source.ssb],
+      },
       production: false,
       tabs: [
         {
@@ -58,9 +60,11 @@ export default {
     {
       size: 'small',
       heading: 'Under 0,5 rom per person',
-      about:
-        'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
+        sources: [source.ssb],
+      },
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
@@ -113,9 +117,11 @@ export default {
     {
       size: 'small',
       heading: '0,5–0,9 rom per person',
-      about:
-        'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
+        sources: [source.ssb],
+      },
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
@@ -168,9 +174,11 @@ export default {
     {
       size: 'small',
       heading: '1–1,9 rom per person',
-      about:
-        'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
+        sources: [source.ssb],
+      },
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
@@ -223,9 +231,11 @@ export default {
     {
       size: 'small',
       heading: '2 rom eller flere per person',
-      about:
-        'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
+        sources: [source.ssb],
+      },
       map: {
         labels: ['Lav andel', 'Høy andel'],
         method: 'ratio',
