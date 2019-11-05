@@ -37,7 +37,9 @@
     "about": {
       "aria": "Om statistikken",
       "label": "Om statistikken",
-      "updated": "Publisert"
+      "updated": "Publisert",
+      "externalLabel": "For mer statistikk ",
+      "externalAnchor": "se statistikkbanken"
     },
     "options": {
       "label": "Valg"

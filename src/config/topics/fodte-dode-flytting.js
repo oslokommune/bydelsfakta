@@ -12,7 +12,11 @@ export default {
       size: 'large',
       heading: 'Flytting etter alder',
       production: true,
-      sources: [source.ssb],
+      about: {
+        sources: [source.ssb],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog2&submode=catalog&mode=documentation&top=yes',
+      },
       tabs: [
         {
           label: 'Status',

@@ -11,8 +11,12 @@ export default {
     {
       size: 'large',
       heading: 'Husholdningstyper',
-      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
-      sources: [source.ssb],
+      about: {
+        info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+        sources: [source.ssb],
+      },
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/husholdningstyper-status`,
@@ -66,9 +70,13 @@ export default {
     {
       size: 'large',
       heading: 'Husholdninger med barn',
-      about:
-        'Statistikken omfatter privathusholdninger i Oslo per 1.1. Husholdninger med barn regnes her som husholdninger med barn under 18 år.',
-      sources: [source.ssb],
+      about: {
+        info:
+          'Statistikken omfatter privathusholdninger i Oslo per 1.1. Husholdninger med barn regnes her som husholdninger med barn under 18 år.',
+        sources: [source.ssb],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+      },
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/husholdning-totalt-status`,
@@ -126,8 +134,12 @@ export default {
     {
       size: 'small',
       heading: 'Husholdninger med ett barn',
-      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
-      sources: [source.ssb],
+      about: {
+        info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+        sources: [source.ssb],
+      },
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Husholdninger med ett barn',
@@ -179,8 +191,12 @@ export default {
     {
       size: 'small',
       heading: 'Husholdninger med to barn',
-      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
-      sources: [source.ssb],
+      about: {
+        info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+        sources: [source.ssb],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+      },
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Husholdninger med to barn',
@@ -232,8 +248,12 @@ export default {
     {
       size: 'small',
       heading: 'Husholdninger med tre eller flere barn',
-      about: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
-      sources: [source.ssb],
+      about: {
+        info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
+        sources: [source.ssb],
+        externalInfo:
+          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+      },
       map: {
         labels: ['Færre', 'Flere'],
         heading: 'Husholdninger med tre+ barn',
