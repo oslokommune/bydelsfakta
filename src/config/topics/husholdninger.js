@@ -77,14 +77,6 @@ export default {
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
       },
-      map: {
-        labels: ['Færre', 'Flere'],
-        url: `${API}/husholdning-totalt-status`,
-        heading: 'Husholdninger med 1 barn',
-        method: 'ratio',
-        series: 0,
-        scale: [0.06, 0.32],
-      },
       production: true,
       tabs: [
         {

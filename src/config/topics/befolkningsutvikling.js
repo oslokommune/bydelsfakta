@@ -32,6 +32,7 @@ export default {
 
         {
           active: false,
+          heading: 'Prosentvis årlig utvikling i folkemengde',
           label: 'Prosentvis endring',
           method: 'ratio',
           template: 'b',
