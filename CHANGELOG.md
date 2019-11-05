@@ -7,11 +7,16 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 ## 🚀 New features
 
 - Sort rows when expanding a series in multi-series bar charts (Template A)
-- Links to external data sources on 'About' view for cards
 
-## 💅🏽 Improvements
+## 💅 Improvements
 
 - Refactoring code for Template A
+- More descriptive headings and labels for graphs
+
+## 🔧 Other changes
+
+- Remove map view from 'Husholdninger med barn' card
+- Add links to external data sources on 'About' view for cards
 
 ## 🐛 Bugfixes
 
