@@ -1,25 +1,32 @@
 # Unreleased (v.1.1)
 
-## About this version
+### About this version
 
 This planned expansion takes place in November 2019 and adds features ommited from the main product launch.
 
-## 🚀 New features
+### 🚀 New features
 
 - Sort rows when expanding a series in multi-series bar charts (Template A)
 
-## 💅 Improvements
+### 💅 Improvements
 
-- Refactoring code for Template A
+- Refactoring code for Template A, F
 - More descriptive headings and labels for graphs
+- Add legend to box plot
 
-## 🔧 Other changes
+### 🔧 Other changes
 
 - Remove map view from 'Husholdninger med barn' card
 - Add links to external data sources on 'About' view for cards
 - Added back a 'norskfødt med én innvandrerforelder'-card which was removed a couple of months ago
 
-## 🐛 Bugfixes
+### 🐛 Bugfixes
+
+- Fix issue where close button was included when downloading graph as SVGs and PNGs
+
+&nbsp;
+
+---
 
 # Release 1.0
 
@@ -29,9 +36,9 @@ This is the first official release of Bydelsfakta created by [Oslo Origo](http:/
 
 Official date of release 27 August 2019.
 
-## Main features
+### Main features
 
-### Visualising data
+#### Visualising data
 
 - 13 templates for visualising data
   - Bar charts (single or multiple series)
@@ -49,25 +56,25 @@ Official date of release 27 August 2019.
   - Combo bar chart and line charts for migration data
 - Visualising geospatial data
 
-### Exporting data
+#### Exporting data
 
 - Export dataset as Excel (.xlsx)
 - Export dataset as CSV (.csv)
 - Export graph as image (.png)
 - Export graph as SVG
 
-### Exploring statistics
+#### Exploring statistics
 
 - Compare districts in Oslo
 - Compare subdistricts within a district
 - View dataset as data grid
 
-### Other
+#### Other
 
 - Fully responsive experience
 - 4 x 100/100 on Google Lighthouse audit
 
-## Main credits
+### Main credits
 
 - [Aulon Mujaj](https://github.com/aulonm) (dev)
 - [Jesper Kiledal](https://github.com/kiledal) (design, dev)

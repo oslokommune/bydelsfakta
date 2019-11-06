@@ -24,6 +24,8 @@ function cleanSvgData(str) {
     .attr('tabindex', null)
     .style('cursor', null);
 
+  svg.select('.close').remove();
+
   // Remove hyperlinks by grabbing their children
   // and appending them to their grandparent before
   // removing the <a>-elements.
