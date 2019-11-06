@@ -20,13 +20,18 @@
           "
         />
       </div>
+      <div class="main-container__description">
+        <!-- TODO: Add text description of the application -->
+        <v-leaflet :district="geoDistricts" :district-labels="true" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import VCategory from '../components/VCategory';
+import VLeaflet from '../components/VLeaflet';
 import { topics, topicNames } from '../config/topics';
 import districts from '../config/geoData/districts';
 import { getDistrictName } from '../util';
@@ -35,6 +40,7 @@ export default {
   name: 'District',
   components: {
     VCategory,
+    VLeaflet,
   },
 
   props: {
@@ -58,6 +64,7 @@ export default {
 
   computed: {
     ...mapState(['productionMode', 'compareDistricts']),
+    ...mapGetters(['geoDistricts']),
   },
 
   data() {
