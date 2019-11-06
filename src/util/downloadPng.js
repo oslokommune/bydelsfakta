@@ -10,6 +10,18 @@ export default function downloadPng(svgRef, filename) {
   const background = svg.select('.background');
   const width = background.node().getBBox().width + padding * 2;
   const height = background.node().getBBox().height + padding * 2;
+  const close = svg.select('.close');
+
+  const options = {
+    scale,
+    top: -padding,
+    left: -padding,
+    width,
+    height,
+    canvg,
+  };
+
+  // Manipulate things before screenshot
   svg
     .select('.background')
     .attr('x', -padding)
@@ -20,14 +32,11 @@ export default function downloadPng(svgRef, filename) {
   svg.selectAll('.tick line').attr('stroke', 'black');
   svg.select('.heading').style('font-size', '1.3rem');
 
-  saveSvgAsPng(svgRef, filename, {
-    scale,
-    top: -padding,
-    left: -padding,
-    width,
-    height,
-    canvg,
-  }).then(() => {
+  close.attr('opacity', 0);
+
+  saveSvgAsPng(svgRef, filename, options).then(() => {
+    // Revert things after screenshot
     svg.select('.heading').style('font-size', '1rem');
+    close.attr('opacity', 1);
   });
 }
