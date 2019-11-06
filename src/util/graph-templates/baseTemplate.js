@@ -79,7 +79,11 @@ function Base_Template(svg) {
     }
 
     if (tick) {
-      return this.showPermille ? `${num * 100}‰` : method === 'ratio' ? d3.format('~p')(num) : d3.format('~d')(num);
+      return this.showPermille
+        ? `${d3.format('~d')(num * 100)}‰`
+        : method === 'ratio'
+        ? d3.format('~p')(num)
+        : d3.format('~d')(num);
     }
 
     if (table) {
