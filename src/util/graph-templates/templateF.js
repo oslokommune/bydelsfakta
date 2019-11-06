@@ -5,15 +5,28 @@
 
 import Base_Template from './baseTemplate';
 import util from './template-utils';
-import { color } from './colors';
 import d3 from '@/assets/d3';
 import * as locale from './locale';
+
+import {
+  positionLegend,
+  createBoxPlotLegend,
+  createRowElements,
+  updateRowBox,
+  updateRowGeography,
+  updateRowMedianText,
+  updateRowMeanText,
+  updateRowMeanRect,
+  updateRowMedianRect,
+  updateRowFill,
+  updateRowDivider,
+} from './graph-helpers/boxplotHelpers';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'f';
 
-  this.padding = { top: 90, left: 250, right: 20, bottom: 1 };
+  this.padding = { top: 90, left: 250, right: 20, bottom: 40 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
 
   // Define withs of both charts.
@@ -45,6 +58,8 @@ function Template(svg) {
       .attr('height', this.padding.top + this.height + this.padding.bottom + this.sourceHeight)
       .attr('width', this.width + this.padding.left + this.padding.right);
 
+    this.legend.call(positionLegend.bind(this));
+
     this.drawScales();
     this.drawAxisLabels();
     this.drawRows();
@@ -69,6 +84,11 @@ function Template(svg) {
       .attr('x', this.width1 / 2)
       .attr('text-anchor', 'middle')
       .text('Gjennomsnittsalder');
+
+    this.legend = this.canvas
+      .append('g')
+      .classed('legend', true)
+      .call(createBoxPlotLegend.bind(this));
   };
 
   this.drawTable = function() {
@@ -83,92 +103,6 @@ function Template(svg) {
 
     const tableGenerator = util.drawTable.bind(this);
     tableGenerator(table_head, table_body, { formatter: locale.norwegianLocale.format(',.1f') });
-  };
-
-  this.initRowElements = function(rowsE) {
-    rowsE.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-
-    // Row fill
-    rowsE
-      .append('rect')
-      .attr('class', 'rowFill')
-      .attr('fill', color.purple)
-      .attr('height', this.rowHeight)
-      .attr('x', -this.padding.left)
-      .attr('width', this.width + this.padding.left + this.padding.right);
-
-    // Row divider
-    rowsE
-      .append('rect')
-      .attr('class', 'divider')
-      .attr('fill', color.purple)
-      .attr('x', -this.padding.left)
-      .attr('width', this.width + this.padding.left + this.padding.right)
-      .attr('height', 1)
-      .attr('y', this.rowHeight);
-
-    // Row Geography
-    rowsE
-      .append('text')
-      .attr('class', 'geography')
-      .attr('fill', color.purple)
-      .attr('y', this.rowHeight / 2 + 6)
-      .attr('x', -this.padding.left + 10);
-
-    // Box
-    rowsE
-      .append('rect')
-      .attr('class', 'box')
-      .attr('fill', color.purple)
-      .attr('stroke', color.purple)
-      .attr('stroke-width', 1)
-      .attr('fill-opacity', 0.2)
-      .attr('rx', 2)
-      .attr('shape-rendering', 'geometricPrecision')
-      .attr('height', this.barHeight)
-      .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
-      .attr('y', (this.rowHeight - this.barHeight) / 2);
-
-    // Median Age
-    rowsE
-      .append('text')
-      .attr('class', 'median-value')
-      .attr('text-anchor', 'start')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
-      .attr('y', this.rowHeight / 2 + 5);
-
-    // Median stroke
-    rowsE
-      .append('rect')
-      .attr('class', 'median-stroke')
-      .attr('fill', color.purple)
-      .attr('height', this.rowHeight)
-      .attr('width', 3)
-      .attr('shape-rendering', 'geometricPrecision')
-      .attr('transform', `translate(-1.5, 0)`)
-      .attr('y', 0)
-      .attr('x', this.gapX + this.width1);
-
-    // Mean Age
-    rowsE
-      .append('text')
-      .attr('class', 'mean-value')
-      .attr('text-anchor', 'start')
-      .attr('font-size', 12)
-      .attr('font-weight', 700)
-      .attr('y', this.rowHeight / 2 + 5);
-
-    // Mean Stroke
-    rowsE
-      .append('rect')
-      .attr('class', 'mean-stroke')
-      .attr('fill', color.purple)
-      .attr('height', this.rowHeight)
-      .attr('width', 3)
-      .attr('shape-rendering', 'geometricPrecision')
-      .attr('transform', `translate(-1.5, 0)`)
-      .attr('y', 0);
   };
 
   // Updates the text and position for both
@@ -192,6 +126,7 @@ function Template(svg) {
   this.drawScales = function() {
     this.width1 = (this.width - this.gapX) / 2;
     this.width2 = (this.width - this.gapX) / 2;
+
     this.x2
       .range([0, this.width2])
       .domain([0, 70])
@@ -209,7 +144,7 @@ function Template(svg) {
 
     this.x
       .range([0, this.width1])
-      .domain([d3.min(this.data.data.map(d => d.mean)), d3.max(this.data.data.map(d => d.mean))])
+      .domain(d3.extent(this.data.data.map(d => d.mean)))
       .nice();
     this.xAxis
       .transition()
@@ -225,68 +160,25 @@ function Template(svg) {
   // Update the contents for each row on each
   // render
   this.drawRows = function() {
-    let rows = this.canvas.selectAll('g.row').data(this.data.data);
-    const rowsE = rows
-      .enter()
-      .append('g')
-      .attr('class', 'row');
-    rows.exit().remove();
-    rows = rows.merge(rowsE);
+    const rows = this.canvas
+      .selectAll('g.row')
+      .data(this.data.data)
+      .join(createRowElements.bind(this));
 
-    // Create elements on each row that's created on enter
-    this.initRowElements(rowsE);
-
-    // Update row geography, style and position
-    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
-    rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
-    rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
     rows
       .transition()
       .duration(this.duration)
       .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-    rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
 
     rows
-      .select('text.median-value')
-      .text(d => d.median + ' år')
-      .transition()
-      .duration(this.duration)
-      .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
-
-    rows
-      .select('text.mean-value')
-      .text(d => locale.norwegianLocale.format(',.2f')(d.mean) + ' år')
-      .transition()
-      .duration(this.duration)
-      .attr('x', d => this.x(d.mean) + 6);
-
-    rows
-      .select('rect.mean-stroke')
-      .transition()
-      .duration(this.duration)
-      .attr('x', d => this.x(d.mean));
-    rows
-      .select('rect.median-stroke')
-      .transition()
-      .duration(this.duration)
-      .attr('x', d => this.gapX + this.width1 + this.x2(d.median));
-    rows
-      .select('rect.box')
-      .transition()
-      .duration(this.duration)
-      .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
-      .attr('width', d => this.x2(d.high) - this.x2(d.low));
-
-    rows
-      .select('rect.rowFill')
-      .transition()
-      .duration(this.duration)
-      .attr('width', this.width + this.padding.left + this.padding.right);
-    rows
-      .select('rect.divider')
-      .transition()
-      .duration(this.duration)
-      .attr('width', this.width + this.padding.left + this.padding.right);
+      .call(updateRowBox.bind(this))
+      .call(updateRowGeography.bind(this))
+      .call(updateRowMedianText.bind(this))
+      .call(updateRowMeanText.bind(this))
+      .call(updateRowMeanRect.bind(this))
+      .call(updateRowMedianRect.bind(this))
+      .call(updateRowFill.bind(this))
+      .call(updateRowDivider.bind(this));
   };
 
   this.init(svg);
