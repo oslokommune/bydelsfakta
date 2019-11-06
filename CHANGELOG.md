@@ -22,6 +22,8 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 ### 🐛 Bugfixes
 
+- Fix issue where close button was included when downloading graph as SVGs and PNGs
+
 &nbsp;
 
 ---
