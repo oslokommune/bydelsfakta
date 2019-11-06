@@ -18,7 +18,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 - Remove map view from 'Husholdninger med barn' card
 - Add links to external data sources on 'About' view for cards
-- Add a 'norskfødt med én innvandrerforelder'-card which was removed a couple of months ago
+- Add a 'norskfødt med én innvandrerforelder'-card
 - Add dødsrater-historisk graph
 - Add bygningstyper-alle graphs, both historic and status
 
