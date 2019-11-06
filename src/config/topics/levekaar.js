@@ -261,6 +261,16 @@ export default {
           production: true,
           showPermille: true,
         },
+        {
+          active: false,
+          label: 'Historisk',
+          id: 'levekar_dodsrater_historisk_andel',
+          template: 'b',
+          method: 'ratio',
+          url: `${API}/dodsrater-historisk`,
+          production: true,
+          showPermille: true,
+        },
       ],
     },
     {
