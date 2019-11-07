@@ -273,6 +273,7 @@ export default {
       date: '',
       fullscreen: false,
       showAsTabs: true,
+      scroll: null,
     };
   },
   computed: {
@@ -310,7 +311,9 @@ export default {
         this.fullscreen = false;
         body.style.height = 'auto';
         body.style.overflow = 'auto';
+        window.scrollTo(this.scroll[0], this.scroll[1]);
       } else {
+        this.scroll = [window.pageXOffset, window.pageYOffset];
         this.fullscreen = true;
         body.style.height = '100vh';
         body.style.overflow = 'hidden';
