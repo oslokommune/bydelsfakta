@@ -239,7 +239,7 @@ export default {
         fillColor: '#222',
         fillOpacity: 0.3,
         color: color.purple,
-        weight: 4,
+        weight: 1,
       },
       mapOptions: {
         zoomControl: true,
