@@ -27,6 +27,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 - Fix issue where close button was included when downloading graph as SVGs and PNGs
 - Fix floating point rounding error in axis ticks when formatted as permille
+- Fix scrollposition when going out of fullscreen-mode
 
 &nbsp;
 
