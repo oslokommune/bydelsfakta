@@ -21,7 +21,6 @@
         />
       </div>
       <div class="main-container__description">
-        <!-- TODO: Add text description of the application -->
         <v-leaflet :district="geoDistricts" :district-labels="true" />
       </div>
     </div>

@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
 
-import Bydel from '../District';
+import District from '../District';
 import setupI18n from '../../i18n';
 import { routes } from '../../router';
 import mockStore from '../../../tests/MockStore';
@@ -22,7 +22,7 @@ describe('Bydel', () => {
     localVue.use(VueMeta);
     router = new VueRouter({ routes });
     store = new Vuex.Store(mockStore);
-    wrapper = mount(Bydel, {
+    wrapper = mount(District, {
       propsData: {
         district: 'gamleoslo',
       },
@@ -30,6 +30,9 @@ describe('Bydel', () => {
       router,
       store,
       i18n,
+      stubs: {
+        VLeaflet: true,
+      },
     });
   });
 

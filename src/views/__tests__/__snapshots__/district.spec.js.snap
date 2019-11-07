@@ -362,6 +362,17 @@ exports[`Bydel renders component correctly 1`] = `
         </span>
       </a>
     </div>
+     
+    <div
+      class="main-container__description"
+    >
+      <vleaflet-stub
+        dataurl=""
+        district="[object Object]"
+        districtlabels="true"
+        settings="[object Object]"
+      />
+    </div>
   </div>
 </div>
 `;
