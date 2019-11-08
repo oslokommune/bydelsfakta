@@ -7,13 +7,14 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 ### 🚀 New features
 
 - Sort rows when expanding a series in multi-series bar charts (Template A)
+- Add map to district-view
+- Add rom-per-person topic
 
 ### 💅 Improvements
 
 - Refactoring code for Template A, F
 - More descriptive headings and labels for graphs
 - Add legend to box plot
-- Add map to district-view
 
 ### 🔧 Other changes
 

@@ -275,5 +275,5 @@ export default {
     bgImage: `${baseUrl}/img/bygningstyper`,
     txtColor: 'rgb(199, 247, 201)',
   },
-  related: ['husholdninger', /*'rom-per-person', TODO: temporary */ 'boligpriser'],
+  related: ['husholdninger', 'rom-per-person', 'boligpriser'],
 };
