@@ -17,6 +17,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Refactoring code for Template A, F, N
 - More descriptive headings and labels for graphs
 - Add legend to box plot
+- Improve colors on line charts making them more distinguishable
 
 ### 🔧 Other changes
 
