@@ -26,314 +26,58 @@ function Template(svg) {
 
   this.minWidth = 600;
   this.ageCap = 119; // caps the graphs on this age (set to 119 to disable capping)
-  let gBrushSmall, gBrushLarge;
+  this.gBrushSmall = null;
 
   this.age = d3.scaleLinear().domain([0, this.ageCap]);
 
-  let extent = [];
-
-  function sortData(input, method) {
-    input.sort((a, b) => {
-      const totA = d3.sum(a.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
-      const totB = d3.sum(b.values.filter((d, i) => i >= extent[0] && i <= extent[1]).map(d => d[method]));
-      return totB - totA;
-    });
-
-    input.sort((a, b) => a.avgRow - b.avgRow);
-    input.sort((a, b) => a.totalRow - b.totalRow);
-    return input;
-  }
+  this.extent = null;
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
-
     if (!data.data) return;
 
-    sortData(data.data, this.method);
+    if(options.range) {
+      this.extent = JSON.parse(options.range);
+    }
+
+    if (!this.extent) {
+      this.extent = [0, 39];
+      this.render(this.data, { method: this.method, range: '[0, 39]', useDropdown: true });
+      return;
+    }
 
     this.width = d3.max([this.width, this.minWidth]);
 
-    if (this.parentWidth() < this.minWidth) {
-      this.upper.attr('opacity', 0);
-      this.middle.attr('opacity', 0);
-      this.yGutter = 0;
-      this.dropDownParent.style('top', '32px');
-    } else {
-      this.upper.attr('opacity', 1);
-      this.middle.attr('opacity', 1);
-      this.yGutter = 130;
-      this.dropDownParent.style('top', 'none');
-    }
+    sortData.call(this, data.data, this.method);
+    handleMobileView.call(this);
 
     this.lower.attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
-
-    // Set sizes for brush objects
-    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 18]]);
 
     // Set size for age (scale for brushes)
     this.age.range([0, this.width - this.paddingUpperLeft]);
 
     // Resize SVG DOM element
-    this.svg
-      .attr(
-        'height',
-        this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom + this.sourceHeight
-      )
-      .attr('width', this.padding.left + this.width + this.padding.right);
+    this.svg.call(resizeSvg.bind(this));
 
-    // Move the brushes if a range was selected and save the new extent
-    if (options.range && typeof options.range === 'string') {
-      extent = JSON.parse(options.range);
-      gBrushLarge
-        .transition()
-        .duration(this.duration)
-        .call(brushLarge.move, extent.map(this.age));
-      gBrushSmall
-        .transition()
-        .duration(this.duration)
-        .call(brushSmall.move, extent.map(this.age));
-    }
-
-    // Find the larges accumulated number within the selected range
-    const maxAccumulated = this.getMaxAccumulated();
-
-    // Find the largest single age to scale y axis behind brush within the selected range
-    const max = this.getMax();
-
-    // Set axis and scales based on these max values (for the bars()
-    this.y
-      .domain([0, max])
-      .range([this.height2, 0])
-      .nice();
-    this.x
-      .domain([0, maxAccumulated])
-      .range([0, this.width - this.paddingLowerLeft])
-      .nice();
-
-    this.upperYAxis
-      .transition()
-      .duration(this.duration)
-      .call(
-        d3
-          .axisLeft(this.y)
-          .ticks(4)
-          .tickFormat(d => this.format(d, this.method, true))
-      );
-    this.upperXAxis
-      .transition()
-      .duration(this.duration)
-      .call(
-        d3
-          .axisBottom(this.age)
-          .ticks((this.width - this.paddingUpperLeft) / 100)
-          .tickFormat(d => d + ' år')
-      );
-    this.lowerXAxis
-      .transition()
-      .duration(this.duration)
-      .call(
-        d3
-          .axisTop(this.x)
-          .ticks((this.width - this.paddingLowerLeft) / 70)
-          .tickFormat(d => this.format(d, this.method, true))
-      );
-
-    // Call brush method on resize, because it handles stuff
-    // like moving the brush overlays and brush handles.
-    if (options.event === 'resize') {
-      this.brushed(this);
-    }
-
-    // Trigger re-draws of rows (bars) and lines
-    // this.setBrushes();
-    this.drawRows();
-    this.drawLines();
-    this.drawTable();
+    updateAxis.call(this);
+    drawRows.call(this);
+    drawLines.call(this);
+    drawTable.call(this);
   };
 
-  /**
-   * @param  {this} self -
-   *
-   * Needs access to the object's 'this' to read from this.render etc
-   * and to manipulate DOM elements stored in the template's properties.
-   */
-  this.brushed = function(self) {
-    let s; // Holds the pixel values for where brushes should be rendered
-
-    // Find the pixel values for where brushes should be rendered.
-    // If no d3.event, then it must be a 'resize' event, and
-    // therefore the brush values (ages) should remain the same
-    // but on different pixel values.
-    // If there's brush event, we get the selection here
-    // and saves the extent (years) to the global variable.
-    if (!d3.event) {
-      return;
-    } else {
-      s = d3.event.selection || self.age.range();
-      extent = s.map(val => Math.round(self.age.invert(val)));
-    }
-
-    if (d3.event.sourceEvent) {
-      this.dropDownParent.select('select').node().value = '';
-    }
-
-    // Brushes need to be called from their parent group ('g')
-    gBrushLarge.call(brushLarge);
-    gBrushSmall.call(brushSmall);
-
-    // If event.selection equals 'null', the user has clicked the brush
-    // area, and then we set the selection to this.age's range (all ages).
-    // This to counteract D3's default behavior of hiding the brush
-    // selection.
-    if (d3.event && d3.event.selection === null) {
-      gBrushSmall
-        .transition()
-        .duration(this.duration)
-        .call(brushSmall.move, self.age.range());
-      gBrushLarge
-        .transition()
-        .duration(this.duration)
-        .call(brushLarge.move, self.age.range());
-    }
-
-    // Resize and move both selections to new location
-    d3.selectAll('rect.selection')
-      .attr('x', s[0])
-      .attr('opacity', 1)
-      .attr('width', s[1] - s[0])
-      .filter((d, i) => i === 1)
-      .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
-      .on('mousemove', showTooltipMove)
-      .on('mouseleave', hideTooltip);
-
-    // Move invisible handles
-    d3.selectAll('.handle--e')
-      .attr('width', 21)
-      .attr('x', s[1])
-      .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
-      .on('mousemove', showTooltipMove)
-      .on('mouseleave', hideTooltip);
-    d3.selectAll('.handle--w')
-      .attr('width', 21)
-      .attr('x', s[0] - 21)
-      .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
-      .on('mousemove', showTooltipMove)
-      .on('mouseleave', hideTooltip);
-
-    // Move visible handles
-    self.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
-
-    // Trigger a new render to update the bars, values and scales
-    self.render(self.data, { method: self.method });
-  };
-
-  this.line = d3
-    .line()
-    .curve(d3.curveBasis)
-    .x((d, i) => (i > this.ageCap ? this.age(this.ageCap) : this.age(i)))
-    .y(d => this.y(d[this.method]));
-
-  const brushLarge = d3.brushX().on('brush end', () => {
-    this.brushed(this);
-  });
-  const brushSmall = d3.brushX().on('brush end', () => {
-    this.brushed(this);
-  });
-
-  // Draws the handle icons. Triggered from this.created()
-  this.drawHandles = function() {
-    this.handle = gBrushSmall
-      .selectAll('path.handle')
-      .data([{ type: 'w' }, { type: 'e' }])
-      .enter()
-      .append('g')
-      .attr('class', 'handleIcon')
-      .attr('transform', 'translate(0, -9)');
-
-    this.handle
-      .append('path')
-      .attr('fill', color.purple)
-      .style('pointer-events', 'none')
-      .attr('d', d =>
-        d.type === 'e'
-          ? 'M0 0h11c6 0 10 4 10 10v17c0 6-4 10-10 10H0V0z'
-          : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z'
-      );
-
-    this.handle
-      .append('rect')
-      .style('pointer-events', 'none')
-      .attr('height', 11)
-      .attr('width', 1)
-      .attr('x', 6)
-      .attr('y', 13)
-      .attr('fill', 'white')
-      .attr('fill-opacity', '0.75');
-
-    this.handle
-      .append('rect')
-      .style('pointer-events', 'none')
-      .attr('height', 11)
-      .attr('width', 1)
-      .attr('x', 10)
-      .attr('y', 13)
-      .attr('fill', 'white')
-      .attr('fill-opacity', '0.75');
-
-    this.handle
-      .append('rect')
-      .style('pointer-events', 'none')
-      .attr('height', 11)
-      .attr('width', 1)
-      .attr('x', 14)
-      .attr('y', 13)
-      .attr('fill', 'white')
-      .attr('fill-opacity', '0.75');
-  };
-
-  // Creates the styled age selector as normal HTML
-  // as sibling element to the SVG.
-  this.createAgeSelector = function() {
-    const parent = d3.select(this.svg.node().parentNode.parentNode);
-    this.dropDownParent = parent
-      .insert('div')
-      .attr('class', 'graph__dropdown')
-      .attr('aria-hidden', true);
-
-    this.dropDownParent
-      .insert('label')
-      .attr('for', 'age_selector')
-      .attr('class', 'graph__dropdown__label')
-      .html('Velg aldersgruppe');
-
-    const selectElement = this.dropDownParent
-      .insert('select')
-      .attr('aria-hidden', true)
-      .attr('id', 'age_selector')
-      .attr('aria-hidden', true)
-      .attr('class', 'child graph__dropdown__select')
-      .attr('data-no-dragscroll', true);
-
-    selectElement
-      .selectAll('option')
-      .data(ageRanges)
-      .join('option')
-      .attr('disabled', d => d.disabled)
-      .attr('value', d => d.range)
-      .text(d => d.label);
-
-    // Add eventlistener to the selector, and capture the value
-    // and pass it on when re-rendering the chart
-    selectElement.on('change', (d, i, j) => {
-      this.render(this.data, { method: this.method, range: j[i].value });
+  this.brushSmall = d3
+    .brushX()
+    .on('brush', updateHandlePositions.bind(this))
+    .on('end', () => {
+      if (d3.event.sourceEvent || d3.event.type === 'end') {
+        this.render(this.data, { method: this.method });
+      }
     });
-  };
 
   // Runs once after initialization. Creates elements that are
   // unique to this template
   this.created = function() {
-    this.createAgeSelector();
+    createAgeSelector.call(this);
 
     this.upper = this.canvas.append('g').attr('class', 'upper');
     this.middle = this.canvas
@@ -342,44 +86,23 @@ function Template(svg) {
       .attr('transform', `translate(0, ${this.height2 + 40})`);
     this.lower = this.canvas.append('g').attr('class', 'lower');
 
-    this.lower
-      .append('text')
-      .attr('class', 'xAxis-title')
-      .attr('font-size', '1em')
-      .attr('font-weight', 500)
-      .attr('fill', color.purple)
-      .attr('transform', `translate(${this.paddingLowerLeft}, ${-32})`);
+    this.lower.append('text').call(initLowerHeading.bind(this));
 
-    brushLarge.extent([[0, 0], [this.width - this.paddingUpperLeft, this.height2]]);
-    brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    this.brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
 
     this.upper.append('g').attr('class', 'lines');
 
-    gBrushLarge = this.upper
+    this.gBrushSmall = this.middle
       .append('g')
       .attr('class', 'brush')
       .attr('transform', `translate(${this.paddingUpperLeft}, 0)`)
-      .call(brushLarge);
+      .call(this.brushSmall);
 
-    gBrushLarge
-      .select('.selection')
-      .attr('fill', color.yellow)
-      .attr('stroke', color.yellow)
-      .attr('stroke-width', 2)
-      .attr('stroke-opacity', 1)
-      .attr('fill-opacity', 0.15);
-
-    gBrushSmall = this.middle
-      .append('g')
-      .attr('class', 'brush')
-      .attr('transform', `translate(${this.paddingUpperLeft}, 0)`)
-      .call(brushSmall);
-
-    gBrushSmall
+    this.gBrushSmall
       .select('.selection')
       .attr('fill', color.yellow)
       .attr('fill-opacity', 1);
-    gBrushSmall
+    this.gBrushSmall
       .select('.overlay')
       .attr('stroke', color.purple)
       .attr('rx', 2);
@@ -399,183 +122,12 @@ function Template(svg) {
       .attr('class', 'axis x')
       .attr('transform', `translate(${this.paddingLowerLeft}, 0)`);
 
-    this.drawHandles();
+    drawHandles.call(this);
 
-    gBrushLarge
+    this.gBrushSmall
       .transition()
       .duration(this.duration)
-      .call(brushLarge.move, [0, 50].map(this.age));
-    gBrushSmall
-      .transition()
-      .duration(this.duration)
-      .call(brushSmall.move, [0, 50].map(this.age));
-  };
-
-  this.drawTable = function() {
-    const table_head = [
-      ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
-      [...ageRanges.filter(d => !d.disabled).map(d => d.label)],
-    ];
-
-    const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
-
-    const table_body = tableData.map(d => {
-      return {
-        key: d.geography,
-        values: ageRanges
-          .filter(d => !d.disabled)
-          .map(age => {
-            const range = JSON.parse(age.range);
-            let sum = 0;
-            for (let i = range[0]; i <= range[1]; i++) {
-              sum += d.values[i][this.method];
-            }
-            return sum;
-          }),
-      };
-    });
-
-    const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body);
-  };
-
-  // Draws/updates rows content. Triggered each render
-  this.drawRows = function() {
-    const rows = this.lower
-      .selectAll('g.row')
-      .data(this.data.data, d => d.geography)
-      .join(enter => {
-        const g = enter.append('g').attr('class', 'row');
-        g.append('rect')
-          .attr('class', 'rowFill')
-          .attr('fill', color.purple)
-          .attr('height', this.rowHeight)
-          .attr('width', this.width);
-        g.append('text')
-          .attr('class', 'geography')
-          .attr('fill', color.purple)
-          .attr('x', 10)
-          .attr('y', this.rowHeight / 2 + 7);
-        g.append('text')
-          .attr('class', 'value')
-          .attr('y', this.rowHeight / 2 + 7)
-          .attr('fill', color.purple)
-          .attr('x', this.paddingLowerLeft - 40)
-          .attr('text-anchor', 'end');
-        g.append('rect')
-          .attr('class', 'bar')
-          .attr('height', this.barHeight);
-        g.append('rect')
-          .attr('class', 'divider')
-          .attr('fill', color.purple)
-          .attr('width', this.width)
-          .attr('height', 1)
-          .attr('y', this.rowHeight);
-        return g;
-      });
-
-    rows.select('rect.rowFill').attr('width', this.width);
-    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
-    rows.select('rect.rowFill').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
-    rows.select('rect.divider').attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
-    rows
-      .transition()
-      .duration(this.duration * 2)
-      .delay(this.duration)
-      .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-    rows.select('text.geography').text(d => d.geography);
-    rows.select('text.value').text(district => {
-      const sum = d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]));
-      return this.format(sum, this.method);
-    });
-
-    rows.select('rect.rowFill').attr('width', this.padding.left + this.width + this.padding.right);
-    rows.select('rect.divider').attr('width', this.padding.left + this.width + this.padding.right);
-
-    rows
-      .select('rect.bar')
-      .transition()
-      .duration(this.duration)
-      .attr('width', district => {
-        if (this.method === 'value' && (district.avgRow || district.totalRow)) {
-          return 0;
-        }
-        return this.x(
-          d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d[this.method]))
-        );
-      })
-      .attr('x', this.paddingLowerLeft)
-      .attr('y', (this.rowHeight - this.barHeight) / 2 + 1)
-      .attr('fill', d => {
-        return d.totalRow || d.avgRow ? color.purple : color.blue;
-      });
-
-    rows
-      .select('rect.bar')
-      .on('mouseover', d => {
-        const sum = d3.sum(d.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(d => d.value));
-        showTooltipOver(sum);
-      })
-      .on('mousemove', showTooltipMove)
-      .on('mouseleave', hideTooltip);
-
-    this.lower.select('text.xAxis-title').text(() => {
-      if (this.method === 'ratio' && extent[1] - extent[0] >= 1) {
-        return `Andel av befolkningen mellom ${extent[0]} og ${extent[1]} år`;
-      } else if (this.method === 'ratio' && extent[1] - extent[0] === 0) {
-        return `Andel av befolkningen som er ${extent[0]} år`;
-      } else if (this.method !== 'ratio' && extent[1] - extent[0] >= 1) {
-        return `Antall personer mellom ${extent[0]} og ${extent[1]} år`;
-      } else if (this.method !== 'ratio' && extent[1] - extent[0] === 0) {
-        return `Størrelse av befolkningen på ${extent[0]} år`;
-      }
-    });
-  };
-
-  // Draws/updates lines in the line chart. Triggered each render
-  this.drawLines = function() {
-    // Select lines
-    let lines = this.upper
-      .select('.lines')
-      .selectAll('path.line')
-      .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)));
-    const linesE = lines
-      .enter()
-      .append('path')
-      .attr('class', 'line')
-      .attr('fill', 'none')
-      .attr('transform', `translate(${this.paddingUpperLeft}, 0)`)
-      .attr('opacity', 0);
-
-    lines
-      .exit()
-      .attr('opacity', 0)
-      .remove();
-    lines = lines.merge(linesE);
-
-    lines
-      .attr('opacity', 1)
-      .attr('d', d => this.line(d.values))
-      .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
-      .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
-      .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
-      .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
-
-    lines.on('mouseover', (d, i, j) => {
-      lines.attr('opacity', 0.1).attr('stroke', color.blue);
-      d3.select(j[i])
-        .attr('opacity', 1)
-        .attr('stroke', color.purple);
-
-      showTooltipOver(d.geography);
-    });
-
-    lines.on('mousemove', showTooltipMove);
-
-    lines.on('mouseleave', () => {
-      lines.attr('opacity', 1).attr('stroke', color.blue);
-      hideTooltip();
-    });
+      .call(this.brushSmall.move, [0, 50].map(this.age));
   };
 
   // Finds the larges accumulated number within the selected range
@@ -585,7 +137,11 @@ function Template(svg) {
         this.data.data
           .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
           .map(district =>
-            d3.sum(district.values.filter((val, i) => i >= extent[0] && i <= extent[1]).map(val => val[this.method]))
+            d3.sum(
+              district.values
+                .filter((val, i) => i >= this.extent[0] && i <= this.extent[1])
+                .map(val => val[this.method])
+            )
           )
       ) * 1.05
     );
@@ -606,3 +162,436 @@ function Template(svg) {
 }
 
 export default Template;
+
+// Draws the handle icons. Triggered from this.created()
+function drawHandles() {
+  this.handle = this.gBrushSmall
+    .selectAll('path.handle')
+    .data([{ type: 'w' }, { type: 'e' }])
+    .enter()
+    .append('g')
+    .attr('class', 'handleIcon')
+    .attr('transform', 'translate(0, -9)');
+
+  this.handle
+    .append('path')
+    .attr('fill', color.purple)
+    .style('pointer-events', 'none')
+    .attr('d', d =>
+      d.type === 'e' ? 'M0 0h11c6 0 10 4 10 10v17c0 6-4 10-10 10H0V0z' : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z'
+    );
+
+  this.handle
+    .append('rect')
+    .style('pointer-events', 'none')
+    .attr('height', 11)
+    .attr('width', 1)
+    .attr('x', 6)
+    .attr('y', 13)
+    .attr('fill', 'white')
+    .attr('fill-opacity', '0.75');
+
+  this.handle
+    .append('rect')
+    .style('pointer-events', 'none')
+    .attr('height', 11)
+    .attr('width', 1)
+    .attr('x', 10)
+    .attr('y', 13)
+    .attr('fill', 'white')
+    .attr('fill-opacity', '0.75');
+
+  this.handle
+    .append('rect')
+    .style('pointer-events', 'none')
+    .attr('height', 11)
+    .attr('width', 1)
+    .attr('x', 14)
+    .attr('y', 13)
+    .attr('fill', 'white')
+    .attr('fill-opacity', '0.75');
+}
+
+// Creates the styled age selector as normal HTML
+// as sibling element to the SVG.
+function createAgeSelector() {
+  const parent = d3.select(this.svg.node().parentNode.parentNode);
+  this.dropDownParent = parent
+    .insert('div')
+    .attr('class', 'graph__dropdown')
+    .attr('aria-hidden', true);
+
+  this.dropDownParent
+    .insert('label')
+    .attr('for', 'age_selector')
+    .attr('class', 'graph__dropdown__label')
+    .html('Velg aldersgruppe');
+
+  const selectElement = this.dropDownParent
+    .insert('select')
+    .attr('aria-hidden', true)
+    .attr('id', 'age_selector')
+    .attr('aria-hidden', true)
+    .attr('class', 'child graph__dropdown__select')
+    .attr('data-no-dragscroll', true);
+
+  selectElement
+    .selectAll('option')
+    .data(ageRanges)
+    .join('option')
+    .attr('disabled', d => d.disabled)
+    .attr('value', d => d.range)
+    .text(d => d.label);
+
+  // Add eventlistener to the selector, and capture the value
+  // and pass it on when re-rendering the chart
+  selectElement.on('change', (d, i, j) => {
+    this.render(this.data, { method: this.method, range: j[i].value, useDropdown: true });
+  });
+}
+
+function sortData(input, method) {
+  input.sort((a, b) => {
+    if (a.avgRow) return 1;
+    if (a.totalRow) return 1;
+
+    const totA = d3.sum(a.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[method]));
+    const totB = d3.sum(b.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[method]));
+    return totB - totA;
+  });
+
+  return input;
+}
+
+function brushed(initialExtent) {
+  if (!d3.event && !initialExtent) return;
+
+  let s = d3.event ? d3.event.selection || this.age.range() : false;
+
+  this.extent = initialExtent || s.map(val => Math.round(this.age.invert(val)));
+
+  if (d3.event && d3.event.sourceEvent) {
+    this.dropDownParent.select('select').node().value = '';
+  }
+
+  // updateHandlePositions.call(this);
+}
+
+function updateSelections(selection, s) {
+  selection
+    .attr('x', s[0])
+    .attr('opacity', 1)
+    .attr('width', s[1] - s[0])
+    .filter((d, i) => i === 1)
+    .call(handleMouseEvents);
+}
+
+function handleMouseEvents(selection) {
+  selection
+    .on('mouseover', () => showTooltipOver('Dra for å velge alderssegment', 700))
+    .on('mousemove', showTooltipMove)
+    .on('mouseleave', hideTooltip);
+}
+
+function updateHandlePositions() {
+  // pixel range for selected age range
+  let s = d3.event.selection.map(this.age);
+
+  console.log(d3.event);
+
+  // Resize and move both selections to new location
+  d3.selectAll('rect.selection').call(updateSelections.bind(this), s);
+
+  d3.selectAll('.handle')
+    .attr('width', 21)
+    .call(handleMouseEvents);
+
+  d3.selectAll('.handle--e').attr('x', s[1]);
+  d3.selectAll('.handle--w').attr('x', s[0] - 21);
+
+  // Move visible handles
+  this.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
+}
+
+function resizeSvg(selection) {
+  const h = this.padding.top + this.height2 + this.yGutter + this.height + this.padding.bottom + this.sourceHeight;
+  const w = this.padding.left + this.width + this.padding.right;
+
+  selection.attr('height', h).attr('width', w);
+}
+
+function initLowerHeading(selection) {
+  selection
+    .classed('xAxis-title', true)
+    .attr('font-size', '1em')
+    .attr('font-weight', 500)
+    .attr('fill', color.purple)
+    .attr('transform', `translate(${this.paddingLowerLeft}, ${-32})`);
+}
+
+function createLines(enter) {
+  return enter
+    .append('path')
+    .classed('line', true)
+    .attr('fill', 'none')
+    .attr('transform', `translate(${this.paddingUpperLeft}, 0)`)
+    .attr('opacity', 0);
+}
+
+function enterRows(enter) {
+  const g = enter.append('g').attr('class', 'row');
+
+  g.append('rect')
+    .attr('class', 'rowFill')
+    .attr('fill', color.purple)
+    .attr('height', this.rowHeight)
+    .attr('width', this.width);
+
+  g.append('text')
+    .attr('class', 'geography')
+    .attr('fill', color.purple)
+    .attr('x', 10)
+    .attr('y', this.rowHeight / 2 + 7);
+
+  g.append('text')
+    .attr('class', 'value')
+    .attr('y', this.rowHeight / 2 + 7)
+    .attr('fill', color.purple)
+    .attr('x', this.paddingLowerLeft - 40)
+    .attr('text-anchor', 'end');
+
+  g.append('rect')
+    .attr('class', 'bar')
+    .attr('height', this.barHeight);
+
+  g.append('rect')
+    .attr('class', 'divider')
+    .attr('fill', color.purple)
+    .attr('width', this.width)
+    .attr('height', 1)
+    .attr('y', this.rowHeight);
+
+  return g;
+}
+
+function getLowerHeadingString() {
+  if (this.method === 'ratio' && this.extent[1] - this.extent[0] >= 1) {
+    return `Andel av befolkningen mellom ${this.extent[0]} og ${this.extent[1]} år`;
+  } else if (this.method === 'ratio' && this.extent[1] - this.extent[0] === 0) {
+    return `Andel av befolkningen som er ${this.extent[0]} år`;
+  } else if (this.method !== 'ratio' && this.extent[1] - this.extent[0] >= 1) {
+    return `Antall personer mellom ${this.extent[0]} og ${this.extent[1]} år`;
+  } else if (this.method !== 'ratio' && this.extent[1] - this.extent[0] === 0) {
+    return `Størrelse av befolkningen på ${this.extent[0]} år`;
+  }
+}
+
+function updateRowFill(selection) {
+  selection
+    .select('rect.rowFill')
+    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0))
+    .attr('width', this.padding.left + this.width + this.padding.right);
+}
+
+function updateRowGeography(selection) {
+  selection
+    .select('text.geography')
+    .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400))
+    .text(d => d.geography);
+}
+
+function updateRowDivider(selection) {
+  selection
+    .select('rect.divider')
+    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+    .attr('width', this.padding.left + this.width + this.padding.right);
+}
+
+function updateRowBar(selection) {
+  const bar = selection.select('rect.bar');
+
+  bar
+    .transition()
+    .duration(this.duration)
+    .attr('width', district => {
+      return this.method === 'value' && (district.avgRow || district.totalRow)
+        ? 0
+        : this.x(
+            d3.sum(
+              district.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[this.method])
+            )
+          );
+    })
+    .attr('x', this.paddingLowerLeft)
+    .attr('y', (this.rowHeight - this.barHeight) / 2 + 1)
+    .attr('fill', d => {
+      return d.totalRow || d.avgRow ? color.purple : color.blue;
+    });
+
+  bar
+    .on('mouseover', d => {
+      const sum = d3.sum(d.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d.value));
+      showTooltipOver(sum);
+    })
+    .on('mousemove', showTooltipMove)
+    .on('mouseleave', hideTooltip);
+}
+
+function updateRowTextValue(selection) {
+  selection.select('text.value').text(district => {
+    const sum = d3.sum(
+      district.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[this.method])
+    );
+    return this.format(sum, this.method);
+  });
+}
+
+function positionRow(selection) {
+  selection
+    .transition()
+    .duration(this.duration * 2)
+    .delay(this.duration)
+    .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
+}
+
+function handleMobileView() {
+  if (this.parentWidth() < this.minWidth) {
+    this.upper.attr('opacity', 0);
+    this.middle.attr('opacity', 0);
+    this.yGutter = 0;
+    this.dropDownParent.style('top', '32px');
+  } else {
+    this.upper.attr('opacity', 1);
+    this.middle.attr('opacity', 1);
+    this.yGutter = 130;
+    this.dropDownParent.style('top', 'none');
+  }
+}
+
+function updateAxis() {
+  // Find the larges accumulated number within the selected range
+  const maxAccumulated = this.getMaxAccumulated();
+
+  // Find the largest single age to scale y axis behind brush within the selected range
+  const max = this.getMax();
+
+  // Set axis and scales based on these max values (for the bars()
+  this.y
+    .domain([0, max])
+    .range([this.height2, 0])
+    .nice();
+  this.x
+    .domain([0, maxAccumulated])
+    .range([0, this.width - this.paddingLowerLeft])
+    .nice();
+
+  this.upperYAxis
+    .transition()
+    .duration(this.duration)
+    .call(
+      d3
+        .axisLeft(this.y)
+        .ticks(4)
+        .tickFormat(d => this.format(d, this.method, true))
+    );
+  this.upperXAxis
+    .transition()
+    .duration(this.duration)
+    .call(
+      d3
+        .axisBottom(this.age)
+        .ticks((this.width - this.paddingUpperLeft) / 100)
+        .tickFormat(d => d + ' år')
+    );
+  this.lowerXAxis
+    .transition()
+    .duration(this.duration)
+    .call(
+      d3
+        .axisTop(this.x)
+        .ticks((this.width - this.paddingLowerLeft) / 70)
+        .tickFormat(d => this.format(d, this.method, true))
+    );
+}
+
+function drawRows() {
+  // Draws/updates rows content. Triggered each render
+  this.lower
+    .selectAll('g.row')
+    .data(this.data.data, d => d.geography)
+    .join(enterRows.bind(this))
+    .call(updateRowFill.bind(this))
+    .call(positionRow.bind(this))
+    .call(updateRowGeography.bind(this))
+    .call(updateRowDivider.bind(this))
+    .call(updateRowBar.bind(this))
+    .call(updateRowTextValue.bind(this));
+
+  this.lower.select('text.xAxis-title').text(getLowerHeadingString.bind(this));
+}
+
+function drawLines() {
+  const line = d3
+    .line()
+    .curve(d3.curveBasis)
+    .x((d, i) => (i > this.ageCap ? this.age(this.ageCap) : this.age(i)))
+    .y(d => this.y(d[this.method]));
+
+  let lines = this.upper
+    .select('.lines')
+    .selectAll('path.line')
+    .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)))
+    .join(createLines.bind(this));
+
+  lines
+    .attr('opacity', 1)
+    .attr('d', d => line(d.values))
+    .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
+    .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
+    .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
+    .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
+
+  lines.on('mouseover', (d, i, j) => {
+    lines.attr('opacity', 0.1).attr('stroke', color.blue);
+    d3.select(j[i])
+      .attr('opacity', 1)
+      .attr('stroke', color.purple);
+
+    showTooltipOver(d.geography);
+  });
+
+  lines.on('mousemove', showTooltipMove);
+
+  lines.on('mouseleave', () => {
+    lines.attr('opacity', 1).attr('stroke', color.blue);
+    hideTooltip();
+  });
+}
+
+function drawTable() {
+  const table_head = [
+    ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
+    [...ageRanges.filter(d => !d.disabled).map(d => d.label)],
+  ];
+
+  const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
+
+  const table_body = tableData.map(d => {
+    return {
+      key: d.geography,
+      values: ageRanges
+        .filter(d => !d.disabled)
+        .map(age => {
+          const range = JSON.parse(age.range);
+          let sum = 0;
+          for (let i = range[0]; i <= range[1]; i++) {
+            sum += d.values[i][this.method];
+          }
+          return sum;
+        }),
+    };
+  });
+
+  const tableGenerator = util.drawTable.bind(this);
+  tableGenerator(table_head, table_body);
+}
