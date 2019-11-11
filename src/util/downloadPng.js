@@ -34,9 +34,14 @@ export default function downloadPng(svgRef, filename) {
 
   close.attr('opacity', 0);
 
-  saveSvgAsPng(svgRef, filename, options).then(() => {
-    // Revert things after screenshot
-    svg.select('.heading').style('font-size', '1rem');
-    close.attr('opacity', 1);
-  });
+  svg.selectAll('.label').attr('opacity', 1);
+  svg.selectAll('.lines path').attr('stroke-opacity', 1);
+
+  saveSvgAsPng(svgRef, filename, options).then(revert.bind(null, svg));
+}
+
+// Revert things after screenshot
+function revert(svg) {
+  svg.select('.heading').style('font-size', '1rem');
+  svg.select('close').attr('opacity', 1);
 }

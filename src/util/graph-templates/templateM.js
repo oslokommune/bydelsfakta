@@ -263,9 +263,7 @@ function Template(svg) {
     radio.attr('transform', 'translate(5, 0)');
     label.attr('transform', 'translate(16, 5)').text(d => d.label);
 
-    inner.attr('transform', (d, i) => {
-      return `scale(${i === this.series ? 1 : 0})`;
-    });
+    inner.attr('opacity', (d, i) => i === this.series ? 1 : 0);
 
     g.on('click keyup', (d, i) => {
       if (i === this.series) return;

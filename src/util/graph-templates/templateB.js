@@ -27,7 +27,7 @@ function Template(svg) {
 
     // Add colors to geographies if they don't already exist
     this.data.data.forEach((geo, i, j) => {
-      geo.color = d3.interpolateRainbow(i / j.length);
+      geo.color = d3.interpolateTurbo(i / j.length);
     });
 
     this.width = d3.max([this.width, 300]);
