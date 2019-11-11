@@ -31,7 +31,7 @@ function generateFlattenData(data, scale, key) {
 function generateVoronoiData(data) {
   return d3
     .voronoi()
-    .extent([[1, 1], [this.width, this.height2]])
+    .extent([[1, 1], [this.width, this.lineChartHeight]])
     .x(d => d.x + this.x.bandwidth() / 2)
     .y(d => d.y)
     .polygons(data)
