@@ -9,10 +9,12 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Sort rows when expanding a series in multi-series bar charts (Template A)
 - Add map to district-view
 - Add rom-per-person topic
+- Add graph for births and deaths ('Fødselsoverskudd')
+- Add three new datasets for immigration data ('Personer med innvandrerbakgrunn')
 
 ### 💅 Improvements
 
-- Refactoring code for Template A, F
+- Refactoring code for Template A, F, N
 - More descriptive headings and labels for graphs
 - Add legend to box plot
 
@@ -29,6 +31,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Fix issue where close button was included when downloading graph as SVGs and PNGs
 - Fix floating point rounding error in axis ticks when formatted as permille
 - Fix scrollposition when going out of fullscreen-mode
+- Fix bug where opacity of lines were too faint
 
 &nbsp;
 
