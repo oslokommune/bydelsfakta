@@ -7,6 +7,7 @@
 import d3 from '@/assets/d3';
 import { hideTooltip, showTooltipMove, showTooltipOver } from '../tooltip';
 import Base_Template from './baseTemplate';
+import drawVoronoi from './graph-helpers/voronoiHelpers';
 import { color } from './colors';
 import util from './template-utils';
 
@@ -25,11 +26,11 @@ function Template(svg) {
   this.y = [];
 
   this.render = function(data, options = {}) {
+    if (!this.commonRender(data, options)) return;
+
     this.filteredData = JSON.parse(JSON.stringify(data.data))
       .filter(row => row.totalRow || row.avgRow)[0]
-      .values[0].map(cleanupData);
-
-    if (!this.commonRender(data, options)) return;
+      .values[0].map(cleanupData.bind(this));
 
     this.height = this.height1 + this.gapY + this.height2 + this.gapY + this.height3;
     this.width = d3.max([this.width, this.mobileWidth]);
@@ -42,8 +43,8 @@ function Template(svg) {
     this.drawBars();
     this.drawLines(this.graph2, this.y[1], 'netImmigration', '#clipImmigration');
     this.drawLines(this.graph3, this.y[2], 'netBirths', '#clipBirths');
-    this.drawVoronoi(this.graph2, this.y[1], 'netImmigration');
-    this.drawVoronoi(this.graph3, this.y[2], 'netBirths');
+    drawVoronoi.call(this, this.graph2, this.y[1], 'netImmigration');
+    drawVoronoi.call(this, this.graph3, this.y[2], 'netBirths');
     this.drawTable();
   };
 
@@ -294,89 +295,6 @@ function Template(svg) {
     container.select('path.negative').attr('clip-path', `url(${clipPathId})`);
   };
 
-  this.drawVoronoi = function(container, scale, key) {
-    const flattenData = this.filteredData.map(row => {
-      return {
-        x: this.x(row.date),
-        y: scale(row[key]),
-        label: `${row[key]}`,
-      };
-    });
-
-    // Generate voronoi cells
-    const voronoiData = d3
-      .voronoi()
-      .extent([[1, 1], [this.width, this.height2]])
-      .x(d => d.x + this.x.bandwidth() / 2)
-      .y(d => d.y)
-      .polygons(flattenData)
-      .filter(Boolean);
-
-    // Draw DOM elements for each voronoi cell
-    const voronoiCells = container
-      .select('g.voronoi')
-      .selectAll('g')
-      .data(voronoiData)
-      .join(enter => {
-        const g = enter.append('g');
-        g.append('path');
-        g.append('rect');
-        g.append('circle');
-        g.append('text');
-        return g;
-      });
-
-    const circle = voronoiCells
-      .select('circle')
-      .attr('r', 6)
-      .attr('cx', d => d.data.x + this.x.bandwidth() / 2)
-      .attr('cy', d => d.data.y)
-      .attr('opacity', 0)
-      .style('pointer-events', 'none')
-      .attr('stroke', 'white')
-      .attr('stroke-width', 2);
-
-    const rect = voronoiCells
-      .select('rect')
-      .attr('height', 25)
-      .attr('width', d => util.getTextWidth(d.data.label) + 12)
-      .attr('x', d => d.data.x + this.x.bandwidth() / 2 - 2)
-      .attr('y', d => d.data.y - 26)
-      .attr('fill', color.yellow)
-      .attr('stroke', 'white')
-      .attr('rx', 12.5)
-      .attr('opacity', 0)
-      .style('pointer-events', 'none');
-
-    const text = voronoiCells
-      .select('text')
-      .attr('x', d => d.data.x + this.x.bandwidth() / 2 + 4)
-      .attr('y', d => d.data.y - 8)
-      .text(d => d.data.label)
-      .attr('opacity', 0)
-      .style('pointer-events', 'none')
-      .style('cursor', 'auto');
-
-    // Draw path for the voronoi cell
-    const path = voronoiCells
-      .select('path')
-      .attr('d', d => 'M' + d.join('L') + 'Z')
-      .attr('fill-opacity', 0);
-
-    // Handle mouse interactions
-    path.on('mouseenter', (d, i, j) => {
-      const parent = d3.select(j[i].parentNode);
-      parent.select('rect').attr('opacity', 1);
-      parent.select('text').attr('opacity', 1);
-      parent.select('circle').attr('opacity', 1);
-    });
-    path.on('mouseleave', () => {
-      circle.attr('opacity', 0);
-      text.attr('opacity', 0);
-      rect.attr('opacity', 0);
-    });
-  };
-
   this.drawTable = function() {
     // Prepare data for table head
     const table_head = [
@@ -419,7 +337,10 @@ export default Template;
 
 // Helper function to reduce the data objects
 function cleanupData(obj) {
+  console.log(this.variant);
+
   const date = obj.date;
+
   const netImmigration = obj.immigration - obj.emigration;
   const netBirths = obj.births - obj.deaths;
   const netGrowth = netImmigration + netBirths;

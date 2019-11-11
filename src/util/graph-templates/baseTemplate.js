@@ -121,6 +121,7 @@ function Base_Template(svg) {
       compareDistricts: this.isCompare,
       showPermille: this.showPermille,
       event: 'resize',
+      variant: this.variant || false,
     });
   }, 250);
 
@@ -310,6 +311,7 @@ function Base_Template(svg) {
     this.highlight = options.highlight === undefined || options.highlight === null ? -1 : options.highlight;
     this.series = options.series || 0;
     this.selected = options.selected === undefined || options.selected === null ? -1 : options.selected;
+    this.variant = options.variant;
     this.showPermille = options.showPermille || false;
 
     this.width = this.parentWidth() - this.padding.left - this.padding.right;
