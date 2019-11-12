@@ -283,7 +283,9 @@ function updateLineChart(el, opt) {
   el.call(drawLines.bind(this), scale, clipId);
 
   // Update voronoi for chart
-  drawVoronoi.call(this, el, scale, clipId);
+  const flattenData = generateFlattenData.call(this, this.filteredData, scale, clipId);
+  const dataAccessor = d => d.data.label;
+  el.select('.voronoi').call(drawVoronoi.bind(this), flattenData, [this.width, this.lineChartHeight], dataAccessor);
 
   // Update zero line position
   el.select('.zero').call(updateZeroLines.bind(this), scale);
@@ -359,4 +361,14 @@ function drawTable() {
   });
 
   util.drawTable.call(this, table_head, table_body);
+}
+
+function generateFlattenData(data, scale, key) {
+  return data.map(row => {
+    return {
+      x: this.x(row.date),
+      y: scale(row[key]),
+      label: `${row[key]}`,
+    };
+  });
 }
