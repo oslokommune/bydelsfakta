@@ -123,8 +123,8 @@ function prepareData(dataset) {
       const str = row.alder;
       let arr = [];
 
-      if (str === 'Under 10 år') {
-        arr = [0, 9];
+      if (str === 'Under 5 år') {
+        arr = [0, 4];
       } else if (str === '90 år og eldre') {
         arr = [90, 119];
       } else {

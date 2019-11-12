@@ -14,13 +14,14 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 ### 💅 Improvements
 
-- Partially or fully refactor d3.js scripts for templates A, F, N, J, K, N
+- Partially or fully refactor d3.js scripts for templates A, F, N, J, K, M
 - More descriptive headings and labels for graphs
 - Add legend to box plot
 - Improve colors on some charts making them more distinguishable
 - Convert most of the legacy enter/update/exit pattern to d3v5's `join()` pattern
 - Convert custom color legends to [`d3-svg-legend`](https://d3-legend.susielu.com/)
 - Add markers for 100% on Template K
+- Use 5-years groups in Template M
 
 ### 🔧 Other changes
 
