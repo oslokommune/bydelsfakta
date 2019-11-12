@@ -2,36 +2,24 @@ import d3 from '@/assets/d3';
 import { color } from '../colors';
 import util from '../template-utils';
 
-export default function drawVoronoi(container, scale, key) {
-  const flattenData = generateFlattenData.call(this, this.filteredData, scale, key);
-  const voronoiData = generateVoronoiData.call(this, flattenData);
+export default function drawVoronoi(container, flattenData, shape, dataAccessor) {
+  const voronoiData = generateVoronoiData.call(this, flattenData, shape);
 
   // Draw DOM elements for each voronoi cell
   container
-    .select('g.voronoi')
     .selectAll('g')
     .data(voronoiData)
     .join(enterVoronoiCell.bind(this))
     .call(styleCircles.bind(this))
-    .call(styleRects.bind(this))
-    .call(styleTexts.bind(this))
+    .call(styleRects.bind(this), dataAccessor)
+    .call(styleTexts.bind(this), dataAccessor)
     .call(drawPaths.bind(this));
 }
 
-function generateFlattenData(data, scale, key) {
-  return data.map(row => {
-    return {
-      x: this.x(row.date),
-      y: scale(row[key]),
-      label: `${row[key]}`,
-    };
-  });
-}
-
-function generateVoronoiData(data) {
+function generateVoronoiData(data, shape) {
   return d3
     .voronoi()
-    .extent([[1, 1], [this.width, this.lineChartHeight]])
+    .extent([[1, 1], shape])
     .x(d => d.x + this.x.bandwidth() / 2)
     .y(d => d.y)
     .polygons(data)
@@ -59,11 +47,12 @@ function styleCircles(selection) {
     .attr('stroke-width', 2);
 }
 
-function styleRects(selection) {
+function styleRects(selection, dataAccessor) {
   selection
     .select('rect')
     .attr('height', 25)
-    .attr('width', d => util.getTextWidth(d.data.label) + 12)
+    .attr('data-value', dataAccessor)
+    .attr('width', (d, i, j) => util.getTextWidth(j[i].dataset.value) + 12)
     .attr('x', d => d.data.x + this.x.bandwidth() / 2 - 2)
     .attr('y', d => d.data.y - 26)
     .attr('fill', color.yellow)
@@ -73,12 +62,12 @@ function styleRects(selection) {
     .style('pointer-events', 'none');
 }
 
-function styleTexts(selection) {
+function styleTexts(selection, dataAccessor) {
   selection
     .select('text')
     .attr('x', d => d.data.x + this.x.bandwidth() / 2 + 4)
     .attr('y', d => d.data.y - 8)
-    .text(d => d.data.label)
+    .text(dataAccessor)
     .attr('opacity', 0)
     .style('pointer-events', 'none')
     .style('cursor', 'auto');
