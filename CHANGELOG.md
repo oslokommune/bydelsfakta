@@ -14,10 +14,13 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 ### 💅 Improvements
 
-- Refactoring code for Template A, F, N
+- Partially or fully refactor d3.js scripts for templates A, F, N, J, K
 - More descriptive headings and labels for graphs
 - Add legend to box plot
-- Improve colors on line charts making them more distinguishable
+- Improve colors on some charts making them more distinguishable
+- Convert most of the legacy enter/update/exit pattern to d3v5's `join()` pattern
+- Convert custom color legends to [`d3-svg-legend`](https://d3-legend.susielu.com/)
+- Add markers for 100% on Template K
 
 ### 🔧 Other changes
 
@@ -32,7 +35,8 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Fix issue where close button was included when downloading graph as SVGs and PNGs
 - Fix floating point rounding error in axis ticks when formatted as permille
 - Fix scrollposition when going out of fullscreen-mode
-- Fix bug where opacity of lines were too faint
+- Fix bug where opacity of lines on line charts was too faint when saving as PNG
+- Fix issue on Template K where some row dividers has wrong opacity
 
 &nbsp;
 
