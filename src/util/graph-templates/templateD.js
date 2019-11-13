@@ -30,31 +30,22 @@ function Template(svg) {
 
   this.age = d3.scaleLinear().domain([0, this.ageCap]);
 
-  this.extent = null;
+  this.extent = [0, 39];
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
     if (!data.data) return;
 
-    if(options.range) {
-      this.extent = JSON.parse(options.range);
-    }
-
-    if (!this.extent) {
-      this.extent = [0, 39];
-      this.render(this.data, { method: this.method, range: '[0, 39]', useDropdown: true });
-      return;
-    }
-
     this.width = d3.max([this.width, this.minWidth]);
+    // Set size for age (scale for brushes)
+    this.age.range([0, this.width - this.paddingUpperLeft]);
+
+    this.brushSmall.move(this.gBrushSmall, this.extent.map(this.age));
 
     sortData.call(this, data.data, this.method);
     handleMobileView.call(this);
 
     this.lower.attr('transform', `translate(0, ${this.height2 + this.yGutter})`);
-
-    // Set size for age (scale for brushes)
-    this.age.range([0, this.width - this.paddingUpperLeft]);
 
     // Resize SVG DOM element
     this.svg.call(resizeSvg.bind(this));
@@ -69,7 +60,11 @@ function Template(svg) {
     .brushX()
     .on('brush', updateHandlePositions.bind(this))
     .on('end', () => {
-      if (d3.event.sourceEvent || d3.event.type === 'end') {
+      if (d3.event.sourceEvent instanceof MouseEvent) {
+        this.dropDownParent.select('select').node().value = '';
+        this.extent = d3.event.selection
+          ? d3.event.selection.map(val => Math.round(this.age.invert(val)))
+          : this.extent;
         this.render(this.data, { method: this.method });
       }
     });
@@ -88,9 +83,19 @@ function Template(svg) {
 
     this.lower.append('text').call(initLowerHeading.bind(this));
 
-    this.brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    this.brushSmall.extent([[0, 0], [this.width + this.padding.right, 19]]);
 
     this.upper.append('g').attr('class', 'lines');
+
+    this.upper
+      .append('rect')
+      .classed('selection', true)
+      .attr('height', this.height2)
+      .attr('width', 200)
+      .attr('fill', color.yellow)
+      .attr('fill-opacity', 0.2)
+      .attr('stroke', color.yellow)
+      .attr('transform', `translate(${this.paddingUpperLeft}, 0)`);
 
     this.gBrushSmall = this.middle
       .append('g')
@@ -246,7 +251,8 @@ function createAgeSelector() {
   // Add eventlistener to the selector, and capture the value
   // and pass it on when re-rendering the chart
   selectElement.on('change', (d, i, j) => {
-    this.render(this.data, { method: this.method, range: j[i].value, useDropdown: true });
+    this.extent = JSON.parse(j[i].value);
+    this.render(this.data, { method: this.method, useDropdown: true });
   });
 }
 
@@ -261,20 +267,6 @@ function sortData(input, method) {
   });
 
   return input;
-}
-
-function brushed(initialExtent) {
-  if (!d3.event && !initialExtent) return;
-
-  let s = d3.event ? d3.event.selection || this.age.range() : false;
-
-  this.extent = initialExtent || s.map(val => Math.round(this.age.invert(val)));
-
-  if (d3.event && d3.event.sourceEvent) {
-    this.dropDownParent.select('select').node().value = '';
-  }
-
-  // updateHandlePositions.call(this);
 }
 
 function updateSelections(selection, s) {
@@ -295,9 +287,13 @@ function handleMouseEvents(selection) {
 
 function updateHandlePositions() {
   // pixel range for selected age range
-  let s = d3.event.selection.map(this.age);
+  let s;
 
-  console.log(d3.event);
+  if (d3.event && d3.event.selection) {
+    s = d3.event.selection;
+  } else {
+    s = this.extent.map(this.age);
+  }
 
   // Resize and move both selections to new location
   d3.selectAll('rect.selection').call(updateSelections.bind(this), s);
