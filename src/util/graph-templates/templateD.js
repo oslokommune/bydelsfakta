@@ -27,10 +27,21 @@ function Template(svg) {
   this.minWidth = 600;
   this.ageCap = 119; // caps the graphs on this age (set to 119 to disable capping)
   this.gBrushSmall = null;
+  this.brushSmall = d3
+    .brushX()
+    .on('brush', updateHandlePositions.bind(this))
+    .on('end', () => {
+      if (d3.event.sourceEvent instanceof MouseEvent) {
+        this.dropDownParent.select('select').node().value = '';
+        this.extent = d3.event.selection
+          ? d3.event.selection.map(val => Math.round(this.age.invert(val)))
+          : this.extent;
+        this.render(this.data, { method: this.method });
+      }
+    });
 
   this.age = d3.scaleLinear().domain([0, this.ageCap]);
-
-  this.extent = [0, 39];
+  this.extent = [0, 39]; // default age range
 
   this.render = function(data, options) {
     if (!this.commonRender(data, options)) return;
@@ -41,6 +52,9 @@ function Template(svg) {
     this.age.range([0, this.width - this.paddingUpperLeft]);
 
     this.brushSmall.move(this.gBrushSmall, this.extent.map(this.age));
+    this.brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+
+    this.gBrushSmall.call(this.brushSmall);
 
     sortData.call(this, data.data, this.method);
     handleMobileView.call(this);
@@ -55,19 +69,6 @@ function Template(svg) {
     drawLines.call(this);
     drawTable.call(this);
   };
-
-  this.brushSmall = d3
-    .brushX()
-    .on('brush', updateHandlePositions.bind(this))
-    .on('end', () => {
-      if (d3.event.sourceEvent instanceof MouseEvent) {
-        this.dropDownParent.select('select').node().value = '';
-        this.extent = d3.event.selection
-          ? d3.event.selection.map(val => Math.round(this.age.invert(val)))
-          : this.extent;
-        this.render(this.data, { method: this.method });
-      }
-    });
 
   // Runs once after initialization. Creates elements that are
   // unique to this template
