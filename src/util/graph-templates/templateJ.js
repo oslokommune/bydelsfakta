@@ -19,8 +19,8 @@ function Template(svg) {
   this.bars;
   this.colors = d3
     .scaleOrdinal()
-    .domain([0, 1, 2, 3])
-    .range(['#C57066', '#834B44', '#838296', '#4F4E6A']);
+    .domain([1, 0, 2, 3])
+    .range([d3.interpolateRdBu(0.1), d3.interpolateRdBu(0.25), d3.interpolateRdBu(0.75), d3.interpolateRdBu(0.9)]);
 
   this.render = function(data, options = {}) {
     if (options.method === 'value') {
