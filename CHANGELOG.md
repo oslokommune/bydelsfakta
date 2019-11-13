@@ -33,6 +33,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Remove card for expected population growth ('Forventet utvikling') because of inaccurate data
 - Remove map view from 'Husholdninger med barn' card
 - Add links to external data sources on 'About' view for cards
+- Update .prettierrc
 
 ### 🐛 Bugfixes
 
@@ -50,7 +51,8 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 **https://bydelsfakta.oslo.kommune.no/**
 
-This is the first official release of Bydelsfakta created by [Oslo Origo](http://labs.oslo.kommune.no/) in [City of Oslo](http://oslo.kommune.no/).
+This is the first official release of Bydelsfakta created by [Oslo Origo](http://labs.oslo.kommune.no/) in
+[City of Oslo](http://oslo.kommune.no/).
 
 Official date of release 27 August 2019.
 
