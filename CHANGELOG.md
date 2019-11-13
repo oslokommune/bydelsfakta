@@ -7,25 +7,40 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 ### 🚀 New features
 
 - Sort rows when expanding a series in multi-series bar charts (Template A)
+- Add map to district-view
+- Add cramped housing topic ('Rom per person')
+- Add graph for births and deaths ('Fødselsoverskudd')
+- Add three new datasets for immigration data ('Personer med innvandrerbakgrunn')
+- Add a 'norskfødt med én innvandrerforelder'-card
+- Add 'dødsrater-historisk' graph
+- Add 'bygningstyper-alle' graphs, both historic and status
+- Add card for migration over time ('Inn- og utvandring')
 
 ### 💅 Improvements
 
-- Refactoring code for Template A, F
+- Partially or fully refactor d3.js scripts for templates A, F, J, K, M, N
 - More descriptive headings and labels for graphs
 - Add legend to box plot
+- Improve colors on some charts making them more distinguishable
+- Convert most of the legacy enter/update/exit pattern to d3v5's `join()` pattern
+- Convert custom color legends to [`d3-svg-legend`](https://d3-legend.susielu.com/)
+- Add markers for 100% on Template K
+- Use 5-years groups in Template M
+- More consistent use of color in visualisations
 
 ### 🔧 Other changes
 
+- Remove card for expected population growth ('Forventet utvikling') because of inaccurate data
 - Remove map view from 'Husholdninger med barn' card
 - Add links to external data sources on 'About' view for cards
-- Add a 'norskfødt med én innvandrerforelder'-card
-- Add dødsrater-historisk graph
-- Add bygningstyper-alle graphs, both historic and status
 
 ### 🐛 Bugfixes
 
 - Fix issue where close button was included when downloading graph as SVGs and PNGs
 - Fix floating point rounding error in axis ticks when formatted as permille
+- Fix scroll position when going out of fullscreen-mode
+- Fix bug where opacity of lines on line charts was too faint when saving as PNG
+- Fix issue on Template K where some row dividers has wrong opacity
 
 &nbsp;
 

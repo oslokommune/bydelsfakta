@@ -57,6 +57,11 @@ export default {
       required: false,
       default: false,
     },
+    districtLabels: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 
   computed: {
@@ -84,10 +89,26 @@ export default {
 
   mounted() {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
-    this.getData(this.dataUrl);
+
+    if (this.dataUrl) {
+      this.getData(this.dataUrl);
+    }
+
+    if (this.districtLabels) {
+      this.$nextTick(function() {
+        this.addPopup();
+      });
+    }
   },
+
   updated() {
-    this.getData(this.dataUrl);
+    if (this.districtLabels) {
+      this.addPopup();
+    }
+
+    if (this.dataUrl) {
+      this.getData(this.dataUrl);
+    }
   },
 
   methods: {
@@ -107,6 +128,7 @@ export default {
     async getData(url) {
       if (!url) return;
       this.data = await fetch(url).then(d => d.json().then(d => d[0].data));
+
       this.createChoropleth(this.data);
 
       this.year =
@@ -189,6 +211,19 @@ export default {
           });
         });
     },
+    addPopup() {
+      const layers = this.$refs.geojsonLayer.mapObject._layers;
+
+      for (let key in layers) {
+        const layer = layers[key];
+        const popupContent = `
+          <h4>${layer.feature.properties.name}</h4>
+        `;
+
+        // Bind colors and popup content to the layer
+        layer.bindPopup(popupContent);
+      }
+    },
   },
 
   data() {
@@ -204,7 +239,7 @@ export default {
         fillColor: '#222',
         fillOpacity: 0.3,
         color: color.purple,
-        weight: 4,
+        weight: 1,
       },
       mapOptions: {
         zoomControl: true,

@@ -39,6 +39,43 @@ export default {
           method: 'value',
           heading: 'Befolkningsvekst etter netto innflytting og fødselsoverskudd',
           template: 'n',
+          variant: 'population-growth',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: true,
+        },
+      ],
+    },
+
+    {
+      size: 'large',
+      heading: 'Fødselsoverskudd',
+      production: true,
+      sources: [source.ssb],
+      tabs: [
+        {
+          label: 'Historisk',
+          method: 'value',
+          heading: 'Fødselsoverskudd',
+          template: 'n',
+          variant: 'births-and-deaths',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: true,
+        },
+      ],
+    },
+
+    {
+      size: 'large',
+      heading: 'Inn- og utvandring',
+      production: true,
+      sources: [source.ssb],
+      tabs: [
+        {
+          label: 'Historisk',
+          method: 'value',
+          heading: 'Inn- og utvandring',
+          template: 'n',
+          variant: 'migrations',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
           production: true,
         },

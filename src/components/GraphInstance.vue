@@ -66,7 +66,6 @@ import TemplateD from '../util/graph-templates/templateD';
 import TemplateE from '../util/graph-templates/templateE';
 import TemplateF from '../util/graph-templates/templateF';
 import TemplateG from '../util/graph-templates/templateG';
-import TemplateH from '../util/graph-templates/templateH';
 import TemplateI from '../util/graph-templates/templateI';
 import TemplateJ from '../util/graph-templates/templateJ';
 import TemplateK from '../util/graph-templates/templateK';
@@ -256,9 +255,6 @@ export default {
           case 'g':
             this.svg = new TemplateG(this.$refs['svg']);
             break;
-          case 'h':
-            this.svg = new TemplateH(this.$refs['svg']);
-            break;
           case 'i':
             this.svg = new TemplateI(this.$refs['svg']);
             break;
@@ -290,6 +286,7 @@ export default {
         sources: this.sources,
         initialRender: true,
         compareDistricts: this.compareDistricts,
+        variant: this.settings.variant,
       });
       this.drawShadows();
       this.svg.setHeading(this.settings.heading);

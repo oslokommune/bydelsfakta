@@ -3,12 +3,12 @@
  * aligned at 0.
  */
 
+import { legendColor } from 'd3-svg-legend';
 import Base_Template from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
-import { state } from '@/store';
 
 function Template(svg) {
   Base_Template.apply(this, arguments);
@@ -17,11 +17,10 @@ function Template(svg) {
   this.padding = { top: 90, left: 240, right: 20, bottom: 58 };
   this.x = d3.scaleLinear();
   this.bars;
-  this.legendBox;
   this.colors = d3
     .scaleOrdinal()
-    .domain([0, 1, 2, 3])
-    .range(['#C57066', '#834B44', '#838296', '#4F4E6A']);
+    .domain([1, 0, 2, 3])
+    .range([d3.interpolateRdBu(0.1), d3.interpolateRdBu(0.25), d3.interpolateRdBu(0.75), d3.interpolateRdBu(0.9)]);
 
   this.render = function(data, options = {}) {
     if (options.method === 'value') {
@@ -54,13 +53,6 @@ function Template(svg) {
       .attr('width', this.width + this.padding.left + this.padding.right);
 
     this.drawRows();
-
-    if (state.ie11) {
-      this.drawIeLegend();
-    } else {
-      this.drawFlexLegend();
-    }
-
     this.drawTable();
 
     // Move the 'zero line' to the x's zero position
@@ -76,16 +68,11 @@ function Template(svg) {
     // Move the x labels to either side of the x's 0 position
     this.canvas.select('text.label-min').attr('x', this.x(0) - 15);
     this.canvas.select('text.label-max').attr('x', this.x(0) + 15);
+
+    updateLegend.call(this);
   };
 
   this.created = function() {
-    // Create container for legend box
-    if (state.ie11) {
-      this.legendBox = this.svg.append('g').attr('class', 'legend');
-    } else {
-      this.legendBox = this.svg.append('foreignObject').attr('height', 40);
-    }
-
     // Add two labels above the xAxis
     this.canvas
       .append('text')
@@ -114,6 +101,8 @@ function Template(svg) {
       .attr('class', 'zero')
       .attr('stroke-width', 1.5)
       .attr('stroke', 'black');
+
+    this.canvas.append('g').classed('legend', true);
   };
 
   this.drawTable = function() {
@@ -130,67 +119,17 @@ function Template(svg) {
     tableGenerator(table_head, table_body);
   };
 
-  // Creates and set default styles for the DOM elements on each row
-  this.initRowElements = function(rowsE) {
-    // Row fill
-    rowsE
-      .append('rect')
-      .attr('class', 'rowFill')
-      .attr('fill', color.purple)
-      .attr('height', this.rowHeight)
-      .attr('x', -this.padding.left)
-      .attr('width', this.width + this.padding.left);
-
-    // Row divider
-    rowsE
-      .append('rect')
-      .attr('class', 'divider')
-      .attr('fill', color.purple)
-      .attr('x', -this.padding.left)
-      .attr('width', this.width + this.padding.left)
-      .attr('height', 1)
-      .attr('y', this.rowHeight);
-
-    // Row Geography
-    rowsE
-      .append('text')
-      .attr('class', 'geography')
-      .attr('fill', color.purple)
-      .attr('y', this.rowHeight / 2 + 6)
-      .attr('x', -this.padding.left + 10);
-  };
-
   // Updates the rows
   this.drawRows = function() {
     const rows = this.canvas
       .select('g.rows')
       .selectAll('g.row')
       .data(this.data.data)
-      .join(enter => {
-        // Create elements on each row that's created on enter
-        let g = enter.append('g').attr('class', 'row');
-        this.initRowElements(g);
-        return g;
-      });
+      .join(enterRows.bind(this));
 
-    // Update row geography, style and position
-    rows.select('text.geography').attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
-
-    // Update the row fill
-    rows
-      .select('rect.rowFill')
-      .transition()
-      .duration(this.duration)
-      .attr('width', this.padding.left + this.width + this.padding.right)
-      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
-
-    // Update the row divider
-    rows
-      .select('rect.divider')
-      .transition()
-      .duration(this.duration)
-      .attr('width', this.padding.left + this.width + this.padding.right)
-      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+    rows.select('text.geography').call(styleRowGeography.bind(this));
+    rows.select('rect.rowFill').call(styleRowFill.bind(this));
+    rows.select('rect.divider').call(styleRowDivider.bind(this));
 
     // Vertically position the rows
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
@@ -206,120 +145,136 @@ function Template(svg) {
       .keys([1, 0, 2, 3])
       .offset(d3.stackOffsetDiverging)(this.data.data.map(district => district.values.map(d => d[this.method])));
 
-    // Find the minimum and maximum values (and add a bit of padding) for the x scale
-    const min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;
-    const max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
+    // Update the xAxis using the seriesData
+    this.xAxis.call(updateXAxis.bind(this), seriesData);
 
-    // Set the x-scale's domain and range
-    this.x
-      .domain([min, max])
-      .range([0, this.width])
-      .nice();
+    // Create series
+    let series = this.bars
+      .selectAll('g.series')
+      .data(seriesData)
+      .join('g')
+      .classed('series', true)
+      .attr('fill', (d, i) => this.colors(i));
 
-    // Update the xAxis using the x-scale
-    // Calculate the number of ticks based on the width.
-    this.xAxis.call(
-      d3
-        .axisTop(this.x)
-        .ticks(this.width / 60)
-        .tickFormat(d => this.format(Math.abs(d), this.method, true))
-    );
-
-    // Standard select/enter/update/exit pattern for the series
-    // using the series data created using d3.stack()
-    let series = this.bars.selectAll('g.series').data(seriesData);
-    const seriesE = series
-      .enter()
-      .append('g')
-      .attr('class', 'series');
-    series.exit().remove();
-    series = series.merge(seriesE);
-
-    // Give each series a fill color
-    series.attr('fill', (d, i) => this.colors(i));
-
-    // Standard select/enter/update/exit pattern for
-    // the bars in each series
-    let bar = series.selectAll('rect').data(d => d);
-    const barE = bar.enter().append('rect');
-    bar.exit().remove();
-    bar = bar.merge(barE);
-
-    // Style and position each bar using the
-    // values generated by d3.stack()
-    bar
+    // Create bars
+    let bar = series
+      .selectAll('rect')
+      .data(d => d)
+      .join('rect')
       .attr('y', (d, i) => i * this.rowHeight + (this.rowHeight - this.barHeight) / 2)
-      .attr('height', this.barHeight)
+      .attr('height', this.barHeight);
+
+    bar
       .transition()
       .duration(this.duration)
       .attr('x', d => this.x(d[0]))
       .attr('width', d => this.x(d[1]) - this.x(d[0]));
 
     // Show and hide tooltips
-    bar
-      .on('mouseenter', d => {
-        const value = this.method === 'ratio' ? Math.round((d[1] - d[0]) * 100) + '%' : d[1] - d[0];
-        showTooltipOver(value);
-      })
-      .on('mousemove', showTooltipMove)
-      .on('mouseleave', hideTooltip);
-  };
-
-  // Updates the legends on each render
-  this.drawFlexLegend = function() {
-    let legendHtml = `<div class="graphlegend">`;
-    this.data.meta.series.forEach((serie, i) => {
-      const colorIndex = i === 0 ? 1 : i === 1 ? 0 : i;
-      legendHtml += `<div class="graphlegend__item"><span class="graphlegend__swatch" style="background:${this.colors(
-        colorIndex
-      )};"></span><span class="graphlegend__label">${serie.heading}</span></div>`;
-    });
-    legendHtml += '</div>';
-
-    // Resize and re-position the legend box based on the height of the svg
-    this.legendBox
-      .attr('width', this.width + this.padding.left + this.padding.right)
-      .html(legendHtml)
-      .attr('transform', `translate(0, ${this.height + this.padding.top + this.padding.bottom / 2 - 8})`);
-  };
-
-  this.drawIeLegend = function() {
-    // Re-position the legend box based on the height of the svg
-    this.legendBox.attr('transform', `translate(0, ${this.height + this.padding.top + this.padding.bottom / 2 - 8})`);
-
-    // Standard select/enter/update/exit pattern for each series
-    let group = this.legendBox.selectAll('g.group').data(this.data.meta.series);
-    const groupE = group
-      .enter()
-      .append('g')
-      .attr('class', 'group');
-    group.exit().remove();
-    group = group.merge(groupE);
-
-    // Create DOM elements for newly created legend groups (series)
-    groupE
-      .append('rect')
-      .attr('height', 16)
-      .attr('width', 16)
-      .attr('rx', 3)
-      // Cheap trick to ensure correct colors on the legend
-      .attr('fill', (d, i) => (i === 0 ? this.colors(1) : i === 1 ? this.colors(0) : this.colors(i)));
-    groupE.append('text').attr('y', 8);
-
-    // Update the label for each series in the legend
-    group
-      .select('text')
-      .text(d => d.heading)
-      .attr('y', 12)
-      .attr('x', 20)
-      .attr('font-size', 12);
-    group.attr(
-      'transform',
-      (d, i) => `translate(${i * ((this.width + this.padding.left + this.padding.right) / 4)}, 0)`
-    );
+    bar.call(handleMouseEvents.bind(this));
   };
 
   this.init(svg);
 }
 
 export default Template;
+
+function updateLegend() {
+  const legend = legendColor()
+    .scale(this.colors)
+    .labels(['Under 0,5 rom', '0,5–0,9 rom', '1–1,9 rom', '2+ rom'])
+    .orient('horizontal')
+    .shapeHeight(10)
+    .shapeWidth(90);
+
+  this.svg
+    .select('.legend')
+    .attr('transform', `translate(${0}, ${this.height + 32})`)
+    .call(legend);
+}
+
+function initRowFill(selection) {
+  selection
+    .attr('class', 'rowFill')
+    .attr('fill', color.purple)
+    .attr('height', this.rowHeight)
+    .attr('x', -this.padding.left)
+    .attr('width', this.width + this.padding.left);
+}
+
+function styleRowFill(selection) {
+  selection
+    .transition()
+    .duration(this.duration)
+    .attr('width', this.padding.left + this.width + this.padding.right)
+    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
+}
+
+function initRowDivider(selection) {
+  selection
+    .attr('class', 'divider')
+    .attr('fill', color.purple)
+    .attr('x', -this.padding.left)
+    .attr('width', this.width + this.padding.left)
+    .attr('height', 1)
+    .attr('y', this.rowHeight);
+}
+
+function styleRowDivider(selection) {
+  selection
+    .transition()
+    .duration(this.duration)
+    .attr('width', this.padding.left + this.width + this.padding.right)
+    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+}
+
+function initRowGeography(selection) {
+  selection
+    .attr('class', 'geography')
+    .attr('fill', color.purple)
+    .attr('y', this.rowHeight / 2 + 6)
+    .attr('x', -this.padding.left + 10);
+}
+
+function styleRowGeography(selection) {
+  selection.attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+}
+
+function handleMouseEvents(selection) {
+  selection
+    .on('mouseenter', d => {
+      const value = this.method === 'ratio' ? Math.round((d[1] - d[0]) * 100) + '%' : d[1] - d[0];
+      showTooltipOver(value);
+    })
+    .on('mousemove', showTooltipMove)
+    .on('mouseleave', hideTooltip);
+}
+
+function enterRows(enter) {
+  let g = enter.append('g').attr('class', 'row');
+  g.append('rect').call(initRowFill.bind(this));
+  g.append('rect').call(initRowDivider.bind(this));
+  g.append('text').call(initRowGeography.bind(this));
+  return g;
+}
+
+function updateXAxis(selection, seriesData) {
+  // Find the minimum and maximum values (and add a bit of padding) for the x scale
+  const min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;
+  const max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
+
+  // Set the x-scale's domain and range
+  this.x
+    .domain([min, max])
+    .range([0, this.width])
+    .nice();
+
+  // Update the xAxis using the x-scale
+  // Calculate the number of ticks based on the width.
+  selection.call(
+    d3
+      .axisTop(this.x)
+      .ticks(this.width / 60)
+      .tickFormat(d => this.format(Math.abs(d), this.method, true))
+  );
+}

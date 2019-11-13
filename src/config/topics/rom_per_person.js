@@ -6,7 +6,7 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Rom per person',
   value: 'rom-per-person',
-  production: false,
+  production: true,
   cards: [
     {
       size: 'large',
@@ -16,7 +16,7 @@ export default {
           'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
         sources: [source.ssb],
       },
-      production: false,
+      production: true,
       tabs: [
         {
           active: false,
@@ -73,7 +73,7 @@ export default {
         scale: [0.018, 0.14],
         url: `${API}/trangboddhet-under-0-5-status`,
       },
-      production: false,
+      production: true,
       tabs: [
         {
           active: false,
@@ -130,7 +130,7 @@ export default {
         scale: [0.035, 0.21],
         url: `${API}/trangboddhet-0-5-0-9-status`,
       },
-      production: false,
+      production: true,
       tabs: [
         {
           active: false,
@@ -187,7 +187,7 @@ export default {
         scale: [0.268, 0.475],
         url: `${API}/trangboddhet-1-0-1-9-status`,
       },
-      production: false,
+      production: true,
       tabs: [
         {
           active: false,
@@ -244,7 +244,7 @@ export default {
         scale: [0.34, 0.6],
         url: `${API}/trangboddhet-over-2-status`,
       },
-      production: false,
+      production: true,
       tabs: [
         {
           active: false,

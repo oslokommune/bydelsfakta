@@ -34,7 +34,7 @@ function Template(svg) {
 
     // Add colors to geographies if they don't already exist
     this.data.data.forEach((geo, i, j) => {
-      geo.color = d3.interpolateRainbow(i / j.length);
+      geo.color = d3.interpolateTurbo(i / j.length);
     });
 
     this.width = d3.max([this.width, 300]);
@@ -286,9 +286,7 @@ function Template(svg) {
     radio.attr('transform', 'translate(5, 0)');
     label.attr('transform', 'translate(16, 5)').text(d => `${d.heading} ${d.subheading}`);
 
-    inner.attr('transform', (d, i) => {
-      return `scale(${i === this.series ? 1 : 0})`;
-    });
+    inner.attr('opacity', (d, i) => (i === this.series ? 1 : 0));
 
     g.on('click keyup', (d, i) => {
       if (i === this.series) return;
