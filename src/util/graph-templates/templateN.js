@@ -15,29 +15,53 @@ const variations = {
   'population-growth': {
     lineData1: {
       heading: 'Netto innflytting',
-      data: obj => obj.immigration - obj.emigration,
+      data: obj => obj.immigration - obj.emigration || 'N/A',
     },
     lineData2: {
       heading: 'Fødselsoverskudd',
-      data: obj => obj.births - obj.deaths,
+      data: obj => obj.births - obj.deaths || 'N/A',
     },
     barData: {
       heading: 'Befolkningsvekst',
-      data: obj => obj.immigration - obj.emigration + (obj.births - obj.deaths),
+      data: obj => {
+        if (!obj) return 'N/A';
+
+        const netImmigration = obj.immigration - obj.emigration || 'N/A';
+        const netBirths = obj.births - obj.deaths || 'N/A';
+        const netGrowth =
+          typeof netImmigration === 'number' && typeof netBirths === 'number' ? netImmigration + netBirths : 'N/A';
+
+        return netGrowth;
+      },
     },
   },
   'births-and-deaths': {
     lineData1: {
       heading: 'Antall fødte',
-      data: obj => obj.births,
+      data: obj => obj.births || 'N/A',
     },
     lineData2: {
       heading: 'Antall døde',
-      data: obj => obj.deaths,
+      data: obj => obj.deaths || 'N/A',
     },
     barData: {
       heading: 'Fødselsoverskudd',
-      data: obj => obj.births - obj.deaths,
+      data: obj => obj.births - obj.deaths || 'N/A',
+    },
+  },
+
+  migrations: {
+    lineData1: {
+      heading: 'Antall innfyttere',
+      data: obj => obj.immigration || 'N/A',
+    },
+    lineData2: {
+      heading: 'Antall utflyttere',
+      data: obj => obj.emigration || 'N/A',
+    },
+    barData: {
+      heading: 'Netto innflytting',
+      data: obj => obj.immigration - obj.emigration || 'N/A',
     },
   },
 };
@@ -69,6 +93,8 @@ function Template(svg) {
 
     // Set headings for each of the three charts
     this.barChart.select('.group-heading').text(variations[this.variant].barData.heading);
+    this.lineChart1.select('.group-heading').text(variations[this.variant].lineData1.heading);
+    this.lineChart2.select('.group-heading').text(variations[this.variant].lineData2.heading);
 
     drawTable.call(this);
     setScales.call(this);
@@ -314,7 +340,7 @@ function updateBars(selection) {
   bars
     .attr('x', d => this.x(d.date))
     .attr('width', this.x.bandwidth())
-    .attr('fill-opacity', 0.6)
+    .attr('fill-opacity', 1)
     .transition()
     .attr('height', d => Math.abs(this.y[0](0) - this.y[0](d.barData)))
     .attr('y', d => (d.barData > 0 ? this.y[0](d.barData) : this.y[0](0)))
@@ -333,7 +359,11 @@ function drawTable() {
   // Prepare data for table head
   const table_head = [
     ['Geografi', ...this.filteredData.map(d => d.date)],
-    this.filteredData.flatMap(() => ['Befolkningsvekst', 'Netto innflytting', 'Fødselsoverskudd']),
+    this.filteredData.flatMap(() => [
+      variations[this.variant].barData.heading,
+      variations[this.variant].lineData1.heading,
+      variations[this.variant].lineData2.heading,
+    ]),
   ];
 
   // Find all years in dataset
@@ -350,12 +380,11 @@ function drawTable() {
         const yearData = geo.values[0].find(row => row.date === year);
         if (!yearData) return ['N/A', 'N/A', 'N/A'];
 
-        const netImmigration = yearData.immigration - yearData.emigration || 'N/A';
-        const netBirths = yearData.births - yearData.deaths || 'N/A';
-        const netGrowth =
-          typeof netImmigration === 'number' && typeof netBirths === 'number' ? netImmigration + netBirths : 'N/A';
+        const barDataValue = variations[this.variant].barData.data(yearData);
+        const lineData1Value = variations[this.variant].lineData1.data(yearData);
+        const lineData2Value = variations[this.variant].lineData2.data(yearData);
 
-        return [netGrowth, netImmigration, netBirths];
+        return [barDataValue, lineData1Value, lineData2Value];
       }),
     };
   });
