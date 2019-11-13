@@ -45,12 +45,12 @@ function Template(svg) {
       this.rowHeight = 37;
     }
 
-    sortData.call(this, data, { series: this.selected >= 0 ? this.selected : 0 });
-
     // Temp fix until meta data is included in data from API
     if (!data.meta.series || !data.meta.series.length) data.meta.series.push('');
 
     if (!this.commonRender(data, options)) return;
+
+    sortData.call(this, data, { series: this.selected >= 0 ? this.selected : 0 });
 
     if (!this.isMobileView && !this.isSingleSeries) {
       this.width = d3.max([this.width, 600]);
