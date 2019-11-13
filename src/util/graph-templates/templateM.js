@@ -16,6 +16,9 @@ const tabData = [
   { label: 'Til/fra Oslo', value: 'tilFraOslo' },
 ];
 
+const positive = d3.interpolateRdBu(0.1);
+const negative = d3.interpolateRdBu(0.9);
+
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'm';
@@ -28,7 +31,10 @@ function Template(svg) {
   this.height2 = 160;
   this.gapY = 65;
 
-  this.x = d3.scaleBand().paddingOuter(0.15);
+  this.x = d3
+    .scaleBand()
+    .paddingOuter(0.15)
+    .paddingInner(0.03);
   this.y1 = d3.scaleLinear().rangeRound([this.height1, 0]);
   this.y2 = d3.scaleLinear().rangeRound([this.height2, 0]);
 
@@ -230,7 +236,7 @@ function initUpper(selection) {
     .append('path')
     .attr('class', 'emigration')
     .attr('fill', 'none')
-    .attr('stroke', color.red)
+    .attr('stroke', color.blue)
     .attr('stroke-width', 4);
 
   selection
@@ -271,8 +277,8 @@ function drawHeadings() {
     .join(enter => {
       const g = enter.append('g');
       g.append('rect')
-        .attr('height', 5)
-        .attr('rx', 3)
+        .attr('height', 8)
+        .attr('rx', 4)
         .attr('width', 23);
       g.append('text');
       return g;
@@ -285,8 +291,8 @@ function drawHeadings() {
 
   g.select('rect')
     .text(d => d)
-    .attr('y', -7)
-    .attr('fill', (d, i) => (i === 0 ? color.purple : color.red));
+    .attr('y', -9)
+    .attr('fill', (d, i) => (i === 0 ? color.purple : color.blue));
 }
 
 function updateUpper(selection) {
@@ -339,12 +345,10 @@ function updateLower(selection) {
 function updateBars(selection) {
   selection
     .attr('x', d => this.x(d.age))
-    .attr('stroke', d => (d.diff <= 0 ? color.red : color.purple))
-    .attr('fill-opacity', 0.6)
     .attr('width', this.x.bandwidth())
     .call(handleMouseEvents.bind(this))
     .transition()
-    .attr('fill', d => (d.diff <= 0 ? color.red : color.purple))
+    .attr('fill', d => (d.diff <= 0 ? negative : positive))
     .attr('height', d => this.y2(0) - this.y2(Math.abs(d.diff)))
     .attr('y', d => (d.diff <= 0 ? this.y2(0) + 1 : this.y2(d.diff)));
 }
