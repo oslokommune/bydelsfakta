@@ -34,6 +34,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Remove map view from 'Husholdninger med barn' card
 - Add links to external data sources on 'About' view for cards
 - Update .prettierrc
+- Remove 'brush' functionality from the shaded area on the age distribution graph (Template D)
 
 ### 🐛 Bugfixes
 
@@ -42,6 +43,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Fix scroll position when going out of fullscreen-mode
 - Fix bug where opacity of lines on line charts was too faint when saving as PNG
 - Fix issue on Template K where some row dividers has wrong opacity
+- Fix issue where brush selection is reset when changing tabs or geographies on template D
 
 &nbsp;
 
