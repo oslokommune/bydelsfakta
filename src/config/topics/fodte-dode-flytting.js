@@ -63,6 +63,24 @@ export default {
         },
       ],
     },
+
+    {
+      size: 'large',
+      heading: 'Inn- og utvandring',
+      production: true,
+      sources: [source.ssb],
+      tabs: [
+        {
+          label: 'Historisk',
+          method: 'value',
+          heading: 'Inn- og utvandring',
+          template: 'n',
+          variant: 'migrations',
+          url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
+          production: true,
+        },
+      ],
+    },
   ],
   options: {
     kategori: 'Befolkning',
