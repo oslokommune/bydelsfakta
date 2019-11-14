@@ -8,7 +8,8 @@ export const color = {
   light_grey: '#F0F1F1',
   red: '#FF8174',
   blue: '#6EE9FF',
-  positive: '#06AFCD',
+  positive: d3.interpolateRdBu(0.9),
+  negative: d3.interpolateRdBu(0.1),
 };
 
-export const interpolator = d3.interpolateRdYlBu;
+export const interpolator = d3.interpolateRdBu;
