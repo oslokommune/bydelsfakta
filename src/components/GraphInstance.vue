@@ -286,7 +286,6 @@ export default {
         sources: this.sources,
         initialRender: true,
         compareDistricts: this.compareDistricts,
-        range: '[0, 40]', // default range
         variant: this.settings.variant,
       });
       this.drawShadows();
