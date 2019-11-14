@@ -29,6 +29,7 @@ function Template(svg) {
   this.gBrushSmall = null;
   this.brushSmall = d3
     .brushX()
+    .handleSize(21)
     .on('brush', updateHandlePositions.bind(this))
     .on('end', () => {
       if (d3.event.sourceEvent instanceof MouseEvent) {
@@ -67,7 +68,8 @@ function Template(svg) {
     updateAxis.call(this);
     drawRows.call(this);
     drawLines.call(this);
-    drawTable.call(this);
+
+    util.drawTable.call(this, ...generateTableData.call(this));
   };
 
   // Runs once after initialization. Creates elements that are
@@ -300,11 +302,11 @@ function updateHandlePositions() {
   d3.selectAll('rect.selection').call(updateSelections.bind(this), s);
 
   d3.selectAll('.handle')
-    .attr('width', 21)
-    .call(handleMouseEvents);
-
-  d3.selectAll('.handle--e').attr('x', s[1]);
-  d3.selectAll('.handle--w').attr('x', s[0] - 21);
+    .call(handleMouseEvents)
+    .attr('transform', (d, i) => {
+      const offsetX = i === 0 ? -10 : 10;
+      return `translate(${offsetX}, 0)`;
+    });
 
   // Move visible handles
   this.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
@@ -565,7 +567,7 @@ function drawLines() {
   });
 }
 
-function drawTable() {
+function generateTableData() {
   const table_head = [
     ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
     [...ageRanges.filter(d => !d.disabled).map(d => d.label)],
@@ -589,6 +591,5 @@ function drawTable() {
     };
   });
 
-  const tableGenerator = util.drawTable.bind(this);
-  tableGenerator(table_head, table_body);
+  return [table_head, table_body];
 }
