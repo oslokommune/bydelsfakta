@@ -12,7 +12,7 @@ export default {
     {
       size: 'large',
       heading: 'Innvandringskategori',
-      info: {
+      about: {
         info:
           'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet. Botid er beregnet etter ankomstår til Norge.',
         sources: [source.ssb],
