@@ -267,7 +267,8 @@ function Template(svg) {
     // Style the path
     genderGroup
       .select('path')
-      .attr('fill', d => (d[0].gender === 'kvinne' ? color.red : color.positive))
+      .attr('fill', color.purple)
+      .attr('fill-opacity', d => (d[0].gender === 'kvinne' ? 0.45 : 0.35))
       .transition()
       .duration(this.duration)
       .attr('d', this.area);

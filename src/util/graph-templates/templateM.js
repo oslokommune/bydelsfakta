@@ -16,9 +16,6 @@ const tabData = [
   { label: 'Til/fra Oslo', value: 'tilFraOslo' },
 ];
 
-const positive = d3.interpolateRdBu(0.1);
-const negative = d3.interpolateRdBu(0.9);
-
 function Template(svg) {
   Base_Template.apply(this, arguments);
   this.template = 'm';
@@ -348,7 +345,7 @@ function updateBars(selection) {
     .attr('width', this.x.bandwidth())
     .call(handleMouseEvents.bind(this))
     .transition()
-    .attr('fill', d => (d.diff <= 0 ? negative : positive))
+    .attr('fill', d => (d.diff <= 0 ? color.negative : color.positive))
     .attr('height', d => this.y2(0) - this.y2(Math.abs(d.diff)))
     .attr('y', d => (d.diff <= 0 ? this.y2(0) + 1 : this.y2(d.diff)));
 }
