@@ -66,14 +66,14 @@ export default {
 
     {
       size: 'large',
-      heading: 'Inn- og utvandring',
+      heading: 'Inn- og utflytting',
       production: true,
       sources: [source.ssb],
       tabs: [
         {
           label: 'Historisk',
           method: 'value',
-          heading: 'Inn- og utvandring',
+          heading: 'Inn- og utflytting',
           template: 'n',
           variant: 'migrations',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
