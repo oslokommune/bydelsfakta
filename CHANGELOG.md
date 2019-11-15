@@ -18,7 +18,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 ### 💅 Improvements
 
-- Partially or fully refactor d3.js scripts for templates A, F, J, K, M, N
+- Partially or fully refactor d3.js scripts for templates A, D, F, J, K, M, N
 - More descriptive headings and labels for graphs
 - Add legend to box plot
 - Improve colors on some charts making them more distinguishable
