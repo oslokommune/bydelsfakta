@@ -22,8 +22,8 @@ export default {
         url: `${API}/husholdningstyper-status`,
         heading: 'Aleneboende',
         method: 'ratio',
-        series: 0,
         scale: [0.25, 0.6],
+        series: 0,
       },
       production: true,
       tabs: [
@@ -138,7 +138,6 @@ export default {
         url: `${API}/husholdninger-med-1-barn-status`,
         method: 'ratio',
         series: 0,
-        scale: [0.04, 0.21],
       },
       production: true,
       tabs: [
@@ -195,7 +194,6 @@ export default {
         url: `${API}/husholdninger-med-2-barn-status`,
         method: 'ratio',
         series: 0,
-        scale: [0.025, 0.22],
       },
       production: true,
       tabs: [
@@ -252,7 +250,6 @@ export default {
         url: `${API}/husholdninger-med-3-barn-status`,
         method: 'ratio',
         series: 0,
-        scale: [0, 0.15],
       },
       production: true,
       tabs: [

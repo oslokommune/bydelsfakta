@@ -21,7 +21,6 @@ export default {
         url: `${API}/eieform-status`,
         heading: 'Leietakere',
         method: 'ratio',
-        scale: [0.08, 0.6],
       },
       production: true,
       tabs: [
@@ -72,7 +71,6 @@ export default {
         url: `${API}/kommunale-boliger-av-boligmassen-i-alt-status`,
         method: 'ratio',
         heading: 'Kommunale boliger',
-        scale: [0, 0.14],
         reverse: true,
       },
       production: true,
