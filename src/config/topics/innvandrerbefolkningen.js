@@ -133,7 +133,6 @@ export default {
         labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-innvandrer-status`,
         heading: 'Innvandrere under 16 år',
-        scale: [0.03, 0.15],
         reverse: true,
         method: 'ratio',
       },
@@ -191,7 +190,6 @@ export default {
         labels: ['Færre', 'Flere'],
         url: `${API}/innvandring-under-16-en-innvandrerforelder-status`,
         heading: 'Innvandrere under 16 år med én innvandrerforelder',
-        scale: [0.11, 0.34],
         reverse: true,
         method: 'ratio',
       },
@@ -247,7 +245,6 @@ export default {
       },
       map: {
         labels: ['Færre', 'Flere'],
-        scale: [0.05, 0.75],
         heading: 'Innvandrere under 16 år med to innvandrerforeldre',
         reverse: true,
         method: 'ratio',
@@ -305,7 +302,6 @@ export default {
       },
       map: {
         labels: ['Færre', 'Flere'],
-        scale: [0.07, 0.57],
         heading: 'Innvandrer kort botid (<=5 år)',
         reverse: true,
         method: 'ratio',
@@ -363,7 +359,6 @@ export default {
       },
       map: {
         labels: ['Færre', 'Flere'],
-        scale: [0.32, 0.62],
         heading: 'Innvandrer lang botid (>5 år)',
         reverse: true,
         method: 'ratio',
@@ -421,7 +416,6 @@ export default {
       },
       map: {
         labels: ['Færre', 'Flere'],
-        scale: [0.09, 0.38],
         heading: 'Norskfødt med innvandrerforeldre',
         reverse: true,
         method: 'ratio',

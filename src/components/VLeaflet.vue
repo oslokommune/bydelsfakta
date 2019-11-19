@@ -127,7 +127,12 @@ export default {
 
     async getData(url) {
       if (!url) return;
-      this.data = await fetch(url).then(d => d.json().then(d => d[0].data));
+      this.data = await fetch(url).then(d =>
+        d.json().then(d => {
+          this.meta = d[0].meta;
+          return d[0].data;
+        })
+      );
 
       this.createChoropleth(this.data);
 
@@ -138,11 +143,18 @@ export default {
     },
 
     createChoropleth(data) {
+      const scale =
+        this.meta.scale && this.meta.scale.length !== 0
+          ? this.settings.method === 'value'
+            ? this.meta.scale.value
+            : this.meta.scale.ratio
+          : this.settings.scale;
+
       // Color calulator defined by the scale set in the map settings
       const colorStrength = d3
         .scaleLinear()
         .range([0, 1])
-        .domain(this.settings.scale);
+        .domain(scale);
 
       // Store data to create
       let allLayerData = [];

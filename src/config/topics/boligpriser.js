@@ -21,7 +21,6 @@ export default {
       map: {
         labels: ['Lavere boligpriser', 'Høyere boligpriser'],
         heading: 'Gjennomsnittlig kvadratmeterpris blokkleiligheter',
-        scale: [40000, 95000],
         method: 'value',
         url: `${API}/boligpriser-blokkleiligheter-status`,
       },
