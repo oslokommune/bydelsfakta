@@ -22,6 +22,7 @@ export default {
         url: `${API}/husholdningstyper-status`,
         heading: 'Aleneboende',
         method: 'ratio',
+        scale: [0.25, 0.6],
         series: 0,
       },
       production: true,
