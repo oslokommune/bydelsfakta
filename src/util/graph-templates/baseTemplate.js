@@ -175,7 +175,7 @@ function BaseTemplate(svg) {
         year = this.data.data[0].values[0].date ? `(${this.data.data[0].values[0].date})` : '';
         break;
 
-      case 'g':
+      case 'populationDetailsTable':
         year = `(${this.data.data[0].values[4]})`;
         break;
 
