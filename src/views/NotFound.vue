@@ -31,8 +31,8 @@
       <div class="topics-grid">
         <v-category
           v-for="topicName in seeMoreTopics"
-          :key="topics[`${topicName}`].value"
           :id="topics[`${topicName}`].value"
+          :key="topics[`${topicName}`].value"
           :category="topics[`${topicName}`].options.kategori"
           :topic="topics[`${topicName}`].options.tema"
           :bg-image="topics[`${topicName}`].options.bgImage"
@@ -50,13 +50,16 @@ import { topics } from '../config/topics';
 
 export default {
   name: 'NotFound',
+
   components: { VCategory },
+
   data() {
     return {
       seeMoreTopics: ['husholdninger', 'boligpriser'],
-      topics: topics,
+      topics,
     };
   },
+
   metaInfo() {
     return {
       title: 'Page not found | Bydelsfakta',

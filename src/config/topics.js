@@ -1,5 +1,5 @@
 import alder from './topics/alder';
-import fodte_dode_flytting from './topics/fodte-dode-flytting';
+import fodteDodeFlytting from './topics/fodteDodeFlytting';
 import boligpriser from './topics/boligpriser';
 import bygningstyper from './topics/bygningstyper';
 import eierform from './topics/eierform';
@@ -7,7 +7,7 @@ import befolkningsutvikling from './topics/befolkningsutvikling';
 import husholdninger from './topics/husholdninger';
 import innvandrerbefolkningen from './topics/innvandrerbefolkningen';
 import levekaar from './topics/levekaar';
-import rom_per_person from './topics/rom_per_person';
+import romPerPerson from './topics/romPerPerson';
 
 export const topicNames = [
   'befolkningsutvikling',
@@ -44,7 +44,7 @@ export const categories = [
 
 export const topics = {
   alder,
-  'fodte-dode-flytting': fodte_dode_flytting,
+  'fodte-dode-flytting': fodteDodeFlytting,
   boligpriser,
   bygningstyper,
   eierform,
@@ -52,5 +52,5 @@ export const topics = {
   husholdninger,
   innvandrerbefolkningen,
   levekaar,
-  'rom-per-person': rom_per_person,
+  'rom-per-person': romPerPerson,
 };

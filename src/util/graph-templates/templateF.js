@@ -3,7 +3,7 @@
  * (the dots are rendered as lines)
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import d3 from '@/assets/d3';
 import * as locale from './locale';
@@ -23,7 +23,7 @@ import {
 } from './graph-helpers/boxplotHelpers';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'f';
 
   this.padding = { top: 90, left: 250, right: 20, bottom: 40 };
@@ -52,6 +52,7 @@ function Template(svg) {
       district.median = d3.quantile(ages, 0.5);
       district.high = d3.quantile(ages, 0.75);
       district.mean = d3.mean(ages);
+      return district;
     });
 
     this.svg
@@ -93,8 +94,8 @@ function Template(svg) {
 
   this.drawTable = function() {
     const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
-    const table_head = ['Geografi', 'Gjennomsnittsalder', 'Medianalder'];
-    const table_body = tableData.map(d => {
+    const tableHead = ['Geografi', 'Gjennomsnittsalder', 'Medianalder'];
+    const tableBody = tableData.map(d => {
       return {
         key: d.geography,
         values: [d.mean, d.median],
@@ -102,7 +103,7 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body, { formatter: locale.norwegianLocale.format(',.1f') });
+    tableGenerator(tableHead, tableBody, { formatter: locale.norwegianLocale.format(',.1f') });
   };
 
   // Updates the text and position for both

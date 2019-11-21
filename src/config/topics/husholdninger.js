@@ -22,7 +22,6 @@ export default {
         url: `${API}/husholdningstyper-status`,
         heading: 'Aleneboende',
         method: 'ratio',
-        scale: [0.25, 0.6],
         series: 0,
       },
       production: true,
@@ -137,7 +136,6 @@ export default {
         heading: 'Husholdninger med ett barn',
         url: `${API}/husholdninger-med-1-barn-status`,
         method: 'ratio',
-        series: 0,
       },
       production: true,
       tabs: [
@@ -193,7 +191,6 @@ export default {
         heading: 'Husholdninger med to barn',
         url: `${API}/husholdninger-med-2-barn-status`,
         method: 'ratio',
-        series: 0,
       },
       production: true,
       tabs: [
@@ -249,7 +246,6 @@ export default {
         heading: 'Husholdninger med tre+ barn',
         url: `${API}/husholdninger-med-3-barn-status`,
         method: 'ratio',
-        series: 0,
       },
       production: true,
       tabs: [

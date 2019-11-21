@@ -2,7 +2,7 @@ import d3 from '@/assets/d3';
 import { color } from '../colors';
 
 export function init() {
-  const duration = this.duration;
+  const { duration } = this;
 
   const g = this.canvas
     .append('g')

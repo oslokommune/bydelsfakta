@@ -3,8 +3,6 @@
     <div class="main-container__cards">
       <template v-for="(card, cardIndex) in topics[topic].cards">
         <graph-card
-          :key="`card-${cardIndex}`"
-          :settings="card"
           v-if="
             card.production === productionMode && card.production !== null
               ? true
@@ -12,6 +10,8 @@
               ? true
               : productionMode === null
           "
+          :key="`card-${cardIndex}`"
+          :settings="card"
         />
       </template>
       <div class="related">
@@ -19,8 +19,8 @@
         <div class="topics-grid">
           <v-category
             v-for="(item, relatedIndex) in topics[`${topic}`].related"
-            :key="`related-${relatedIndex}`"
             :id="topics[`${item}`].value"
+            :key="`related-${relatedIndex}`"
             :category="topics[`${item}`].options.kategori"
             :topic="topics[`${item}`].options.tema"
             :bg-image="topics[`${item}`].options.bgImage"
@@ -54,6 +54,7 @@ export default {
     GraphCard,
     VCategory,
   },
+
   props: {
     district: {
       type: String,
@@ -75,7 +76,7 @@ export default {
 
   data() {
     return {
-      topics: topics,
+      topics,
     };
   },
 

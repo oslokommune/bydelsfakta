@@ -3,18 +3,18 @@
     <h1 v-if="selectedTopic === null" id="select" class="header">{{ getDistrict($route.params.district) }}</h1>
     <div class="navigation-topbar" :class="{ 'navigation-topbar--hidden': selectedTopic === null }">
       <div
-        tabindex="0"
-        role="button"
         v-if="selectedTopic"
         id="select"
+        ref="select"
+        v-click-outside="closeMenu"
+        tabindex="0"
+        role="button"
         class="navigation-topbar__select"
+        :aria-label="$t('navigationTopbar.selectTopic.aria')"
+        :title="$t('navigationTopbar.selectTopic.aria')"
         @click="showDropdown = !showDropdown"
         @keydown.enter="showDropdown = !showDropdown"
         @keydown.escape="closeMenu"
-        v-click-outside="closeMenu"
-        ref="select"
-        :aria-label="$t('navigationTopbar.selectTopic.aria')"
-        :title="$t('navigationTopbar.selectTopic.aria')"
       >
         <div class="label" :class="{ 'label--active': selectedTopic !== null }">
           {{ $t('navigationTopbar.selectTopic.label') }}
@@ -25,7 +25,7 @@
         </div>
       </div>
       <transition name="fade">
-        <div id="dropdown" class="navigation-topbar__dropdown" v-if="showDropdown">
+        <div v-if="showDropdown" id="dropdown" class="navigation-topbar__dropdown">
           <div v-for="(kategori, index) in dropdown" :key="index" class="navigation-topbar__dropdown-column">
             <div
               class="navigation-topbar__dropdown-column--heading"
@@ -36,15 +36,15 @@
             <div class="navigation-topbar__dropdown-items">
               <router-link
                 v-for="(link, topicIndex) in kategori.links"
-                class="navigation-topbar__dropdown-item"
                 :id="`dropdown-href-${topics[link].value}`"
+                :key="topicIndex"
+                class="navigation-topbar__dropdown-item"
                 :class="{
                   'navigation-topbar__dropdown-item--active': checkActiveTopic(topics[link].value),
                   'navigation-topbar__dropdown-item--disabled': disabledTopics.includes(topics[link].value),
                 }"
-                :key="topicIndex"
-                v-text="topics[link].text"
                 :to="onClickTopic(topics[link].value)"
+                v-text="topics[link].text"
                 >{{ topics[`${link}`].text }}</router-link
               >
             </div>
@@ -62,21 +62,37 @@ import OkIcon from './OkIcon';
 
 export default {
   name: 'TheNavigationTopbar',
+
+  components: { OkIcon },
   data() {
     return {
       selectedTopic: null,
       dropdown: categories,
-      allDistricts: allDistricts,
+      allDistricts,
       showDropdown: false,
-      topics: topics,
-      disabledTopics: disabledTopics,
+      topics,
+      disabledTopics,
     };
   },
 
-  components: { OkIcon },
-
   computed: {
     ...mapState(['compareDistricts', 'menuIsOpen', 'districts']),
+  },
+
+  watch: {
+    $route(to) {
+      const routes = to.path.split('/');
+
+      if (to.name !== 'Topic') {
+        this.selectedTopic = null;
+        this.showDropdown = false;
+      } else if (routes.length > 3) this.selectedTopic = routes[3];
+      this.closeMenu();
+    },
+
+    showDropdown() {
+      this.setMenuIsOpen(this.showDropdown);
+    },
   },
 
   methods: {
@@ -91,24 +107,24 @@ export default {
     getHumanReadableTopic(id) {
       if (this.topics[id]) {
         return this.topics[id].text;
-      } else {
-        this.selectedTopic = null;
-        return '';
       }
+      this.selectedTopic = null;
+      return '';
     },
 
     getDistrict(id) {
       if (this.compareDistricts || id === 'alle') {
         return this.$t('navigationTopbar.header.compareDistrict');
-      } else if (this.$route.name === 'NotFound') {
-        return this.$t('navigationTopbar.header.notFound');
-      } else if (this.$route.name === 'Home') {
-        return this.$t('navigationTopbar.header.home');
-      } else {
-        return id !== undefined
-          ? this.allDistricts.find(district => district.uri === id).value
-          : this.$t('navigationTopbar.header.chooseDistrict');
       }
+      if (this.$route.name === 'NotFound') {
+        return this.$t('navigationTopbar.header.notFound');
+      }
+      if (this.$route.name === 'Home') {
+        return this.$t('navigationTopbar.header.home');
+      }
+      return id !== undefined
+        ? this.allDistricts.find(district => district.uri === id).value
+        : this.$t('navigationTopbar.header.chooseDistrict');
     },
 
     checkActiveTopic(topic) {
@@ -119,24 +135,6 @@ export default {
       return this.disabledTopics.includes(topic)
         ? ''
         : { name: 'Topic', params: { district: this.$route.params.district, topic } };
-    },
-  },
-
-  watch: {
-    $route(to) {
-      const routes = to.path.split('/');
-
-      if (to.name !== 'Topic') {
-        this.selectedTopic = null;
-        this.showDropdown = false;
-      } else {
-        if (routes.length > 3) this.selectedTopic = routes[3];
-      }
-      this.closeMenu();
-    },
-
-    showDropdown() {
-      this.setMenuIsOpen(this.showDropdown);
     },
   },
 };

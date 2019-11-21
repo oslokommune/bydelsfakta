@@ -2,7 +2,7 @@
  * Template for bar chart which supports both single or multiple series.
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import d3 from '@/assets/d3';
 import * as closeButton from './graph-helpers/closeButton';
@@ -13,7 +13,7 @@ import * as columnHelpers from './graph-helpers/columnHelpers';
 import * as svgHelpers from './graph-helpers/svgHelpers';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
 
   this.padding = { top: 100, left: 190, right: 25, bottom: 30 };
   this.gutter = 30;
@@ -132,7 +132,7 @@ function Template(svg) {
     this.x = this.filteredData.meta.series.map((series, index) => {
       const SCALE = d3.scaleLinear();
       let startPos = 0;
-      for (let i = 0; i < index; i++) {
+      for (let i = 0; i < index; i += 1) {
         startPos += this.x2(maxValues[i]);
         startPos += this.gutter;
       }
@@ -167,7 +167,7 @@ function Template(svg) {
           d3
             .axisBottom(this.x[i])
             .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
-            .tickFormat(d => this.format(d, this.method, true))
+            .tickFormat(dj => this.format(dj, this.method, true))
         );
     });
   };

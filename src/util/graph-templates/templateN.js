@@ -6,7 +6,7 @@
 
 import d3 from '@/assets/d3';
 import { hideTooltip, showTooltipMove, showTooltipOver } from '../tooltip';
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import drawVoronoi from './graph-helpers/voronoiHelpers';
 import { color } from './colors';
 import util from './template-utils';
@@ -67,7 +67,7 @@ const variations = {
 };
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'n';
 
   this.salt = Math.round(Math.random() * 100000).toString();
@@ -165,7 +165,7 @@ function cleanupData(obj) {
     throw new Error('Missing or misspelled graph variant');
   }
 
-  const date = obj.date;
+  const { date } = obj;
   const lineData1 = variations[this.variant].lineData1.data(obj);
   const lineData2 = variations[this.variant].lineData2.data(obj);
   const barData = variations[this.variant].barData.data(obj);
@@ -299,8 +299,8 @@ function updateClipPaths(selection, scale) {
 }
 
 function updateLineChart(el, opt) {
-  const scale = opt.scale;
-  const clipId = opt.clipId;
+  const { scale } = opt;
+  const { clipId } = opt;
 
   // Update clip paths
   this.defs.select(`#${clipId}-${this.salt}`).call(updateClipPaths.bind(this), scale);
@@ -357,7 +357,7 @@ function updateBars(selection) {
 
 function drawTable() {
   // Prepare data for table head
-  const table_head = [
+  const tableHead = [
     ['Geografi', ...this.filteredData.map(d => d.date)],
     this.filteredData.flatMap(() => [
       variations[this.variant].barData.heading,
@@ -372,7 +372,7 @@ function drawTable() {
   );
 
   // Generate the table body from the raw data
-  const table_body = this.data.data.map(geo => {
+  const tableBody = this.data.data.map(geo => {
     return {
       key: geo.geography,
       values: years.flatMap(year => {
@@ -389,7 +389,7 @@ function drawTable() {
     };
   });
 
-  util.drawTable.call(this, table_head, table_body);
+  util.drawTable.call(this, tableHead, tableBody);
 }
 
 function generateFlattenData(data, scale, key) {

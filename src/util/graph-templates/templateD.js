@@ -2,7 +2,7 @@
  * Template for brushable bar chart for age distributions.
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import ageRanges from '../../config/ageRanges';
@@ -10,7 +10,7 @@ import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 import util from './template-utils';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'd';
 
   this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
@@ -21,8 +21,8 @@ function Template(svg) {
   this.paddingLowerLeft = 300; // padding left of the lower chart
   this.yGutter = 130; // space between upper and lower charts
   this.y = d3.scaleLinear();
-  this.handle;
-  this.dropDownParent;
+  this.handle = null;
+  this.dropDownParent = null;
 
   this.minWidth = 600;
   this.ageCap = 119; // caps the graphs on this age (set to 119 to disable capping)
@@ -53,7 +53,10 @@ function Template(svg) {
     this.age.range([0, this.width - this.paddingUpperLeft]);
 
     this.brushSmall.move(this.gBrushSmall, this.extent.map(this.age));
-    this.brushSmall.extent([[0, 0], [this.width - this.paddingUpperLeft, 19]]);
+    this.brushSmall.extent([
+      [0, 0],
+      [this.width - this.paddingUpperLeft, 19],
+    ]);
 
     this.gBrushSmall.call(this.brushSmall);
 
@@ -86,7 +89,10 @@ function Template(svg) {
 
     this.lower.append('text').call(initLowerHeading.bind(this));
 
-    this.brushSmall.extent([[0, 0], [this.width + this.padding.right, 19]]);
+    this.brushSmall.extent([
+      [0, 0],
+      [this.width + this.padding.right, 19],
+    ]);
 
     this.upper.append('g').attr('class', 'lines');
 
@@ -376,13 +382,18 @@ function enterRows(enter) {
 function getLowerHeadingString() {
   if (this.method === 'ratio' && this.extent[1] - this.extent[0] >= 1) {
     return `Andel av befolkningen mellom ${this.extent[0]} og ${this.extent[1]} år`;
-  } else if (this.method === 'ratio' && this.extent[1] - this.extent[0] === 0) {
+  }
+  if (this.method === 'ratio' && this.extent[1] - this.extent[0] === 0) {
     return `Andel av befolkningen som er ${this.extent[0]} år`;
-  } else if (this.method !== 'ratio' && this.extent[1] - this.extent[0] >= 1) {
+  }
+  if (this.method !== 'ratio' && this.extent[1] - this.extent[0] >= 1) {
     return `Antall personer mellom ${this.extent[0]} og ${this.extent[1]} år`;
-  } else if (this.method !== 'ratio' && this.extent[1] - this.extent[0] === 0) {
+  }
+  if (this.method !== 'ratio' && this.extent[1] - this.extent[0] === 0) {
     return `Størrelse av befolkningen på ${this.extent[0]} år`;
   }
+
+  return '';
 }
 
 function updateRowFill(selection) {
@@ -429,7 +440,7 @@ function updateRowBar(selection) {
 
   bar
     .on('mouseover', d => {
-      const sum = d3.sum(d.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d.value));
+      const sum = d3.sum(d.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(dj => dj.value));
       showTooltipOver(sum);
     })
     .on('mousemove', showTooltipMove)
@@ -500,7 +511,7 @@ function updateAxis() {
       d3
         .axisBottom(this.age)
         .ticks((this.width - this.paddingUpperLeft) / 100)
-        .tickFormat(d => d + ' år')
+        .tickFormat(d => `${d} år`)
     );
   this.lowerXAxis
     .transition()
@@ -536,7 +547,7 @@ function drawLines() {
     .x((d, i) => (i > this.ageCap ? this.age(this.ageCap) : this.age(i)))
     .y(d => this.y(d[this.method]));
 
-  let lines = this.upper
+  const lines = this.upper
     .select('.lines')
     .selectAll('path.line')
     .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)))
@@ -568,22 +579,22 @@ function drawLines() {
 }
 
 function generateTableData() {
-  const table_head = [
+  const tableHead = [
     ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
     [...ageRanges.filter(d => !d.disabled).map(d => d.label)],
   ];
 
   const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
 
-  const table_body = tableData.map(d => {
+  const tableBody = tableData.map(d => {
     return {
       key: d.geography,
       values: ageRanges
-        .filter(d => !d.disabled)
+        .filter(dj => !dj.disabled)
         .map(age => {
           const range = JSON.parse(age.range);
           let sum = 0;
-          for (let i = range[0]; i <= range[1]; i++) {
+          for (let i = range[0]; i <= range[1]; i += 1) {
             sum += d.values[i][this.method];
           }
           return sum;
@@ -591,5 +602,5 @@ function generateTableData() {
     };
   });
 
-  return [table_head, table_body];
+  return [tableHead, tableBody];
 }

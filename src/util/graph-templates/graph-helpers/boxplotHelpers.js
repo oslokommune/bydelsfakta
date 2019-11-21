@@ -169,7 +169,7 @@ function initRowMedianText(selection) {
 function updateRowMedianText(selection) {
   selection
     .select('.median-value')
-    .text(d => d.median + ' år')
+    .text(d => `${d.median} år`)
     .transition()
     .duration(this.duration)
     .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
@@ -206,7 +206,7 @@ function initMeanText(selection) {
 function updateRowMeanText(selection) {
   selection
     .select('.mean-value')
-    .text(d => locale.norwegianLocale.format(',.2f')(d.mean) + ' år')
+    .text(d => `${locale.norwegianLocale.format(',.2f')(d.mean)} år`)
     .transition()
     .duration(this.duration)
     .attr('x', d => this.x(d.mean) + 6);

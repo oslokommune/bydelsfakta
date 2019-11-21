@@ -4,19 +4,19 @@
  */
 
 import { legendColor } from 'd3-svg-legend';
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'j';
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 58 };
   this.x = d3.scaleLinear();
-  this.bars;
+  this.bars = null;
   this.colors = d3
     .scaleOrdinal()
     .domain([1, 0, 2, 3])
@@ -107,8 +107,8 @@ function Template(svg) {
 
   this.drawTable = function() {
     const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
-    const table_head = ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)];
-    const table_body = tableData.map(row => {
+    const tableHead = ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)];
+    const tableBody = tableData.map(row => {
       return {
         key: row.geography,
         values: row.values.map(d => Math.abs(d[this.method])),
@@ -116,7 +116,7 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body);
+    tableGenerator(tableHead, tableBody);
   };
 
   // Updates the rows
@@ -149,7 +149,7 @@ function Template(svg) {
     this.xAxis.call(updateXAxis.bind(this), seriesData);
 
     // Create series
-    let series = this.bars
+    const series = this.bars
       .selectAll('g.series')
       .data(seriesData)
       .join('g')
@@ -157,7 +157,7 @@ function Template(svg) {
       .attr('fill', (d, i) => this.colors(i));
 
     // Create bars
-    let bar = series
+    const bar = series
       .selectAll('rect')
       .data(d => d)
       .join('rect')
@@ -243,7 +243,7 @@ function styleRowGeography(selection) {
 function handleMouseEvents(selection) {
   selection
     .on('mouseenter', d => {
-      const value = this.method === 'ratio' ? Math.round((d[1] - d[0]) * 100) + '%' : d[1] - d[0];
+      const value = this.method === 'ratio' ? `${Math.round((d[1] - d[0]) * 100)}%` : d[1] - d[0];
       showTooltipOver(value);
     })
     .on('mousemove', showTooltipMove)
@@ -251,7 +251,7 @@ function handleMouseEvents(selection) {
 }
 
 function enterRows(enter) {
-  let g = enter.append('g').attr('class', 'row');
+  const g = enter.append('g').attr('class', 'row');
   g.append('rect').call(initRowFill.bind(this));
   g.append('rect').call(initRowDivider.bind(this));
   g.append('text').call(initRowGeography.bind(this));

@@ -4,8 +4,8 @@
       <div class="topics-grid">
         <v-category
           v-for="topicName in names"
-          :key="topics[`${topicName}`].value"
           :id="topics[`${topicName}`].value"
+          :key="topics[`${topicName}`].value"
           :category="topics[`${topicName}`].options.kategori"
           :topic="topics[`${topicName}`].options.tema"
           :bg-image="topics[`${topicName}`].options.bgImage"
@@ -50,29 +50,31 @@ export default {
     },
   },
 
-  metaInfo() {
+  data() {
     return {
-      title:
-        this.$route.fullPath === '/'
-          ? 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold'
-          : this.compareDistricts || this.district === 'alle'
-          ? 'Sammenlign bydeler | Bydelsfakta'
-          : `${getDistrictName(this.district)} | Bydelsfakta`,
+      names: topicNames,
+      topics,
+      chosenDistrict: {},
+      districts,
+    };
+  },
+
+  metaInfo() {
+    let title = '';
+    if (this.$route.fullPath === '/') {
+      title = 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold';
+    } else if (this.compareDistricts || this.district === 'alle') {
+      title = 'Sammenlign bydeler | Bydelsfakta';
+    } else title = `${getDistrictName(this.district)} | Bydelsfakta`;
+
+    return {
+      title,
     };
   },
 
   computed: {
     ...mapState(['productionMode', 'compareDistricts']),
     ...mapGetters(['geoDistricts']),
-  },
-
-  data() {
-    return {
-      names: topicNames,
-      topics: topics,
-      chosenDistrict: {},
-      districts: districts,
-    };
   },
 };
 </script>

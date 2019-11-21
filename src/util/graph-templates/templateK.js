@@ -3,14 +3,14 @@
  */
 
 import { legendColor } from 'd3-svg-legend';
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'k';
 
   this.padding = { top: 140, left: 200, right: 20, bottom: 50 };
@@ -297,15 +297,15 @@ function updateColAxis(selection) {
 
 function generateTableData() {
   const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
-  const table_head = [['Geografi', 'Prosentandel'], [...this.data.meta.series.map(d => `${d.heading}`)]];
-  const table_body = tableData.map(row => {
+  const tableHead = [['Geografi', 'Prosentandel'], [...this.data.meta.series.map(d => `${d.heading}`)]];
+  const tableBody = tableData.map(row => {
     return {
       key: row.geography,
       values: row.values.map(value => value[this.mode]),
     };
   });
 
-  return [table_head, table_body];
+  return [tableHead, tableBody];
 }
 
 function updateScales() {

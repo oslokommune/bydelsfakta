@@ -8,8 +8,8 @@
  */
 
 function avoidCollisions(data, height) {
-  let spacing = 15;
-  let walk = 2;
+  const spacing = 15;
+  const walk = 2;
 
   data = data
     .map(d => {
@@ -22,7 +22,7 @@ function avoidCollisions(data, height) {
   let collision = true;
   while (collision) {
     collision = false;
-    for (let i = 0; i < data.length - 1; i++) {
+    for (let i = 0; i < data.length - 1; i += 1) {
       if (data[i].end > data[i + 1].start) {
         if (data[i].start > 0) {
           data[i].start -= walk;

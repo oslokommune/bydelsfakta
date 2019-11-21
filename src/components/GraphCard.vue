@@ -1,15 +1,15 @@
 <template>
   <section class="card-container" :class="{ large: settings.size === 'large' }">
-    <div class="card" :class="{ fullscreen }" @keydown.escape="toggleFullscreen" :tabindex="fullscreen ? 0 : false">
+    <div class="card" :class="{ fullscreen }" :tabindex="fullscreen ? 0 : false" @keydown.escape="toggleFullscreen">
       <button
         v-if="fullscreen"
         role="menuitem"
-        @click="toggleFullscreen"
-        @keyup.enter="toggleFullscreen"
         class="close-fullscreen"
         tabindex="0"
         :title="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
         :aria-label="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+        @click="toggleFullscreen"
+        @keyup.enter="toggleFullscreen"
       >
         <ok-icon icon-ref="fullscreenExit" :options="{ size: 'small' }"></ok-icon>
       </button>
@@ -18,20 +18,10 @@
           <h2 class="card__title">{{ settings.heading }}</h2>
         </div>
         <nav class="card__nav">
-          <div class="tabs" ref="tabsRef" role="tablist">
+          <div ref="tabsRef" class="tabs" role="tablist">
             <resize-observer @notify="showTabsOrSelect"></resize-observer>
             <template v-for="(tab, index) in settings.tabs">
               <button
-                :disabled="mode === 'map' || mode === 'about'"
-                ref="tabRef"
-                role="tab"
-                :aria-label="tab.label"
-                :data-id="`tabButton-${settings.heading}-${index}`"
-                :key="index"
-                @click="activeTab(index)"
-                :class="{ active: active === index, 'tabs__tab--hidden': !showAsTabs }"
-                class="tabs__tab"
-                v-text="tab.label"
                 v-if="
                   tab.production === productionMode && tab.production !== null
                     ? true
@@ -39,14 +29,24 @@
                     ? true
                     : productionMode === null
                 "
+                ref="tabRef"
+                :key="index"
+                :disabled="mode === 'map' || mode === 'about'"
+                role="tab"
+                :aria-label="tab.label"
+                :data-id="`tabButton-${settings.heading}-${index}`"
+                :class="{ active: active === index, 'tabs__tab--hidden': !showAsTabs }"
+                class="tabs__tab"
+                @click="activeTab(index)"
+                v-text="tab.label"
               ></button>
             </template>
             <select v-if="!showAsTabs" v-model="active" class="select tabs__select" aria-hidden>
               <option
-                :value="index"
                 v-for="(tab, index) in settings.tabs"
-                v-text="tab.label"
                 :key="'tab' + tab.label"
+                :value="index"
+                v-text="tab.label"
               ></option>
             </select>
           </div>
@@ -54,10 +54,10 @@
           <div class="card__toggle-menu">
             <button
               class="card__toggle-button"
-              @click="mode = 'graph'"
               :class="{ 'card__toggle-button--active': mode === 'graph' }"
               :aria-label="$t('graphCard.mode.graph')"
               :title="$t('graphCard.mode.graph')"
+              @click="mode = 'graph'"
             >
               <ok-icon
                 class="context-menu__dropdown-item-icon"
@@ -68,10 +68,10 @@
             </button>
             <button
               class="card__toggle-button"
-              @click="mode = 'table'"
               :class="{ 'card__toggle-button--active': mode === 'table' }"
               :aria-label="$t('graphCard.mode.table')"
               :title="$t('graphCard.mode.table')"
+              @click="mode = 'table'"
             >
               <ok-icon
                 class="context-menu__dropdown-item-icon"
@@ -84,10 +84,10 @@
             <button
               v-if="settings.map"
               class="card__toggle-button"
-              @click="mode = 'map'"
               :class="{ 'card__toggle-button--active': mode === 'map' }"
               :aria-label="$t('graphCard.mode.map')"
               :title="$t('graphCard.mode.map')"
+              @click="mode = 'map'"
             >
               <ok-icon
                 class="context-menu__dropdown-item-icon"
@@ -97,15 +97,15 @@
               ></ok-icon>
             </button>
           </div>
-          <div @keydown.escape="closeMenu()" v-click-outside="closeMenu" class="context-menu">
+          <div v-click-outside="closeMenu" class="context-menu" @keydown.escape="closeMenu()">
             <button
               class="context-menu__button"
               :class="{ 'card__toggle-button--active': showDropdown }"
-              @click="showDropdown = !showDropdown"
               aria-haspopup="true"
               :aria-label="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
               data-id="context-menu-button"
               :title="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
+              @click="showDropdown = !showDropdown"
             >
               <ok-icon icon-ref="hamburger"></ok-icon>
               <span class="button-label">Valg</span>
@@ -113,12 +113,12 @@
             <div v-if="showDropdown" class="context-menu__dropdown" role="menu">
               <button
                 role="menuitem"
-                @click="toggleFullscreen"
-                @keyup.enter="toggleFullscreen"
                 class="context-menu__dropdown-item"
                 tabindex="0"
                 :title="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
                 :aria-label="fullscreen ? $t('graphCard.fullscreen.exit.aria') : $t('graphCard.fullscreen.open.aria')"
+                @click="toggleFullscreen"
+                @keyup.enter="toggleFullscreen"
               >
                 <ok-icon
                   :icon-ref="fullscreen ? 'fullscreenExit' : 'fullscreen'"
@@ -131,6 +131,11 @@
 
               <button
                 role="menuitem"
+                class="context-menu__dropdown-item"
+                tabindex="0"
+                :title="$t('graphCard.about.aria')"
+                :aria-label="$t('graphCard.about.aria')"
+                data-id="context-menu-button-about"
                 @click="
                   mode === 'about' ? (mode = 'graph') : (mode = 'about');
                   showDropdown = false;
@@ -139,70 +144,65 @@
                   mode === 'about' ? (mode = 'graph') : (mode = 'about');
                   showDropdown = false;
                 "
-                class="context-menu__dropdown-item"
-                tabindex="0"
-                :title="$t('graphCard.about.aria')"
-                :aria-label="$t('graphCard.about.aria')"
-                data-id="context-menu-button-about"
               >
                 <ok-icon icon-ref="help" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.about.label') }}</span>
               </button>
 
               <button
-                role="menuitem"
                 v-if="mode === 'graph'"
-                @click="savePng(settings.tabs[active].id)"
-                @keyup.enter="saveSvg(settings.tabs[active].id)"
+                role="menuitem"
                 class="context-menu__dropdown-item"
                 tabindex="0"
                 :title="$t('graphCard.savePNG.aria')"
                 :aria-label="$t('graphCard.savePNG.aria')"
                 data-id="context-menu-button-png"
+                @click="savePng(settings.tabs[active].id)"
+                @keyup.enter="saveSvg(settings.tabs[active].id)"
               >
                 <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
               </button>
               <button
-                role="menuitem"
                 v-if="mode === 'graph' || ie11"
+                role="menuitem"
                 :title="ie11 ? $t('ie11.disabled') : $t('graphCard.saveSVG.aria')"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
                 tabindex="0"
+                data-id="context-menu-button-svg"
                 @click="saveSvg(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
-                data-id="context-menu-button-svg"
               >
                 <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
               </button>
 
               <button
-                role="menuitem"
                 v-if="mode !== 'map'"
+                role="menuitem"
                 class="context-menu__dropdown-item"
                 :title="$t('graphCard.saveCSV.aria')"
                 :aria-label="$t('graphCard.saveCSV.aria')"
                 tabindex="0"
+                data-id="context-menu-button-csv"
                 @click="saveCsv(settings.tabs[active].id)"
                 @keyup.enter="saveCsv(settings.tabs[active].id)"
-                data-id="context-menu-button-csv"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveCSV.label') }}</span>
               </button>
 
               <button
-                role="menuitem"
                 v-if="mode !== 'map'"
+                role="menuitem"
                 class="context-menu__dropdown-item"
                 :title="$t('graphCard.saveExcel.aria')"
                 :aria-label="$t('graphCard.saveExcel.aria')"
                 tabindex="0"
+                data-id="context-menu-button-excel"
                 @click="saveExcel(settings.tabs[active].id)"
                 @keyup.enter="saveExcel(settings.tabs[active].id)"
-                data-id="context-menu-button-excel"
               >
                 <ok-icon icon-ref="download" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveExcel.label') }}</span>
@@ -212,14 +212,14 @@
         </nav>
       </header>
       <graph-instance
-        @updateDate="setDate"
         v-if="settings.tabs[active] !== undefined && (mode === 'graph' || mode === 'table')"
+        ref="graph"
         :settings="settings.tabs[active]"
         :sources="settings.sources"
         :mode="mode"
-        ref="graph"
+        @updateDate="setDate"
       />
-      <div class="map-container" v-if="mode === 'map'">
+      <div v-if="mode === 'map'" class="map-container">
         <v-leaflet
           v-if="settings.map"
           :district="geoDistricts"
@@ -228,7 +228,7 @@
           :fullscreen="fullscreen"
         ></v-leaflet>
       </div>
-      <div class="about-container" v-if="mode === 'about'">
+      <div v-if="mode === 'about'" class="about-container">
         <h3>{{ $t('graphCard.about.label') }}</h3>
         <button class="close" @click="mode = 'graph'"></button>
         <p v-if="date">{{ $t('graphCard.about.updated') }}: {{ date }}</p>
@@ -265,6 +265,14 @@ import OkIcon from './OkIcon';
 export default {
   name: 'GraphCard',
   components: { GraphInstance, VLeaflet, OkIcon },
+
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       active: 0,
@@ -276,6 +284,7 @@ export default {
       scroll: null,
     };
   },
+
   computed: {
     ...mapState(['districts', 'ie11', 'productionMode']),
     ...mapGetters(['geoDistricts']),
@@ -285,10 +294,20 @@ export default {
       return '00';
     },
   },
-  props: {
-    settings: {
-      type: Object,
-      required: true,
+
+  watch: {
+    mode(to, from) {
+      this.$ga.event({
+        eventCategory: 'Card',
+        eventAction: 'Change view',
+        eventLabel: `${from} -> ${to}`,
+      });
+    },
+
+    '$route.params.topic': function() {
+      this.active = 0;
+      this.mode = 'graph';
+      this.showTabsOrSelect();
     },
   },
 
@@ -406,22 +425,6 @@ export default {
         tabsWidth += tab.offsetWidth;
       });
       this.showAsTabs = this.$refs.tabsRef.offsetWidth > tabsWidth;
-    },
-  },
-
-  watch: {
-    mode(to, from) {
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Change view',
-        eventLabel: `${from} -> ${to}`,
-      });
-    },
-
-    '$route.params.topic'() {
-      this.active = 0;
-      this.mode = 'graph';
-      this.showTabsOrSelect();
     },
   },
 };

@@ -30,7 +30,7 @@ import allDistricts from '../../config/allDistricts';
 
 d3.timeFormatDefaultLocale(locale.timeFormat);
 
-function Base_Template(svg) {
+function BaseTemplate(svg) {
   // Declaring local variables here to prevent templates to be
   // unnecessary cluttered with commonly used variables.
   this.data = {};
@@ -71,36 +71,34 @@ function Base_Template(svg) {
   };
 
   this.format = function(num, method, tick = false, table = false) {
-    if (method === undefined) throw 'Cannot format number';
-    if (num === undefined) throw 'Missing number';
+    if (method === undefined) throw Error('Cannot format number');
+    if (num === undefined) throw Error('Missing number');
 
     if (num === 'N/A' || num === 'I/T' || num === 'Ikke tilgjengelig') {
       return '–';
     }
 
     if (tick) {
-      return this.showPermille
-        ? `${d3.format('~d')(num * 100)}‰`
-        : method === 'ratio'
-        ? d3.format('~p')(num)
-        : d3.format('~d')(num);
+      if (this.showPermille) return `${d3.format('~d')(num * 100)}‰`;
+      if (method === 'ratio') return d3.format('~p')(num);
+      return d3.format('~d')(num);
     }
 
     if (table) {
-      return method === 'ratio'
-        ? num * 100 < 1
-          ? locale.tableLocale.format('.2f')(num * 100)
-          : locale.tableLocale.format('.1f')(num * 100)
-        : locale.tableLocale.format(',.0f')(num);
+      if (method === 'ratio') {
+        if (num * 100 < 1) return locale.tableLocale.format('.2f')(num * 100);
+        return locale.tableLocale.format('.1f')(num * 100);
+      }
+      return locale.tableLocale.format(',.0f')(num);
     }
 
     switch (method) {
       case 'ratio':
         if (this.showPermille) {
           return locale.norwegianLocale.format(',.1f')(num * 100);
-        } else {
-          return this.formatPercent(num);
         }
+        return this.formatPercent(num);
+
       case 'value':
         return this.formatDecimal(num);
       case 'change':
@@ -288,7 +286,7 @@ function Base_Template(svg) {
 
   // The parent container width is needed for each render of a template.
   this.parentWidth = function() {
-    const width = svg.parentNode.getBoundingClientRect().width;
+    const { width } = svg.parentNode.getBoundingClientRect();
     const paddingLeft = +getComputedStyle(svg.parentNode).paddingLeft.split('px')[0];
     const paddingRight = +getComputedStyle(svg.parentNode).paddingRight.split('px')[0];
     const paddingSum = paddingLeft + paddingRight;
@@ -300,7 +298,7 @@ function Base_Template(svg) {
 
   // All templates share these common operations when rendered
   this.commonRender = function(data, options = {}) {
-    if (data === undefined || data.data === undefined) return;
+    if (data === undefined || data.data === undefined) return null;
     this.sources = options.sources || null;
     this.data = data;
 
@@ -318,7 +316,7 @@ function Base_Template(svg) {
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     if (this.sources && this.sources.length) {
-      let str = this.sources.map(source => source.name).join(', ');
+      const str = this.sources.map(source => source.name).join(', ');
       this.drawSource(str);
     }
 
@@ -341,4 +339,4 @@ function Base_Template(svg) {
   this.render = function() {};
 }
 
-export default Base_Template;
+export default BaseTemplate;

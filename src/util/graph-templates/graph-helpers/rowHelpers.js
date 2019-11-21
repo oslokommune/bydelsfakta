@@ -25,7 +25,9 @@ export function styleRows(selection) {
     .select('rect.divider')
     .attr('fill-opacity', d => {
       if (this.data.meta.series.length === 1) return 0;
-      return this.isMobileView ? 0 : d.avgRow || d.totalRow ? 0.5 : 0.2;
+      if (this.isMobileView) return 0;
+      if (d.avgRow || d.totalRow) return 0.5;
+      return 0.2;
     })
     .attr('width', this.padding.left + this.width + this.padding.right);
 
@@ -43,7 +45,11 @@ export function styleRows(selection) {
     .html(d => d.geography);
 
   // Add attributes to total and avg rows
-  selection.attr('fill', d => (d.avgRow ? color.yellow : d.totalRow ? color.purple : color.purple));
+  selection.attr('fill', d => {
+    if (d.avgRow) return color.yellow;
+    if (d.totalRow) return color.purple;
+    return color.purple;
+  });
 }
 
 function styleValueText(selection) {
@@ -79,8 +85,9 @@ function styleRowName(selection) {
       return (this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) ? 'pointer' : false;
     })
     .style('text-decoration', d => {
-      if (d.noLink) return;
+      if (d.noLink) return null;
       const isDistrict = util.allDistricts.some(district => district.value === d.geography);
+
       return (this.isCompare && !d.totalRow) || (!this.isCompare && d.totalRow) || isDistrict ? 'underline' : false;
     });
 }
@@ -88,9 +95,8 @@ function styleRowName(selection) {
 function getRowName(d) {
   if (this.isMobileView && d.values.length) {
     return `${d.geography} (${this.format(d.values[0][this.method], this.method)})`;
-  } else {
-    return d.geography;
   }
+  return d.geography;
 }
 
 function enterRowElements(selection) {
@@ -152,9 +158,8 @@ export function updateBars(selection) {
     .attr('y', (d, i, j) => {
       if (this.isMobileView) {
         return (this.rowHeight - this.barHeight) / 2 + 12;
-      } else {
-        return j[0].parentNode.__data__.totalRow ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
       }
+      return j[0].parentNode.__data__.totalRow ? this.rowHeight / 2 : (this.rowHeight - this.barHeight) / 2;
     })
     .attr('opacity', (d, i) =>
       i === this.highlight || this.highlight === -1 || this.highlight === undefined ? 1 : 0.2

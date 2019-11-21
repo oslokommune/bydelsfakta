@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 /**
  * Template for multi series multi-line chart.
  *
@@ -8,14 +9,14 @@
  * in the options object.
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import positionLabels from '../positionLabels';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'c';
   this.isMobileView = false;
   this.mobileWidth = 420;
@@ -51,9 +52,8 @@ function Template(svg) {
     if (!yearCount) {
       this.showMessage('Mangelfull data: Tidsserien inneholder for få datapunkter.');
       return;
-    } else {
-      this.hideMessage();
     }
+    this.hideMessage();
 
     this.drawAxis();
     this.drawLines();
@@ -92,8 +92,8 @@ function Template(svg) {
     });
     dates = [...dates].sort((a, b) => a - b);
 
-    const table_head = [];
-    table_head[0] = [
+    const tableHead = [];
+    tableHead[0] = [
       'Geografi',
       ...this.data.meta.series.map(d => {
         let str = '';
@@ -109,12 +109,12 @@ function Template(svg) {
       }),
     ];
 
-    table_head[1] = [];
-    for (let i = 0; i < this.data.meta.series.length; i++) {
-      table_head[1] = table_head[1].concat(dates);
+    tableHead[1] = [];
+    for (let i = 0; i < this.data.meta.series.length; i += 1) {
+      tableHead[1] = tableHead[1].concat(dates);
     }
 
-    const table_body = this.data.data.map(row => {
+    const tableBody = this.data.data.map(row => {
       return {
         key: row.geography,
         values: this.data.meta.series.flatMap((serie, serieIndex) =>
@@ -128,14 +128,17 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body);
+    tableGenerator(tableHead, tableBody);
   };
 
   this.drawDots = function() {
     const dotgroup = this.canvas
       .select('g.dots')
       .selectAll('g.dotgroup')
-      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
+      .data(
+        this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))),
+        d => d.geography
+      )
       .join('g')
       .attr('class', 'dotgroup');
 
@@ -143,7 +146,10 @@ function Template(svg) {
 
     const dot = dotgroup
       .selectAll('g.dot')
-      .data(d => d.values[this.series], d => d.geography)
+      .data(
+        d => d.values[this.series],
+        d => d.geography
+      )
       .join(enter => {
         const g = enter.append('g');
         g.append('text');
@@ -166,11 +172,11 @@ function Template(svg) {
         const pos = this.x(this.parseYear(d.date));
         if (pos < 50) {
           return 'start';
-        } else if (pos > this.width - 50) {
-          return 'end';
-        } else {
-          return 'middle';
         }
+        if (pos > this.width - 50) {
+          return 'end';
+        }
+        return 'middle';
       })
       .style('pointer-events', 'none');
 
@@ -193,7 +199,10 @@ function Template(svg) {
 
     const voronoiData = d3
       .voronoi()
-      .extent([[1, 1], [this.width, this.height]])
+      .extent([
+        [1, 1],
+        [this.width, this.height],
+      ])
       .x(d => this.x(this.parseYear(d.date)))
       .y(d => this.y(d.value))
       .polygons(flattenData)
@@ -204,15 +213,15 @@ function Template(svg) {
       .selectAll('path')
       .data(voronoiData)
       .join('path')
-      .attr('d', d => 'M' + d.join('L') + 'Z')
+      .attr('d', d => `M${d.join('L')}Z`)
       .attr('fill-opacity', 0);
 
     // Highlight a geography when hovering the chart. If the
     // chart is rendered with a geography highlighted, then only
     // the selected geography will be affected by hover.
     voronoiCells.on('mouseover', (d, i, j) => {
-      const geography = j[i].__data__.data.geography;
-      const date = j[i].__data__.data.date;
+      const { geography } = j[i].__data__.data;
+      const { date } = j[i].__data__.data;
 
       if (!this.highlight || this.highlight === d.data.geography) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
@@ -223,6 +232,7 @@ function Template(svg) {
               this.handleMouseover(dot.geography);
               return true;
             }
+            return false;
           })
           .selectAll('g.dot')
           .filter(dot => dot.date === date)
@@ -256,7 +266,7 @@ function Template(svg) {
 
   // Updates the tabs. Highlights the active series
   this.drawTabs = function() {
-    let g = this.tabs
+    const g = this.tabs
       .selectAll('g.tab')
       .data(this.data.meta.series)
       .join(enter => enterTab(enter));
@@ -297,28 +307,29 @@ function Template(svg) {
       .style('cursor', 'pointer');
 
     function enterTab(enter) {
-      const g = enter.append('g').attr('class', 'tab');
+      const group = enter.append('g').attr('class', 'tab');
 
-      g.append('rect')
+      group
+        .append('rect')
         .classed('bg', true)
         .attr('height', 20);
-      g.append('text').classed('label', true);
-      const radio = g.append('g').classed('radio', true);
+      group.append('text').classed('label', true);
+      const radioGroup = group.append('g').classed('radio', true);
 
-      radio
+      radioGroup
         .append('circle')
         .classed('outer', true)
         .attr('r', 6)
         .attr('stroke', color.purple)
         .attr('stroke-width', 1)
         .attr('fill', 'none');
-      radio
+      radioGroup
         .append('circle')
         .classed('inner', true)
         .attr('r', 4)
         .attr('fill', color.purple);
 
-      return g;
+      return group;
     }
   };
 
@@ -443,7 +454,11 @@ function Template(svg) {
       .duration(this.duration)
       .attr('x1', this.width + 22)
       .attr('x2', this.width + 31)
-      .attr('stroke', d => (d.totalRow ? 'black' : d.avgRow ? color.purple : d.color))
+      .attr('stroke', d => {
+        if (d.totalRow) return 'black';
+        if (d.avgRow) return color.purple;
+        return d.color;
+      })
       .style('stroke-dasharray', d => (d.totalRow ? '2,1' : ''));
 
     // Style the text label element
@@ -486,7 +501,10 @@ function Template(svg) {
     const rows = this.canvas
       .select('g.lines')
       .selectAll('path.row')
-      .data(this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))), d => d.geography)
+      .data(
+        this.data.data.filter(d => !(this.method === 'value' && (d.avgRow || d.totalRow))),
+        d => d.geography
+      )
       .join(enter => enter.append('path'))
       .attr('class', 'row')
       .style('pointer-events', 'none')
@@ -501,19 +519,25 @@ function Template(svg) {
       .attr('d', d => {
         if (d.values[this.series].length > 1) {
           return this.line(d.values[this.series]);
-        } else {
-          const path = this.line(d.values[this.series]).split('Z')[0];
-          return `${path} h-15 Z`;
         }
+        const path = this.line(d.values[this.series]).split('Z')[0];
+        return `${path} h-15 Z`;
       })
-      .attr('stroke', d => (d.avgRow ? color.purple : d.totalRow ? 'black' : d.color))
-      .attr('stroke-width', d => (this.highlight === d.geography ? 5 : d.avgRow || d.totalRow ? 5 : 3))
+      .attr('stroke', d => {
+        if (d.avgRow) return color.purple;
+        if (d.totalRow) return 'black';
+        return d.color;
+      })
+      .attr('stroke-width', d => {
+        if (this.highlight === d.geography) return 5;
+        if (d.avgRow || d.totalRow) return 5;
+        return 3;
+      })
       .attr('stroke-opacity', d => {
         if (this.highlight) {
           return this.highlight === d.geography ? 1 : 0.15;
-        } else {
-          return d.totalRow || d.avgRow ? 1 : 0.4;
         }
+        return d.totalRow || d.avgRow ? 1 : 0.4;
       })
       .style('stroke-dasharray', d => (d.totalRow ? '4,3' : ''));
   };
@@ -536,7 +560,7 @@ function Template(svg) {
     const maxYear = this.parseYear(
       d3.max(
         this.data.data.map(row => {
-          if (!row.values || !row.values.length) return;
+          if (!row.values || !row.values.length) return false;
           return row.values.map(val => val[val.length - 1].date);
         })
       )[0]
@@ -544,7 +568,7 @@ function Template(svg) {
     const minYear = this.parseYear(
       d3.min(
         this.data.data.map(row => {
-          if (!row.values || !row.values.length) return;
+          if (!row.values || !row.values.length) return false;
           return row.values.map(val => val[0].date);
         })
       )[0]

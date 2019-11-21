@@ -1,38 +1,38 @@
 <template>
   <div class="graph__shadow" role="tabpanel" :class="shadowClass">
     <div
+      ref="graphContainer"
+      v-dragscroll.x="!isTouchDevice"
       class="graph__container"
       :class="{ hidden: mode === 'table' }"
-      ref="graphContainer"
       aria-hidden="true"
       @scroll="drawShadows"
-      v-dragscroll.x="!isTouchDevice"
     >
-      <div class="spinner" v-if="loading">
+      <div v-if="loading" class="spinner">
         <spinner></spinner>
         <span class="spinner__text">{{ $t('loading.loadingData') }}</span>
       </div>
-      <div class="error" v-if="error">
+      <div v-if="error" class="error">
         <h2>{{ errorMessage }}</h2>
       </div>
       <svg
         v-if="!error"
+        ref="svg"
         class="graph__svg"
         aria-hidden="true"
-        ref="svg"
         :class="{ loading }"
         @click="showHelp = false"
       ></svg>
     </div>
     <div
-      :class="{ 'visually-hidden': mode === 'graph' }"
-      class="graph__tablecontainer"
       ref="tableContainer"
       v-dragscroll.x="!isTouchDevice"
+      :class="{ 'visually-hidden': mode === 'graph' }"
+      class="graph__tablecontainer"
       @scroll="drawShadows"
     >
       <h3 class="table-heading"></h3>
-      <table :class="{ compareDistrictsTable: compareDistricts }" ref="table">
+      <table ref="table" :class="{ compareDistrictsTable: compareDistricts }">
         <thead></thead>
         <tbody></tbody>
       </table>
@@ -42,11 +42,11 @@
     </div>
     <!-- <table class="visually-hidden"> -->
     <resize-observer @notify="handleResize"></resize-observer>
-    <div class="help" v-if="settings.help && mode === 'graph'">
+    <div v-if="settings.help && mode === 'graph'" class="help">
       <button
         class="help__button"
-        @click="showHelp = !showHelp"
         :aria-label="showHelp ? $t('graphCard.help.ariaHide') : $t('graphCard.help.ariaShow')"
+        @click="showHelp = !showHelp"
       >
         <ok-icon icon-ref="help" :options="{ size: 'small', margin: '0' }"></ok-icon>
       </button>
@@ -76,6 +76,28 @@ import Spinner from '../assets/spinner.svg';
 import OkIcon from './OkIcon';
 
 export default {
+  components: { OkIcon, Spinner },
+
+  directives: {
+    dragscroll,
+  },
+
+  props: {
+    settings: {
+      type: Object,
+      required: true,
+    },
+    sources: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+    mode: {
+      type: String,
+      required: true,
+    },
+  },
+
   data: () => ({
     svg: false,
     shadow: {
@@ -90,8 +112,6 @@ export default {
     errorMessage: '',
     showHelp: false,
   }),
-
-  components: { OkIcon, Spinner },
 
   computed: {
     shadowClass() {
@@ -118,10 +138,10 @@ export default {
   },
 
   watch: {
-    settings: function() {
+    settings() {
       this.draw();
     },
-    districts: function(to, from) {
+    districts(to, from) {
       if (
         from.length > 1 &&
         (to.length > 1 || this.compareDistricts) &&
@@ -137,7 +157,6 @@ export default {
   mounted() {
     this.draw();
   },
-
   methods: {
     drawShadows() {
       let ref;
@@ -165,36 +184,37 @@ export default {
     },
 
     sortData(data) {
-      const template = this.settings.template;
+      const { template } = this.settings;
 
       data.data.sort((a, b) => {
         if (b.totalRow && a.avgRow) return -1;
-        else if (a.totalRow && b.avgRow) return 1;
-        else if (a.totalRow || a.avgRow) return 1;
-        else if (b.totalRow || b.avgRow) return -1;
-        else {
-          if (template === 'a') {
-            if (a.values.length && b.values.length) {
-              return b.values[0][this.settings.method] - a.values[0][this.settings.method];
-            }
-          }
+        if (a.totalRow && b.avgRow) return 1;
+        if (a.totalRow || a.avgRow) return 1;
+        if (b.totalRow || b.avgRow) return -1;
 
-          if (template === 'f') {
-            const meanA = d3.mean(a.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
-            const meanB = d3.mean(b.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
-            return meanA - meanB;
-          }
-
-          if (template === 'g') {
-            return b.values[0] - a.values[0];
-          }
-
-          if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
-            const sumA = a.values[0][this.settings.method] + a.values[1][this.settings.method];
-            const sumB = b.values[0][this.settings.method] + b.values[1][this.settings.method];
-            return sumB - sumA;
+        if (template === 'a') {
+          if (a.values.length && b.values.length) {
+            return b.values[0][this.settings.method] - a.values[0][this.settings.method];
           }
         }
+
+        if (template === 'f') {
+          const meanA = d3.mean(a.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
+          const meanB = d3.mean(b.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
+          return meanA - meanB;
+        }
+
+        if (template === 'g') {
+          return b.values[0] - a.values[0];
+        }
+
+        if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
+          const sumA = a.values[0][this.settings.method] + a.values[1][this.settings.method];
+          const sumB = b.values[0][this.settings.method] + b.values[1][this.settings.method];
+          return sumB - sumA;
+        }
+
+        return 0;
       });
 
       return data;
@@ -235,40 +255,40 @@ export default {
       if (this.currentTemplate !== this.settings.template && !options.keepData) {
         switch (this.settings.template) {
           case 'a':
-            this.svg = new TemplateA(this.$refs['svg']);
+            this.svg = new TemplateA(this.$refs.svg);
             break;
           case 'b':
-            this.svg = new TemplateB(this.$refs['svg']);
+            this.svg = new TemplateB(this.$refs.svg);
             break;
           case 'c':
-            this.svg = new TemplateC(this.$refs['svg']);
+            this.svg = new TemplateC(this.$refs.svg);
             break;
           case 'd':
-            this.svg = new TemplateD(this.$refs['svg']);
+            this.svg = new TemplateD(this.$refs.svg);
             break;
           case 'e':
-            this.svg = new TemplateE(this.$refs['svg']);
+            this.svg = new TemplateE(this.$refs.svg);
             break;
           case 'f':
-            this.svg = new TemplateF(this.$refs['svg']);
+            this.svg = new TemplateF(this.$refs.svg);
             break;
           case 'g':
-            this.svg = new TemplateG(this.$refs['svg']);
+            this.svg = new TemplateG(this.$refs.svg);
             break;
           case 'i':
-            this.svg = new TemplateI(this.$refs['svg']);
+            this.svg = new TemplateI(this.$refs.svg);
             break;
           case 'j':
-            this.svg = new TemplateJ(this.$refs['svg']);
+            this.svg = new TemplateJ(this.$refs.svg);
             break;
           case 'k':
-            this.svg = new TemplateK(this.$refs['svg']);
+            this.svg = new TemplateK(this.$refs.svg);
             break;
           case 'm':
-            this.svg = new TemplateM(this.$refs['svg']);
+            this.svg = new TemplateM(this.$refs.svg);
             break;
           case 'n':
-            this.svg = new TemplateN(this.$refs['svg']);
+            this.svg = new TemplateN(this.$refs.svg);
             break;
           default:
             break;
@@ -291,24 +311,6 @@ export default {
       this.drawShadows();
       this.svg.setHeading(this.settings.heading);
     },
-  },
-  props: {
-    settings: {
-      type: Object,
-      required: true,
-    },
-    sources: {
-      type: Array,
-      required: false,
-      default: () => [],
-    },
-    mode: {
-      type: String,
-      required: true,
-    },
-  },
-  directives: {
-    dragscroll,
   },
 };
 </script>
