@@ -59,18 +59,18 @@
 import * as d3 from 'd3';
 import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
-import TemplateA from '../util/graph-templates/templateA';
-import TemplateB from '../util/graph-templates/templateB';
-import TemplateC from '../util/graph-templates/templateC';
-import TemplateD from '../util/graph-templates/templateD';
-import TemplateE from '../util/graph-templates/templateE';
-import TemplateF from '../util/graph-templates/templateF';
-import TemplateG from '../util/graph-templates/templateG';
-import TemplateI from '../util/graph-templates/templateI';
-import TemplateJ from '../util/graph-templates/templateJ';
-import TemplateK from '../util/graph-templates/templateK';
-import TemplateM from '../util/graph-templates/templateM';
-import TemplateN from '../util/graph-templates/templateN';
+import TemplateBars from '../util/graph-templates/templateBars';
+import TemplateLines from '../util/graph-templates/templateLines';
+import TemplateLinesMulti from '../util/graph-templates/templateLinesMulti';
+import TemplateAgeDistribution from '../util/graph-templates/templateAgeDistribution';
+import TemplatePyramid from '../util/graph-templates/templatePyramid';
+import TemplateBoxPlot from '../util/graph-templates/templateBoxPlot';
+import TemplatePopulationDetailsTable from '../util/graph-templates/templatePopulationDetailsTable';
+import TemplateTernaryPlot from '../util/graph-templates/templateTernaryPlot';
+import TemplateStackedBars from '../util/graph-templates/templateStackedBars';
+import TemplateLivingConditions from '../util/graph-templates/templateLivingConditions';
+import TemplateComboHistogram from '../util/graph-templates/templateComboHistogram';
+import TemplateBarsAndLines from '../util/graph-templates/templateBarsAndLines';
 import districtNames from '../config/districtNames';
 import Spinner from '../assets/spinner.svg';
 import OkIcon from './OkIcon';
@@ -192,23 +192,23 @@ export default {
         if (a.totalRow || a.avgRow) return 1;
         if (b.totalRow || b.avgRow) return -1;
 
-        if (template === 'a') {
+        if (template === 'bars') {
           if (a.values.length && b.values.length) {
             return b.values[0][this.settings.method] - a.values[0][this.settings.method];
           }
         }
 
-        if (template === 'f') {
+        if (template === 'boxPlot') {
           const meanA = d3.mean(a.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
           const meanB = d3.mean(b.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
           return meanA - meanB;
         }
 
-        if (template === 'g') {
+        if (template === 'populationDetailsTable') {
           return b.values[0] - a.values[0];
         }
 
-        if (template === 'j' && a.values && a.values.length && b.values && b.values.length) {
+        if (template === 'stackedBars' && a.values && a.values.length && b.values && b.values.length) {
           const sumA = a.values[0][this.settings.method] + a.values[1][this.settings.method];
           const sumB = b.values[0][this.settings.method] + b.values[1][this.settings.method];
           return sumB - sumA;
@@ -254,41 +254,41 @@ export default {
 
       if (this.currentTemplate !== this.settings.template && !options.keepData) {
         switch (this.settings.template) {
-          case 'a':
-            this.svg = new TemplateA(this.$refs.svg);
+          case 'bars':
+            this.svg = new TemplateBars(this.$refs.svg);
             break;
-          case 'b':
-            this.svg = new TemplateB(this.$refs.svg);
+          case 'lines':
+            this.svg = new TemplateLines(this.$refs.svg);
             break;
-          case 'c':
-            this.svg = new TemplateC(this.$refs.svg);
+          case 'linesMulti':
+            this.svg = new TemplateLinesMulti(this.$refs.svg);
             break;
-          case 'd':
-            this.svg = new TemplateD(this.$refs.svg);
+          case 'ageDistribution':
+            this.svg = new TemplateAgeDistribution(this.$refs.svg);
             break;
-          case 'e':
-            this.svg = new TemplateE(this.$refs.svg);
+          case 'pyramid':
+            this.svg = new TemplatePyramid(this.$refs.svg);
             break;
-          case 'f':
-            this.svg = new TemplateF(this.$refs.svg);
+          case 'boxPlot':
+            this.svg = new TemplateBoxPlot(this.$refs.svg);
             break;
-          case 'g':
-            this.svg = new TemplateG(this.$refs.svg);
+          case 'populationDetailsTable':
+            this.svg = new TemplatePopulationDetailsTable(this.$refs.svg);
             break;
-          case 'i':
-            this.svg = new TemplateI(this.$refs.svg);
+          case 'ternaryPlot':
+            this.svg = new TemplateTernaryPlot(this.$refs.svg);
             break;
-          case 'j':
-            this.svg = new TemplateJ(this.$refs.svg);
+          case 'stackedBars':
+            this.svg = new TemplateStackedBars(this.$refs.svg);
             break;
-          case 'k':
-            this.svg = new TemplateK(this.$refs.svg);
+          case 'livingConditions':
+            this.svg = new TemplateLivingConditions(this.$refs.svg);
             break;
-          case 'm':
-            this.svg = new TemplateM(this.$refs.svg);
+          case 'comboHistogram':
+            this.svg = new TemplateComboHistogram(this.$refs.svg);
             break;
-          case 'n':
-            this.svg = new TemplateN(this.$refs.svg);
+          case 'barsAndLines':
+            this.svg = new TemplateBarsAndLines(this.$refs.svg);
             break;
           default:
             break;

@@ -161,17 +161,17 @@ function BaseTemplate(svg) {
     let year = '';
 
     switch (this.template) {
-      case 'a':
-      case 'i':
-      case 'j':
-      case 'k':
+      case 'bars':
+      case 'ternaryPlot':
+      case 'stackedBars':
+      case 'livingConditions':
         if (!this.data.data[0].values.length) break;
         year = `(${this.data.data[0].values[0].date})`;
         break;
 
-      case 'd':
-      case 'e':
-      case 'f':
+      case 'ageDistribution':
+      case 'pyramid':
+      case 'boxPlot':
         year = this.data.data[0].values[0].date ? `(${this.data.data[0].values[0].date})` : '';
         break;
 
@@ -179,11 +179,11 @@ function BaseTemplate(svg) {
         year = `(${this.data.data[0].values[4]})`;
         break;
 
-      case 'm':
+      case 'comboHistogram':
         year = `(${this.data.data[0].values.year})`;
         break;
 
-      case 'n':
+      case 'barsAndLines':
         year = `(${this.data.data[0].values[0][this.data.data[0].values[0].length - 1].date})`;
         break;
 

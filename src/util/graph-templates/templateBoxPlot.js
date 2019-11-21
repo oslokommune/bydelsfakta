@@ -24,7 +24,7 @@ import {
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'f';
+  this.template = 'boxPlot';
 
   this.padding = { top: 90, left: 250, right: 20, bottom: 40 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;

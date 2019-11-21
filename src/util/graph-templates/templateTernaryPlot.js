@@ -60,7 +60,7 @@ d3.selection.prototype.moveToFront = function() {
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'i';
+  this.template = 'ternaryPlot';
 
   this.padding = { top: 70, bottom: 70, left: 200, right: 105 };
   this.width = 400;

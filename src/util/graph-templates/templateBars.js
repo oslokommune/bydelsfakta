@@ -23,7 +23,7 @@ function Template(svg) {
   this.mobileWidth = 420;
   this.isMobileView = false;
   this.isSingleSeries = false;
-  this.template = 'a';
+  this.template = 'bars';
 
   this.render = function(data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;

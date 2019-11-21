@@ -21,7 +21,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          template: 'j',
+          template: 'stackedBars',
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-status`,
           method: 'ratio',
@@ -30,7 +30,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          template: 'j',
+          template: 'stackedBars',
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-status`,
           method: 'value',
@@ -40,7 +40,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          template: 'c',
+          template: 'linesMulti',
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-historisk`,
           method: 'ratio',
@@ -49,7 +49,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          template: 'c',
+          template: 'linesMulti',
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-historisk`,
           method: 'value',
@@ -77,7 +77,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-status`,
           method: 'ratio',
@@ -86,7 +86,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-status`,
           method: 'value',
@@ -95,7 +95,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-historisk`,
           method: 'ratio',
@@ -104,7 +104,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-historisk`,
           method: 'value',
@@ -133,7 +133,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-status`,
           method: 'ratio',
@@ -142,7 +142,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-status`,
           method: 'value',
@@ -151,7 +151,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-historisk`,
           method: 'ratio',
@@ -160,7 +160,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-historisk`,
           method: 'value',
@@ -189,7 +189,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-status`,
           method: 'ratio',
@@ -198,7 +198,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-status`,
           method: 'value',
@@ -207,7 +207,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-historisk`,
           method: 'ratio',
@@ -216,7 +216,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-historisk`,
           method: 'value',
@@ -245,7 +245,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-status`,
           method: 'ratio',
@@ -254,7 +254,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          template: 'a',
+          template: 'bars',
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-status`,
           method: 'value',
@@ -263,7 +263,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-historisk`,
           method: 'ratio',
@@ -272,7 +272,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          template: 'b',
+          template: 'lines',
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-historisk`,
           method: 'value',

@@ -11,7 +11,7 @@ import d3 from '@/assets/d3';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'g';
+  this.template = 'populationDetailsTable';
 
   this.padding = { top: 90, left: 180, right: 20, bottom: 1 };
   this.x = d3.scaleBand();

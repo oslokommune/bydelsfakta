@@ -12,7 +12,7 @@ import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'j';
+  this.template = 'stackedBars';
 
   this.padding = { top: 90, left: 240, right: 20, bottom: 58 };
   this.x = d3.scaleLinear();

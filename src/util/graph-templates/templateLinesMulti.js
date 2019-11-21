@@ -17,7 +17,7 @@ import positionLabels from '../positionLabels';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'c';
+  this.template = 'linesMulti';
   this.isMobileView = false;
   this.mobileWidth = 420;
 
