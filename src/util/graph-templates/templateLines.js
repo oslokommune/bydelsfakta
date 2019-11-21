@@ -13,7 +13,7 @@ import positionLabels from '../positionLabels';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'b';
+  this.template = 'lines';
 
   this.padding = { top: 50, right: 190, bottom: 32, left: 60 };
 

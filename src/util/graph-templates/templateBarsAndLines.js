@@ -68,7 +68,7 @@ const variations = {
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'n';
+  this.template = 'barsAndLines';
 
   this.salt = Math.round(Math.random() * 100000).toString();
   this.padding = { top: 80, left: 60, right: 20, bottom: 30 };

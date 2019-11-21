@@ -11,7 +11,7 @@ import util from './template-utils';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'd';
+  this.template = 'ageDistribution';
 
   this.padding = { top: 50, right: 20, bottom: 1, left: 0 };
   this.height = 0; // calculated on render. Height of the lower part

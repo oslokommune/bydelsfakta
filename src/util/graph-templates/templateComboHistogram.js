@@ -18,7 +18,7 @@ const tabData = [
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'm';
+  this.template = 'comboHistogram';
 
   this.padding = { top: 110, left: 60, right: 20, bottom: 30 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;

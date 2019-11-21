@@ -11,7 +11,7 @@ import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
-  this.template = 'k';
+  this.template = 'livingConditions';
 
   this.padding = { top: 140, left: 200, right: 20, bottom: 50 };
   this.width = this.parentWidth() - this.padding.left - this.padding.right;
