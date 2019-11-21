@@ -9,13 +9,13 @@
  *
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import util from './template-utils';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'e';
 
   this.padding = { top: 70, right: 85, bottom: 50, left: 360 };
@@ -127,7 +127,7 @@ function Template(svg) {
   this.drawTable = function() {
     const ageInterval = 5; // must be 2 or more
 
-    let ageRanges = [];
+    const ageRanges = [];
     for (let i = 0; i < 120; i += ageInterval) {
       ageRanges.push({
         label: `${i}–${i + ageInterval - 1} år`,
@@ -135,20 +135,20 @@ function Template(svg) {
       });
     }
 
-    const table_head = [];
+    const tableHead = [];
     const cols = ['mann', 'kvinne', 'value'];
-    table_head[0] = ['Geografi', 'Menn', 'Kvinner', 'Totalt'];
-    table_head[1] = cols.flatMap(() => ageRanges.map(age => age.label));
+    tableHead[0] = ['Geografi', 'Menn', 'Kvinner', 'Totalt'];
+    tableHead[1] = cols.flatMap(() => ageRanges.map(age => age.label));
 
     const tableData = JSON.parse(JSON.stringify(this.data.data));
-    const table_body = tableData.map(d => {
+    const tableBody = tableData.map(d => {
       return {
         key: d.geography,
         values: cols.flatMap(col => {
           return ageRanges.map(age => {
-            const range = age.range;
+            const { range } = age;
             let agg = 0;
-            for (let i = range[0]; i <= range[1]; i++) {
+            for (let i = range[0]; i <= range[1]; i += 1) {
               agg += d.values[i][col];
             }
             return agg;
@@ -158,7 +158,7 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body);
+    tableGenerator(tableHead, tableBody);
   };
 
   this.drawList = function() {
@@ -296,15 +296,15 @@ function Template(svg) {
     this.yAxis.each((d, i, j) => {
       if (d.type === 'left') {
         d3.select(j[i])
-          .call(d3.axisLeft(this.y).tickFormat(d => d + ' år'))
+          .call(d3.axisLeft(this.y).tickFormat(dj => `${dj} år`))
           .selectAll('text');
       } else if (d.type === 'right') {
         d3.select(j[i])
-          .call(d3.axisRight(this.y).tickFormat(d => d + ' år'))
+          .call(d3.axisRight(this.y).tickFormat(dj => `${dj}j år`))
           .attr('transform', `translate(${this.width}, 0)`)
           .selectAll('text');
       } else if (d.type === 'lines') {
-        let axis = d3.select(j[i]);
+        const axis = d3.select(j[i]);
 
         axis.call(d3.axisLeft(this.y).tickSize(-this.width));
         axis.selectAll('text').remove();
@@ -395,7 +395,7 @@ function moveTooltip(self) {
 
   labelMen.text(self.formatDecimal(valueMen));
   labelWomen.text(self.formatDecimal(valueWomen));
-  labelYear.text(age + ' år');
+  labelYear.text(`${age} år`);
 
   g.attr('opacity', 1).attr('transform', `translate(0, ${pos[1]})`);
   labelWomen.attr('transform', `translate(${self.width}, 0)`);

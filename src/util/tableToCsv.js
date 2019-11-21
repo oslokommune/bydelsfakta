@@ -7,15 +7,15 @@ const decimalSeparator = ',';
 // extract column names from thead.
 const getColumnNames = thead => {
   const tr = thead.querySelectorAll('tr');
-  let cols = [];
+  const cols = [];
 
   if (tr.length === 1) {
     tr[0].querySelectorAll('th').forEach(th => {
       cols.push(th.innerHTML);
     });
   } else {
-    let firstRow = [];
-    let lastRow = [];
+    const firstRow = [];
+    const lastRow = [];
     tr[0].querySelectorAll('th:not(:first-child)').forEach(th => firstRow.push(th.innerHTML));
     tr[1].querySelectorAll('th').forEach(th => lastRow.push(th.innerHTML));
     const ratio = tr[1].querySelectorAll('th').length / (tr[0].querySelectorAll('th').length - 1);
@@ -32,11 +32,11 @@ const getColumnNames = thead => {
 
 // Extract cell values in tbody
 const getRows = tbody => {
-  let data = [];
+  const data = [];
   const rows = tbody.querySelectorAll('tr');
 
   rows.forEach(row => {
-    let cells = [];
+    const cells = [];
     cells.push(row.querySelector('th').innerHTML);
     row.querySelectorAll('td').forEach(cell => {
       /**

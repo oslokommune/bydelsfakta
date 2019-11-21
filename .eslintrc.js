@@ -9,7 +9,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
 
-  extends: ['plugin:vue/strongly-recommended', '@vue/airbnb', '@vue/prettier'],
+  extends: ['plugin:vue/recommended', '@vue/airbnb', '@vue/prettier'],
 
   rules: {
     'vue/component-name-in-template-casing': [
@@ -26,6 +26,20 @@ module.exports = {
         svg: 'ignorePackages',
       },
     ],
+    "no-shadow": ["error", { "allow": ["state"] }],
+    "no-underscore-dangle": "off",
+    "global-require": "off",
+    "func-names": "off",
+    "no-param-reassign": "off",
+    "no-use-before-define": "off",
+    "prefer-rest-params": "off",
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": true
+    }, {
+      "enforceForRenamedProperties": false
+    }],
+    "vue/no-v-html": "off",
   },
 
   overrides: [

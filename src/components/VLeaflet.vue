@@ -1,19 +1,19 @@
 <template>
   <div style=" width: 100%; height: 100%;">
-    <div class="legend" v-if="settings.labels">
-      <h2 class="legend__heading" v-if="settings.heading || year">
+    <div v-if="settings.labels" class="legend">
+      <h2 v-if="settings.heading || year" class="legend__heading">
         {{ settings.heading }} {{ year ? `(${year})` : '' }}
       </h2>
       <div class="legend__labels">
         <span v-for="(label, i) in settings.labels" :key="i" v-text="label"></span>
       </div>
-      <div class="legend__colorstrip" ref="colorstrip" :style="gradient"></div>
+      <div ref="colorstrip" class="legend__colorstrip" :style="gradient"></div>
     </div>
     <div class="container">
       <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
         <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution" />
-        <l-feature-group @layeradd="fitMap" ref="featureGroup">
-          <l-geo-json ref="geojsonLayer" @layeradd="fitBounds" :geojson="district" :options-style="style"></l-geo-json>
+        <l-feature-group ref="featureGroup" @layeradd="fitMap">
+          <l-geo-json ref="geojsonLayer" :geojson="district" :options-style="style" @layeradd="fitBounds"></l-geo-json>
         </l-feature-group>
       </l-map>
     </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+/* eslint-disable no-continue */
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
 import L from 'leaflet';
 import * as d3 from 'd3';
@@ -64,9 +65,37 @@ export default {
     },
   },
 
+  data() {
+    return {
+      data: [],
+      year: false,
+      zoom: 10,
+      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+      attribution:
+        '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      center: L.latLng(59.91695, 10.746589),
+      style: {
+        fillColor: '#222',
+        fillOpacity: 0.3,
+        color: color.purple,
+        weight: 1,
+      },
+      mapOptions: {
+        zoomControl: true,
+        attributionControl: false,
+        doubleClickZoom: true,
+        dragging: true,
+        scrollWheelZoom: false,
+        touchZoom: true,
+        gestureHandling: true,
+      },
+      scale: null,
+    };
+  },
+
   computed: {
     gradient() {
-      let steps = [];
+      const steps = [];
       if (this.settings.reverse) {
         for (let i = 1; i >= 0; i -= 0.05) {
           steps.push(interpolator(i));
@@ -128,9 +157,9 @@ export default {
     async getData(url) {
       if (!url) return;
       this.data = await fetch(url).then(d =>
-        d.json().then(d => {
-          this.meta = d[0].meta;
-          return d[0].data;
+        d.json().then(dj => {
+          this.meta = dj[0].meta;
+          return dj[0].data;
         })
       );
 
@@ -143,45 +172,43 @@ export default {
     },
 
     createChoropleth(data) {
-      const scale =
-        this.meta.scale && this.meta.scale.length !== 0
-          ? this.settings.method === 'value'
-            ? this.meta.scale.value
-            : this.meta.scale.ratio
-          : this.settings.scale;
+      if (this.meta.scale && this.meta.scale.length !== 0) {
+        if (this.settings.method === 'value') this.scale = this.meta.scale.value;
+        else this.scale = this.meta.scale.ratio;
+      } else {
+        this.scale = this.settings.scale;
+      }
 
       // Color calulator defined by the scale set in the map settings
       const colorStrength = d3
         .scaleLinear()
         .range([0, 1])
-        .domain(scale);
+        .domain(this.scale);
 
       // Store data to create
-      let allLayerData = [];
+      const allLayerData = [];
 
       // Find all the layers on the map
       const layers = this.$refs.geojsonLayer.mapObject._layers;
 
       // Map layers in the map with the data returned
-      for (let key in layers) {
+      Object.keys(layers).forEach(key => {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
         const dataObj = data.find(geo => geo.id === layerId.substring(6, 10) || geo.id === layerId);
-        if (!dataObj || !dataObj.values || !dataObj.values.length) continue;
+        if (!dataObj || !dataObj.values || !dataObj.values.length) return;
 
-        const geography = dataObj.geography;
+        const { geography } = dataObj;
 
         // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
         if (this.settings.method === 'avg') {
           const values = dataObj.values.map(d => d.value);
           dataValue = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
+        } else if (this.settings.series) {
+          dataValue = dataObj.values[this.settings.series][this.settings.method];
         } else {
-          if (this.settings.series) {
-            dataValue = dataObj.values[this.settings.series][this.settings.method];
-          } else {
-            dataValue = dataObj.values[0][this.settings.method];
-          }
+          dataValue = dataObj.values[0][this.settings.method];
         }
 
         // Calculate the fill color based on the value
@@ -206,7 +233,7 @@ export default {
 
         // Store the layer data for use in legend
         allLayerData.push({ dataValue, geography, layer });
-      }
+      });
 
       // For each layer add an interactive dot on the legend.
       // Clicking the dot triggers the popop on the respective layer.
@@ -216,7 +243,7 @@ export default {
         .join('div')
         .attr('class', 'legend__dot')
         .transition()
-        .style('left', d => colorStrength(d.dataValue) * 100 + '%')
+        .style('left', d => `${colorStrength(d.dataValue) * 100}%`)
         .each((d, i, j) => {
           j[i].addEventListener('click', () => {
             d.layer.openPopup();
@@ -226,7 +253,7 @@ export default {
     addPopup() {
       const layers = this.$refs.geojsonLayer.mapObject._layers;
 
-      for (let key in layers) {
+      Object.keys(layers).forEach(key => {
         const layer = layers[key];
         const popupContent = `
           <h4>${layer.feature.properties.name}</h4>
@@ -234,35 +261,8 @@ export default {
 
         // Bind colors and popup content to the layer
         layer.bindPopup(popupContent);
-      }
+      });
     },
-  },
-
-  data() {
-    return {
-      data: [],
-      year: false,
-      zoom: 10,
-      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      attribution:
-        '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      center: L.latLng(59.91695, 10.746589),
-      style: {
-        fillColor: '#222',
-        fillOpacity: 0.3,
-        color: color.purple,
-        weight: 1,
-      },
-      mapOptions: {
-        zoomControl: true,
-        attributionControl: false,
-        doubleClickZoom: true,
-        dragging: true,
-        scrollWheelZoom: false,
-        touchZoom: true,
-        gestureHandling: true,
-      },
-    };
   },
 };
 </script>

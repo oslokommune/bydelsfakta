@@ -76,7 +76,7 @@ function styleTexts(selection, dataAccessor) {
 function drawPaths(selection) {
   const path = selection
     .select('path')
-    .attr('d', d => 'M' + d.join('L') + 'Z')
+    .attr('d', d => `M${d.join('L')}Z`)
     .attr('fill-opacity', 0);
 
   // Handle mouse interactions

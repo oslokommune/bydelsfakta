@@ -6,46 +6,132 @@
  * options object.
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 import util from './template-utils';
 
 // Coordinates for the three corners of the triangle.
 // First corner duplicated to complete the path
-const triangleData = [{ x: -1, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+const triangleData = [
+  { x: -1, y: 0 },
+  { x: 1, y: 0 },
+  { x: 0, y: 1 },
+  { x: -1, y: 0 },
+];
 
 // Coordinates for the grid lines (starting and ending positions)
 const gridLinesData = [
-  [{ x: -0.9, y: 0.1 }, { x: -0.8, y: 0 }],
-  [{ x: -0.8, y: 0.2 }, { x: -0.6, y: 0 }],
-  [{ x: -0.7, y: 0.3 }, { x: -0.4, y: 0 }],
-  [{ x: -0.6, y: 0.4 }, { x: -0.2, y: 0 }],
-  [{ x: -0.5, y: 0.5 }, { x: 0.0, y: 0 }],
-  [{ x: -0.4, y: 0.6 }, { x: 0.2, y: 0 }],
-  [{ x: -0.3, y: 0.7 }, { x: 0.4, y: 0 }],
-  [{ x: -0.2, y: 0.8 }, { x: 0.6, y: 0 }],
-  [{ x: -0.1, y: 0.9 }, { x: 0.8, y: 0 }],
+  [
+    { x: -0.9, y: 0.1 },
+    { x: -0.8, y: 0 },
+  ],
+  [
+    { x: -0.8, y: 0.2 },
+    { x: -0.6, y: 0 },
+  ],
+  [
+    { x: -0.7, y: 0.3 },
+    { x: -0.4, y: 0 },
+  ],
+  [
+    { x: -0.6, y: 0.4 },
+    { x: -0.2, y: 0 },
+  ],
+  [
+    { x: -0.5, y: 0.5 },
+    { x: 0.0, y: 0 },
+  ],
+  [
+    { x: -0.4, y: 0.6 },
+    { x: 0.2, y: 0 },
+  ],
+  [
+    { x: -0.3, y: 0.7 },
+    { x: 0.4, y: 0 },
+  ],
+  [
+    { x: -0.2, y: 0.8 },
+    { x: 0.6, y: 0 },
+  ],
+  [
+    { x: -0.1, y: 0.9 },
+    { x: 0.8, y: 0 },
+  ],
 
-  [{ x: 0.1, y: 0.9 }, { x: -0.8, y: 0 }],
-  [{ x: 0.2, y: 0.8 }, { x: -0.6, y: 0 }],
-  [{ x: 0.3, y: 0.7 }, { x: -0.4, y: 0 }],
-  [{ x: 0.4, y: 0.6 }, { x: -0.2, y: 0 }],
-  [{ x: 0.5, y: 0.5 }, { x: 0.0, y: 0 }],
-  [{ x: 0.6, y: 0.4 }, { x: 0.2, y: 0 }],
-  [{ x: 0.7, y: 0.3 }, { x: 0.4, y: 0 }],
-  [{ x: 0.8, y: 0.2 }, { x: 0.6, y: 0 }],
-  [{ x: 0.9, y: 0.1 }, { x: 0.8, y: 0 }],
+  [
+    { x: 0.1, y: 0.9 },
+    { x: -0.8, y: 0 },
+  ],
+  [
+    { x: 0.2, y: 0.8 },
+    { x: -0.6, y: 0 },
+  ],
+  [
+    { x: 0.3, y: 0.7 },
+    { x: -0.4, y: 0 },
+  ],
+  [
+    { x: 0.4, y: 0.6 },
+    { x: -0.2, y: 0 },
+  ],
+  [
+    { x: 0.5, y: 0.5 },
+    { x: 0.0, y: 0 },
+  ],
+  [
+    { x: 0.6, y: 0.4 },
+    { x: 0.2, y: 0 },
+  ],
+  [
+    { x: 0.7, y: 0.3 },
+    { x: 0.4, y: 0 },
+  ],
+  [
+    { x: 0.8, y: 0.2 },
+    { x: 0.6, y: 0 },
+  ],
+  [
+    { x: 0.9, y: 0.1 },
+    { x: 0.8, y: 0 },
+  ],
 
-  [{ x: -0.9, y: 0.1 }, { x: 0.9, y: 0.1 }],
-  [{ x: -0.8, y: 0.2 }, { x: 0.8, y: 0.2 }],
-  [{ x: -0.7, y: 0.3 }, { x: 0.7, y: 0.3 }],
-  [{ x: -0.6, y: 0.4 }, { x: 0.6, y: 0.4 }],
-  [{ x: -0.5, y: 0.5 }, { x: 0.5, y: 0.5 }],
-  [{ x: -0.4, y: 0.6 }, { x: 0.4, y: 0.6 }],
-  [{ x: -0.3, y: 0.7 }, { x: 0.3, y: 0.7 }],
-  [{ x: -0.2, y: 0.8 }, { x: 0.2, y: 0.8 }],
-  [{ x: -0.1, y: 0.9 }, { x: 0.1, y: 0.9 }],
+  [
+    { x: -0.9, y: 0.1 },
+    { x: 0.9, y: 0.1 },
+  ],
+  [
+    { x: -0.8, y: 0.2 },
+    { x: 0.8, y: 0.2 },
+  ],
+  [
+    { x: -0.7, y: 0.3 },
+    { x: 0.7, y: 0.3 },
+  ],
+  [
+    { x: -0.6, y: 0.4 },
+    { x: 0.6, y: 0.4 },
+  ],
+  [
+    { x: -0.5, y: 0.5 },
+    { x: 0.5, y: 0.5 },
+  ],
+  [
+    { x: -0.4, y: 0.6 },
+    { x: 0.4, y: 0.6 },
+  ],
+  [
+    { x: -0.3, y: 0.7 },
+    { x: 0.3, y: 0.7 },
+  ],
+  [
+    { x: -0.2, y: 0.8 },
+    { x: 0.2, y: 0.8 },
+  ],
+  [
+    { x: -0.1, y: 0.9 },
+    { x: 0.1, y: 0.9 },
+  ],
 ];
 
 // Helper function to move an element to front
@@ -57,7 +143,7 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'i';
 
   this.padding = { top: 70, bottom: 70, left: 200, right: 105 };
@@ -66,15 +152,15 @@ function Template(svg) {
   this.y = d3.scaleLinear();
   this.x = d3.scaleLinear();
   this.selected = null;
-  this.list;
-  this.matrix;
-  this.values;
+  this.list = null;
+  this.matrix = null;
+  this.values = null;
   this.gutter = (this.parentWidth() - this.padding.left - this.width) / 2;
   this.yAxis = [];
   this.max = 0;
-  this.dotContainer;
-  this.lineContainer;
-  this.arrows;
+  this.dotContainer = null;
+  this.lineContainer = null;
+  this.arrows = null;
 
   const fillOpacity = 0.6;
   const strokeOpacity = 0.8;
@@ -164,9 +250,9 @@ function Template(svg) {
   };
 
   this.drawTable = function() {
-    const table_head = [];
-    table_head[0] = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];
-    table_head[1] = [
+    const tableHead = [];
+    tableHead[0] = ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'];
+    tableHead[1] = [
       ...this.data.meta.series.map(d => {
         let str = '';
         if (typeof d === 'string') {
@@ -180,7 +266,7 @@ function Template(svg) {
 
     const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
 
-    const table_body = tableData.map(row => {
+    const tableBody = tableData.map(row => {
       return {
         key: row.geography,
         values: row.values.map(d => d[this.method]),
@@ -188,7 +274,7 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body);
+    tableGenerator(tableHead, tableBody);
   };
 
   this.drawList = function() {
@@ -233,7 +319,7 @@ function Template(svg) {
         if (i === active) return;
         d3.select(this).attr('fill-opacity', 0.25);
         dots
-          .filter((d, index) => i === index)
+          .filter((dj, index) => i === index)
           .select('circle')
           .attr('r', 8)
           .attr('fill-opacity', 1)
@@ -243,7 +329,7 @@ function Template(svg) {
         if (i === active) return;
         d3.select(this).attr('fill-opacity', 0);
         dots
-          .filter((d, index) => i === index)
+          .filter((dj, index) => i === index)
           .select('circle')
           .attr('r', 6)
           .attr('fill-opacity', fillOpacity)
@@ -266,11 +352,14 @@ function Template(svg) {
     values.attr(`transform`, (d, i) => {
       if (i === 1) {
         return `translate(${-x(-0.2)}, -${y(0.7)}) rotate(-60)`;
-      } else if (i === 2) {
+      }
+      if (i === 2) {
         return `translate(${x(-0.2)}, -${y(0.7)}) rotate(60)`;
-      } else if (i === 0) {
+      }
+      if (i === 0) {
         return `translate(0, ${y(0.45)})`;
       }
+      return null;
     });
 
     values
@@ -387,7 +476,7 @@ function Template(svg) {
       .selectAll('g.arrow')
       .data([1, 3, 5])
       .join(enter => {
-        let g = enter.append('g').attr('class', 'arrow');
+        const g = enter.append('g').attr('class', 'arrow');
         g.append('path')
           .attr('d', () => {
             return `M0,0 h70 l-10,-4 v8 l10,-4 Z`;
@@ -470,9 +559,18 @@ function Template(svg) {
     // Generate the data to draw the guide lines
     // based on the coordinates of the selected node
     const lineData = [
-      [{ x: x.invert(m), y: y.invert(n) }, { x: xx(circ.attr('data-0')), y: 0 }],
-      [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-1') - 1, y: circ.attr('data-1') }],
-      [{ x: x.invert(m), y: y.invert(n) }, { x: circ.attr('data-2'), y: 1 - circ.attr('data-2') }],
+      [
+        { x: x.invert(m), y: y.invert(n) },
+        { x: xx(circ.attr('data-0')), y: 0 },
+      ],
+      [
+        { x: x.invert(m), y: y.invert(n) },
+        { x: circ.attr('data-1') - 1, y: circ.attr('data-1') },
+      ],
+      [
+        { x: x.invert(m), y: y.invert(n) },
+        { x: circ.attr('data-2'), y: 1 - circ.attr('data-2') },
+      ],
     ];
 
     // Create, update, remove pattern for
@@ -511,9 +609,9 @@ function Template(svg) {
     dot
       .transition()
       .attr('transform', d => {
-        const pos_y = y(d.values[1].ratio);
-        const pos_x = x(d.values[2].ratio - d.values[0].ratio);
-        return `translate(${pos_x}, ${pos_y})`;
+        const posY = y(d.values[1].ratio);
+        const posX = x(d.values[2].ratio - d.values[0].ratio);
+        return `translate(${posX}, ${posY})`;
       })
       .attr('data-x', d => x(d.values[2].ratio - d.values[0].ratio))
       .attr('data-y', d => y(d.values[1].ratio));
@@ -530,11 +628,11 @@ function Template(svg) {
       .attr('fill', (d, i) => {
         if (d.avgRow) {
           return color.red;
-        } else if (d.totalRow) {
-          return color.yellow;
-        } else {
-          return i === this.selected ? color.purple : color.blue;
         }
+        if (d.totalRow) {
+          return color.yellow;
+        }
+        return i === this.selected ? color.purple : color.blue;
       })
       .attr('r', (d, i) => (i === this.selected ? 9 : 6))
       .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : fillOpacity))
@@ -551,7 +649,9 @@ function Template(svg) {
   };
 
   this.updateAxisLabels = function() {
-    let label1Text, label2Text, label3Text;
+    let label1Text;
+    let label2Text;
+    let label3Text;
 
     if (typeof this.data.meta.series === 'string') {
       label1Text = `Andel ${this.data.meta.series[0].toLowerCase()} (%)`;
@@ -580,7 +680,10 @@ function Template(svg) {
     const distY = s(dist) * Math.sin(rad);
     const x2 = x.invert(distX + x(x1));
     const y2 = y.invert(distY + y(y1));
-    return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+    return [
+      { x: x1, y: y1 },
+      { x: x2, y: y2 },
+    ];
   };
 
   const tickData = [

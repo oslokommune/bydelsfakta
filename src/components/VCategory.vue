@@ -1,5 +1,5 @@
 <template>
-  <router-link class="main-container__item" :class="{ disabled }" :to="getLink()" :id="id">
+  <router-link :id="id" class="main-container__item" :class="{ disabled }" :to="getLink()">
     <picture>
       <source :srcset="bgImage + '.webp'" :alt="topic" type="image/webp" />
       <source :srcset="bgImage + '.png'" :alt="topic" type="image/png" />

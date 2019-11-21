@@ -1,5 +1,5 @@
 <template>
-  <div class="app" id="app" tabindex="-1" :class="{ menuIsOpen, navigationIsOpen }">
+  <div id="app" class="app" tabindex="-1" :class="{ menuIsOpen, navigationIsOpen }">
     <the-navigation-drawer />
     <div class="app__content">
       <the-navigation-topbar />
@@ -31,8 +31,22 @@ export default {
     ...mapState(['menuIsOpen', 'navigationIsOpen']),
   },
 
-  methods: {
-    ...mapActions(['addDistrict', 'setTouchDevice', 'setIE11Compatibility', 'setProductionMode']),
+  watch: {
+    $route(to) {
+      if (to.params.district !== undefined) {
+        this.addDistrict({ district: to.params.district, pushRoute: false });
+        document.getElementById('app').focus();
+      }
+    },
+  },
+
+  mounted() {
+    if ('ontouchstart' in document.documentElement) {
+      this.setTouchDevice(true);
+    }
+    if (!!window.MSInputMethodContext && !!document.documentMode) {
+      this.setIE11Compatibility(true);
+    }
   },
 
   created() {
@@ -53,30 +67,16 @@ export default {
     this.addDistrict({ district: this.$route.params.district, pushRoute: true });
   },
 
-  mounted() {
-    if ('ontouchstart' in document.documentElement) {
-      this.setTouchDevice(true);
-    }
-    if (!!window.MSInputMethodContext && !!document.documentMode) {
-      this.setIE11Compatibility(true);
-    }
-  },
-
-  watch: {
-    $route(to) {
-      if (to.params.district !== undefined) {
-        this.addDistrict({ district: to.params.district, pushRoute: false });
-        document.getElementById('app').focus();
-      }
-    },
+  methods: {
+    ...mapActions(['addDistrict', 'setTouchDevice', 'setIE11Compatibility', 'setProductionMode']),
   },
 };
 
 // Using a class on body to determine how to style focus states
-document.body.addEventListener('mousedown', function() {
+document.body.addEventListener('mousedown', () => {
   document.body.classList.add('using-mouse');
 });
-document.body.addEventListener('keydown', function() {
+document.body.addEventListener('keydown', () => {
   document.body.classList.remove('using-mouse');
 });
 </script>

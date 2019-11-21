@@ -18,7 +18,8 @@ export const getters = {
   geoDistricts: state => {
     if (!state.compareDistricts && state.districts.length !== 0) {
       return { ...state.districtsGeo[`${allDistricts.find(district => district.key === state.districts[0]).uri}`] };
-    } else if (state.districts[0] === 'alle') {
+    }
+    if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
 
@@ -60,34 +61,38 @@ export const mutations = {
     state.ie11 = payload;
   },
   SET_PRODUCTION_MODE(state, payload) {
-    state.productionMode = payload === 'prod' ? true : payload === 'dev' ? false : null;
+    if (payload === 'prod') state.productionMode = true;
+    else if (payload === 'dev') state.productionMode = false;
+    else state.productionMode = null;
   },
 };
 
 export const actions = {
   addDistrict({ commit }, payload) {
-    const districts = payload.district.split('-');
-    if (districts.length === 1) {
-      if (districts[0] === 'alle') {
+    const payloadDistricts = payload.district.split('-');
+    if (payloadDistricts.length === 1) {
+      if (payloadDistricts[0] === 'alle') {
         commit('ADD_DISTRICT', districts);
       } else {
-        const districtValue = allDistricts.find(district => district.uri === districts[0]);
-        const districtKey = allDistricts.find(district => district.key === districts[0]);
-        districtValue === undefined
-          ? commit('ADD_DISTRICT', [districtKey.key])
-          : commit('SELECT_DISTRICT', [districtValue.key]);
+        const districtValue = allDistricts.find(district => district.uri === payloadDistricts[0]);
+        const districtKey = allDistricts.find(district => district.key === payloadDistricts[0]);
+
+        if (districtValue === undefined) commit('ADD_DISTRICT', [districtKey.key]);
+        else commit('SELECT_DISTRICT', [districtValue.key]);
       }
     } else {
       commit('ADD_DISTRICT', districts);
     }
 
     if (payload.pushRoute) {
-      router.currentRoute.params.topic === undefined
-        ? router.push({ name: 'District', params: { district: districts.join('-') } })
-        : router.push({
-            name: 'Topic',
-            params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
-          });
+      if (router.currentRoute.params.topic === undefined) {
+        router.push({ name: 'District', params: { district: districts.join('-') } });
+      } else {
+        router.push({
+          name: 'Topic',
+          params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
+        });
+      }
     }
   },
 

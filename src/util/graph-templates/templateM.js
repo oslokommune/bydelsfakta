@@ -4,7 +4,7 @@
 
 import d3 from '@/assets/d3';
 import { hideTooltip, showTooltipMove, showTooltipOver } from '../tooltip';
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import drawVoronoi from './graph-helpers/voronoiHelpers';
 import { color } from './colors';
 import util from './template-utils';
@@ -17,7 +17,7 @@ const tabData = [
 ];
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'm';
 
   this.padding = { top: 110, left: 60, right: 20, bottom: 30 };
@@ -136,45 +136,46 @@ function prepareData(dataset) {
           .split(' - ')
           .map(d => +d);
       }
-      row.totalt = row['mellomBydeler'] + row['innenforBydelen'] + row['tilFraOslo'];
+      row.totalt = row.mellomBydeler + row.innenforBydelen + row.tilFraOslo;
       row.alder = arr;
     });
     dataset[key].sort((a, b) => a.alder[0] - b.alder[0]);
+    return dataset;
   });
 }
 
 function generateTableData() {
   // Prepare data for table head
-  const table_head = [
+  const tableHead = [
     ['Alder', ...tabData.map(d => d.label)],
     tabData.flatMap(() => ['Innflytting', 'Utflytting', 'Netto flytting']),
   ];
 
   // Prepare data for table body
-  const table_body = this.filteredData.immigration.map((d, i) => {
+  const tableBody = this.filteredData.immigration.map((d, i) => {
     return {
-      key: d.alder.join('–') + ' år',
+      key: `${d.alder.join('–')} år`,
       values: [
-        this.filteredData.immigration[i]['totalt'],
-        this.filteredData.emigration[i]['totalt'],
-        this.filteredData.immigration[i]['totalt'] - this.filteredData.emigration[i]['totalt'],
+        this.filteredData.immigration[i].totalt,
+        this.filteredData.emigration[i].totalt,
+        this.filteredData.immigration[i].totalt - this.filteredData.emigration[i].totalt,
 
-        this.filteredData.immigration[i]['mellomBydeler'],
-        this.filteredData.emigration[i]['mellomBydeler'],
-        this.filteredData.immigration[i]['mellomBydeler'] - this.filteredData.emigration[i]['mellomBydeler'],
+        this.filteredData.immigration[i].mellomBydeler,
+        this.filteredData.emigration[i].mellomBydeler,
+        this.filteredData.immigration[i].mellomBydeler - this.filteredData.emigration[i].mellomBydeler,
 
-        this.filteredData.immigration[i]['innenforBydelen'],
-        this.filteredData.emigration[i]['innenforBydelen'],
-        this.filteredData.immigration[i]['innenforBydelen'] - this.filteredData.emigration[i]['innenforBydelen'],
+        this.filteredData.immigration[i].innenforBydelen,
+        this.filteredData.emigration[i].innenforBydelen,
+        this.filteredData.immigration[i].innenforBydelen - this.filteredData.emigration[i].innenforBydelen,
 
-        this.filteredData.immigration[i]['tilFraOslo'],
-        this.filteredData.emigration[i]['tilFraOslo'],
-        this.filteredData.immigration[i]['tilFraOslo'] - this.filteredData.emigration[i]['tilFraOslo'],
+        this.filteredData.immigration[i].tilFraOslo,
+        this.filteredData.emigration[i].tilFraOslo,
+        this.filteredData.immigration[i].tilFraOslo - this.filteredData.emigration[i].tilFraOslo,
       ],
     };
   });
 
-  table_body.push({
+  tableBody.push({
     key: 'Totalt',
     values: [
       d3.sum(this.filteredData.immigration.map(d => d.totalt)),
@@ -199,7 +200,7 @@ function generateTableData() {
     ],
   });
 
-  return [table_head, table_body];
+  return [tableHead, tableBody];
 }
 
 function resizeSvg(selection) {
@@ -272,13 +273,14 @@ function drawHeadings() {
     .selectAll('g')
     .data(['Innflytting', 'Utflytting'])
     .join(enter => {
-      const g = enter.append('g');
-      g.append('rect')
+      const group = enter.append('g');
+      group
+        .append('rect')
         .attr('height', 8)
         .attr('rx', 4)
         .attr('width', 23);
-      g.append('text');
-      return g;
+      group.append('text');
+      return group;
     });
 
   g.attr('transform', (d, i) => `translate(${this.width - 250 + i * 125}, 10)`);
@@ -361,7 +363,7 @@ function handleMouseEvents(selection) {
 }
 
 function updateRadio(selection) {
-  let g = selection
+  const g = selection
     .selectAll('g.tab')
     .data(tabData)
     .join(enterTabs)

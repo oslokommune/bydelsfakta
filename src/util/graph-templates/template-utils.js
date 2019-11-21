@@ -7,8 +7,8 @@ import router from '../../router';
 import allDistricts from '../../config/allDistricts';
 
 const util = {
-  truncate: function(str, width, size = 14, weight = 400) {
-    if (!str) return;
+  truncate(str, width, size = 14, weight = 400) {
+    if (!str) return null;
 
     width = width.length === 2 ? width[1] - width[0] : width;
 
@@ -24,7 +24,7 @@ const util = {
     return str;
   },
 
-  getTextWidth: function(str, size = 14, weight = 400) {
+  getTextWidth(str, size = 14, weight = 400) {
     let computedWidth;
 
     // create placeholder svg
@@ -43,15 +43,15 @@ const util = {
     return computedWidth;
   },
 
-  capitalize: function(str) {
-    let arr = str.split('');
+  capitalize(str) {
+    const arr = str.split('');
     arr[0] = arr[0].toUpperCase();
     return arr.join('');
   },
 
-  goto: function(geo) {
+  goto(geo) {
     let district = allDistricts.find(d => d.value === geo.geography);
-    const topic = router.currentRoute.params.topic;
+    const { topic } = router.currentRoute.params;
 
     if (geo.geography === 'Oslo i alt') {
       district = {
@@ -70,9 +70,9 @@ const util = {
     });
   },
 
-  allDistricts: allDistricts,
+  allDistricts,
 
-  drawTable: function(head, body, options = {}) {
+  drawTable(head, body, options = {}) {
     const formatter = options.formatter || this.format;
     const tableElement = this.table;
     const thead = tableElement.select('thead');
@@ -80,7 +80,7 @@ const util = {
 
     const isMultiLevel = typeof head[1] === 'object';
 
-    let hideFootnote =
+    const hideFootnote =
       tableElement
         .node()
         .querySelector('tbody')
@@ -100,7 +100,13 @@ const util = {
       .data(() => (isMultiLevel ? head[0] : head))
       .join('th')
       .attr('rowspan', (d, i) => (i === 0 && isMultiLevel ? 2 : 1))
-      .attr('colspan', (d, i) => (isMultiLevel ? (i > 0 ? head[1].length / (head[0].length - 1) : 1) : 0))
+      .attr('colspan', (d, i) => {
+        if (isMultiLevel) {
+          if (i > 0) return head[1].length / (head[0].length - 1);
+          return 1;
+        }
+        return 0;
+      })
       .attr('scope', 'col')
       .classed('border-cell', (d, i) => i > 0)
       .text(d => d);

@@ -1,10 +1,11 @@
+/* eslint-disable no-nested-ternary */
 // TODO: refactor this function to be more flexible and reusable for all templates
 
 export default function generateTableData() {
   const isMultiLevel = this.data.meta.series[1] !== undefined;
-  let table_head;
+  let tableHead;
   if (isMultiLevel) {
-    table_head = [
+    tableHead = [
       ['Geografi', this.method === 'value' ? 'Antall' : this.showPermille ? 'Promilleandel' : 'Prosentandel'],
       [
         ...this.data.meta.series.map(d => {
@@ -19,12 +20,9 @@ export default function generateTableData() {
       ],
     ];
   } else {
-    table_head = [
-      'Geografi',
-      this.method === 'value' ? 'Antall' : this.showPermille ? 'Promilleandel' : 'Prosentandel',
-    ];
+    tableHead = ['Geografi', this.method === 'value' ? 'Antall' : this.showPermille ? 'Promilleandel' : 'Prosentandel'];
   }
-  const table_body = JSON.parse(JSON.stringify(this.data.data))
+  const tableBody = JSON.parse(JSON.stringify(this.data.data))
     .sort(this.tableSort)
     .map(row => {
       return {
@@ -33,5 +31,5 @@ export default function generateTableData() {
       };
     });
 
-  return [table_head, table_body];
+  return [tableHead, tableBody];
 }

@@ -39,6 +39,18 @@ export default {
     oslologo,
   },
 
+  props: {
+    iconRef: {
+      type: String,
+      required: true,
+    },
+    options: {
+      type: Object,
+      required: false,
+      default: () => ({}),
+    },
+  },
+
   computed: {
     small() {
       return this.options.size && this.options.size === 'small';
@@ -60,18 +72,6 @@ export default {
       }
 
       return str;
-    },
-  },
-
-  props: {
-    iconRef: {
-      type: String,
-      required: true,
-    },
-    options: {
-      type: Object,
-      required: false,
-      default: () => ({}),
     },
   },
 };

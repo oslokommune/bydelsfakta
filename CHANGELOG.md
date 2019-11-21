@@ -27,6 +27,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Add markers for 100% on Template K
 - Use 5-years groups in Template M
 - More consistent use of color in visualisations
+- Color-scare for maps now receives bounderies from backend
 
 ### 🔧 Other changes
 
@@ -35,6 +36,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 - Add links to external data sources on 'About' view for cards
 - Update .prettierrc
 - Remove 'brush' functionality from the shaded area on the age distribution graph (Template D)
+- Updated dependencies
 
 ### 🐛 Bugfixes
 

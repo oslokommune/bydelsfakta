@@ -1,5 +1,5 @@
 // tried to tree-shake but we would only save about 100-120kb, not worth it.
-/*import {
+/* import {
   line,
   brushX,
   move,
@@ -36,7 +36,7 @@
   mean,
   mouse,
   Page
-} from 'd3';*/
+} from 'd3'; */
 /*
 
 export default {

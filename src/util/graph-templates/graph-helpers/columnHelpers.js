@@ -50,21 +50,21 @@ export function updateColFill(selection) {
     .duration(this.duration)
     .attr('width', (d, i) => {
       let val;
-      const totalRow = this.filteredData.data.find(d => d.totalRow);
+      const totalRow = this.filteredData.data.find(dj => dj.totalRow);
 
       if (totalRow && totalRow.values && totalRow.values[i]) {
         val = totalRow.values[i][this.method];
       } else {
-        return;
+        return 0;
       }
 
       if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
         return 0;
-      } else if (this.filteredData.data.filter(d => d.totalRow).length) {
-        return this.x[0](val);
-      } else {
-        return 0;
       }
+      if (this.filteredData.data.filter(dj => dj.totalRow).length) {
+        return this.x[0](val);
+      }
+      return 0;
     });
 }
 
@@ -77,12 +77,12 @@ export function updateColArrow(selection) {
     .attr('y', () => this.filteredData.data.findIndex(d => d.totalRow) * this.rowHeight)
     .attr('x', (d, i) => {
       let val;
-      const totalRow = this.filteredData.data.find(d => d.totalRow);
+      const totalRow = this.filteredData.data.find(dj => dj.totalRow);
 
       if (totalRow && totalRow.values && totalRow.values[i]) {
         val = totalRow.values[i][this.method];
       } else {
-        return;
+        return null;
       }
 
       if (this.method === 'value' && val > this.x[i].domain()[1]) return 0;
@@ -90,7 +90,7 @@ export function updateColArrow(selection) {
     })
     .attr('opacity', (d, i) => {
       let val;
-      const totalRow = this.filteredData.data.find(d => d.totalRow);
+      const totalRow = this.filteredData.data.find(dj => dj.totalRow);
 
       if (totalRow && totalRow.values && totalRow.values[i]) {
         val = totalRow.values[i][this.method];
@@ -100,11 +100,11 @@ export function updateColArrow(selection) {
 
       if (this.isMobileView) {
         return 0;
-      } else if (this.method === 'value' && val > this.x[i].domain()[1]) {
-        return 0;
-      } else {
-        return 1;
       }
+      if (this.method === 'value' && val > this.x[i].domain()[1]) {
+        return 0;
+      }
+      return 1;
     });
 }
 
@@ -135,7 +135,7 @@ export function updateClickTrigger(selection) {
     })
     .attr('tabindex', this.filteredData.meta.series.length > 1 ? 0 : false)
     .append('title')
-    .html(d => d.heading + ' ' + d.subheading);
+    .html(d => `${d.heading} ${d.subheading}`);
 }
 
 function createColumns(selection) {

@@ -35,29 +35,29 @@
       <header class="navigation-header">
         <template v-if="compareDistricts">
           <input
-            type="checkbox"
             id="allDistricts"
             v-model="selectedAll"
+            type="checkbox"
             :indeterminate.sync="indeterminate"
-            @change="toggleCheckbox(selectedAll)"
             class="navigation-header__input custom"
             :value="selectedAll"
             :aria-label="$t('navigationDrawer.select.label')"
+            @change="toggleCheckbox(selectedAll)"
           />
           <label
             for="allDistricts"
             class="custom-label custom-label__selectedAll"
-            @keypress="toggleCheckbox(!selectedAll)"
             tabindex="0"
             :class="{
               'custom-label__selectedAll--checked': selectedAll,
               'custom-label__selectedAll--indeterminate': indeterminate,
             }"
+            @keypress="toggleCheckbox(!selectedAll)"
           ></label>
           <select
             id="navigation-drawer-select"
-            class="navigation-header__select"
             v-model="selectedPredefinedOption"
+            class="navigation-header__select"
             :aria-label="$t('navigationDrawer.select.label')"
           >
             <option
@@ -85,21 +85,21 @@
           }"
         >
           <input
-            type="checkbox"
-            v-model="selected"
-            :value="link.key"
-            :id="`checkbox-${link.uri}`"
-            @change="onChangeCheckbox()"
             v-if="compareDistricts"
+            :id="`checkbox-${link.uri}`"
+            v-model="selected"
+            type="checkbox"
+            :value="link.key"
             class="custom"
+            @change="onChangeCheckbox()"
           />
           <label
             v-if="compareDistricts"
             :for="`checkbox-${link.uri}`"
-            @keypress="onChangeCheckbox(link.key)"
             tabindex="0"
             class="custom-label"
             :class="{ compare: compareDistricts }"
+            @keypress="onChangeCheckbox(link.key)"
           >
             <span class="navigation-link__label navigation-link__label--span">{{ link.value }}</span>
           </label>
@@ -139,76 +139,26 @@ export default {
 
   computed: {
     selectedTopic: {
-      get: function() {
+      get() {
         if (this.compareDistricts) {
-          let count = this.selected.length ? this.selected.length : this.links.length;
+          const count = this.selected.length ? this.selected.length : this.links.length;
           return `${this.$t('navigationDrawer.navigationDistrict.compareDistrict')} (${count})`;
-        } else if (!this.selected.length) {
-          return `${this.$t('navigationDrawer.navigationDistrict.chooseDistrict')}`;
-        } else {
-          return this.links[this.selected - 1].value;
         }
+        if (!this.selected.length) {
+          return `${this.$t('navigationDrawer.navigationDistrict.chooseDistrict')}`;
+        }
+        return this.links[this.selected - 1].value;
       },
-      set: function() {},
+      set() {},
     },
     ...mapState(['compareDistricts', 'districts', 'navigationIsOpen']),
     ...mapGetters(['getDistrict']),
   },
 
-  methods: {
-    ...mapActions(['setNavigationIsOpen', 'addDistrict']),
-
-    toggleCheckbox(event) {
-      this.selected = [];
-      this.selected = event ? allDistricts.map(district => district.key) : [];
-      this.selectedPredefinedOption = [];
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district: 'alle' } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district: 'alle', topic: this.$route.params.topic },
-          });
-    },
-
-    onChangeCheckbox(key) {
-      // Reset selector
-      this.selectedPredefinedOption = [];
-
-      if (key) {
-        if (!this.selected.includes(key)) this.selected.push(key);
-        else this.selected = this.selected.filter(k => k !== key);
-      }
-
-      const district =
-        this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
-
-      this.$route.params.topic === undefined
-        ? this.$router.push({ name: 'District', params: { district } })
-        : this.$router.push({
-            name: 'Topic',
-            params: { district, topic: this.$route.params.topic },
-          });
-    },
-
-    onClickDistrict(district) {
-      return district === this.$route.params.district
-        ? { name: 'District', params: { district } }
-        : this.$route.params.topic === undefined
-        ? { name: 'District', params: { district } }
-        : { name: 'Topic', params: { district, topic: this.$route.params.topic } };
-    },
-
-    onClickTab(compare) {
-      const name = this.$route.params.topic ? 'Topic' : 'District';
-
-      return { name, params: { district: compare ? 'alle' : allDistricts[0].uri } };
-    },
-  },
-
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      const district = allDistricts.find(district => district.uri === routes[2]);
+      const district = allDistricts.find(d => d.uri === routes[2]);
 
       if (to.name === 'NotFound') {
         this.$store.dispatch('cleanState');
@@ -237,12 +187,14 @@ export default {
     selectedPredefinedOption() {
       if (this.selectedPredefinedOption.length !== 0) {
         this.selected = this.selectedPredefinedOption;
-        this.$route.params.topic === undefined
-          ? this.$router.push({ name: 'District', params: { district: this.selected.join('-') } })
-          : this.$router.push({
-              name: 'Topic',
-              params: { district: this.selected.join('-'), topic: this.$route.params.topic },
-            });
+        if (this.$route.params.topic === undefined) {
+          this.$router.push({ name: 'District', params: { district: this.selected.join('-') } });
+        } else {
+          this.$router.push({
+            name: 'Topic',
+            params: { district: this.selected.join('-'), topic: this.$route.params.topic },
+          });
+        }
       }
     },
 
@@ -261,6 +213,65 @@ export default {
 
     showNavigation() {
       this.setNavigationIsOpen(this.showNavigation);
+    },
+  },
+
+  methods: {
+    ...mapActions(['setNavigationIsOpen', 'addDistrict']),
+
+    toggleCheckbox(event) {
+      this.selected = [];
+      this.selected = event ? allDistricts.map(district => district.key) : [];
+      this.selectedPredefinedOption = [];
+
+      if (this.$route.params.topic === undefined) {
+        this.$router.push({ name: 'District', params: { district: 'alle' } });
+      } else {
+        this.$router.push({
+          name: 'Topic',
+          params: { district: 'alle', topic: this.$route.params.topic },
+        });
+      }
+    },
+
+    onChangeCheckbox(key) {
+      // Reset selector
+      this.selectedPredefinedOption = [];
+
+      if (key) {
+        if (!this.selected.includes(key)) this.selected.push(key);
+        else this.selected = this.selected.filter(k => k !== key);
+      }
+
+      const district =
+        this.selected.length === 0 || this.selected.length === this.links.length ? 'alle' : this.selected.join('-');
+
+      if (this.$route.params.topic === undefined) {
+        this.$router.push({ name: 'District', params: { district } });
+      } else {
+        this.$router.push({
+          name: 'Topic',
+          params: { district, topic: this.$route.params.topic },
+        });
+      }
+    },
+
+    onClickDistrict(district) {
+      if (district === this.$route.params.district) {
+        return { name: 'District', params: { district } };
+      }
+
+      if (this.$route.params.topic === undefined) {
+        return { name: 'District', params: { district } };
+      }
+
+      return { name: 'Topic', params: { district, topic: this.$route.params.topic } };
+    },
+
+    onClickTab(compare) {
+      const name = this.$route.params.topic ? 'Topic' : 'District';
+
+      return { name, params: { district: compare ? 'alle' : allDistricts[0].uri } };
     },
   },
 };

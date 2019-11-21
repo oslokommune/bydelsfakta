@@ -4,13 +4,13 @@
  * sparklines for population change last 10 years.
  */
 
-import Base_Template from './baseTemplate';
+import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
 import d3 from '@/assets/d3';
 
 function Template(svg) {
-  Base_Template.apply(this, arguments);
+  BaseTemplate.apply(this, arguments);
   this.template = 'g';
 
   this.padding = { top: 90, left: 180, right: 20, bottom: 1 };
@@ -44,8 +44,8 @@ function Template(svg) {
 
   this.drawTable = function() {
     const tableData = JSON.parse(JSON.stringify(this.data.data));
-    const table_head = ['Geografi', ...this.data.meta.series.map(d => d.heading)];
-    const table_body = tableData.map(d => {
+    const tableHead = ['Geografi', ...this.data.meta.series.map(d => d.heading)];
+    const tableBody = tableData.map(d => {
       return {
         key: d.geography,
         values: [d.values[0], d.values[1], d.values[2]],
@@ -53,7 +53,7 @@ function Template(svg) {
     });
 
     const tableGenerator = util.drawTable.bind(this);
-    tableGenerator(table_head, table_body);
+    tableGenerator(tableHead, tableBody);
   };
 
   this.initRowElements = function(rowsE) {
@@ -131,7 +131,7 @@ function Template(svg) {
   };
 
   this.renderPopulation = function(rows) {
-    let x = d3
+    const x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
       .domain([0, d3.max(this.data.data.filter(d => (d.avgRow || d.totalRow ? false : d)).map(d => d.values[0]))]);
@@ -180,7 +180,11 @@ function Template(svg) {
       )
       .transition()
       .duration(100)
-      .attr('d', d => (d.values[1] === 0 ? '' : d.values[1] > 0 ? arrowPaths.up : arrowPaths.down));
+      .attr('d', d => {
+        if (d.values[1] === 0) return '';
+        if (d.values[1] > 0) return arrowPaths.up;
+        return arrowPaths.down;
+      });
   };
 
   /**
@@ -222,7 +226,11 @@ function Template(svg) {
       )
       .transition()
       .duration(100)
-      .attr('d', d => (d.values[2] === 0 ? '' : d.values[2] > 0 ? arrowPaths.up : arrowPaths.down));
+      .attr('d', d => {
+        if (d.values[2] === 0) return '';
+        if (d.values[2] > 2) return arrowPaths.up;
+        return arrowPaths.down;
+      });
 
     row
       .select('path.progress-year__line')
