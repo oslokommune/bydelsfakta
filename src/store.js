@@ -74,7 +74,6 @@ export const mutations = {
 export const actions = {
   addDistrict({ commit }, payload) {
     const payloadDistricts = payload.district.split('-');
-    console.log(payloadDistricts)
     if (payloadDistricts.length === 1) {
       if (payloadDistricts[0] === 'alle') {
         commit('ADD_DISTRICT', payloadDistricts);
