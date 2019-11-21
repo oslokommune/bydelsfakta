@@ -74,6 +74,7 @@ export const mutations = {
 export const actions = {
   addDistrict({ commit }, payload) {
     const payloadDistricts = payload.district.split('-');
+    console.log(payloadDistricts)
     if (payloadDistricts.length === 1) {
       if (payloadDistricts[0] === 'alle') {
         commit('ADD_DISTRICT', payloadDistricts);
@@ -85,16 +86,16 @@ export const actions = {
         else commit('SELECT_DISTRICT', [districtValue.key]);
       }
     } else {
-      commit('ADD_DISTRICT', districts);
+      commit('ADD_DISTRICT', payloadDistricts);
     }
 
     if (payload.pushRoute) {
       if (router.currentRoute.params.topic === undefined) {
-        router.push({ name: 'District', params: { district: districts.join('-') } });
+        router.push({ name: 'District', params: { district: payloadDistricts.join('-') } });
       } else {
         router.push({
           name: 'Topic',
-          params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
+          params: { district: payloadDistricts.join('-'), topic: router.currentRoute.params.topic },
         });
       }
     }
