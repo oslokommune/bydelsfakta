@@ -57,7 +57,6 @@ export default {
         heading: 'Personer 30–59 år med lav utdanning',
         reverse: true,
         method: 'ratio',
-        scale: [0, 0.5],
       },
       production: true,
       tabs: [
