@@ -62,7 +62,7 @@ export default {
 
   metaInfo() {
     return {
-      title: 'Page not found | Bydelsfakta',
+      title: 'Siden finnes ikke | Bydelsfakta',
     };
   },
 };
