@@ -29,7 +29,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'husholdningstyper_status',
+          id: 'husholdningstyper_status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/husholdningstyper-status`,
@@ -38,7 +38,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'husholdningstyper_status',
+          id: 'husholdningstyper_status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/husholdningstyper-status`,
@@ -48,7 +48,7 @@ export default {
           active: false,
           label: 'Historisk (andel)',
           help: 'Skifte i datagrunnlaget fra SSB mellom 2012 og 2014.',
-          id: 'husholdningstyper_historisk',
+          id: 'husholdningstyper_historisk_andel',
           template: 'linesMulti',
           url: `${API}/husholdningstyper-historisk`,
           method: 'ratio',
@@ -58,7 +58,7 @@ export default {
           active: false,
           label: 'Historisk (antall)',
           help: 'Skifte i datagrunnlaget fra SSB mellom 2012 og 2014.',
-          id: 'husholdningstyper_historisk',
+          id: 'husholdningstyper_historisk_antall',
           template: 'linesMulti',
           url: `${API}/husholdningstyper-historisk`,
           method: 'value',
@@ -81,7 +81,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'husholdning_totalt_status',
+          id: 'husholdning_totalt_status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/husholdning-totalt-status`,
@@ -90,7 +90,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'husholdning_totalt_status',
+          id: 'husholdning_totalt_status_antall',
           heading: 'Husholdninger etter husholdningstype',
           template: 'bars',
           method: 'value',
@@ -101,7 +101,7 @@ export default {
           active: false,
           label: 'Historisk (andel)',
           help: 'Skifte i datagrunnlaget fra SSB mellom 2012 og 2014.',
-          id: 'husholdning_totalt_historisk',
+          id: 'husholdning_totalt_historisk_andel',
           heading: 'Husholdninger etter husholdningstype',
           template: 'linesMulti',
           url: `${API}/husholdning-totalt-historisk`,
@@ -113,7 +113,7 @@ export default {
           active: false,
           label: 'Historisk (antall)',
           help: 'Skifte i datagrunnlaget fra SSB mellom 2012 og 2014.',
-          id: 'husholdning_totalt_historisk',
+          id: 'husholdning_totalt_historisk_antall',
           heading: 'Husholdninger etter husholdningstype',
           template: 'linesMulti',
           url: `${API}/husholdning-totalt-historisk`,
@@ -142,7 +142,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'husholdning_med_1_barn_andel-status',
+          id: 'husholdning_med_1_barn_andel-status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/husholdninger-med-1-barn-status`,
@@ -151,7 +151,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'husholdning_med_1_barn_antall-status',
+          id: 'husholdning_med_1_barn_antall-status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/husholdninger-med-1-barn-status`,
@@ -160,7 +160,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'husholdning_med_1_barn_andel-historisk',
+          id: 'husholdning_med_1_barn_andel-historisk_andel',
           template: 'lines',
           method: 'ratio',
           url: `${API}/husholdninger-med-1-barn-historisk`,
@@ -169,7 +169,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'husholdning_med_1_barn_antall-historisk',
+          id: 'husholdning_med_1_barn_antall-historisk_antall',
           template: 'lines',
           method: 'value',
           url: `${API}/husholdninger-med-1-barn-historisk`,
@@ -197,7 +197,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'husholdning_med_to_barn_andel-status',
+          id: 'husholdning_med_to_barn_andel-status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/husholdninger-med-2-barn-status`,
@@ -206,7 +206,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'husholdning_med_to_barn_antall-status',
+          id: 'husholdning_med_to_barn_antall-status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/husholdninger-med-2-barn-status`,
@@ -215,7 +215,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'husholdning_med_to_barn_andel-historisk',
+          id: 'husholdning_med_to_barn_andel-historisk_andel',
           template: 'lines',
           method: 'ratio',
           url: `${API}/husholdninger-med-2-barn-historisk`,
@@ -224,7 +224,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'husholdning_med_to_barn_antall-historisk',
+          id: 'husholdning_med_to_barn_antall-historisk_antall',
           template: 'lines',
           method: 'value',
           url: `${API}/husholdninger-med-2-barn-historisk`,
@@ -252,7 +252,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'husholdning_med_tre_barn_andel-status',
+          id: 'husholdning_med_tre_barn_andel-status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/husholdninger-med-3-barn-status`,
@@ -261,7 +261,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'husholdning_med_tre_barn_antall-status',
+          id: 'husholdning_med_tre_barn_antall-status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/husholdninger-med-3-barn-status`,
@@ -270,7 +270,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'husholdning_med_tre_barn_andel-historisk',
+          id: 'husholdning_med_tre_barn_andel-historisk_andel',
           template: 'lines',
           method: 'ratio',
           url: `${API}/husholdninger-med-3-barn-historisk`,
@@ -279,7 +279,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'husholdning_med_tre_barn_antall-historisk',
+          id: 'husholdning_med_tre_barn_antall-historisk_antall',
           template: 'lines',
           method: 'value',
           url: `${API}/husholdninger-med-3-barn-historisk`,

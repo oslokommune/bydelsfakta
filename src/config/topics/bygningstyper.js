@@ -23,7 +23,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eieform_totalt_status',
+          id: 'bygningstyper_alle_status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/bygningstyper-alle-status`,
@@ -32,7 +32,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eieform_totalt_status',
+          id: 'bygningstyper_alle_status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/bygningstyper-alle-status`,
@@ -41,7 +41,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'eieform_totalt_historisk',
+          id: 'bygningstyper_alle_historisk_andel',
           template: 'linesMulti',
           method: 'ratio',
           url: `${API}/bygningstyper-alle-historisk`,
@@ -50,7 +50,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'eieform_totalt_historisk',
+          id: 'bygningstyper_alle_historisk_antall',
           template: 'linesMulti',
           method: 'value',
           url: `${API}/bygningstyper-alle-historisk`,
@@ -112,7 +112,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eieform_blokk_andel',
+          id: 'bygningstyper_blokk_status_andel',
           heading: 'Blokkbebyggelse',
           template: 'bars',
           method: 'ratio',
@@ -122,7 +122,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eieform_blokk_antall',
+          id: 'bygningstyper_blokk_status_antall',
           heading: 'Blokkbebyggelse',
           template: 'bars',
           method: 'value',
@@ -132,7 +132,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'eieform_blokk_historisk',
+          id: 'bygnignstyper_blokk_historisk_andel',
           heading: 'Blokkbebyggelse',
           template: 'lines',
           method: 'ratio',
@@ -142,7 +142,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'eieform_blokk_historisk',
+          id: 'bygningstyper_blokk_historisk_antall',
           heading: 'Blokkbebyggelse',
           template: 'lines',
           method: 'value',
@@ -173,7 +173,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eieform_rekkehus_andel',
+          id: 'bygningstyper_rekkehus_status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/bygningstyper-rekkehus-status`,
@@ -182,7 +182,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eieform_rekkehus_antall',
+          id: 'bygningstyper_rekkehus_status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/bygningstyper-rekkehus-status`,
@@ -191,7 +191,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'eieform_rekkehus_historisk',
+          id: 'bygningstyper_rekkehus_historisk_andel',
           template: 'lines',
           method: 'ratio',
           url: `${API}/bygningstyper-rekkehus-historisk`,
@@ -200,7 +200,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'eieform_rekkehus_historisk',
+          id: 'bygningstyper_rekkehus_historisk_antall',
           template: 'lines',
           method: 'value',
           url: `${API}/bygningstyper-rekkehus-historisk`,
@@ -230,7 +230,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eieform_enebolig_andel',
+          id: 'bygningstyper_endebolig_status_andel',
           template: 'bars',
           method: 'ratio',
           url: `${API}/bygningstyper-enebolig-status`,
@@ -239,7 +239,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'eieform_enebolig_antall',
+          id: 'bygningstyper_endebolig_status_antall',
           template: 'bars',
           method: 'value',
           url: `${API}/bygningstyper-enebolig-status`,
@@ -248,7 +248,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'eieform_enebolig_historisk',
+          id: 'bygningstyper_endebolig_historisk_andel',
           template: 'lines',
           method: 'ratio',
           url: `${API}/bygningstyper-enebolig-historisk`,
@@ -257,7 +257,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'eieform_enebolig_historisk',
+          id: 'bygningstyper_endebolig_historisk_antall',
           template: 'lines',
           method: 'value',
           url: `${API}/bygningstyper-enebolig-historisk`,

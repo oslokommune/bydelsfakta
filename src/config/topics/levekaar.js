@@ -26,6 +26,7 @@ export default {
           heading: 'Ulike levekårsindikatorer (%) sammenlignet med Oslo',
           method: 'ratio',
           mode: 'osloRatio',
+          id: 'total_levekar_status_oslo',
           url: `${API}/levekar-totalt-status`,
         },
         {
@@ -37,6 +38,7 @@ export default {
           heading: 'Ulike levekårsindikatorer (%) sammenlignet med bydelen',
           method: 'ratio',
           mode: 'districtRatio',
+          id: 'totalt_levekar_status_bydeler',
           url: `${API}/levekar-totalt-status`,
         },
       ],
@@ -73,7 +75,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'levekar_lav-utdanning_andel',
+          id: 'levekar_lav-utdanning_antall',
           heading: 'Personer 30–59 år med lav utdanning',
           template: 'bars',
           method: 'value',
@@ -83,7 +85,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'levekar_lav-utdanning_historisk',
+          id: 'levekar_lav-utdanning_historisk_andel',
           heading: 'Personer 30–59 år med lav utdanning',
           help: 'Skifte i datagrunnlaget fra SSB mellom 2014 og 2015.',
           method: 'ratio',
@@ -94,7 +96,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'levekar_lav-utdanning_historisk',
+          id: 'levekar_lav-utdanning_historisk_antall',
           heading: 'Personer 30–59 år med lav utdanning',
           help: 'Skifte i datagrunnlaget fra SSB mellom 2014 og 2015.',
           method: 'value',
@@ -136,7 +138,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'levekar_fattige_andel',
+          id: 'levekar_fattige_antall',
           heading: 'Barnehusholdninger med lav inntekt korrigert for formue',
           template: 'bars',
           method: 'value',
@@ -146,7 +148,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'levekar_fattige_historisk',
+          id: 'levekar_fattige_historisk_andel',
           heading: 'Barnehusholdninger med lav inntekt korrigert for formue',
           method: 'ratio',
           template: 'lines',
@@ -156,7 +158,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'levekar_fattige_historisk',
+          id: 'levekar_fattige_historisk_antall',
           heading: 'Barnehusholdninger med lav inntekt korrigert for formue',
           method: 'value',
           template: 'lines',
@@ -197,7 +199,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'levekar_vgs_andel',
+          id: 'levekar_vgs_antall',
           heading: 'Personer 21–29 år som ikke har fullført videregående skole',
           template: 'bars',
           method: 'value',
@@ -207,7 +209,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'levekar_vgs-historisk',
+          id: 'levekar_vgs-historisk_andel',
           heading: 'Personer 21–29 år som ikke har fullført videregående skole',
           template: 'lines',
           method: 'ratio',
@@ -218,7 +220,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'levekar_vgs-historisk',
+          id: 'levekar_vgs-historisk_antall',
           heading: 'Personer 21–29 år som ikke har fullført videregående skole',
           template: 'lines',
           method: 'value',
@@ -414,7 +416,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'levekar_trangbodde_status',
+          id: 'levekar_trangbodde_status_andel',
           heading: 'Trangbodde husholdninger',
           template: 'bars',
           method: 'ratio',
@@ -424,7 +426,7 @@ export default {
         {
           active: false,
           label: 'Antall',
-          id: 'levekar_trangbodde_status',
+          id: 'levekar_trangbodde_status_antall',
           heading: 'Trangbodde husholdninger',
           template: 'bars',
           method: 'value',
@@ -434,7 +436,7 @@ export default {
         {
           active: false,
           label: 'Historisk (andel)',
-          id: 'levekar_trangbodde_historisk',
+          id: 'levekar_trangbodde_historisk_andel',
           heading: 'Trangbodde husholdninger',
           method: 'ratio',
           template: 'lines',
@@ -444,7 +446,7 @@ export default {
         {
           active: false,
           label: 'Historisk (antall)',
-          id: 'levekar_trangbodde_historisk',
+          id: 'levekar_trangbodde_historisk_antall',
           heading: 'Trangbodde husholdninger',
           method: 'value',
           template: 'lines',

@@ -25,6 +25,7 @@ export default {
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-status`,
           method: 'ratio',
+          id: 'rom_per_pers_alle_status_andel',
           production: true,
         },
         {
@@ -34,6 +35,7 @@ export default {
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-status`,
           method: 'value',
+          id: 'rom_per_pers_alle_status_antall',
           production: true,
         },
 
@@ -44,6 +46,7 @@ export default {
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-historisk`,
           method: 'ratio',
+          id: 'rom_per_pers_alle_historisk_andel',
           production: true,
         },
         {
@@ -53,6 +56,7 @@ export default {
           heading: 'Husholdninger fordelt etter antall rom per person',
           url: `${API}/trangboddhet-alle-historisk`,
           method: 'value',
+          id: 'rom_per_pers_alle_historisk_antall',
           production: true,
         },
       ],
@@ -81,6 +85,7 @@ export default {
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-status`,
           method: 'ratio',
+          id: 'husholdninger_under_0_5_per_pers_status_andel',
           production: true,
         },
         {
@@ -90,6 +95,7 @@ export default {
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-status`,
           method: 'value',
+          id: 'husholdninger_under_0_5_per_pers_status_antall',
           production: true,
         },
         {
@@ -99,6 +105,7 @@ export default {
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-historisk`,
           method: 'ratio',
+          id: 'husholdninger_0_5_per_pers_historisk_andel',
           production: true,
         },
         {
@@ -108,6 +115,7 @@ export default {
           heading: 'Husholdninger med under 0,5 rom per person',
           url: `${API}/trangboddhet-under-0-5-historisk`,
           method: 'value',
+          id: 'husholdninger_under_0_5_per_pers_hitorisk_antall',
           production: true,
         },
       ],
@@ -137,6 +145,7 @@ export default {
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-status`,
           method: 'ratio',
+          id: 'husholdninger_0_5_til_0_9_per_pers_status_andel',
           production: true,
         },
         {
@@ -146,6 +155,7 @@ export default {
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-status`,
           method: 'value',
+          id: 'husholdninger_0_5_til_0_9_per_pers_status_antall',
           production: true,
         },
         {
@@ -155,6 +165,7 @@ export default {
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-historisk`,
           method: 'ratio',
+          id: 'husholdninger_0_5_til_0_9_per_pers_historisk_andel',
           production: true,
         },
         {
@@ -164,6 +175,7 @@ export default {
           heading: 'Husholdninger med 0,5–0,9 rom per person',
           url: `${API}/trangboddhet-0-5-0-9-historisk`,
           method: 'value',
+          id: 'husholdninger_0_5_til_0_9_per_pers_status_antall',
           production: true,
         },
       ],
@@ -193,6 +205,7 @@ export default {
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-status`,
           method: 'ratio',
+          id: 'husholdninger_1_til_1_9_per_pers_status_andel',
           production: true,
         },
         {
@@ -202,6 +215,7 @@ export default {
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-status`,
           method: 'value',
+          id: 'husholdninger_1_til_1_9_per_pers_status_antall',
           production: true,
         },
         {
@@ -211,6 +225,7 @@ export default {
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-historisk`,
           method: 'ratio',
+          id: 'husholdninger_1_til_1_9_per_pers_historisk_andel',
           production: true,
         },
         {
@@ -219,6 +234,7 @@ export default {
           template: 'lines',
           heading: 'Husholdninger med 1–1,9 rom per person',
           url: `${API}/trangboddhet-1-0-1-9-historisk`,
+          id: 'husholdninger_1_til_1_9_per_pers_historisk_antall',
           method: 'value',
           production: true,
         },
@@ -249,6 +265,7 @@ export default {
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-status`,
           method: 'ratio',
+          id: 'husholdninger_2_eller_flere_per_pers_status_andel',
           production: true,
         },
         {
@@ -258,6 +275,7 @@ export default {
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-status`,
           method: 'value',
+          id: 'husholdninger_2_eller_flere_per_pers_status_antall',
           production: true,
         },
         {
@@ -267,6 +285,7 @@ export default {
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-historisk`,
           method: 'ratio',
+          id: 'husholdninger_2_eller_flere_per_pers_historisk_andel',
           production: true,
         },
         {
@@ -276,6 +295,7 @@ export default {
           heading: 'Husholdninger med 2 rom eller flere per person',
           url: `${API}/trangboddhet-over-2-historisk`,
           method: 'value',
+          id: 'husholdninger_2_eller_flere_per_pers_historisk_antall',
           production: true,
         },
       ],

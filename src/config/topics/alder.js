@@ -59,7 +59,7 @@ export default {
         {
           active: false,
           label: 'Status',
-          id: 'alder_distribusjon_status',
+          id: 'alder_befolkningspyramide_status',
           template: 'pyramid',
           heading: 'Befolkningen etter alder og kjønn',
           method: 'value',

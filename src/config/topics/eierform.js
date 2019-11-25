@@ -27,7 +27,7 @@ export default {
         {
           active: false,
           label: 'Andel',
-          id: 'eieform_status',
+          id: 'eieform_status_antall',
           heading: 'Husholdning etter eie-/leieforhold',
           template: 'bars',
           method: 'ratio',
@@ -37,7 +37,7 @@ export default {
         {
           active: false,
           label: 'Matrise',
-          id: 'eieform_status',
+          id: 'eieform_status_andel',
           heading: 'Husholdning etter eie-/leieforhold',
           template: 'ternaryPlot',
           method: 'ratio',
@@ -47,7 +47,7 @@ export default {
         {
           active: false,
           label: 'Historisk',
-          id: 'eieform_historisk',
+          id: 'eieform_historisk_andel',
           heading: 'Husholdning etter eie-/leieforhold',
           template: 'linesMulti',
           method: 'ratio',
