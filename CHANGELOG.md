@@ -1,4 +1,4 @@
-# Release 1.1
+# Release v1.1
 
 ### About this version
 
@@ -71,7 +71,7 @@ This planned expansion takes place in November 2019 and adds features ommited fr
 
 ---
 
-# Release 1.0
+# Release v1.0
 
 **https://bydelsfakta.oslo.kommune.no/**
 
