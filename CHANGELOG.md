@@ -1,4 +1,4 @@
-# Unreleased (v.1.1)
+# Release 1.1
 
 ### About this version
 
