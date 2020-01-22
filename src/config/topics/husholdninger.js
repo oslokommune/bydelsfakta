@@ -20,7 +20,7 @@ export default {
       map: {
         labels: ['Færre', 'Flere'],
         url: `${API}/husholdningstyper-status`,
-        heading: 'Aleneboende',
+        heading: 'Énpersonshusholdninger',
         method: 'ratio',
         series: 0,
       },
