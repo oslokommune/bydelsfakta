@@ -18,7 +18,7 @@ exports[`GraphCard change an active tab 1`] = `
         <h2
           class="card__title"
         >
-          Eierform
+          Befolkningen etter alder
         </h2>
       </div>
        
@@ -43,28 +43,20 @@ exports[`GraphCard change an active tab 1`] = `
           </div>
            
           <button
+            aria-label="Antall"
+            class="tabs__tab active"
+            data-id="tabButton-Befolkningen etter alder-0"
+            role="tab"
+          >
+            Antall
+          </button>
+          <button
             aria-label="Andel"
             class="tabs__tab"
-            data-id="tabButton-Eierform-0"
+            data-id="tabButton-Befolkningen etter alder-1"
             role="tab"
           >
             Andel
-          </button>
-          <button
-            aria-label="Matrise"
-            class="tabs__tab active"
-            data-id="tabButton-Eierform-1"
-            role="tab"
-          >
-            Matrise
-          </button>
-          <button
-            aria-label="Historisk"
-            class="tabs__tab"
-            data-id="tabButton-Eierform-2"
-            role="tab"
-          >
-            Historisk
           </button>
            
           <!---->
@@ -99,18 +91,7 @@ exports[`GraphCard change an active tab 1`] = `
             />
           </button>
            
-          <button
-            aria-label="Kart"
-            class="card__toggle-button"
-            title="Kart"
-          >
-            <ok-icon-stub
-              class="context-menu__dropdown-item-icon"
-              iconref="map-pin"
-              options="[object Object]"
-              stroke-width="2.5"
-            />
-          </button>
+          <!---->
         </div>
          
         <div
@@ -199,7 +180,21 @@ exports[`GraphCard change an active tab 1`] = `
         />
       </div>
        
-      <!---->
+      <div
+        class="help"
+      >
+        <button
+          aria-label="Vis hjelpetekst"
+          class="help__button"
+        >
+          <ok-icon-stub
+            iconref="help"
+            options="[object Object]"
+          />
+        </button>
+         
+        <!---->
+      </div>
     </div>
      
     <!---->

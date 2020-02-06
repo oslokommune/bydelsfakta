@@ -1,5 +1,5 @@
-import { color } from '../colors';
 import d3 from '@/assets/d3';
+import { color } from '../colors';
 import util from '../template-utils';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../../tooltip';
 

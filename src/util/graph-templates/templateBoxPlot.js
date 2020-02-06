@@ -3,9 +3,9 @@
  * (the dots are rendered as lines)
  */
 
+import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import util from './template-utils';
-import d3 from '@/assets/d3';
 import * as locale from './locale';
 
 import {

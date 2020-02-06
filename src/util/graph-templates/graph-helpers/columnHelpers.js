@@ -1,6 +1,6 @@
+import d3 from '@/assets/d3';
 import { color } from '../colors';
 import util from '../template-utils';
-import d3 from '@/assets/d3';
 
 export function initColumns() {
   return this.canvas

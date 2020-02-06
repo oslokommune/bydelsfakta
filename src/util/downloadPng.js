@@ -18,7 +18,7 @@ export default function downloadPng(svgRef, filename) {
     left: -padding,
     width,
     height,
-    canvg,
+    canvg: canvg.Canvg,
   };
 
   // Manipulate things before screenshot

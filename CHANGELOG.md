@@ -1,3 +1,14 @@
+# Unreleased v1.1.1
+
+### About this version
+
+This is only a release updating dependencies and fixing breaking changes
+
+### Improvements
+
+- Changed string `Aleneboende` to `Énpersonshusholdninger`
+- Updated almost all of the dependencies
+
 # Release v1.1
 
 ### About this version

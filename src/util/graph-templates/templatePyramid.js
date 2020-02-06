@@ -9,9 +9,9 @@
  *
  */
 
+import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import { color } from './colors';
-import d3 from '@/assets/d3';
 import util from './template-utils';
 
 function Template(svg) {

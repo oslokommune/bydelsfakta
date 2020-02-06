@@ -6,9 +6,9 @@
  * options object.
  */
 
+import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import { color } from './colors';
-import d3 from '@/assets/d3';
 import util from './template-utils';
 
 // Coordinates for the three corners of the triangle.

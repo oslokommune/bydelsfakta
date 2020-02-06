@@ -4,10 +4,10 @@
  * sparklines for population change last 10 years.
  */
 
+import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import util from './template-utils';
 import { color } from './colors';
-import d3 from '@/assets/d3';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);

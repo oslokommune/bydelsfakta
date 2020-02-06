@@ -2,9 +2,9 @@
  * Template for brushable bar chart for age distributions.
  */
 
+import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import { color } from './colors';
-import d3 from '@/assets/d3';
 import ageRanges from '../../config/ageRanges';
 import { showTooltipOver, showTooltipMove, hideTooltip } from '../tooltip';
 import util from './template-utils';

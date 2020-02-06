@@ -26,8 +26,8 @@ import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
 import L from 'leaflet';
 import * as d3 from 'd3';
 import { GestureHandling } from 'leaflet-gesture-handling';
-import { color, interpolator } from '../util/graph-templates/colors';
 import * as locale from '@/util/graph-templates/locale';
+import { color, interpolator } from '../util/graph-templates/colors';
 
 export default {
   name: 'VLeaflet',

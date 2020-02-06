@@ -2,9 +2,9 @@
  * Template for bar chart which supports both single or multiple series.
  */
 
+import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import util from './template-utils';
-import d3 from '@/assets/d3';
 import * as closeButton from './graph-helpers/closeButton';
 import sortData from './graph-helpers/sortData';
 import generateTableData from './graph-helpers/tableHelpers';
