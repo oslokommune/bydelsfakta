@@ -23,6 +23,7 @@
 <script>
 /* eslint-disable no-continue */
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
+import * as Sentry from '@sentry/browser';
 import L from 'leaflet';
 import * as d3 from 'd3';
 import { GestureHandling } from 'leaflet-gesture-handling';
@@ -156,12 +157,21 @@ export default {
 
     async getData(url) {
       if (!url) return;
-      this.data = await fetch(url).then(d =>
-        d.json().then(dj => {
-          this.meta = dj[0].meta;
-          return dj[0].data;
-        })
-      );
+      this.data = await fetch(url)
+        .then(d =>
+          d
+            .json()
+            .then(dj => {
+              this.meta = dj[0].meta;
+              return dj[0].data;
+            })
+            .catch(err => {
+              Sentry.captureException(err);
+            })
+        )
+        .catch(err => {
+          Sentry.captureException(err);
+        });
 
       this.createChoropleth(this.data);
 

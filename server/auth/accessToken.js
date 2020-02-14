@@ -1,8 +1,8 @@
 'use strict';
 
-const isDate = require('date-fns/is_date');
-const addSeconds = require('date-fns/add_seconds');
-const isAfter = require('date-fns/is_after');
+const isDate = require('date-fns/isDate');
+const addSeconds = require('date-fns/addSeconds');
+const isAfter = require('date-fns/isAfter');
 
 const parseToken = token => {
   const parsedTokenProps = {};
