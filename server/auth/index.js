@@ -13,13 +13,13 @@ let accessToken = null;
 
 const logErrors = (error, refresh) => {
   if (refresh) {
-    console.log('Status: ', error.status);
-    console.log('StatusText: ', error.statusText);
-    console.log('Error refreshing access token: ', error.data);
+    console.error('Status: ', error.status);
+    console.error('StatusText: ', error.statusText);
+    console.error('Error refreshing access token: ', error.data);
   } else {
-    console.log('Status: ', error.status);
-    console.log('StatusText: ', error.statusText);
-    console.log('Error getting access token: ', error.data);
+    console.error('Status: ', error.status);
+    console.error('StatusText: ', error.statusText);
+    console.error('Error getting access token: ', error.data);
   }
 };
 

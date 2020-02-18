@@ -22,7 +22,7 @@
         aria-hidden="true"
         :class="{ loading }"
         @click="showHelp = false"
-      ></svg>
+      />
     </div>
     <div
       ref="tableContainer"
@@ -57,6 +57,7 @@
 
 <script>
 import * as d3 from 'd3';
+import * as Sentry from '@sentry/browser';
 import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
 import TemplateBars from '../util/graph-templates/templateBars';
@@ -238,10 +239,11 @@ export default {
             });
             return data;
           })
-          .catch(() => {
+          .catch(err => {
             this.error = true;
             this.errorMessage = this.$t('error.connectionLost');
             this.loading = false;
+            Sentry.captureException(err);
           });
       }
 
