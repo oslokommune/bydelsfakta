@@ -12,17 +12,10 @@ import {
 
 // Update the contents for each row on each render
 export default function() {
-  const rows = this.canvas
+  this.canvas
     .selectAll('g.row')
     .data(this.data.data)
-    .join(createRowElements.bind(this));
-
-  rows
-    .transition()
-    .duration(this.duration)
-    .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-
-  rows
+    .join(createRowElements.bind(this))
     .call(updateRowBox.bind(this))
     .call(updateRowGeography.bind(this))
     .call(updateRowMedianText.bind(this))
@@ -30,5 +23,8 @@ export default function() {
     .call(updateRowMeanRect.bind(this))
     .call(updateRowMedianRect.bind(this))
     .call(updateRowFill.bind(this))
-    .call(updateRowDivider.bind(this));
+    .call(updateRowDivider.bind(this))
+    .transition()
+    .duration(this.duration)
+    .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 }

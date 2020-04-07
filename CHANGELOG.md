@@ -4,8 +4,21 @@
 
 - Update dependencies
 - Improved sentry support
-- Sort historical data for `TemplateLines`
+- Sort historical data for `templateLines`
 - Refactoring graph helpers
+- Refactoring graph templates (4 of 12)
+  - ✅ `templateBars`
+  - ✅ `templateBoxPlot`
+  - ✅ `templateBarsAndLines`
+  - ✅ `templateAgeDistribution`
+  - ❌ `templateLines`
+  - ❌ `templateLinesMulti`
+  - ❌ `templateLivingConditions`
+  - ❌ `templatePopulationDetailsTable`
+  - ❌ `templatePyramid`
+  - ❌ `templateStackedBars`
+  - ❌ `templateTernaryPlot`
+  - ❌ `templateComboHistogram`
 
 # Release v1.1.1
 
