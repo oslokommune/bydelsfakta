@@ -25,9 +25,16 @@ function Template(svg) {
       this.highlight = false;
     }
 
-    // Add colors to geographies if they don't already exist
     this.data.data.forEach((geo, i, j) => {
+      // Add colors to geographies if they don't already exist
       geo.color = d3.interpolateTurbo(i / j.length);
+
+      // Sort values by year
+      geo.values.sort((a, b) => {
+        if (a.date > b.date) return 1;
+        if (a.date < b.date) return -1;
+        return 0;
+      });
     });
 
     this.width = d3.max([this.width, 300]);
@@ -473,13 +480,13 @@ function Template(svg) {
           .map(row => d3.min(row.values.map(d => d[this.method])))
       ) * 0.8;
 
-    const minDate = d3.min(this.data.data.map(d => d.values[0].date).map(this.parseYear));
-    const maxDate = d3.max(this.data.data.map(d => d.values[d.values.length - 1].date).map(this.parseYear));
+    const dates = this.data.data.map(geo => geo.values.map(val => val.date)).flat();
+    const dateExtent = d3.extent(dates).map(this.parseYear);
 
     // Set the xScale (time dimension) range and domain
     this.x = d3
       .scaleTime()
-      .domain([minDate, maxDate])
+      .domain(dateExtent)
       .range([0, this.width]);
 
     // Set the y scale based on max and min values
