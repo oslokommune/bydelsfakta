@@ -1,7 +1,7 @@
 import d3 from '@/assets/d3';
-import { color } from '../colors';
+import { color } from '../../colors';
 
-export function init() {
+export default function init() {
   const { duration } = this;
 
   const g = this.canvas
@@ -44,12 +44,4 @@ export function init() {
     .attr('transform', 'translate(15, 20)');
 
   return g;
-}
-
-//
-export function showOrHide() {
-  this.close
-    .style('display', () => (this.selected > -1 ? 'block' : 'none'))
-    .attr('transform', `translate(${this.width - 30}, -60)`)
-    .attr('tabindex', this.selected === -1 ? false : 0);
 }

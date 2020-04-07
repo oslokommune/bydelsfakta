@@ -5,7 +5,7 @@
 import d3 from '@/assets/d3';
 import { hideTooltip, showTooltipMove, showTooltipOver } from '../tooltip';
 import BaseTemplate from './baseTemplate';
-import drawVoronoi from './graph-helpers/voronoiHelpers';
+import { drawVoronoi } from './graph-helpers';
 import { color } from './colors';
 import util from './template-utils';
 

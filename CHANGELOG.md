@@ -5,6 +5,7 @@
 - Update dependencies
 - Improved sentry support
 - Sort historical data for `TemplateLines`
+- Refactoring graph helpers
 
 # Release v1.1.1
 
