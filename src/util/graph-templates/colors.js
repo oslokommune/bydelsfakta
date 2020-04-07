@@ -1,4 +1,6 @@
-import * as d3 from 'd3';
+import { interpolateRdBu } from 'd3';
+
+export const interpolator = interpolateRdBu;
 
 export const color = {
   yellow: '#F8C66B',
@@ -8,8 +10,6 @@ export const color = {
   light_grey: '#F0F1F1',
   red: '#FF8174',
   blue: '#6EE9FF',
-  positive: d3.interpolateRdBu(0.9),
-  negative: d3.interpolateRdBu(0.1),
+  positive: interpolator(0.9),
+  negative: interpolator(0.1),
 };
-
-export const interpolator = d3.interpolateRdBu;
