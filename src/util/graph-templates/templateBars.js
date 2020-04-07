@@ -5,12 +5,8 @@
 import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import util from './template-utils';
-import * as closeButton from './graph-helpers/closeButton';
-import sortData from './graph-helpers/sortData';
-import generateTableData from './graph-helpers/tableHelpers';
-import * as rowHelpers from './graph-helpers/rowHelpers';
-import * as columnHelpers from './graph-helpers/columnHelpers';
-import * as svgHelpers from './graph-helpers/svgHelpers';
+
+import { closeButton, sortData, generateTableData, rowHelpers, columnHelpers, resizeSvg } from './graph-helpers';
 
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
@@ -74,7 +70,7 @@ function Template(svg) {
     }
 
     // Resize svg
-    this.svg.call(svgHelpers.resize.bind(this));
+    this.svg.call(resizeSvg.bind(this));
 
     // Move the close button
     closeButton.showOrHide.call(this);
