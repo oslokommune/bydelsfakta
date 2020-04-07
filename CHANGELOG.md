@@ -1,4 +1,12 @@
-# Unreleased v1.1.1
+# Unreleased
+
+### Changes
+
+- Update dependencies
+- Improved sentry support
+- Sort historical data for `TemplateLines`
+
+# Release v1.1.1
 
 ### About this version
 
