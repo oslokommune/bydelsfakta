@@ -1,5 +1,11 @@
 # Unreleased
 
+# Release v1.1.2
+
+### About this version
+
+In this release we have mostly updated our dependencies, but we also found a bug with the historic graphs that we fixed
+
 ### Changes
 
 - Update dependencies
