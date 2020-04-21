@@ -31,7 +31,7 @@ exports[`GraphCard change an active tab 1`] = `
         >
           <div
             class="resize-observer"
-            data-v-2b830392=""
+            data-v-b329ee4c=""
             tabindex="-1"
           >
             <object
@@ -169,7 +169,7 @@ exports[`GraphCard change an active tab 1`] = `
        
       <div
         class="resize-observer"
-        data-v-2b830392=""
+        data-v-b329ee4c=""
         tabindex="-1"
       >
         <object
@@ -235,7 +235,7 @@ exports[`GraphCard renders correctly 1`] = `
         >
           <div
             class="resize-observer"
-            data-v-2b830392=""
+            data-v-b329ee4c=""
             tabindex="-1"
           >
             <object
@@ -373,7 +373,7 @@ exports[`GraphCard renders correctly 1`] = `
        
       <div
         class="resize-observer"
-        data-v-2b830392=""
+        data-v-b329ee4c=""
         tabindex="-1"
       >
         <object
