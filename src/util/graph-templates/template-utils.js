@@ -2,7 +2,7 @@
  * Utility methods for commonly used operations in the graph templates.
  */
 
-import d3 from '@/assets/d3';
+import { select } from 'd3';
 import router from '../../router';
 import allDistricts from '../../config/allDistricts';
 
@@ -28,7 +28,7 @@ const util = {
     let computedWidth;
 
     // create placeholder svg
-    const svg = d3.select('body').append('svg');
+    const svg = select('body').append('svg');
 
     svg
       .append('text')
@@ -87,7 +87,7 @@ const util = {
         .querySelectorAll('th[data-footnote=true]').length === 0;
 
     tableElement.classed('hide-footnote', hideFootnote);
-    d3.select(tableElement.node().parentNode)
+    select(tableElement.node().parentNode)
       .select('.table-footnote')
       .classed('hide-footnote', hideFootnote);
 
