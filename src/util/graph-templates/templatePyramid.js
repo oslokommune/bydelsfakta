@@ -300,7 +300,7 @@ function Template(svg) {
           .selectAll('text');
       } else if (d.type === 'right') {
         d3.select(j[i])
-          .call(d3.axisRight(this.y).tickFormat(dj => `${dj}j år`))
+          .call(d3.axisRight(this.y).tickFormat(dj => `${dj} år`))
           .attr('transform', `translate(${this.width}, 0)`)
           .selectAll('text');
       } else if (d.type === 'lines') {
