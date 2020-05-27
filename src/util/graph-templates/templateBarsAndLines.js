@@ -52,7 +52,7 @@ const variations = {
 
   migrations: {
     lineData1: {
-      heading: 'Antall innfyttere',
+      heading: 'Antall innflyttere',
       data: obj => obj.immigration || 'N/A',
     },
     lineData2: {
