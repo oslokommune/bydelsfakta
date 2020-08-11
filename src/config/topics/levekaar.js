@@ -51,7 +51,7 @@ export default {
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog57&submode=catalog&mode=documentation&top=yes',
         info:
-          'Statistikken omfatter personer 30–59 år, per 1.1, med utdanningsnivå per 1.10 året før. Lav utdanning omfatter personer med kun grunnskole, ingen eller uoppgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; utdanningsnivå fra og med 2015  er ikke direkte sammenlignbart tidligere år.',
+          'Statistikken omfatter personer 30–59 år, per 1.1, med utdanningsnivå per 1.10 året før. År i figur/tabell svarer til året for utdanningsnivået. Lav utdanning omfatter personer med kun grunnskole, ingen eller uoppgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; utdanningsnivå fra og med 2015 er ikke direkte sammenlignbart med tidligere år.',
       },
       map: {
         labels: ['Færre', 'Flere'],
