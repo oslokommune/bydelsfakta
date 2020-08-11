@@ -35,6 +35,7 @@ exports[`Topic renders component correctly 1`] = `
       </p>
        
       <a
+        aria-current="page"
         class="notFound__information--frontpage-link router-link-exact-active router-link-active"
         href="#/"
       >
