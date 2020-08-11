@@ -16,7 +16,11 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
   >
     <!---->
      
-    <!---->
+    <transition-stub
+      name="fade"
+    >
+      <!---->
+    </transition-stub>
   </div>
 </header>
 `;

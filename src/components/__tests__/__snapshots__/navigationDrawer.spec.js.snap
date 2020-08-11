@@ -110,6 +110,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
         <!---->
          
         <a
+          aria-current="page"
           class="navigation-link__label router-link-exact-active router-link-active"
           href="/bydel/sagene"
           id="a-sagene"
@@ -412,6 +413,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <!---->
          
         <a
+          aria-current="page"
           class="navigation-link__label router-link-exact-active router-link-active"
           href="/bydel/sagene"
           id="a-sagene"
