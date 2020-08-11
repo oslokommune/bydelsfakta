@@ -1,5 +1,15 @@
 # Unreleased
 
+# Release v1.1.3
+
+### About this version
+Minor changes
+
+### Changes
+
+- Updated dependencies because of security vulnerabilities
+- Changed the information about lav-utdanning graph
+
 # Release v1.1.2
 
 ### About this version
