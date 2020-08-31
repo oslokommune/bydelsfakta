@@ -4,7 +4,7 @@ const axios = require('axios');
 const querystring = require('querystring');
 
 const envs = {
-  access_token_url: `${process.env.KEYCLOAK_URL}realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
+  access_token_url: `${process.env.KEYCLOAK_SERVER_URL}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
 };
 
 const request = params => {
