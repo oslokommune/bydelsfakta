@@ -26,20 +26,24 @@ module.exports = {
         svg: 'ignorePackages',
       },
     ],
-    "no-shadow": ["error", { "allow": ["state"] }],
-    "no-underscore-dangle": "off",
-    "global-require": "off",
-    "func-names": "off",
-    "no-param-reassign": "off",
-    "no-use-before-define": "off",
-    "prefer-rest-params": "off",
-    "prefer-destructuring": ["error", {
-      "array": false,
-      "object": true
-    }, {
-      "enforceForRenamedProperties": false
-    }],
-    "vue/no-v-html": "off",
+    'no-shadow': ['error', { allow: ['state'] }],
+    'no-underscore-dangle': 'off',
+    'global-require': 'off',
+    'func-names': 'off',
+    'no-param-reassign': 'off',
+    'no-use-before-define': 'off',
+    'prefer-rest-params': 'off',
+    'prefer-destructuring': [
+      'error',
+      {
+        array: false,
+        object: true,
+      },
+      {
+        enforceForRenamedProperties: false,
+      },
+    ],
+    'vue/no-v-html': 'off',
   },
 
   overrides: [

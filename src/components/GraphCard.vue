@@ -217,7 +217,7 @@
         :settings="settings.tabs[active]"
         :sources="settings.sources"
         :mode="mode"
-        @updateDate="setDate"
+        @update-date="setDate"
       />
       <div v-if="mode === 'map'" class="map-container">
         <v-leaflet
