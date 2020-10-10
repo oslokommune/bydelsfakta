@@ -1,6 +1,9 @@
 # Unreleased
 
-# Release v1.2.0
+# Release v1.1.5
+Just a version bump because of a mistake from earlier version bump
+
+# Release v1.1.4
 
 ### About this version
 Minor fixes and changes

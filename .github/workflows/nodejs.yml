@@ -62,8 +62,8 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: oslokommune/bydelsfakta-frontend
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.CR_PAT }}
         registry: ghcr.io
         tags: latest,$RELEASE_VERSION
         dockerfile: Dockerfile
