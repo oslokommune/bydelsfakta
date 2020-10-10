@@ -64,5 +64,5 @@ jobs:
         name: oslokommune/bydelsfakta-frontend
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: latest,${{ $RELEASE_VERSION }}
+        snapshot: true
         dockerfile: Dockerfile
