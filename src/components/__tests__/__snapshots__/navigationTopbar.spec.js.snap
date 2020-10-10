@@ -8,7 +8,7 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
     class="header"
     id="select"
   >
-    Bydelsfakta – statistikk om befolkning, levekår og boforhold
+    Bydel Sagene
   </h1>
    
   <div

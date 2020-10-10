@@ -39,31 +39,28 @@ describe('TheNavigationTopbar', () => {
     expect(wrapper.classes('oslo__navigation-topbar')).toBe(true);
   });
 
-  test('renders correctly', () => {
-    router.push('/bydel/sagene');
+  test('renders correctly', async () => {
+    await router.push('/bydel/sagene');
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('return false if subpage is not active', () => {
-    router.push('/bydel/sagene/boligpriser');
+  test('return false if subpage is not active', async () => {
+    await router.push('/bydel/sagene/boligpriser');
     expect(wrapper.vm.checkActiveTopic('levekaar')).toEqual(false);
   });
 
-  test('change showDropdown to false if it is true', () => {
-    router.push('/bydel/sagene/boligpriser');
+  test('change showDropdown to false if it is true', async () => {
     wrapper.setData({ showDropdown: true });
     wrapper.vm.closeMenu();
     expect(wrapper.vm.showDropdown).toEqual(false);
   });
 
-  test('keep showDropdown as false if false', () => {
-    router.push('/bydel/sagene/boligpriser');
+  test('keep showDropdown as false if false', async () => {
     wrapper.vm.closeMenu();
     expect(wrapper.vm.showDropdown).toEqual(false);
   });
 
-  test('return router object when clicking on a subpage', () => {
-    router.push('/bydel/sagene/boligpriser');
+  test('return router object when clicking on a subpage', async () => {
     expect(wrapper.vm.onClickTopic('boligpriser')).toEqual({
       name: 'Topic',
       params: { district: 'sagene', topic: 'boligpriser' },

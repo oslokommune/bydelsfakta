@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import { mutations, actions, getters } from '../store';
 import districts from '../config/geoData/districts';
 import { allDistricts, oneDistrict, oneDistrictCompare } from '../../tests/config/expectedDistrictResults';
@@ -157,68 +156,68 @@ describe('actions', () => {
   let commit;
   let state;
   beforeEach(() => {
-    commit = sinon.spy();
+    commit = jest.fn();
     state = {};
   });
 
   it('addDistrict with multiple districts', () => {
     addDistrict({ commit, state }, { district: '01-02-03-04' });
 
-    expect(commit.args).toEqual([['ADD_DISTRICT', ['01', '02', '03', '04']]]);
+    expect(commit).toHaveBeenCalledWith('ADD_DISTRICT', ['01', '02', '03', '04']);
   });
 
   it('addDistrict with only one district', () => {
     addDistrict({ commit, state }, { district: 'sagene' });
 
-    expect(commit.args).toEqual([['SELECT_DISTRICT', ['03']]]);
+    expect(commit).toHaveBeenCalledWith('SELECT_DISTRICT', ['03']);
   });
 
   it('addDistrict with only one district from checkbox', () => {
     addDistrict({ commit, state }, { district: '01' });
 
-    expect(commit.args).toEqual([['ADD_DISTRICT', ['01']]]);
+    expect(commit).toHaveBeenCalledWith('ADD_DISTRICT', ['01']);
   });
 
   it('addDistrict with alle as a district', () => {
     addDistrict({ commit, state }, { district: 'alle' });
 
-    expect(commit.args).toEqual([['ADD_DISTRICT', ['alle']]]);
+    expect(commit).toHaveBeenCalledWith('ADD_DISTRICT', ['alle']);
   });
 
   it('addDistrict with alle as a district with pushRoute true', () => {
     addDistrict({ commit, state }, { district: 'alle', pushRoute: true });
 
-    expect(commit.args).toEqual([['ADD_DISTRICT', ['alle']]]);
+    expect(commit).toHaveBeenCalledWith('ADD_DISTRICT', ['alle']);
   });
 
   it('cleanState', () => {
     cleanState({ commit, state });
-    expect(commit.args).toEqual([['CLEAN_STATE']]);
+    expect(commit).toHaveBeenCalledWith('CLEAN_STATE');
   });
 
   it('Change navigation to open', () => {
     setNavigationIsOpen({ commit, state }, true);
-    expect(commit.args).toEqual([['SET_NAVIGATION_IS_OPEN', true]]);
+    expect(commit).toHaveBeenCalledWith('SET_NAVIGATION_IS_OPEN', true);
   });
 
   it('Change menu to open', () => {
     setMenuIsOpen({ commit, state }, true);
-    expect(commit.args).toEqual([['SET_MENU_IS_OPEN', true]]);
+    expect(commit).toHaveBeenCalledWith('SET_MENU_IS_OPEN', true);
   });
 
   it('set compabiliity to ie11', () => {
     setIE11Compatibility({ commit, state }, true);
-    expect(commit.args).toEqual([['SET_IE11_COMPATIBILITY', true]]);
+    expect(commit).toHaveBeenCalledWith('SET_IE11_COMPATIBILITY', true);
   });
 
   it('set production mode to prod', () => {
     setProductionMode({ commit, state }, 'prod');
-    expect(commit.args).toEqual([['SET_PRODUCTION_MODE', 'prod']]);
+    expect(commit).toHaveBeenCalledWith('SET_PRODUCTION_MODE', 'prod');
   });
 
   it('set touch device', () => {
     setTouchDevice({ commit, state }, true);
-    expect(commit.args).toEqual([['SET_TOUCH_DEVICE', true]]);
+    expect(commit).toHaveBeenCalledWith('SET_TOUCH_DEVICE', true);
   });
 });
 

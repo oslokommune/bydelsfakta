@@ -230,7 +230,7 @@ export default {
           .json(`${this.settings.url}?geography=${geoParam}`)
           .then(rawData => {
             const data = rawData[0];
-            this.$emit('updateDate', data.meta.publishedDate);
+            this.$emit('update-date', data.meta.publishedDate);
 
             data.data.map(district => {
               district.noLink = !districtNames[district.id]; // add noLink flag if geography is not a district
