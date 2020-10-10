@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleoslo correctly 1`] = `
+exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene correctly 1`] = `
 <aside
   class="navbar"
 >
@@ -24,7 +24,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/gamleo
   <button
     class="selectedTopic"
   >
-    - Velg byområde -
+    Bydel Sagene
   </button>
    
   <nav
@@ -315,7 +315,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
   </a>
    
   <a
-    class="logo-link router-link-active"
+    aria-current="page"
+    class="logo-link router-link-exact-active router-link-active"
     href="/"
   >
     <oslo-logo-stub
@@ -413,8 +414,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
         <!---->
          
         <a
-          aria-current="page"
-          class="navigation-link__label router-link-exact-active router-link-active"
+          class="navigation-link__label"
           href="/bydel/sagene"
           id="a-sagene"
         >

@@ -18,7 +18,7 @@ describe('Topic', () => {
   let router = null;
   let store = null;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     const localVue = createLocalVue();
     localVue.use(VueRouter);
     localVue.use(VueResize);
@@ -42,7 +42,7 @@ describe('Topic', () => {
         'v-category': true,
       },
     });
-    router.push('/bydel/gamleoslo/alder');
+    await router.push('/bydel/gamleoslo/alder');
   });
 
   afterEach(() => {

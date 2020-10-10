@@ -19,7 +19,6 @@ describe('TheNavigationDrawer', () => {
     localVue.use(router);
     localVue.use(vuex);
     localVue.use(VueSkipTo);
-    router.push('/bydel/sagene');
     wrapper = mount(TheNavigationDrawer, {
       localVue,
       router,
@@ -43,8 +42,8 @@ describe('TheNavigationDrawer', () => {
     expect(wrapper.element).toMatchSnapshot();
   });
 
-  test('render TheNavigationDrawer with route /bydel/gamleoslo correctly', () => {
-    router.push('/bydel/gamleoslo');
+  test('render TheNavigationDrawer with route /bydel/sagene correctly', async () => {
+    await router.push('/bydel/sagene');
     expect(wrapper.element).toMatchSnapshot();
   });
 });

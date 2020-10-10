@@ -38,7 +38,7 @@
             id="allDistricts"
             v-model="selectedAll"
             type="checkbox"
-            :indeterminate.sync="indeterminate"
+            :indeterminate="indeterminate"
             class="navigation-header__input custom"
             :value="selectedAll"
             :aria-label="$t('navigationDrawer.select.label')"
