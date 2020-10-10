@@ -36,12 +36,12 @@ jobs:
         CI: true
 
     - name: Automated version bump
-        uses: phips28/gh-action-bump-version@master
-        with:
-          tag-prefix: ""
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: phips28/gh-action-bump-version@master
+      with:
+        tag-prefix: ""
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - run: echo "RELEASE_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 
