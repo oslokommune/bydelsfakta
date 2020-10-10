@@ -39,12 +39,6 @@ jobs:
         npm run lint
         npm run lint:style
         npm run test:unit
-        npm run build
-      env:
-        CI: true
-    - name: npm build
-      run: |
-        npm run build
       env:
         CI: true
 
@@ -55,6 +49,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: npm build
+      run: |
+        npm run build
+      env:
+        CI: true
 
     - run: echo "RELEASE_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 

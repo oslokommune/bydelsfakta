@@ -1,6 +1,6 @@
 # Unreleased
 
-# Release v1.1.4
+# Release v1.2.0
 
 ### About this version
 Minor fixes and changes
