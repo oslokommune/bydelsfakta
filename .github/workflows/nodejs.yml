@@ -29,10 +29,28 @@ jobs:
         npm run build
       env:
         CI: true
-    - uses: elgohr/Publish-Docker-Github-Action@master
+    - name: npm build
+      run: |
+        npm run build
+      env:
+        CI: true
+
+    - name: Automated version bump
+        uses: phips28/gh-action-bump-version@master
+        with:
+          tag-prefix: ""
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - run: echo "RELEASE_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+    - name: Publish docker image
+      uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: oslokommune/bydelsfakta-frontend
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        snapshot: true
+        registry: ghcr.io
+        tags: latest,$RELEASE_VERSION
         dockerfile: Dockerfile
