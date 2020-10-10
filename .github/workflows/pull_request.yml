@@ -36,3 +36,5 @@ jobs:
         CI: true
 
     - run: echo "RELEASE_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+    - run: echo $RELEASE_VERSION
