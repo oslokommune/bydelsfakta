@@ -8,6 +8,7 @@ Minor fixes and changes
 ### Changes
 
 - Updated dependencies because of security vulnerabilities
+- Updated workflows for github actions
 - Fixed a bug when downloading pngs does not wrap the text the correct way
 
 # Release v1.1.3
