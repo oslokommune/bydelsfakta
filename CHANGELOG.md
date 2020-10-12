@@ -1,6 +1,17 @@
 # Unreleased
 
+# Release v1.1.6
+
+### About this version
+We found a second bug when downloading pngs - this versino fixes that
+
+### Changes
+
+- Fix downloadpng-method
+
 # Release v1.1.5
+
+### About this version
 Just a version bump because of a mistake from earlier version bump
 
 # Release v1.1.4
