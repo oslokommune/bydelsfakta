@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 
 const padding = 20;
 const scale = 2;
-const offset = 20;
+const offset = 34;
 
 export default function downloadPng(svgRef, filename) {
   const svg = d3.select(svgRef);
@@ -34,19 +34,22 @@ export default function downloadPng(svgRef, filename) {
 
   svg.selectAll('.domain').attr('stroke', 'black');
   svg.selectAll('.tick line').attr('stroke', 'black');
-  heading.call(resizeHeading, options);
+  heading.call(resizeHeading, options, '18px', '1.1em');
   canvas.call(translateCanvas, offset);
   close.attr('opacity', 0);
   svg.selectAll('.label').attr('opacity', 1);
   svg.selectAll('.lines path').attr('stroke-opacity', 1);
 
-  saveSvgAsPng(svgRef, filename, options).then(revert.bind(null, svg));
+  saveSvgAsPng(svgRef, filename, options);
+
+  setTimeout(revert.bind(null, svg, options), 10);
 }
 
 // Revert things after screenshot
-function revert(svg) {
-  svg.select('canvas').call(translateCanvas, -20);
+function revert(svg, options) {
+  svg.select('.canvas').call(translateCanvas, -offset);
   svg.select('close').attr('opacity', 1);
+  svg.select('.heading').call(resizeHeading, options, '14px', '1em');
 }
 
 /**
@@ -57,8 +60,8 @@ function translateCanvas(canvas, value) {
     .attr('transform')
     .split('(')[1]
     .split(')')[0]
-    .split(', ')
-    .map(str => +str);
+    .split(',')
+    .map(str => +str.trim());
 
   canvas.attr('transform', `translate(${[x, y + value]})`);
 }
@@ -68,15 +71,21 @@ function translateCanvas(canvas, value) {
  * @param {selection} heading
  * @param {object} options
  */
-function resizeHeading(heading, { width }) {
+function resizeHeading(heading, { width }, fontSize) {
   const wrap = textwrap()
-    .bounds({ width: width - padding * 4, height: 60 })
+    .bounds({ width: width - padding * 2, height: 60 })
     .method('tspans');
+
+  const text = getHeadingText(heading);
 
   heading
     .html('')
-    .text(getHeadingText(heading))
-    .call(wrap);
+    .text(text)
+    .attr('font-size', fontSize)
+    .call(wrap)
+    .selectAll('tspan')
+    .filter((d, i) => i > 0)
+    .attr('dy', '1.1em');
 }
 
 /**
@@ -89,5 +98,5 @@ function getHeadingText(heading) {
   heading.selectAll('tspan').each((d, i, j) => {
     headingTextParts.push(j[i].textContent.trim());
   });
-  return headingTextParts.join(' ');
+  return headingTextParts.join(' ').replace('  ', ' ');
 }
