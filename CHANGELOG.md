@@ -1,5 +1,14 @@
 # Unreleased
 
+# Release v1.1.7
+### About this version
+There was a critical security vulnerability with axios and some changes to sentry
+
+### Changes
+
+- Fix axios vulnerability
+- Updated sentry handling
+
 # Release v1.1.6
 
 ### About this version

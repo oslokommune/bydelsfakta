@@ -2,7 +2,7 @@ import d3 from '../assets/d3';
 import downloadFile from './downloadFile';
 
 // Generates the svg blob and calls download function
-export default function(svgData, filename) {
+export default function (svgData, filename) {
   svgData = cleanSvgData(svgData);
 
   const preface = '<?xml version="1.0" standalone="no"?>\r\n';
@@ -19,10 +19,7 @@ function cleanSvgData(str) {
   const doc = parser.parseFromString(str, 'image/svg+xml');
   const svg = d3.select(doc).select('svg');
 
-  svg
-    .selectAll('*')
-    .attr('tabindex', null)
-    .style('cursor', null);
+  svg.selectAll('*').attr('tabindex', null).style('cursor', null);
 
   svg.select('.close').remove();
 
@@ -30,7 +27,7 @@ function cleanSvgData(str) {
   // and appending them to their grandparent before
   // removing the <a>-elements.
   const hyperlinkChildren = svg.selectAll('a > *');
-  hyperlinkChildren.each(function() {
+  hyperlinkChildren.each(function () {
     const parent = d3.select(this).node().parentElement.parentElement;
     parent.append(d3.select(this).node());
   });

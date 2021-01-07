@@ -1,15 +1,15 @@
 import util from '@/util/graph-templates/template-utils';
 import { color } from '@/util/graph-templates/colors';
 
-export default function() {
+export default function () {
   return this.canvas
     .select('g.rows')
     .selectAll('g.row')
-    .data(this.filteredData.data, d => d.geography)
+    .data(this.filteredData.data, (d) => d.geography)
     .join(enterRowElements.bind(this), updateRowElements.bind(this))
     .classed('row', true)
-    .attr('data-avgRow', d => d.avgRow)
-    .attr('data-totalRow', d => d.totalRow);
+    .attr('data-avgRow', (d) => d.avgRow)
+    .attr('data-totalRow', (d) => d.totalRow);
 }
 
 function enterRowElements(selection) {
@@ -41,9 +41,7 @@ function enterRowElements(selection) {
 
   g.append('g').attr('class', 'bars');
 
-  g.append('text')
-    .attr('class', 'valueText')
-    .attr('fill', color.purple);
+  g.append('text').attr('class', 'valueText').attr('fill', color.purple);
 
   g.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 

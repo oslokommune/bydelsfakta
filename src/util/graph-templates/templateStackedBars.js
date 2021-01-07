@@ -22,9 +22,9 @@ function Template(svg) {
     .domain([1, 0, 2, 3])
     .range([d3.interpolateRdBu(0.1), d3.interpolateRdBu(0.25), d3.interpolateRdBu(0.75), d3.interpolateRdBu(0.9)]);
 
-  this.render = function(data, options = {}) {
+  this.render = function (data, options = {}) {
     if (options.method === 'value') {
-      data.data = data.data.filter(row => {
+      data.data = data.data.filter((row) => {
         return !row.avgRow && !row.totalRow ? row : false;
       });
     }
@@ -34,7 +34,7 @@ function Template(svg) {
     // Convert first two values into negative numbers
     // to support the concept of 'positive' and 'negative'
     // values in this chart.
-    this.data.data = data.data.map(district => {
+    this.data.data = data.data.map((district) => {
       district.values.forEach((val, i) => {
         if (i === 0 || i === 1) {
           district.values[i][this.method] = Math.abs(district.values[i][this.method]) * -1;
@@ -72,7 +72,7 @@ function Template(svg) {
     updateLegend.call(this);
   };
 
-  this.created = function() {
+  this.created = function () {
     // Add two labels above the xAxis
     this.canvas
       .append('text')
@@ -96,22 +96,18 @@ function Template(svg) {
     this.bars = this.canvas.append('g').attr('class', 'bars');
 
     // Create the 'zero line' last to ensure it's always on top (thus visible)
-    this.canvas
-      .append('line')
-      .attr('class', 'zero')
-      .attr('stroke-width', 1.5)
-      .attr('stroke', 'black');
+    this.canvas.append('line').attr('class', 'zero').attr('stroke-width', 1.5).attr('stroke', 'black');
 
     this.canvas.append('g').classed('legend', true);
   };
 
-  this.drawTable = function() {
+  this.drawTable = function () {
     const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
-    const tableHead = ['Geografi', ...this.data.meta.series.map(d => `${d.heading} ${d.subheading}`)];
-    const tableBody = tableData.map(row => {
+    const tableHead = ['Geografi', ...this.data.meta.series.map((d) => `${d.heading} ${d.subheading}`)];
+    const tableBody = tableData.map((row) => {
       return {
         key: row.geography,
-        values: row.values.map(d => Math.abs(d[this.method])),
+        values: row.values.map((d) => Math.abs(d[this.method])),
       };
     });
 
@@ -120,12 +116,8 @@ function Template(svg) {
   };
 
   // Updates the rows
-  this.drawRows = function() {
-    const rows = this.canvas
-      .select('g.rows')
-      .selectAll('g.row')
-      .data(this.data.data)
-      .join(enterRows.bind(this));
+  this.drawRows = function () {
+    const rows = this.canvas.select('g.rows').selectAll('g.row').data(this.data.data).join(enterRows.bind(this));
 
     rows.select('text.geography').call(styleRowGeography.bind(this));
     rows.select('rect.rowFill').call(styleRowFill.bind(this));
@@ -135,15 +127,14 @@ function Template(svg) {
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
     // Update the row label (geography)
-    rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
+    rows.select('text.geography').text((d) => util.truncate(d.geography, this.padding.left));
 
     // Create the stack data using the .offset method to create negative values
     // The order of keys in the .keys() method determines the order of the series
     // in the stack
-    const seriesData = d3
-      .stack()
-      .keys([1, 0, 2, 3])
-      .offset(d3.stackOffsetDiverging)(this.data.data.map(district => district.values.map(d => d[this.method])));
+    const seriesData = d3.stack().keys([1, 0, 2, 3]).offset(d3.stackOffsetDiverging)(
+      this.data.data.map((district) => district.values.map((d) => d[this.method]))
+    );
 
     // Update the xAxis using the seriesData
     this.xAxis.call(updateXAxis.bind(this), seriesData);
@@ -159,7 +150,7 @@ function Template(svg) {
     // Create bars
     const bar = series
       .selectAll('rect')
-      .data(d => d)
+      .data((d) => d)
       .join('rect')
       .attr('y', (d, i) => i * this.rowHeight + (this.rowHeight - this.barHeight) / 2)
       .attr('height', this.barHeight);
@@ -167,8 +158,8 @@ function Template(svg) {
     bar
       .transition()
       .duration(this.duration)
-      .attr('x', d => this.x(d[0]))
-      .attr('width', d => this.x(d[1]) - this.x(d[0]));
+      .attr('x', (d) => this.x(d[0]))
+      .attr('width', (d) => this.x(d[1]) - this.x(d[0]));
 
     // Show and hide tooltips
     bar.call(handleMouseEvents.bind(this));
@@ -207,7 +198,7 @@ function styleRowFill(selection) {
     .transition()
     .duration(this.duration)
     .attr('width', this.padding.left + this.width + this.padding.right)
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0));
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.05 : 0));
 }
 
 function initRowDivider(selection) {
@@ -225,7 +216,7 @@ function styleRowDivider(selection) {
     .transition()
     .duration(this.duration)
     .attr('width', this.padding.left + this.width + this.padding.right)
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2));
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.5 : 0.2));
 }
 
 function initRowGeography(selection) {
@@ -237,12 +228,12 @@ function initRowGeography(selection) {
 }
 
 function styleRowGeography(selection) {
-  selection.attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400));
+  selection.attr('font-weight', (d) => (d.avgRow || d.totalRow ? 700 : 400));
 }
 
 function handleMouseEvents(selection) {
   selection
-    .on('mouseenter', d => {
+    .on('mouseenter', (d) => {
       const value = this.method === 'ratio' ? `${Math.round((d[1] - d[0]) * 100)}%` : d[1] - d[0];
       showTooltipOver(value);
     })
@@ -260,14 +251,11 @@ function enterRows(enter) {
 
 function updateXAxis(selection, seriesData) {
   // Find the minimum and maximum values (and add a bit of padding) for the x scale
-  const min = d3.min(seriesData.map(serie => d3.min(serie.map(d => d[0])))) * 1.1;
-  const max = d3.max(seriesData.map(serie => d3.max(serie.map(d => d[1])))) * 1.1;
+  const min = d3.min(seriesData.map((serie) => d3.min(serie.map((d) => d[0])))) * 1.1;
+  const max = d3.max(seriesData.map((serie) => d3.max(serie.map((d) => d[1])))) * 1.1;
 
   // Set the x-scale's domain and range
-  this.x
-    .domain([min, max])
-    .range([0, this.width])
-    .nice();
+  this.x.domain([min, max]).range([0, this.width]).nice();
 
   // Update the xAxis using the x-scale
   // Calculate the number of ticks based on the width.
@@ -275,6 +263,6 @@ function updateXAxis(selection, seriesData) {
     d3
       .axisTop(this.x)
       .ticks(this.width / 60)
-      .tickFormat(d => this.format(Math.abs(d), this.method, true))
+      .tickFormat((d) => this.format(Math.abs(d), this.method, true))
   );
 }

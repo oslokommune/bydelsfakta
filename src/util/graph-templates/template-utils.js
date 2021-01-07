@@ -35,7 +35,7 @@ const util = {
       .text(str)
       .attr('font-size', size)
       .attr('font-weight', weight)
-      .each(function() {
+      .each(function () {
         computedWidth = this.getComputedTextLength();
       });
     svg.remove();
@@ -50,7 +50,7 @@ const util = {
   },
 
   goto(geo) {
-    let district = allDistricts.find(d => d.value === geo.geography);
+    let district = allDistricts.find((d) => d.value === geo.geography);
     const { topic } = router.currentRoute.params;
 
     if (geo.geography === 'Oslo i alt') {
@@ -81,15 +81,10 @@ const util = {
     const isMultiLevel = typeof head[1] === 'object';
 
     const hideFootnote =
-      tableElement
-        .node()
-        .querySelector('tbody')
-        .querySelectorAll('th[data-footnote=true]').length === 0;
+      tableElement.node().querySelector('tbody').querySelectorAll('th[data-footnote=true]').length === 0;
 
     tableElement.classed('hide-footnote', hideFootnote);
-    d3.select(tableElement.node().parentNode)
-      .select('.table-footnote')
-      .classed('hide-footnote', hideFootnote);
+    d3.select(tableElement.node().parentNode).select('.table-footnote').classed('hide-footnote', hideFootnote);
 
     thead.selectAll('*').remove();
     tbody.selectAll('*').remove();
@@ -109,7 +104,7 @@ const util = {
       })
       .attr('scope', 'col')
       .classed('border-cell', (d, i) => i > 0)
-      .text(d => d);
+      .text((d) => d);
 
     if (isMultiLevel) {
       const hRow2 = thead.append('tr');
@@ -122,37 +117,34 @@ const util = {
           const l = head[1].length / (head[0].length - 1);
           return i % l === 0;
         })
-        .text(d => d)
+        .text((d) => d)
         .attr('scope', 'col');
     }
 
-    const rows = tbody
-      .selectAll('tr')
-      .data(body)
-      .join('tr');
+    const rows = tbody.selectAll('tr').data(body).join('tr');
 
     // key cell
     rows
       .selectAll('th')
-      .data(d => [d.key])
+      .data((d) => [d.key])
       .join('th')
       .attr('scope', 'row')
-      .text(d => d)
-      .attr('data-footnote', d => {
+      .text((d) => d)
+      .attr('data-footnote', (d) => {
         return d === 'Oslo i alt' && this.isCompare;
       });
 
     // Value cells
     rows
       .selectAll('td')
-      .data(d => d.values)
+      .data((d) => d.values)
       .join('td')
       .classed('border-cell', (d, i) => {
         if (!isMultiLevel) return true;
         const l = head[1].length / (head[0].length - 1);
         return i % l === 0;
       })
-      .text(d => formatter(d, this.method, false, true));
+      .text((d) => formatter(d, this.method, false, true));
   },
 };
 

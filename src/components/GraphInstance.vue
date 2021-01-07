@@ -57,7 +57,7 @@
 
 <script>
 import * as d3 from 'd3';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/vue';
 import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
 import TemplateBars from '../util/graph-templates/templateBars';
@@ -127,11 +127,11 @@ export default {
 
       if (!this.compareDistricts || this.districts.includes('alle') || this.settings.noFilter) return this.data;
 
-      const selectedDistrictNames = this.districts.map(id => districtNames[id]);
+      const selectedDistrictNames = this.districts.map((id) => districtNames[id]);
 
       return {
         meta: this.data.meta,
-        data: this.data.data.filter(d => {
+        data: this.data.data.filter((d) => {
           return selectedDistrictNames.includes(d.geography) || d.totalRow;
         }),
       };
@@ -200,8 +200,8 @@ export default {
         }
 
         if (template === 'boxPlot') {
-          const meanA = d3.mean(a.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
-          const meanB = d3.mean(b.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age)));
+          const meanA = d3.mean(a.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age)));
+          const meanB = d3.mean(b.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age)));
           return meanA - meanB;
         }
 
@@ -228,18 +228,18 @@ export default {
       if (!options.keepData) {
         this.data = await d3
           .json(`${this.settings.url}?geography=${geoParam}`)
-          .then(rawData => {
+          .then((rawData) => {
             const data = rawData[0];
             this.$emit('update-date', data.meta.publishedDate);
 
-            data.data.map(district => {
+            data.data.map((district) => {
               district.noLink = !districtNames[district.id]; // add noLink flag if geography is not a district
 
               return district;
             });
             return data;
           })
-          .catch(err => {
+          .catch((err) => {
             this.error = true;
             this.errorMessage = this.$t('error.connectionLost');
             this.loading = false;

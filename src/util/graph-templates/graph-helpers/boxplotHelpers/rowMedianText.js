@@ -10,8 +10,8 @@ export function initRowMedianText(selection) {
 export function updateRowMedianText(selection) {
   selection
     .select('.median-value')
-    .text(d => `${d.median} år`)
+    .text((d) => `${d.median} år`)
     .transition()
     .duration(this.duration)
-    .attr('x', d => this.gapX + this.width1 + this.x2(d.median) + 6);
+    .attr('x', (d) => this.gapX + this.width1 + this.x2(d.median) + 6);
 }

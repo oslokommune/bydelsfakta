@@ -1,4 +1,4 @@
-export default function(content, filename, filetype) {
+export default function (content, filename, filetype) {
   const url = URL.createObjectURL(content);
   const downloadLink = document.createElement('a');
   if (window.navigator.msSaveOrOpenBlob) {

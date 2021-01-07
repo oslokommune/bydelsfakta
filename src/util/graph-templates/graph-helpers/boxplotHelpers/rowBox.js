@@ -18,6 +18,6 @@ export function updateRowBox(selection) {
     .select('.box')
     .transition()
     .duration(this.duration)
-    .attr('x', d => this.gapX + this.width1 + this.x2(d.low))
-    .attr('width', d => this.x2(d.high) - this.x2(d.low));
+    .attr('x', (d) => this.gapX + this.width1 + this.x2(d.low))
+    .attr('width', (d) => this.x2(d.high) - this.x2(d.low));
 }

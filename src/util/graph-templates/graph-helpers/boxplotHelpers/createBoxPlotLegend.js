@@ -1,13 +1,10 @@
 import { boxHeight, boxWidth, textLabels } from './_legendConfig';
 
-export default function(selection) {
-  selection
-    .call(createBox)
-    .call(createMedianLine)
-    .call(createTextLabels);
+export default function (selection) {
+  selection.call(createBox).call(createMedianLine).call(createTextLabels);
 }
 
-const createBox = selection => {
+const createBox = (selection) => {
   selection
     .attr('opacity', 0.5)
     .append('rect')
@@ -21,7 +18,7 @@ const createBox = selection => {
   return selection;
 };
 
-const createMedianLine = selection => {
+const createMedianLine = (selection) => {
   selection
     .append('rect')
     .classed('median', true)
@@ -32,7 +29,7 @@ const createMedianLine = selection => {
     .attr('width', 3);
 };
 
-const createTextLabels = selection => {
+const createTextLabels = (selection) => {
   selection
     .append('text')
     .text(textLabels[0])

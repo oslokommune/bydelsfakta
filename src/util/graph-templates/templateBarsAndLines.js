@@ -15,15 +15,15 @@ const variations = {
   'population-growth': {
     lineData1: {
       heading: 'Netto innflytting',
-      data: obj => obj.immigration - obj.emigration || 'N/A',
+      data: (obj) => obj.immigration - obj.emigration || 'N/A',
     },
     lineData2: {
       heading: 'Fødselsoverskudd',
-      data: obj => obj.births - obj.deaths || 'N/A',
+      data: (obj) => obj.births - obj.deaths || 'N/A',
     },
     barData: {
       heading: 'Befolkningsvekst',
-      data: obj => {
+      data: (obj) => {
         if (!obj) return 'N/A';
 
         const netImmigration = obj.immigration - obj.emigration || 'N/A';
@@ -38,30 +38,30 @@ const variations = {
   'births-and-deaths': {
     lineData1: {
       heading: 'Antall fødte',
-      data: obj => obj.births || 'N/A',
+      data: (obj) => obj.births || 'N/A',
     },
     lineData2: {
       heading: 'Antall døde',
-      data: obj => obj.deaths || 'N/A',
+      data: (obj) => obj.deaths || 'N/A',
     },
     barData: {
       heading: 'Fødselsoverskudd',
-      data: obj => obj.births - obj.deaths || 'N/A',
+      data: (obj) => obj.births - obj.deaths || 'N/A',
     },
   },
 
   migrations: {
     lineData1: {
       heading: 'Antall innflyttere',
-      data: obj => obj.immigration || 'N/A',
+      data: (obj) => obj.immigration || 'N/A',
     },
     lineData2: {
       heading: 'Antall utflyttere',
-      data: obj => obj.emigration || 'N/A',
+      data: (obj) => obj.emigration || 'N/A',
     },
     barData: {
       heading: 'Netto innflytting',
-      data: obj => obj.immigration - obj.emigration || 'N/A',
+      data: (obj) => obj.immigration - obj.emigration || 'N/A',
     },
   },
 };
@@ -78,11 +78,11 @@ function Template(svg) {
   this.gapY = 70;
   this.mobileWidth = 520;
 
-  this.render = function(data, options = {}) {
+  this.render = function (data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
     this.filteredData = JSON.parse(JSON.stringify(data.data))
-      .filter(row => row.totalRow || row.avgRow)[0]
+      .filter((row) => row.totalRow || row.avgRow)[0]
       .values[0].map(cleanupData.bind(this));
 
     this.height = this.barChartHeight + this.gapY + this.lineChartHeight + this.gapY + this.lineChartHeight;
@@ -115,11 +115,8 @@ function Template(svg) {
     this.barChart.selectAll('rect').call(updateBars.bind(this));
   };
 
-  this.created = function() {
-    this.barChart = this.canvas
-      .append('g')
-      .attr('class', 'barChart')
-      .call(initBarChart.bind(this));
+  this.created = function () {
+    this.barChart = this.canvas.append('g').attr('class', 'barChart').call(initBarChart.bind(this));
 
     this.lineChart1 = this.canvas
       .append('g')
@@ -138,14 +135,8 @@ function Template(svg) {
     this.canvas.selectAll('.group-heading').attr('transform', 'translate(20, -10)');
 
     this.defs = this.svg.insert('defs');
-    this.defs
-      .append('clipPath')
-      .attr('id', `lineData1-${this.salt}`)
-      .append('rect');
-    this.defs
-      .append('clipPath')
-      .attr('id', `lineData2-${this.salt}`)
-      .append('rect');
+    this.defs.append('clipPath').attr('id', `lineData1-${this.salt}`).append('rect');
+    this.defs.append('clipPath').attr('id', `lineData2-${this.salt}`).append('rect');
 
     this.lineChart2.append('g').attr('class', 'voronoi');
   };
@@ -176,17 +167,9 @@ function cleanupData(obj) {
 function initBarChart(selection) {
   selection.append('text').attr('class', 'group-heading');
 
-  selection
-    .append('g')
-    .attr('class', 'axis y')
-    .append('line')
-    .attr('class', 'zero')
-    .attr('stroke', 'black');
+  selection.append('g').attr('class', 'axis y').append('line').attr('class', 'zero').attr('stroke', 'black');
 
-  selection
-    .append('g')
-    .attr('class', 'axis x')
-    .attr('transform', `translate(0, ${this.barChartHeight})`);
+  selection.append('g').attr('class', 'axis x').attr('transform', `translate(0, ${this.barChartHeight})`);
 }
 
 function initLineChart(selection, offsetY, height) {
@@ -195,10 +178,7 @@ function initLineChart(selection, offsetY, height) {
   selection.append('text').attr('class', 'group-heading');
   selection.append('g').attr('class', 'axis y');
 
-  selection
-    .append('line')
-    .attr('class', 'zero')
-    .attr('stroke', 'black');
+  selection.append('line').attr('class', 'zero').attr('stroke', 'black');
 
   selection
     .append('path')
@@ -214,10 +194,7 @@ function initLineChart(selection, offsetY, height) {
     .attr('stroke', color.red)
     .attr('stroke-width', 3);
 
-  selection
-    .append('g')
-    .attr('class', 'axis x')
-    .attr('transform', `translate(0, ${height})`);
+  selection.append('g').attr('class', 'axis x').attr('transform', `translate(0, ${height})`);
 
   selection.append('g').attr('class', 'voronoi');
 }
@@ -234,38 +211,34 @@ function updateZeroLines(selection, scale) {
 }
 
 function setScales() {
-  const years = this.filteredData.map(d => d.date);
+  const years = this.filteredData.map((d) => d.date);
 
   this.y[0] = d3
     .scaleLinear()
-    .domain([d3.min([0, ...this.filteredData.map(d => d.barData)]), d3.max(this.filteredData.map(d => d.barData))])
+    .domain([d3.min([0, ...this.filteredData.map((d) => d.barData)]), d3.max(this.filteredData.map((d) => d.barData))])
     .range([this.barChartHeight, 0])
     .nice();
 
   this.y[1] = d3
     .scaleLinear()
-    .domain(d3.extent(this.filteredData.map(d => d.lineData1)))
+    .domain(d3.extent(this.filteredData.map((d) => d.lineData1)))
     .range([this.lineChartHeight, 0])
     .nice();
 
   this.y[2] = d3
     .scaleLinear()
-    .domain(d3.extent(this.filteredData.map(d => d.lineData2)))
+    .domain(d3.extent(this.filteredData.map((d) => d.lineData2)))
     .range([this.lineChartHeight, 0])
     .nice();
 
-  this.x = d3
-    .scaleBand()
-    .rangeRound([0, this.width])
-    .domain(years)
-    .padding(0.15);
+  this.x = d3.scaleBand().rangeRound([0, this.width]).domain(years).padding(0.15);
 }
 
 function updateAxis() {
   this.barChart
     .select('g.axis.y')
     .transition()
-    .call(d3.axisLeft(this.y[0]).tickFormat(d => this.format(d, 'value', true)));
+    .call(d3.axisLeft(this.y[0]).tickFormat((d) => this.format(d, 'value', true)));
   this.lineChart1
     .select('g.axis.y')
     .transition()
@@ -273,7 +246,7 @@ function updateAxis() {
       d3
         .axisLeft(this.y[1])
         .ticks(4)
-        .tickFormat(d => this.format(d, 'value', true))
+        .tickFormat((d) => this.format(d, 'value', true))
     );
   this.lineChart2
     .select('g.axis.y')
@@ -282,7 +255,7 @@ function updateAxis() {
       d3
         .axisLeft(this.y[2])
         .ticks(4)
-        .tickFormat(d => this.format(d, 'value', true))
+        .tickFormat((d) => this.format(d, 'value', true))
     );
 
   this.barChart.select('g.axis.x').call(d3.axisBottom(this.x));
@@ -310,7 +283,7 @@ function updateLineChart(el, opt) {
 
   // Update voronoi for chart
   const flattenData = generateFlattenData.call(this, this.filteredData, scale, clipId);
-  const dataAccessor = d => d.data.label;
+  const dataAccessor = (d) => d.data.label;
   el.select('.voronoi').call(drawVoronoi.bind(this), flattenData, [this.width, this.lineChartHeight], dataAccessor);
 
   // Update zero line position
@@ -320,8 +293,8 @@ function updateLineChart(el, opt) {
 function drawLines(selection, scale, clipId) {
   const lineGenerator = d3
     .line()
-    .x(d => this.x(d.date))
-    .y(d => scale(d[clipId]));
+    .x((d) => this.x(d.date))
+    .y((d) => scale(d[clipId]));
 
   selection
     .selectAll('.line')
@@ -338,16 +311,16 @@ function updateBars(selection) {
   const bars = selection.data(this.filteredData).join('rect');
 
   bars
-    .attr('x', d => this.x(d.date))
+    .attr('x', (d) => this.x(d.date))
     .attr('width', this.x.bandwidth())
     .attr('fill-opacity', 1)
     .transition()
-    .attr('height', d => Math.abs(this.y[0](0) - this.y[0](d.barData)))
-    .attr('y', d => (d.barData > 0 ? this.y[0](d.barData) : this.y[0](0)))
-    .attr('stroke', d => (d.barData > 0 ? color.purple : color.red))
-    .attr('fill', d => (d.barData > 0 ? color.purple : color.red));
+    .attr('height', (d) => Math.abs(this.y[0](0) - this.y[0](d.barData)))
+    .attr('y', (d) => (d.barData > 0 ? this.y[0](d.barData) : this.y[0](0)))
+    .attr('stroke', (d) => (d.barData > 0 ? color.purple : color.red))
+    .attr('fill', (d) => (d.barData > 0 ? color.purple : color.red));
 
-  bars.on('mouseenter', d => {
+  bars.on('mouseenter', (d) => {
     showTooltipOver(this.formatDecimal(d.barData));
     showTooltipMove();
   });
@@ -358,7 +331,7 @@ function updateBars(selection) {
 function drawTable() {
   // Prepare data for table head
   const tableHead = [
-    ['Geografi', ...this.filteredData.map(d => d.date)],
+    ['Geografi', ...this.filteredData.map((d) => d.date)],
     this.filteredData.flatMap(() => [
       variations[this.variant].barData.heading,
       variations[this.variant].lineData1.heading,
@@ -367,17 +340,17 @@ function drawTable() {
   ];
 
   // Find all years in dataset
-  const years = Array.from(new Set(this.data.data.flatMap(geo => geo.values[0].flatMap(year => year.date)))).sort(
+  const years = Array.from(new Set(this.data.data.flatMap((geo) => geo.values[0].flatMap((year) => year.date)))).sort(
     d3.ascending
   );
 
   // Generate the table body from the raw data
-  const tableBody = this.data.data.map(geo => {
+  const tableBody = this.data.data.map((geo) => {
     return {
       key: geo.geography,
-      values: years.flatMap(year => {
+      values: years.flatMap((year) => {
         // Find the correct year and push the data to the array
-        const yearData = geo.values[0].find(row => row.date === year);
+        const yearData = geo.values[0].find((row) => row.date === year);
         if (!yearData) return ['N/A', 'N/A', 'N/A'];
 
         const barDataValue = variations[this.variant].barData.data(yearData);
@@ -393,7 +366,7 @@ function drawTable() {
 }
 
 function generateFlattenData(data, scale, key) {
-  return data.map(row => {
+  return data.map((row) => {
     return {
       x: this.x(row.date),
       y: scale(row[key]),

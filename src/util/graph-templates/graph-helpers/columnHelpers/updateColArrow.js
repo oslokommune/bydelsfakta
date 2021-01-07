@@ -1,13 +1,13 @@
-export default function(selection) {
+export default function (selection) {
   selection
     .select('rect.arrow')
     .attr('transform', `translate(0, ${this.rowHeight / 2 - 5})`)
     .transition()
     .duration(this.duration)
-    .attr('y', () => this.filteredData.data.findIndex(d => d.totalRow) * this.rowHeight)
+    .attr('y', () => this.filteredData.data.findIndex((d) => d.totalRow) * this.rowHeight)
     .attr('x', (d, i) => {
       let val;
-      const totalRow = this.filteredData.data.find(dj => dj.totalRow);
+      const totalRow = this.filteredData.data.find((dj) => dj.totalRow);
 
       if (totalRow && totalRow.values && totalRow.values[i]) {
         val = totalRow.values[i][this.method];
@@ -20,7 +20,7 @@ export default function(selection) {
     })
     .attr('opacity', (d, i) => {
       let val;
-      const totalRow = this.filteredData.data.find(dj => dj.totalRow);
+      const totalRow = this.filteredData.data.find((dj) => dj.totalRow);
 
       if (totalRow && totalRow.values && totalRow.values[i]) {
         val = totalRow.values[i][this.method];

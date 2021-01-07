@@ -66,8 +66,9 @@
               :value="element.option"
               :selected="element.selected"
               :disabled="element.disabled"
-              >{{ element.label }}</option
             >
+              {{ element.label }}
+            </option>
           </select>
         </template>
         <span v-else>
@@ -158,7 +159,7 @@ export default {
   watch: {
     $route(to) {
       const routes = to.path.split('/');
-      const district = allDistricts.find(d => d.uri === routes[2]);
+      const district = allDistricts.find((d) => d.uri === routes[2]);
 
       if (to.name === 'NotFound') {
         this.$store.dispatch('cleanState');
@@ -221,7 +222,7 @@ export default {
 
     toggleCheckbox(event) {
       this.selected = [];
-      this.selected = event ? allDistricts.map(district => district.key) : [];
+      this.selected = event ? allDistricts.map((district) => district.key) : [];
       this.selectedPredefinedOption = [];
 
       if (this.$route.params.topic === undefined) {
@@ -240,7 +241,7 @@ export default {
 
       if (key) {
         if (!this.selected.includes(key)) this.selected.push(key);
-        else this.selected = this.selected.filter(k => k !== key);
+        else this.selected = this.selected.filter((k) => k !== key);
       }
 
       const district =

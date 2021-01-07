@@ -28,16 +28,13 @@ function Template(svg) {
   this.height2 = 160;
   this.gapY = 65;
 
-  this.x = d3
-    .scaleBand()
-    .paddingOuter(0.15)
-    .paddingInner(0.03);
+  this.x = d3.scaleBand().paddingOuter(0.15).paddingInner(0.03);
   this.y1 = d3.scaleLinear().rangeRound([this.height1, 0]);
   this.y2 = d3.scaleLinear().rangeRound([this.height2, 0]);
 
-  this.render = function(data, options = {}) {
+  this.render = function (data, options = {}) {
     if (!this.commonRender(data, options)) return;
-    this.filteredData = JSON.parse(JSON.stringify(this.data.data.find(d => d.avgRow || d.totalRow).values));
+    this.filteredData = JSON.parse(JSON.stringify(this.data.data.find((d) => d.avgRow || d.totalRow).values));
 
     prepareData.call(this, this.filteredData);
 
@@ -54,13 +51,13 @@ function Template(svg) {
 
     // Update voronoi for chart
     const flattenData = generateFlattenData.call(this);
-    const dataAccessor = d => d.data.value;
+    const dataAccessor = (d) => d.data.value;
     this.voronoi.call(drawVoronoi.bind(this), flattenData, [this.width, this.height1], dataAccessor);
 
     util.drawTable.apply(this, generateTableData.call(this));
   };
 
-  this.created = function() {
+  this.created = function () {
     this.radio = this.svg.append('g').call(initRadioContainer.bind(this));
     this.upper = this.canvas.append('g').call(initUpper.bind(this));
     this.lower = this.canvas.append('g').call(initLower.bind(this));
@@ -73,13 +70,13 @@ function Template(svg) {
 export default Template;
 
 function setScales() {
-  const ages = this.filteredData.immigration.map(d => d.alder.join('–'));
+  const ages = this.filteredData.immigration.map((d) => d.alder.join('–'));
 
   const extent1 = [
     0,
     d3.max([
-      d3.max(this.filteredData.immigration.map(d => d[tabData[this.series].value])),
-      d3.max(this.filteredData.emigration.map(d => d[tabData[this.series].value])),
+      d3.max(this.filteredData.immigration.map((d) => d[tabData[this.series].value])),
+      d3.max(this.filteredData.emigration.map((d) => d[tabData[this.series].value])),
     ]),
   ];
 
@@ -95,34 +92,23 @@ function setScales() {
   this.x.domain(ages).rangeRound([0, this.width]);
   this.y1.domain(extent1).nice();
   this.y2.domain(extent2).nice();
-  this.upper
-    .select('g.axisX')
-    .transition()
-    .call(d3.axisBottom(this.x));
+  this.upper.select('g.axisX').transition().call(d3.axisBottom(this.x));
   this.upper
     .select('g.axisY')
     .transition()
-    .call(d3.axisLeft(this.y1).tickFormat(d => this.format(d, 'value', true)));
-  this.lower
-    .select('g.axisX')
-    .transition()
-    .call(d3.axisBottom(this.x));
+    .call(d3.axisLeft(this.y1).tickFormat((d) => this.format(d, 'value', true)));
+  this.lower.select('g.axisX').transition().call(d3.axisBottom(this.x));
   this.lower
     .select('g.axisY')
     .transition()
-    .call(
-      d3
-        .axisLeft(this.y2)
-        .tickFormat(d3.format('+'))
-        .ticks(5)
-    );
+    .call(d3.axisLeft(this.y2).tickFormat(d3.format('+')).ticks(5));
 }
 
 function prepareData(dataset) {
   const keys = ['emigration', 'immigration'];
 
-  keys.map(key => {
-    dataset[key].forEach(row => {
+  keys.map((key) => {
+    dataset[key].forEach((row) => {
       const str = row.alder;
       let arr = [];
 
@@ -134,7 +120,7 @@ function prepareData(dataset) {
         arr = str
           .split(' år')[0]
           .split(' - ')
-          .map(d => +d);
+          .map((d) => +d);
       }
       row.totalt = row.mellomBydeler + row.innenforBydelen + row.tilFraOslo;
       row.alder = arr;
@@ -147,7 +133,7 @@ function prepareData(dataset) {
 function generateTableData() {
   // Prepare data for table head
   const tableHead = [
-    ['Alder', ...tabData.map(d => d.label)],
+    ['Alder', ...tabData.map((d) => d.label)],
     tabData.flatMap(() => ['Innflytting', 'Utflytting', 'Netto flytting']),
   ];
 
@@ -178,25 +164,25 @@ function generateTableData() {
   tableBody.push({
     key: 'Totalt',
     values: [
-      d3.sum(this.filteredData.immigration.map(d => d.totalt)),
-      d3.sum(this.filteredData.emigration.map(d => d.totalt)),
-      d3.sum(this.filteredData.immigration.map(d => d.totalt)) -
-        d3.sum(this.filteredData.emigration.map(d => d.totalt)),
+      d3.sum(this.filteredData.immigration.map((d) => d.totalt)),
+      d3.sum(this.filteredData.emigration.map((d) => d.totalt)),
+      d3.sum(this.filteredData.immigration.map((d) => d.totalt)) -
+        d3.sum(this.filteredData.emigration.map((d) => d.totalt)),
 
-      d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)),
-      d3.sum(this.filteredData.emigration.map(d => d.mellomBydeler)),
-      d3.sum(this.filteredData.immigration.map(d => d.mellomBydeler)) -
-        d3.sum(this.filteredData.emigration.map(d => d.mellomBydeler)),
+      d3.sum(this.filteredData.immigration.map((d) => d.mellomBydeler)),
+      d3.sum(this.filteredData.emigration.map((d) => d.mellomBydeler)),
+      d3.sum(this.filteredData.immigration.map((d) => d.mellomBydeler)) -
+        d3.sum(this.filteredData.emigration.map((d) => d.mellomBydeler)),
 
-      d3.sum(this.filteredData.immigration.map(d => d.innenforBydelen)),
-      d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
-      d3.sum(this.filteredData.immigration.map(d => d.innenforBydelen)) -
-        d3.sum(this.filteredData.emigration.map(d => d.innenforBydelen)),
+      d3.sum(this.filteredData.immigration.map((d) => d.innenforBydelen)),
+      d3.sum(this.filteredData.emigration.map((d) => d.innenforBydelen)),
+      d3.sum(this.filteredData.immigration.map((d) => d.innenforBydelen)) -
+        d3.sum(this.filteredData.emigration.map((d) => d.innenforBydelen)),
 
-      d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)),
-      d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
-      d3.sum(this.filteredData.immigration.map(d => d.tilFraOslo)) -
-        d3.sum(this.filteredData.emigration.map(d => d.tilFraOslo)),
+      d3.sum(this.filteredData.immigration.map((d) => d.tilFraOslo)),
+      d3.sum(this.filteredData.emigration.map((d) => d.tilFraOslo)),
+      d3.sum(this.filteredData.immigration.map((d) => d.tilFraOslo)) -
+        d3.sum(this.filteredData.emigration.map((d) => d.tilFraOslo)),
     ],
   });
 
@@ -217,10 +203,7 @@ function initUpper(selection) {
   selection.attr('class', 'upper');
 
   // Containers for axis on upper chart
-  selection
-    .append('g')
-    .attr('class', 'axis axisX')
-    .attr('transform', `translate(0, ${this.height1})`);
+  selection.append('g').attr('class', 'axis axisX').attr('transform', `translate(0, ${this.height1})`);
 
   // Path elements for lines
   selection
@@ -237,10 +220,7 @@ function initUpper(selection) {
     .attr('stroke', color.blue)
     .attr('stroke-width', 4);
 
-  selection
-    .append('g')
-    .attr('class', 'heading')
-    .attr('transform', `translate(20, 4)`);
+  selection.append('g').attr('class', 'heading').attr('transform', `translate(20, 4)`);
 
   selection.append('g').attr('class', 'axis axisY');
 }
@@ -249,47 +229,34 @@ function initLower(selection) {
   selection.attr('class', 'lower').attr('transform', `translate(0, ${this.height1 + this.gapY})`);
 
   // Containers for elements on the lower chart
-  selection
-    .append('g')
-    .attr('class', 'axis axisX')
-    .attr('transform', `translate(0, ${this.height2})`);
+  selection.append('g').attr('class', 'axis axisX').attr('transform', `translate(0, ${this.height2})`);
   selection.append('g').attr('class', 'axis axisY');
   selection.append('g').attr('class', 'bars');
   selection.append('rect').attr('class', 'zero');
-  selection
-    .append('text')
-    .attr('class', 'heading')
-    .attr('transform', `translate(20, 4)`);
+  selection.append('text').attr('class', 'heading').attr('transform', `translate(20, 4)`);
 }
 
 function drawHeadings() {
-  this.lower
-    .select('.heading')
-    .text('Netto innflytting')
-    .attr('y', -12);
+  this.lower.select('.heading').text('Netto innflytting').attr('y', -12);
 
   const g = this.upper
     .select('.heading')
     .selectAll('g')
     .data(['Innflytting', 'Utflytting'])
-    .join(enter => {
+    .join((enter) => {
       const group = enter.append('g');
-      group
-        .append('rect')
-        .attr('height', 8)
-        .attr('rx', 4)
-        .attr('width', 23);
+      group.append('rect').attr('height', 8).attr('rx', 4).attr('width', 23);
       group.append('text');
       return group;
     });
 
   g.attr('transform', (d, i) => `translate(${this.width - 250 + i * 125}, 10)`);
   g.select('text')
-    .text(d => d)
+    .text((d) => d)
     .attr('x', 30);
 
   g.select('rect')
-    .text(d => d)
+    .text((d) => d)
     .attr('y', -9)
     .attr('fill', (d, i) => (i === 0 ? color.purple : color.blue));
 }
@@ -298,20 +265,12 @@ function updateUpper(selection) {
   // Line constructor
   const line = d3
     .line()
-    .y(d => this.y1(d[tabData[this.series].value]))
-    .x(d => this.x.bandwidth() / 2 + this.x(d.alder.join('–')));
+    .y((d) => this.y1(d[tabData[this.series].value]))
+    .x((d) => this.x.bandwidth() / 2 + this.x(d.alder.join('–')));
 
-  selection
-    .select('path.immigration')
-    .data([this.filteredData.immigration])
-    .transition()
-    .attr('d', line); // Use line constructor to generate line
+  selection.select('path.immigration').data([this.filteredData.immigration]).transition().attr('d', line); // Use line constructor to generate line
 
-  selection
-    .select('path.emigration')
-    .data([this.filteredData.emigration])
-    .transition()
-    .attr('d', line); // Use line constructor to generate line
+  selection.select('path.emigration').data([this.filteredData.emigration]).transition().attr('d', line); // Use line constructor to generate line
 }
 
 function updateLower(selection) {
@@ -325,49 +284,35 @@ function updateLower(selection) {
     };
   });
 
-  selection
-    .select('.bars')
-    .selectAll('rect')
-    .data(barData)
-    .join('rect')
-    .call(updateBars.bind(this));
+  selection.select('.bars').selectAll('rect').data(barData).join('rect').call(updateBars.bind(this));
 
   // Reposition line at zero
-  selection
-    .select('.zero')
-    .attr('height', 1)
-    .attr('width', this.width)
-    .transition()
-    .attr('y', this.y2(0));
+  selection.select('.zero').attr('height', 1).attr('width', this.width).transition().attr('y', this.y2(0));
 }
 
 function updateBars(selection) {
   selection
-    .attr('x', d => this.x(d.age))
+    .attr('x', (d) => this.x(d.age))
     .attr('width', this.x.bandwidth())
     .call(handleMouseEvents.bind(this))
     .transition()
-    .attr('fill', d => (d.diff <= 0 ? color.negative : color.positive))
-    .attr('height', d => this.y2(0) - this.y2(Math.abs(d.diff)))
-    .attr('y', d => (d.diff <= 0 ? this.y2(0) + 1 : this.y2(d.diff)));
+    .attr('fill', (d) => (d.diff <= 0 ? color.negative : color.positive))
+    .attr('height', (d) => this.y2(0) - this.y2(Math.abs(d.diff)))
+    .attr('y', (d) => (d.diff <= 0 ? this.y2(0) + 1 : this.y2(d.diff)));
 }
 
 function handleMouseEvents(selection) {
   selection
     .on('mousemove', showTooltipMove)
     .on('mouseleave', hideTooltip)
-    .on('mouseenter', d => {
+    .on('mouseenter', (d) => {
       showTooltipOver(`${d.age} år: ${this.formatChange(d.diff)}`);
       showTooltipMove();
     });
 }
 
 function updateRadio(selection) {
-  const g = selection
-    .selectAll('g.tab')
-    .data(tabData)
-    .join(enterTabs)
-    .attr('class', 'tab');
+  const g = selection.selectAll('g.tab').data(tabData).join(enterTabs).attr('class', 'tab');
 
   const rowCount = this.isMobileView ? 3 : 2;
   const gapX = 36;
@@ -376,7 +321,7 @@ function updateRadio(selection) {
   const inner = radio.select('.inner');
   const label = g.select('.label');
   const bg = g.select('.bg');
-  const maxWidth = d3.max(tabData, d => util.getTextWidth(d.label)) + gapX;
+  const maxWidth = d3.max(tabData, (d) => util.getTextWidth(d.label)) + gapX;
 
   g.attr('transform', (d, i) => {
     const col = Math.floor(i / rowCount);
@@ -390,7 +335,7 @@ function updateRadio(selection) {
     .attr('y', -gapX / 2);
 
   radio.attr('transform', 'translate(5, 0)');
-  label.attr('transform', 'translate(16, 5)').text(d => d.label);
+  label.attr('transform', 'translate(16, 5)').text((d) => d.label);
 
   inner.attr('opacity', (d, i) => (i === this.series ? 1 : 0));
 
@@ -406,9 +351,7 @@ function updateRadio(selection) {
 function enterTabs(enter) {
   const g = enter.append('g').attr('class', 'tab');
 
-  g.append('rect')
-    .classed('bg', true)
-    .attr('height', 20);
+  g.append('rect').classed('bg', true).attr('height', 20);
   g.append('text').classed('label', true);
 
   const radio = g.append('g').classed('radio', true);
@@ -421,11 +364,7 @@ function enterTabs(enter) {
     .attr('stroke-width', 1)
     .attr('fill', 'none');
 
-  radio
-    .append('circle')
-    .classed('inner', true)
-    .attr('r', 4)
-    .attr('fill', color.purple);
+  radio.append('circle').classed('inner', true).attr('r', 4).attr('fill', color.purple);
 
   return g;
 }

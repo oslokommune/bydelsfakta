@@ -1,9 +1,9 @@
 import d3 from '@/assets/d3';
 
-export default function(selection) {
+export default function (selection) {
   const path = selection
     .select('path')
-    .attr('d', d => `M${d.join('L')}Z`)
+    .attr('d', (d) => `M${d.join('L')}Z`)
     .attr('fill-opacity', 0);
 
   // Handle mouse interactions

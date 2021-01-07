@@ -35,7 +35,7 @@ function Template(svg) {
       if (d3.event.sourceEvent instanceof MouseEvent) {
         this.dropDownParent.select('select').node().value = '';
         this.extent = d3.event.selection
-          ? d3.event.selection.map(val => Math.round(this.age.invert(val)))
+          ? d3.event.selection.map((val) => Math.round(this.age.invert(val)))
           : this.extent;
         this.render(this.data, { method: this.method });
       }
@@ -44,7 +44,7 @@ function Template(svg) {
   this.age = d3.scaleLinear().domain([0, this.ageCap]);
   this.extent = [0, 39]; // default age range
 
-  this.render = function(data, options) {
+  this.render = function (data, options) {
     if (!this.commonRender(data, options)) return;
     if (!data.data) return;
 
@@ -77,7 +77,7 @@ function Template(svg) {
 
   // Runs once after initialization. Creates elements that are
   // unique to this template
-  this.created = function() {
+  this.created = function () {
     createAgeSelector.call(this);
 
     this.upper = this.canvas.append('g').attr('class', 'upper');
@@ -112,14 +112,8 @@ function Template(svg) {
       .attr('transform', `translate(${this.paddingUpperLeft}, 0)`)
       .call(this.brushSmall);
 
-    this.gBrushSmall
-      .select('.selection')
-      .attr('fill', color.yellow)
-      .attr('fill-opacity', 1);
-    this.gBrushSmall
-      .select('.overlay')
-      .attr('stroke', color.purple)
-      .attr('rx', 2);
+    this.gBrushSmall.select('.selection').attr('fill', color.yellow).attr('fill-opacity', 1);
+    this.gBrushSmall.select('.overlay').attr('stroke', color.purple).attr('rx', 2);
 
     this.upperXAxis = this.upper
       .append('g')
@@ -138,23 +132,20 @@ function Template(svg) {
 
     drawHandles.call(this);
 
-    this.gBrushSmall
-      .transition()
-      .duration(this.duration)
-      .call(this.brushSmall.move, [0, 50].map(this.age));
+    this.gBrushSmall.transition().duration(this.duration).call(this.brushSmall.move, [0, 50].map(this.age));
   };
 
   // Finds the larges accumulated number within the selected range
-  this.getMaxAccumulated = function() {
+  this.getMaxAccumulated = function () {
     return (
       d3.max(
         this.data.data
-          .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
-          .map(district =>
+          .filter((district) => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
+          .map((district) =>
             d3.sum(
               district.values
                 .filter((val, i) => i >= this.extent[0] && i <= this.extent[1])
-                .map(val => val[this.method])
+                .map((val) => val[this.method])
             )
           )
       ) * 1.05
@@ -162,12 +153,12 @@ function Template(svg) {
   };
 
   // Finds the largest single age to scale y axis behind brush within the selected range
-  this.getMax = function() {
+  this.getMax = function () {
     return (
       d3.max(
         this.data.data
-          .filter(district => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
-          .map(district => d3.max(district.values.map(val => val[this.method])))
+          .filter((district) => (this.method === 'ratio' ? district : !district.totalRow && !district.avgRow))
+          .map((district) => d3.max(district.values.map((val) => val[this.method])))
       ) * 1.05
     );
   };
@@ -191,7 +182,7 @@ function drawHandles() {
     .append('path')
     .attr('fill', color.purple)
     .style('pointer-events', 'none')
-    .attr('d', d =>
+    .attr('d', (d) =>
       d.type === 'e' ? 'M0 0h11c6 0 10 4 10 10v17c0 6-4 10-10 10H0V0z' : 'M21 0H10C4 0 0 4 0 10v17c0 6 4 10 10 10h11V0z'
     );
 
@@ -230,10 +221,7 @@ function drawHandles() {
 // as sibling element to the SVG.
 function createAgeSelector() {
   const parent = d3.select(this.svg.node().parentNode.parentNode);
-  this.dropDownParent = parent
-    .insert('div')
-    .attr('class', 'graph__dropdown')
-    .attr('aria-hidden', true);
+  this.dropDownParent = parent.insert('div').attr('class', 'graph__dropdown').attr('aria-hidden', true);
 
   this.dropDownParent
     .insert('label')
@@ -253,9 +241,9 @@ function createAgeSelector() {
     .selectAll('option')
     .data(ageRanges)
     .join('option')
-    .attr('disabled', d => d.disabled)
-    .attr('value', d => d.range)
-    .text(d => d.label);
+    .attr('disabled', (d) => d.disabled)
+    .attr('value', (d) => d.range)
+    .text((d) => d.label);
 
   // Add eventlistener to the selector, and capture the value
   // and pass it on when re-rendering the chart
@@ -270,8 +258,8 @@ function sortData(input, method) {
     if (a.avgRow) return 1;
     if (a.totalRow) return 1;
 
-    const totA = d3.sum(a.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[method]));
-    const totB = d3.sum(b.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[method]));
+    const totA = d3.sum(a.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map((d) => d[method]));
+    const totB = d3.sum(b.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map((d) => d[method]));
     return totB - totA;
   });
 
@@ -315,7 +303,7 @@ function updateHandlePositions() {
     });
 
   // Move visible handles
-  this.handle.attr('transform', d => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
+  this.handle.attr('transform', (d) => (d.type === 'e' ? `translate(${s[1]}, -9)` : `translate(${s[0] - 21}, -9)`));
 }
 
 function resizeSvg(selection) {
@@ -365,9 +353,7 @@ function enterRows(enter) {
     .attr('x', this.paddingLowerLeft - 40)
     .attr('text-anchor', 'end');
 
-  g.append('rect')
-    .attr('class', 'bar')
-    .attr('height', this.barHeight);
+  g.append('rect').attr('class', 'bar').attr('height', this.barHeight);
 
   g.append('rect')
     .attr('class', 'divider')
@@ -399,21 +385,21 @@ function getLowerHeadingString() {
 function updateRowFill(selection) {
   selection
     .select('rect.rowFill')
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0))
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.05 : 0))
     .attr('width', this.padding.left + this.width + this.padding.right);
 }
 
 function updateRowGeography(selection) {
   selection
     .select('text.geography')
-    .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400))
-    .text(d => d.geography);
+    .attr('font-weight', (d) => (d.avgRow || d.totalRow ? 700 : 400))
+    .text((d) => d.geography);
 }
 
 function updateRowDivider(selection) {
   selection
     .select('rect.divider')
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.5 : 0.2))
     .attr('width', this.padding.left + this.width + this.padding.right);
 }
 
@@ -423,24 +409,24 @@ function updateRowBar(selection) {
   bar
     .transition()
     .duration(this.duration)
-    .attr('width', district => {
+    .attr('width', (district) => {
       return this.method === 'value' && (district.avgRow || district.totalRow)
         ? 0
         : this.x(
             d3.sum(
-              district.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[this.method])
+              district.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map((d) => d[this.method])
             )
           );
     })
     .attr('x', this.paddingLowerLeft)
     .attr('y', (this.rowHeight - this.barHeight) / 2 + 1)
-    .attr('fill', d => {
+    .attr('fill', (d) => {
       return d.totalRow || d.avgRow ? color.purple : color.blue;
     });
 
   bar
-    .on('mouseover', d => {
-      const sum = d3.sum(d.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(dj => dj.value));
+    .on('mouseover', (d) => {
+      const sum = d3.sum(d.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map((dj) => dj.value));
       showTooltipOver(sum);
     })
     .on('mousemove', showTooltipMove)
@@ -448,9 +434,9 @@ function updateRowBar(selection) {
 }
 
 function updateRowTextValue(selection) {
-  selection.select('text.value').text(district => {
+  selection.select('text.value').text((district) => {
     const sum = d3.sum(
-      district.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map(d => d[this.method])
+      district.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map((d) => d[this.method])
     );
     return this.format(sum, this.method);
   });
@@ -486,10 +472,7 @@ function updateAxis() {
   const max = this.getMax();
 
   // Set axis and scales based on these max values (for the bars()
-  this.y
-    .domain([0, max])
-    .range([this.height2, 0])
-    .nice();
+  this.y.domain([0, max]).range([this.height2, 0]).nice();
   this.x
     .domain([0, maxAccumulated])
     .range([0, this.width - this.paddingLowerLeft])
@@ -502,7 +485,7 @@ function updateAxis() {
       d3
         .axisLeft(this.y)
         .ticks(4)
-        .tickFormat(d => this.format(d, this.method, true))
+        .tickFormat((d) => this.format(d, this.method, true))
     );
   this.upperXAxis
     .transition()
@@ -511,7 +494,7 @@ function updateAxis() {
       d3
         .axisBottom(this.age)
         .ticks((this.width - this.paddingUpperLeft) / 100)
-        .tickFormat(d => `${d} år`)
+        .tickFormat((d) => `${d} år`)
     );
   this.lowerXAxis
     .transition()
@@ -520,7 +503,7 @@ function updateAxis() {
       d3
         .axisTop(this.x)
         .ticks((this.width - this.paddingLowerLeft) / 70)
-        .tickFormat(d => this.format(d, this.method, true))
+        .tickFormat((d) => this.format(d, this.method, true))
     );
 }
 
@@ -528,7 +511,7 @@ function drawRows() {
   // Draws/updates rows content. Triggered each render
   this.lower
     .selectAll('g.row')
-    .data(this.data.data, d => d.geography)
+    .data(this.data.data, (d) => d.geography)
     .join(enterRows.bind(this))
     .call(updateRowFill.bind(this))
     .call(positionRow.bind(this))
@@ -545,27 +528,25 @@ function drawLines() {
     .line()
     .curve(d3.curveBasis)
     .x((d, i) => (i > this.ageCap ? this.age(this.ageCap) : this.age(i)))
-    .y(d => this.y(d[this.method]));
+    .y((d) => this.y(d[this.method]));
 
   const lines = this.upper
     .select('.lines')
     .selectAll('path.line')
-    .data(this.data.data.filter(d => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)))
+    .data(this.data.data.filter((d) => (this.method === 'ratio' ? d : !d.avgRow && !d.totalRow)))
     .join(createLines.bind(this));
 
   lines
     .attr('opacity', 1)
-    .attr('d', d => line(d.values))
-    .attr('stroke-width', d => (d.avgRow || d.totalRow ? 3 : 2))
-    .attr('stroke', d => (d.avgRow || d.totalRow ? color.purple : color.blue))
-    .attr('stroke-opacity', d => (d.avgRow || d.totalRow ? 1 : 0.5))
-    .style('stroke-dasharray', d => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
+    .attr('d', (d) => line(d.values))
+    .attr('stroke-width', (d) => (d.avgRow || d.totalRow ? 3 : 2))
+    .attr('stroke', (d) => (d.avgRow || d.totalRow ? color.purple : color.blue))
+    .attr('stroke-opacity', (d) => (d.avgRow || d.totalRow ? 1 : 0.5))
+    .style('stroke-dasharray', (d) => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
 
   lines.on('mouseover', (d, i, j) => {
     lines.attr('opacity', 0.1).attr('stroke', color.blue);
-    d3.select(j[i])
-      .attr('opacity', 1)
-      .attr('stroke', color.purple);
+    d3.select(j[i]).attr('opacity', 1).attr('stroke', color.purple);
 
     showTooltipOver(d.geography);
   });
@@ -581,17 +562,17 @@ function drawLines() {
 function generateTableData() {
   const tableHead = [
     ['Geografi', this.method === 'value' ? 'Antall' : 'Prosentandel'],
-    [...ageRanges.filter(d => !d.disabled).map(d => d.label)],
+    [...ageRanges.filter((d) => !d.disabled).map((d) => d.label)],
   ];
 
   const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
 
-  const tableBody = tableData.map(d => {
+  const tableBody = tableData.map((d) => {
     return {
       key: d.geography,
       values: ageRanges
-        .filter(dj => !dj.disabled)
-        .map(age => {
+        .filter((dj) => !dj.disabled)
+        .map((age) => {
           const range = JSON.parse(age.range);
           let sum = 0;
           for (let i = range[0]; i <= range[1]; i += 1) {

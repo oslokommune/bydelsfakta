@@ -1,4 +1,4 @@
-export default function(data = [], options = {}) {
+export default function (data = [], options = {}) {
   if (typeof options.series === 'number') {
     const direction = options.direction ? options.direction : 'desc';
 

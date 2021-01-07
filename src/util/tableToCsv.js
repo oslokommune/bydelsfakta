@@ -5,19 +5,19 @@ const decimalSeparator = ',';
 
 // Handle multi-level column headers and
 // extract column names from thead.
-const getColumnNames = thead => {
+const getColumnNames = (thead) => {
   const tr = thead.querySelectorAll('tr');
   const cols = [];
 
   if (tr.length === 1) {
-    tr[0].querySelectorAll('th').forEach(th => {
+    tr[0].querySelectorAll('th').forEach((th) => {
       cols.push(th.innerHTML);
     });
   } else {
     const firstRow = [];
     const lastRow = [];
-    tr[0].querySelectorAll('th:not(:first-child)').forEach(th => firstRow.push(th.innerHTML));
-    tr[1].querySelectorAll('th').forEach(th => lastRow.push(th.innerHTML));
+    tr[0].querySelectorAll('th:not(:first-child)').forEach((th) => firstRow.push(th.innerHTML));
+    tr[1].querySelectorAll('th').forEach((th) => lastRow.push(th.innerHTML));
     const ratio = tr[1].querySelectorAll('th').length / (tr[0].querySelectorAll('th').length - 1);
 
     cols.push(tr[0].querySelector('th').innerHTML);
@@ -31,14 +31,14 @@ const getColumnNames = thead => {
 };
 
 // Extract cell values in tbody
-const getRows = tbody => {
+const getRows = (tbody) => {
   const data = [];
   const rows = tbody.querySelectorAll('tr');
 
-  rows.forEach(row => {
+  rows.forEach((row) => {
     const cells = [];
     cells.push(row.querySelector('th').innerHTML);
-    row.querySelectorAll('td').forEach(cell => {
+    row.querySelectorAll('td').forEach((cell) => {
       /**
        * If we want to introduce custom number formats
        * on the CSVs we need to extract the actual number
@@ -77,7 +77,7 @@ const mergeColsAndRows = (columns, rows) => {
 };
 
 // Remove spaces and convert commas to periods from cell values
-const numberify = str => {
+const numberify = (str) => {
   if (typeof str === 'number') return str;
   str = str.replace(/\s/g, '');
   str = str.replace(',', decimalSeparator);
@@ -85,7 +85,7 @@ const numberify = str => {
 };
 
 // Generates and downloads csv file from HTML <table> element
-export default table => {
+export default (table) => {
   const caption = table.querySelector('h3').innerHTML || 'title';
   const columns = getColumnNames(table.querySelector('thead'));
   const rows = getRows(table.querySelector('tbody'));

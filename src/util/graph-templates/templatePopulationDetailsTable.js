@@ -22,7 +22,7 @@ function Template(svg) {
     down: 'M11 1h2v12H1v-2l1-1h6L0 2V1l1-1h1l8 8V2l1-1z',
   };
 
-  this.render = function(data, options = {}) {
+  this.render = function (data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
     this.width = d3.max([this.width, 560]);
@@ -40,12 +40,12 @@ function Template(svg) {
     this.drawTable();
   };
 
-  this.created = function() {};
+  this.created = function () {};
 
-  this.drawTable = function() {
+  this.drawTable = function () {
     const tableData = JSON.parse(JSON.stringify(this.data.data));
-    const tableHead = ['Geografi', ...this.data.meta.series.map(d => d.heading)];
-    const tableBody = tableData.map(d => {
+    const tableHead = ['Geografi', ...this.data.meta.series.map((d) => d.heading)];
+    const tableBody = tableData.map((d) => {
       return {
         key: d.geography,
         values: [d.values[0], d.values[1], d.values[2]],
@@ -56,13 +56,9 @@ function Template(svg) {
     tableGenerator(tableHead, tableBody);
   };
 
-  this.initRowElements = function(rowsE) {
+  this.initRowElements = function (rowsE) {
     // Row fill
-    rowsE
-      .append('rect')
-      .attr('class', 'rowFill')
-      .attr('fill', color.purple)
-      .attr('height', this.rowHeight);
+    rowsE.append('rect').attr('class', 'rowFill').attr('fill', color.purple).attr('height', this.rowHeight);
 
     // Row divider
     rowsE
@@ -99,10 +95,7 @@ function Template(svg) {
       .attr('text-anchor', 'end')
       .attr('y', this.rowHeight / 2 + 6);
 
-    rowsE
-      .append('g')
-      .attr('class', 'progress-year__arrow')
-      .append('path');
+    rowsE.append('g').attr('class', 'progress-year__arrow').append('path');
 
     rowsE
       .append('rect')
@@ -117,10 +110,7 @@ function Template(svg) {
       .attr('text-anchor', 'end')
       .attr('y', this.rowHeight / 2 + 6);
 
-    rowsE
-      .append('g')
-      .attr('class', 'progress-period__arrow')
-      .append('path');
+    rowsE.append('g').attr('class', 'progress-period__arrow').append('path');
 
     rowsE
       .append('path')
@@ -130,16 +120,16 @@ function Template(svg) {
       .attr('stroke-width', 2);
   };
 
-  this.renderPopulation = function(rows) {
+  this.renderPopulation = function (rows) {
     const x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
-      .domain([0, d3.max(this.data.data.filter(d => (d.avgRow || d.totalRow ? false : d)).map(d => d.values[0]))]);
+      .domain([0, d3.max(this.data.data.filter((d) => (d.avgRow || d.totalRow ? false : d)).map((d) => d.values[0]))]);
 
     rows
       .select('text.population__value')
-      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
-      .text(d => this.format(d.values[0], 'value'))
+      .attr('font-weight', (d) => (d.avgRow || d.totalRow ? 500 : 400))
+      .text((d) => this.format(d.values[0], 'value'))
       .attr('x', this.x(0) + this.x.bandwidth() / 2 - 8);
 
     rows
@@ -147,40 +137,40 @@ function Template(svg) {
       .attr('x', this.x(0) + this.x.bandwidth() / 2)
       .transition()
       .duration(this.duration)
-      .attr('width', d => (d.avgRow || d.totalRow ? 0 : x(d.values[0])));
+      .attr('width', (d) => (d.avgRow || d.totalRow ? 0 : x(d.values[0])));
   };
 
-  this.renderProgressYear = function(rows) {
+  this.renderProgressYear = function (rows) {
     const x = d3
       .scaleLinear()
       .range([0, this.x.bandwidth() / 2])
       .domain([
         0,
-        d3.max(this.data.data.filter(d => (d.avgRow || d.totalRow ? false : d)).map(d => Math.abs(d.values[1]))),
+        d3.max(this.data.data.filter((d) => (d.avgRow || d.totalRow ? false : d)).map((d) => Math.abs(d.values[1]))),
       ]);
 
     rows
       .select('text.progress-year__value')
-      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
+      .attr('font-weight', (d) => (d.avgRow || d.totalRow ? 500 : 400))
       .attr('x', this.x(1) + this.x.bandwidth() / 2 - 30)
-      .text(d => this.format(d.values[1], 'change'));
+      .text((d) => this.format(d.values[1], 'change'));
     rows
       .select('rect.progress-year__bar')
-      .attr('fill', d => (d.values[1] > 0 ? color.positive : color.red))
+      .attr('fill', (d) => (d.values[1] > 0 ? color.positive : color.red))
       .attr('x', this.x(1) + this.x.bandwidth() / 2)
       .transition()
       .duration(this.duration)
-      .attr('width', d => (d.avgRow || d.totalRow ? 0 : x(Math.abs(d.values[1]))));
+      .attr('width', (d) => (d.avgRow || d.totalRow ? 0 : x(Math.abs(d.values[1]))));
     rows
       .select('g.progress-year__arrow path')
-      .attr('fill', d => (d.values[1] > 0 ? color.positive : color.red))
+      .attr('fill', (d) => (d.values[1] > 0 ? color.positive : color.red))
       .attr(
         'transform',
         `translate(${this.x(1) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
       .transition()
       .duration(100)
-      .attr('d', d => {
+      .attr('d', (d) => {
         if (d.values[1] === 0) return '';
         if (d.values[1] > 0) return arrowPaths.up;
         return arrowPaths.down;
@@ -191,7 +181,7 @@ function Template(svg) {
    * Period chart is called on each row in order to set a relative
    * scale on the y axis.
    */
-  this.renderProgressPeriod = function(data, index, arr) {
+  this.renderProgressPeriod = function (data, index, arr) {
     const min = d3.min(data.values[3]) / 1.05;
     const max = d3.max(data.values[3]) * 1.05;
     const row = d3.select(arr[index]);
@@ -201,32 +191,29 @@ function Template(svg) {
       .range([0, this.x.bandwidth() / 2])
       .domain([0, data.values[3].length]);
 
-    const y = d3
-      .scaleLinear()
-      .range([this.rowHeight, 0])
-      .domain([min, max]);
+    const y = d3.scaleLinear().range([this.rowHeight, 0]).domain([min, max]);
 
     const line = d3
       .line()
       .x((d, i) => x(i))
-      .y(d => y(d));
+      .y((d) => y(d));
 
     row
       .select('text.progress-period__value')
       .attr('x', this.x(2) + this.x.bandwidth() / 2 - 30)
-      .attr('font-weight', d => (d.avgRow || d.totalRow ? 500 : 400))
-      .text(d => this.format(d.values[2], 'change'));
+      .attr('font-weight', (d) => (d.avgRow || d.totalRow ? 500 : 400))
+      .text((d) => this.format(d.values[2], 'change'));
 
     row
       .select('g.progress-period__arrow path')
-      .attr('fill', d => (d.values[2] > 0 ? color.positive : color.red))
+      .attr('fill', (d) => (d.values[2] > 0 ? color.positive : color.red))
       .attr(
         'transform',
         `translate(${this.x(2) + this.x.bandwidth() / 2 - 22}, ${(this.rowHeight - this.barHeight) / 2 + 4})`
       )
       .transition()
       .duration(100)
-      .attr('d', d => {
+      .attr('d', (d) => {
         if (d.values[2] === 0) return '';
         if (d.values[2] > 2) return arrowPaths.up;
         return arrowPaths.down;
@@ -237,15 +224,12 @@ function Template(svg) {
       .attr('transform', `translate(${this.x(2) + this.x.bandwidth() / 2}, 0)`)
       .transition()
       .duration(this.duration)
-      .attr('d', d => line(d.values[3]));
+      .attr('d', (d) => line(d.values[3]));
   };
 
-  this.drawRows = function() {
+  this.drawRows = function () {
     let rows = this.canvas.selectAll('g.row').data(this.data.data);
-    const rowsE = rows
-      .enter()
-      .append('g')
-      .attr('class', 'row');
+    const rowsE = rows.enter().append('g').attr('class', 'row');
     rows.exit().remove();
     rows = rows.merge(rowsE);
 
@@ -255,32 +239,29 @@ function Template(svg) {
     // Update row geography, style and position
     rows
       .select('text.geography')
-      .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400))
+      .attr('font-weight', (d) => (d.avgRow || d.totalRow ? 700 : 400))
       .attr('transform', `translate(${-this.padding.left}, ${0})`);
     rows
       .select('rect.rowFill')
-      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0))
+      .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.05 : 0))
       .attr('width', this.padding.left + this.width + this.padding.right)
       .attr('transform', `translate(${-this.padding.left}, ${0})`);
     rows
       .select('rect.divider')
-      .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+      .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.5 : 0.2))
       .attr('width', this.padding.left + this.width + this.padding.right)
       .attr('transform', `translate(${-this.padding.left}, ${0})`);
     rows.attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
-    rows.select('text.geography').text(d => util.truncate(d.geography, this.padding.left));
+    rows.select('text.geography').text((d) => util.truncate(d.geography, this.padding.left));
 
     this.renderPopulation(rows);
     this.renderProgressYear(rows);
     rows.each((row, index, array) => this.renderProgressPeriod(row, index, array));
   };
 
-  this.drawColumnHeaders = function() {
+  this.drawColumnHeaders = function () {
     let column = this.canvas.selectAll('g.column').data(this.data.meta.series);
-    const columnE = column
-      .enter()
-      .append('g')
-      .attr('class', 'column');
+    const columnE = column.enter().append('g').attr('class', 'column');
     column.exit().remove();
     column = column.merge(columnE);
 
@@ -300,8 +281,8 @@ function Template(svg) {
 
     column.attr('transform', (d, i) => `translate(${this.x(i) + this.x.bandwidth() / 2}, -30)`);
 
-    column.select('text.heading').text(d => (d.heading ? d.heading : ''));
-    column.select('text.subHeading').text(d => (d.subheading ? d.subheading : ''));
+    column.select('text.heading').text((d) => (d.heading ? d.heading : ''));
+    column.select('text.subHeading').text((d) => (d.subheading ? d.subheading : ''));
   };
 
   this.init(svg);

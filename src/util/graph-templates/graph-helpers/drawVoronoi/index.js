@@ -5,7 +5,7 @@ import styleRects from './styleRects';
 import styleTexts from './styleTexts';
 import drawPaths from './drawPaths';
 
-export default function(container, flattenData, shape, dataAccessor) {
+export default function (container, flattenData, shape, dataAccessor) {
   const voronoiData = generateVoronoiData.call(this, flattenData, shape);
 
   // Draw DOM elements for each voronoi cell

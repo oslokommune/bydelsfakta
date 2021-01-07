@@ -8,7 +8,7 @@ export default function generateTableData() {
     tableHead = [
       ['Geografi', this.method === 'value' ? 'Antall' : this.showPermille ? 'Promilleandel' : 'Prosentandel'],
       [
-        ...this.data.meta.series.map(d => {
+        ...this.data.meta.series.map((d) => {
           let str = '';
           if (typeof d === 'string') {
             str += d;
@@ -24,10 +24,10 @@ export default function generateTableData() {
   }
   const tableBody = JSON.parse(JSON.stringify(this.data.data))
     .sort(this.tableSort)
-    .map(row => {
+    .map((row) => {
       return {
         key: row.geography,
-        values: row.values.map(d => d[this.method]),
+        values: row.values.map((d) => d[this.method]),
       };
     });
 

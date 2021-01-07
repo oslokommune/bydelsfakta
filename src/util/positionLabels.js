@@ -12,7 +12,7 @@ function avoidCollisions(data, height) {
   const walk = 2;
 
   data = data
-    .map(d => {
+    .map((d) => {
       d.start = d.y;
       d.end = d.y + spacing;
       return d;

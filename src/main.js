@@ -4,8 +4,7 @@ import VueAnalytics from 'vue-analytics';
 import VueMeta from 'vue-meta';
 import VueResize from 'vue-resize';
 import { Icon } from 'leaflet';
-import * as Sentry from '@sentry/browser';
-import * as Integrations from '@sentry/integrations';
+import * as Sentry from '@sentry/vue';
 import VueSkipTo from 'vue-skip-to';
 import './util/polyfills';
 import App from './App';
@@ -53,8 +52,9 @@ Vue.use(VueAnalytics, {
 
 if (production) {
   Sentry.init({
+    Vue,
     dsn: production ? envs.VUE_APP_SENTRY_DSN : process.env.VUE_APP_SENTRY_DSN,
-    integrations: [new Integrations.Vue({ Vue, attachProps: true, logErrors: true })],
+    logErrors: true,
   });
 }
 
@@ -62,5 +62,5 @@ new Vue({
   router,
   store,
   i18n,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

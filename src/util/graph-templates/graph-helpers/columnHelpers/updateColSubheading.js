@@ -1,6 +1,6 @@
 import util from '../../template-utils';
 
-export default function(selection) {
+export default function (selection) {
   selection
     .select('text.colSubheading')
     .text((d, i) => util.truncate(d.subheading, this.x[i].range()))

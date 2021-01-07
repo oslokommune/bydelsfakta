@@ -1,6 +1,6 @@
 import util from '@/util/graph-templates/template-utils';
 
-export default function(selection) {
+export default function (selection) {
   selection
     .select('text.colHeading')
     .style('display', () => (this.filteredData.meta.series.length > 1 || this.selected > -1 ? 'inherit' : 'none'))

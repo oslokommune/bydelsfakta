@@ -12,8 +12,8 @@ export function initMeanText(selection) {
 export function updateRowMeanText(selection) {
   selection
     .select('.mean-value')
-    .text(d => `${norwegianLocale.format(',.2f')(d.mean)} år`)
+    .text((d) => `${norwegianLocale.format(',.2f')(d.mean)} år`)
     .transition()
     .duration(this.duration)
-    .attr('x', d => this.x(d.mean) + 6);
+    .attr('x', (d) => this.x(d.mean) + 6);
 }

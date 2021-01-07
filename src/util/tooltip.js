@@ -10,11 +10,8 @@ export const showTooltipOver = (str, delay = 0) => {
     .attr('aria-hidden', true)
     .html(str)
     .style('top', '-30px')
-    .style('left', function() {
-      const div = d3
-        .select(this)
-        .node()
-        .getBoundingClientRect().width;
+    .style('left', function () {
+      const div = d3.select(this).node().getBoundingClientRect().width;
       return `${div / -2}px`;
     });
 

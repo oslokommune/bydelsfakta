@@ -1,12 +1,12 @@
 import XLSX from 'xlsx/dist/xlsx.mini.min';
 import downloadFile from './downloadFile';
 
-export default table => {
+export default (table) => {
   const td = table.querySelectorAll('td');
   const caption = table.parentNode.querySelector('h3').innerHTML || 'title';
 
   // Replace commas (Norwegian decimal delimiter) with periods in data cells
-  td.forEach(d => {
+  td.forEach((d) => {
     d.setAttribute('data-pretty', d.innerHTML);
     d.innerHTML = d.innerHTML.replace(',', '.').replace(' ', '');
   });
@@ -16,7 +16,7 @@ export default table => {
   downloadFile(new Blob([wbout]), caption, '.xlsx');
 
   // Replace periods back to commas
-  td.forEach(d => {
+  td.forEach((d) => {
     d.innerHTML = d.getAttribute('data-pretty');
   });
 };

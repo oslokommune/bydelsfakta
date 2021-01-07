@@ -39,15 +39,15 @@ function Template(svg) {
   this.x = d3.scaleLinear();
   this.x2 = d3.scaleLinear();
 
-  this.render = function(data, options = {}) {
+  this.render = function (data, options = {}) {
     if (!this.commonRender(data, options)) return;
 
     this.width = d3.max([this.width, 360]);
 
     // Bind quartiles, mean and median to each geography
-    data.data.forEach(district => {
+    data.data.forEach((district) => {
       if (district.low) return district;
-      const ages = district.values.flatMap(obj => [...Array(obj.value)].fill(+obj.age));
+      const ages = district.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age));
       district.low = d3.quantile(ages, 0.25);
       district.median = d3.quantile(ages, 0.5);
       district.high = d3.quantile(ages, 0.75);
@@ -67,7 +67,7 @@ function Template(svg) {
     this.drawTable();
   };
 
-  this.created = function() {
+  this.created = function () {
     this.canvas
       .append('text')
       .attr('class', 'label-median')
@@ -86,16 +86,13 @@ function Template(svg) {
       .attr('text-anchor', 'middle')
       .text('Gjennomsnittsalder');
 
-    this.legend = this.canvas
-      .append('g')
-      .classed('legend', true)
-      .call(createBoxPlotLegend.bind(this));
+    this.legend = this.canvas.append('g').classed('legend', true).call(createBoxPlotLegend.bind(this));
   };
 
-  this.drawTable = function() {
+  this.drawTable = function () {
     const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
     const tableHead = ['Geografi', 'Gjennomsnittsalder', 'Medianalder'];
-    const tableBody = tableData.map(d => {
+    const tableBody = tableData.map((d) => {
       return {
         key: d.geography,
         values: [d.mean, d.median],
@@ -108,7 +105,7 @@ function Template(svg) {
 
   // Updates the text and position for both
   // axis labels on each render
-  this.drawAxisLabels = function() {
+  this.drawAxisLabels = function () {
     this.canvas
       .select('text.label-median')
       .transition()
@@ -124,28 +121,25 @@ function Template(svg) {
 
   // Updates the scales and axis for the two
   // charts on each render.
-  this.drawScales = function() {
+  this.drawScales = function () {
     this.width1 = (this.width - this.gapX) / 2;
     this.width2 = (this.width - this.gapX) / 2;
 
-    this.x2
-      .range([0, this.width2])
-      .domain([0, 70])
-      .nice();
+    this.x2.range([0, this.width2]).domain([0, 70]).nice();
     this.x2Axis
       .transition()
       .duration(this.duration)
       .call(
         d3
           .axisTop(this.x2)
-          .tickFormat(d => `${d} år`)
+          .tickFormat((d) => `${d} år`)
           .ticks(this.width2 / 60)
       )
       .attr('transform', `translate(${this.width1 + this.gapX})`);
 
     this.x
       .range([0, this.width1])
-      .domain(d3.extent(this.data.data.map(d => d.mean)))
+      .domain(d3.extent(this.data.data.map((d) => d.mean)))
       .nice();
     this.xAxis
       .transition()
@@ -153,18 +147,15 @@ function Template(svg) {
       .call(
         d3
           .axisTop(this.x)
-          .tickFormat(d => `${d} år`)
+          .tickFormat((d) => `${d} år`)
           .ticks(this.width2 / 60)
       );
   };
 
   // Update the contents for each row on each
   // render
-  this.drawRows = function() {
-    const rows = this.canvas
-      .selectAll('g.row')
-      .data(this.data.data)
-      .join(createRowElements.bind(this));
+  this.drawRows = function () {
+    const rows = this.canvas.selectAll('g.row').data(this.data.data).join(createRowElements.bind(this));
 
     rows
       .transition()

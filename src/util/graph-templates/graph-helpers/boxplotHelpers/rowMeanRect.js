@@ -16,5 +16,5 @@ export function updateRowMeanRect(selection) {
     .select('.mean-stroke')
     .transition()
     .duration(this.duration)
-    .attr('x', d => this.x(d.mean));
+    .attr('x', (d) => this.x(d.mean));
 }
