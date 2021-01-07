@@ -56,7 +56,9 @@ jobs:
       env:
         CI: true
 
-    - run: echo "::set-env name=RELEASE_VERSION::$(jq -r .version package.json)"
+    - name: Set env variable
+      run: |
+        echo "RELEASE_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 
     - name: Publish docker image
       uses: elgohr/Publish-Docker-Github-Action@master
