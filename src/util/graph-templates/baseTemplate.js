@@ -61,7 +61,7 @@ function BaseTemplate(svg) {
   this.isCompare = false;
   this.table = d3.select(svg.parentNode.parentNode).select('table');
 
-  this.tableSort = function(a, b) {
+  this.tableSort = function (a, b) {
     if (a.totalRow && b.avgRow) return 1;
     if (b.totalRow && a.avgRow) return -1;
     if (a.totalRow || a.avgRow) return 1;
@@ -70,7 +70,7 @@ function BaseTemplate(svg) {
     return a.id - b.id;
   };
 
-  this.format = function(num, method, tick = false, table = false) {
+  this.format = function (num, method, tick = false, table = false) {
     if (method === undefined) throw Error('Cannot format number');
     if (num === undefined) throw Error('Missing number');
 
@@ -110,7 +110,7 @@ function BaseTemplate(svg) {
 
   // Resize is called from the parent vue component
   // every time the container size changes.
-  this.resize = debounce(function() {
+  this.resize = debounce(function () {
     this.render(this.data, {
       method: this.method,
       series: this.series,
@@ -124,7 +124,7 @@ function BaseTemplate(svg) {
   }, 250);
 
   // Sets the heading for the graph on load.
-  this.setHeading = function(str = false) {
+  this.setHeading = function (str = false) {
     if (this.data.meta && this.data.meta.heading && typeof this.data.meta.heading === 'string') {
       this.customHeading = str;
       const text = this.getHeading(str);
@@ -134,20 +134,15 @@ function BaseTemplate(svg) {
         .select('.table-heading')
         .join('h3')
         .attr('class', 'table-heading')
-        .html(d => d);
+        .html((d) => d);
 
-      const wrap = textwrap()
-        .bounds({ width: this.parentWidth(), height: 60 })
-        .method('tspans');
+      const wrap = textwrap().bounds({ width: this.parentWidth(), height: 60 }).method('tspans');
 
-      this.heading
-        .html('')
-        .text(text)
-        .call(wrap);
+      this.heading.html('').text(text).call(wrap);
     }
   };
 
-  this.getHeading = function() {
+  this.getHeading = function () {
     /**
      * @Returns a string with heading for the graph.
      *
@@ -156,7 +151,7 @@ function BaseTemplate(svg) {
      * on which template is in use.
      */
     const heading = this.customHeading || this.data.meta.heading;
-    const district = allDistricts.find(d => d.key === this.data.district || d.value === this.data.district);
+    const district = allDistricts.find((d) => d.key === this.data.district || d.value === this.data.district);
     const geo = district ? ` i ${district.value}` : ' i Oslo';
     let year = '';
 
@@ -195,7 +190,7 @@ function BaseTemplate(svg) {
   };
 
   // Common operations to be run once a template is initialized
-  this.init = function() {
+  this.init = function () {
     this.svg = d3.select(svg).style('font-family', 'OsloSans');
 
     this.svg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink').attr('xmlns', 'http://www.w3.org/2000/svg');
@@ -204,9 +199,7 @@ function BaseTemplate(svg) {
     this.svg.selectAll('*').remove();
 
     // Remove dropdown element
-    d3.select(svg.parentNode.parentNode)
-      .select('.graph__dropdown')
-      .remove();
+    d3.select(svg.parentNode.parentNode).select('.graph__dropdown').remove();
 
     this.background = this.svg
       .append('rect')
@@ -245,19 +238,10 @@ function BaseTemplate(svg) {
   };
 
   // Creates DOM elements for generic source reference
-  this.addSourceElement = function() {
-    const group = this.svg
-      .append('g')
-      .attr('class', 'sourceGroup')
-      .attr('fill', color.purple)
-      .attr('opacity', 0);
+  this.addSourceElement = function () {
+    const group = this.svg.append('g').attr('class', 'sourceGroup').attr('fill', color.purple).attr('opacity', 0);
 
-    group
-      .append('text')
-      .attr('class', 'source-label')
-      .attr('font-size', 12)
-      .attr('y', '100%')
-      .text('Kilde: ');
+    group.append('text').attr('class', 'source-label').attr('font-size', 12).attr('y', '100%').text('Kilde: ');
 
     group
       .append('text')
@@ -265,27 +249,21 @@ function BaseTemplate(svg) {
       .attr('font-size', 12)
       .attr('y', '100%')
       .attr('transform', () => {
-        const labelWidth = group
-          .select('.source-label')
-          .node()
-          .getBBox().width;
+        const labelWidth = group.select('.source-label').node().getBBox().width;
         return `translate(${labelWidth + 4}, 0)`;
       });
   };
 
   // Updates and repositions the source reference text
-  this.drawSource = function(str) {
+  this.drawSource = function (str) {
     // Update source text
     this.svg.select('text.source').text(str);
 
-    this.svg
-      .select('g.sourceGroup')
-      .attr('opacity', 1)
-      .attr('transform', `translate(0, -5)`);
+    this.svg.select('g.sourceGroup').attr('opacity', 1).attr('transform', `translate(0, -5)`);
   };
 
   // The parent container width is needed for each render of a template.
-  this.parentWidth = function() {
+  this.parentWidth = function () {
     const { width } = svg.parentNode.getBoundingClientRect();
     const paddingLeft = +getComputedStyle(svg.parentNode).paddingLeft.split('px')[0];
     const paddingRight = +getComputedStyle(svg.parentNode).paddingRight.split('px')[0];
@@ -294,10 +272,10 @@ function BaseTemplate(svg) {
   };
 
   // Placeholder for operations to be run once a child template is initialized
-  this.created = function() {};
+  this.created = function () {};
 
   // All templates share these common operations when rendered
-  this.commonRender = function(data, options = {}) {
+  this.commonRender = function (data, options = {}) {
     if (data === undefined || data.data === undefined) return null;
     this.sources = options.sources || null;
     this.data = data;
@@ -316,27 +294,23 @@ function BaseTemplate(svg) {
     this.height = Array.isArray(this.data.data) ? this.data.data.length * this.rowHeight : 500;
 
     if (this.sources && this.sources.length) {
-      const str = this.sources.map(source => source.name).join(', ');
+      const str = this.sources.map((source) => source.name).join(', ');
       this.drawSource(str);
     }
 
     return true;
   };
 
-  this.showMessage = function(msg) {
-    this.svg
-      .append('text')
-      .attr('class', 'error-message')
-      .attr('y', 100)
-      .text(msg);
+  this.showMessage = function (msg) {
+    this.svg.append('text').attr('class', 'error-message').attr('y', 100).text(msg);
   };
 
-  this.hideMessage = function() {
+  this.hideMessage = function () {
     this.svg.select('.error-message').remove();
   };
 
   // Placeholder for the render method
-  this.render = function() {};
+  this.render = function () {};
 }
 
 export default BaseTemplate;

@@ -123,7 +123,7 @@ export default {
         return this.$t('navigationTopbar.header.home');
       }
       return id !== undefined
-        ? this.allDistricts.find(district => district.uri === id).value
+        ? this.allDistricts.find((district) => district.uri === id).value
         : this.$t('navigationTopbar.header.chooseDistrict');
     },
 

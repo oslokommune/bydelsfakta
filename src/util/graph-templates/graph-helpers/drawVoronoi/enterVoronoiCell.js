@@ -1,4 +1,4 @@
-export default function(enter) {
+export default function (enter) {
   const g = enter.append('g');
   g.append('path');
   g.append('rect');

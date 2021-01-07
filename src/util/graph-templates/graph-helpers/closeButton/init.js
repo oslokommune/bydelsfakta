@@ -20,17 +20,11 @@ export default function init() {
     .attr('fill', color.red)
     .style('cursor', 'pointer')
     .attr('opacity', 0.7)
-    .on('mouseenter', function() {
-      d3.select(this)
-        .transition()
-        .duration(duration)
-        .attr('opacity', 1);
+    .on('mouseenter', function () {
+      d3.select(this).transition().duration(duration).attr('opacity', 1);
     })
-    .on('mouseleave', function() {
-      d3.select(this)
-        .transition()
-        .duration(duration)
-        .attr('opacity', 0.7);
+    .on('mouseleave', function () {
+      d3.select(this).transition().duration(duration).attr('opacity', 0.7);
     });
 
   // Close button icon

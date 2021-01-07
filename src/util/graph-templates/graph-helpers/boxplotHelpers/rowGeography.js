@@ -12,6 +12,6 @@ export function initRowGeography(selection) {
 export function updateRowGeography(selection) {
   selection
     .select('.geography')
-    .attr('font-weight', d => (d.avgRow || d.totalRow ? 700 : 400))
-    .text(d => util.truncate(d.geography, this.padding.left));
+    .attr('font-weight', (d) => (d.avgRow || d.totalRow ? 700 : 400))
+    .text((d) => util.truncate(d.geography, this.padding.left));
 }

@@ -44,7 +44,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.params.topic) {
     if (
-      (!topicNames.find(name => name === to.params.topic) && process.env.VUE_APP_PRODUCTION_DATA === 'prod') ||
+      (!topicNames.find((name) => name === to.params.topic) && process.env.VUE_APP_PRODUCTION_DATA === 'prod') ||
       disabledTopics.includes(to.params.topic)
     ) {
       next({ name: 'NotFound', params: [to.path] });
@@ -56,17 +56,17 @@ router.beforeEach((to, from, next) => {
     if (districts[0] === 'alle') {
       next();
     } else if (districts.length === 1) {
-      if (allDistricts.find(district => district.uri === districts[0])) {
+      if (allDistricts.find((district) => district.uri === districts[0])) {
         next();
-      } else if (allDistricts.find(district => district.key === districts[0])) {
+      } else if (allDistricts.find((district) => district.key === districts[0])) {
         next();
       } else {
         next({ name: 'NotFound', params: [to.path] });
       }
     } else if (districts.length > 1) {
       const errors = [];
-      districts.forEach(district => {
-        if (!allDistricts.find(item => item.key === district)) {
+      districts.forEach((district) => {
+        if (!allDistricts.find((item) => item.key === district)) {
           errors.push(district);
         }
       });

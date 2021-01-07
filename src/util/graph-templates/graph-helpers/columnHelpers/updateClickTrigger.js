@@ -1,6 +1,6 @@
 import d3 from '@/assets/d3';
 
-export default function(selection) {
+export default function (selection) {
   selection
     .select('rect.clickTrigger')
     .style('cursor', () => (this.data.meta.series.length > 1 ? 'pointer' : 'default'))
@@ -27,5 +27,5 @@ export default function(selection) {
     })
     .attr('tabindex', this.filteredData.meta.series.length > 1 ? 0 : false)
     .append('title')
-    .html(d => `${d.heading} ${d.subheading}`);
+    .html((d) => `${d.heading} ${d.subheading}`);
 }

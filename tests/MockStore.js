@@ -15,16 +15,16 @@ export const state = {
 };
 
 export const getters = {
-  geoDistricts: state => {
+  geoDistricts: (state) => {
     if (!state.compareDistricts && state.districts.length !== 0) {
-      return { ...state.districtsGeo[`${allDistricts.find(district => district.key === state.districts[0]).uri}`] };
+      return { ...state.districtsGeo[`${allDistricts.find((district) => district.key === state.districts[0]).uri}`] };
     }
     if (state.districts[0] === 'alle') {
       return { ...state.districtsGeo.oslo };
     }
 
-    const features = state.districts.map(id =>
-      state.districtsGeo.oslo.features.find(district => district.properties.id === id)
+    const features = state.districts.map((id) =>
+      state.districtsGeo.oslo.features.find((district) => district.properties.id === id)
     );
 
     return {
@@ -74,8 +74,8 @@ export const actions = {
       if (payloadDistricts[0] === 'alle') {
         commit('ADD_DISTRICT', districts);
       } else {
-        const districtValue = allDistricts.find(district => district.uri === payloadDistricts[0]);
-        const districtKey = allDistricts.find(district => district.key === payloadDistricts[0]);
+        const districtValue = allDistricts.find((district) => district.uri === payloadDistricts[0]);
+        const districtKey = allDistricts.find((district) => district.key === payloadDistricts[0]);
 
         if (districtValue === undefined) commit('ADD_DISTRICT', [districtKey.key]);
         else commit('SELECT_DISTRICT', [districtValue.key]);

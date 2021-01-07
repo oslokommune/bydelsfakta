@@ -1,8 +1,8 @@
 {
-  "semi": true,
-  "proseWrap": "always",
-  "eslintIntegration": true,
-  "printWidth": 120,
+  "tabWidth": 2,
   "trailingComma": "es5",
-  "singleQuote": true
+  "singleQuote": true,
+  "printWidth": 120,
+  "semi": true,
+  "arrowParens": "always"
 }

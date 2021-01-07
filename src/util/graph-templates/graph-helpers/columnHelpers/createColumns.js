@@ -1,6 +1,6 @@
 import { color } from '../../colors';
 
-export default function(selection) {
+export default function (selection) {
   const g = selection.append('g').attr('class', 'column');
   g.append('rect').call(styleColumnBackground);
   g.append('rect').call(styleClickTrigger);
@@ -19,19 +19,13 @@ function styleClickTrigger(el) {
 }
 
 function styleArrow(el) {
-  el.attr('class', 'arrow')
-    .attr('width', 1)
-    .attr('height', 11);
+  el.attr('class', 'arrow').attr('width', 1).attr('height', 11);
 }
 
 function styleColumnHeading(el) {
-  el.attr('class', 'colHeading')
-    .attr('transform', 'translate(0, -40)')
-    .style('pointer-events', 'none');
+  el.attr('class', 'colHeading').attr('transform', 'translate(0, -40)').style('pointer-events', 'none');
 }
 
 function styleColumnSubheading(el) {
-  el.attr('class', 'colSubheading')
-    .attr('transform', 'translate(0, -20)')
-    .style('pointer-events', 'none');
+  el.attr('class', 'colSubheading').attr('transform', 'translate(0, -20)').style('pointer-events', 'none');
 }

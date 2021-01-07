@@ -13,6 +13,6 @@ export function updateRowFill(selection) {
     .select('.rowFill')
     .transition()
     .duration(this.duration)
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.05 : 0))
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.05 : 0))
     .attr('width', this.width + this.padding.left + this.padding.right);
 }

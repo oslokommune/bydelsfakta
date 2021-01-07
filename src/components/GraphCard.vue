@@ -304,7 +304,7 @@ export default {
       });
     },
 
-    '$route.params.topic': function() {
+    '$route.params.topic': function () {
       this.active = 0;
       this.mode = 'graph';
       this.showTabsOrSelect();
@@ -421,7 +421,7 @@ export default {
     showTabsOrSelect() {
       let tabsWidth = 0;
       const tabs = this.$refs.tabRef;
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         tabsWidth += tab.offsetWidth;
       });
       this.showAsTabs = this.$refs.tabsRef.offsetWidth > tabsWidth;

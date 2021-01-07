@@ -16,5 +16,5 @@ export function updateRowMedianRect(selection) {
     .select('.median-stroke')
     .transition()
     .duration(this.duration)
-    .attr('x', d => this.gapX + this.width1 + this.x2(d.median));
+    .attr('x', (d) => this.gapX + this.width1 + this.x2(d.median));
 }

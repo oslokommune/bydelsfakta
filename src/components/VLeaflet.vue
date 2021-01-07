@@ -1,5 +1,5 @@
 <template>
-  <div style=" width: 100%; height: 100%;">
+  <div style="width: 100%; height: 100%">
     <div v-if="settings.labels" class="legend">
       <h2 v-if="settings.heading || year" class="legend__heading">
         {{ settings.heading }} {{ year ? `(${year})` : '' }}
@@ -23,7 +23,7 @@
 <script>
 /* eslint-disable no-continue */
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/vue';
 import L from 'leaflet';
 import * as d3 from 'd3';
 import { GestureHandling } from 'leaflet-gesture-handling';
@@ -125,7 +125,7 @@ export default {
     }
 
     if (this.districtLabels) {
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         this.addPopup();
       });
     }
@@ -158,18 +158,18 @@ export default {
     async getData(url) {
       if (!url) return;
       this.data = await fetch(url)
-        .then(d =>
+        .then((d) =>
           d
             .json()
-            .then(dj => {
+            .then((dj) => {
               this.meta = dj[0].meta;
               return dj[0].data;
             })
-            .catch(err => {
+            .catch((err) => {
               Sentry.captureException(err);
             })
         )
-        .catch(err => {
+        .catch((err) => {
           Sentry.captureException(err);
         });
 
@@ -190,10 +190,7 @@ export default {
       }
 
       // Color calulator defined by the scale set in the map settings
-      const colorStrength = d3
-        .scaleLinear()
-        .range([0, 1])
-        .domain(this.scale);
+      const colorStrength = d3.scaleLinear().range([0, 1]).domain(this.scale);
 
       // Store data to create
       const allLayerData = [];
@@ -202,10 +199,10 @@ export default {
       const layers = this.$refs.geojsonLayer.mapObject._layers;
 
       // Map layers in the map with the data returned
-      Object.keys(layers).forEach(key => {
+      Object.keys(layers).forEach((key) => {
         const layer = layers[key];
         const layerId = layer.feature.properties.id;
-        const dataObj = data.find(geo => geo.id === layerId.substring(6, 10) || geo.id === layerId);
+        const dataObj = data.find((geo) => geo.id === layerId.substring(6, 10) || geo.id === layerId);
         if (!dataObj || !dataObj.values || !dataObj.values.length) return;
 
         const { geography } = dataObj;
@@ -213,7 +210,7 @@ export default {
         // The data value depends on the method and/or series defined on the map settings object
         let dataValue;
         if (this.settings.method === 'avg') {
-          const values = dataObj.values.map(d => d.value);
+          const values = dataObj.values.map((d) => d.value);
           dataValue = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
         } else if (this.settings.series) {
           dataValue = dataObj.values[this.settings.series][this.settings.method];
@@ -253,7 +250,7 @@ export default {
         .join('div')
         .attr('class', 'legend__dot')
         .transition()
-        .style('left', d => `${colorStrength(d.dataValue) * 100}%`)
+        .style('left', (d) => `${colorStrength(d.dataValue) * 100}%`)
         .each((d, i, j) => {
           j[i].addEventListener('click', () => {
             d.layer.openPopup();
@@ -263,7 +260,7 @@ export default {
     addPopup() {
       const layers = this.$refs.geojsonLayer.mapObject._layers;
 
-      Object.keys(layers).forEach(key => {
+      Object.keys(layers).forEach((key) => {
         const layer = layers[key];
         const popupContent = `
           <h4>${layer.feature.properties.name}</h4>

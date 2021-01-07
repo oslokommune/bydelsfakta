@@ -21,7 +21,7 @@ function Template(svg) {
   this.isSingleSeries = false;
   this.template = 'bars';
 
-  this.render = function(data, options = {}) {
+  this.render = function (data, options = {}) {
     this.selected = options.selected !== undefined ? options.selected : -1;
 
     if (data.data && data.data[0].values && data.data[0].values.length === 1 && data.meta.series.length > 1) {
@@ -63,7 +63,7 @@ function Template(svg) {
 
     if (this.selected > -1) {
       this.filteredData.meta.series = [this.data.meta.series[this.selected]];
-      this.filteredData.data = this.filteredData.data.map(district => {
+      this.filteredData.data = this.filteredData.data.map((district) => {
         district.values = [district.values[this.selected]];
         return district;
       });
@@ -99,7 +99,7 @@ function Template(svg) {
       .call(columnHelpers.updateColArrow.bind(this));
   };
 
-  this.created = function() {
+  this.created = function () {
     this.canvas.append('g').attr('class', 'columns');
     this.canvas.append('g').attr('class', 'rows');
 
@@ -107,13 +107,13 @@ function Template(svg) {
     this.close = closeButton.init.call(this);
   };
 
-  this.setScales = function() {
+  this.setScales = function () {
     if (!this.filteredData.meta.series || !this.filteredData.meta.series.length) return;
     const maxValues = this.filteredData.meta.series.map((row, i) => {
       return d3.max(
         this.filteredData.data
-          .filter(d => !(this.method === 'value' && (d.totalRow || d.avgRow)))
-          .map(d => {
+          .filter((d) => !(this.method === 'value' && (d.totalRow || d.avgRow)))
+          .map((d) => {
             if (!d.values || !d.values[i] || !d.values[i][this.method]) return 0;
             return d.values[i][this.method];
           })
@@ -133,9 +133,7 @@ function Template(svg) {
         startPos += this.gutter;
       }
       const endPos = startPos + this.x2(maxValues[index]);
-      SCALE.domain([0, maxValues[index]])
-        .range([startPos, endPos])
-        .nice();
+      SCALE.domain([0, maxValues[index]]).range([startPos, endPos]).nice();
 
       return SCALE;
     });
@@ -143,12 +141,8 @@ function Template(svg) {
     this.x2.domain(this.filteredData.meta.series.map((d, i) => i)).range([0, this.width]);
   };
 
-  this.drawAxis = function() {
-    this.xAxis = this.canvas
-      .selectAll('g.axis.x')
-      .data(this.x)
-      .join('g')
-      .attr('class', 'axis x');
+  this.drawAxis = function () {
+    this.xAxis = this.canvas.selectAll('g.axis.x').data(this.x).join('g').attr('class', 'axis x');
 
     this.xAxis.each((d, i, j) => {
       d3.select(j[i])
@@ -163,7 +157,7 @@ function Template(svg) {
           d3
             .axisBottom(this.x[i])
             .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
-            .tickFormat(dj => this.format(dj, this.method, true))
+            .tickFormat((dj) => this.format(dj, this.method, true))
         );
     });
   };

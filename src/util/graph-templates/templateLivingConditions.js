@@ -20,8 +20,8 @@ function Template(svg) {
   this.colPos = d3.scaleBand().paddingInner(0.25);
   this.x = [];
 
-  this.render = function(data, options = {}) {
-    data.data = data.data.filter(d => !d.totalRow);
+  this.render = function (data, options = {}) {
+    data.data = data.data.filter((d) => !d.totalRow);
 
     options.highlight = options.highlight || 0;
     if (!this.commonRender(data, options)) return;
@@ -44,7 +44,7 @@ function Template(svg) {
     util.drawTable.apply(this, generateTableData.call(this));
   };
 
-  this.created = function() {
+  this.created = function () {
     this.svg.append('g').attr('class', 'legend');
     this.canvas.append('g').classed('rows', true);
     this.canvas.append('g').classed('columns', true);
@@ -74,8 +74,8 @@ function updateLegend(svg) {
   const padding = 2;
   const legendWidth = shapeWidth * count + padding * (count - 1);
 
-  const districtGeo = this.data.data.filter(geo => geo.avgRow)[0]
-    ? this.data.data.filter(geo => geo.avgRow)[0].geography
+  const districtGeo = this.data.data.filter((geo) => geo.avgRow)[0]
+    ? this.data.data.filter((geo) => geo.avgRow)[0].geography
     : 'bydelen';
   const compareWith = this.mode === 'osloRatio' ? 'Oslo' : districtGeo;
 
@@ -112,7 +112,7 @@ function updateRows(g) {
   // Dynamic styling, sizing and positioning based on data and container size
 
   g.select('rect.rowFill')
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0 : 0))
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0 : 0))
     .attr('width', this.padding.left + this.width + this.padding.right);
 
   g.select('rect.divider')
@@ -124,19 +124,19 @@ function updateRows(g) {
 
   g.select('text.geography')
     .attr('x', -this.padding.left)
-    .text(d => d.geography);
+    .text((d) => d.geography);
 
   g.select('.bars')
     .selectAll('rect')
-    .data(d => d.values)
+    .data((d) => d.values)
     .join('rect')
     .call(updateBars.bind(this))
     .call(handleMouseEvents.bind(this));
 
   g.select('.comparisonMarkers')
     .selectAll('line')
-    .data(d => d.values)
-    .join(enter => {
+    .data((d) => d.values)
+    .join((enter) => {
       return enter
         .append('line')
         .attr('y1', 11)
@@ -157,16 +157,13 @@ function enterColumns(enter) {
     .classed('textgroup', true)
     .append('text')
     .classed('heading', true);
-  group
-    .append('g')
-    .classed('axis', true)
-    .attr('transform', `translate(0, -10)`);
+  group.append('g').classed('axis', true).attr('transform', `translate(0, -10)`);
 
   group
     .append('rect')
     .attr('class', 'clicky')
     .append('title')
-    .text(d => `Sorter etter ${d.heading}`);
+    .text((d) => `Sorter etter ${d.heading}`);
 
   return group;
 }
@@ -175,7 +172,7 @@ function drawColumns(selection) {
   selection
     .select('.columns')
     .selectAll('g.column')
-    .data(this.data.meta.series, d => d.heading)
+    .data(this.data.meta.series, (d) => d.heading)
     .join(enterColumns.bind(this))
     .call(updateColPosition.bind(this))
     .call(updateColClicky.bind(this))
@@ -193,7 +190,7 @@ function updateBars(selection) {
     .attr('width', (d, i) => this.x[i](d[this.mode]))
     .attr('y', 4)
     .attr('x', (d, i) => this.colPos(this.data.meta.series[i].heading))
-    .attr('fill', d => colorScale(d[this.mode]));
+    .attr('fill', (d) => colorScale(d[this.mode]));
 }
 
 // Update the contents for each row on each
@@ -202,7 +199,7 @@ function drawRows(selection) {
   selection
     .select('.rows')
     .selectAll('g.row')
-    .data(this.data.data, d => d.geography)
+    .data(this.data.data, (d) => d.geography)
     .join(enterRows.bind(this))
     .call(updateRows.bind(this));
 }
@@ -237,22 +234,20 @@ function enterRows(enter) {
   g.append('g').attr('class', 'bars');
   g.append('g').attr('class', 'comparisonMarkers');
 
-  g.append('text')
-    .attr('class', 'valueText')
-    .attr('fill', color.purple);
+  g.append('text').attr('class', 'valueText').attr('fill', color.purple);
 
   return g;
 }
 
 function handleMouseEvents(selection) {
   selection
-    .on('mouseover', d => showTooltipOver(d3.format('.0%')(d[this.mode])))
+    .on('mouseover', (d) => showTooltipOver(d3.format('.0%')(d[this.mode])))
     .on('mousemove', showTooltipMove)
     .on('mouseleave', hideTooltip);
 }
 
 function updateColPosition(selection) {
-  selection.attr('transform', d => `translate(${this.colPos(d.heading)}, 0)`);
+  selection.attr('transform', (d) => `translate(${this.colPos(d.heading)}, 0)`);
 }
 
 function updateColClicky(selection) {
@@ -268,7 +263,7 @@ function updateColClicky(selection) {
 function updateColHeading(selection) {
   selection
     .select('.heading')
-    .text(d => d.heading)
+    .text((d) => d.heading)
     .style('cursor', 'normal');
 }
 
@@ -286,22 +281,17 @@ function updateColAxis(selection) {
   selection.each((d, i, j) => {
     d3.select(j[i])
       .select('.axis')
-      .call(
-        d3
-          .axisTop(this.x[i])
-          .ticks(2)
-          .tickFormat(d3.format(',.1p'))
-      );
+      .call(d3.axisTop(this.x[i]).ticks(2).tickFormat(d3.format(',.1p')));
   });
 }
 
 function generateTableData() {
   const tableData = JSON.parse(JSON.stringify(this.data.data)).sort(this.tableSort);
-  const tableHead = [['Geografi', 'Prosentandel'], [...this.data.meta.series.map(d => `${d.heading}`)]];
-  const tableBody = tableData.map(row => {
+  const tableHead = [['Geografi', 'Prosentandel'], [...this.data.meta.series.map((d) => `${d.heading}`)]];
+  const tableBody = tableData.map((row) => {
     return {
       key: row.geography,
-      values: row.values.map(value => value[this.mode]),
+      values: row.values.map((value) => value[this.mode]),
     };
   });
 
@@ -309,16 +299,12 @@ function generateTableData() {
 }
 
 function updateScales() {
-  this.colPos.rangeRound([0, this.width]).domain(this.data.meta.series.map(d => d.heading));
+  this.colPos.rangeRound([0, this.width]).domain(this.data.meta.series.map((d) => d.heading));
   const bw = this.colPos.bandwidth();
 
   return this.data.meta.series.map((series, i) => {
-    const max = d3.max([...this.data.data.map(geo => geo.values[i][this.mode]), 2]);
-    return d3
-      .scaleLinear()
-      .range([0, bw])
-      .domain([0, max])
-      .nice();
+    const max = d3.max([...this.data.data.map((geo) => geo.values[i][this.mode]), 2]);
+    return d3.scaleLinear().range([0, bw]).domain([0, max]).nice();
   });
 }
 

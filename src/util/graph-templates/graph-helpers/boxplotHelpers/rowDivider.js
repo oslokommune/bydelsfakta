@@ -14,6 +14,6 @@ export function updateRowDivider(selection) {
     .select('.divider')
     .transition()
     .duration(this.duration)
-    .attr('fill-opacity', d => (d.avgRow || d.totalRow ? 0.5 : 0.2))
+    .attr('fill-opacity', (d) => (d.avgRow || d.totalRow ? 0.5 : 0.2))
     .attr('width', this.width + this.padding.left + this.padding.right);
 }

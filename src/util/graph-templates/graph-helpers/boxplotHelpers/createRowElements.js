@@ -7,7 +7,7 @@ import { initMeanRect } from './rowMeanRect';
 import { initRowMedianRect } from './rowMedianRect';
 import { initRowFill } from './rowFill';
 
-export default function(enter) {
+export default function (enter) {
   const g = enter
     .append('g')
     .classed('row', true)

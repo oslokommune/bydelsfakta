@@ -26,11 +26,7 @@ export default function downloadPng(svgRef, filename) {
   };
 
   // Manipulate things before screenshot
-  background
-    .attr('x', -padding)
-    .attr('y', -padding)
-    .attr('width', width)
-    .attr('height', height);
+  background.attr('x', -padding).attr('y', -padding).attr('width', width).attr('height', height);
 
   svg.selectAll('.domain').attr('stroke', 'black');
   svg.selectAll('.tick line').attr('stroke', 'black');
@@ -61,7 +57,7 @@ function translateCanvas(canvas, value) {
     .split('(')[1]
     .split(')')[0]
     .split(',')
-    .map(str => +str.trim());
+    .map((str) => +str.trim());
 
   canvas.attr('transform', `translate(${[x, y + value]})`);
 }

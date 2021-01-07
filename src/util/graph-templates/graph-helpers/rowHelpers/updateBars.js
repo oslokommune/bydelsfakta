@@ -1,4 +1,4 @@
-export default function(selection) {
+export default function (selection) {
   selection
     .attr('height', (d, i, j) => {
       if (this.isMobileView) return 7;

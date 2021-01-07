@@ -1,4 +1,4 @@
-export default function(selection) {
+export default function (selection) {
   selection
     .select('rect.colFill')
     .attr('y', -10)
@@ -8,7 +8,7 @@ export default function(selection) {
     .duration(this.duration)
     .attr('width', (d, i) => {
       let val;
-      const totalRow = this.filteredData.data.find(dj => dj.totalRow);
+      const totalRow = this.filteredData.data.find((dj) => dj.totalRow);
 
       if (totalRow && totalRow.values && totalRow.values[i]) {
         val = totalRow.values[i][this.method];
@@ -19,7 +19,7 @@ export default function(selection) {
       if ((this.method === 'value' && val > this.x[i].domain()[1]) || this.isMobileView) {
         return 0;
       }
-      if (this.filteredData.data.filter(dj => dj.totalRow).length) {
+      if (this.filteredData.data.filter((dj) => dj.totalRow).length) {
         return this.x[0](val);
       }
       return 0;
