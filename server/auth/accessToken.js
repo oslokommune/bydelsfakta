@@ -1,10 +1,8 @@
-'use strict';
-
 const isDate = require('date-fns/isDate');
 const addSeconds = require('date-fns/addSeconds');
 const isAfter = require('date-fns/isAfter');
 
-const parseToken = token => {
+const parseToken = (token) => {
   const parsedTokenProps = {};
 
   if ('expires_in' in token) {
@@ -19,10 +17,10 @@ const parseToken = token => {
     }
   }
 
-  return Object.assign({}, token, parsedTokenProps);
+  return { ...token, ...parsedTokenProps };
 };
 
-const isTokenExpired = expired => {
+const isTokenExpired = (expired) => {
   return isAfter(new Date(), expired);
 };
 

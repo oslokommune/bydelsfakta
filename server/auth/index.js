@@ -26,33 +26,32 @@ const logErrors = (error, refresh) => {
 module.exports = () => {
   return (req, res, next) => {
     if (accessToken === null || isTokenExpired(accessToken.refresh_expires_at)) {
-      const params = Object.assign({}, data, {
-        grant_type: process.env.KEYCLOAK_GRANT_TYPE_CLIENT,
-      });
+      const params = { ...data, grant_type: process.env.KEYCLOAK_GRANT_TYPE_CLIENT };
 
-      return request(params)
-        .then(response => {
+      request(params)
+        .then((response) => {
           accessToken = parseToken(response);
           req.headers.authorization = `Bearer ${accessToken.access_token}`;
           next();
         })
-        .catch(error => {
+        .catch((error) => {
           logErrors(error);
           return res.status(error.status);
         });
     } else if (isTokenExpired(accessToken.expires_at)) {
-      const params = Object.assign({}, data, {
+      const params = {
+        ...data,
         grant_type: process.env.KEYCLOAK_GRANT_TYPE_REFRESH,
         refresh_token: accessToken.refresh_token,
-      });
+      };
 
-      return request(params)
-        .then(response => {
+      request(params)
+        .then((response) => {
           accessToken = parseToken(response);
           req.headers.authorization = `Bearer ${accessToken.access_token}`;
           next();
         })
-        .catch(error => {
+        .catch((error) => {
           logErrors(error, true);
           return res.status(error.status);
         });

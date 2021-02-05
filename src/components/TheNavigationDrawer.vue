@@ -121,7 +121,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex';
 import allDistricts from '../config/allDistricts';
 import predefinedOptions from '../config/predefinedOptions';
-import OsloLogo from '../assets/oslo-logo.svg'; //
+import OsloLogo from '../assets/oslo-logo.svg';
 
 export default {
   name: 'TheNavigationDrawer',

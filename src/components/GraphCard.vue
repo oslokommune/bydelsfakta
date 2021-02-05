@@ -362,7 +362,7 @@ export default {
       this.$ga.event({
         eventCategory: 'Card',
         eventAction: 'Change tab',
-        eventLabel: this.settings.tabs[index].label,
+        eventLabel: this.settings.tabs[index - 1].label,
       });
     },
 

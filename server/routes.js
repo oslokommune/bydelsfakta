@@ -10,7 +10,7 @@ const api = process.env.BYDELSFAKTA_API_URL;
 const API_URL = api.slice(-1) === '/' ? api : `${api}/`;
 const get = API_URL[4] === 's' ? https.get : http.get;
 
-module.exports = app => {
+module.exports = (app) => {
   app.use('/', express.static(path.join(__dirname, '../docs/')));
 
   app.get('/health', (req, res) => {
@@ -30,9 +30,10 @@ module.exports = app => {
       {
         headers,
       },
-      proxyRes => {
-        const { statusCode, headers } = proxyRes;
-        const contentType = headers['content-type'];
+      (proxyRes) => {
+        const { statusCode } = proxyRes;
+        const newHeaders = proxyRes.headers;
+        const contentType = newHeaders['content-type'];
 
         if (statusCode !== 200) {
           console.error('Unexpected status:', statusCode);
@@ -41,7 +42,7 @@ module.exports = app => {
           console.error('Unexpected content-type:', contentType);
         }
 
-        res.writeHead(statusCode, headers);
+        res.writeHead(statusCode, newHeaders);
         proxyRes.pipe(res);
       }
     );
@@ -51,7 +52,7 @@ module.exports = app => {
 
   const allConfiguredRoutes = () => {
     const routes = [];
-    app._router.stack.forEach(layer => {
+    app._router.stack.forEach((layer) => {
       if (layer && layer.route) {
         routes.push(layer.route.path);
       }

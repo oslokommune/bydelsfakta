@@ -4,34 +4,30 @@ import Router from 'vue-router';
 import { topicNames, disabledTopics } from './config/topics';
 import allDistricts from './config/allDistricts';
 
-const District = () => import('./views/District');
-const Topic = () => import('./views/Topic');
-const NotFound = () => import('./views/NotFound');
-
 Vue.use(Router);
 
 export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: District,
+    component: () => import('./views/District'),
   },
   {
     path: '/bydel/:district?',
     name: 'District',
-    component: District,
+    component: () => import('./views/District'),
     props: true,
   },
   {
     path: '/bydel/:district/:topic',
     name: 'Topic',
-    component: Topic,
+    component: () => import('./views/Topic'),
     props: true,
   },
   {
     path: '*',
     name: 'NotFound',
-    component: NotFound,
+    component: () => import('./views/NotFound'),
   },
 ];
 

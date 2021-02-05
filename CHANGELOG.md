@@ -1,5 +1,13 @@
 # Unreleased
 
+# Release v1.1.8
+
+### Changes
+
+- Trigger Age-chart re-render when using a touch device
+- Updated dependencies
+- QoL changes to the server
+
 # Release v1.1.7
 ### About this version
 There was a critical security vulnerability with axios and some changes to sentry

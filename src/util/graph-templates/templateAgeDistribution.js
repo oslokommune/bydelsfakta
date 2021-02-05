@@ -32,7 +32,7 @@ function Template(svg) {
     .handleSize(21)
     .on('brush', updateHandlePositions.bind(this))
     .on('end', () => {
-      if (d3.event.sourceEvent instanceof MouseEvent) {
+      if (d3.event.sourceEvent instanceof MouseEvent || d3.event.sourceEvent instanceof TouchEvent) {
         this.dropDownParent.select('select').node().value = '';
         this.extent = d3.event.selection
           ? d3.event.selection.map((val) => Math.round(this.age.invert(val)))
