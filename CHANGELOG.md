@@ -1,5 +1,9 @@
 # Unreleased
 
+# Release v1.1.9
+
+- Fix a bug with firefox and touchEvents
+
 # Release v1.1.8
 
 ### Changes

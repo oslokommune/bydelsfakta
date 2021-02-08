@@ -32,7 +32,10 @@ function Template(svg) {
     .handleSize(21)
     .on('brush', updateHandlePositions.bind(this))
     .on('end', () => {
-      if (d3.event.sourceEvent instanceof MouseEvent || d3.event.sourceEvent instanceof TouchEvent) {
+      if (
+        d3.event.sourceEvent instanceof MouseEvent ||
+        (window.TouchEvent && d3.event.sourceEvent instanceof TouchEvent)
+      ) {
         this.dropDownParent.select('select').node().value = '';
         this.extent = d3.event.selection
           ? d3.event.selection.map((val) => Math.round(this.age.invert(val)))
@@ -255,8 +258,10 @@ function createAgeSelector() {
 
 function sortData(input, method) {
   input.sort((a, b) => {
-    if (a.avgRow) return 1;
-    if (a.totalRow) return 1;
+    if (b.totalRow && a.avgRow) return -1;
+    if (a.totalRow && b.avgRow) return 1;
+    if (a.totalRow || a.avgRow) return 1;
+    if (b.totalRow || b.avgRow) return -1;
 
     const totA = d3.sum(a.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map((d) => d[method]));
     const totB = d3.sum(b.values.filter((d, i) => i >= this.extent[0] && i <= this.extent[1]).map((d) => d[method]));

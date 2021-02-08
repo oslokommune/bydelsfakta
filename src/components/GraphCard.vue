@@ -351,18 +351,13 @@ export default {
       }
     },
 
-    toggleShowTable() {
-      this.showTable = !this.showTable;
-      this.showDropdown = false;
-    },
-
     activeTab(index) {
       this.active = index;
 
       this.$ga.event({
         eventCategory: 'Card',
         eventAction: 'Change tab',
-        eventLabel: this.settings.tabs[index - 1].label,
+        eventLabel: this.settings.tabs[index].label,
       });
     },
 

@@ -63,12 +63,9 @@ describe('GraphCard', () => {
   });
 
   test('change active tab multiple times', () => {
-    wrapper.setProps({ settings: topics.husholdninger.cards[0] });
     expect(wrapper.vm.active).toEqual(0);
     wrapper.vm.activeTab(1);
     expect(wrapper.vm.active).toEqual(1);
-    wrapper.vm.activeTab(2);
-    expect(wrapper.vm.active).toEqual(2);
   });
 
   test('if dropdown is false, stay false', () => {
