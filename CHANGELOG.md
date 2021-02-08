@@ -1,8 +1,13 @@
 # Unreleased
 
+# Release v1.1.10
+
+- Fix a touchEvent-bug when too many TouchEvents are triggered at the same time
+
 # Release v1.1.9
 
 - Fix a bug with firefox and touchEvents
+- Fix a sorting bug with firefox
 
 # Release v1.1.8
 

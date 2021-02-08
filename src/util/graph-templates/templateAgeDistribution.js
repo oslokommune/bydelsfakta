@@ -34,7 +34,7 @@ function Template(svg) {
     .on('end', () => {
       if (
         d3.event.sourceEvent instanceof MouseEvent ||
-        (window.TouchEvent && d3.event.sourceEvent instanceof TouchEvent)
+        (window.TouchEvent && d3.event.sourceEvent instanceof TouchEvent && d3.event.sourceEvent.cancelable)
       ) {
         this.dropDownParent.select('select').node().value = '';
         this.extent = d3.event.selection
