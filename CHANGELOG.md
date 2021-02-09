@@ -2,6 +2,10 @@
 
 # Release v1.1.10
 
+- Turned off session tracking with sentry
+
+# Release v1.1.10
+
 - Fix a touchEvent-bug when too many TouchEvents are triggered at the same time
 
 # Release v1.1.9

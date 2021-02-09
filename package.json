@@ -17,7 +17,7 @@
     "test:unit:watch": "vue-cli-service test:unit --watchAll"
   },
   "dependencies": {
-    "@sentry/vue": "^5.29.2",
+    "@sentry/vue": "^6.1.0",
     "canvas": "^2.6.1",
     "canvg": "^3.0.7",
     "core-js": "^3.8.3",
@@ -65,7 +65,7 @@
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.18.0",
+    "stylelint-scss": "^3.19.0",
     "vue-cli-plugin-i18n": "^1.0.1",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.12"

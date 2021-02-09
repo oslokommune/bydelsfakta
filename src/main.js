@@ -55,6 +55,7 @@ if (production) {
     Vue,
     dsn: production ? envs.VUE_APP_SENTRY_DSN : process.env.VUE_APP_SENTRY_DSN,
     logErrors: true,
+    autoSessionTracking: false,
   });
 }
 
