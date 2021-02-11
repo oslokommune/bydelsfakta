@@ -56,7 +56,8 @@
 </template>
 
 <script>
-import * as d3 from 'd3';
+import axios from 'axios';
+import { mean } from 'd3';
 import * as Sentry from '@sentry/vue';
 import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
@@ -139,9 +140,13 @@ export default {
   },
 
   watch: {
-    settings() {
-      this.draw();
+    settings: {
+      immediate: true,
+      handler() {
+        this.draw();
+      },
     },
+
     districts(to, from) {
       if (
         from.length > 1 &&
@@ -155,9 +160,6 @@ export default {
     },
   },
 
-  mounted() {
-    this.draw();
-  },
   methods: {
     drawShadows() {
       let ref;
@@ -180,6 +182,8 @@ export default {
     handleResize() {
       if (this.loading) return;
       if (!this.svg.resize) return;
+      if (!this.svg) return;
+
       this.svg.resize(this.data, { method: this.settings.method, compareDistricts: this.compareDistricts });
       this.drawShadows();
     },
@@ -200,8 +204,8 @@ export default {
         }
 
         if (template === 'boxPlot') {
-          const meanA = d3.mean(a.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age)));
-          const meanB = d3.mean(b.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age)));
+          const meanA = mean(a.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age)));
+          const meanB = mean(b.values.flatMap((obj) => [...Array(obj.value)].fill(+obj.age)));
           return meanA - meanB;
         }
 
@@ -226,32 +230,27 @@ export default {
 
       const geoParam = this.compareDistricts ? '00' : this.districts[0];
       if (!options.keepData) {
-        this.data = await d3
-          .json(`${this.settings.url}?geography=${geoParam}`)
-          .then((rawData) => {
-            const data = rawData[0];
-            this.$emit('update-date', data.meta.publishedDate);
+        try {
+          const { data } = await axios.get(`${this.settings.url}?geography=${geoParam}`);
 
-            data.data.map((district) => {
-              district.noLink = !districtNames[district.id]; // add noLink flag if geography is not a district
+          this.$emit('update-date', data[0].meta.publishedDate);
 
-              return district;
-            });
-            return data;
-          })
-          .catch((err) => {
-            this.error = true;
-            this.errorMessage = this.$t('error.connectionLost');
-            this.loading = false;
-            Sentry.captureException(err);
+          data[0].data.map((district) => {
+            district.noLink = !districtNames[district.id]; // add noLink flag if geography is not a district
+
+            return district;
           });
-      }
 
-      if (this.data) {
-        this.error = false;
-        this.errorMessage = '';
-      } else {
-        return;
+          this.data = data[0];
+          this.error = false;
+          this.errorMessage = '';
+        } catch (err) {
+          this.error = true;
+          this.errorMessage = this.$t('error.connectionLost');
+          this.loading = false;
+          Sentry.captureException(err);
+          return;
+        }
       }
 
       if (this.currentTemplate !== this.settings.template && !options.keepData) {
@@ -299,8 +298,6 @@ export default {
 
       this.currentTemplate = this.settings.template;
 
-      this.loading = false;
-
       this.svg.render(this.filteredData, {
         method: this.settings.method,
         showPermille: this.settings.showPermille,
@@ -310,8 +307,10 @@ export default {
         compareDistricts: this.compareDistricts,
         variant: this.settings.variant,
       });
+
       this.drawShadows();
       this.svg.setHeading(this.settings.heading);
+      this.loading = false;
     },
   },
 };

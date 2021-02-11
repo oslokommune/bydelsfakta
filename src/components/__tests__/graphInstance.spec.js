@@ -1,11 +1,10 @@
-import 'whatwg-fetch';
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import vueResize from 'vue-resize';
+import { topics } from '@/config/topics';
+import store from '@/store';
+import setupI18n from '@/i18n';
 import GraphInstance from '../GraphInstance';
-import { topics } from '../../config/topics';
-import store from '../../store';
-import setupI18n from '../../i18n';
 
 const i18n = setupI18n();
 

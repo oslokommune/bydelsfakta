@@ -253,7 +253,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import * as d3 from 'd3';
+import { timeParse, timeFormat } from 'd3';
 import GraphInstance from './GraphInstance';
 import downloadSvg from '../util/downloadSvg';
 import downloadPng from '../util/downloadPng';
@@ -317,8 +317,8 @@ export default {
         this.date = 'Ikke tilgjengelig';
         return;
       }
-      const parseTime = d3.timeParse('%Y-%m-%d');
-      const formatTime = d3.timeFormat('%x');
+      const parseTime = timeParse('%Y-%m-%d');
+      const formatTime = timeFormat('%x');
       this.date = formatTime(parseTime(dateStr));
     },
 

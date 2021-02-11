@@ -24,11 +24,12 @@
 /* eslint-disable no-continue */
 import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
 import * as Sentry from '@sentry/vue';
+import axios from 'axios';
 import L from 'leaflet';
-import * as d3 from 'd3';
+import { sum, select, scaleLinear } from 'd3';
 import { GestureHandling } from 'leaflet-gesture-handling';
 import * as locale from '@/util/graph-templates/locale';
-import { color, interpolator } from '../util/graph-templates/colors';
+import { color, interpolator } from '@/util/graph-templates/colors';
 
 export default {
   name: 'VLeaflet',
@@ -157,28 +158,23 @@ export default {
 
     async getData(url) {
       if (!url) return;
-      this.data = await fetch(url)
-        .then((d) =>
-          d
-            .json()
-            .then((dj) => {
-              this.meta = dj[0].meta;
-              return dj[0].data;
-            })
-            .catch((err) => {
-              Sentry.captureException(err);
-            })
-        )
-        .catch((err) => {
-          Sentry.captureException(err);
-        });
+      try {
+        const { data } = await axios.get(url);
+
+        this.meta = data[0].meta;
+        this.data = data[0].data;
+      } catch (err) {
+        Sentry.captureException(err);
+        return;
+      }
 
       this.createChoropleth(this.data);
 
-      this.year =
-        this.data && this.data[0] && this.data[0].values && this.data[0].values[0] && this.data[0].values[0].date
-          ? this.data[0].values[0].date
-          : false;
+      if (this.data && this.data[0] && this.data[0].values && this.data[0].values[0] && this.data[0].values[0].date) {
+        this.year = this.data[0].values[0].date;
+      } else {
+        this.year = false;
+      }
     },
 
     createChoropleth(data) {
@@ -190,7 +186,7 @@ export default {
       }
 
       // Color calulator defined by the scale set in the map settings
-      const colorStrength = d3.scaleLinear().range([0, 1]).domain(this.scale);
+      const colorStrength = scaleLinear().range([0, 1]).domain(this.scale);
 
       // Store data to create
       const allLayerData = [];
@@ -211,7 +207,7 @@ export default {
         let dataValue;
         if (this.settings.method === 'avg') {
           const values = dataObj.values.map((d) => d.value);
-          dataValue = d3.sum(values.map((val, i) => val * i)) / d3.sum(values);
+          dataValue = sum(values.map((val, i) => val * i)) / sum(values);
         } else if (this.settings.series) {
           dataValue = dataObj.values[this.settings.series][this.settings.method];
         } else {
@@ -244,7 +240,7 @@ export default {
 
       // For each layer add an interactive dot on the legend.
       // Clicking the dot triggers the popop on the respective layer.
-      d3.select(this.$refs.colorstrip)
+      select(this.$refs.colorstrip)
         .selectAll('.legend__dot')
         .data(allLayerData)
         .join('div')

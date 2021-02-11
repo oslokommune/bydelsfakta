@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueMeta from 'vue-meta';

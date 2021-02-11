@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { mount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';

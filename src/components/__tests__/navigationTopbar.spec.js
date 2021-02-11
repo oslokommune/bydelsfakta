@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import TheNavigationTopbar from '../TheNavigationTopbar';

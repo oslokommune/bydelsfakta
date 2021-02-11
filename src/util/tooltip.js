@@ -1,6 +1,6 @@
-import d3 from '@/assets/d3';
+import { select, event } from 'd3';
 
-const body = d3.select('body');
+const body = select('body');
 
 // Creates DOM elements for generic tooltip
 export const showTooltipOver = (str, delay = 0) => {
@@ -11,7 +11,7 @@ export const showTooltipOver = (str, delay = 0) => {
     .html(str)
     .style('top', '-30px')
     .style('left', function () {
-      const div = d3.select(this).node().getBoundingClientRect().width;
+      const div = select(this).node().getBoundingClientRect().width;
       return `${div / -2}px`;
     });
 
@@ -21,7 +21,7 @@ export const showTooltipOver = (str, delay = 0) => {
 };
 
 export const showTooltipMove = () => {
-  body.select('div.tooltip').style('transform', `translate(${d3.event.pageX}px, ${d3.event.pageY}px)`);
+  body.select('div.tooltip').style('transform', `translate(${event.pageX}px, ${event.pageY}px)`);
 };
 
 export const hideTooltip = () => {

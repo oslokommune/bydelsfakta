@@ -1,14 +1,14 @@
 import { saveSvgAsPng } from 'save-svg-as-png';
 import { textwrap } from 'd3-textwrap';
 import canvg from 'canvg';
-import * as d3 from 'd3';
+import { select } from 'd3';
 
 const padding = 20;
 const scale = 2;
 const offset = 34;
 
 export default function downloadPng(svgRef, filename) {
-  const svg = d3.select(svgRef);
+  const svg = select(svgRef);
   const background = svg.select('.background');
   const heading = svg.select('.heading');
   const canvas = svg.select('.canvas');
