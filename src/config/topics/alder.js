@@ -28,7 +28,7 @@ export default {
           help: 'Bruk slideren eller rullegardinlisten til å utforske et bestemt alderssegment.',
           template: 'ageDistribution',
           heading: 'Aldersfordeling (antall)',
-          url: `${API}/alder-distribusjon-status`,
+          url: `/test.json`,
           method: 'value',
           production: true,
         },
