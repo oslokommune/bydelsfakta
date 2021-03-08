@@ -237,6 +237,8 @@ export default {
             },
           });
 
+          console.log(data);
+
           this.$emit('update-date', data[0].meta.publishedDate);
 
           data[0].data.map((district) => {

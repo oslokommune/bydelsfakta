@@ -42,6 +42,7 @@ export default {
 
   mounted() {
     if ('ontouchstart' in document.documentElement) {
+      console.log('why')
       this.setTouchDevice(true);
     }
     if (!!window.MSInputMethodContext && !!document.documentMode) {
