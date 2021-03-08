@@ -237,8 +237,6 @@ export default {
             },
           });
 
-          console.log(data);
-
           this.$emit('update-date', data[0].meta.publishedDate);
 
           data[0].data.map((district) => {
@@ -251,7 +249,6 @@ export default {
           this.error = false;
           this.errorMessage = '';
         } catch (err) {
-          console.log(err);
           this.error = true;
           this.errorMessage = this.$t('error.connectionLost');
           this.loading = false;
