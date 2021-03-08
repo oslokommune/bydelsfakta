@@ -1,6 +1,11 @@
 # Unreleased
 
-# Release v1.1.10
+# Release v1.1.12
+
+- Fixed IE11 bug
+- Updated dependencies
+
+# Release v1.1.11
 
 - Turned off session tracking with sentry
 
