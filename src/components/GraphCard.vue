@@ -167,6 +167,7 @@
                 v-if="mode === 'graph' || ie11"
                 role="menuitem"
                 :title="ie11 ? $t('ie11.disabled') : $t('graphCard.saveSVG.aria')"
+                :disabled="ie11"
                 class="context-menu__dropdown-item"
                 :aria-label="$t('graphCard.saveSVG.aria')"
                 tabindex="0"

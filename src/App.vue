@@ -28,7 +28,7 @@ export default {
   components: { TheNavigationTopbar, TheNavigationDrawer, TheFooter },
 
   computed: {
-    ...mapState(['menuIsOpen', 'navigationIsOpen']),
+    ...mapState(['menuIsOpen', 'navigationIsOpen', 'ie11']),
   },
 
   watch: {

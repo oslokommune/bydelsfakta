@@ -231,7 +231,11 @@ export default {
       const geoParam = this.compareDistricts ? '00' : this.districts[0];
       if (!options.keepData) {
         try {
-          const { data } = await axios.get(`${this.settings.url}?geography=${geoParam}`);
+          const { data } = await axios.get(`${this.settings.url}?geography=${geoParam}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
 
           this.$emit('update-date', data[0].meta.publishedDate);
 
