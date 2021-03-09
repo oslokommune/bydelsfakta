@@ -2,6 +2,10 @@
 
 # [2021-03-09] Release v1.1.12
 
+- Fixed wrong url on age distribution graph
+
+# [2021-03-09] Release v1.1.12
+
 - Fixed IE11 bug
 - Updated dependencies
 
