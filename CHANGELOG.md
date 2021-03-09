@@ -1,6 +1,6 @@
 # Unreleased
 
-# [2021-03-09] Release v1.1.12
+# [2021-03-09] Release v1.2.3
 
 - Fixed IE11 bug
 - Updated dependencies
