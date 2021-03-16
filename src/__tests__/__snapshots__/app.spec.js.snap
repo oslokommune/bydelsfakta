@@ -21,5 +21,7 @@ exports[`App shallowmounts app 1`] = `
      
     <the-footer-stub />
   </div>
+   
+  <!---->
 </div>
 `;

@@ -18,7 +18,7 @@
     "test:unit:watch": "vue-cli-service test:unit --watchAll"
   },
   "dependencies": {
-    "@sentry/vue": "^6.2.1",
+    "@sentry/vue": "^6.2.2",
     "axios": "^0.21.1",
     "canvas": "^2.7.0",
     "canvg": "^3.0.7",
@@ -33,7 +33,7 @@
     "vue": "^2.6.12",
     "vue-analytics": "^5.22.1",
     "vue-dragscroll": "^1.10.2",
-    "vue-i18n": "^8.23.0",
+    "vue-i18n": "^8.24.1",
     "vue-meta": "^2.4.0",
     "vue-resize": "^0.5.0",
     "vue-router": "^3.5.1",
@@ -41,7 +41,7 @@
     "vue2-leaflet": "^2.6.0",
     "vuex": "^3.6.2",
     "xlsx": "^0.16.9",
-    "xmldom": "^0.4.0"
+    "xmldom": "^0.5.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.11",
@@ -56,7 +56,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.7.0",
     "node-sass": "^5.0.0",
@@ -67,7 +67,7 @@
     "stylelint-config-standard": "^21.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
-    "vue-cli-plugin-i18n": "^2.0.0",
+    "vue-cli-plugin-i18n": "^2.0.1",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.12"
   }

@@ -8,6 +8,7 @@
       </main>
       <the-footer />
     </div>
+    <modal v-if="isOpen" @close="isOpen = false" />
   </div>
 </template>
 
@@ -16,16 +17,22 @@ import { mapState, mapActions } from 'vuex';
 import TheNavigationDrawer from './components/TheNavigationDrawer';
 import TheNavigationTopbar from './components/TheNavigationTopbar';
 import TheFooter from './components/TheFooter';
+import Modal from './components/Modal';
 
 export default {
   name: 'App',
+
+  components: { TheNavigationTopbar, TheNavigationDrawer, TheFooter, Modal },
+
+  data: () => ({
+    isOpen: false,
+  }),
+
   metaInfo() {
     return {
       title: 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold',
     };
   },
-
-  components: { TheNavigationTopbar, TheNavigationDrawer, TheFooter },
 
   computed: {
     ...mapState(['menuIsOpen', 'navigationIsOpen', 'ie11']),
@@ -45,6 +52,7 @@ export default {
       this.setTouchDevice(true);
     }
     if (!!window.MSInputMethodContext && !!document.documentMode) {
+      this.isOpen = true;
       this.setIE11Compatibility(true);
     }
   },

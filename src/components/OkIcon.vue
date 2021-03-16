@@ -15,6 +15,8 @@ import dataTable from '../assets/icons/data-table.svg';
 import fullscreen from '../assets/icons/fullscreen.svg';
 import fullscreenExit from '../assets/icons/fullscreen-exit.svg';
 import oslologo from '../assets/oslo-logo.svg';
+import cross from '../assets/icons/cross.svg';
+import newWindow from '../assets/icons/new-window.svg';
 
 /* 
   available options (optional):
@@ -37,6 +39,8 @@ export default {
     fullscreen,
     fullscreenExit,
     oslologo,
+    cross,
+    newWindow,
   },
 
   props: {
