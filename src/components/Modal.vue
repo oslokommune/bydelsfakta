@@ -109,10 +109,10 @@ export default {
   box-shadow: 0 0.25rem 0.45rem rgba(black, 0.5);
 
   &__header {
+    position: relative;
     display: flex;
     align-items: center;
     padding: 30px 40px 0.5rem 40px;
-    position: relative;
 
     .btn {
       margin: 0;
@@ -149,9 +149,9 @@ export default {
     font-size: 12px;
 
     &--link {
-      text-decoration: underline;
-      font-weight: 500;
       color: $color-grey-900;
+      font-weight: 500;
+      text-decoration: underline;
     }
   }
 }
