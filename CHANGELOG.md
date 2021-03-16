@@ -1,5 +1,9 @@
 # Unreleased
 
+# [2021-03-16] Release v1.1.14
+
+- Added modal with information that IE11 is not supported
+
 # [2021-03-09] Release v1.1.13
 
 - Fixed wrong url on age distribution graph
