@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <g data-name="new window">
+    <path d="M23.03 21.11v2.06H8.97V9.18h2.06v-2H8.97v-.01h-2v18h18.06v-4.06h-2z" fill="var(--fg-color, #2A2859)" />
+    <path fill-rule="evenodd" d="M18 7.16v2h3.62l-7.26 7.28 1.38 1.39 7.27-7.29v3.63h2.02V7.16H18z"
+      fill="var(--fg-color, #2A2859)" />
+  </g>
+</svg>

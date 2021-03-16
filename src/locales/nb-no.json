@@ -136,5 +136,14 @@
   },
   "ie11": {
     "disabled": "Utilgjengelig i Internet Explorer"
+  },
+  "modal": {
+    "header": "Bytt nettleser",
+    "subheader": "Internet Explorer er utdatert og kan gi feil og dårligere brukeropplevelse.",
+    "main": "For å få fullt utbytte av innhold og funksjonalitet på Bydelsfakta anbefaler vi deg å bruke en nettleser som er oppdatert til gjeldende webstandarder, som Chrome, Edge eller Firefox.",
+    "footer": {
+      "download": "Last ned {browser}" 
+    },
+    "close": "Lukk modal"
   }
 }
