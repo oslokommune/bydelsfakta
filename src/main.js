@@ -55,12 +55,6 @@ if (production) {
     dsn: production ? envs.VUE_APP_SENTRY_DSN : process.env.VUE_APP_SENTRY_DSN,
     logErrors: true,
     autoSessionTracking: false,
-    beforeSend(event) {
-      if ((!!window.MSInputMethodContext && !!document.documentMode) || navigator.userAgent.indexOf('Edge') >= 0) {
-        return false;
-      }
-      return event;
-    },
   });
 }
 

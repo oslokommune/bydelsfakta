@@ -1,5 +1,10 @@
 # Unreleased
 
+# [Release v1.1.17] 2021-04-08
+
+- (revert) Drop all events to sentry if they are either <=IE11 || Edge
+
+
 # [Release v1.1.16] 2021-04-08
 
 - Drop all events to sentry if they are either <=IE11 || Edge
