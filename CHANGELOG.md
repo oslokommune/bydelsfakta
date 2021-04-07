@@ -3,6 +3,7 @@
 # [Release v1.1.15] 2021-04-07
 
 - Fixed a bug where the css of the modal started to bleed over on to other components
+- Update dependencies
 
 # [Release v1.1.14] 2021-03-16
 
