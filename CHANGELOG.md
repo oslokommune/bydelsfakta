@@ -1,14 +1,18 @@
 # Unreleased
 
-# [2021-03-16] Release v1.1.14
+# [Release v1.1.15] 2021-04-07
+
+- Fixed a bug where the css of the modal started to bleed over on to other components
+
+# [Release v1.1.14] 2021-03-16
 
 - Added modal with information that IE11 is not supported
 
-# [2021-03-09] Release v1.1.13
+# [Release v1.1.13] 2021-03-09
 
 - Fixed wrong url on age distribution graph
 
-# [2021-03-09] Release v1.1.12
+# [Release v1.1.12] 2021-03-09
 
 - Fixed IE11 bug
 - Updated dependencies
