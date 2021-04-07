@@ -1,5 +1,9 @@
 # Unreleased
 
+# [Release v1.1.16] 2021-04-08
+
+- Drop all events to sentry if they are either <=IE11 || Edge
+
 # [Release v1.1.15] 2021-04-07
 
 - Fixed a bug where the css of the modal started to bleed over on to other components
