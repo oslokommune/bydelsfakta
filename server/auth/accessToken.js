@@ -21,9 +21,9 @@ const parseToken = (token) => {
   return { ...token, ...parsedTokenProps };
 };
 
-const isTokenExpired = (expired) => {
-  return isAfter(new Date(), subSeconds(expired, 10));
+const shouldRefreshToken = (expires_at) => {
+  return isAfter(new Date(), subSeconds(expires_at, 10));
 };
 
-module.exports.isTokenExpired = isTokenExpired;
+module.exports.shouldRefreshToken = shouldRefreshToken;
 module.exports.parseToken = parseToken;

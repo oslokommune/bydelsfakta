@@ -2,7 +2,7 @@
 'use strict';
 
 const { request } = require('./api');
-const { isTokenExpired, parseToken } = require('./accessToken');
+const { shouldRefreshToken, parseToken } = require('./accessToken');
 
 const data = {
   client_id: process.env.KEYCLOAK_CLIENT_ID,
@@ -25,7 +25,7 @@ const logErrors = (error, refresh) => {
 
 module.exports = () => {
   return (req, res, next) => {
-    if (accessToken === null || isTokenExpired(accessToken.refresh_expires_at)) {
+    if (accessToken === null || shouldRefreshToken(accessToken.refresh_expires_at)) {
       const params = { ...data, grant_type: process.env.KEYCLOAK_GRANT_TYPE_CLIENT };
 
       request(params)
@@ -38,7 +38,7 @@ module.exports = () => {
           logErrors(error);
           return res.status(error.status);
         });
-    } else if (isTokenExpired(accessToken.expires_at)) {
+    } else if (shouldRefreshToken(accessToken.expires_at)) {
       const params = {
         ...data,
         grant_type: process.env.KEYCLOAK_GRANT_TYPE_REFRESH,
