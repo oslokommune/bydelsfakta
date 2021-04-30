@@ -1,5 +1,6 @@
 const isDate = require('date-fns/isDate');
 const addSeconds = require('date-fns/addSeconds');
+const subSeconds = require('date-fns/subSeconds');
 const isAfter = require('date-fns/isAfter');
 
 const parseToken = (token) => {
@@ -21,7 +22,7 @@ const parseToken = (token) => {
 };
 
 const isTokenExpired = (expired) => {
-  return isAfter(new Date(), expired);
+  return isAfter(new Date(), subSeconds(expired, 10));
 };
 
 module.exports.isTokenExpired = isTokenExpired;
