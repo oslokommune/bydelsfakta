@@ -1,5 +1,10 @@
 # Unreleased
 
+# [Release v1.1.19] 2021-04-30
+
+- Updated dependencies
+- Changed node-sass to dart-sass
+
 # [Release v1.1.18] 2021-04-30
 
 - Check if token is expired 10 seconds before the expiration time
