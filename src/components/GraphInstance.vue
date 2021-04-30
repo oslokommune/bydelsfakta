@@ -366,7 +366,7 @@ export default {
     padding: 1em 1em 0 1em;
     overflow: auto;
 
-    /deep/ &.hidden ~ .graph__dropdown {
+    ::v-deep &.hidden ~ .graph__dropdown {
       display: none;
     }
   }
