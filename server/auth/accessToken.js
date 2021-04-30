@@ -1,8 +1,9 @@
 const isDate = require('date-fns/isDate');
 const addSeconds = require('date-fns/addSeconds');
+const subSeconds = require('date-fns/subSeconds');
 const isAfter = require('date-fns/isAfter');
 
-const parseToken = (token) => {
+const addExpirationInformation = (token) => {
   const parsedTokenProps = {};
 
   if ('expires_in' in token) {
@@ -20,9 +21,9 @@ const parseToken = (token) => {
   return { ...token, ...parsedTokenProps };
 };
 
-const isTokenExpired = (expired) => {
-  return isAfter(new Date(), expired);
+const shouldRefreshToken = (expiresAt) => {
+  return isAfter(new Date(), subSeconds(expiresAt, 10));
 };
 
-module.exports.isTokenExpired = isTokenExpired;
-module.exports.parseToken = parseToken;
+module.exports.shouldRefreshToken = shouldRefreshToken;
+module.exports.addExpirationInformation = addExpirationInformation;

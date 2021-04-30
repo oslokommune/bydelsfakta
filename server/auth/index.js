@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
-'use strict';
-
 const { request } = require('./api');
-const { isTokenExpired, parseToken } = require('./accessToken');
+const { shouldRefreshToken, addExpirationInformation } = require('./accessToken');
 
 const data = {
   client_id: process.env.KEYCLOAK_CLIENT_ID,
@@ -25,12 +23,12 @@ const logErrors = (error, refresh) => {
 
 module.exports = () => {
   return (req, res, next) => {
-    if (accessToken === null || isTokenExpired(accessToken.refresh_expires_at)) {
+    if (accessToken === null || shouldRefreshToken(accessToken.refresh_expires_at)) {
       const params = { ...data, grant_type: process.env.KEYCLOAK_GRANT_TYPE_CLIENT };
 
       request(params)
         .then((response) => {
-          accessToken = parseToken(response);
+          accessToken = addExpirationInformation(response);
           req.headers.authorization = `Bearer ${accessToken.access_token}`;
           next();
         })
@@ -38,7 +36,7 @@ module.exports = () => {
           logErrors(error);
           return res.status(error.status);
         });
-    } else if (isTokenExpired(accessToken.expires_at)) {
+    } else if (shouldRefreshToken(accessToken.expires_at)) {
       const params = {
         ...data,
         grant_type: process.env.KEYCLOAK_GRANT_TYPE_REFRESH,
@@ -47,7 +45,7 @@ module.exports = () => {
 
       request(params)
         .then((response) => {
-          accessToken = parseToken(response);
+          accessToken = addExpirationInformation(response);
           req.headers.authorization = `Bearer ${accessToken.access_token}`;
           next();
         })
