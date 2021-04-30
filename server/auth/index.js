@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
-'use strict';
-
 const { request } = require('./api');
-const { shouldRefreshToken, parseToken } = require('./accessToken');
+const { shouldRefreshToken, addExpirationInformation } = require('./accessToken');
 
 const data = {
   client_id: process.env.KEYCLOAK_CLIENT_ID,
@@ -30,7 +28,7 @@ module.exports = () => {
 
       request(params)
         .then((response) => {
-          accessToken = parseToken(response);
+          accessToken = addExpirationInformation(response);
           req.headers.authorization = `Bearer ${accessToken.access_token}`;
           next();
         })
@@ -47,7 +45,7 @@ module.exports = () => {
 
       request(params)
         .then((response) => {
-          accessToken = parseToken(response);
+          accessToken = addExpirationInformation(response);
           req.headers.authorization = `Bearer ${accessToken.access_token}`;
           next();
         })
