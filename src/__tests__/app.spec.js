@@ -3,11 +3,11 @@ import Vuex from 'vuex';
 import VueMeta from 'vue-meta';
 import VueRouter from 'vue-router';
 
-import App from '../App';
-import clickOutside from '../directives/clickOutside';
-import setupI18n from '../i18n';
-import mockStore from '../../tests/MockStore';
-import { routes } from '../router';
+import App from '@/App.vue';
+import clickOutside from '@/directives/clickOutside';
+import setupI18n from '@/i18n';
+import mockStore from '@/../tests/MockStore';
+import { routes } from '@/router';
 
 global.scroll = jest.fn();
 window.scroll = jest.fn();

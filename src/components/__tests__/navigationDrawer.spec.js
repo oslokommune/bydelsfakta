@@ -1,10 +1,10 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import vuex from 'vuex';
 import VueSkipTo from 'vue-skip-to';
-import TheNavigationDrawer from '../TheNavigationDrawer';
-import router from '../../router';
-import store from '../../store';
-import setupI18n from '../../i18n';
+import router from '@/router';
+import store from '@/store';
+import setupI18n from '@/i18n';
+import TheNavigationDrawer from '../TheNavigationDrawer.vue';
 
 const i18n = setupI18n();
 

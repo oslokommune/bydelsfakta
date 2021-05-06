@@ -3,10 +3,10 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
 
-import District from '../District';
-import setupI18n from '../../i18n';
-import { routes } from '../../router';
-import mockStore from '../../../tests/MockStore';
+import setupI18n from '@/i18n';
+import { routes } from '@/router';
+import mockStore from '@/../tests/MockStore';
+import District from '../District.vue';
 
 const i18n = setupI18n();
 

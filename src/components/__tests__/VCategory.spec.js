@@ -1,8 +1,8 @@
 import { mount, RouterLinkStub, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
-import VCategory from '../VCategory';
-import store from '../../store';
-import setupI18n from '../../i18n';
+import store from '@/store';
+import setupI18n from '@/i18n';
+import VCategory from '../VCategory.vue';
 
 const i18n = setupI18n();
 

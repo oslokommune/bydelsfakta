@@ -6,7 +6,7 @@ import { Icon } from 'leaflet';
 import * as Sentry from '@sentry/vue';
 import VueSkipTo from 'vue-skip-to';
 import './util/polyfills';
-import App from './App';
+import App from './App.vue';
 import router from './router';
 import store from './store';
 import clickOutside from './directives/clickOutside';

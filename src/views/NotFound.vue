@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import VCategory from '../components/VCategory';
-import { topics } from '../config/topics';
+import VCategory from '@/components/VCategory.vue';
+import { topics } from '@/config/topics';
 
 export default {
   name: 'NotFound',
@@ -69,9 +69,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../styles/colors';
-@import '../styles/variables';
-@import '../styles/layout';
+@import '@/styles/colors';
+@import '@/styles/variables';
+@import '@/styles/layout';
 
 .topics-grid {
   flex-basis: auto;

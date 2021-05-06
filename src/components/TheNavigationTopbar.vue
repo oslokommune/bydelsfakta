@@ -56,9 +56,9 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
-import allDistricts from '../config/allDistricts';
-import { categories, topics, disabledTopics } from '../config/topics';
-import OkIcon from './OkIcon';
+import allDistricts from '@/config/allDistricts';
+import { categories, topics, disabledTopics } from '@/config/topics';
+import OkIcon from './OkIcon.vue';
 
 export default {
   name: 'TheNavigationTopbar',
@@ -140,8 +140,8 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import '../styles/colors';
-@import '../styles/variables';
+@import '@/styles/colors';
+@import '@/styles/variables';
 
 .header {
   position: relative;

@@ -4,7 +4,7 @@ import vueResize from 'vue-resize';
 import { topics } from '@/config/topics';
 import store from '@/store';
 import setupI18n from '@/i18n';
-import GraphInstance from '../GraphInstance';
+import GraphInstance from '../GraphInstance.vue';
 
 const i18n = setupI18n();
 

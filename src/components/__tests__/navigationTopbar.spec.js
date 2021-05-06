@@ -1,10 +1,10 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
-import TheNavigationTopbar from '../TheNavigationTopbar';
-import router from '../../router';
-import clickOutside from '../../directives/clickOutside';
-import store from '../../store';
-import setupI18n from '../../i18n';
+import router from '@/router';
+import clickOutside from '@/directives/clickOutside';
+import store from '@/store';
+import setupI18n from '@/i18n';
+import TheNavigationTopbar from '../TheNavigationTopbar.vue';
 
 const i18n = setupI18n();
 

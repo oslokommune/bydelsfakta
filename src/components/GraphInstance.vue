@@ -61,21 +61,21 @@ import { mean } from 'd3';
 import * as Sentry from '@sentry/vue';
 import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
-import TemplateBars from '../util/graph-templates/templateBars';
-import TemplateLines from '../util/graph-templates/templateLines';
-import TemplateLinesMulti from '../util/graph-templates/templateLinesMulti';
-import TemplateAgeDistribution from '../util/graph-templates/templateAgeDistribution';
-import TemplatePyramid from '../util/graph-templates/templatePyramid';
-import TemplateBoxPlot from '../util/graph-templates/templateBoxPlot';
-import TemplatePopulationDetailsTable from '../util/graph-templates/templatePopulationDetailsTable';
-import TemplateTernaryPlot from '../util/graph-templates/templateTernaryPlot';
-import TemplateStackedBars from '../util/graph-templates/templateStackedBars';
-import TemplateLivingConditions from '../util/graph-templates/templateLivingConditions';
-import TemplateComboHistogram from '../util/graph-templates/templateComboHistogram';
-import TemplateBarsAndLines from '../util/graph-templates/templateBarsAndLines';
-import districtNames from '../config/districtNames';
-import Spinner from '../assets/spinner.svg';
-import OkIcon from './OkIcon';
+import TemplateBars from '@/util/graph-templates/templateBars';
+import TemplateLines from '@/util/graph-templates/templateLines';
+import TemplateLinesMulti from '@/util/graph-templates/templateLinesMulti';
+import TemplateAgeDistribution from '@/util/graph-templates/templateAgeDistribution';
+import TemplatePyramid from '@/util/graph-templates/templatePyramid';
+import TemplateBoxPlot from '@/util/graph-templates/templateBoxPlot';
+import TemplatePopulationDetailsTable from '@/util/graph-templates/templatePopulationDetailsTable';
+import TemplateTernaryPlot from '@/util/graph-templates/templateTernaryPlot';
+import TemplateStackedBars from '@/util/graph-templates/templateStackedBars';
+import TemplateLivingConditions from '@/util/graph-templates/templateLivingConditions';
+import TemplateComboHistogram from '@/util/graph-templates/templateComboHistogram';
+import TemplateBarsAndLines from '@/util/graph-templates/templateBarsAndLines';
+import districtNames from '@/config/districtNames';
+import Spinner from '@/assets/spinner.svg';
+import OkIcon from './OkIcon.vue';
 
 export default {
   components: { OkIcon, Spinner },
@@ -321,8 +321,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../styles/colors';
-@import './../styles/variables';
+@import '@/styles/colors';
+@import '@/styles/variables';
 
 .graph {
   &__shadow {

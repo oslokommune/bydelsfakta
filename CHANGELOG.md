@@ -1,5 +1,10 @@
 # Unreleased
 
+# [Release v1.1.20] 2021-05-06
+
+- Add alert component to show warnings to users
+- Changed eslint rules
+
 # [Release v1.1.19] 2021-04-30
 
 - Updated dependencies

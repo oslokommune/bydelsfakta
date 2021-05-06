@@ -3,10 +3,10 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
 
-import NotFound from '../NotFound';
-import setupI18n from '../../i18n';
-import { routes } from '../../router';
-import mockStore from '../../../tests/MockStore';
+import setupI18n from '@/i18n';
+import { routes } from '@/router';
+import mockStore from '@/../tests/MockStore';
+import NotFound from '../NotFound.vue';
 
 const i18n = setupI18n();
 

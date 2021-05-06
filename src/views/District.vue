@@ -29,11 +29,11 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import VCategory from '../components/VCategory';
-import VLeaflet from '../components/VLeaflet';
-import { topics, topicNames } from '../config/topics';
-import districts from '../config/geoData/districts';
-import { getDistrictName } from '../util';
+import VCategory from '@/components/VCategory.vue';
+import VLeaflet from '@/components/VLeaflet.vue';
+import { topics, topicNames } from '@/config/topics';
+import districts from '@/config/geoData/districts';
+import { getDistrictName } from '@/util';
 
 export default {
   name: 'District',
