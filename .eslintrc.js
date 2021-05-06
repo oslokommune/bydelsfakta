@@ -12,20 +12,6 @@ module.exports = {
   extends: ['plugin:vue/recommended', '@vue/airbnb', '@vue/prettier'],
 
   rules: {
-    'vue/component-name-in-template-casing': [
-      'error',
-      'kebab-case',
-      {
-        registeredComponentsOnly: true,
-        ignores: [],
-      },
-    ],
-    'import/extensions': [
-      'error',
-      {
-        svg: 'ignorePackages',
-      },
-    ],
     'no-shadow': ['error', { allow: ['state'] }],
     'no-underscore-dangle': 'off',
     'global-require': 'off',

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import OkIcon from './OkIcon';
+import OkIcon from './OkIcon.vue';
 
 export default {
   name: 'Modal',
@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/_colors.scss';
+@import '@/styles/_colors.scss';
 
 .overlay {
   position: fixed;

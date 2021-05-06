@@ -4,11 +4,11 @@ import VueResize from 'vue-resize';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta';
 
-import Topic from '../Topic';
-import clickOutside from '../../directives/clickOutside';
-import setupI18n from '../../i18n';
-import { routes } from '../../router';
-import mockStore from '../../../tests/MockStore';
+import clickOutside from '@/directives/clickOutside';
+import setupI18n from '@/i18n';
+import { routes } from '@/router';
+import mockStore from '@/../tests/MockStore';
+import Topic from '../Topic.vue';
 
 const i18n = setupI18n();
 

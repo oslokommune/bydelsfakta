@@ -255,13 +255,13 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import { timeParse, timeFormat } from 'd3';
-import GraphInstance from './GraphInstance';
-import downloadSvg from '../util/downloadSvg';
-import downloadPng from '../util/downloadPng';
-import tableToCsv from '../util/tableToCsv';
-import tableToExcel from '../util/tableToExcel';
-import VLeaflet from './VLeaflet';
-import OkIcon from './OkIcon';
+import downloadSvg from '@/util/downloadSvg';
+import downloadPng from '@/util/downloadPng';
+import tableToCsv from '@/util/tableToCsv';
+import tableToExcel from '@/util/tableToExcel';
+import GraphInstance from './GraphInstance.vue';
+import VLeaflet from './VLeaflet.vue';
+import OkIcon from './OkIcon.vue';
 
 export default {
   name: 'GraphCard',
@@ -427,8 +427,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import './../styles/colors';
-@import './../styles/variables';
+@import '@/styles/colors';
+@import '@/styles/variables';
 
 .map-container,
 .about-container {

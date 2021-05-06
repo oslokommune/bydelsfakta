@@ -3,12 +3,12 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import vueResize from 'vue-resize';
 import VueAnalytics from 'vue-analytics';
-import GraphCard from '../GraphCard';
-import clickOutside from '../../directives/clickOutside';
-import { topics } from '../../config/topics';
-import mockStore from '../../../tests/MockStore';
-import setupI18n from '../../i18n';
-import { routes } from '../../router';
+import clickOutside from '@/directives/clickOutside';
+import { topics } from '@/config/topics';
+import mockStore from '@/../tests/MockStore';
+import setupI18n from '@/i18n';
+import { routes } from '@/router';
+import GraphCard from '../GraphCard.vue';
 
 const i18n = setupI18n();
 

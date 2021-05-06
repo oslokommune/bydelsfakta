@@ -1,6 +1,6 @@
-import { mutations, actions, getters } from '../store';
-import districts from '../config/geoData/districts';
-import { allDistricts, oneDistrict, oneDistrictCompare } from '../../tests/config/expectedDistrictResults';
+import { mutations, actions, getters } from '@/store';
+import districts from '@/config/geoData/districts';
+import { allDistricts, oneDistrict, oneDistrictCompare } from '@/../tests/config/expectedDistrictResults';
 
 const {
   ADD_DISTRICT,
