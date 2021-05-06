@@ -2,7 +2,7 @@
   <div id="app" class="app" tabindex="-1" :class="{ menuIsOpen, navigationIsOpen }">
     <the-navigation-drawer />
     <div class="app__content">
-      <div class="ok-alert-container">
+      <div v-if="showWarning" class="ok-alert-container">
         <div class="ok-alert ok-alert--warning">
           {{ $t('alert.warning') }}
         </div>
