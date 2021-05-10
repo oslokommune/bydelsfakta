@@ -68,11 +68,11 @@ export default {
     if (process.env.NODE_ENV === 'production') {
       const envs = JSON.parse(window.__GLOBAL_ENVS__);
       this.setProductionMode(envs.VUE_APP_PRODUCTION_DATA);
-      this.showWarning = JSON.parse(envs.VUE_APP_INFO_SHOW) ? JSON.parse(envs.VUE_APP_INFO_SHOW) : false;
+      this.showWarning = envs.VUE_APP_INFO_SHOW ? JSON.parse(envs.VUE_APP_INFO_SHOW) : false;
       this.warningMessage = envs.VUE_APP_INFO_MESSAGE;
       document.getElementById('bydelsfakta-globals').remove();
     } else {
-      this.showWarning = JSON.parse(process.env.VUE_APP_INFO_SHOW) ? JSON.parse(process.env.VUE_APP_INFO_SHOW) : false;
+      this.showWarning = process.env.VUE_APP_INFO_SHOW ? JSON.parse(process.env.VUE_APP_INFO_SHOW) : false;
       this.warningMessage = process.env.VUE_APP_INFO_MESSAGE;
       this.setProductionMode(process.env.VUE_APP_PRODUCTION_DATA);
     }
