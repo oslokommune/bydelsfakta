@@ -11,17 +11,7 @@ exports[`App shallowmounts app 1`] = `
   <div
     class="app__content"
   >
-    <div
-      class="ok-alert-container"
-    >
-      <div
-        class="ok-alert ok-alert--warning"
-      >
-        
-        Grunnet planlagt vedlikeholdsarbeid vil Bydelsfakta oppleve noe nedetid og/eller feilmeldinger fra og med søndag 09.05. Vi beklager ulempene dette medfører.
-      
-      </div>
-    </div>
+    <!---->
      
     <the-navigation-topbar-stub />
      

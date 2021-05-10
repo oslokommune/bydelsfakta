@@ -12,8 +12,7 @@ export default {
       size: 'large',
       heading: 'Befolkningsutvikling',
       about: {
-        info:
-          'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+        info: 'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
         sources: [source.ssb],
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog48&submode=catalog&mode=documentation&top=yes',
@@ -47,8 +46,7 @@ export default {
       size: 'large',
       heading: 'Befolkningsvekst',
       about: {
-        info:
-          'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
+        info: 'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
         sources: [source.ssb],
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog48&submode=catalog&mode=documentation&top=yes',

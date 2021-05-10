@@ -17,6 +17,8 @@ const envs = JSON.stringify({
   VUE_APP_GOOGLE_ANALYTICS_ID: process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
   VUE_APP_PRODUCTION_DATA: process.env.VUE_APP_PRODUCTION_DATA,
   VUE_APP_SENTRY_DSN: process.env.VUE_APP_SENTRY_DSN,
+  VUE_APP_INFO_SHOW: process.env.VUE_APP_SHOW_INFO,
+  VUE_APP_INFO_MESSAGE: process.env.VUE_APP_INFO_MESSAGE,
 });
 
 const $ = cheerio.load(fs.readFileSync(path.join(__dirname, '../docs/index.html')));

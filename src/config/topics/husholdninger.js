@@ -70,8 +70,7 @@ export default {
       size: 'large',
       heading: 'Husholdninger med barn',
       about: {
-        info:
-          'Statistikken omfatter privathusholdninger i Oslo per 1.1. Husholdninger med barn regnes her som husholdninger med barn under 18 år.',
+        info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1. Husholdninger med barn regnes her som husholdninger med barn under 18 år.',
         sources: [source.ssb],
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',

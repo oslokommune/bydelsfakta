@@ -1,5 +1,10 @@
 # Unreleased
 
+# [Release v1.1.21] 2021-05-10
+
+- Get information about alert component from environment variables
+- Updated dependencies
+
 # [Release v1.1.20] 2021-05-06
 
 - Add alert component to show warnings to users
