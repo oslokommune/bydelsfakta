@@ -69,3 +69,14 @@ jobs:
         registry: ghcr.io
         tags: latest,${{ env.RELEASE_VERSION }}
         dockerfile: Dockerfile
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_PROD }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+        aws-region: eu-west-1
+
+    - name: Deploy to aws ecs prod
+      run: |
+        aws ecs update-service --force-new-deployment --service bydelsfakta --cluster bydelsfakta --region eu-west-1

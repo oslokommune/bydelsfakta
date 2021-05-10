@@ -1,5 +1,9 @@
 # Unreleased
 
+# [Release v1.1.22] 2021-05-10
+
+- Deploy new release automatically to aws
+
 # [Release v1.1.21] 2021-05-10
 
 - Get information about alert component from environment variables
