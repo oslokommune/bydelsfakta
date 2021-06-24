@@ -64,16 +64,14 @@ export default {
   name: 'TheNavigationTopbar',
 
   components: { OkIcon },
-  data() {
-    return {
-      selectedTopic: null,
-      dropdown: categories,
-      allDistricts,
-      showDropdown: false,
-      topics,
-      disabledTopics,
-    };
-  },
+  data: () => ({
+    selectedTopic: null,
+    dropdown: categories,
+    allDistricts,
+    showDropdown: false,
+    topics,
+    disabledTopics,
+  }),
 
   computed: {
     ...mapState(['compareDistricts', 'menuIsOpen', 'districts']),

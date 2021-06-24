@@ -6,7 +6,6 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Befolkningsutvikling',
   value: 'befolkningsutvikling',
-  production: true,
   cards: [
     {
       size: 'large',
@@ -17,28 +16,23 @@ export default {
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog48&submode=catalog&mode=documentation&top=yes',
       },
-      production: true,
       tabs: [
         {
-          active: false,
           label: 'Folkemengde',
           heading: 'Befolkningsutvikling',
           id: 'befolkningsutvikling_antall',
           method: 'value',
           template: 'lines',
           url: `${API}/folkemengde-utvikling-historisk`,
-          production: true,
         },
 
         {
-          active: false,
           heading: 'Prosentvis årlig utvikling i folkemengde',
           label: 'Prosentvis endring',
           id: 'befolkningsutvikling_andel',
           method: 'ratio',
           template: 'lines',
           url: `${API}/folkemengde-utvikling-historisk-prosent`,
-          production: true,
         },
       ],
     },
@@ -51,13 +45,10 @@ export default {
         externalInfo:
           'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog48&submode=catalog&mode=documentation&top=yes',
       },
-      production: true,
       tabs: [
         {
-          active: true,
           label: 'Status',
           heading: 'Befolkningsvekst',
-          production: true,
           id: 'befolkningsvekst',
           url: `${API}/nokkeltall-om-befolkningen`,
           template: 'populationDetailsTable',

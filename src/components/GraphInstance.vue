@@ -118,15 +118,21 @@ export default {
   computed: {
     shadowClass() {
       let str = '';
-      if (this.shadow.left && this.mode === 'graph') str += ' graph__shadow--left';
-      if (this.shadow.right) str += ' graph__shadow--right';
+      if (this.shadow.left && this.mode === 'graph') {
+        str += ' graph__shadow--left';
+      }
+      if (this.shadow.right) {
+        str += ' graph__shadow--right';
+      }
       return str;
     },
     ...mapState(['districts', 'compareDistricts', 'isTouchDevice']),
     filteredData() {
       this.sortData(this.data);
 
-      if (!this.compareDistricts || this.districts.includes('alle') || this.settings.noFilter) return this.data;
+      if (!this.compareDistricts || this.districts.includes('alle') || this.settings.noFilter) {
+        return this.data;
+      }
 
       const selectedDistrictNames = this.districts.map((id) => districtNames[id]);
 

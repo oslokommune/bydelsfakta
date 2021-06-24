@@ -6,7 +6,6 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Kjønn og alder',
   value: 'alder',
-  production: true,
   cards: [
     {
       size: 'large',
@@ -18,7 +17,6 @@ export default {
         sources: [source.ssb, source.oslo],
       },
       map: false,
-      production: true,
       tabs: [
         {
           active: false,
@@ -29,7 +27,6 @@ export default {
           heading: 'Aldersfordeling (antall)',
           url: `${API}/alder-distribusjon-status`,
           method: 'value',
-          production: true,
         },
         {
           active: false,
@@ -40,7 +37,6 @@ export default {
           heading: 'Aldersfordeling (andel)',
           url: `${API}/alder-distribusjon-status`,
           method: 'ratio',
-          production: true,
         },
       ],
     },
@@ -52,7 +48,6 @@ export default {
         sources: [source.ssb, source.oslo],
       },
       map: false,
-      production: true,
       tabs: [
         {
           active: false,
@@ -62,7 +57,6 @@ export default {
           heading: 'Befolkningen etter alder og kjønn',
           method: 'value',
           url: `${API}/alder-distribusjon-status`,
-          production: true,
         },
       ],
     },
@@ -73,14 +67,12 @@ export default {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. For flere befolkningstabeller se under «Befolkning» i Oslo kommunes statistikkbank.',
         sources: [source.ssb, source.oslo],
       },
-      production: true,
       map: {
         labels: ['Lavere gjennomsnittsalder', 'Høyere gjennomsnittsalder'],
         scale: [32, 43],
         reverse: true,
         method: 'avg',
         url: `${API}/alder-distribusjon-status`,
-        production: true,
       },
       tabs: [
         {
@@ -91,7 +83,6 @@ export default {
           heading: 'Gjennomsnitts- og medianalder',
           template: 'boxPlot',
           url: `${API}/alder-distribusjon-status`,
-          production: true,
         },
       ],
     },

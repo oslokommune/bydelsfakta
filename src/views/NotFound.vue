@@ -53,12 +53,10 @@ export default {
 
   components: { VCategory },
 
-  data() {
-    return {
-      seeMoreTopics: ['husholdninger', 'boligpriser'],
-      topics,
-    };
-  },
+  data: () => ({
+    seeMoreTopics: ['husholdninger', 'boligpriser'],
+    topics,
+  }),
 
   metaInfo() {
     return {

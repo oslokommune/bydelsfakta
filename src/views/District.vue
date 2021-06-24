@@ -11,13 +11,6 @@
           :bg-image="topics[`${topicName}`].options.bgImage"
           :txt-color="topics[`${topicName}`].options.txtColor"
           :district="district"
-          :disabled="
-            topics[`${topicName}`].production === productionMode && topics[`${topicName}`].production !== null
-              ? false
-              : topics[`${topicName}`].production === true && productionMode === false
-              ? false
-              : productionMode !== null
-          "
         />
       </div>
       <div class="main-container__description">
@@ -50,14 +43,12 @@ export default {
     },
   },
 
-  data() {
-    return {
-      names: topicNames,
-      topics,
-      chosenDistrict: {},
-      districts,
-    };
-  },
+  data: () => ({
+    names: topicNames,
+    topics,
+    chosenDistrict: {},
+    districts,
+  }),
 
   metaInfo() {
     let title = '';

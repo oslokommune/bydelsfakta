@@ -67,33 +67,31 @@ export default {
     },
   },
 
-  data() {
-    return {
-      data: [],
-      year: false,
-      zoom: 10,
-      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      attribution:
-        '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      center: L.latLng(59.91695, 10.746589),
-      style: {
-        fillColor: '#222',
-        fillOpacity: 0.3,
-        color: color.purple,
-        weight: 1,
-      },
-      mapOptions: {
-        zoomControl: true,
-        attributionControl: false,
-        doubleClickZoom: true,
-        dragging: true,
-        scrollWheelZoom: false,
-        touchZoom: true,
-        gestureHandling: true,
-      },
-      scale: null,
-    };
-  },
+  data: () => ({
+    data: [],
+    year: false,
+    zoom: 10,
+    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    attribution:
+      '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    center: L.latLng(59.91695, 10.746589),
+    style: {
+      fillColor: '#222',
+      fillOpacity: 0.3,
+      color: color.purple,
+      weight: 1,
+    },
+    mapOptions: {
+      zoomControl: true,
+      attributionControl: false,
+      doubleClickZoom: true,
+      dragging: true,
+      scrollWheelZoom: false,
+      touchZoom: true,
+      gestureHandling: true,
+    },
+    scale: null,
+  }),
 
   computed: {
     gradient() {
