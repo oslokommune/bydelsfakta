@@ -43,7 +43,7 @@ jobs:
         CI: true
 
     - name: Automated version bump
-      uses: phips28/gh-action-bump-version@master
+      uses: oslokommune/gh-action-bump-version@master
       with:
         tag-prefix: ""
       env:
@@ -61,7 +61,7 @@ jobs:
         echo "RELEASE_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
 
     - name: Publish docker image
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: oslokommune/Publish-Docker-Github-Action@master
       with:
         name: oslokommune/bydelsfakta-frontend
         username: ${{ github.actor }}
