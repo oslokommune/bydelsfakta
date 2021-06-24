@@ -1,5 +1,11 @@
 # Unreleased
 
+# [Release v1.1.23] 2021-06-24
+
+- Updated dependencies
+- Removed unused code from config files and vue-files
+- Changed order of the tabs in levekaar
+
 # [Release v1.1.22] 2021-05-10
 
 - Deploy new release automatically to aws
