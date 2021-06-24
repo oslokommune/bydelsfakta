@@ -2,17 +2,7 @@
   <div class="main-container">
     <div class="main-container__cards">
       <template v-for="(card, cardIndex) in topics[topic].cards">
-        <graph-card
-          v-if="
-            card.production === productionMode && card.production !== null
-              ? true
-              : card.production === true && productionMode === false
-              ? true
-              : productionMode === null
-          "
-          :key="`card-${cardIndex}`"
-          :settings="card"
-        />
+        <graph-card :key="`card-${cardIndex}`" :settings="card" />
       </template>
       <div class="related">
         <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
@@ -26,13 +16,6 @@
             :bg-image="topics[`${item}`].options.bgImage"
             :txt-color="topics[`${item}`].options.txtColor"
             :district="district"
-            :disabled="
-              topics[`${item}`].production === productionMode && topics[`${item}`].production !== null
-                ? false
-                : topics[`${item}`].production === true && productionMode === false
-                ? false
-                : productionMode !== null
-            "
           />
         </div>
       </div>
@@ -74,11 +57,9 @@ export default {
     };
   },
 
-  data() {
-    return {
-      topics,
-    };
-  },
+  data: () => ({
+    topics,
+  }),
 
   computed: {
     ...mapState(['productionMode', 'compareDistricts']),

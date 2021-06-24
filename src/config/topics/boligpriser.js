@@ -6,7 +6,6 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Boligpriser',
   value: 'boligpriser',
-  production: true,
   cards: [
     {
       size: 'large',
@@ -23,27 +22,22 @@ export default {
         method: 'value',
         url: `${API}/boligpriser-blokkleiligheter-status`,
       },
-      production: true,
       tabs: [
         {
-          active: false,
           label: 'Status',
           id: 'boligpriser_status',
           heading: 'Gjennomsnittlig kvadratmeterpris for blokkleiligheter',
           method: 'value',
           template: 'bars',
           url: `${API}/boligpriser-blokkleiligheter-status`,
-          production: true,
         },
         {
-          active: false,
           label: 'Historisk',
           id: 'boligpriser_historisk',
           heading: 'Gjennomsnittlig kvadratmeterpris for blokkleiligheter',
           method: 'value',
           template: 'lines',
           url: `${API}/boligpriser-blokkleiligheter-historisk`,
-          production: true,
         },
       ],
     },

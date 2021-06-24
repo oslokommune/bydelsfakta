@@ -6,12 +6,10 @@ const API = `${apiUrl}/api/dataset`;
 export default {
   text: 'Fødte, døde og flytting',
   value: 'fodte-dode-flytting',
-  production: true,
   cards: [
     {
       size: 'large',
       heading: 'Flytting etter alder',
-      production: true,
       about: {
         sources: [source.ssb],
         externalInfo:
@@ -24,7 +22,6 @@ export default {
           template: 'comboHistogram',
           id: 'flyttehyppighet_totalt_status',
           url: `${API}/flyttehyppighet-totalt-status`,
-          production: true,
         },
       ],
     },
@@ -32,7 +29,6 @@ export default {
     {
       size: 'large',
       heading: 'Befolkningsvekst',
-      production: true,
       sources: [source.ssb],
       tabs: [
         {
@@ -43,7 +39,6 @@ export default {
           variant: 'population-growth',
           id: 'befolkningsvekst_netto_innflytting_fødselsoverskudd',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
-          production: true,
         },
       ],
     },
@@ -51,7 +46,6 @@ export default {
     {
       size: 'large',
       heading: 'Fødselsoverskudd',
-      production: true,
       sources: [source.ssb],
       tabs: [
         {
@@ -62,7 +56,6 @@ export default {
           variant: 'births-and-deaths',
           id: 'fodselsoverskudd',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
-          production: true,
         },
       ],
     },
@@ -70,7 +63,6 @@ export default {
     {
       size: 'large',
       heading: 'Inn- og utflytting',
-      production: true,
       sources: [source.ssb],
       tabs: [
         {
@@ -81,7 +73,6 @@ export default {
           variant: 'migrations',
           id: 'inn_og_utflytting',
           url: `${API}/befolkningsutvikling-og-forventet-utvikling`,
-          production: true,
         },
       ],
     },

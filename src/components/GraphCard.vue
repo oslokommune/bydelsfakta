@@ -22,13 +22,6 @@
             <resize-observer @notify="showTabsOrSelect"></resize-observer>
             <template v-for="(tab, index) in settings.tabs">
               <button
-                v-if="
-                  tab.production === productionMode && tab.production !== null
-                    ? true
-                    : tab.production === true && productionMode === false
-                    ? true
-                    : productionMode === null
-                "
                 ref="tabRef"
                 :key="index"
                 :disabled="mode === 'map' || mode === 'about'"
@@ -274,24 +267,26 @@ export default {
     },
   },
 
-  data() {
-    return {
-      active: 0,
-      showDropdown: false,
-      mode: 'graph',
-      date: '',
-      fullscreen: false,
-      showAsTabs: true,
-      scroll: null,
-    };
-  },
+  data: () => ({
+    active: 0,
+    showDropdown: false,
+    mode: 'graph',
+    date: '',
+    fullscreen: false,
+    showAsTabs: true,
+    scroll: null,
+  }),
 
   computed: {
     ...mapState(['districts', 'ie11', 'productionMode']),
     ...mapGetters(['geoDistricts']),
     district() {
-      if (this.districts[0] === 'alle') return '00';
-      if (this.districts.length === 1) return this.districts[0];
+      if (this.districts[0] === 'alle') {
+        return '00';
+      }
+      if (this.districts.length === 1) {
+        return this.districts[0];
+      }
       return '00';
     },
   },

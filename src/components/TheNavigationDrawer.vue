@@ -126,17 +126,15 @@ import OsloLogo from '@/assets/oslo-logo.svg';
 export default {
   name: 'TheNavigationDrawer',
   components: { OsloLogo },
-  data() {
-    return {
-      links: allDistricts,
-      showNavigation: false,
-      selected: [],
-      selectedAll: false,
-      indeterminate: false,
-      options: predefinedOptions,
-      selectedPredefinedOption: [],
-    };
-  },
+  data: () => ({
+    links: allDistricts,
+    showNavigation: false,
+    selected: [],
+    selectedAll: false,
+    indeterminate: false,
+    options: predefinedOptions,
+    selectedPredefinedOption: [],
+  }),
 
   computed: {
     selectedTopic: {
