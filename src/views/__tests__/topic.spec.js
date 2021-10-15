@@ -1,3 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+
+
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueResize from 'vue-resize';

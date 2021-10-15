@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 5000;
 
 const envs = JSON.stringify({
   NODE_ENV: process.env.NODE_ENV,
-  VUE_APP_GOOGLE_ANALYTICS_ID: process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
-  VUE_APP_PRODUCTION_DATA: process.env.VUE_APP_PRODUCTION_DATA,
-  VUE_APP_SENTRY_DSN: process.env.VUE_APP_SENTRY_DSN,
-  VUE_APP_INFO_SHOW: process.env.VUE_APP_SHOW_INFO,
-  VUE_APP_INFO_MESSAGE: process.env.VUE_APP_INFO_MESSAGE,
+  VITE_GOOGLE_ANALYTICS_ID: process.env.VITE_GOOGLE_ANALYTICS_ID,
+  VITE_PRODUCTION_DATA: process.env.VITE_PRODUCTION_DATA,
+  VITE_SENTRY_DSN: process.env.VITE_SENTRY_DSN,
+  VITE_INFO_SHOW: process.env.VITE_SHOW_INFO,
+  VITE_INFO_MESSAGE: process.env.VITE_INFO_MESSAGE,
 });
 
 const $ = cheerio.load(fs.readFileSync(path.join(__dirname, '../docs/index.html')));

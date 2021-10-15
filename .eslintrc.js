@@ -9,7 +9,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
 
-  extends: ['plugin:vue/recommended', '@vue/airbnb', '@vue/prettier'],
+  extends: ['plugin:vue/recommended', 'airbnb-base', 'prettier'],
 
   rules: {
     'no-shadow': ['error', { allow: ['state'] }],
@@ -30,6 +30,14 @@ module.exports = {
       },
     ],
     'vue/no-v-html': 'off',
+  },
+
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+      },
+    },
   },
 
   overrides: [

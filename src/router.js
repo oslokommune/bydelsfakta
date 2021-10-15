@@ -10,24 +10,24 @@ export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('./views/District'),
+    component: () => import('./views/District.vue'),
   },
   {
     path: '/bydel/:district?',
     name: 'District',
-    component: () => import('./views/District'),
+    component: () => import('./views/District.vue'),
     props: true,
   },
   {
     path: '/bydel/:district/:topic',
     name: 'Topic',
-    component: () => import('./views/Topic'),
+    component: () => import('./views/Topic.vue'),
     props: true,
   },
   {
     path: '*',
     name: 'NotFound',
-    component: () => import('./views/NotFound'),
+    component: () => import('./views/NotFound.vue'),
   },
 ];
 
@@ -40,7 +40,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.params.topic) {
     if (
-      (!topicNames.find((name) => name === to.params.topic) && process.env.VUE_APP_PRODUCTION_DATA === 'prod') ||
+      (!topicNames.find((name) => name === to.params.topic) && import.meta.VITE_PRODUCTION_DATA === 'prod') ||
       disabledTopics.includes(to.params.topic)
     ) {
       next({ name: 'NotFound', params: [to.path] });

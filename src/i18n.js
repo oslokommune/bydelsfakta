@@ -1,19 +1,15 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import nb from './locales/nb-NO.json';
 
-function loadLocaleMessages() {
-  const locales = require('./locales/nb-no.json');
-  return {
-    'nb-no': locales,
-  };
-}
+Vue.use(VueI18n);
 
-export default function setupI18n() {
-  Vue.use(VueI18n);
+const i18n = new VueI18n({
+  locale: import.meta.env.VITE_I18N_LOCALE || 'nb-NO',
+  fallbackLocale: import.meta.env.VITE_I18N_FALLBACK_LOCAL || 'nb-NO',
+  messages: {
+    'nb-NO': nb,
+  },
+});
 
-  return new VueI18n({
-    locale: process.env.VUE_APP_I18N_LOCALE || 'nb-no',
-    fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'nb-no',
-    messages: loadLocaleMessages(),
-  });
-}
+export default i18n;

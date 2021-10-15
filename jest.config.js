@@ -1,6 +1,7 @@
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest',
   transform: {
+    '^-+\\.vue$': 'vue-jest',
+    '^-+\\.js$': 'vue-jest',
     '^.+\\.svg$': '<rootDir>/svgTransform.js',
   },
   moduleNameMapper: {
@@ -9,6 +10,7 @@ module.exports = {
   },
   setupFiles: ['<rootDir>/setup_file.js'],
   testURL: 'http://localhost/',
+  moduleFileExtensions: ['js', 'ts', 'json', 'vue'],
   // collectCoverage: true,
   // coverageReporters: ['json', 'html'],
   // collectCoverageFrom: ['src/**/*.js', 'src/**/*.vue'],

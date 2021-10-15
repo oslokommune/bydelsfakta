@@ -65,12 +65,12 @@ export default {
   },
 
   created() {
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.NODE_ENV === 'production') {
       const envs = JSON.parse(window.__GLOBAL_ENVS__);
-      this.setProductionMode(envs.VUE_APP_PRODUCTION_DATA);
+      this.setProductionMode(envs.VITE_PRODUCTION_DATA);
       document.getElementById('bydelsfakta-globals').remove();
     } else {
-      this.setProductionMode(process.env.VUE_APP_PRODUCTION_DATA);
+      this.setProductionMode(import.meta.env.VITE_PRODUCTION_DATA);
     }
 
     if (this.$route.name === 'Home') {
