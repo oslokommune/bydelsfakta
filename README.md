@@ -4,6 +4,11 @@
 
 Bydelsfakta is a frontend application for Oslo municipality which visualises demographic statistics and data on various topics for the 15 districts in the City of Oslo.
 
+#### Requirements
+
+- Node >= 14.x
+- npm >= 6.x
+
 #### Install dependencies
 Install dependencies in both the root folder and the server folder for the backend
 ```
