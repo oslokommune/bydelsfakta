@@ -1,6 +1,7 @@
 name: Build and deploy bydelsfakta-frontend
 
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
@@ -65,7 +66,7 @@ jobs:
       with:
         name: oslokommune/bydelsfakta-frontend
         username: ${{ github.actor }}
-        password: ${{ secrets.CR_PAT }}
+        password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
         tags: latest,${{ env.RELEASE_VERSION }}
         dockerfile: Dockerfile
