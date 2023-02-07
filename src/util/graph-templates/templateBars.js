@@ -156,7 +156,7 @@ function Template(svg) {
         .call(
           d3
             .axisBottom(this.x[i])
-            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
+            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 70)
             .tickFormat((dj) => this.format(dj, this.method, true))
         );
     });
