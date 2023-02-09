@@ -15,7 +15,7 @@ function Template(svg) {
   BaseTemplate.apply(this, arguments);
   this.template = 'lines';
 
-  this.padding = { top: 50, right: 190, bottom: 32, left: 60 };
+  this.padding = { top: 50, right: 190, bottom: 32, left: 70 };
 
   this.render = function (data, options = {}) {
     if (!this.commonRender(data, options)) return;
@@ -490,7 +490,7 @@ function Template(svg) {
     this.yAxis.transition().call(
       d3
         .axisLeft(this.y)
-        .ticks(this.height / 30)
+        .ticks(this.height / 40)
         .tickFormat((d) => this.format(d, this.method, true))
     );
 
