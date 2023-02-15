@@ -8,6 +8,7 @@ import husholdninger from './topics/husholdninger';
 import innvandrerbefolkningen from './topics/innvandrerbefolkningen';
 import levekaar from './topics/levekaar';
 import romPerPerson from './topics/romPerPerson';
+import utdanning from './topics/utdanning';
 
 export const topicNames = [
   'befolkningsutvikling',
@@ -20,6 +21,7 @@ export const topicNames = [
   'bygningstyper',
   'boligpriser',
   'rom-per-person',
+  'utdanning',
 ];
 
 export const disabledTopics = [];
@@ -40,6 +42,11 @@ export const categories = [
     color: 'rgb(219, 160, 52)',
     links: ['levekaar'],
   },
+  {
+    kategori: 'Utdanning',
+    color: 'rgb(89, 186, 204)',
+    links: ['utdanning'],
+  },
 ];
 
 export const topics = {
@@ -53,4 +60,5 @@ export const topics = {
   innvandrerbefolkningen,
   levekaar,
   'rom-per-person': romPerPerson,
+  utdanning,
 };
