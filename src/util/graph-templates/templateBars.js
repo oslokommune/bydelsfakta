@@ -11,7 +11,7 @@ import { closeButton, sortData, generateTableData, rowHelpers, columnHelpers, re
 function Template(svg) {
   BaseTemplate.apply(this, arguments);
 
-  this.padding = { top: 100, left: 190, right: 25, bottom: 30 };
+  this.padding = { top: 100, left: 190, right: 35, bottom: 30 };
   this.gutter = 30;
   this.x2 = d3.scaleLinear();
   this.x = [];
@@ -53,7 +53,7 @@ function Template(svg) {
     }
 
     if (this.isMobileView || this.isSingleSeries) {
-      this.padding.right = 25;
+      this.padding.right = 35;
       this.gutter = 0;
     }
 
@@ -156,7 +156,7 @@ function Template(svg) {
         .call(
           d3
             .axisBottom(this.x[i])
-            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 60)
+            .ticks((this.x[i].range()[1] - this.x[i].range()[0]) / 80)
             .tickFormat((dj) => this.format(dj, this.method, true))
         );
     });
