@@ -41,6 +41,38 @@ export default {
         },
       ],
     },
+    {
+      size: 'large',
+      heading: 'Median totalpris',
+      about: {
+        info: '<p>Statistikken viser median totalpris på omsatte boliger via FINN.no i tillegg til salg registrert i grunnboken. Pris er kjøpesummen oppgitt i kjøpekontrakten. For borettslagsboliger er både innskudd og andel av fellesgjeld inkludert i prisen.</p><p>Omsatte boliger inkluderer:</p><ol><li>Alle salg via FINN.no, og</li><li>Alle salg via grunnboken som:<ul><li>står oppført som et fritt salg (i motsetning til arv e.l.)</li><li>hvor kjøper og selger ikke er samme person</li><li>salget er fullstendig (100% av eiendommen er solgt)</li><li>det er kun en enhet som er solgt (ikke en boligblokk e.l.)</ul></ol><p>Totalpris = Salgspris + fellesgjeld<br>Median totalpris = Totalpris på boligen som er midt i rekken hvis salgene sorteres etter pris.</p>',
+        sources: [source.virdi],
+      },
+      map: {
+        labels: ['Lavere boligpriser', 'Høyere boligpriser'],
+        heading: 'Median totalpris',
+        method: 'value',
+        url: `${API}/median-totalpris-status`,
+      },
+      tabs: [
+        {
+          label: 'Status',
+          id: 'median_totalpris_status',
+          heading: 'Median totalpris for boliger',
+          method: 'value',
+          template: 'bars',
+          url: `${API}/median-totalpris-status`,
+        },
+        {
+          label: 'Historisk',
+          id: 'median_totalpris_historisk',
+          heading: 'Median totalpris for boliger',
+          method: 'value',
+          template: 'lines',
+          url: `${API}/median-totalpris-historisk`,
+        },
+      ],
+    },
   ],
   options: {
     kategori: 'Boforhold',

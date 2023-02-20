@@ -7,4 +7,8 @@ export default {
     name: 'Oslo kommune',
     url: 'https://statistikkbanken.oslo.kommune.no/',
   },
+  virdi: {
+    name: 'Virdi AS',
+    url: 'https://virdi.no/',
+  },
 };
