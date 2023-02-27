@@ -239,7 +239,7 @@ export default {
 .navigation-topbar {
   position: relative;
   width: 100%;
-  max-width: 768px;
+  max-width: 1024px;
 
   &--hidden {
     @media screen and (max-width: $break-lg) {
@@ -274,7 +274,7 @@ export default {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
-    max-width: 768px;
+    max-width: 1024px;
     max-height: calc(100vh - 17rem);
     padding: 1rem 0.5rem;
     overflow: auto;
@@ -283,7 +283,7 @@ export default {
 
     &-column {
       display: flex;
-      flex: 33.333%;
+      flex: 25%;
       flex-direction: column;
       min-width: 200px;
       padding: 0.5rem;
