@@ -159,9 +159,12 @@ function BaseTemplate(svg) {
       case 'bars':
       case 'ternaryPlot':
       case 'stackedBars':
-      case 'livingConditions':
         if (!this.data.data[0].values.length) break;
         year = `(${this.data.data[0].values[0].date})`;
+        break;
+
+      case 'livingConditions':
+        year = '(indikatorene viser siste tilgjengelige årgang, se "Om statistikken" for mer info)';
         break;
 
       case 'ageDistribution':
