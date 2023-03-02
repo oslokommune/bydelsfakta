@@ -400,6 +400,45 @@ exports[`Bydel renders component correctly 1`] = `
           Rom per person
         </span>
       </a>
+      <a
+        class="main-container__item"
+        href="#/bydel/gamleoslo/utdanning"
+        id="utdanning"
+      >
+        <picture>
+          <source
+            alt="Utdanning"
+            srcset="/img/utdanning.webp"
+            type="image/webp"
+          />
+           
+          <source
+            alt="Utdanning"
+            srcset="/img/utdanning.png"
+            type="image/png"
+          />
+           
+          <img
+            alt="Utdanning"
+            aria-hidden="true"
+            class="oslo__img"
+            src="/img/utdanning.png"
+          />
+        </picture>
+         
+        <span
+          class="oslo__category"
+          style="background-color: rgb(179, 245, 255);"
+        >
+          Utdanning
+        </span>
+         
+        <span
+          class="oslo__topic"
+        >
+          Utdanning
+        </span>
+      </a>
     </div>
      
     <div

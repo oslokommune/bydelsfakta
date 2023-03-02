@@ -4,7 +4,7 @@
       <template v-for="(card, cardIndex) in topics[topic].cards">
         <graph-card :key="`card-${cardIndex}`" :settings="card" />
       </template>
-      <div class="related">
+      <div v-if="topics[`${topic}`].related" class="related">
         <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>
         <div class="topics-grid">
           <v-category
