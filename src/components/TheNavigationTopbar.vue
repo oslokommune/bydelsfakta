@@ -220,22 +220,6 @@ export default {
   }
 }
 
-.icon {
-  width: 2rem;
-  height: 2rem;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  transition: all 0.5s cubic-bezier(0.3, 0, 0.5, 1);
-
-  &.rotate {
-    transform: rotateX(180deg);
-  }
-
-  &__arrow {
-    background-image: url('/icons/arrow.svg');
-  }
-}
-
 .navigation-topbar {
   position: relative;
   width: 100%;
