@@ -425,17 +425,14 @@ export default {
 @import '@/styles/colors';
 @import '@/styles/variables';
 
-.map-container,
-.about-container {
-  height: 560px;
-}
-
 .map-container {
   flex-grow: 1;
+  height: 560px;
 }
 
 .about-container {
   position: relative;
+  min-height: 560px;
   padding: 1rem;
 }
 
