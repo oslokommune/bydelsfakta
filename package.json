@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@sentry/vue": "^6.7.2",
+    "@xmldom/xmldom": "^0.8.6",
     "axios": "^0.21.2",
     "canvas": "^2.8.0",
     "canvg": "^3.0.7",
@@ -40,8 +41,7 @@
     "vue-skip-to": "^1.0.6",
     "vue2-leaflet": "^2.7.0",
     "vuex": "^3.6.2",
-    "xlsx": "^0.17.0",
-    "xmldom": "^0.6.0"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.13",
