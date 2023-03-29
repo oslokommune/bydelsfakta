@@ -74,7 +74,6 @@ exports[`GraphCard change an active tab 1`] = `
               class="context-menu__dropdown-item-icon"
               iconref="graph"
               options="[object Object]"
-              stroke-width="2.5"
             />
           </button>
            
@@ -85,9 +84,8 @@ exports[`GraphCard change an active tab 1`] = `
           >
             <ok-icon-stub
               class="context-menu__dropdown-item-icon"
-              iconref="data-table"
+              iconref="table"
               options="[object Object]"
-              stroke-width="2.5"
             />
           </button>
            
@@ -105,7 +103,7 @@ exports[`GraphCard change an active tab 1`] = `
             title="Åpne meny"
           >
             <ok-icon-stub
-              iconref="hamburger"
+              iconref="menu"
               options="[object Object]"
             />
              
@@ -188,7 +186,7 @@ exports[`GraphCard change an active tab 1`] = `
           class="help__button"
         >
           <ok-icon-stub
-            iconref="help"
+            iconref="question"
             options="[object Object]"
           />
         </button>
@@ -278,7 +276,6 @@ exports[`GraphCard renders correctly 1`] = `
               class="context-menu__dropdown-item-icon"
               iconref="graph"
               options="[object Object]"
-              stroke-width="2.5"
             />
           </button>
            
@@ -289,9 +286,8 @@ exports[`GraphCard renders correctly 1`] = `
           >
             <ok-icon-stub
               class="context-menu__dropdown-item-icon"
-              iconref="data-table"
+              iconref="table"
               options="[object Object]"
-              stroke-width="2.5"
             />
           </button>
            
@@ -309,7 +305,7 @@ exports[`GraphCard renders correctly 1`] = `
             title="Åpne meny"
           >
             <ok-icon-stub
-              iconref="hamburger"
+              iconref="menu"
               options="[object Object]"
             />
              
@@ -392,7 +388,7 @@ exports[`GraphCard renders correctly 1`] = `
           class="help__button"
         >
           <ok-icon-stub
-            iconref="help"
+            iconref="question"
             options="[object Object]"
           />
         </button>

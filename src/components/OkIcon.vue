@@ -1,22 +1,9 @@
 <template>
-  <component :is="iconRef" class="logo icon" :class="{ small, tiny }" :style="{ marginRight, transform }"></component>
+  <pkt-icon :name="iconRef" class="logo icon" :class="{ small, tiny }" :style="{ marginRight, transform }" />
 </template>
 
 <script>
-// Import all icons (note the '?inline' suffix)
-import hamburger from '@/assets/icons/menu.svg';
-import help from '@/assets/icons/help.svg';
-import photo from '@/assets/icons/photo.svg';
-import download from '@/assets/icons/download.svg';
-import arrowDown from '@/assets/icons/arrow-down.svg';
-import mapPin from '@/assets/icons/map-pin.svg';
-import graph from '@/assets/icons/graph.svg';
-import dataTable from '@/assets/icons/data-table.svg';
-import fullscreen from '@/assets/icons/fullscreen.svg';
-import fullscreenExit from '@/assets/icons/fullscreen-exit.svg';
-import oslologo from '@/assets/oslo-logo.svg';
-import cross from '@/assets/icons/cross.svg';
-import newWindow from '@/assets/icons/new-window.svg';
+import { PktIcon } from '@oslokommune/punkt-vue2';
 
 /*
   available options (optional):
@@ -26,21 +13,8 @@ import newWindow from '@/assets/icons/new-window.svg';
 */
 
 export default {
-  // Bind SVGs as components
   components: {
-    hamburger,
-    help,
-    photo,
-    download,
-    arrowDown,
-    mapPin,
-    graph,
-    dataTable,
-    fullscreen,
-    fullscreenExit,
-    oslologo,
-    cross,
-    newWindow,
+    PktIcon,
   },
 
   props: {

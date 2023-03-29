@@ -11,7 +11,7 @@
         @click="toggleFullscreen"
         @keyup.enter="toggleFullscreen"
       >
-        <ok-icon icon-ref="fullscreenExit" :options="{ size: 'small' }"></ok-icon>
+        <ok-icon icon-ref="minimize" :options="{ size: 'small' }"></ok-icon>
       </button>
       <header class="card__header">
         <div class="card__headertext">
@@ -52,12 +52,7 @@
               :title="$t('graphCard.mode.graph')"
               @click="mode = 'graph'"
             >
-              <ok-icon
-                class="context-menu__dropdown-item-icon"
-                icon-ref="graph"
-                stroke-width="2.5"
-                :options="{ size: 'tiny' }"
-              ></ok-icon>
+              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="graph" :options="{ size: 'tiny' }"></ok-icon>
             </button>
             <button
               class="card__toggle-button"
@@ -66,12 +61,7 @@
               :title="$t('graphCard.mode.table')"
               @click="mode = 'table'"
             >
-              <ok-icon
-                class="context-menu__dropdown-item-icon"
-                icon-ref="data-table"
-                stroke-width="2.5"
-                :options="{ size: 'tiny' }"
-              ></ok-icon>
+              <ok-icon class="context-menu__dropdown-item-icon" icon-ref="table" :options="{ size: 'tiny' }"></ok-icon>
             </button>
 
             <button
@@ -84,8 +74,7 @@
             >
               <ok-icon
                 class="context-menu__dropdown-item-icon"
-                icon-ref="map-pin"
-                stroke-width="2.5"
+                icon-ref="location-pin"
                 :options="{ size: 'tiny' }"
               ></ok-icon>
             </button>
@@ -100,7 +89,7 @@
               :title="showDropdown ? $t('graphCard.dropdown.close') : $t('graphCard.dropdown.open')"
               @click="showDropdown = !showDropdown"
             >
-              <ok-icon icon-ref="hamburger"></ok-icon>
+              <ok-icon icon-ref="menu" :options="{ size: 'small' }"></ok-icon>
               <span class="button-label">Valg</span>
             </button>
             <div v-if="showDropdown" class="context-menu__dropdown" role="menu">
@@ -113,10 +102,7 @@
                 @click="toggleFullscreen"
                 @keyup.enter="toggleFullscreen"
               >
-                <ok-icon
-                  :icon-ref="fullscreen ? 'fullscreenExit' : 'fullscreen'"
-                  :options="{ size: 'small' }"
-                ></ok-icon>
+                <ok-icon :icon-ref="fullscreen ? 'minimize' : 'expand'" :options="{ size: 'small' }"></ok-icon>
                 <span>{{
                   fullscreen ? $t('graphCard.fullscreen.exit.label') : $t('graphCard.fullscreen.open.label')
                 }}</span>
@@ -138,7 +124,7 @@
                   showDropdown = false;
                 "
               >
-                <ok-icon icon-ref="help" :options="{ size: 'small' }"></ok-icon>
+                <ok-icon icon-ref="question" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.about.label') }}</span>
               </button>
 
@@ -153,7 +139,7 @@
                 @click="savePng(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
               >
-                <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
+                <ok-icon icon-ref="picture" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.savePNG.label') }}</span>
               </button>
               <button
@@ -168,7 +154,7 @@
                 @click="saveSvg(settings.tabs[active].id)"
                 @keyup.enter="saveSvg(settings.tabs[active].id)"
               >
-                <ok-icon icon-ref="photo" :options="{ size: 'small' }"></ok-icon>
+                <ok-icon icon-ref="picture" :options="{ size: 'small' }"></ok-icon>
                 <span>{{ $t('graphCard.saveSVG.label') }}</span>
               </button>
 

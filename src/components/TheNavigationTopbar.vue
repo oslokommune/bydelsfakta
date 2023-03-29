@@ -21,7 +21,7 @@
         </div>
         <div class="topic">
           <h1 class="header">{{ getHumanReadableTopic(selectedTopic) }}</h1>
-          <ok-icon icon-ref="arrow-down" :options="{ rotation: showDropdown ? '180deg' : false }"></ok-icon>
+          <ok-icon icon-ref="chevron-down" :options="{ rotation: showDropdown ? '180deg' : false }"></ok-icon>
         </div>
       </div>
       <transition name="fade">

@@ -1,0 +1,22 @@
+{
+  "svgsprite": {
+    "files": [
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/chevron-down.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/close.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/download.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/expand.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/graph.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/location-pin.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/menu.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/minimize.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/new-window-small.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/picture.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/question.svg",
+      "./node_modules/@oslokommune/punkt-assets/dist/icons/table.svg"
+    ],
+    "output": {
+      "fileType": "html",
+      "filePath": "src/components/PktIconsSprite.vue"
+    }
+  }
+}

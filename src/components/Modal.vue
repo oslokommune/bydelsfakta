@@ -10,7 +10,7 @@
           aria-label="Lukk modal"
           @click="$emit('close')"
         >
-          <ok-icon icon-ref="cross" :options="{ margin: '16px' }"></ok-icon>
+          <ok-icon icon-ref="close" :options="{ margin: '16px' }"></ok-icon>
         </button>
       </div>
 
@@ -30,7 +30,7 @@
               tabindex="1"
               >{{ $t('modal.footer.download', { browser: 'Chrome' }) }}</a
             >
-            <ok-icon icon-ref="new-window" :options="{ size: 'tiny' }"></ok-icon>
+            <ok-icon icon-ref="new-window-small" :options="{ size: 'tiny' }"></ok-icon>
           </li>
           <li>
             <a
@@ -41,7 +41,7 @@
               tabindex="1"
               >{{ $t('modal.footer.download', { browser: 'Edge' }) }}</a
             >
-            <ok-icon icon-ref="new-window" :options="{ size: 'tiny' }"></ok-icon>
+            <ok-icon icon-ref="new-window-small" :options="{ size: 'tiny' }"></ok-icon>
           </li>
           <li>
             <a
@@ -52,7 +52,7 @@
               tabindex="1"
               >{{ $t('modal.footer.download', { browser: 'Firefox' }) }}</a
             >
-            <ok-icon icon-ref="new-window" :options="{ size: 'tiny' }"></ok-icon>
+            <ok-icon icon-ref="new-window-small" :options="{ size: 'tiny' }"></ok-icon>
           </li>
         </ul>
       </div>
