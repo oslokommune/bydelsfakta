@@ -17,6 +17,9 @@
     "lint:style:fix": "stylelint 'src/**/*.scss' 'src/**/*.vue' --fix",
     "test:unit:watch": "vue-cli-service test:unit --watchAll"
   },
+  "engines": {
+    "node": "16"
+  },
   "dependencies": {
     "@oslokommune/punkt-assets": "^3.1.1",
     "@oslokommune/punkt-vue2": "^3.1.1",
