@@ -48,7 +48,7 @@
         :aria-label="showHelp ? $t('graphCard.help.ariaHide') : $t('graphCard.help.ariaShow')"
         @click="showHelp = !showHelp"
       >
-        <ok-icon icon-ref="help" :options="{ size: 'small', margin: '0' }"></ok-icon>
+        <ok-icon icon-ref="question" :options="{ size: 'small', margin: '0' }"></ok-icon>
       </button>
       <div v-if="showHelp" class="help__text">{{ settings.help }}</div>
     </div>
@@ -74,7 +74,7 @@ import TemplateLivingConditions from '@/util/graph-templates/templateLivingCondi
 import TemplateComboHistogram from '@/util/graph-templates/templateComboHistogram';
 import TemplateBarsAndLines from '@/util/graph-templates/templateBarsAndLines';
 import districtNames from '@/config/districtNames';
-import Spinner from '@/assets/spinner.svg';
+import Spinner from '@/components/Spinner.vue';
 import OkIcon from './OkIcon.vue';
 
 export default {

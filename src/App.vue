@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="app" tabindex="-1" :class="{ menuIsOpen, navigationIsOpen }">
+    <pkt-icons-sprite />
     <the-navigation-drawer />
     <div class="app__content">
       <div v-if="showWarning" class="ok-alert-container">
@@ -19,6 +20,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import PktIconsSprite from './components/PktIconsSprite.vue';
 import TheNavigationDrawer from './components/TheNavigationDrawer.vue';
 import TheNavigationTopbar from './components/TheNavigationTopbar.vue';
 import TheFooter from './components/TheFooter.vue';
@@ -27,7 +29,13 @@ import Modal from './components/Modal.vue';
 export default {
   name: 'App',
 
-  components: { TheNavigationTopbar, TheNavigationDrawer, TheFooter, Modal },
+  components: {
+    PktIconsSprite,
+    TheNavigationTopbar,
+    TheNavigationDrawer,
+    TheFooter,
+    Modal,
+  },
 
   data: () => ({
     isOpen: false,

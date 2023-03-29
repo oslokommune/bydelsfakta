@@ -6,6 +6,8 @@ exports[`App shallowmounts app 1`] = `
   id="app"
   tabindex="-1"
 >
+  <pkt-icons-sprite-stub />
+   
   <the-navigation-drawer-stub />
    
   <div

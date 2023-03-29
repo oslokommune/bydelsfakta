@@ -17,7 +17,12 @@
     "lint:style:fix": "stylelint 'src/**/*.scss' 'src/**/*.vue' --fix",
     "test:unit:watch": "vue-cli-service test:unit --watchAll"
   },
+  "engines": {
+    "node": "16"
+  },
   "dependencies": {
+    "@oslokommune/punkt-assets": "^3.1.1",
+    "@oslokommune/punkt-vue2": "^3.1.1",
     "@sentry/vue": "^6.7.2",
     "@xmldom/xmldom": "^0.8.6",
     "axios": "^0.21.2",
@@ -31,7 +36,7 @@
     "leaflet-gesture-handling": "^1.2.1",
     "nodemon": "^2.0.20",
     "save-svg-as-png": "^1.4.17",
-    "vue": "^2.6.14",
+    "vue": "^2.7.14",
     "vue-analytics": "^5.22.1",
     "vue-dragscroll": "^1.10.2",
     "vue-i18n": "^8.24.5",
@@ -44,15 +49,16 @@
     "xlsx": "^0.17.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.13",
-    "@vue/cli-plugin-eslint": "^4.5.13",
-    "@vue/cli-plugin-router": "^4.5.13",
-    "@vue/cli-plugin-unit-jest": "^4.5.13",
-    "@vue/cli-plugin-vuex": "^4.5.13",
-    "@vue/cli-service": "^4.5.13",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "^5.0.8",
+    "@vue/cli-plugin-vuex": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.2.1",
+    "@vue/vue2-jest": "^27.0.0",
     "babel-eslint": "^10.1.0",
     "env-cmd": "^10.1.0",
     "eslint": "^7.29.0",
@@ -66,7 +72,6 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
-    "vue-svg-loader": "^0.16.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.7.14"
   }
 }
