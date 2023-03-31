@@ -4,19 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode production",
     "serve": "npm run dev",
-    "test:unit": "NODE_ENV=test jest",
-    "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint",
     "backend": "env-cmd -f ./.env.local nodemon server/server.js",
+    "build": "vite build --mode production",
     "build:prod": "npm install && npm run lint && npm run test:unit && npm run build",
     "docker": "npm run build:prod && npm run docker:build",
     "docker:build": "docker build -t ghcr.io/oslokommune/bydelsfakta-frontend:$npm_package_version .",
     "docker:push": "docker push ghcr.io/oslokommune/bydelsfakta-frontend:$npm_package_version",
+    "lint": "eslint ./src ./server --ext .js,.vue",
     "lint:style": "stylelint 'src/**/*.scss' 'src/**/*.vue'",
     "lint:style:fix": "stylelint 'src/**/*.scss' 'src/**/*.vue' --fix",
-    "test:unit:watch": "vue-cli-service test:unit --watchAll"
+    "test:unit": "NODE_ENV=test jest",
+    "test:unit:watch": "NODE_ENV=test jest --watchAll"
   },
   "engines": {
     "node": "16"
