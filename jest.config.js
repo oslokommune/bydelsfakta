@@ -1,22 +1,15 @@
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest',
+  testEnvironment: 'jsdom',
+  rootDir: './',
+  moduleDirectories: ['node_modules', 'src'],
+  moduleFileExtensions: ['js', 'vue'],
   transform: {
-    '^.+\\.svg$': '<rootDir>/svgTransform.js',
+    '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
+    '^.+\\.vue$': '@vue/vue2-jest',
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^.+\\.svg\\?inline?$': '<rootDir>/empty-module.js',
   },
   setupFiles: ['<rootDir>/setup_file.js'],
   testURL: 'http://localhost/',
-  // collectCoverage: true,
-  // coverageReporters: ['json', 'html'],
-  // collectCoverageFrom: ['src/**/*.js', 'src/**/*.vue'],
-  // coverageDirectory: '<rootDir>/src/coverageReport',
-  // coveragePathIgnorePatterns: [
-  //   '<rootDir>/node_modules',
-  //   '<rootDir>/src/coverageReport',
-  //   '<rootDir>/src/main.js',
-  //   '<rootDir>/src/i18n.js',
-  // ],
 };

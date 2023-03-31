@@ -3,9 +3,10 @@
   "version": "1.1.45",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "dev": "vite",
+    "build": "vite build --mode production",
+    "serve": "npm run dev",
+    "test:unit": "NODE_ENV=test jest",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "backend": "env-cmd -f ./.env.local nodemon server/server.js",
@@ -19,6 +20,18 @@
   },
   "engines": {
     "node": "16"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "dependencies": {
     "@oslokommune/punkt-assets": "^3.1.1",
@@ -49,12 +62,10 @@
     "xlsx": "^0.17.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-plugin-router": "^5.0.8",
-    "@vue/cli-plugin-unit-jest": "^5.0.8",
-    "@vue/cli-plugin-vuex": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
+    "@babel/eslint-parser": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@vitejs/plugin-legacy": "^4.0.2",
+    "@vitejs/plugin-vue2": "^2.2.0",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.2.1",
@@ -72,6 +83,7 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
+    "vite": "^4.2.1",
     "vue-template-compiler": "^2.7.14"
   }
 }

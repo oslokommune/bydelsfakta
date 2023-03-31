@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueMeta from 'vue-meta';
 import VueResize from 'vue-resize';
-import { Icon } from 'leaflet';
 import * as Sentry from '@sentry/vue';
 import VueSkipTo from 'vue-skip-to';
 import './util/polyfills';
@@ -17,18 +16,9 @@ import 'leaflet/dist/leaflet.css';
 import './styles/main.scss';
 import setupI18n from './i18n';
 
-const production = process.env.NODE_ENV === 'production';
+const production = import.meta.env.PROD;
 const envs = production ? JSON.parse(window.__GLOBAL_ENVS__) : {};
 const i18n = setupI18n();
-
-// this part resolve an issue where the markers would not appear
-delete Icon.Default.prototype._getIconUrl;
-
-Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
 
 Vue.use(VueMeta);
 Vue.use(VueResize);
@@ -42,7 +32,7 @@ Vue.config.performance = !production;
 Vue.directive('click-outside', clickOutside);
 
 Vue.use(VueAnalytics, {
-  id: production ? envs.VUE_APP_GOOGLE_ANALYTICS_ID : process.env.VUE_APP_GOOGLE_ANALYTICS_ID,
+  id: production ? envs.VITE_GOOGLE_ANALYTICS_ID : import.meta.env.VITE_GOOGLE_ANALYTICS_ID,
   router,
   debug: {
     sendHitTask: production,
@@ -52,7 +42,7 @@ Vue.use(VueAnalytics, {
 if (production) {
   Sentry.init({
     Vue,
-    dsn: production ? envs.VUE_APP_SENTRY_DSN : process.env.VUE_APP_SENTRY_DSN,
+    dsn: production ? envs.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
     logErrors: true,
     autoSessionTracking: false,
   });
