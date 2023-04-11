@@ -47,11 +47,6 @@ npm run lint
 npm run lint:style:fix
 ```
 
-#### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
 #### Github Actions
 
 We now use github actions to build the bydelsfakta-frontend, so you can check out when the last successfull build was built in the actions-tab
