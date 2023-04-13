@@ -725,6 +725,8 @@ export default {
       font-weight: 500;
       cursor: pointer;
 
+      --fg-color: #{$color-blue};
+
       &:disabled {
         text-decoration: line-through;
       }
