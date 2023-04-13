@@ -372,13 +372,13 @@ function enterRows(enter) {
 
 function getLowerHeadingString() {
   if (this.method === 'ratio' && this.extent[1] - this.extent[0] >= 1) {
-    return `Andel av befolkningen mellom ${this.extent[0]} og ${this.extent[1]} år`;
+    return `Andel av befolkningen fra ${this.extent[0]} til og med ${this.extent[1]} år`;
   }
   if (this.method === 'ratio' && this.extent[1] - this.extent[0] === 0) {
     return `Andel av befolkningen som er ${this.extent[0]} år`;
   }
   if (this.method !== 'ratio' && this.extent[1] - this.extent[0] >= 1) {
-    return `Antall personer mellom ${this.extent[0]} og ${this.extent[1]} år`;
+    return `Antall personer fra ${this.extent[0]} til og med ${this.extent[1]} år`;
   }
   if (this.method !== 'ratio' && this.extent[1] - this.extent[0] === 0) {
     return `Størrelse av befolkningen på ${this.extent[0]} år`;
