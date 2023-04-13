@@ -19,16 +19,18 @@
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': !compareDistricts }"
             :to="onClickTab(false)"
-            v-html="$t('navigationDrawer.selectOne.tab')"
-          ></router-link>
+          >
+            <span v-html="$t('navigationDrawer.selectOne.tab')" />
+          </router-link>
         </li>
         <li class="state-toggle__element">
           <router-link
             class="state-toggle__link"
             :class="{ 'state-toggle__link--active': compareDistricts }"
             :to="onClickTab(true)"
-            v-html="$t('navigationDrawer.linkCompare')"
-          ></router-link>
+          >
+            {{ $t('navigationDrawer.linkCompare') }}
+          </router-link>
         </li>
       </ul>
 
