@@ -1,3 +1,6 @@
+@use './variables' as *;
+@use './colors' as *;
+
 h2.section-heading {
   width: 100%;
   margin-bottom: 0.5rem;

@@ -280,8 +280,8 @@ export default {
 
 <style scoped lang="scss">
 @use 'sass:math';
-@import '../styles/colors';
-@import '../styles/variables';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
 
 $rowHeight: 2.5em;
 

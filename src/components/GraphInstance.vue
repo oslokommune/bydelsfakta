@@ -327,8 +327,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/colors';
-@import '@/styles/variables';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
 
 .graph {
   &__shadow {

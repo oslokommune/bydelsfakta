@@ -67,9 +67,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/colors';
-@import '@/styles/variables';
-@import '@/styles/layout';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
+@use '@/styles/layout' as *;
 
 .topics-grid {
   flex-basis: auto;
