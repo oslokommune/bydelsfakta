@@ -279,6 +279,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@use 'sass:math';
 @import '../styles/colors';
 @import '../styles/variables';
 
@@ -490,8 +491,8 @@ input[type='checkbox'].custom {
   height: $rowHeight;
   padding-left: 1rem;
   vertical-align: middle;
-  border-top-left-radius: $rowHeight / 2;
-  border-bottom-left-radius: $rowHeight / 2;
+  border-top-left-radius: math.div($rowHeight, 2);
+  border-bottom-left-radius: math.div($rowHeight, 2);
   cursor: pointer;
 
   // unchecked border
@@ -573,7 +574,7 @@ input[type='checkbox'].custom {
   align-items: center;
   margin-bottom: 1px;
   background-color: inherit;
-  border-radius: $rowHeight / 2;
+  border-radius: math.div($rowHeight, 2);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
@@ -621,8 +622,8 @@ input[type='checkbox'].custom {
     margin-left: 46px;
     color: rgba($color-purple, 0.85);
     letter-spacing: 0.1px;
-    border-top-right-radius: $rowHeight / 2;
-    border-bottom-right-radius: $rowHeight / 2;
+    border-top-right-radius: math.div($rowHeight, 2);
+    border-bottom-right-radius: math.div($rowHeight, 2);
 
     &--compare {
       margin-top: 0;
