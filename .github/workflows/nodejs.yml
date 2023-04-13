@@ -37,6 +37,7 @@ jobs:
     - name: npm install, test, and build
       run: |
         npm install
+        npm install --prefix server
         npm run lint
         npm run lint:style
         npm run test:unit

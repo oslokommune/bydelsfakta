@@ -19,6 +19,7 @@ module.exports = (app) => {
 
   app.get('/api/dataset/:dataset', auth(), (req, res) => {
     const headers = {};
+    // eslint-disable-next-line no-restricted-syntax
     for (const k in req.headers) {
       if (['host', 'connection', 'content-length'].indexOf(k) === -1) {
         headers[k] = req.headers[k];

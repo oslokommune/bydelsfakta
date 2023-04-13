@@ -6,12 +6,13 @@ module.exports = {
   },
 
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
 
   extends: ['plugin:vue/recommended', '@vue/airbnb', '@vue/prettier'],
 
   rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-shadow': ['error', { allow: ['state'] }],
     'no-underscore-dangle': 'off',
     'global-require': 'off',
