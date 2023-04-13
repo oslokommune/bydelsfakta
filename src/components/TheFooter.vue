@@ -13,8 +13,8 @@ export default {};
 </script>
 
 <style lang="scss">
-@import '@/styles/_variables';
-@import '@/styles/_colors';
+@import '@/styles/variables';
+@import '@/styles/colors';
 
 .footer {
   margin-bottom: 3rem;

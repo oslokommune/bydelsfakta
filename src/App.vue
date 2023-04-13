@@ -161,13 +161,11 @@ $borderRadius: 1.5px;
     text-align: center;
     content: '';
   }
-}
 
-.ok-alert {
   @include boxColor(#242433);
-}
 
-.ok-alert--warning {
-  @include boxColor(#f8c66b, darken(#f8c66b, 20%));
+  &--warning {
+    @include boxColor(#f8c66b, darken(#f8c66b, 20%));
+  }
 }
 </style>
