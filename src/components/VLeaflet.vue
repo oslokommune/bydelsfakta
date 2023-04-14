@@ -269,8 +269,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../styles/_colors.scss';
-@import '../styles/variables';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
 
 .container {
   width: 100%;

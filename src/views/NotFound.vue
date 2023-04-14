@@ -67,9 +67,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/colors';
-@import '@/styles/variables';
-@import '@/styles/layout';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
+@use '@/styles/layout' as *;
 
 .topics-grid {
   flex-basis: auto;
@@ -143,12 +143,6 @@ export default {
       background-color: rgb(255, 255, 255);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.33);
     }
-  }
-
-  &__topics-grid {
-    @extend .topics-grid;
-
-    padding: 0;
   }
 }
 </style>

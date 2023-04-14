@@ -1,11 +1,11 @@
-@import 'colors';
-@import 'fonts';
-@import 'layout';
-@import 'animations';
-@import 'variables';
-@import 'typography';
-@import 'table';
-@import 'print';
+@use 'colors';
+@use 'fonts';
+@use 'layout';
+@use 'animations';
+@use 'variables';
+@use 'typography';
+@use 'table';
+@use 'print';
 
 *,
 ::before,
@@ -17,14 +17,14 @@ html {
   box-sizing: border-box;
   overflow-y: scroll;
   font-size: 12.5px;
-  background-color: $color-bg;
+  background-color: colors.$color-bg;
   -webkit-font-smoothing: antialiased;
 
   @media screen and (min-width: 600px) {
     font-size: 13px;
   }
 
-  @media screen and (min-width: $break-md) {
+  @media screen and (min-width: variables.$break-md) {
     font-size: 14px;
   }
 }

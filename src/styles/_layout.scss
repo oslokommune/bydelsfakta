@@ -1,5 +1,5 @@
-@import './variables';
-@import './colors';
+@use './variables' as *;
+@use './colors' as *;
 
 .app {
   display: flex;

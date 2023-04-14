@@ -41,9 +41,11 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
           class="state-toggle__link state-toggle__link--active"
           href="/bydel/gamleoslo"
         >
-          Utforsk
-          <br />
-          en bydel
+          <span>
+            Utforsk
+            <br />
+            en bydel
+          </span>
         </a>
       </li>
        
@@ -54,7 +56,9 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
           class="state-toggle__link"
           href="/bydel/alle"
         >
+          
           Sammenlign bydeler
+        
         </a>
       </li>
     </ul>
@@ -345,9 +349,11 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
           class="state-toggle__link state-toggle__link--active"
           href="/bydel/gamleoslo"
         >
-          Utforsk
-          <br />
-          en bydel
+          <span>
+            Utforsk
+            <br />
+            en bydel
+          </span>
         </a>
       </li>
        
@@ -358,7 +364,9 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
           class="state-toggle__link"
           href="/bydel/alle"
         >
+          
           Sammenlign bydeler
+        
         </a>
       </li>
     </ul>

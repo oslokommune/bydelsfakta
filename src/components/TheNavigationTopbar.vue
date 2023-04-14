@@ -44,9 +44,9 @@
                   'navigation-topbar__dropdown-item--disabled': disabledTopics.includes(topics[link].value),
                 }"
                 :to="onClickTopic(topics[link].value)"
-                v-text="topics[link].text"
-                >{{ topics[`${link}`].text }}</router-link
               >
+                {{ topics[`${link}`].text }}
+              </router-link>
             </div>
           </div>
         </div>
@@ -138,8 +138,8 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import '@/styles/colors';
-@import '@/styles/variables';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
 
 .header {
   position: relative;

@@ -408,8 +408,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/styles/colors';
-@import '@/styles/variables';
+@use '@/styles/colors' as *;
+@use '@/styles/variables' as *;
 
 .map-container {
   flex-grow: 1;
@@ -724,6 +724,8 @@ export default {
       color: $color-blue;
       font-weight: 500;
       cursor: pointer;
+
+      --fg-color: #{$color-blue};
 
       &:disabled {
         text-decoration: line-through;

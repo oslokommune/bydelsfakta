@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/_colors.scss';
+@use '@/styles/colors' as *;
 
 .overlay {
   position: fixed;
