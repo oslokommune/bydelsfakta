@@ -54,7 +54,7 @@ function Template(svg) {
     this.canvas.selectAll('*').remove();
 
     // Holds the list of available geographies
-    this.list = this.svg.append('g').attr('class', 'list').attr('transform', `translate(3, ${this.padding.top})`);
+    this.list = this.canvas.append('g').attr('class', 'list').attr('transform', 'translate(-357, 0)');
 
     // Create heading (label) for the list
     this.list
