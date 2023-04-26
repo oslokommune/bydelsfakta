@@ -224,6 +224,22 @@ export default {
           method: 'value',
           url: `${API}/neets-status`,
         },
+        {
+          label: 'Historisk (antall)',
+          id: 'neets_historisk_antall',
+          heading: 'Personer i aldersgruppe 15–29 år klassifisert som NEETs',
+          template: 'lines',
+          method: 'value',
+          url: `${API}/neets-historisk`,
+        },
+        {
+          label: 'Historisk (andel)',
+          id: 'neets_historisk_andel',
+          heading: 'Personer i aldersgruppe 15–29 år klassifisert som NEETs',
+          template: 'lines',
+          method: 'ratio',
+          url: `${API}/neets-historisk`,
+        },
       ],
     },
     {
