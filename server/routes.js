@@ -17,6 +17,10 @@ module.exports = (app) => {
     res.send('UP');
   });
 
+  app.get('/.well-known/security.txt', (req, res) => {
+    res.redirect('https://www.oslo.kommune.no/.well-known/security.txt');
+  });
+
   app.get('/api/dataset/:dataset', auth(), (req, res) => {
     const headers = {};
     // eslint-disable-next-line no-restricted-syntax
