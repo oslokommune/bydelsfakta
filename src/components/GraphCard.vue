@@ -499,6 +499,7 @@ export default {
     flex-direction: column;
     width: calc(100vw - 2rem);
     height: calc(100vh - 2rem);
+    overflow-y: auto;
     outline: 2rem solid rgba(black, 0.9);
   }
 
