@@ -396,57 +396,6 @@ export default {
         },
       ],
     },
-    {
-      size: 'small',
-      heading: 'Redusert funksjonsevne',
-      about: {
-        info: 'Statistikken omfatter personer i alderen 16 til 66 år med redusert funksjonsevne per 30. november. F.o.m. 2010 er redusert funksjonsevne definert som mottakere av sykepenger, uførepensjon  eller personer med nedsatt arbeidsevne. Nedsatt arbeidsevne omfatter personer som på grunn av sykdom, skade eller andre hindringer har behov for ekstra oppfølging fra NAV for å få eller beholde arbeid. For perioden 2000–2009 er redusert funksjonsevne definert som personer som er registrert i FD-trygd basen på ett eller flere av disse områdene per 30.11: Uførepensjon, sykepenger, medisinsk rehabilitering, foreløpig uførestønad eller arbeidssøkerstatus=yrkeshemmet.',
-        sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?Geografisubset=301%2C30101+-+30118&headers=r&Befolkningslice=2&stubs=Geografi&measure=common&virtualslice=Andel_value&layers=Kjnn&layers=Befolkning&layers=virtual&study=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfStudy%2Flevekaarfunkevne&mode=cube&v=2&virtualsubset=Andel_value&Befolkningsubset=2&rsubset=2000+-+2016&measuretype=4&Kjnnsubset=1&cube=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCube%2Flevekaarfunkevne_C1&Kjnnslice=1&top=yes',
-      },
-      map: {
-        labels: ['Færre', 'Flere'],
-        url: `${API}/levekar-redusert-funksjonsevne-status`,
-        heading: 'Personer 16–66 år med redusert funksjonsevne',
-        reverse: true,
-        method: 'ratio',
-      },
-      tabs: [
-        {
-          label: 'Andel',
-          id: 'levekar_redusert_funksjonsevne_status_andel',
-          heading: 'Personer 16–66 år med redusert funksjonsevne',
-          template: 'bars',
-          method: 'ratio',
-          url: `${API}/levekar-redusert-funksjonsevne-status`,
-        },
-        {
-          label: 'Antall',
-          id: 'levekar_redusert_funksjonsevne_status_antall',
-          heading: 'Personer 16–66 år med redusert funksjonsevne',
-          template: 'bars',
-          method: 'value',
-          url: `${API}/levekar-redusert-funksjonsevne-status`,
-        },
-        {
-          label: 'Historisk (andel)',
-          id: 'levekar_redusert_funksjonsevne_historisk_andel',
-          heading: 'Personer 16–66 år med redusert funksjonsevne',
-          method: 'ratio',
-          template: 'lines',
-          url: `${API}/levekar-redusert-funksjonsevne-historisk`,
-        },
-        {
-          label: 'Historisk (antall)',
-          id: 'levekar_redusert_funksjonsevne_historisk_antall',
-          heading: 'Personer 16–66 år med redusert funksjonsevne',
-          method: 'value',
-          template: 'lines',
-          url: `${API}/levekar-redusert-funksjonsevne-historisk`,
-        },
-      ],
-    },
   ],
   options: {
     kategori: 'Levekår',
