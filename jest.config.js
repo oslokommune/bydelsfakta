@@ -7,6 +7,7 @@ module.exports = {
     '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
     '^.+\\.vue$': '@vue/vue2-jest',
   },
+  transformIgnorePatterns: ['node_modules/(?!axios)'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
