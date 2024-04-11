@@ -1,6 +1,6 @@
 {
   "name": "bydelsfakta",
-  "version": "1.1.71",
+  "version": "1.1.72",
   "private": true,
   "scripts": {
     "dev": "vite",
