@@ -43,7 +43,7 @@ export default {
       sources: [source.ssb],
       about: {
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog57&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Barnehage,%20skole%20og%20utdanning__Utdanningsniv%C3%A5%20og%20ikke%20fullf%C3%B8rt%20VGS/',
         info: 'Statistikken omfatter personer 30–59 år, per 1.1, med utdanningsnivå per 1.10 året før. År i figur/tabell svarer til året for utdanningsnivået. Lav utdanning omfatter personer med kun grunnskole, ingen eller uoppgitt utdanning. Fra og med 1.10.2014 har SSB gjort endringer i beregningsmetode over utdanningsnivå for innvandrere som står med uoppgitt i registeret. SSB bruker imputerte verdier på disse dataene. Dette har ført til brudd i tidsserien; utdanningsnivå fra og med 2015 er ikke direkte sammenlignbart med tidligere år.',
       },
       map: {
@@ -94,8 +94,7 @@ export default {
       size: 'small',
       heading: 'Lavinntekt',
       about: {
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?Geografisubset=301%2C30101+-+30118&headers=r&virtualsubset=AndeletterEUskala_value&v=2&stubs=Geografi&measure=common&Husholdningstypesubset=1&virtualslice=AndeletterEUskala_value&rsubset=2014+-+2017&layers=Husholdningstype&layers=virtual&measuretype=4&study=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfStudy%2Fhusholdningerfattig-korrformue&cube=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCube%2Fhusholdningerfattig-korrformue_C1&Husholdningstypeslice=1&mode=cube&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Inntekt/',
         info: 'Statistikken viser husholdninger med barn under 18 år med lav inntekt, i henhold til EU-skala. Det vil si, husholdningens inntekt etter skatt per forbruksenhet er under 60 prosent av medianinntekten for Oslo. I henhold til EU-skalaen er husholdningsinntekten skalert med forbruksvekter ved å gi første voksne i husholdningen vekten 1, andre voksne vekten 0,5 hver, mens hvert barn får vekten 0,3. Inntekten er videre korrigert for formue, det vil si at husholdninger som har brutto finanskapital per forbruksenhet over 1G, uansett ikke regnes som lavinntektshusholdninger.',
         sources: [source.ssb],
       },
@@ -148,7 +147,7 @@ export default {
         info: 'Statistikken omfatter bosatte personer 21–29 år, per 1.1, som har startet i videregående utdanning uten å fullføre i løpet av 5 år. Fullføring er oppdatert per 1.oktober året før. Årstallet i overskriften relateres til året for fullføring.',
         sources: [source.ssb],
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?Geografisubset=301%2C30101+-+30119&headers=r&virtualsubset=Andel_value&v=2&stubs=Geografi&measure=common&V5subset=1&virtualslice=Andel_value&V5slice=1&rsubset=2012+-+2018&layers=V5&layers=virtual&measuretype=4&study=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfStudy%2Flevekaarvgs&cube=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCube%2Flevekaarvgs_C1&mode=cube&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Barnehage,%20skole%20og%20utdanning__Utdanningsniv%C3%A5%20og%20ikke%20fullf%C3%B8rt%20VGS/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -199,6 +198,7 @@ export default {
       about: {
         info: '<p>Statistikken viser andel av befolkningen i aldersgruppe 15–29 år som er klassifisert som NEETs. NEET er en forkortelse av «Not in Education, Employment or Training» og er en fellesbetegnelse for personer som verken er i arbeid, utdanning eller opplæring.</p><p>Se følgende artikkel hos SSB for mer informasjon om denne klassifiseringen – <a href="https://www.ssb.no/arbeid-og-lonn/artikler-og-publikasjoner/ungdom-som-verken-er-i-arbeid-eller-utdanning">https://www.ssb.no/arbeid-og-lonn/artikler-og-publikasjoner/ungdom-som-verken-er-i-arbeid-eller-utdanning</a>.</p>',
         sources: [source.ssb],
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Sysselsetting/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -248,8 +248,7 @@ export default {
       about: {
         info: 'Statistikken omfatter bosatte i Oslo, 30–59 år, som ikke er registrert sysselsatt per 4. kvartal. En sysselsatt er her definert som enten lønnstaker eller selvstendig næringsdrivende. En lønnstaker er en som har utført inntektsgivende arbeid av minst én times varighet i løpet av referanseuken.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog10&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Sysselsetting/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -299,8 +298,7 @@ export default {
       about: {
         info: 'Statistikken omfatter personer som har innvandret til Norge fra Asia, Afrika, Latin-Amerika og Øst-Europa for mindre enn fem år siden.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?headers=Ankomst&Geografisubset=30100%2C30101+-+30118&stubs=Geografi&measure=common&virtualslice=Antall_value&layers=r&layers=virtual&study=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfStudy%2FIn03-Innvandrerbefolkningen-etter-bydel-delbydel-ankomstaar-2017&mode=cube&Ankomstsubset=100%2C1+-+99&v=2&virtualsubset=Antall_value&rsubset=2019&measuretype=4&rslice=2019&cube=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCube%2FIn03-Innvandrerbefolkningen-etter-bydel-delbydel-ankomstaar-2017_C1&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -351,7 +349,7 @@ export default {
         info: 'Statistikken viser trangbodde husholdninger per 1.1. Husholdninger regnes som trangbodd dersom: (1) Antall rom i boligen er mindre enn antall personer eller én person bor på ett rom, og (2) antall kvadratmeter (p-areal) er under 25 kvm per person. I tilfeller hvor det mangler opplysninger om antall rom eller p-areal, vil husholdninger regnes som trangbodde dersom en av de to betingelsene er oppfylt.',
         sources: [source.ssb],
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?Geografisubset=30100%2C30101+-+30117&headers=virtual&stubs=Geografi&measure=common&layers=r&study=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfStudy%2FNPS-trangboddhet&mode=cube&v=2&virtualsubset=Trangboddhethusholdninger_value+-+Trangboddhetpersoner_value&rsubset=2015&measuretype=4&rslice=2015&cube=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCube%2FNPS-trangboddhet_C1&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Husholdninger%20og%20boforhold/',
       },
 
       map: {

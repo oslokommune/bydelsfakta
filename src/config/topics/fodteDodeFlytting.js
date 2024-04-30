@@ -13,7 +13,7 @@ export default {
       about: {
         sources: [source.ssb],
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2Fstatistikkbanken.oslo.kommune.no%3A80%2Fobj%2FfCatalog%2FCatalog2&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__F%C3%B8dte,%20d%C3%B8de%20og%20forventet%20levealder/',
       },
       tabs: [
         {
@@ -30,6 +30,8 @@ export default {
       size: 'large',
       heading: 'Befolkningsvekst',
       sources: [source.ssb],
+      externalInfo:
+        'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__F%C3%B8dte,%20d%C3%B8de%20og%20forventet%20levealder/',
       tabs: [
         {
           label: 'Historisk',
@@ -47,6 +49,8 @@ export default {
       size: 'large',
       heading: 'Fødselsoverskudd',
       sources: [source.ssb],
+      externalInfo:
+        'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__F%C3%B8dte,%20d%C3%B8de%20og%20forventet%20levealder/',
       tabs: [
         {
           label: 'Historisk',
@@ -64,6 +68,8 @@ export default {
       size: 'large',
       heading: 'Inn- og utflytting',
       sources: [source.ssb],
+      externalInfo:
+        'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__F%C3%B8dte,%20d%C3%B8de%20og%20forventet%20levealder/',
       tabs: [
         {
           label: 'Historisk',
