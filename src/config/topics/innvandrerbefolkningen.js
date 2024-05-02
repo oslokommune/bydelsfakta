@@ -14,8 +14,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet. Botid er beregnet etter ankomstår til Norge.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       tabs: [
         {
@@ -59,8 +58,7 @@ export default {
       about: {
         info: '«Landbakgrunn» for innvandrere er vanligvis fødeland. For norskfødte er dette foreldrenes eventuelle utenlandske fødeland. I tilfeller der foreldrene har ulikt fødeland, er det mors fødeland som gjelder.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       tabs: [
         {
@@ -108,8 +106,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -155,8 +152,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -202,8 +198,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -251,8 +246,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet. Botid er beregnet etter ankomstår til Norge.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -298,8 +292,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet. Botid er beregnet etter ankomstår til Norge.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -345,8 +338,7 @@ export default {
       about: {
         info: 'Statistikken viser folkemengden per 1.1. hvert år. «Innvandrere» defineres som personer som er født i utlandet av to utenlandsfødte foreldre og fire utenlandsfødte besteforeldre. «Norskfødte med innvandrerforeldre» er personer som er født i Norge av to foreldre som er født i utlandet, og som i tillegg har fire besteforeldre som er født i utlandet. Botid er beregnet etter ankomstår til Norge.',
         sources: [source.ssb],
-        externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog51&submode=catalog&mode=documentation&top=yes',
+        externalInfo: 'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Befolkning__Innvandrere/',
       },
       map: {
         labels: ['Færre', 'Flere'],

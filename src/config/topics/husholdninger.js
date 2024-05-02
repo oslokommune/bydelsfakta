@@ -13,7 +13,7 @@ export default {
       about: {
         info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Husholdninger%20og%20boforhold',
         sources: [source.ssb],
       },
       map: {
@@ -63,7 +63,7 @@ export default {
         info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1. Husholdninger med barn regnes her som husholdninger med barn under 18 år.',
         sources: [source.ssb],
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Husholdninger%20og%20boforhold',
       },
       tabs: [
         {
@@ -108,7 +108,7 @@ export default {
       about: {
         info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Husholdninger%20og%20boforhold',
         sources: [source.ssb],
       },
       map: {
@@ -155,7 +155,7 @@ export default {
         info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
         sources: [source.ssb],
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Husholdninger%20og%20boforhold',
       },
       map: {
         labels: ['Færre', 'Flere'],
@@ -201,7 +201,7 @@ export default {
         info: 'Statistikken omfatter privathusholdninger i Oslo per 1.1.',
         sources: [source.ssb],
         externalInfo:
-          'http://statistikkbanken.oslo.kommune.no/webview/index.jsp?catalog=http%3A%2F%2F192.168.101.44%3A80%2Fobj%2FfCatalog%2FCatalog19&submode=catalog&mode=documentation&top=yes',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Husholdninger%20og%20boforhold',
       },
       map: {
         labels: ['Færre', 'Flere'],
