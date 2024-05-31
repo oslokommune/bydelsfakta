@@ -1,56 +1,55 @@
-import Vue from 'vue';
-import VueAnalytics from 'vue-analytics';
-import VueMeta from 'vue-meta';
-import VueResize from 'vue-resize';
+import { createApp } from 'vue';
+import { VueHeadMixin, createHead } from '@unhead/vue';
+import VueGtag from 'vue-gtag';
+import Vue3Resize from 'vue3-resize';
 import * as Sentry from '@sentry/vue';
-import VueSkipTo from 'vue-skip-to';
+import VueSkipTo from '@vue-a11y/skip-to';
+import '@vue-a11y/skip-to/dist/style.css';
 import './util/polyfills';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import i18n from './i18n';
 import clickOutside from './directives/clickOutside';
 
-import 'vue-resize/dist/vue-resize.css';
+import 'vue3-resize/dist/vue3-resize.css';
 import 'leaflet/dist/leaflet.css';
 
 import './styles/main.scss';
-import setupI18n from './i18n';
 
 const production = import.meta.env.PROD;
 const envs = production ? JSON.parse(window.__GLOBAL_ENVS__) : {};
-const i18n = setupI18n();
 
-Vue.use(VueMeta);
-Vue.use(VueResize);
-Vue.use(VueSkipTo);
+const app = createApp(App);
 
-Vue.config.productionTip = false;
-Vue.config.devtools = !production;
-Vue.config.performance = !production;
+const head = createHead();
+app.mixin(VueHeadMixin);
+app.use(head);
+
+app.use(store);
+app.use(router);
+app.use(i18n);
+
+app.use(Vue3Resize);
+app.use(VueSkipTo);
 
 // Directive to detect clicks outside of an element
-Vue.directive('click-outside', clickOutside);
+app.directive('click-outside', clickOutside);
 
-Vue.use(VueAnalytics, {
-  id: production ? envs.VITE_GOOGLE_ANALYTICS_ID : import.meta.env.VITE_GOOGLE_ANALYTICS_ID,
-  router,
-  debug: {
-    sendHitTask: production,
+app.use(VueGtag, {
+  config: {
+    id: production ? envs.VITE_GOOGLE_ANALYTICS_ID : import.meta.env.VITE_GOOGLE_ANALYTICS_ID,
   },
+  router,
 });
 
 if (production) {
   Sentry.init({
-    Vue,
+    app,
     dsn: production ? envs.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
     logErrors: true,
     autoSessionTracking: false,
   });
 }
 
-new Vue({
-  router,
-  store,
-  i18n,
-  render: (h) => h(App),
-}).$mount('#app');
+app.mount('#app');
