@@ -20,7 +20,7 @@ module.exports = {
     'vue-jest': {
       compilerOptions: {
         comments: false,
-      }
-    }
-  }
+      },
+    },
+  },
 };
