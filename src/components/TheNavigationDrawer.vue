@@ -185,31 +185,37 @@ export default {
       }
     },
 
-    selectedPredefinedOption() {
-      if (this.selectedPredefinedOption.length !== 0) {
-        this.selected = this.selectedPredefinedOption;
-        if (this.$route.params.topic === undefined) {
-          this.$router.push({ name: 'District', params: { district: this.selected.join('-') } });
-        } else {
-          this.$router.push({
-            name: 'Topic',
-            params: { district: this.selected.join('-'), topic: this.$route.params.topic },
-          });
+    selectedPredefinedOption: {
+      handler() {
+        if (this.selectedPredefinedOption.length !== 0) {
+          this.selected = this.selectedPredefinedOption;
+          if (this.$route.params.topic === undefined) {
+            this.$router.push({ name: 'District', params: { district: this.selected.join('-') } });
+          } else {
+            this.$router.push({
+              name: 'Topic',
+              params: { district: this.selected.join('-'), topic: this.$route.params.topic },
+            });
+          }
         }
-      }
+      },
+      deep: true,
     },
 
-    selected(newVal) {
-      if (newVal.length === 0) {
-        this.indeterminate = false;
-        this.selectedAll = false;
-      } else if (newVal.length === this.links.length) {
-        this.indeterminate = false;
-        this.selectedAll = true;
-      } else {
-        this.indeterminate = true;
-        this.selectedAll = false;
-      }
+    selected: {
+      handler(newVal) {
+        if (newVal.length === 0) {
+          this.indeterminate = false;
+          this.selectedAll = false;
+        } else if (newVal.length === this.links.length) {
+          this.indeterminate = false;
+          this.selectedAll = true;
+        } else {
+          this.indeterminate = true;
+          this.selectedAll = false;
+        }
+      },
+      deep: true,
     },
 
     showNavigation() {
