@@ -278,10 +278,9 @@ export default {
 
   watch: {
     mode(to, from) {
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Change view',
-        eventLabel: `${from} -> ${to}`,
+      this.$gtag.event('change_view', {
+        event_category: 'card',
+        event_label: `${from} -> ${to}`,
       });
     },
 
@@ -318,10 +317,9 @@ export default {
         body.style.height = '100vh';
         body.style.overflow = 'hidden';
 
-        this.$ga.event({
-          eventCategory: 'Card',
-          eventAction: 'Open fullscreen',
-          eventLabel: this.mode,
+        this.$gtag.event('open_fullscreen', {
+          event_category: 'card',
+          event_label: this.mode,
         });
       }
     },
@@ -335,10 +333,9 @@ export default {
     activeTab(index) {
       this.active = index;
 
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Change tab',
-        eventLabel: this.settings.tabs[index].label,
+      this.$gtag.event('change_tab', {
+        event_category: 'card',
+        event_label: this.settings.tabs[index].label,
       });
     },
 
@@ -348,10 +345,9 @@ export default {
       downloadSvg(svgData, filename);
       this.closeMenu();
 
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save SVG',
-        eventLabel: filename,
+      this.$gtag.event('save_svg', {
+        event_category: 'card',
+        event_label: filename,
       });
     },
 
@@ -361,10 +357,9 @@ export default {
 
       this.closeMenu();
 
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save PNG',
-        eventLabel: filename,
+      this.$gtag.event('save_png', {
+        event_category: 'card',
+        event_label: filename,
       });
     },
 
@@ -372,11 +367,9 @@ export default {
       tableToCsv(this.$refs.graph.$refs.tableContainer);
       this.closeMenu();
 
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save CSV',
-        eventLabel: `${this.$route.params.district}_${id}`,
-        eventValue: null,
+      this.$gtag.event('save_csv', {
+        event_category: 'card',
+        event_label: `${this.$route.params.district}_${id}`,
       });
     },
 
@@ -384,11 +377,9 @@ export default {
       tableToExcel(this.$refs.graph.$refs.tableContainer.querySelector('table'));
       this.closeMenu();
 
-      this.$ga.event({
-        eventCategory: 'Card',
-        eventAction: 'Save Excel',
-        eventLabel: `${this.$route.params.district}_${id}`,
-        eventValue: null,
+      this.$gtag.event('save_xls', {
+        event_category: 'card',
+        event_label: `${this.$route.params.district}_${id}`,
       });
     },
 
