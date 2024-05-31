@@ -10,19 +10,13 @@
       <div ref="colorstrip" class="legend__colorstrip" :style="gradient"></div>
     </div>
     <div class="container">
-      <l-map ref="leafletMap" :zoom="zoom" :center="center" :options="mapOptions">
-        <l-tile-layer ref="tileLayer" :url="url" :attribution="attribution" />
-        <l-feature-group ref="featureGroup" @layeradd="fitMap">
-          <l-geo-json ref="geojsonLayer" :geojson="district" :options-style="style" @layeradd="fitBounds"></l-geo-json>
-        </l-feature-group>
-      </l-map>
+      <div id="map" ref="map"></div>
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable no-continue */
-import { LMap, LTileLayer, LFeatureGroup, LGeoJson } from 'vue2-leaflet';
 import * as Sentry from '@sentry/vue';
 import axios from 'axios';
 import L from 'leaflet';
@@ -33,12 +27,6 @@ import { color, interpolator } from '@/util/graph-templates/colors';
 
 export default {
   name: 'VLeaflet',
-  components: {
-    LMap,
-    LFeatureGroup,
-    LTileLayer,
-    LGeoJson,
-  },
 
   props: {
     settings: {
@@ -70,6 +58,9 @@ export default {
   data: () => ({
     data: [],
     year: false,
+    map: null,
+    featureGroup: null,
+    geojsonLayer: null,
     zoom: 10,
     url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
     attribution:
@@ -110,14 +101,22 @@ export default {
   },
 
   watch: {
-    fullscreen() {
-      this.$refs.leafletMap.mapObject.invalidateSize();
+    district(geojson) {
+      this.geojsonLayer.clearLayers();
+      this.geojsonLayer.addData(geojson);
       this.fitMap();
+    },
+
+    fullscreen() {
+      this.$nextTick(function () {
+        this.map.invalidateSize();
+        this.fitMap();
+      });
     },
   },
 
   mounted() {
-    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+    this.initializeMap();
 
     if (this.dataUrl) {
       this.getData(this.dataUrl);
@@ -134,22 +133,33 @@ export default {
     if (this.districtLabels) {
       this.addPopup();
     }
-
     if (this.dataUrl) {
       this.getData(this.dataUrl);
     }
   },
 
   methods: {
-    // Called for each added layer, calls fitMap that calls flyToBounds after all the layers are added to the map
-    fitBounds(e) {
-      if (Object.values(e.target._layers).length === this.district.features.length) {
-        this.fitMap();
-      }
+    initializeMap() {
+      L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+      this.map = L.map(this.$refs.map, this.mapOptions);
+      this.map.setView(this.center, this.zoom);
+
+      L.tileLayer(this.url, {
+        attribution: this.attribution,
+      }).addTo(this.map);
+
+      this.featureGroup = L.featureGroup();
+      this.featureGroup.on('layeradd', this.fitMap);
+      this.featureGroup.addTo(this.map);
+
+      this.geojsonLayer = L.geoJSON(this.district, {
+        style: this.style,
+      });
+      this.geojsonLayer.addTo(this.featureGroup);
     },
 
     fitMap() {
-      this.$refs.leafletMap.mapObject.flyToBounds(this.$refs.geojsonLayer.getBounds(), {
+      this.map.flyToBounds(this.geojsonLayer.getBounds(), {
         duration: 0.6,
       });
     },
@@ -189,12 +199,8 @@ export default {
       // Store data to create
       const allLayerData = [];
 
-      // Find all the layers on the map
-      const layers = this.$refs.geojsonLayer.mapObject._layers;
-
       // Map layers in the map with the data returned
-      Object.keys(layers).forEach((key) => {
-        const layer = layers[key];
+      this.geojsonLayer.eachLayer((layer) => {
         const layerId = layer.feature.properties.id;
         const dataObj = data.find((geo) => geo.id === layerId.substring(6, 10) || geo.id === layerId);
         if (!dataObj || !dataObj.values || !dataObj.values.length) return;
@@ -251,15 +257,12 @@ export default {
           });
         });
     },
-    addPopup() {
-      const layers = this.$refs.geojsonLayer.mapObject._layers;
 
-      Object.keys(layers).forEach((key) => {
-        const layer = layers[key];
+    addPopup() {
+      this.geojsonLayer.eachLayer((layer) => {
         const popupContent = `
           <h4>${layer.feature.properties.name}</h4>
         `;
-
         // Bind colors and popup content to the layer
         layer.bindPopup(popupContent);
       });
@@ -272,7 +275,9 @@ export default {
 @use '@/styles/colors' as *;
 @use '@/styles/variables' as *;
 
-.container {
+.container,
+#map {
+  z-index: 0;
   width: 100%;
   height: 100%;
 }
@@ -281,8 +286,9 @@ export default {
   height: calc(100% - 90px);
 }
 
-.vue2leaflet-map {
-  z-index: 0;
+// https://github.com/Leaflet/Leaflet/issues/3575
+.leaflet-tile-container img {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 .legend {
