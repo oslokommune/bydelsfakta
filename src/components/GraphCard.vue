@@ -1,6 +1,6 @@
 <template>
   <section class="card-container" :class="{ large: settings.size === 'large' }">
-    <div class="card" :class="{ fullscreen }" :tabindex="fullscreen ? 0 : false" @keydown.escape="toggleFullscreen">
+    <div class="card" :class="{ fullscreen }" :tabindex="fullscreen ? 0 : null" @keydown.escape="toggleFullscreen">
       <button
         v-if="fullscreen"
         role="menuitem"
@@ -20,10 +20,9 @@
         <nav class="card__nav">
           <div ref="tabsRef" class="tabs" role="tablist">
             <resize-observer @notify="showTabsOrSelect"></resize-observer>
-            <template v-for="(tab, index) in settings.tabs">
+            <template v-for="(tab, index) in settings.tabs" :key="index">
               <button
                 ref="tabRef"
-                :key="index"
                 :disabled="mode === 'map' || mode === 'about'"
                 role="tab"
                 :aria-label="tab.label"

@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
     <div class="main-container__cards">
-      <template v-for="(card, cardIndex) in topics[topic].cards">
-        <graph-card :key="`card-${cardIndex}`" :settings="card" />
+      <template v-for="(card, cardIndex) in topics[topic].cards" :key="`card-${cardIndex}`">
+        <graph-card :settings="card" />
       </template>
       <div v-if="topics[`${topic}`].related" class="related">
         <h2 class="section-heading">{{ $t('topic.seeMore') }}</h2>

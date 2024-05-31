@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { PktIcon } from '@oslokommune/punkt-vue2';
+import { PktIcon } from '@oslokommune/punkt-vue';
 
 /*
   available options (optional):
