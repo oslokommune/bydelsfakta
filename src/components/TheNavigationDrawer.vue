@@ -20,7 +20,7 @@
             :class="{ 'state-toggle__link--active': !compareDistricts }"
             :to="onClickTab(false)"
           >
-            <span v-html="$t('navigationDrawer.selectOne.tab')" />
+            <span>{{ $t('navigationDrawer.selectOne.tab') }}</span>
           </router-link>
         </li>
         <li class="state-toggle__element">
@@ -29,7 +29,7 @@
             :class="{ 'state-toggle__link--active': compareDistricts }"
             :to="onClickTab(true)"
           >
-            {{ $t('navigationDrawer.linkCompare') }}
+            <span>{{ $t('navigationDrawer.linkCompare') }}</span>
           </router-link>
         </li>
       </ul>
@@ -712,6 +712,10 @@ input[type='checkbox'].custom {
       background: $color-blue;
       opacity: 0;
       content: '';
+    }
+
+    span {
+      max-width: 80%;
     }
 
     &:hover:not(&--active) {
