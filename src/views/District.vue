@@ -50,12 +50,12 @@ export default {
     districts,
   }),
 
-  metaInfo() {
+  head() {
     let title = '';
     if (this.$route.fullPath === '/') {
-      title = 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold';
+      title = this.$t('title');
     } else if (this.compareDistricts || this.district === 'alle') {
-      title = 'Sammenlign bydeler | Bydelsfakta';
+      title = `${this.$t('navigationDrawer.linkCompare')} | Bydelsfakta`;
     } else title = `${getDistrictName(this.district)} | Bydelsfakta`;
 
     return {

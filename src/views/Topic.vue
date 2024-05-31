@@ -49,17 +49,17 @@ export default {
     },
   },
 
-  metaInfo() {
-    return {
-      title: `${getHumanReadableTopic(this.topic)} | ${
-        this.compareDistricts ? 'Sammenlign bydeler' : getDistrictName(this.district)
-      } | Bydelsfakta`,
-    };
-  },
-
   data: () => ({
     topics,
   }),
+
+  head() {
+    return {
+      title: `${getHumanReadableTopic(this.topic)} | ${
+        this.compareDistricts ? this.$t('navigationDrawer.linkCompare') : getDistrictName(this.district)
+      } | Bydelsfakta`,
+    };
+  },
 
   computed: {
     ...mapState(['productionMode', 'compareDistricts']),
