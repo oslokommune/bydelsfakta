@@ -13,13 +13,11 @@ exports[`VCategory renders correctly 1`] = `
       srcset="test.webp"
       type="image/webp"
     />
-     
     <source
       alt="test"
       srcset="test.png"
       type="image/png"
     />
-     
     <img
       alt="test"
       aria-hidden="true"
@@ -27,14 +25,12 @@ exports[`VCategory renders correctly 1`] = `
       src="test.png"
     />
   </picture>
-   
   <span
     class="oslo__category"
     style="background-color: white;"
   >
     test
   </span>
-   
   <span
     class="oslo__topic"
   >

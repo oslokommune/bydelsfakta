@@ -7,8 +7,7 @@ exports[`GraphCard change an active tab 1`] = `
   <div
     class="card"
   >
-    <!---->
-     
+    <!--v-if-->
     <header
       class="card__header"
     >
@@ -21,7 +20,6 @@ exports[`GraphCard change an active tab 1`] = `
           Befolkningen etter alder
         </h2>
       </div>
-       
       <nav
         class="card__nav"
       >
@@ -30,8 +28,7 @@ exports[`GraphCard change an active tab 1`] = `
           role="tablist"
         >
           <div
-            class="resize-observer"
-            data-v-8859cc6c=""
+            class="vue3-resize-observer"
             tabindex="-1"
           >
             <object
@@ -41,10 +38,10 @@ exports[`GraphCard change an active tab 1`] = `
               type="text/html"
             />
           </div>
-           
+          
           <button
             aria-label="Antall"
-            class="tabs__tab active"
+            class="active tabs__tab"
             data-id="tabButton-Befolkningen etter alder-0"
             role="tab"
           >
@@ -58,10 +55,9 @@ exports[`GraphCard change an active tab 1`] = `
           >
             Andel
           </button>
-           
-          <!---->
+          
+          <!--v-if-->
         </div>
-         
         <div
           class="card__toggle-menu"
         >
@@ -76,7 +72,6 @@ exports[`GraphCard change an active tab 1`] = `
               options="[object Object]"
             />
           </button>
-           
           <button
             aria-label="Tabell"
             class="card__toggle-button"
@@ -88,10 +83,8 @@ exports[`GraphCard change an active tab 1`] = `
               options="[object Object]"
             />
           </button>
-           
-          <!---->
+          <!--v-if-->
         </div>
-         
         <div
           class="context-menu"
         >
@@ -106,19 +99,16 @@ exports[`GraphCard change an active tab 1`] = `
               iconref="menu"
               options="[object Object]"
             />
-             
             <span
               class="button-label"
             >
               Valg
             </span>
           </button>
-           
-          <!---->
+          <!--v-if-->
         </div>
       </nav>
     </header>
-     
     <div
       class="graph__shadow"
       role="tabpanel"
@@ -131,43 +121,34 @@ exports[`GraphCard change an active tab 1`] = `
           class="spinner"
         >
           <spinner-stub />
-           
           <span
             class="spinner__text"
           >
             Henter data
           </span>
         </div>
-         
-        <!---->
-         
+        <!--v-if-->
         <svg
           aria-hidden="true"
           class="graph__svg loading"
         />
       </div>
-       
       <div
-        class="graph__tablecontainer visually-hidden"
+        class="visually-hidden graph__tablecontainer"
       >
         <h3
           class="table-heading"
         />
-         
         <table
           class=""
         >
           <thead />
-           
           <tbody />
         </table>
-         
-        <!---->
+        <!--v-if-->
       </div>
-       
       <div
-        class="resize-observer"
-        data-v-8859cc6c=""
+        class="vue3-resize-observer"
         tabindex="-1"
       >
         <object
@@ -177,7 +158,6 @@ exports[`GraphCard change an active tab 1`] = `
           type="text/html"
         />
       </div>
-       
       <div
         class="help"
       >
@@ -190,14 +170,11 @@ exports[`GraphCard change an active tab 1`] = `
             options="[object Object]"
           />
         </button>
-         
-        <!---->
+        <!--v-if-->
       </div>
     </div>
-     
-    <!---->
-     
-    <!---->
+    <!--v-if-->
+    <!--v-if-->
   </div>
 </section>
 `;
@@ -209,8 +186,7 @@ exports[`GraphCard renders correctly 1`] = `
   <div
     class="card"
   >
-    <!---->
-     
+    <!--v-if-->
     <header
       class="card__header"
     >
@@ -223,7 +199,6 @@ exports[`GraphCard renders correctly 1`] = `
           Befolkningen etter alder
         </h2>
       </div>
-       
       <nav
         class="card__nav"
       >
@@ -232,8 +207,7 @@ exports[`GraphCard renders correctly 1`] = `
           role="tablist"
         >
           <div
-            class="resize-observer"
-            data-v-8859cc6c=""
+            class="vue3-resize-observer"
             tabindex="-1"
           >
             <object
@@ -243,10 +217,10 @@ exports[`GraphCard renders correctly 1`] = `
               type="text/html"
             />
           </div>
-           
+          
           <button
             aria-label="Antall"
-            class="tabs__tab active"
+            class="active tabs__tab"
             data-id="tabButton-Befolkningen etter alder-0"
             role="tab"
           >
@@ -260,10 +234,9 @@ exports[`GraphCard renders correctly 1`] = `
           >
             Andel
           </button>
-           
-          <!---->
+          
+          <!--v-if-->
         </div>
-         
         <div
           class="card__toggle-menu"
         >
@@ -278,7 +251,6 @@ exports[`GraphCard renders correctly 1`] = `
               options="[object Object]"
             />
           </button>
-           
           <button
             aria-label="Tabell"
             class="card__toggle-button"
@@ -290,10 +262,8 @@ exports[`GraphCard renders correctly 1`] = `
               options="[object Object]"
             />
           </button>
-           
-          <!---->
+          <!--v-if-->
         </div>
-         
         <div
           class="context-menu"
         >
@@ -308,19 +278,16 @@ exports[`GraphCard renders correctly 1`] = `
               iconref="menu"
               options="[object Object]"
             />
-             
             <span
               class="button-label"
             >
               Valg
             </span>
           </button>
-           
-          <!---->
+          <!--v-if-->
         </div>
       </nav>
     </header>
-     
     <div
       class="graph__shadow"
       role="tabpanel"
@@ -333,43 +300,34 @@ exports[`GraphCard renders correctly 1`] = `
           class="spinner"
         >
           <spinner-stub />
-           
           <span
             class="spinner__text"
           >
             Henter data
           </span>
         </div>
-         
-        <!---->
-         
+        <!--v-if-->
         <svg
           aria-hidden="true"
           class="graph__svg loading"
         />
       </div>
-       
       <div
-        class="graph__tablecontainer visually-hidden"
+        class="visually-hidden graph__tablecontainer"
       >
         <h3
           class="table-heading"
         />
-         
         <table
           class=""
         >
           <thead />
-           
           <tbody />
         </table>
-         
-        <!---->
+        <!--v-if-->
       </div>
-       
       <div
-        class="resize-observer"
-        data-v-8859cc6c=""
+        class="vue3-resize-observer"
         tabindex="-1"
       >
         <object
@@ -379,7 +337,6 @@ exports[`GraphCard renders correctly 1`] = `
           type="text/html"
         />
       </div>
-       
       <div
         class="help"
       >
@@ -392,14 +349,11 @@ exports[`GraphCard renders correctly 1`] = `
             options="[object Object]"
           />
         </button>
-         
-        <!---->
+        <!--v-if-->
       </div>
     </div>
-     
-    <!---->
-     
-    <!---->
+    <!--v-if-->
+    <!--v-if-->
   </div>
 </section>
 `;

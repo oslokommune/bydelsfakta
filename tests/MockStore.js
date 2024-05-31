@@ -85,12 +85,12 @@ export const actions = {
     }
 
     if (payload.pushRoute) {
-      if (router.currentRoute.params.topic === undefined) {
+      if (router.currentRoute.value.params.topic === undefined) {
         router.push({ name: 'District', params: { district: districts.join('-') } });
       } else {
         router.push({
           name: 'Topic',
-          params: { district: districts.join('-'), topic: router.currentRoute.params.topic },
+          params: { district: districts.join('-'), topic: router.currentRoute.value.params.topic },
         });
       }
     }

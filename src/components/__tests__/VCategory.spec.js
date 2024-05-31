@@ -1,19 +1,18 @@
-import { mount, RouterLinkStub, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { mount, RouterLinkStub } from '@vue/test-utils';
 import store from '@/store';
-import setupI18n from '@/i18n';
+import i18n from '@/i18n';
 import VCategory from '../VCategory.vue';
-
-const i18n = setupI18n();
 
 describe('VCategory', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(Vuex);
     wrapper = mount(VCategory, {
-      propsData: {
+      global: {
+        plugins: [i18n, store],
+        stubs: { RouterLink: RouterLinkStub },
+      },
+      props: {
         category: 'test',
         topic: 'test',
         bgImage: 'test',
@@ -23,15 +22,11 @@ describe('VCategory', () => {
         link: '/test',
         district: 'sagene',
       },
-      localVue,
-      stubs: { RouterLink: RouterLinkStub },
-      i18n,
-      store,
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('renders VCategory-component and finds main-container__item-class', () => {

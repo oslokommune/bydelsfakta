@@ -1,12 +1,9 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import vuex from 'vuex';
-import VueSkipTo from 'vue-skip-to';
+import { mount } from '@vue/test-utils';
+import VueSkipTo from '@vue-a11y/skip-to';
 import router from '@/router';
 import store from '@/store';
-import setupI18n from '@/i18n';
+import i18n from '@/i18n';
 import TheNavigationDrawer from '../TheNavigationDrawer.vue';
-
-const i18n = setupI18n();
 
 global.scroll = jest.fn();
 window.scroll = jest.fn();
@@ -15,23 +12,18 @@ describe('TheNavigationDrawer', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(router);
-    localVue.use(vuex);
-    localVue.use(VueSkipTo);
     wrapper = mount(TheNavigationDrawer, {
-      localVue,
-      router,
-      store,
-      i18n,
-      stubs: {
-        'oslo-logo': true,
+      global: {
+        plugins: [router, store, i18n, VueSkipTo],
+        stubs: {
+          'oslo-logo': true,
+        },
       },
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('renders TheNavigationDrawer-component and finds navbar-id', () => {

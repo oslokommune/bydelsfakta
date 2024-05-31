@@ -7,14 +7,14 @@ exports[`Topic renders component correctly 1`] = `
   <div
     class="main-container__cards"
   >
+    
     <section
       class="card-container large"
     >
       <div
         class="card"
       >
-        <!---->
-         
+        <!--v-if-->
         <header
           class="card__header"
         >
@@ -27,7 +27,6 @@ exports[`Topic renders component correctly 1`] = `
               Befolkningen etter alder
             </h2>
           </div>
-           
           <nav
             class="card__nav"
           >
@@ -36,8 +35,7 @@ exports[`Topic renders component correctly 1`] = `
               role="tablist"
             >
               <div
-                class="resize-observer"
-                data-v-8859cc6c=""
+                class="vue3-resize-observer"
                 tabindex="-1"
               >
                 <object
@@ -47,10 +45,10 @@ exports[`Topic renders component correctly 1`] = `
                   type="text/html"
                 />
               </div>
-               
+              
               <button
                 aria-label="Antall"
-                class="tabs__tab active tabs__tab--hidden"
+                class="active tabs__tab--hidden tabs__tab"
                 data-id="tabButton-Befolkningen etter alder-0"
                 role="tab"
               >
@@ -58,17 +56,18 @@ exports[`Topic renders component correctly 1`] = `
               </button>
               <button
                 aria-label="Andel"
-                class="tabs__tab tabs__tab--hidden"
+                class="tabs__tab--hidden tabs__tab"
                 data-id="tabButton-Befolkningen etter alder-1"
                 role="tab"
               >
                 Andel
               </button>
-               
+              
               <select
                 aria-hidden=""
                 class="select tabs__select"
               >
+                
                 <option
                   value="0"
                 >
@@ -79,9 +78,9 @@ exports[`Topic renders component correctly 1`] = `
                 >
                   Andel
                 </option>
+                
               </select>
             </div>
-             
             <div
               class="card__toggle-menu"
             >
@@ -92,11 +91,10 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="graph"
+                  iconref="graph"
                   options="[object Object]"
                 />
               </button>
-               
               <button
                 aria-label="Tabell"
                 class="card__toggle-button"
@@ -104,14 +102,12 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="table"
+                  iconref="table"
                   options="[object Object]"
                 />
               </button>
-               
-              <!---->
+              <!--v-if-->
             </div>
-             
             <div
               class="context-menu"
             >
@@ -123,22 +119,19 @@ exports[`Topic renders component correctly 1`] = `
                 title="Åpne meny"
               >
                 <ok-icon-stub
-                  icon-ref="menu"
+                  iconref="menu"
                   options="[object Object]"
                 />
-                 
                 <span
                   class="button-label"
                 >
                   Valg
                 </span>
               </button>
-               
-              <!---->
+              <!--v-if-->
             </div>
           </nav>
         </header>
-         
         <div
           class="graph__shadow"
           role="tabpanel"
@@ -151,43 +144,34 @@ exports[`Topic renders component correctly 1`] = `
               class="spinner"
             >
               <spinner-stub />
-               
               <span
                 class="spinner__text"
               >
                 Henter data
               </span>
             </div>
-             
-            <!---->
-             
+            <!--v-if-->
             <svg
               aria-hidden="true"
               class="graph__svg loading"
             />
           </div>
-           
           <div
-            class="graph__tablecontainer visually-hidden"
+            class="visually-hidden graph__tablecontainer"
           >
             <h3
               class="table-heading"
             />
-             
             <table
               class=""
             >
               <thead />
-               
               <tbody />
             </table>
-             
-            <!---->
+            <!--v-if-->
           </div>
-           
           <div
-            class="resize-observer"
-            data-v-8859cc6c=""
+            class="vue3-resize-observer"
             tabindex="-1"
           >
             <object
@@ -197,7 +181,6 @@ exports[`Topic renders component correctly 1`] = `
               type="text/html"
             />
           </div>
-           
           <div
             class="help"
           >
@@ -206,18 +189,15 @@ exports[`Topic renders component correctly 1`] = `
               class="help__button"
             >
               <ok-icon-stub
-                icon-ref="question"
+                iconref="question"
                 options="[object Object]"
               />
             </button>
-             
-            <!---->
+            <!--v-if-->
           </div>
         </div>
-         
-        <!---->
-         
-        <!---->
+        <!--v-if-->
+        <!--v-if-->
       </div>
     </section>
     <section
@@ -226,8 +206,7 @@ exports[`Topic renders component correctly 1`] = `
       <div
         class="card"
       >
-        <!---->
-         
+        <!--v-if-->
         <header
           class="card__header"
         >
@@ -240,7 +219,6 @@ exports[`Topic renders component correctly 1`] = `
               Befolkningspyramide
             </h2>
           </div>
-           
           <nav
             class="card__nav"
           >
@@ -249,8 +227,7 @@ exports[`Topic renders component correctly 1`] = `
               role="tablist"
             >
               <div
-                class="resize-observer"
-                data-v-8859cc6c=""
+                class="vue3-resize-observer"
                 tabindex="-1"
               >
                 <object
@@ -260,28 +237,29 @@ exports[`Topic renders component correctly 1`] = `
                   type="text/html"
                 />
               </div>
-               
+              
               <button
                 aria-label="Status"
-                class="tabs__tab active tabs__tab--hidden"
+                class="active tabs__tab--hidden tabs__tab"
                 data-id="tabButton-Befolkningspyramide-0"
                 role="tab"
               >
                 Status
               </button>
-               
+              
               <select
                 aria-hidden=""
                 class="select tabs__select"
               >
+                
                 <option
                   value="0"
                 >
                   Status
                 </option>
+                
               </select>
             </div>
-             
             <div
               class="card__toggle-menu"
             >
@@ -292,11 +270,10 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="graph"
+                  iconref="graph"
                   options="[object Object]"
                 />
               </button>
-               
               <button
                 aria-label="Tabell"
                 class="card__toggle-button"
@@ -304,14 +281,12 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="table"
+                  iconref="table"
                   options="[object Object]"
                 />
               </button>
-               
-              <!---->
+              <!--v-if-->
             </div>
-             
             <div
               class="context-menu"
             >
@@ -323,22 +298,19 @@ exports[`Topic renders component correctly 1`] = `
                 title="Åpne meny"
               >
                 <ok-icon-stub
-                  icon-ref="menu"
+                  iconref="menu"
                   options="[object Object]"
                 />
-                 
                 <span
                   class="button-label"
                 >
                   Valg
                 </span>
               </button>
-               
-              <!---->
+              <!--v-if-->
             </div>
           </nav>
         </header>
-         
         <div
           class="graph__shadow"
           role="tabpanel"
@@ -351,43 +323,34 @@ exports[`Topic renders component correctly 1`] = `
               class="spinner"
             >
               <spinner-stub />
-               
               <span
                 class="spinner__text"
               >
                 Henter data
               </span>
             </div>
-             
-            <!---->
-             
+            <!--v-if-->
             <svg
               aria-hidden="true"
               class="graph__svg loading"
             />
           </div>
-           
           <div
-            class="graph__tablecontainer visually-hidden"
+            class="visually-hidden graph__tablecontainer"
           >
             <h3
               class="table-heading"
             />
-             
             <table
               class=""
             >
               <thead />
-               
               <tbody />
             </table>
-             
-            <!---->
+            <!--v-if-->
           </div>
-           
           <div
-            class="resize-observer"
-            data-v-8859cc6c=""
+            class="vue3-resize-observer"
             tabindex="-1"
           >
             <object
@@ -397,13 +360,10 @@ exports[`Topic renders component correctly 1`] = `
               type="text/html"
             />
           </div>
-           
-          <!---->
+          <!--v-if-->
         </div>
-         
-        <!---->
-         
-        <!---->
+        <!--v-if-->
+        <!--v-if-->
       </div>
     </section>
     <section
@@ -412,8 +372,7 @@ exports[`Topic renders component correctly 1`] = `
       <div
         class="card"
       >
-        <!---->
-         
+        <!--v-if-->
         <header
           class="card__header"
         >
@@ -426,7 +385,6 @@ exports[`Topic renders component correctly 1`] = `
               Gjennomsnitt- og medianalder
             </h2>
           </div>
-           
           <nav
             class="card__nav"
           >
@@ -435,8 +393,7 @@ exports[`Topic renders component correctly 1`] = `
               role="tablist"
             >
               <div
-                class="resize-observer"
-                data-v-8859cc6c=""
+                class="vue3-resize-observer"
                 tabindex="-1"
               >
                 <object
@@ -446,28 +403,29 @@ exports[`Topic renders component correctly 1`] = `
                   type="text/html"
                 />
               </div>
-               
+              
               <button
                 aria-label="Status"
-                class="tabs__tab active tabs__tab--hidden"
+                class="active tabs__tab--hidden tabs__tab"
                 data-id="tabButton-Gjennomsnitt- og medianalder-0"
                 role="tab"
               >
                 Status
               </button>
-               
+              
               <select
                 aria-hidden=""
                 class="select tabs__select"
               >
+                
                 <option
                   value="0"
                 >
                   Status
                 </option>
+                
               </select>
             </div>
-             
             <div
               class="card__toggle-menu"
             >
@@ -478,11 +436,10 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="graph"
+                  iconref="graph"
                   options="[object Object]"
                 />
               </button>
-               
               <button
                 aria-label="Tabell"
                 class="card__toggle-button"
@@ -490,11 +447,10 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="table"
+                  iconref="table"
                   options="[object Object]"
                 />
               </button>
-               
               <button
                 aria-label="Kart"
                 class="card__toggle-button"
@@ -502,12 +458,11 @@ exports[`Topic renders component correctly 1`] = `
               >
                 <ok-icon-stub
                   class="context-menu__dropdown-item-icon"
-                  icon-ref="location-pin"
+                  iconref="location-pin"
                   options="[object Object]"
                 />
               </button>
             </div>
-             
             <div
               class="context-menu"
             >
@@ -519,22 +474,19 @@ exports[`Topic renders component correctly 1`] = `
                 title="Åpne meny"
               >
                 <ok-icon-stub
-                  icon-ref="menu"
+                  iconref="menu"
                   options="[object Object]"
                 />
-                 
                 <span
                   class="button-label"
                 >
                   Valg
                 </span>
               </button>
-               
-              <!---->
+              <!--v-if-->
             </div>
           </nav>
         </header>
-         
         <div
           class="graph__shadow"
           role="tabpanel"
@@ -547,43 +499,34 @@ exports[`Topic renders component correctly 1`] = `
               class="spinner"
             >
               <spinner-stub />
-               
               <span
                 class="spinner__text"
               >
                 Henter data
               </span>
             </div>
-             
-            <!---->
-             
+            <!--v-if-->
             <svg
               aria-hidden="true"
               class="graph__svg loading"
             />
           </div>
-           
           <div
-            class="graph__tablecontainer visually-hidden"
+            class="visually-hidden graph__tablecontainer"
           >
             <h3
               class="table-heading"
             />
-             
             <table
               class=""
             >
               <thead />
-               
               <tbody />
             </table>
-             
-            <!---->
+            <!--v-if-->
           </div>
-           
           <div
-            class="resize-observer"
-            data-v-8859cc6c=""
+            class="vue3-resize-observer"
             tabindex="-1"
           >
             <object
@@ -593,16 +536,13 @@ exports[`Topic renders component correctly 1`] = `
               type="text/html"
             />
           </div>
-           
-          <!---->
+          <!--v-if-->
         </div>
-         
-        <!---->
-         
-        <!---->
+        <!--v-if-->
+        <!--v-if-->
       </div>
     </section>
-     
+    
     <div
       class="related"
     >
@@ -611,13 +551,14 @@ exports[`Topic renders component correctly 1`] = `
       >
         Se også
       </h2>
-       
       <div
         class="topics-grid"
       >
+        
         <v-category-stub
           bgimage="/img/folkemengde"
           category="Befolkning"
+          disabled="false"
           district="gamleoslo"
           id="befolkningsutvikling"
           topic="Befolkningsutvikling"
@@ -626,6 +567,7 @@ exports[`Topic renders component correctly 1`] = `
         <v-category-stub
           bgimage="/img/husholdninger"
           category="Befolkning"
+          disabled="false"
           district="gamleoslo"
           id="husholdninger"
           topic="Husholdninger"
@@ -634,11 +576,13 @@ exports[`Topic renders component correctly 1`] = `
         <v-category-stub
           bgimage="/img/levekaar"
           category="Levekår"
+          disabled="false"
           district="gamleoslo"
           id="levekaar"
           topic="Levekårs&shy;indikatorer"
           txtcolor="rgb(244, 206, 138)"
         />
+        
       </div>
     </div>
   </div>

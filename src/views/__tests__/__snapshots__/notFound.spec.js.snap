@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Topic renders component correctly 1`] = `
+exports[`NotFound renders component correctly 1`] = `
 <div
   class="notFound-container"
 >
@@ -20,7 +20,6 @@ exports[`Topic renders component correctly 1`] = `
         </label>
       </div>
     </div>
-     
     <div
       class="notFound__information"
     >
@@ -29,23 +28,17 @@ exports[`Topic renders component correctly 1`] = `
       >
         Siden ble ikke funnet.
       </h2>
-       
       <p>
         Du har ved en feiltakelse blitt sendt til en side som ikke eksiterer.
       </p>
-       
       <a
-        aria-current="page"
-        class="notFound__information--frontpage-link router-link-exact-active router-link-active"
-        href="#/"
+        class="notFound__information--frontpage-link"
+        href="/"
       >
-        
         Gå til forsiden
-      
       </a>
     </div>
   </div>
-   
   <div
     class="notFound-container--column"
   >
@@ -54,11 +47,8 @@ exports[`Topic renders component correctly 1`] = `
     >
       Pssst...
     </h2>
-     
     <p>
-      
-      Vi vil gjerne høre fra deg om hva som gikk galt slik at vi kan forbedre tjenesten. Du kan sende en e-post til 
-      
+      Vi vil gjerne høre fra deg om hva som gikk galt slik at vi kan forbedre tjenesten. Du kan sende en e-post til  
       <a
         href="mailto:bydelsfakta@byr.oslo.kommune.no?Subject=404%20Bydelsfakta"
         target="_top"
@@ -67,7 +57,6 @@ exports[`Topic renders component correctly 1`] = `
       </a>
     </p>
   </div>
-   
   <div
     class="notFound-container--column"
   >
@@ -76,19 +65,17 @@ exports[`Topic renders component correctly 1`] = `
     >
       Eller sjekk ut en av disse sidene
     </h2>
-     
     <p>
-      
       (de fungerer, vi lover)
-    
     </p>
-     
     <div
       class="topics-grid"
     >
+      
       <v-category-stub
         bgimage="/img/husholdninger"
         category="Befolkning"
+        disabled="false"
         district="alle"
         id="husholdninger"
         topic="Husholdninger"
@@ -97,11 +84,13 @@ exports[`Topic renders component correctly 1`] = `
       <v-category-stub
         bgimage="/img/boligpriser"
         category="Boforhold"
+        disabled="false"
         district="alle"
         id="boligpriser"
         topic="Boligpriser"
         txtcolor="rgb(199, 247, 201)"
       />
+      
     </div>
   </div>
 </div>
