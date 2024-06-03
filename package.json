@@ -19,7 +19,7 @@
     "test:unit:watch": "NODE_ENV=test jest --watchAll"
   },
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "browserslist": {
     "production": [
