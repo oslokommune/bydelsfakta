@@ -16,8 +16,6 @@
 </template>
 
 <script>
-/* eslint-disable no-continue */
-import * as Sentry from '@sentry/vue';
 import axios from 'axios';
 import L from 'leaflet';
 import { sum, select, scaleLinear } from 'd3';
@@ -172,7 +170,7 @@ export default {
         this.meta = data[0].meta;
         this.data = data[0].data;
       } catch (err) {
-        Sentry.captureException(err);
+        console.error(err);
         return;
       }
 
