@@ -240,7 +240,6 @@ export default {
     padding: 0.5rem;
     color: $color-purple;
     font-weight: 500;
-    font-size: $font-huge;
 
     @media screen and (min-width: $break-md) {
       padding: 1rem;
