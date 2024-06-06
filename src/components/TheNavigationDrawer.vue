@@ -20,7 +20,7 @@
             :class="{ 'state-toggle__link--active': !compareDistricts }"
             :to="onClickTab(false)"
           >
-            <span v-html="$t('navigationDrawer.selectOne.tab')" />
+            <span>{{ $t('navigationDrawer.selectOne.tab') }}</span>
           </router-link>
         </li>
         <li class="state-toggle__element">
@@ -29,7 +29,7 @@
             :class="{ 'state-toggle__link--active': compareDistricts }"
             :to="onClickTab(true)"
           >
-            {{ $t('navigationDrawer.linkCompare') }}
+            <span>{{ $t('navigationDrawer.linkCompare') }}</span>
           </router-link>
         </li>
       </ul>
@@ -185,31 +185,37 @@ export default {
       }
     },
 
-    selectedPredefinedOption() {
-      if (this.selectedPredefinedOption.length !== 0) {
-        this.selected = this.selectedPredefinedOption;
-        if (this.$route.params.topic === undefined) {
-          this.$router.push({ name: 'District', params: { district: this.selected.join('-') } });
-        } else {
-          this.$router.push({
-            name: 'Topic',
-            params: { district: this.selected.join('-'), topic: this.$route.params.topic },
-          });
+    selectedPredefinedOption: {
+      handler() {
+        if (this.selectedPredefinedOption.length !== 0) {
+          this.selected = this.selectedPredefinedOption;
+          if (this.$route.params.topic === undefined) {
+            this.$router.push({ name: 'District', params: { district: this.selected.join('-') } });
+          } else {
+            this.$router.push({
+              name: 'Topic',
+              params: { district: this.selected.join('-'), topic: this.$route.params.topic },
+            });
+          }
         }
-      }
+      },
+      deep: true,
     },
 
-    selected(newVal) {
-      if (newVal.length === 0) {
-        this.indeterminate = false;
-        this.selectedAll = false;
-      } else if (newVal.length === this.links.length) {
-        this.indeterminate = false;
-        this.selectedAll = true;
-      } else {
-        this.indeterminate = true;
-        this.selectedAll = false;
-      }
+    selected: {
+      handler(newVal) {
+        if (newVal.length === 0) {
+          this.indeterminate = false;
+          this.selectedAll = false;
+        } else if (newVal.length === this.links.length) {
+          this.indeterminate = false;
+          this.selectedAll = true;
+        } else {
+          this.indeterminate = true;
+          this.selectedAll = false;
+        }
+      },
+      deep: true,
     },
 
     showNavigation() {
@@ -712,6 +718,10 @@ input[type='checkbox'].custom {
       background: $color-blue;
       opacity: 0;
       content: '';
+    }
+
+    span {
+      max-width: 80%;
     }
 
     &:hover:not(&--active) {

@@ -4,6 +4,7 @@ exports[`GraphInstance renders correctly 1`] = `
 <div
   class="graph__shadow"
   role="tabpanel"
+  showtable="false"
 >
   <div
     aria-hidden="true"
@@ -13,43 +14,34 @@ exports[`GraphInstance renders correctly 1`] = `
       class="spinner"
     >
       <spinner-stub />
-       
       <span
         class="spinner__text"
       >
         Henter data
       </span>
     </div>
-     
-    <!---->
-     
+    <!--v-if-->
     <svg
       aria-hidden="true"
       class="graph__svg loading"
     />
   </div>
-   
   <div
-    class="graph__tablecontainer visually-hidden"
+    class="visually-hidden graph__tablecontainer"
   >
     <h3
       class="table-heading"
     />
-     
     <table
       class=""
     >
       <thead />
-       
       <tbody />
     </table>
-     
-    <!---->
+    <!--v-if-->
   </div>
-   
   <div
-    class="resize-observer"
-    data-v-8859cc6c=""
+    class="vue3-resize-observer"
     tabindex="-1"
   >
     <object
@@ -59,7 +51,6 @@ exports[`GraphInstance renders correctly 1`] = `
       type="text/html"
     />
   </div>
-   
-  <!---->
+  <!--v-if-->
 </div>
 `;

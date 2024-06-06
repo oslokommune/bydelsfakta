@@ -1,12 +1,9 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import Vuex from 'vuex';
+import { mount } from '@vue/test-utils';
 import router from '@/router';
 import clickOutside from '@/directives/clickOutside';
 import store from '@/store';
-import setupI18n from '@/i18n';
+import i18n from '@/i18n';
 import TheNavigationTopbar from '../TheNavigationTopbar.vue';
-
-const i18n = setupI18n();
 
 global.scroll = jest.fn();
 window.scroll = jest.fn();
@@ -15,23 +12,21 @@ describe('TheNavigationTopbar', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(router);
-    localVue.use(Vuex);
-    localVue.directive('click-outside', clickOutside);
     wrapper = mount(TheNavigationTopbar, {
-      localVue,
-      router,
-      store,
-      i18n,
-      stubs: {
-        'ok-icon': true,
+      global: {
+        plugins: [router, store, i18n],
+        directives: {
+          'click-outside': clickOutside,
+        },
+        stubs: {
+          'ok-icon': true,
+        },
       },
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('renders navigationDrawer-component and finds oslo__navigation-topbar-class', () => {
@@ -60,6 +55,7 @@ describe('TheNavigationTopbar', () => {
   });
 
   test('return router object when clicking on a subpage', async () => {
+    await router.push('/bydel/sagene/boligpriser');
     expect(wrapper.vm.onClickTopic('boligpriser')).toEqual({
       name: 'Topic',
       params: { district: 'sagene', topic: 'boligpriser' },

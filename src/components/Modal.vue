@@ -70,6 +70,8 @@ export default {
     OkIcon,
   },
 
+  emits: ['close'],
+
   methods: {
     close() {
       this.$emit('close');

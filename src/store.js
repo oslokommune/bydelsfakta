@@ -1,11 +1,8 @@
-import Vue from 'vue';
-import Vuex, { Store } from 'vuex';
+import { createStore } from 'vuex';
 import router from './router';
 
 import districts from './config/geoData/districts';
 import allDistricts from './config/allDistricts';
-
-Vue.use(Vuex);
 
 export const state = {
   compareDistricts: false,
@@ -89,12 +86,12 @@ export const actions = {
     }
 
     if (payload.pushRoute) {
-      if (router.currentRoute.params.topic === undefined) {
+      if (router.currentRoute.value.params.topic === undefined) {
         router.push({ name: 'District', params: { district: payloadDistricts.join('-') } });
       } else {
         router.push({
           name: 'Topic',
-          params: { district: payloadDistricts.join('-'), topic: router.currentRoute.params.topic },
+          params: { district: payloadDistricts.join('-'), topic: router.currentRoute.value.params.topic },
         });
       }
     }
@@ -128,6 +125,6 @@ export const storeStructure = {
   actions,
 };
 
-const store = new Store(storeStructure);
+const store = createStore(storeStructure);
 
 export default store;

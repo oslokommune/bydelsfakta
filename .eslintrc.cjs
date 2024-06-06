@@ -14,7 +14,7 @@ module.exports = {
     Use the recommended rule preset for `eslint-plugin-vue`.
     https://eslint.vuejs.org/rules/
     */
-    'plugin:vue/recommended',
+    'plugin:vue/vue3-recommended',
     /*
     Use as the last extension in order to override conflicting ESLint rules.
     https://github.com/prettier/eslint-plugin-prettier

@@ -51,7 +51,7 @@ const util = {
 
   goto(geo) {
     let district = allDistricts.find((d) => d.value === geo.geography);
-    const { topic } = router.currentRoute.params;
+    const { topic } = router.currentRoute.value.params;
 
     if (geo.geography === 'Oslo i alt') {
       district = {

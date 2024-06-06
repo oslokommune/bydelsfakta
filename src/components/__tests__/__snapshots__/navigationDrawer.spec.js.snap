@@ -4,15 +4,21 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
 <aside
   class="navbar"
 >
-  <a
+  <div
     class="vue-skip-to"
-    href="#select"
+    text="Hopp til hovedinnhold"
   >
-    Hopp til hovedinnhold
-  </a>
-   
+    <a
+      class="vue-skip-to__link"
+      href="#select"
+    >
+      
+      Skip to main content
+      
+    </a>
+  </div>
   <a
-    class="logo-link router-link-active"
+    class="logo-link"
     href="/"
   >
     <oslo-logo-stub
@@ -20,13 +26,11 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       class="oslo__logo"
     />
   </a>
-   
   <button
     class="selectedTopic"
   >
     Bydel Sagene
   </button>
-   
   <nav
     class="navigation"
     role="navigation"
@@ -42,13 +46,10 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
           href="/bydel/gamleoslo"
         >
           <span>
-            Utforsk
-            <br />
-            en bydel
+            Utforsk en bydel
           </span>
         </a>
       </li>
-       
       <li
         class="state-toggle__element"
       >
@@ -56,33 +57,28 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
           class="state-toggle__link"
           href="/bydel/alle"
         >
-          
-          Sammenlign bydeler
-        
+          <span>
+            Sammenlign bydeler
+          </span>
         </a>
       </li>
     </ul>
-     
     <header
       class="navigation-header"
     >
       <span>
-        
         Velg en bydel
-      
       </span>
     </header>
-     
     <ul
       class="navigation-list"
     >
+      
       <li
-        class="navigation-link navigation-link--active"
+        class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/gamleoslo"
@@ -94,10 +90,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/grunerlokka"
@@ -109,13 +103,11 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           aria-current="page"
-          class="navigation-link__label router-link-exact-active router-link-active"
+          class="router-link-active router-link-exact-active navigation-link__label"
           href="/bydel/sagene"
           id="a-sagene"
         >
@@ -125,10 +117,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/sthanshaugen"
@@ -140,10 +130,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/frogner"
@@ -155,10 +143,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/ullern"
@@ -170,10 +156,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/vestreaker"
@@ -185,10 +169,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/nordreaker"
@@ -200,10 +182,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/bjerke"
@@ -215,10 +195,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/grorud"
@@ -230,10 +208,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/stovner"
@@ -245,10 +221,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/alna"
@@ -260,10 +234,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/ostensjo"
@@ -275,10 +247,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/nordstrand"
@@ -290,10 +260,8 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/sondrenordstrand"
@@ -302,6 +270,7 @@ exports[`TheNavigationDrawer render TheNavigationDrawer with route /bydel/sagene
           Bydel Søndre Nordstrand
         </a>
       </li>
+      
     </ul>
   </nav>
 </aside>
@@ -311,16 +280,21 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
 <aside
   class="navbar"
 >
-  <a
+  <div
     class="vue-skip-to"
-    href="#select"
+    text="Hopp til hovedinnhold"
   >
-    Hopp til hovedinnhold
-  </a>
-   
+    <a
+      class="vue-skip-to__link"
+      href="#select"
+    >
+      
+      Skip to main content
+      
+    </a>
+  </div>
   <a
-    aria-current="page"
-    class="logo-link router-link-exact-active router-link-active"
+    class="logo-link"
     href="/"
   >
     <oslo-logo-stub
@@ -328,13 +302,11 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       class="oslo__logo"
     />
   </a>
-   
   <button
     class="selectedTopic"
   >
     - Velg byområde -
   </button>
-   
   <nav
     class="navigation"
     role="navigation"
@@ -350,13 +322,10 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
           href="/bydel/gamleoslo"
         >
           <span>
-            Utforsk
-            <br />
-            en bydel
+            Utforsk en bydel
           </span>
         </a>
       </li>
-       
       <li
         class="state-toggle__element"
       >
@@ -364,33 +333,28 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
           class="state-toggle__link"
           href="/bydel/alle"
         >
-          
-          Sammenlign bydeler
-        
+          <span>
+            Sammenlign bydeler
+          </span>
         </a>
       </li>
     </ul>
-     
     <header
       class="navigation-header"
     >
       <span>
-        
         Velg en bydel
-      
       </span>
     </header>
-     
     <ul
       class="navigation-list"
     >
+      
       <li
-        class="navigation-link navigation-link--active"
+        class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/gamleoslo"
@@ -402,10 +366,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/grunerlokka"
@@ -417,10 +379,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/sagene"
@@ -432,10 +392,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/sthanshaugen"
@@ -447,10 +405,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/frogner"
@@ -462,10 +418,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/ullern"
@@ -477,10 +431,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/vestreaker"
@@ -492,10 +444,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/nordreaker"
@@ -507,10 +457,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/bjerke"
@@ -522,10 +470,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/grorud"
@@ -537,10 +483,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/stovner"
@@ -552,10 +496,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/alna"
@@ -567,10 +509,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/ostensjo"
@@ -582,10 +522,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/nordstrand"
@@ -597,10 +535,8 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
       <li
         class="navigation-link"
       >
-        <!---->
-         
-        <!---->
-         
+        <!--v-if-->
+        <!--v-if-->
         <a
           class="navigation-link__label"
           href="/bydel/sondrenordstrand"
@@ -609,6 +545,7 @@ exports[`TheNavigationDrawer renders TheNavigationDrawer correctly 1`] = `
           Bydel Søndre Nordstrand
         </a>
       </li>
+      
     </ul>
   </nav>
 </aside>

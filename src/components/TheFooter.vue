@@ -1,9 +1,48 @@
 <template>
   <footer class="footer">
     <div class="columns">
-      <div class="column" v-html="$t('footer.columnOne')"></div>
-      <div class="column" v-html="$t('footer.columnTwo')"></div>
-      <div class="column" v-html="$t('footer.columnThree')"></div>
+      <div class="column">
+        <h2>{{ $t('footer.columnOne.title') }}</h2>
+        <p>{{ $tm('footer.columnOne.p1') }}</p>
+        <p>{{ $tm('footer.columnOne.p2') }}</p>
+        <i18n-t keypath="footer.columnOne.p3" tag="p">
+          <template #more>
+            <a href="https://statistikkbanken.oslo.kommune.no/">Statistikkbanken</a>
+          </template>
+        </i18n-t>
+      </div>
+      <div class="column">
+        <h2>{{ $t('footer.columnTwo.title') }}</h2>
+        <i18n-t keypath="footer.columnTwo.p1" tag="p">
+          <template #publisher>
+            <a href="https://www.oslo.kommune.no/politikk-og-administrasjon/politikk/byradet/byrad-for-finans/">
+              Byrådsavdeling for finans
+            </a>
+          </template>
+          <template #developer>
+            <a href="https://labs.oslo.kommune.no/">Oslo Origo</a>
+          </template>
+        </i18n-t>
+        <i18n-t keypath="footer.columnTwo.p2" tag="p">
+          <template #contact>
+            <a href="mailto:oslostatistikken@byr.oslo.kommune.no?subject=Bydelsfakta"
+              >oslostatistikken@byr.oslo.kommune.no</a
+            >
+          </template>
+        </i18n-t>
+      </div>
+      <div class="column">
+        <h2>{{ $t('footer.columnThree.title') }}</h2>
+        <ul>
+          <li><a href="https://statistikkbanken.oslo.kommune.no/">Statistikkbanken</a></li>
+          <li>
+            <a href="https://www.oslo.kommune.no/politikk-og-administrasjon/statistikk/statistiske-publikasjoner/">
+              Oslo kommunes statistiske publikasjoner
+            </a>
+          </li>
+          <li><a href="https://www.ssb.no/">Statistisk sentralbyrå</a></li>
+        </ul>
+      </div>
     </div>
   </footer>
 </template>

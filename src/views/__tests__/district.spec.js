@@ -1,14 +1,10 @@
-import { createLocalVue, mount } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
-import VueMeta from 'vue-meta';
-
-import setupI18n from '@/i18n';
+import { mount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createRouter, createWebHistory } from 'vue-router';
+import i18n from '@/i18n';
 import { routes } from '@/router';
 import mockStore from '@/../tests/MockStore';
 import District from '../District.vue';
-
-const i18n = setupI18n();
 
 describe('Bydel', () => {
   let wrapper = null;
@@ -16,28 +12,27 @@ describe('Bydel', () => {
   let store = null;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(VueRouter);
-    localVue.use(Vuex);
-    localVue.use(VueMeta);
-    router = new VueRouter({ routes });
-    store = new Vuex.Store(mockStore);
+    store = createStore(mockStore);
+    router = createRouter({
+      history: createWebHistory(),
+      routes,
+    });
+
     wrapper = mount(District, {
-      propsData: {
-        district: 'gamleoslo',
+      global: {
+        plugins: [router, store, i18n],
+        stubs: {
+          VLeaflet: true,
+        },
       },
-      localVue,
-      router,
-      store,
-      i18n,
-      stubs: {
-        VLeaflet: true,
+      props: {
+        district: 'gamleoslo',
       },
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('renders bydel-component and finds main-container class', () => {

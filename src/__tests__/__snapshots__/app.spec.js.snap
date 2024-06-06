@@ -7,25 +7,19 @@ exports[`App shallowmounts app 1`] = `
   tabindex="-1"
 >
   <pkt-icons-sprite-stub />
-   
   <the-navigation-drawer-stub />
-   
   <div
     class="app__content"
   >
-    <!---->
-     
+    <!--v-if-->
     <the-navigation-topbar-stub />
-     
     <main>
       <router-view-stub
         name="default"
       />
     </main>
-     
     <the-footer-stub />
   </div>
-   
-  <!---->
+  <!--v-if-->
 </div>
 `;

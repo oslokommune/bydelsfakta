@@ -1,37 +1,33 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import vueResize from 'vue-resize';
+import { mount } from '@vue/test-utils';
+import Vue3Resize from 'vue3-resize';
 import { topics } from '@/config/topics';
 import store from '@/store';
-import setupI18n from '@/i18n';
+import i18n from '@/i18n';
 import GraphInstance from '../GraphInstance.vue';
-
-const i18n = setupI18n();
 
 describe('GraphInstance', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(vueResize);
-    localVue.use(Vuex);
+    GraphInstance.methods.draw = jest.fn();
+
     wrapper = mount(GraphInstance, {
-      propsData: {
+      global: {
+        plugins: [store, i18n, Vue3Resize],
+        stubs: {
+          spinner: true,
+        },
+      },
+      props: {
         settings: topics.alder.cards[0],
         showTable: false,
         mode: 'graph',
-      },
-      localVue,
-      store,
-      i18n,
-      stubs: {
-        spinner: true,
       },
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('renders graphInstance-component and finds graph__container-class', () => {

@@ -22,7 +22,7 @@
         aria-hidden="true"
         :class="{ loading }"
         @click="showHelp = false"
-      />
+      ></svg>
     </div>
     <div
       ref="tableContainer"
@@ -99,6 +99,8 @@ export default {
       required: true,
     },
   },
+
+  emits: ['update-date'],
 
   data: () => ({
     svg: false,
@@ -372,7 +374,7 @@ export default {
     padding: 1em 1em 0 1em;
     overflow: auto;
 
-    ::v-deep &.hidden ~ .graph__dropdown {
+    :deep(&.hidden ~ .graph__dropdown) {
       display: none;
     }
   }

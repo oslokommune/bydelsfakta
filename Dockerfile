@@ -1,4 +1,4 @@
-FROM node:16-alpine@sha256:fcb03294d3c0695cf9762dec94c0366f08e7a8c6a3c1e062d38c80ac30684d8a
+FROM node:20-alpine@sha256:928b24aaadbd47c1a7722c563b471195ce54788bf8230ce807e1dd500aec0549
 
 WORKDIR /usr/src/app/
 COPY ./docs ./docs

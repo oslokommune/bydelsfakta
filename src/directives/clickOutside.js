@@ -1,13 +1,13 @@
 export default {
-  bind: (el, binding, vnode) => {
+  beforeMount: (el, binding) => {
     el.clickOutsideEvent = (event) => {
       if (!(el === event.target || el.contains(event.target))) {
-        vnode.context[binding.expression](event);
+        binding.value();
       }
     };
     document.body.addEventListener('click', el.clickOutsideEvent);
   },
-  unbind: (el) => {
+  unmounted: (el) => {
     document.body.removeEventListener('click', el.clickOutsideEvent);
   },
 };

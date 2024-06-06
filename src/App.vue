@@ -43,9 +43,9 @@ export default {
     warningMessage: '',
   }),
 
-  metaInfo() {
+  head() {
     return {
-      title: 'Bydelsfakta – Visualisering av statistikk om befolkning, levekår og boforhold',
+      title: this.$t('title'),
     };
   },
 

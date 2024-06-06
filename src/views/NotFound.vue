@@ -58,9 +58,9 @@ export default {
     topics,
   }),
 
-  metaInfo() {
+  head() {
     return {
-      title: 'Siden finnes ikke | Bydelsfakta',
+      title: `${this.$t('notFound.title')} | Bydelsfakta`,
     };
   },
 };

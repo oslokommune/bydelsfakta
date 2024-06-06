@@ -10,16 +10,17 @@ exports[`TheNavigationTopbar renders correctly 1`] = `
   >
     Bydel Sagene
   </h1>
-   
   <div
     class="navigation-topbar navigation-topbar--hidden"
   >
-    <!---->
-     
+    <!--v-if-->
     <transition-stub
+      appear="false"
+      css="true"
       name="fade"
+      persisted="false"
     >
-      <!---->
+      <!--v-if-->
     </transition-stub>
   </div>
 </header>

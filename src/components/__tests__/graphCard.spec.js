@@ -1,16 +1,15 @@
-import { mount, createLocalVue } from '@vue/test-utils';
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
-import vueResize from 'vue-resize';
-import VueAnalytics from 'vue-analytics';
+import { mount } from '@vue/test-utils';
+import { createStore } from 'vuex';
+import { createRouter, createWebHistory } from 'vue-router';
+import Vue3Resize from 'vue3-resize';
+import VueGtag from 'vue-gtag';
 import clickOutside from '@/directives/clickOutside';
 import { topics } from '@/config/topics';
 import mockStore from '@/../tests/MockStore';
-import setupI18n from '@/i18n';
+import i18n from '@/i18n';
 import { routes } from '@/router';
 import GraphCard from '../GraphCard.vue';
-
-const i18n = setupI18n();
+import GraphInstance from '../GraphInstance.vue';
 
 describe('GraphCard', () => {
   let wrapper = null;
@@ -18,32 +17,34 @@ describe('GraphCard', () => {
   let store = null;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(vueResize);
-    localVue.use(Vuex);
-    localVue.use(VueAnalytics, {
-      id: 'UA-1234-5',
+    router = createRouter({
+      history: createWebHistory(),
+      routes,
     });
-    localVue.directive('click-outside', clickOutside);
-    store = new Vuex.Store(mockStore);
-    router = new VueRouter({ routes });
+
+    store = createStore(mockStore);
+
+    GraphInstance.methods.draw = jest.fn();
+
     wrapper = mount(GraphCard, {
-      propsData: {
-        settings: topics.alder.cards[0],
+      global: {
+        plugins: [router, store, i18n, Vue3Resize, VueGtag],
+        directives: {
+          'click-outside': clickOutside,
+        },
+        stubs: {
+          'ok-icon': true,
+          spinner: true,
+        },
       },
-      localVue,
-      router,
-      i18n,
-      store,
-      stubs: {
-        'ok-icon': true,
-        spinner: true,
+      props: {
+        settings: topics.alder.cards[0],
       },
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('renders graphCard-component and finds card-container-class', () => {
