@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import { VueHeadMixin, createHead } from '@unhead/vue';
 import VueGtag from 'vue-gtag';
 import Vue3Resize from 'vue3-resize';
-import * as Sentry from '@sentry/vue';
 import VueSkipTo from '@vue-a11y/skip-to';
 import '@vue-a11y/skip-to/dist/style.css';
 import './util/polyfills';
@@ -42,14 +41,5 @@ app.use(VueGtag, {
   },
   router,
 });
-
-if (production) {
-  Sentry.init({
-    app,
-    dsn: production ? envs.VITE_SENTRY_DSN : import.meta.env.VITE_SENTRY_DSN,
-    logErrors: true,
-    autoSessionTracking: false,
-  });
-}
 
 app.mount('#app');

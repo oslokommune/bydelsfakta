@@ -58,7 +58,6 @@
 <script>
 import axios from 'axios';
 import { mean } from 'd3';
-import * as Sentry from '@sentry/vue';
 import { mapState } from 'vuex';
 import { dragscroll } from 'vue-dragscroll';
 import TemplateBars from '@/util/graph-templates/templateBars';
@@ -260,7 +259,6 @@ export default {
           this.error = true;
           this.errorMessage = this.$t('error.connectionLost');
           this.loading = false;
-          Sentry.captureException(err);
           return;
         }
       }
