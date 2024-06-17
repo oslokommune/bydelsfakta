@@ -320,7 +320,7 @@ function updateBars(selection) {
     .attr('stroke', (d) => (d.barData > 0 ? color.purple : color.red))
     .attr('fill', (d) => (d.barData > 0 ? color.purple : color.red));
 
-  bars.on('mouseenter', (d) => {
+  bars.on('mouseenter', (e, d) => {
     showTooltipOver(this.formatDecimal(d.barData));
     showTooltipMove();
   });

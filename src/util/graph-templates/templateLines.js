@@ -5,6 +5,7 @@
  * defined in the options object
  */
 
+import { voronoi } from 'd3-voronoi';
 import d3 from '@/assets/d3';
 import BaseTemplate from './baseTemplate';
 import util from './template-utils';
@@ -82,8 +83,11 @@ function Template(svg) {
       .map((geo) => geo.values.map((val) => ({ date: val.date, value: val[this.method], geography: geo.geography })))
       .reduce((acc, val) => acc.concat(val), []);
 
-    const voronoiData = d3
-      .voronoi()
+    // TODO: The `d3-voronoi` module is now obsolete, and d3@6 bundles the `d3-delaunay` module instead.
+    // It can still be loaded as an independent module, but should be replaced by `d3-delaunay`. The
+    // API, algorithms, and data structure have been changed.
+    // See https://observablehq.com/@d3/d3v6-migration-guide#delaunay.
+    const voronoiData = voronoi()
       .extent([
         [1, 1],
         [this.width, this.height],
@@ -112,9 +116,9 @@ function Template(svg) {
     // Highlight a geography when hovering the chart. If the
     // chart is rendered with a geography highlighted, then only
     // the selected geography will be affected by hover.
-    voronoiCells.on('mouseover', (d, i, j) => {
-      const { geography } = j[i].__data__.data;
-      const { date } = j[i].__data__.data;
+    voronoiCells.on('mouseover', (e, d) => {
+      const { geography } = e.currentTarget.__data__.data;
+      const { date } = e.currentTarget.__data__.data;
 
       if (!this.highlight || this.highlight === d.data.geography) {
         this.canvas.selectAll('g.dot').attr('opacity', 0);
@@ -144,7 +148,7 @@ function Template(svg) {
     // When clicking a voronoi cell, the graph should re-render
     // with the selected geography highlighted. If the geography
     // is alredady selected, then we re-render with no highlight.
-    voronoiCells.on('click', (d) => {
+    voronoiCells.on('click', (e, d) => {
       if (this.highlight === d.data.geography) {
         this.render(this.data, { method: this.method, highlight: false });
       } else {
@@ -332,7 +336,7 @@ function Template(svg) {
       .attr('tabindex', 0);
 
     // Click label to render with highlight
-    labels.on('click', (d) => {
+    labels.on('click', (e, d) => {
       const i = this.data.data.find((row) => row.geography === d.geography).geography;
 
       if (i === this.highlight) {
@@ -343,7 +347,7 @@ function Template(svg) {
     });
 
     // Hover label to highlight itself and its corresponding line
-    labels.on('mouseover', (d) => {
+    labels.on('mouseover', (e, d) => {
       if (!this.highlight) {
         this.handleMouseover(d.geography);
       }
