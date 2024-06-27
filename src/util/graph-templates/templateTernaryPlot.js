@@ -196,9 +196,10 @@ function Template(svg) {
 
     row
       .attr('transform', (d, i) => `translate(0, ${i * (this.rowHeight - 4)})`)
-      .on('click keyup', (d, i, j) => {
-        if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-        if (d3.event && d3.event.type === 'click') j[i].blur();
+      .on('click keyup', (e) => {
+        if (e && e.type === 'keyup' && e.key !== 'Enter') return;
+        if (e && e.type === 'click') e.currentTarget.blur();
+        const i = row.nodes().indexOf(e.currentTarget);
         if (this.selected === i) {
           this.render(this.data, { selected: null });
         } else {
@@ -210,7 +211,8 @@ function Template(svg) {
     row
       .select('rect.fill')
       .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : 0))
-      .on('mouseenter', function (d, i) {
+      .on('mouseenter', function ({ currentTarget }) {
+        const i = row.nodes().indexOf(currentTarget.parentNode);
         if (i === active) return;
         d3.select(this).attr('fill-opacity', 0.25);
         dots
@@ -220,7 +222,8 @@ function Template(svg) {
           .attr('fill-opacity', 1)
           .attr('stroke-opacity', 1);
       })
-      .on('mouseleave', function (d, i) {
+      .on('mouseleave', function ({ currentTarget }) {
+        const i = row.nodes().indexOf(currentTarget.parentNode);
         if (i === active) return;
         d3.select(this).attr('fill-opacity', 0);
         dots
@@ -521,7 +524,8 @@ function Template(svg) {
       .attr('stroke', (d, i) => (i === this.selected ? color.light_grey : color.purple));
 
     dot
-      .on('mouseover', (d, i) => {
+      .on('mouseover', ({ currentTarget }) => {
+        const i = dot.nodes().indexOf(currentTarget);
         this.render(this.data, { selected: i });
       })
       .on('mouseleave', () => {

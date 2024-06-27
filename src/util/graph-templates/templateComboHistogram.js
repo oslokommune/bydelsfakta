@@ -305,7 +305,7 @@ function handleMouseEvents(selection) {
   selection
     .on('mousemove', showTooltipMove)
     .on('mouseleave', hideTooltip)
-    .on('mouseenter', (d) => {
+    .on('mouseenter', (e, d) => {
       showTooltipOver(`${d.age} år: ${this.formatChange(d.diff)}`);
       showTooltipMove();
     });
@@ -339,9 +339,10 @@ function updateRadio(selection) {
 
   inner.attr('opacity', (d, i) => (i === this.series ? 1 : 0));
 
-  g.on('click keyup', (d, i) => {
+  g.on('click keyup', (e) => {
+    const i = g.nodes().indexOf(e.currentTarget);
     if (i === this.series) return;
-    if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+    if (e && e.type === 'keyup' && e.key !== 'Enter') return;
     this.render(this.data, { method: this.method, series: i });
   })
     .attr('tabindex', 0)

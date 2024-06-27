@@ -71,8 +71,8 @@ function Template(svg) {
 
     this.pyramid.append('rect').attr('class', 'pyramidbg');
 
-    this.pyramid.on('mousemove', () => {
-      moveTooltip(this);
+    this.pyramid.on('mousemove', (e) => {
+      moveTooltip(e, this);
     });
 
     this.pyramid.on('mouseleave', () => {
@@ -181,22 +181,25 @@ function Template(svg) {
       .attr('tabindex', 0)
       .attr('transform', (d, i) => `translate(0, ${i * this.rowHeight})`);
 
-    row.on('click keyup', (d, i, j) => {
-      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
-      if (d3.event && d3.event.type === 'click') j[i].blur();
+    row.on('click keyup', (e) => {
+      if (e && e.type === 'keyup' && e.key !== 'Enter') return;
+      if (e && e.type === 'click') e.currentTarget.blur();
+      const i = row.nodes().indexOf(e.currentTarget);
       this.render(this.data, { selected: i });
     });
 
     row
       .select('rect.fill')
       .attr('fill-opacity', (d, i) => (i === this.selected ? 1 : 0))
-      .on('mouseenter', function (d, i) {
+      .on('mouseenter', ({ currentTarget }) => {
+        const i = row.nodes().indexOf(currentTarget.parentNode);
         if (i === active) return;
-        d3.select(this).attr('fill-opacity', 0.15);
+        d3.select(currentTarget).attr('fill-opacity', 0.15);
       })
-      .on('mouseleave', function (d, i) {
+      .on('mouseleave', ({ currentTarget }) => {
+        const i = row.nodes().indexOf(currentTarget.parentNode);
         if (i === active) return;
-        d3.select(this).attr('fill-opacity', 0);
+        d3.select(currentTarget).attr('fill-opacity', 0);
       });
 
     row
@@ -349,11 +352,11 @@ function createTooltipElements(self) {
   return g;
 }
 
-function moveTooltip(self) {
+function moveTooltip(e, self) {
   const g = self.tooltips;
   const container = self.pyramid.select('.pyramidbg').node();
   const yearline = g.select('.yearline');
-  const pos = d3.mouse(container);
+  const pos = d3.pointer(e, container);
   const age = Math.round(self.y.invert(pos[1]));
   const labelYear = g.select('text');
   const labelMen = g.select('.men');
