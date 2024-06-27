@@ -46,7 +46,7 @@
     "canvg": "^3.0.7",
     "core-js": "^3.15.1",
     "d3": "^7.9.0",
-    "d3-svg-legend": "git+https://github.com/inaturalist/d3-legend.git#3c0bca337bb476e38ea19bf103cffbafba5bc1c4",
+    "d3-svg-legend": "git+https://github.com/oslokommune/d3-legend-v7-fix.git#3c0bca337bb476e38ea19bf103cffbafba5bc1c4",
     "d3-textwrap": "^3.0.0",
     "d3-voronoi": "^1.1.4",
     "leaflet": "^1.7.1",
