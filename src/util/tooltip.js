@@ -1,4 +1,4 @@
-import { select, event } from 'd3';
+import { select } from 'd3';
 
 const body = select('body');
 
@@ -20,8 +20,9 @@ export const showTooltipOver = (str, delay = 0) => {
   }, delay);
 };
 
-export const showTooltipMove = () => {
-  body.select('div.tooltip').style('transform', `translate(${event.pageX}px, ${event.pageY}px)`);
+export const showTooltipMove = (e) => {
+  if (!e) return;
+  body.select('div.tooltip').style('transform', `translate(${e.pageX}px, ${e.pageY}px)`);
 };
 
 export const hideTooltip = () => {

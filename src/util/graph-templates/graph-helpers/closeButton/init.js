@@ -8,8 +8,8 @@ export default function init() {
     .append('g')
     .attr('class', 'close')
     .style('display', 'none')
-    .on('click keyup', () => {
-      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+    .on('click keyup', (e) => {
+      if (e && e.type === 'keyup' && e.key !== 'Enter') return;
       this.render(this.data, { method: this.method });
     });
 
