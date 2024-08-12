@@ -1,5 +1,3 @@
-import d3 from '@/assets/d3';
-
 export default function (selection) {
   selection
     .select('rect.clickTrigger')
@@ -12,15 +10,17 @@ export default function (selection) {
     .attr('transform', `translate(0, -60)`)
     .attr('fill', 'black')
     .attr('opacity', 0)
-    .on('mouseover', (d, i) => {
+    .on('mouseover', ({ currentTarget }) => {
+      const i = selection.nodes().indexOf(currentTarget.parentNode);
       this.render(this.data, { highlight: i, selected: this.selected, method: this.method });
     })
     .on('mouseleave', () => {
       this.render(this.data, { highlight: -1, selected: this.selected, method: this.method });
     })
-    .on('click keyup', (d, i) => {
-      if (d3.event && d3.event.type === 'keyup' && d3.event.key !== 'Enter') return;
+    .on('click keyup', (e) => {
+      if (e && e.type === 'keyup' && e.key !== 'Enter') return;
       if (this.data.meta.series.length === 1) return;
+      const i = selection.nodes().indexOf(e.currentTarget.parentNode);
       const target = this.selected > -1 ? -1 : i;
 
       this.render(this.data, { selected: target, method: this.method });

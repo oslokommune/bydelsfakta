@@ -179,7 +179,8 @@ function drawColumns(selection) {
     .call(updateColHeading.bind(this))
     .call(updateColLine.bind(this))
     .call(updateColAxis.bind(this))
-    .on('click', (d, i) => {
+    .on('click', ({ currentTarget }) => {
+      const i = selection.selectAll('g.column').nodes().indexOf(currentTarget);
       this.render(this.data, { highlight: i });
     });
 }
@@ -241,7 +242,7 @@ function enterRows(enter) {
 
 function handleMouseEvents(selection) {
   selection
-    .on('mouseover', (d) => showTooltipOver(d3.format('.0%')(d[this.mode])))
+    .on('mouseover', (e, d) => showTooltipOver(d3.format('.0%')(d[this.mode])))
     .on('mousemove', showTooltipMove)
     .on('mouseleave', hideTooltip);
 }

@@ -31,15 +31,13 @@ function Template(svg) {
     .brushX()
     .handleSize(21)
     .on('brush', updateHandlePositions.bind(this))
-    .on('end', () => {
+    .on('end', ({ sourceEvent, selection }) => {
       if (
-        d3.event.sourceEvent instanceof MouseEvent ||
-        (window.TouchEvent && d3.event.sourceEvent instanceof TouchEvent && d3.event.sourceEvent.cancelable)
+        sourceEvent instanceof MouseEvent ||
+        (window.TouchEvent && sourceEvent instanceof TouchEvent && sourceEvent.cancelable)
       ) {
         this.dropDownParent.select('select').node().value = '';
-        this.extent = d3.event.selection
-          ? d3.event.selection.map((val) => Math.round(this.age.invert(val)))
-          : this.extent;
+        this.extent = selection ? selection.map((val) => Math.round(this.age.invert(val))) : this.extent;
         this.render(this.data, { method: this.method });
       }
     });
@@ -250,8 +248,8 @@ function createAgeSelector() {
 
   // Add eventlistener to the selector, and capture the value
   // and pass it on when re-rendering the chart
-  selectElement.on('change', (d, i, j) => {
-    this.extent = JSON.parse(j[i].value);
+  selectElement.on('change', ({ currentTarget }) => {
+    this.extent = JSON.parse(currentTarget.value);
     this.render(this.data, { method: this.method, useDropdown: true });
   });
 }
@@ -287,12 +285,12 @@ function handleMouseEvents(selection) {
     .on('mouseleave', hideTooltip);
 }
 
-function updateHandlePositions() {
+function updateHandlePositions(e) {
   // pixel range for selected age range
   let s;
 
-  if (d3.event && d3.event.selection) {
-    s = d3.event.selection;
+  if (e && e.selection) {
+    s = e.selection;
   } else {
     s = this.extent.map(this.age);
   }
@@ -430,7 +428,7 @@ function updateRowBar(selection) {
     });
 
   bar
-    .on('mouseover', (d) => {
+    .on('mouseover', (e, d) => {
       const sum = d3.sum(d.values.filter((val, i) => i >= this.extent[0] && i <= this.extent[1]).map((dj) => dj.value));
       showTooltipOver(sum);
     })
@@ -549,9 +547,9 @@ function drawLines() {
     .attr('stroke-opacity', (d) => (d.avgRow || d.totalRow ? 1 : 0.5))
     .style('stroke-dasharray', (d) => (d.totalRow && this.method === 'ratio' ? '4,3' : false));
 
-  lines.on('mouseover', (d, i, j) => {
+  lines.on('mouseover', (e, d) => {
     lines.attr('opacity', 0.1).attr('stroke', color.blue);
-    d3.select(j[i]).attr('opacity', 1).attr('stroke', color.purple);
+    d3.select(e.currentTarget).attr('opacity', 1).attr('stroke', color.purple);
 
     showTooltipOver(d.geography);
   });

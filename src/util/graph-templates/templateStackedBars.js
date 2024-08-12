@@ -233,7 +233,7 @@ function styleRowGeography(selection) {
 
 function handleMouseEvents(selection) {
   selection
-    .on('mouseenter', (d) => {
+    .on('mouseenter', (e, d) => {
       const value = this.method === 'ratio' ? `${Math.round((d[1] - d[0]) * 100)}%` : d[1] - d[0];
       showTooltipOver(value);
     })

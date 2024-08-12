@@ -49,7 +49,7 @@ const util = {
     return arr.join('');
   },
 
-  goto(geo) {
+  goto(e, geo) {
     let district = allDistricts.find((d) => d.value === geo.geography);
     const { topic } = router.currentRoute.value.params;
 

@@ -7,14 +7,14 @@ export default function (selection) {
     .attr('fill-opacity', 0);
 
   // Handle mouse interactions
-  path.on('mouseenter', (d, i, j) => {
-    const parent = d3.select(j[i].parentNode);
+  path.on('mouseenter', ({ currentTarget }) => {
+    const parent = d3.select(currentTarget.parentNode);
     parent.select('rect').attr('opacity', 1);
     parent.select('text').attr('opacity', 1);
     parent.select('circle').attr('opacity', 1);
   });
-  path.on('mouseleave', (d, i, j) => {
-    const parent = d3.select(j[i].parentNode);
+  path.on('mouseleave', ({ currentTarget }) => {
+    const parent = d3.select(currentTarget.parentNode);
     parent.select('rect').attr('opacity', 0);
     parent.select('text').attr('opacity', 0);
     parent.select('circle').attr('opacity', 0);
