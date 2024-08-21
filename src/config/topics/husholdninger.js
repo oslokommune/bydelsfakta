@@ -21,7 +21,6 @@ export default {
         url: `${API}/husholdningstyper-status`,
         heading: 'Énpersonshusholdninger',
         method: 'ratio',
-        series: 0,
       },
       tabs: [
         {
