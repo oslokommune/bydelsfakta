@@ -70,7 +70,6 @@ export default {
       },
       map: {
         labels: ['Lavere gjennomsnittsalder', 'Høyere gjennomsnittsalder'],
-        scale: [32, 43],
         reverse: true,
         method: 'avg',
         url: `${API}/alder-distribusjon-status`,

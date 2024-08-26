@@ -79,7 +79,6 @@ export default {
       touchZoom: true,
       gestureHandling: true,
     },
-    scale: null,
   }),
 
   computed: {
@@ -184,18 +183,19 @@ export default {
     },
 
     createChoropleth(data) {
-      if (this.meta.scale && this.meta.scale.length !== 0) {
-        if (this.settings.method === 'value') this.scale = this.meta.scale.value;
-        else this.scale = this.meta.scale.ratio;
-      } else {
-        this.scale = this.settings.scale;
-      }
-
-      // Color calulator defined by the scale set in the map settings
-      const colorStrength = scaleLinear().range([0, 1]).domain(this.scale);
+      const colorStrength = scaleLinear().domain([0, 2]).range([0, 1]);
+      const totalRow = data.find((geo) => geo.totalRow);
 
       // Store data to create
       const allLayerData = [];
+
+      let osloValue;
+      if (this.settings.method === 'avg') {
+        const osloValues = totalRow.values.map((d) => d.value);
+        osloValue = sum(osloValues.map((val, i) => val * i)) / sum(osloValues);
+      } else {
+        osloValue = totalRow.values[0][this.settings.method];
+      }
 
       // Map layers in the map with the data returned
       this.geojsonLayer.eachLayer((layer) => {
@@ -205,21 +205,22 @@ export default {
 
         const { geography } = dataObj;
 
-        // The data value depends on the method and/or series defined on the map settings object
+        // The data value depends on the method defined on the map settings object
         let dataValue;
         if (this.settings.method === 'avg') {
           const values = dataObj.values.map((d) => d.value);
           dataValue = sum(values.map((val, i) => val * i)) / sum(values);
-        } else if (this.settings.series) {
-          dataValue = dataObj.values[this.settings.series][this.settings.method];
         } else {
           dataValue = dataObj.values[0][this.settings.method];
         }
 
+        // Clamp the upper Oslo ratio to 200%
+        const osloRatio = Math.min(dataValue / osloValue, 2);
+
         // Calculate the fill color based on the value
         const fill = this.settings.reverse
-          ? interpolator(1 - colorStrength(dataValue))
-          : interpolator(colorStrength(dataValue));
+          ? interpolator(1 - colorStrength(osloRatio))
+          : interpolator(colorStrength(osloRatio));
 
         // Set number formatting for popup
 
@@ -237,7 +238,7 @@ export default {
         layer.setStyle({ fillColor: fill, fillOpacity: 0.6, weight: 1 }).bindPopup(popupContent);
 
         // Store the layer data for use in legend
-        allLayerData.push({ dataValue, geography, layer });
+        allLayerData.push({ osloRatio, geography, layer });
       });
 
       // For each layer add an interactive dot on the legend.
@@ -248,7 +249,7 @@ export default {
         .join('div')
         .attr('class', 'legend__dot')
         .transition()
-        .style('left', (d) => `${colorStrength(d.dataValue) * 100}%`)
+        .style('left', (d) => `${colorStrength(d.osloRatio) * 100}%`)
         .each((d, i, j) => {
           j[i].addEventListener('click', () => {
             d.layer.openPopup();
