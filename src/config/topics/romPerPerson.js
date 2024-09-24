@@ -9,7 +9,7 @@ export default {
   cards: [
     {
       size: 'large',
-      heading: 'Trangbodde husholdninger',
+      heading: 'Rom per person',
       about: {
         info: 'Statistikken viser husholdninger i Oslo per 1.1. fordelt på antall rom per person. Studenthusholdninger er utelatt fra statistikken. (Studenthusholdning: Husholdning der hovedinntektstaker er student i hht definisjonen under. Student: Person som verken er yrkesaktiv (ikke yrkesinntekt over 2G) eller trygdemottaker (ytelser fra folketrygden utgjør over halvparten av den samlede inntekten), og som mottar studielån)',
         sources: [source.ssb],
