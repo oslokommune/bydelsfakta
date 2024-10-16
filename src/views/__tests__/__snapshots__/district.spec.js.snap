@@ -4,6 +4,7 @@ exports[`Bydel renders component correctly 1`] = `
 <div
   class="main-container"
 >
+  <ux-signals-stub />
   <div
     class="main-container__cards main-container__cards--district"
   >

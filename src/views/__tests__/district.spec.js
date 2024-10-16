@@ -23,6 +23,7 @@ describe('Bydel', () => {
         plugins: [router, store, i18n],
         stubs: {
           VLeaflet: true,
+          UxSignals: true,
         },
       },
       props: {

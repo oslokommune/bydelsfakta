@@ -1,5 +1,7 @@
 <template>
   <div class="main-container">
+    <ux-signals />
+
     <div class="main-container__cards main-container__cards--district">
       <div class="topics-grid">
         <v-category
@@ -24,15 +26,18 @@
 import { mapState, mapGetters } from 'vuex';
 import VCategory from '@/components/VCategory.vue';
 import VLeaflet from '@/components/VLeaflet.vue';
+import UxSignals from '@/components/UxSignals.vue';
 import { topics, topicNames } from '@/config/topics';
 import districts from '@/config/geoData/districts';
 import { getDistrictName } from '@/util';
 
 export default {
   name: 'District',
+
   components: {
     VCategory,
     VLeaflet,
+    UxSignals,
   },
 
   props: {
