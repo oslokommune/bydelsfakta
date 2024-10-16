@@ -35,7 +35,7 @@ export default {
   color: $color-purple;
   font-family: 'OsloSans', serif !important;
   background-color: #ffffff;
-  border: 0;
+  border: 3px solid #dae3e5;
   border-radius: 0;
 
   @media screen and (min-width: $break-md) {
