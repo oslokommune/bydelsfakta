@@ -49,4 +49,4 @@ npm run lint:style:fix
 
 #### Github Actions
 
-We now use github actions to build the bydelsfakta-frontend, so you can check out when the last successfull build was built in the actions-tab
+We now use github actions to build the bydelsfakta-frontend, so you can check out when the last successfull build was built in the actions-tab.
