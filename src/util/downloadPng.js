@@ -1,7 +1,7 @@
+import { Canvg } from 'canvg';
 import { saveSvgAsPng } from 'save-svg-as-png';
-import { textwrap } from 'd3-textwrap';
-import canvg from 'canvg';
 import { select } from 'd3';
+import { textwrap } from 'd3-textwrap';
 
 const padding = 20;
 const scale = 2;
@@ -22,7 +22,7 @@ export default function downloadPng(svgRef, filename) {
     left: -padding,
     width,
     height,
-    canvg: canvg.Canvg,
+    canvg: Canvg.Canvg,
   };
 
   // Manipulate things before screenshot
