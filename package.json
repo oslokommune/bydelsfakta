@@ -87,7 +87,7 @@
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-order": "^6.0.3",
     "stylelint-scss": "^4.6.0",
-    "vite": "^6.2.5"
+    "vite": "^6.2.6"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.18.0"
