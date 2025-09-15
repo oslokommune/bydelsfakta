@@ -142,17 +142,18 @@ export default {
     },
     {
       size: 'small',
-      heading: 'Ikke fullført videregående skole',
+      heading: 'Ikke fullført videregående opplæring innen 5/6 år',
       about: {
-        info: 'Statistikken omfatter bosatte personer 21–29 år, per 1.1, som har startet i videregående utdanning uten å fullføre i løpet av 5 år. Fullføring er oppdatert per 1.oktober året før. Årstallet i overskriften relateres til året for fullføring.',
+        info: '<p>Statistikken viser andel og antall i elevkull som startet i videregående opplæring første gang en gitt høst, og som ikke har fullført med studie- eller yrkeskompetanse innen oppfølgingstiden. Elever som startet på studieforberedende utdanningsprogram følges i fem år, mens elever som startet på yrkesfaglige programmer følges i seks år.</p><p>Populasjon/avgrensning: Statistikken er bostedsbasert. Den omfatter kun personer som er registrert bosatt i Oslo, uavhengig av hvor de går på videregående skole. Personer som bor utenfor Oslo er ikke inkludert selv om de går på videregående i Oslo, mens personer bosatt i Oslo som går på skole utenfor Oslo er inkludert. Resultater vises for Oslo totalt samt fordelt på bydel og delbydel etter bosted.</p><p>«Ikke fullført» omfatter elever som har sluttet underveis, fortsatt er i videregående uten å ha fullført ved utløpet av perioden, eller har gått opp til fag-/svenneprøve uten å bestå. Andeler beregnes av alle som startet i kullet det aktuelle året (førstegangsstartere).</p><p>Det er ett års etterslep i publiseringen. Som tommelfingerregel er startåret for siste tilgjengelige kull lik publiseringsår minus sju (seks års oppfølging pluss ett års databehandling).</p>',
         sources: [source.ssb],
         externalInfo:
-          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Barnehage,%20skole%20og%20utdanning__Utdanningsniv%C3%A5%20og%20ikke%20fullf%C3%B8rt%20VGS/',
+          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Barnehage,%20skole%20og%20utdanning__Utdanningsniv%C3%A5%20og%20ikke%20fullf%C3%B8rt%20VGS/OK-UTD022.px/',
       },
       map: {
         labels: ['Færre', 'Flere'],
-        url: `${API}/ikke-fullfort-vgs-status`,
-        heading: 'Personer 21–29 uten fullført VGS',
+        url: `${API}/ikke-fullfort-videregaende-opplering-innen-5-6-ar-status`,
+        heading:
+          'Personer som ikke har fullført videregående opplæring innen fem år (studieforberedende) eller seks år (yrkesfaglig) etter skolestart',
         method: 'ratio',
         reverse: true,
       },
@@ -160,35 +161,39 @@ export default {
         {
           label: 'Andel',
           id: 'levekar_vgs_andel',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
+          heading:
+            'Personer som ikke har fullført videregående opplæring innen fem år (studieforberedende) eller seks år (yrkesfaglig) etter skolestart',
           template: 'bars',
           method: 'ratio',
-          url: `${API}/ikke-fullfort-vgs-status`,
+          url: `${API}/ikke-fullfort-videregaende-opplering-innen-5-6-ar-status`,
         },
         {
           label: 'Antall',
           id: 'levekar_vgs_antall',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
+          heading:
+            'Personer som ikke har fullført videregående opplæring innen fem år (studieforberedende) eller seks år (yrkesfaglig) etter skolestart',
           template: 'bars',
           method: 'value',
-          url: `${API}/ikke-fullfort-vgs-status`,
+          url: `${API}/ikke-fullfort-videregaende-opplering-innen-5-6-ar-status`,
         },
         {
           label: 'Historisk (andel)',
           id: 'levekar_vgs-historisk_andel',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
+          heading:
+            'Personer som ikke har fullført videregående opplæring innen fem år (studieforberedende) eller seks år (yrkesfaglig) etter skolestart',
           template: 'lines',
           method: 'ratio',
-          url: `${API}/ikke-fullfort-vgs-historisk`,
+          url: `${API}/ikke-fullfort-videregaende-opplering-innen-5-6-ar-historisk`,
         },
 
         {
           label: 'Historisk (antall)',
           id: 'levekar_vgs-historisk_antall',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
+          heading:
+            'Personer som ikke har fullført videregående opplæring innen fem år (studieforberedende) eller seks år (yrkesfaglig) etter skolestart',
           template: 'lines',
           method: 'value',
-          url: `${API}/ikke-fullfort-vgs-historisk`,
+          url: `${API}/ikke-fullfort-videregaende-opplering-innen-5-6-ar-historisk`,
         },
       ],
     },
