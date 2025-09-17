@@ -11,4 +11,9 @@ WORKDIR /usr/src/app
 
 EXPOSE 5000
 
+RUN addgroup -S app
+RUN adduser -S -D -H -G app app
+RUN chown -R app:app /usr/src/app/
+USER app
+
 CMD [ "node", "server/server.js", "--loglevel", "info" ]
