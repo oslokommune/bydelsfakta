@@ -6,6 +6,10 @@ on:
     branches:
     - master
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build-and-deploy:
 
@@ -74,11 +78,13 @@ jobs:
         dockerfile: Dockerfile
 
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838 # v5.0.0
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_PROD }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_PROD }}:role/github-deploy
         aws-region: eu-west-1
+
+    - name: Sts GetCallerIdentity
+      run: aws sts get-caller-identity
 
     - name: Deploy to aws ecs prod
       run: |
