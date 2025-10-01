@@ -8,7 +8,8 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
+  packages: write
 
 jobs:
   build-and-deploy:
