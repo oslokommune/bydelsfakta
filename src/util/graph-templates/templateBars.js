@@ -33,7 +33,7 @@ function Template(svg) {
 
     // Multiseries need larger padding top to make room for tabs,
     // mobile views have smaller padding.left
-    this.padding.top = this.isSingleSeries && this.selected === -1 ? 40 : 100;
+    this.padding.top = this.isSingleSeries && this.selected === -1 ? 41 : 100;
     this.padding.left = this.isMobileView ? 0 : 190;
     this.padding.bottom = this.isMobileView ? 0 : 30;
 
@@ -152,7 +152,7 @@ function Template(svg) {
         })
         .transition()
         .duration(this.duration)
-        .attr('transform', `translate(0, ${this.height + 10})`)
+        .attr('transform', `translate(0, ${this.height + 11})`)
         .call(
           d3
             .axisBottom(this.x[i])
