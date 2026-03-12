@@ -36,7 +36,7 @@
   "dependencies": {
     "@oslokommune/punkt-assets": "^11.0.1",
     "@oslokommune/punkt-vue": "^11.0.1",
-    "@unhead/vue": "^1.9.11",
+    "@unhead/vue": "^2.1.12",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue-a11y/skip-to": "^3.0.3",
     "@vue/compat": "^3.4.14",
