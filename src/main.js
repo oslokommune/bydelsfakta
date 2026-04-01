@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { VueHeadMixin, createHead } from '@unhead/vue';
+import { VueHeadMixin, createHead } from '@unhead/vue/client';
 import VueGtag from 'vue-gtag';
 import Vue3Resize from 'vue3-resize';
 import VueSkipTo from '@vue-a11y/skip-to';
