@@ -142,58 +142,6 @@ export default {
     },
     {
       size: 'small',
-      heading: 'Ikke fullført videregående skole',
-      about: {
-        info: 'Statistikken omfatter bosatte personer 21–29 år, per 1.1, som har startet i videregående utdanning uten å fullføre i løpet av 5 år. Fullføring er oppdatert per 1.oktober året før. Årstallet i overskriften relateres til året for fullføring.',
-        sources: [source.ssb],
-        externalInfo:
-          'https://statistikkbanken.oslo.kommune.no/statbank/pxweb/no/db1/db1__Barnehage,%20skole%20og%20utdanning__Utdanningsniv%C3%A5%20og%20ikke%20fullf%C3%B8rt%20VGS/',
-      },
-      map: {
-        labels: ['Færre', 'Flere'],
-        url: `${API}/ikke-fullfort-vgs-status`,
-        heading: 'Personer 21–29 uten fullført VGS',
-        method: 'ratio',
-        reverse: true,
-      },
-      tabs: [
-        {
-          label: 'Andel',
-          id: 'levekar_vgs_andel',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
-          template: 'bars',
-          method: 'ratio',
-          url: `${API}/ikke-fullfort-vgs-status`,
-        },
-        {
-          label: 'Antall',
-          id: 'levekar_vgs_antall',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
-          template: 'bars',
-          method: 'value',
-          url: `${API}/ikke-fullfort-vgs-status`,
-        },
-        {
-          label: 'Historisk (andel)',
-          id: 'levekar_vgs-historisk_andel',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
-          template: 'lines',
-          method: 'ratio',
-          url: `${API}/ikke-fullfort-vgs-historisk`,
-        },
-
-        {
-          label: 'Historisk (antall)',
-          id: 'levekar_vgs-historisk_antall',
-          heading: 'Personer 21–29 år som ikke har fullført videregående skole',
-          template: 'lines',
-          method: 'value',
-          url: `${API}/ikke-fullfort-vgs-historisk`,
-        },
-      ],
-    },
-    {
-      size: 'small',
       heading: 'NEETs',
       about: {
         info: '<p>Statistikken viser andel av befolkningen i aldersgruppe 15–29 år som er klassifisert som NEETs. NEET er en forkortelse av «Not in Education, Employment or Training» og er en fellesbetegnelse for personer som verken er i arbeid, utdanning eller opplæring.</p><p>Se følgende artikkel hos SSB for mer informasjon om denne klassifiseringen – <a href="https://www.ssb.no/arbeid-og-lonn/artikler-og-publikasjoner/ungdom-som-verken-er-i-arbeid-eller-utdanning">https://www.ssb.no/arbeid-og-lonn/artikler-og-publikasjoner/ungdom-som-verken-er-i-arbeid-eller-utdanning</a>.</p>',
