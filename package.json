@@ -37,7 +37,7 @@
     "@oslokommune/punkt-assets": "^11.0.1",
     "@oslokommune/punkt-vue": "^11.0.1",
     "@unhead/vue": "^2.1.13",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^6.0.7",
     "@vue-a11y/skip-to": "^3.0.3",
     "@vue/compat": "^3.5.31",
     "@xmldom/xmldom": "^0.8.13",
@@ -86,7 +86,7 @@
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-order": "^6.0.3",
     "stylelint-scss": "^4.6.0",
-    "vite": "^6.4.2"
+    "vite": "^8.0.16"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.18.0"
