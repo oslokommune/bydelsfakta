@@ -90,5 +90,100 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.18.0"
+  },
+  "overrides": {
+    "@oslokommune/punkt-vue": {
+      "nanoid": "5.1.16"
+    },
+    "@unhead/vue": {
+      "nanoid": "5.1.16"
+    },
+    "@vitejs/plugin-vue": {
+      "nanoid": "5.1.16"
+    },
+    "@vue-a11y/skip-to": {
+      "nanoid": "5.1.16"
+    },
+    "@vue/compat": {
+      "nanoid": "5.1.16"
+    },
+    "@vue/compiler-sfc": {
+      "nanoid": "5.1.16"
+    },
+    "@vue/server-renderer": {
+      "nanoid": "5.1.16"
+    },
+    "@vue/vue3-jest": {
+      "nanoid": "5.1.16"
+    },
+    "autoprefixer": {
+      "nanoid": "5.1.16"
+    },
+    "nanoid": {
+      "nanoid": "5.1.16"
+    },
+    "postcss": {
+      "nanoid": "5.1.16"
+    },
+    "postcss-html": {
+      "nanoid": "5.1.16"
+    },
+    "postcss-safe-parser": {
+      "nanoid": "5.1.16"
+    },
+    "postcss-scss": {
+      "nanoid": "5.1.16"
+    },
+    "postcss-sorting": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-config-html": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-config-rational-order-fix": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-config-recommended": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-config-recommended-scss": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-config-recommended-vue": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-order": {
+      "nanoid": "5.1.16"
+    },
+    "stylelint-scss": {
+      "nanoid": "5.1.16"
+    },
+    "vite": {
+      "nanoid": "5.1.16"
+    },
+    "vue": {
+      "nanoid": "5.1.16"
+    },
+    "vue-dragscroll": {
+      "nanoid": "5.1.16"
+    },
+    "vue-gtag": {
+      "nanoid": "5.1.16"
+    },
+    "vue-i18n": {
+      "nanoid": "5.1.16"
+    },
+    "vue-router": {
+      "nanoid": "5.1.16"
+    },
+    "vue3-resize": {
+      "nanoid": "5.1.16"
+    },
+    "vuex": {
+      "nanoid": "5.1.16"
+    }
   }
 }
