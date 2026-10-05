@@ -60,9 +60,8 @@ export default {
     featureGroup: null,
     geojsonLayer: null,
     zoom: 10,
-    url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    attribution:
-      '<a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    url: 'https://cache.kartverket.no/v1/wmts/1.0.0/topograatone/default/webmercator/{z}/{y}/{x}.png',
+    attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>',
     center: L.latLng(59.91695, 10.746589),
     style: {
       fillColor: '#222',
@@ -72,7 +71,7 @@ export default {
     },
     mapOptions: {
       zoomControl: true,
-      attributionControl: false,
+      attributionControl: true,
       doubleClickZoom: true,
       dragging: true,
       scrollWheelZoom: false,
@@ -143,6 +142,8 @@ export default {
 
       L.tileLayer(this.url, {
         attribution: this.attribution,
+        // Dim the basemap so the district overlays stand out
+        opacity: 0.45,
       }).addTo(this.map);
 
       this.featureGroup = L.featureGroup();
@@ -283,6 +284,11 @@ export default {
 
 .legend + .container {
   height: calc(100% - 90px);
+}
+
+// White instead of Leaflet's default grey, so the dimmed tiles stay light
+.leaflet-container {
+  background: white;
 }
 
 // https://github.com/Leaflet/Leaflet/issues/3575
